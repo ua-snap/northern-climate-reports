@@ -1,0 +1,28 @@
+{
+  "name": "iem-webapp",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "test:e2e": "nightwatch"
+  },
+  "dependencies": {
+    "@nuxt/content": "^1.11.1",
+    "@nuxtjs/axios": "^5.12.5",
+    "core-js": "^3.8.3",
+    "nuxt": "^2.14.12",
+    "nuxt-buefy": "^0.4.4"
+  },
+  "devDependencies": {
+    "sass": "*",
+    "sass-loader": "*",
+    "chromedriver": "^88.0.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "nightwatch": "^1.5.1",
+    "prettier": "^2.2.1"
+  }
+}
