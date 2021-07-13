@@ -3,20 +3,12 @@
 </template>
 
 <script>
-// import L from 'leaflet'
-// import 'leaflet/dist/leaflet.css'
-// import proj4 from 'proj4'
-// import p4l from 'proj4leaflet' /* eslint-disable-line */
 
 export default {
 	name: 'Map',
 	mounted() {
 		this.map = L.map('map', this.getBaseMapAndLayers())
 		new this.$L.Control.Zoom({ position: 'topright' }).addTo(this.map)
-
-		// this.map.on('click', _.debounce(this.handleMapClick, 200))
-		// Necessary to see the markers .
-		this.$L.Icon.Default.imagePath = this.baseURL
 	},
 	methods: {
 		getBaseMapAndLayers() {
@@ -27,7 +19,6 @@ export default {
 					srs: 'EPSG:3338',
 					format: 'image/png',
 					version: '1.3.0',
-					continuousWorld: true, // needed for non-3857 projs
 					layers: ['atlas_mapproxy:alaska_osm'],
 				}
 			)
@@ -43,20 +34,19 @@ export default {
 					// in projected space.  Use GeoServer to
 					// find this:
 					// TileSet > Gridset Bounds > compute from maximum extent of SRS
-					origin: [-4648005.934316417, 444809.882955059],
+					// origin: [-4648005.934316417, 444809.882955059],
 				}
 			)
 
 			// Map base configuration
 			var config = {
-				zoom: 0,
+				zoom: 1,
 				minZoom: 0,
-				maxZoom: 5,
-				center: [67, -170],
+				maxZoom: 6,
+				center: [64.7, -150],
 				scrollWheelZoom: false,
 				crs: proj,
 				continuousWorld: true,
-				worldCopyJump: false,
 				zoomControl: false,
 				doubleClickZoom: false,
 				attributionControl: false,
@@ -73,6 +63,5 @@ export default {
 #map {
 	height: 100vh;
 	width: 100vw;
-	border: 1px solid red;
 }
 </style>

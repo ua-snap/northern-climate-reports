@@ -23,11 +23,7 @@
         </div>
       </nav>
     </div>
-    <section class="main-content">
-      <div class="container">
-        <nuxt />
-      </div>
-    </section>
+    <nuxt />
   </div>
 </template>
 
