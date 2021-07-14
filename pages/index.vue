@@ -7,28 +7,32 @@
         <p>
           Enchiladas mint green onions blackberries hearts of palm vine tomatoes
           black bean wraps peppermint Southern Italian butternut mix roasted
-          butternut squash chili pepper. Italian pepperoncini salty kung pao pepper
-          cherry bomb crunchy bananas lychee blueberries chocolate frosted
-          gingerbread bites tabasco pepper spicy hazelnut shiitake jalapeño crispy
-          iceberg lettuce Thai dragon pepper apricot Bolivian rainbow pepper earl
-          grey latte.
+          butternut squash chili pepper. Italian pepperoncini salty kung pao
+          pepper cherry bomb crunchy bananas lychee blueberries chocolate
+          frosted gingerbread bites tabasco pepper spicy hazelnut shiitake
+          jalapeño crispy iceberg lettuce Thai dragon pepper apricot Bolivian
+          rainbow pepper earl grey latte.
         </p>
       </section>
     </div>
-    <client-only>
-      <Map></Map>
-    </client-only>
+
+    <!--
+      Place picker / map / report is all wrapped up below.
+      This needs to be outside of any `container` or `section` wrappers.
+    -->
+    <App></App>
+
   </div>
 </template>
 
 <script>
-import Map from '~/components/Map'
+import App from '~/components/App'
 
 export default {
   name: 'HomePage',
 
   components: {
-    Map,
+    App,
   },
 }
 </script>

@@ -8,7 +8,7 @@
               <nuxt-link :to="{ name: 'index' }" exact-active-class="is-active"
                 >Home</nuxt-link
               >
-            </div>            
+            </div>
             <div class="navbar-item">
               <nuxt-link :to="{ name: 'about' }" exact-active-class="is-active"
                 >About</nuxt-link
@@ -24,9 +24,13 @@
       </nav>
     </div>
     <nuxt />
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
-export default {}
+import Footer from '~/components/Footer'
+export default {
+  components: { Footer },
+}
 </script>
