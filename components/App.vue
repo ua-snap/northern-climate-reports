@@ -14,13 +14,25 @@
 <script>
 import Map from '~/components/Map'
 import Report from '~/components/Report'
-import { mapGetters, mapState } from 'vuex'
+import { mapMutations, mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'App',
   components: {
     Map,
     Report,
+  },
+  created() {
+    // Rehydrate place if present in URL.
+    if (this.$route.query.lat && this.$route.query.lng) {
+      this.setLatLng({
+        lat: this.$route.query.lat,
+        lng: this.$route.query.lng,
+      })
+    }
+  },
+  methods: {
+    ...mapMutations(['setLatLng']),
   },
   computed: {
     ...mapState(['latlng']),
