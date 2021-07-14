@@ -3,25 +3,35 @@
 </template>
 
 <script>
+import _ from 'lodash'
 
 export default {
 	name: 'Map',
 	mounted() {
 		this.map = L.map('map', this.getBaseMapAndLayers())
 		new this.$L.Control.Zoom({ position: 'topright' }).addTo(this.map)
+
+		this.map.on('click', this.handleMapClick)
+	},
+	data() {
+		return {
+			// Currently selected lat/lon on the map.
+			latlng: undefined,
+		}
 	},
 	methods: {
+		handleMapClick(event) {
+			this.latlng = event.latlng
+			this.$store.commit('setLatLng', this.latlng)
+		},
 		getBaseMapAndLayers() {
-			var baseLayer = new this.$L.tileLayer.wms(
-				process.env.geoserverUrl,
-				{
-					transparent: true,
-					srs: 'EPSG:3338',
-					format: 'image/png',
-					version: '1.3.0',
-					layers: ['atlas_mapproxy:alaska_osm'],
-				}
-			)
+			var baseLayer = new this.$L.tileLayer.wms(process.env.geoserverUrl, {
+				transparent: true,
+				srs: 'EPSG:3338',
+				format: 'image/png',
+				version: '1.3.0',
+				layers: ['atlas_mapproxy:alaska_osm'],
+			})
 
 			// Projection definition.
 			var proj = new this.$L.Proj.CRS(
