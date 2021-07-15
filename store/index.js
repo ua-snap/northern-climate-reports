@@ -1,7 +1,11 @@
 import _ from 'lodash'
 
 export const state = () => ({
+  // Object {lat: ..., lng: ...}
   latlng: undefined,
+
+  // ID corresponding to place lat/lon in assets/places.js
+  placeId: undefined,
 })
 
 export const mutations = {
@@ -13,14 +17,24 @@ export const mutations = {
     this.$router.push({ path: this.$router.path, query: state.latlng })
   },
 
+  setPlaceId(state, placeId) {
+    state.placeId = placeId
+    this.$router.push({
+      path: this.$router.path,
+      query: { placeId: state.placeId },
+    })
+  },
+
   // Clear any location data currently in app.
   clearLocation(state) {
     state.latlng = undefined
+    state.placeId = undefined
     this.$router.push({
       path: this.$router.path,
       query: {
         lat: undefined,
         lng: undefined,
+        placeId: undefined,
       },
     })
   },
@@ -31,6 +45,6 @@ export const getters = {
   // so the report section can be shown when a place has
   // been selected.
   reportIsVisible: (state) => {
-    return !_.isUndefined(state.latlng)
+    return (state.latlng || state.placeId)
   },
 }

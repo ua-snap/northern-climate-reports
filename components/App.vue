@@ -2,6 +2,12 @@
   <div>
     <client-only>
       <div v-show="!this.reportIsVisible" class="place-selector">
+        <div class="container">
+          <section class="section">
+            <PlaceSelector></PlaceSelector>
+          </section>
+        </div>
+        <!-- Map can't be wrapped in container/section, if we want it full-screen. -->
         <Map></Map>
       </div>
       <div v-show="this.reportIsVisible" class="report-wrapper">
@@ -14,6 +20,8 @@
 <script>
 import Map from '~/components/Map'
 import Report from '~/components/Report'
+import PlaceSelector from '~/components/PlaceSelector'
+
 import { mapMutations, mapGetters, mapState } from 'vuex'
 
 export default {
@@ -29,10 +37,13 @@ export default {
         lat: this.$route.query.lat,
         lng: this.$route.query.lng,
       })
+    } else if (this.$route.query.placeId) {
+      this.setPlaceId(this.$route.query.placeId)
     }
+
   },
   methods: {
-    ...mapMutations(['setLatLng']),
+    ...mapMutations(['setLatLng', 'setPlaceId']),
   },
   computed: {
     ...mapState(['latlng']),
