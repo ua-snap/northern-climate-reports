@@ -25,7 +25,6 @@
 }
 </style>
 <script>
-import { mapMutations } from 'vuex'
 import places from '~/assets/places'
 
 // So it's not decorated with reactive stuff by Vue,
@@ -40,9 +39,6 @@ export default {
 			selected: undefined,
 			selectedPlace: ''
 		}
-	},
-	methods: {
-		...mapMutations(['setPlaceId']),
 	},
 	computed: {
         filteredDataObj() {
@@ -59,7 +55,9 @@ export default {
     watch: {
     	selected: function (selected) {
     		if(selected) {
-	    		this.setPlaceId(selected.id)
+	    		this.$router.push({
+	    			path: '/report/community/' + selected.id
+	    		})
 	    	}
     	}
     }

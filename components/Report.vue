@@ -4,7 +4,9 @@
 			<b-button v-on:click="clearLocation"
 				>Go Back / Show Location Pickers</b-button
 			>
-			<h3 class="title is-4">Projected Future Conditions for <span v-html="place"></span></h3>
+			<h3 class="title is-4">
+				Projected Future Conditions for <span v-html="place"></span>
+			</h3>
 		</section>
 		<section class="section">
 			<TempReport></TempReport>
@@ -18,13 +20,15 @@
 <script>
 import TempReport from '~/components/TempReport'
 import PrecipReport from '~/components/PrecipReport'
-import { mapMutations, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
 	name: 'Report',
 	components: { TempReport, PrecipReport },
 	methods: {
-		...mapMutations(['clearLocation']),
+		clearLocation() {
+			this.$router.push({ path: '/' })
+		},
 	},
 	computed: {
 		...mapGetters({

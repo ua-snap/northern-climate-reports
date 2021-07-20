@@ -21,7 +21,7 @@ export default {
   css: ['@/assets/scss/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/leaflet.client.js'],
+  plugins: ['~/plugins/leaflet.client.js', '~/plugins/vuex-router-sync'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -54,6 +54,21 @@ export default {
 
   // Env vars
   env: {
-    geoserverUrl: process.env.GEOSERVER_URL || 'https://gs.mapventure.org/geoserver/wms',
+    geoserverUrl:
+      process.env.GEOSERVER_URL || 'https://gs.mapventure.org/geoserver/wms',
+  },
+
+  // Router customizations
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        path: '/report/community/:communityId',
+        component: resolve(__dirname, 'pages/index'),
+      })
+      routes.push({
+        path: '/report/:lat/:lng',
+        component: resolve(__dirname, 'pages/index'),
+      })
+    },
   },
 }

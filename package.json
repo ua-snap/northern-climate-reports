@@ -19,7 +19,8 @@
     "nuxt-buefy": "^0.4.4",
     "nuxt-leaflet": "0.0.25",
     "proj4": "^2.7.4",
-    "proj4leaflet": "^1.0.2"
+    "proj4leaflet": "^1.0.2",
+    "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
     "sass": "*",
