@@ -21,8 +21,11 @@ export default {
 	},
 	methods: {
 		handleMapClick(event) {
-			this.latlng = event.latlng
-			this.$store.commit('setLatLng', this.latlng)
+			this.latlng = {
+				lat: event.latlng.lat.toFixed(4),
+				lng: event.latlng.lng.toFixed(4)
+			}
+			this.$router.push('/report/' + this.latlng.lat + '/' + this.latlng.lng)
 		},
 		getBaseMapAndLayers() {
 			var baseLayer = new this.$L.tileLayer.wms(process.env.geoserverUrl, {
@@ -47,7 +50,7 @@ export default {
 				zoom: 1,
 				minZoom: 0,
 				maxZoom: 6,
-				center: [64.7, -150],
+				center: [64.7, -155],
 				scrollWheelZoom: false,
 				crs: proj,
 				continuousWorld: true,
