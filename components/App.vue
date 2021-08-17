@@ -4,7 +4,9 @@
       <div v-show="!this.reportIsVisible" class="place-selector">
         <div class="container">
           <section class="section">
-            <PlaceSelector></PlaceSelector>
+            <div class="content controls">
+              <PlaceSelector></PlaceSelector>
+            </div>
           </section>
         </div>
         <!-- Map can't be wrapped in container/section, if we want it full-screen. -->
@@ -16,7 +18,15 @@
     </client-only>
   </div>
 </template>
-<style></style>
+<style lang="scss" scoped>
+
+.content.controls {
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
+} 
+
+</style>
 <script>
 import Map from '~/components/Map'
 import Report from '~/components/Report'
