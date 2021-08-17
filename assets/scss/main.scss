@@ -1,4 +1,5 @@
 // Here's where we override defaults in Bulma!
+// Note that this is where our font imports come from too.
 @import "bulma-overrides.scss";
 
 // Import bulma styles
@@ -6,3 +7,10 @@
 
 // Import buefy styles
 @import "~buefy/src/scss/buefy";
+
+// And a few things we use on multiple screens.
+.content-wrapper {
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
+}

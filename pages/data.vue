@@ -1,20 +1,30 @@
 <template>
   <section class="section">
-    <h2 class="title is-3 has-text-grey">
-      Obtaining data used in this tool
-    </h2>
-    <p>
-      Enchiladas mint green onions blackberries hearts of palm vine tomatoes
-      black bean wraps peppermint Southern Italian butternut mix roasted
-      butternut squash chili pepper. Italian pepperoncini salty kung pao pepper
-      cherry bomb crunchy bananas lychee blueberries chocolate frosted
-      gingerbread bites tabasco pepper spicy hazelnut shiitake jalapeño crispy
-      iceberg lettuce Thai dragon pepper apricot Bolivian rainbow pepper earl
-      grey latte. Pine nuts creamiest shaved almonds seasonal double dark
-      chocolate springtime strawberry fall almond milk chai latte lemon tahini
-      dressing crunchy seaweed coconut sugar fresh heat plums smoked tofu
-      habanero golden lingonberry edamame hummus almonds almond milk candy cane
-      winter red lentil curry.
-    </p>
+    <div class="content-wrapper">
+      <h2 class="title is-3">How to obtain data used in this tool</h2>
+      <div class="content is-size-5">
+        <p>
+          YOLO poke fingerstache, ad twee chillwave incididunt snackwave eiusmod
+          in locavore prism cupidatat do. Deserunt nostrud ennui disrupt
+          chillwave, culpa adaptogen kickstarter pop-up. Hoodie mixtape
+          helvetica sriracha, pork belly veniam chicharrones hot chicken butcher
+          labore 3 wolf moon poke meh. Chartreuse try-hard ut, banh mi
+          consectetur polaroid eiusmod cliche irony. Tempor man bun meggings
+          culpa, listicle ugh pickled shaman vaporware drinking vinegar in
+          chicharrones veniam edison bulb.
+        </p>
+        <p>
+          Literally tofu culpa cupidatat aesthetic chia. Enim ut in, glossier
+          vexillologist swag aliqua typewriter food truck cray photo booth twee.
+          Cold-pressed narwhal bushwick locavore umami. Four dollar toast
+          try-hard meditation art party, raclette gluten-free humblebrag hashtag
+          hammock whatever pok pok beard. Tempor dolore single-origin coffee eu
+          hexagon. Raw denim wolf et esse ennui distillery cillum 8-bit
+          excepteur lumbersexual literally letterpress health goth drinking
+          vinegar. Brunch meditation four dollar toast subway tile echo park ad
+          everyday carry iceland in est labore kombucha ut master cleanse.
+        </p>
+      </div>
+    </div>
   </section>
 </template>
