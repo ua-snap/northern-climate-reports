@@ -6,7 +6,7 @@
         <div class="navbar-brand">
           <nuxt-link :to="{ name: 'index' }">
             <div class="logo-type">
-              <div class="logo-type-title">Climate Impact Reviews</div>
+              <div class="logo-type-title">Climate Impact Reports</div>
               <div class="logo-type-subtitle">
                 For Changing Northern Ecosystems
               </div>

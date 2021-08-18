@@ -22,7 +22,7 @@
             </div>
           </div>
         </nav>
-        <h1>Climate<br />Impact<br />Reviews</h1>
+        <h1>Climate<br />Impact<br />Reports</h1>
         <h2>for Changing<br />Northern Ecosystems</h2>
       </div>
       <div class="splash-title-image column is-half"></div>

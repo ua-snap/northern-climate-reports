@@ -1,31 +1,53 @@
 <template>
   <div>
     <div class="container">
+      <section class="section leader">
+        <div class="content-wrapper">
+          <div class="content is-size-4">
+            <p>
+              Ecosystems in the far north are changing rapidly due to several
+              related climate-driven changes. Projecting how these changes are
+              likely to progress in the near-term and more distant future is
+              crucial for land managers, planners, and communities.
+            </p>
+          </div>
+        </div>
+      </section>
       <section class="section">
-        <div class="intro-text content is-size-5">
-          <p>
-            <strong>Monocle ipsum dolor sit amet</strong> perfect artisanal
-            Beams sophisticated first-class boutique Porter Muji. Classic
-            boulevard bulletin pintxos. Discerning smart Helsinki, Muji Swiss
-            iconic Scandinavian impeccable signature premium. Zürich pintxos
-            bureaux essential St Moritz efficient. Delightful Baggu hand-crafted
-            essential flat white Airbus A380, exquisite Toto.
-          </p>
-          <p>
-            Exclusive boutique remarkable Nordic, cosy liveable Muji bureaux
-            Swiss. K-pop conversation perfect flat white liveable sleepy,
-            sophisticated global joy emerging impeccable tote bag bulletin
-            Boeing 787 first-class. Hand-crafted flat white Baggu Swiss premium
-            alluring Asia-Pacific delightful exquisite espresso smart Ettinger
-            Sunspel the highest quality.
-          </p>
-          <p>
-            Tote bag bulletin hand-crafted smart the highest quality Sunspel.
-            Sleepy Beams Comme des Garçons, Boeing 787 Fast Lane destination hub
-            Gaggenau exquisite Nordic. Conversation Tsutaya Baggu sleepy
-            emerging Comme des Garçons alluring global cosy vibrant Helsinki
-            iconic punctual hand-crafted joy.
-          </p>
+        <div class="content-wrapper">
+          <div class="content is-size-5">
+            <p>
+              Three major ecosystem drivers&mdash;temperature, permafrost, and
+              fire&mdash;are linked, both in terms of what causes them and in
+              terms of their effects on ecosystems.
+            </p>
+            <ul>
+              <li>
+                Some changes in species composition are directly driven by
+                warming <strong>temperatures</strong>, particularly warmer
+                summers, earlier springs, later autumns, and less severe
+                winters.
+              </li>
+              <li>
+                Thawing of <strong>permafrost</strong>, also driven by warming
+                temperatures, alters surface drainage and increases possible
+                rooting depths, yielding distinct ecological shifts.
+              </li>
+              <li>
+                Increases in <strong>fire</strong> frequency&mdash;again
+                indirectly driven by warming&mdash;also contributes to broad
+                landscape-level vegetation change, as early-succession species
+                increase in frequency and late-success species decrease.
+              </li>
+            </ul>
+            <p>
+              The uncertainty associated with these complex linkages is high.
+              Nonetheless, by examining and modeling each factor and connecting
+              model outputs when possible, we can produce a range of projections
+              that explore possible changes locally, regionally, or
+              landscape-wide across the far north.
+            </p>
+          </div>
         </div>
       </section>
     </div>
@@ -38,13 +60,9 @@
 </template>
 
 <style type="scss" scoped>
-.content p {
-  max-width: 50rem;
-  margin-left: auto;
-  margin-right: auto;
-  strong {
-    font-weight: 600;
-  }
+.leader {
+  margin-top: 3.5rem;
+  font-weight: 600;
 }
 </style>
 
