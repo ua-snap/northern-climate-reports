@@ -77,7 +77,7 @@ export default {
 		text-align: center;
 		img {
 			position: relative;
-			top: 0.25rem;
+			top: 1.25rem;
 			width: 75%;
 			max-width: 40vw;
 		}
