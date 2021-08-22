@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<h4 class="subtitle is-4">Temperature</h4>
-		<table class="table">
+		<table class="table" v-if="reportData">
 			<thead>
 				<tr>
 					<th scope="col" colspan="2"></th>
@@ -32,50 +32,82 @@
 				<tr>
 					<th scope="row">DJF</th>
 					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
+					<td>
+						{{ reportData['2040_2070']['DJF']['MRI-CGCM3']['rcp45']['tas'] }}
+					</td>
+					<td>{{ reportData['2040_2070']['DJF']['CCSM4']['rcp45']['tas'] }}</td>
+					<td>
+						{{ reportData['2040_2070']['DJF']['MRI-CGCM3']['rcp85']['tas'] }}
+					</td>
+					<td>{{ reportData['2040_2070']['DJF']['CCSM4']['rcp85']['tas'] }}</td>
+					<td>
+						{{ reportData['2070_2100']['DJF']['MRI-CGCM3']['rcp45']['tas'] }}
+					</td>
+					<td>{{ reportData['2070_2100']['DJF']['CCSM4']['rcp45']['tas'] }}</td>
+					<td>
+						{{ reportData['2070_2100']['DJF']['MRI-CGCM3']['rcp85']['tas'] }}
+					</td>
+					<td>{{ reportData['2070_2100']['DJF']['CCSM4']['rcp85']['tas'] }}</td>
 				</tr>
 				<tr>
 					<th scope="row">MAM</th>
 					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
+					<td>
+						{{ reportData['2040_2070']['MAM']['MRI-CGCM3']['rcp45']['tas'] }}
+					</td>
+					<td>{{ reportData['2040_2070']['MAM']['CCSM4']['rcp45']['tas'] }}</td>
+					<td>
+						{{ reportData['2040_2070']['MAM']['MRI-CGCM3']['rcp85']['tas'] }}
+					</td>
+					<td>{{ reportData['2040_2070']['MAM']['CCSM4']['rcp85']['tas'] }}</td>
+					<td>
+						{{ reportData['2070_2100']['MAM']['MRI-CGCM3']['rcp45']['tas'] }}
+					</td>
+					<td>{{ reportData['2070_2100']['MAM']['CCSM4']['rcp45']['tas'] }}</td>
+					<td>
+						{{ reportData['2070_2100']['MAM']['MRI-CGCM3']['rcp85']['tas'] }}
+					</td>
+					<td>{{ reportData['2070_2100']['MAM']['CCSM4']['rcp85']['tas'] }}</td>
 				</tr>
 				<tr>
 					<th scope="row">JJA</th>
 					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
+					<td>
+						{{ reportData['2040_2070']['JJA']['MRI-CGCM3']['rcp45']['tas'] }}
+					</td>
+					<td>{{ reportData['2040_2070']['JJA']['CCSM4']['rcp45']['tas'] }}</td>
+					<td>
+						{{ reportData['2040_2070']['JJA']['MRI-CGCM3']['rcp85']['tas'] }}
+					</td>
+					<td>{{ reportData['2040_2070']['JJA']['CCSM4']['rcp85']['tas'] }}</td>
+					<td>
+						{{ reportData['2070_2100']['JJA']['MRI-CGCM3']['rcp45']['tas'] }}
+					</td>
+					<td>{{ reportData['2070_2100']['JJA']['CCSM4']['rcp45']['tas'] }}</td>
+					<td>
+						{{ reportData['2070_2100']['JJA']['MRI-CGCM3']['rcp85']['tas'] }}
+					</td>
+					<td>{{ reportData['2070_2100']['JJA']['CCSM4']['rcp85']['tas'] }}</td>
 				</tr>
 				<tr>
 					<th scope="row">SON</th>
 					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
+					<td>
+						{{ reportData['2040_2070']['SON']['MRI-CGCM3']['rcp45']['tas'] }}
+					</td>
+					<td>{{ reportData['2040_2070']['SON']['CCSM4']['rcp45']['tas'] }}</td>
+					<td>
+						{{ reportData['2040_2070']['SON']['MRI-CGCM3']['rcp85']['tas'] }}
+					</td>
+					<td>{{ reportData['2040_2070']['SON']['CCSM4']['rcp85']['tas'] }}</td>
+					<td>
+						{{ reportData['2070_2100']['SON']['MRI-CGCM3']['rcp45']['tas'] }}
+					</td>
+					<td>{{ reportData['2070_2100']['SON']['CCSM4']['rcp45']['tas'] }}</td>
+					<td>
+						{{ reportData['2070_2100']['SON']['MRI-CGCM3']['rcp85']['tas'] }}
+					</td>
+					<td>{{ reportData['2070_2100']['SON']['CCSM4']['rcp85']['tas'] }}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -85,5 +117,6 @@
 <script>
 export default {
 	name: 'ReportTable',
+	props: ['reportData'],
 }
 </script>
