@@ -14,6 +14,21 @@ export const getters = {
     )
   },
 
+  // Gets the currently-selected lat/lon [directly or by placeID]
+  getLatLng: (state) => {
+    if (state.route.params.lat && state.route.params.lng) {
+      return [state.route.params.lat, state.route.params.lng]
+    }
+
+    if (state.route.params.communityId) {
+      let place = _.find(places, { id: Number(state.route.params.communityId) })
+      if (place) {
+        return [place.latitude, place.longitude]
+      }
+      throw 'Could not find the community by ID.'
+    }
+  },
+
   // Returns a string for the correct current selected place,
   // whether lat/lon, community name, or other regional name.
   getPlaceName: (state) => {

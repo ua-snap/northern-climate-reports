@@ -21,8 +21,8 @@
 				>
 			</div>
 			<div v-else>
-				<TempReport></TempReport>
-				<PrecipReport></PrecipReport>
+				<TempReport :reportData="results"></TempReport>
+				<PrecipReport :reportData="results"></PrecipReport>
 			</div>
 		</section>
 	</div>
@@ -32,11 +32,6 @@
 import TempReport from '~/components/TempReport'
 import PrecipReport from '~/components/PrecipReport'
 import { mapGetters } from 'vuex'
-
-// For mocking/scaffolding only
-function sleep(ms) {
-	return new Promise((resolve) => setTimeout(resolve, ms))
-}
 
 export default {
 	name: 'Report',
@@ -49,11 +44,19 @@ export default {
 	computed: {
 		...mapGetters({
 			place: 'getPlaceName',
+			latLng: 'getLatLng',
 		}),
 	},
 	async fetch() {
-		// Example doing real fetch: this.results = await this.$http.$get('https://api.nuxtjs.dev/mountains')
-		await sleep(5000)
+		// TODO: add error handling here for 404 (no data) etc.
+		if (this.latLng) {
+			this.results = await this.$http.$get(
+				'http://localhost:5000/iem/point/' +
+					this.latLng[0] +
+					'/' +
+					this.latLng[1]
+			)
+		}
 	},
 }
 </script>
