@@ -9,6 +9,7 @@
 			</h3>
 			<div v-if="$fetchState.pending">
 				<!-- Drama dots -->
+				<b-progress type="is-info" :value="timer" show-value></b-progress>
 				<h4 class="title is-5">Loading data&hellip;</h4>
 			</div>
 			<div v-else-if="$fetchState.error" class="error">
@@ -39,6 +40,7 @@ export default {
 	data() {
 		return {
 			results: undefined,
+			timer: undefined,
 		}
 	},
 	computed: {
@@ -49,14 +51,43 @@ export default {
 	},
 	async fetch() {
 		// TODO: add error handling here for 404 (no data) etc.
-		if (this.latLng) {
-			this.results = await this.$http.$get(
-				'http://localhost:5000/iem/point/' +
-					this.latLng[0] +
-					'/' +
-					this.latLng[1]
-			)
-		}
+		
+		// TODO: detect the type of request being made and configure the timer.
+		// Point queries are fast (1 second or so), don't show a progress bar.
+		// HUC/area queries are slow (30 seconds or more), show a progress bar.
+		this.startTimer()
+		
+		// Perform the query.
+		// Point query below, commented out until all supporting code for HUCs is
+		// ready.
+		// if (this.latLng) {
+		// 	this.results = await this.$http.$get(
+		// 		'http://localhost:5000/iem/point/' +
+		// 			this.latLng[0] +
+		// 			'/' +
+		// 			this.latLng[1]
+		// 	)
+		// }
+		// Temporary hardcoded HUC.
+		this.results = await this.$http.$get(
+			'http://localhost:5000/iem/huc/19070506'
+		)
+		
+		this.stopTimer()
+	},
+	methods: {
+		// Rough initial implementation.
+		startTimer(duration = 45) {
+			this.timer = duration
+			this.countdown = setInterval(() => {
+				if (this.timer > 5) {
+					this.timer -= 1
+				}
+			}, 1000)
+		},
+		stopTimer() {
+			clearInterval(this.countdown)
+		},
 	},
 }
 </script>
