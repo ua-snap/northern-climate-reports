@@ -131,7 +131,7 @@ export default {
 							// Convert to inches!
 							return (value * 0.03937008).toFixed(2)
 						} else if (key == 'tas') {
-							// Convert to degrees!
+							// Convert to degrees F!
 							return (value * 1.8 + 32).toFixed(1)
 						}
 					},
