@@ -1,6 +1,11 @@
 <template>
 	<div>
-		<h4 class="subtitle is-4">Precipitation</h4>
+		<h4 class="subtitle is-4">Precipitation
+		<span class="units">
+				<span v-if="units == 'imperial'">(inches)</span>
+				<span v-if="units == 'metric'">(mm)</span>
+
+			</span></h4>
 		<table class="table" v-if="reportData">
 			<thead>
 				<tr>
@@ -85,6 +90,6 @@
 <script>
 export default {
 	name: 'PrecipReport',
-	props: ['reportData']
+	props: ['reportData', 'units']
 }
 </script>

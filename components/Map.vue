@@ -1,6 +1,21 @@
 <template>
-	<div id="map"></div>
+	<div>
+		<div class="content-wrapper map-intro">
+			<p><strong>Click the map</strong> to pick a location.</p>
+		</div>
+		<div id="map"></div>
+	</div>
 </template>
+
+<style lang="scss" scoped>
+.map-intro {
+	margin-bottom: 1.25rem;
+}
+#map {
+	height: 100vh;
+	width: 100vw;
+}
+</style>
 
 <script>
 import _ from 'lodash'
@@ -25,7 +40,10 @@ export default {
 				lat: event.latlng.lat.toFixed(4),
 				lng: event.latlng.lng.toFixed(4),
 			}
-			this.$router.push('/report/' + this.latlng.lat + '/' + this.latlng.lng)
+			this.$router.push({
+				path: '/report/' + this.latlng.lat + '/' + this.latlng.lng,
+				hash: '#results',
+			})
 		},
 		getBaseMapAndLayers() {
 			var baseLayer = new this.$L.tileLayer.wms(process.env.geoserverUrl, {
@@ -65,10 +83,3 @@ export default {
 	},
 }
 </script>
-
-<style>
-#map {
-	height: 100vh;
-	width: 100vw;
-}
-</style>

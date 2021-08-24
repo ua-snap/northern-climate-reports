@@ -1,6 +1,13 @@
 <template>
 	<div>
-		<h4 class="subtitle is-4">Temperature</h4>
+		<h4 class="subtitle is-4">
+			Temperature
+			<span class="units">
+				<span v-if="units == 'imperial'">(&deg;F)</span>
+				<span v-if="units == 'metric'">(&deg;C)</span>
+
+			</span>
+		</h4>
 		<table class="table" v-if="reportData">
 			<thead>
 				<tr>
@@ -117,6 +124,6 @@
 <script>
 export default {
 	name: 'ReportTable',
-	props: ['reportData'],
+	props: ['reportData', 'units'],
 }
 </script>

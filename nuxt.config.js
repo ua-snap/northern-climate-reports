@@ -57,13 +57,21 @@ export default {
   env: {
     geoserverUrl:
       process.env.GEOSERVER_URL || 'https://gs.mapventure.org/geoserver/wms',
+    apiUrl:
+      process.env.SNAP_API_URL ||
+      'http://testing.eba-hkca5w5b.us-west-2.elasticbeanstalk.com',
   },
 
   // Router customizations
   router: {
     extendRoutes(routes, resolve) {
+      // Order matters here; lat/lng needs to go last because it's "globby"
       routes.push({
         path: '/report/community/:communityId',
+        component: resolve(__dirname, 'pages/index'),
+      })
+      routes.push({
+        path: '/report/huc/:hucId',
         component: resolve(__dirname, 'pages/index'),
       })
       routes.push({

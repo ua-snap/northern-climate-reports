@@ -4,7 +4,7 @@
       <div v-show="!this.reportIsVisible" class="place-selector">
         <div class="container">
           <section class="section">
-            <div class="content controls">
+            <div class="content controls" id="controls"> <!-- ID is used as anchor target, don't remove -->
               <PlaceSelector></PlaceSelector>
             </div>
           </section>
@@ -24,6 +24,8 @@
   max-width: 50rem;
   margin-left: auto;
   margin-right: auto;
+  padding-top: 2rem;
+  margin-top: -2rem;
 } 
 
 </style>

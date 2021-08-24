@@ -9,6 +9,15 @@
 @import "~buefy/src/scss/buefy";
 
 // And a few things we use on multiple screens.
+b, strong {
+  font-weight: 600; // Lighten it up a bit.
+}
+
+// Beufy thing, it's too bold
+label.label {
+  font-weight: 600;
+}
+
 .content-wrapper {
   max-width: 50rem;
   margin-left: auto;
