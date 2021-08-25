@@ -58,7 +58,7 @@ import hucs from '~/assets/hucs'
 // we don't want that.
 Object.freeze(communities)
 Object.freeze(hucs)
-var places = _.concat(communities, hucs)
+const places = _.concat(communities, hucs)
 
 export default {
 	name: 'PlaceSelector',
