@@ -1,6 +1,15 @@
 <template>
 	<div>
-		<h4 class="subtitle is-4">Precipitation</h4>
+		<h4 class="subtitle is-4">
+			Precipitation
+			<span class="units">
+				<span v-if="units == 'imperial'">(inches)</span>
+				<span v-if="units == 'metric'">(mm)</span>
+			</span>
+		</h4>
+		<div class="content-placeholder">
+			What text might go here, introducing Precipitation?
+		</div>
 		<table class="table" v-if="reportData">
 			<thead>
 				<tr>
@@ -32,49 +41,81 @@
 				<tr>
 					<th scope="row">DJF</th>
 					<td>1</td>
-					<td>{{ reportData['2040_2070']['DJF']['MRI-CGCM3']['rcp45']['pr'] }}</td>
+					<td>
+						{{ reportData['2040_2070']['DJF']['MRI-CGCM3']['rcp45']['pr'] }}
+					</td>
 					<td>{{ reportData['2040_2070']['DJF']['CCSM4']['rcp45']['pr'] }}</td>
-					<td>{{ reportData['2040_2070']['DJF']['MRI-CGCM3']['rcp85']['pr'] }}</td>
+					<td>
+						{{ reportData['2040_2070']['DJF']['MRI-CGCM3']['rcp85']['pr'] }}
+					</td>
 					<td>{{ reportData['2040_2070']['DJF']['CCSM4']['rcp85']['pr'] }}</td>
-					<td>{{ reportData['2070_2100']['DJF']['MRI-CGCM3']['rcp45']['pr'] }}</td>
+					<td>
+						{{ reportData['2070_2100']['DJF']['MRI-CGCM3']['rcp45']['pr'] }}
+					</td>
 					<td>{{ reportData['2070_2100']['DJF']['CCSM4']['rcp45']['pr'] }}</td>
-					<td>{{ reportData['2070_2100']['DJF']['MRI-CGCM3']['rcp85']['pr'] }}</td>
+					<td>
+						{{ reportData['2070_2100']['DJF']['MRI-CGCM3']['rcp85']['pr'] }}
+					</td>
 					<td>{{ reportData['2070_2100']['DJF']['CCSM4']['rcp85']['pr'] }}</td>
 				</tr>
 				<tr>
 					<th scope="row">MAM</th>
 					<td>1</td>
-					<td>{{ reportData['2040_2070']['MAM']['MRI-CGCM3']['rcp45']['pr'] }}</td>
+					<td>
+						{{ reportData['2040_2070']['MAM']['MRI-CGCM3']['rcp45']['pr'] }}
+					</td>
 					<td>{{ reportData['2040_2070']['MAM']['CCSM4']['rcp45']['pr'] }}</td>
-					<td>{{ reportData['2040_2070']['MAM']['MRI-CGCM3']['rcp85']['pr'] }}</td>
+					<td>
+						{{ reportData['2040_2070']['MAM']['MRI-CGCM3']['rcp85']['pr'] }}
+					</td>
 					<td>{{ reportData['2040_2070']['MAM']['CCSM4']['rcp85']['pr'] }}</td>
-					<td>{{ reportData['2070_2100']['MAM']['MRI-CGCM3']['rcp45']['pr'] }}</td>
+					<td>
+						{{ reportData['2070_2100']['MAM']['MRI-CGCM3']['rcp45']['pr'] }}
+					</td>
 					<td>{{ reportData['2070_2100']['MAM']['CCSM4']['rcp45']['pr'] }}</td>
-					<td>{{ reportData['2070_2100']['MAM']['MRI-CGCM3']['rcp85']['pr'] }}</td>
+					<td>
+						{{ reportData['2070_2100']['MAM']['MRI-CGCM3']['rcp85']['pr'] }}
+					</td>
 					<td>{{ reportData['2070_2100']['MAM']['CCSM4']['rcp85']['pr'] }}</td>
 				</tr>
 				<tr>
 					<th scope="row">JJA</th>
 					<td>1</td>
-					<td>{{ reportData['2040_2070']['JJA']['MRI-CGCM3']['rcp45']['pr'] }}</td>
+					<td>
+						{{ reportData['2040_2070']['JJA']['MRI-CGCM3']['rcp45']['pr'] }}
+					</td>
 					<td>{{ reportData['2040_2070']['JJA']['CCSM4']['rcp45']['pr'] }}</td>
-					<td>{{ reportData['2040_2070']['JJA']['MRI-CGCM3']['rcp85']['pr'] }}</td>
+					<td>
+						{{ reportData['2040_2070']['JJA']['MRI-CGCM3']['rcp85']['pr'] }}
+					</td>
 					<td>{{ reportData['2040_2070']['JJA']['CCSM4']['rcp85']['pr'] }}</td>
-					<td>{{ reportData['2070_2100']['JJA']['MRI-CGCM3']['rcp45']['pr'] }}</td>
+					<td>
+						{{ reportData['2070_2100']['JJA']['MRI-CGCM3']['rcp45']['pr'] }}
+					</td>
 					<td>{{ reportData['2070_2100']['JJA']['CCSM4']['rcp45']['pr'] }}</td>
-					<td>{{ reportData['2070_2100']['JJA']['MRI-CGCM3']['rcp85']['pr'] }}</td>
+					<td>
+						{{ reportData['2070_2100']['JJA']['MRI-CGCM3']['rcp85']['pr'] }}
+					</td>
 					<td>{{ reportData['2070_2100']['JJA']['CCSM4']['rcp85']['pr'] }}</td>
 				</tr>
 				<tr>
 					<th scope="row">SON</th>
 					<td>1</td>
-					<td>{{ reportData['2040_2070']['SON']['MRI-CGCM3']['rcp45']['pr'] }}</td>
+					<td>
+						{{ reportData['2040_2070']['SON']['MRI-CGCM3']['rcp45']['pr'] }}
+					</td>
 					<td>{{ reportData['2040_2070']['SON']['CCSM4']['rcp45']['pr'] }}</td>
-					<td>{{ reportData['2040_2070']['SON']['MRI-CGCM3']['rcp85']['pr'] }}</td>
+					<td>
+						{{ reportData['2040_2070']['SON']['MRI-CGCM3']['rcp85']['pr'] }}
+					</td>
 					<td>{{ reportData['2040_2070']['SON']['CCSM4']['rcp85']['pr'] }}</td>
-					<td>{{ reportData['2070_2100']['SON']['MRI-CGCM3']['rcp45']['pr'] }}</td>
+					<td>
+						{{ reportData['2070_2100']['SON']['MRI-CGCM3']['rcp45']['pr'] }}
+					</td>
 					<td>{{ reportData['2070_2100']['SON']['CCSM4']['rcp45']['pr'] }}</td>
-					<td>{{ reportData['2070_2100']['SON']['MRI-CGCM3']['rcp85']['pr'] }}</td>
+					<td>
+						{{ reportData['2070_2100']['SON']['MRI-CGCM3']['rcp85']['pr'] }}
+					</td>
 					<td>{{ reportData['2070_2100']['SON']['CCSM4']['rcp85']['pr'] }}</td>
 				</tr>
 			</tbody>
@@ -85,6 +126,6 @@
 <script>
 export default {
 	name: 'PrecipReport',
-	props: ['reportData']
+	props: ['reportData', 'units'],
 }
 </script>
