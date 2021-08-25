@@ -39,10 +39,6 @@
 	z-index: 10000;
 }
 
-strong {
-	font-weight: 700;
-}
-
 .search-item {
 	font-weight: 600;
 	.watershed {
