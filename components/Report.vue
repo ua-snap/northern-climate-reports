@@ -33,6 +33,7 @@
 			<div v-else>
 				<!-- The report! -->
 				<div class="report-controls">
+					<div class="content-placeholder">What text might go here, introducing the results?</div>
 					<b-field label="Units">
 						<b-radio v-model="units" name="units" native-value="imperial">
 							Imperial
@@ -48,6 +49,7 @@
 				<div class="report-type-wrapper">
 					<PrecipReport :reportData="results" :units="units"></PrecipReport>
 				</div>
+				<div class="content-placeholder">What text might go here, as a kind of in-place explainer -- possibly not at the same level of detail as we have elsewhere, but supporting some broad important concepts about the results?</div>
 			</div>
 		</section>
 	</div>

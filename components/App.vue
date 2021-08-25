@@ -4,7 +4,8 @@
       <div v-show="!this.reportIsVisible" class="place-selector">
         <div class="container">
           <section class="section">
-            <div class="content controls" id="controls"> <!-- ID is used as anchor target, don't remove -->
+            <div class="content controls" id="controls">
+              <!-- ID is used as anchor target, don't remove -->
               <PlaceSelector></PlaceSelector>
             </div>
           </section>
@@ -15,19 +16,20 @@
       <div v-show="this.reportIsVisible" class="report-wrapper">
         <Report></Report>
       </div>
+      <div class="content-placeholder">
+        What text might go here, at the end of the page before the footer?
+      </div>
     </client-only>
   </div>
 </template>
 <style lang="scss" scoped>
-
 .content.controls {
   max-width: 50rem;
   margin-left: auto;
   margin-right: auto;
   padding-top: 2rem;
   margin-top: -2rem;
-} 
-
+}
 </style>
 <script>
 import Map from '~/components/Map'
