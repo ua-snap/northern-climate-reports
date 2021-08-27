@@ -15,7 +15,7 @@
         <p>
           Model output products are publicly available, but often in formats
           requiring considerable analytical expertise to access and process.
-          Repackaging these outputs as Climate Impact Reviews moves relevant
+          Repackaging these outputs as Climate Impact Reports moves relevant
           climate information out of archival storage and into management
           decision spaces—thus helping to gauge future fire hazard, reduce
           future wildfire risk, promote ecological resilience and wildlife
