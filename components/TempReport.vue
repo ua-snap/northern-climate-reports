@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="report--temperature">
 		<h4 class="subtitle is-4">
 			Temperature
 			<span class="units">
@@ -7,8 +7,16 @@
 				<span v-if="units == 'metric'">(&deg;C)</span>
 			</span>
 		</h4>
-		<div class="content-placeholder">
-			What text might go here, introducing Temperature?
+		<div class="content is-size-5">
+			<p>
+				Projections for two future time periods are shown for average (mean)
+				temperature. Results are averaged by season (three month averages) for
+				two different climate models (MRI-CGCM3 and NCAR-CCSM4) and two
+				different greenhouse gas scenarios or Representative Concentration
+				Pathways (RCPs). RCP4.5 is an optimistic future, and RCP8.5 is more
+				pessimistic, but also more likely.
+				<nuxt-link :to="{ name: 'about' }">Read more about models and RCPs.</nuxt-link>
+			</p>
 		</div>
 		<table class="table" v-if="reportData">
 			<thead>
@@ -39,8 +47,14 @@
 			</thead>
 			<tbody>
 				<tr>
-					<th scope="row">DJF</th>
-					<td>1</td>
+					<th scope="row">Winter</th>
+					<td>
+						1
+						<span class="units">
+							<span v-if="units == 'imperial'">(&deg;F)</span>
+							<span v-if="units == 'metric'">(&deg;C)</span>
+						</span>
+					</td>
 					<td>
 						{{ reportData['2040_2070']['DJF']['MRI-CGCM3']['rcp45']['tas'] }}
 					</td>
@@ -59,7 +73,7 @@
 					<td>{{ reportData['2070_2100']['DJF']['CCSM4']['rcp85']['tas'] }}</td>
 				</tr>
 				<tr>
-					<th scope="row">MAM</th>
+					<th scope="row">Spring</th>
 					<td>1</td>
 					<td>
 						{{ reportData['2040_2070']['MAM']['MRI-CGCM3']['rcp45']['tas'] }}
@@ -79,7 +93,7 @@
 					<td>{{ reportData['2070_2100']['MAM']['CCSM4']['rcp85']['tas'] }}</td>
 				</tr>
 				<tr>
-					<th scope="row">JJA</th>
+					<th scope="row">Summer</th>
 					<td>1</td>
 					<td>
 						{{ reportData['2040_2070']['JJA']['MRI-CGCM3']['rcp45']['tas'] }}
@@ -99,7 +113,7 @@
 					<td>{{ reportData['2070_2100']['JJA']['CCSM4']['rcp85']['tas'] }}</td>
 				</tr>
 				<tr>
-					<th scope="row">SON</th>
+					<th scope="row">Fall</th>
 					<td>1</td>
 					<td>
 						{{ reportData['2040_2070']['SON']['MRI-CGCM3']['rcp45']['tas'] }}
@@ -122,7 +136,14 @@
 		</table>
 	</div>
 </template>
-<style></style>
+<style lang="scss" scoped>
+.report--temperature {
+	margin-top: 2.25rem;
+}
+table.table {
+	margin-top: 2.25rem;
+}
+</style>
 <script>
 export default {
 	name: 'ReportTable',
