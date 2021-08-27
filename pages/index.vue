@@ -68,6 +68,27 @@
       This needs to be outside of any `container` or `section` wrappers.
     -->
     <App></App>
+
+    <section class="section">
+      <div class="content-wrapper">
+        <h3 class="subtitle is-3">Learn more about this tool and data</h3>
+        <div class="content is-size-5">
+          <p>
+            Read more about
+            <nuxt-link :to="{ name: 'about' }"
+              >why this tool matters, and about climate models and
+              RCPs</nuxt-link
+            >. Find out
+            <nuxt-link :to="{ name: 'data' }"
+              >what data is used in this tool, and how to access it</nuxt-link
+            >. Questions? Email us at
+            <a href="mailto:uaf-snap-data-tools@alaska.edu"
+              >uaf-snap-data-tools@alaska.edu</a
+            >.
+          </p>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
