@@ -48,8 +48,7 @@
 			<tbody>
 				<tr>
 					<th scope="row">Winter</th>
-					<td>
-						1
+					<td>{{ reportData['1910-2009']['DJF']['CRU-TS31']['CRU_historical']['pr'] }}
 						<span class="units">
 							<span v-if="units == 'imperial'">(inches)</span>
 							<span v-if="units == 'metric'">(mm)</span>
@@ -74,7 +73,7 @@
 				</tr>
 				<tr>
 					<th scope="row">Spring</th>
-					<td>1</td>
+					<td>{{ reportData['1910-2009']['MAM']['CRU-TS31']['CRU_historical']['pr'] }}</td>
 					<td>
 						{{ reportData['2040_2070']['MAM']['MRI-CGCM3']['rcp45']['pr'] }}
 					</td>
@@ -94,7 +93,7 @@
 				</tr>
 				<tr>
 					<th scope="row">Summer</th>
-					<td>1</td>
+					<td>{{ reportData['1910-2009']['JJA']['CRU-TS31']['CRU_historical']['pr'] }}</td>
 					<td>
 						{{ reportData['2040_2070']['JJA']['MRI-CGCM3']['rcp45']['pr'] }}
 					</td>
@@ -114,7 +113,7 @@
 				</tr>
 				<tr>
 					<th scope="row">Fall</th>
-					<td>1</td>
+					<td>{{ reportData['1910-2009']['SON']['CRU-TS31']['CRU_historical']['pr'] }}</td>
 					<td>
 						{{ reportData['2040_2070']['SON']['MRI-CGCM3']['rcp45']['pr'] }}
 					</td>
