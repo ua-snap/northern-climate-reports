@@ -18,7 +18,7 @@
           <h4 class="title is-size-4">What this tool does</h4>
           <div class="content is-size-5">
             <p>
-              The Climate Impact Reviews provided by this tool are text and
+              The Climate Impact Reports provided by this tool are text and
               graphic summaries of climate change impacts on vegetation and
               wildfire in Northern landscapes. The goal of these reports is
               better public understanding of local and regional change.
