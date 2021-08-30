@@ -89,8 +89,8 @@
 </style>
 
 <script>
-import TempReport from '~/components/TempReport'
-import PrecipReport from '~/components/PrecipReport'
+import TempReport from '~/components/reports/temperature/TempReport'
+import PrecipReport from '~/components/reports/precipitation/PrecipReport'
 import { mapGetters } from 'vuex'
 import lodash from 'lodash'
 import deepdash from 'deepdash'
