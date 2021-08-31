@@ -16,22 +16,32 @@
 			<h3 class="title is-4 place">
 				Projected Future Conditions for <span v-html="place"></span>
 			</h3>
+			
 			<div v-if="$fetchState.pending">
 				<!-- Drama dots -->
 				<h4 class="title is-5">Loading data&hellip;</h4>
 				<b-progress type="is-info"></b-progress>
 			</div>
 			<div v-else-if="$fetchState.error" class="error">
-				<p>
+				<p class="content is-size-5">
 					Oh no! Something&rsquo;s amiss and the report for this place
 					couldn&rsquo;t be loaded.
 				</p>
-				<b-button tag="nuxt-link" to="/">
-					Go back and try another place</b-button
+				<b-button
+					class="is-warning"
+					tag="nuxt-link"
+					to="/#controls"
+					icon-left="emoticon-sad-outline"
+				>
+					<strong>We&rsquo;re sorry</strong>, please try again</b-button
 				>
 			</div>
+
 			<div v-else>
 				<!-- The report! -->
+				<div class="report--minimap--wrapper">
+					<MiniMap/>
+				</div>
 				<div class="report-controls">
 					<div class="content is-size-5">
 						<p>The tables and charts below are specific to the selected point, or have been averaged across the selected HUC or ecoregion.  Note that the precision of these results depends on the grid resolution (pixel size) of the underlying dataset.  Also note that some data layers are not available as point data or at the HUC or ecoregion level.</p>
@@ -91,6 +101,7 @@
 <script>
 import TempReport from '~/components/reports/temperature/TempReport'
 import PrecipReport from '~/components/reports/precipitation/PrecipReport'
+import MiniMap from '~/components/reports/MiniMap'
 import { mapGetters } from 'vuex'
 import lodash from 'lodash'
 import deepdash from 'deepdash'
@@ -99,7 +110,7 @@ const _ = deepdash(lodash)
 
 export default {
 	name: 'Report',
-	components: { TempReport, PrecipReport },
+	components: { TempReport, PrecipReport, MiniMap },
 	data() {
 		return {
 			originalData: undefined, // for the raw stuff back from API
