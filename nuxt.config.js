@@ -59,7 +59,7 @@ export default {
       process.env.GEOSERVER_URL || 'https://gs.mapventure.org/geoserver/wms',
     apiUrl:
       process.env.SNAP_API_URL ||
-      'http://testing.eba-hkca5w5b.us-west-2.elasticbeanstalk.com',
+      'http://earthmaps.io',
   },
 
   // Router customizations

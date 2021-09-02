@@ -1,6 +1,6 @@
 <template>
 	<div class="headerbanner">
-		University of Alaska Fairbanks&nbsp;&nbsp;|&nbsp;&nbsp;Alaska Climate Science Adaptation Center
+		University of Alaska Fairbanks&nbsp;&nbsp;|&nbsp;&nbsp;Alaska Climate Adaptation Science Center
 	</div>
 </template>
 
