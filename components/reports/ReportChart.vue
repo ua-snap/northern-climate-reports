@@ -1,18 +1,19 @@
 <template>
-	<div class="temp-chart-wrapper">
-		<div id="temp-chart" />
+	<div class="chart-wrapper">
+		<div v-if="variable == 'tas'" id="temp-chart" />
+		<div v-if="variable == 'pr'" id="precip-chart" />
 	</div>
 </template>
 <style lang="scss" scoped>
-.temp-chart-wrapper {
+.chart-wrapper {
 	padding-bottom: 6rem;
 }
 </style>
 <script>
 import _ from 'lodash'
 export default {
-	name: 'ReportTempChart',
-	props: ['reportData', 'units'],
+	name: 'ReportChart',
+	props: ['reportData', 'variable', 'units'],
 	mounted() {
 		this.renderPlot()
 	},
@@ -27,6 +28,8 @@ export default {
 			if (!reportData) {
 				return
 			}
+			let variable = this.variable
+			var units
 
 			let seasons = ['DJF', 'MAM', 'JJA', 'SON']
 			let seasons_names = ['Winter', 'Spring', 'Summer', 'Fall']
@@ -37,7 +40,11 @@ export default {
 				JJA: { x: 'x3', y: 'y3' },
 				SON: { x: 'x4', y: 'y4' },
 			}
-			let units = this.units == 'metric' ? 'ºC' : 'ºF'
+			if (variable == 'tas') {
+				units = this.units == 'metric' ? 'ºC' : 'ºF'
+			} else if (variable == 'pr') {
+				units = this.units == 'metric' ? 'mm' : 'in'
+			}
 			function get_seasonal_subplot(season) {
 				let xAxisDef = [
 					'<b>2040-2070</b>, MRI-CGCM3',
@@ -49,10 +56,10 @@ export default {
 				let trace_rcp45 = {
 					x: xAxisDef,
 					y: [
-						reportData['2040_2070'][season]['MRI-CGCM3']['rcp45']['tas'],
-						reportData['2040_2070'][season]['CCSM4']['rcp45']['tas'],
-						reportData['2070_2100'][season]['MRI-CGCM3']['rcp45']['tas'],
-						reportData['2070_2100'][season]['CCSM4']['rcp45']['tas'],
+						reportData['2040_2070'][season]['MRI-CGCM3']['rcp45'][variable],
+						reportData['2040_2070'][season]['CCSM4']['rcp45'][variable],
+						reportData['2070_2100'][season]['MRI-CGCM3']['rcp45'][variable],
+						reportData['2070_2100'][season]['CCSM4']['rcp45'][variable],
 					],
 					xaxis: axisGroups[season]['x'],
 					yaxis: axisGroups[season]['y'],
@@ -65,10 +72,10 @@ export default {
 				let trace_rcp85 = {
 					x: xAxisDef,
 					y: [
-						reportData['2040_2070'][season]['MRI-CGCM3']['rcp85']['tas'],
-						reportData['2040_2070'][season]['CCSM4']['rcp85']['tas'],
-						reportData['2070_2100'][season]['MRI-CGCM3']['rcp85']['tas'],
-						reportData['2070_2100'][season]['CCSM4']['rcp85']['tas'],
+						reportData['2040_2070'][season]['MRI-CGCM3']['rcp85'][variable],
+						reportData['2040_2070'][season]['CCSM4']['rcp85'][variable],
+						reportData['2070_2100'][season]['MRI-CGCM3']['rcp85'][variable],
+						reportData['2070_2100'][season]['CCSM4']['rcp85'][variable],
 					],
 					xaxis: axisGroups[season]['x'],
 					yaxis: axisGroups[season]['y'],
@@ -78,15 +85,15 @@ export default {
 					marker: { color: '#333', size: 8 },
 				}
 
-				let historical_temp =
-					reportData['1910-2009'][season]['CRU-TS31']['CRU_historical']['tas']
+				let historical =
+					reportData['1910-2009'][season]['CRU-TS31']['CRU_historical'][variable]
 				let trace_historical = {
 					x: xAxisDef,
 					y: [
-						historical_temp,
-						historical_temp,
-						historical_temp,
-						historical_temp,
+						historical,
+						historical,
+						historical,
+						historical,
 					],
 					xaxis: axisGroups[season]['x'],
 					yaxis: axisGroups[season]['y'],
@@ -95,7 +102,7 @@ export default {
 					mode: 'lines+text',
 					showlegend: false,
 					text: [
-						'Historical (CRU TS 3.1), <b>' + historical_temp + units + '</b>',
+						'Historical (CRU TS 3.1), <b>' + historical + units + '</b>',
 						'',
 						'',
 						'',
@@ -132,14 +139,14 @@ export default {
 				grid: { rows: 1, columns: 4, pattern: 'independent' },
 				yaxis: {
 					title: {
-						text: 'Temperature ' + units,
+						text: variable == 'tas' ? 'Temperature ' + units : 'Precipitation ' + units,
 						font: {
 							size: 18,
 						},
 					},
 				},
 				title: {
-					text: 'Projected temperatures',
+					text: variable == 'tas' ? 'Projected temperatures' : 'Projected precipitation',
 					font: {
 						size: 24,
 					},
@@ -148,7 +155,7 @@ export default {
 				// showlegend: false,
 			}
 
-			this.$Plotly.newPlot('temp-chart', data_traces, layout, {
+			this.$Plotly.newPlot(variable == 'tas' ? 'temp-chart' : 'precip-chart', data_traces, layout, {
 				displaylogo: false,
 				modeBarButtonsToRemove: [
 					'zoom2d',

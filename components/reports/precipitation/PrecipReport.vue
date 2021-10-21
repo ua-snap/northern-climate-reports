@@ -19,21 +19,21 @@
 			>
 		</div>
 		<div class="chart-wrapper">
-			<ReportPrecipChart :reportData="reportData" :units="units" />
+			<ReportChart :reportData="reportData" variable='pr' :units="units" />
 		</div>
 		<div class="chart-wrapper">
-			<ReportPrecipTable :reportData="reportData" :units="units" />
+			<ReportTable :reportData="reportData" variable='pr' :units="units" />
 		</div>
 	</div>
 </template>
 <style></style>
 <script>
-import ReportPrecipChart from './ReportPrecipChart'
-import ReportPrecipTable from './ReportPrecipTable'
+import ReportChart from '../ReportChart'
+import ReportTable from '../ReportTable'
 
 export default {
 	name: 'PrecipReport',
 	props: ['reportData', 'units'],
-	components: { ReportPrecipChart, ReportPrecipTable },
+	components: { ReportChart, ReportTable },
 }
 </script>
