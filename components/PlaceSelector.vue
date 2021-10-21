@@ -42,7 +42,7 @@
 .search-item {
 	font-weight: 600;
 	.watershed {
-		text-tranform: uppercase;
+		text-transform: uppercase;
 		display: inline-block;
 		padding-left: 1ex;
 		color: #888;
