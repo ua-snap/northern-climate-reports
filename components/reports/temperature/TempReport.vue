@@ -21,6 +21,9 @@
 			</p>
 		</div>
 		<div class="chart-wrapper">
+			<ReportTempText :reportData="reportData" :place="place" :units="units" />
+		</div>
+		<div class="chart-wrapper">
 			<ReportTempChart :reportData="reportData" :units="units" />
 		</div>
 		<div class="table-wrapper">
@@ -39,9 +42,10 @@ table.table {
 <script>
 import ReportTempChart from './ReportTempChart'
 import ReportTempTable from './ReportTempTable'
+import ReportTempText from './ReportTempText'
 export default {
 	name: 'ReportTable',
-	props: ['reportData', 'units'],
-	components: { ReportTempChart, ReportTempTable },
+	props: ['reportData', 'place', 'units'],
+	components: { ReportTempChart, ReportTempTable, ReportTempText },
 }
 </script>

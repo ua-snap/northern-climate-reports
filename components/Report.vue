@@ -70,7 +70,7 @@
 					</b-field>
 				</div>
 				<div class="report-type-wrapper">
-					<TempReport :reportData="results" :units="units"></TempReport>
+					<TempReport :reportData="results" :place="place" :units="units"></TempReport>
 				</div>
 				<div class="report-type-wrapper">
 					<PrecipReport :reportData="results" :units="units"></PrecipReport>
