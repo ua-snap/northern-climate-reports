@@ -1,10 +1,10 @@
 <template>
-	<div class="temp-chart-wrapper">
+	<div class="temp-text-wrapper">
 		<div id="temp-text" />
 	</div>
 </template>
 <style lang="scss" scoped>
-.temp-chart-wrapper {
+.temp-text-wrapper {
 	padding-bottom: 6rem;
 }
 </style>
@@ -60,7 +60,7 @@
 
                 // By the most in what period?
                 if (Math.abs(season_metrics['max_temp_diff']) < Math.abs(current_temp)) {
-                    season_metrics['max_temp_diff'] = Math.abs(current_temp - historical_temp).toFixed(1)
+                    season_metrics['max_temp_diff'] = Math.round(Math.abs(current_temp - historical_temp))
                     season_metrics['max_temp_period'] = period_names[period]
                 }
 
@@ -89,12 +89,37 @@
           
         }
 
-        
+        var annual_temp_rise = true
+        var season_highest_temp_change = 0.0
+        var season_period_highest_temp_change = "None"
+        var season_with_highest_temp_change = "None"
+        var above_freezing_seasons = []
         var seasonal_metrics = []
         seasons.forEach((season) => {
-          seasonal_metrics.push(collect_seasonal_metrics(season))
+          var season_output = collect_seasonal_metrics(season)
+          
+          if (season_output['temp_rising'] == false) {
+            annual_temp_rise = false
+          }
+          console.log(season_highest_temp_change < season_output['max_temp_diff'])
+          if (season_highest_temp_change < season_output['max_temp_diff']) {
+            console.log(season_output['max_temp_diff'])
+            season_highest_temp_change = season_output['max_temp_diff']
+            season_period_highest_temp_change = season_output['max_temp_period']
+            season_with_highest_temp_change = season_output['season']
+          }
+
+          if (season_output['above_freezing'] == true) {
+            above_freezing_seasons.push(season_output['season'])
+          }
+
+          seasonal_metrics.push(season_output)
         })
-        console.log(seasonal_metrics)
+        console.log("In " + place + ", " + (annual_temp_rise ? "annual" : season_with_highest_temp_change) + " temperatures are increasing.")
+        console.log(season_with_highest_temp_change + " temperatures are increasing the most at " + season_highest_temp_change + units + " through the end of " + season_period_highest_temp_change.slice(5) + ".")
+        if (above_freezing_seasons.length > 0) {
+          console.log("In " + above_freezing_seasons.join(" and ").toLowerCase() + ", the average temperature may be above freezing in the future.")
+        }
       }
     }
   }
