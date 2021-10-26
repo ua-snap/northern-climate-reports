@@ -1,15 +1,16 @@
 // Here's where we override defaults in Bulma!
 // Note that this is where our font imports come from too.
-@import "bulma-overrides.scss";
+@import 'bulma-overrides.scss';
 
 // Import bulma styles
-@import "~bulma";
+@import '~bulma';
 
 // Import buefy styles
-@import "~buefy/src/scss/buefy";
+@import '~buefy/src/scss/buefy';
 
 // And a few things we use on multiple screens.
-b, strong {
+b,
+strong {
   font-weight: 600; // Lighten it up a bit.
 }
 
@@ -33,4 +34,41 @@ label.label {
   border: 4px dotted #aaa;
   margin: 1.25rem 0;
   padding: 1.25rem;
+}
+
+// Formatting common for both report tables.
+table.table.report-table {
+  width: 100%;
+  font-weight: 400;
+  margin-top: 2.25rem;
+
+  thead th[scope='col'].light-border {
+    border-bottom: 1px solid #eee;
+  }
+
+  td:not(.about) {
+    font-family: 'IBM Plex Mono', monospace;
+    text-align: right;
+    &.left {
+      text-align: left;
+    }
+  }
+
+  th[scope='col'] {
+    vertical-align: bottom;
+    text-align: center;
+    &.left {
+      text-align: left;
+    }
+  }
+  tbody th[scope='row'] {
+    text-align: left;
+  }
+  tr.models th {
+    text-align: right;
+  }
+  caption {
+    font-size: 150%;
+    padding-bottom: 1rem;
+  }
 }
