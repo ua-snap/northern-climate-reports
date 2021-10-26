@@ -1,3 +1,13 @@
+// Some properties reused in the OpenGraph tags.
+var metas = {
+  title: 'Climate Impact Reports for Changing Northern Ecosystems',
+  description:
+    'Three forms of heat-related phenomena—warming temperatures, thawing permafrost, and more fire—are driving landscape change in Northern ecosystems. This tool uses climate data to construct a variety of possible futures for a warming North.',
+  preview: '/preview.png',
+  url: 'https://northernclimatereports.org/',
+}
+
+// NuxtJS Config object!
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -12,6 +22,21 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
+      { itemprop: 'name', content: metas.title },
+      { itemprop: 'description', content: metas.description },
+      { itemprop: 'image', content: metas.preview },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:site', content: '@SNAPandACCAP' },
+      { name: 'twitter:title', content: metas.title },
+      { name: 'twitter:description', content: metas.description },
+      { name: 'twitter:creator', content: '@SNAPandACCAP' },
+      { name: 'twitter:image:src', content: metas.preview },
+      { property: 'og:title', content: metas.title },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:url', content: metas.url },
+      { property: 'og:image', content: metas.preview },
+      { property: 'og:description', content: metas.description },
+      { property: 'og:site_name', content: metas.title },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
@@ -21,7 +46,11 @@ export default {
   css: ['@/assets/scss/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/plotly.client','~/plugins/leaflet.client.js', '~/plugins/vuex-router-sync'],
+  plugins: [
+    '~/plugins/plotly.client',
+    '~/plugins/leaflet.client.js',
+    '~/plugins/vuex-router-sync',
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -57,9 +86,7 @@ export default {
   env: {
     geoserverUrl:
       process.env.GEOSERVER_URL || 'https://gs.mapventure.org/geoserver/wms',
-    apiUrl:
-      process.env.SNAP_API_URL ||
-      'http://earthmaps.io',
+    apiUrl: process.env.SNAP_API_URL || 'http://earthmaps.io',
   },
 
   // Router customizations
