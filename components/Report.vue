@@ -70,6 +70,9 @@
 					</b-field>
 				</div>
 				<div class="report-type-wrapper">
+					<QualitativeText :reportData="results" :place="place" :units="units" />
+				</div>
+				<div class="report-type-wrapper">
 					<TempReport :reportData="results" :place="place" :units="units"></TempReport>
 				</div>
 				<div class="report-type-wrapper">
@@ -144,6 +147,7 @@
 import TempReport from '~/components/reports/temperature/TempReport'
 import PrecipReport from '~/components/reports/precipitation/PrecipReport'
 import MiniMap from '~/components/reports/MiniMap'
+import QualitativeText from '~/components/reports/QualitativeText'
 import { mapGetters } from 'vuex'
 import lodash from 'lodash'
 import deepdash from 'deepdash'
@@ -152,7 +156,7 @@ const _ = deepdash(lodash)
 
 export default {
 	name: 'Report',
-	components: { TempReport, PrecipReport, MiniMap },
+	components: { TempReport, PrecipReport, MiniMap, QualitativeText },
 	data() {
 		return {
 			originalData: undefined, // for the raw stuff back from API

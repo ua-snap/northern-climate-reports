@@ -1,11 +1,22 @@
 <template>
-	<div class="temp-text-wrapper">
-		<div id="temp-text" />
+	<div class="text-wrapper">
+		<div id="qualitative-text"> 
+      <h4 class="subtitle is-4">
+			Qualitative Information
+      </h4>
+      <div class="content is-size-5">
+        <ul v-html="generateText()" />
+      </div>
+    </div>
 	</div>
 </template>
 <style lang="scss" scoped>
-.temp-text-wrapper {
-	padding-bottom: 6rem;
+#qualitative-text ul {
+  list-style-type: circle;
+}
+.text-wrapper {
+  padding-top: 2rem;
+	padding-bottom: 2rem;
 }
 </style>
 <script>
@@ -42,18 +53,21 @@
         let units = this.units == 'metric' ? 'ºC' : 'ºF'
         function collect_seasonal_metrics(season) {
 
-          let historical_temp = reportData['1910-2009'][season]['CRU-TS31']['CRU_historical']['tas']
+          let historical_temp = Math.round(reportData['1910-2009'][season]['CRU-TS31']['CRU_historical']['tas'])
           let historical_precip = reportData['1910-2009'][season]['CRU-TS31']['CRU_historical']['pr']
           var season_metrics = {'season': season_names[season], 'max_temp_diff': 0, 'max_precip_diff': 0, 'precip_percent_change': 0, 'above_freezing': false, 'historical_temp': historical_temp}
           
-          console.log(season_names[season])
+          
           periods.forEach((period) => {
             rcps.forEach((rcp) => {
-              let temperature_average = (reportData[period][season]['MRI-CGCM3'][rcp]['tas'] + reportData[period][season]['CCSM4'][rcp]['tas']) / 2
-              let precip_average = (reportData[period][season]['MRI-CGCM3'][rcp]['pr'] + reportData[period][season]['CCSM4'][rcp]['pr']) / 2
-
+              console.log(season_names[season] + " " + period + " " + rcp)
+              let temperature_average = Math.round((reportData[period][season]['MRI-CGCM3'][rcp]['tas'] + reportData[period][season]['CCSM4'][rcp]['tas']) / 2)
+              let precip_average = Math.round((reportData[period][season]['MRI-CGCM3'][rcp]['pr'] + reportData[period][season]['CCSM4'][rcp]['pr']) / 2)
+                console.log(season_names[season] + " Modeled Average Temperature: " + temperature_average)
+                console.log(season_names[season] + " Historical Average Temperature: " + historical_temp)
+                console.log("Seasonal difference: " + (temperature_average - historical_temp))
                 if (Math.abs(season_metrics['max_temp_diff']) < Math.abs(temperature_average)) {
-                    season_metrics['max_temp_diff'] = Math.round(Math.abs(temperature_average - historical_temp))
+                    season_metrics['max_temp_diff'] = temperature_average - historical_temp
                 }
 
                 if (season_metrics['max_precip_diff'] < precip_average) {
@@ -71,7 +85,7 @@
           return season_metrics     
         }
 
-        function parse_metrics() {
+        function generate_annual_output() {
 
           var annual_temperature_average = 0
           var historical_temperature_average = 0
@@ -85,16 +99,20 @@
             var season_output = collect_seasonal_metrics(season)
             
             annual_temperature_average = annual_temperature_average + season_output['max_temp_diff']
+            //console.log(season_output['season'] + " modeled: " + annual_temperature_average)
             historical_temperature_average = historical_temperature_average + season_output['historical_temp']
-            console.log(annual_highest_temp_change < season_output['max_temp_diff'])
+            //console.log(season_output['season'] + " historical: " + historical_temperature_average)
+            //console.log("Higest temp change: " + annual_highest_temp_change)
+            //console.log("Test season temp: " + season_output['max_temp_diff'])
+            //console.log(annual_highest_temp_change < season_output['max_temp_diff'])
             if (annual_highest_temp_change < season_output['max_temp_diff']) {
-              console.log("Temperatue change: " + season_output['max_temp_diff'])
+              //console.log("Temperatue change: " + season_output['max_temp_diff'])
               annual_highest_temp_change = season_output['max_temp_diff']
               season_with_highest_temp_change = season_output['season']
             }
 
             if (annual_highest_precip_percent_change < season_output['precip_percent_change']) {
-              console.log("Precip change: " + season_output['precip_percent_change'] + "%")
+              //console.log("Precip change: " + season_output['precip_percent_change'] + "%")
               annual_highest_precip_percent_change = season_output['precip_percent_change']
               season_with_highest_precip_change = season_output['season']
             }
@@ -109,16 +127,21 @@
           // Average value against the 4 seasons included.
           annual_temperature_average = annual_temperature_average / 4
           historical_temperature_average = historical_temperature_average / 4
-          let annual_temperature_diff = Math.round(annual_temperature_average  - historical_temperature_average)
-          console.log("In " + place + ", annual temperatures are likely to increase by up to " + annual_temperature_diff + units + " by the end of the century.")
-          console.log(season_with_highest_temp_change + " temperatures are increasing the most (+" + annual_highest_temp_change + units + ").")
+          console.log("Annual modeled: " + annual_temperature_average)
+          console.log("Annual historical: " + historical_temperature_average)
+          let annual_temperature_diff = annual_temperature_average
+          var returned_string = "<li>In <b>" + place + "</b>, annual temperatures are likely to increase by up to <b>" + annual_temperature_diff + units + "</b> by the end of the century.</li>"
+          returned_string += "<li><b>" + season_with_highest_temp_change + "</b> temperatures are increasing the most (<b>+" + annual_highest_temp_change + units + "</b>). "
           if (above_freezing_seasons.length > 0) {
-            console.log(above_freezing_seasons.join(" and ") + " may transition from below freezing to above freezing in the future.")
+            returned_string += "<b>" + above_freezing_seasons.join(" and ") + "</b> may transition from below freezing to <b>above freezing</b> in the future."
           }
-          console.log("Models have high uncertainty with regard to precipitation, but " + season_with_highest_precip_change + " is likely to get wetter (+" + annual_highest_precip_percent_change + "%).")
+          returned_string += "</li><li>Models have high uncertainty with regard to precipitation, but <b>" + season_with_highest_precip_change + "</b> is likely to get wetter (<b>+" + annual_highest_precip_percent_change + "%</b>).</li>"
+        
+          return returned_string
+
         }
 
-        parse_metrics()
+        return generate_annual_output()
       }
     }
   }
