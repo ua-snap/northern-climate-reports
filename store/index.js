@@ -49,7 +49,10 @@ export const getters = {
     // Lat/lon!
     if (state.route.params.lat && state.route.params.lng) {
       return (
-        state.route.params.lat + '&deg;N, ' + Math.abs(state.route.params.lng) + '&deg;W'
+        state.route.params.lat +
+        '&deg;N, ' +
+        Math.abs(state.route.params.lng) +
+        '&deg;W'
       )
     }
 
@@ -77,6 +80,17 @@ export const getters = {
           huc.id +
           '</span>'
         )
+      }
+    }
+  },
+
+  getRawHucName(state) {
+    if (state.route.params.hucId) {
+      let huc = _.find(hucs, {
+        id: Number(state.route.params.hucId),
+      })
+      if (huc) {
+        return huc.name
       }
     }
   },
