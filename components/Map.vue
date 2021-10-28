@@ -37,8 +37,8 @@ export default {
 	methods: {
 		handleMapClick(event) {
 			this.latlng = {
-				lat: event.latlng.lat.toFixed(4),
-				lng: event.latlng.lng.toFixed(4),
+				lat: event.latlng.lat.toFixed(2),
+				lng: event.latlng.lng.toFixed(2),
 			}
 			this.$router.push({
 				path: '/report/' + this.latlng.lat + '/' + this.latlng.lng,
