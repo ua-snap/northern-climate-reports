@@ -5,7 +5,7 @@
 			Qualitative Information
       </h4>
       <div class="content is-size-5">
-        <ul v-html="generateText()" />
+        <ul class="place" v-html="generateText()" />
       </div>
     </div>
 	</div>
@@ -18,9 +18,11 @@
   padding-top: 2rem;
 	padding-bottom: 2rem;
 }
-.place::v-deep .watershed {
+.place {
+  ::v-deep .watershed {
 		color: #888;
 		font-weight: 800;
+  }
 }
 </style>
 <script>
@@ -150,11 +152,11 @@
           var returned_string = ""
 
           if (path.includes("community")) {
-            returned_string += "<li class='place'>In " + place
+            returned_string += "<li>In <b>" + place + "</b>"
           } else if (path.includes("huc")) {
-            returned_string += "<li class='place'>In the " + place
+            returned_string += "<li>In the <b>" + place + "</b>"
           } else {
-            returned_string += "<li class='place'>At " + place
+            returned_string += "<li>At <b>" + place + "</b>"    
           }
           // Create the returned string using the values from the loop above.
           returned_string += ", average annual temperatures are likely to increase by up to <b>" + annual_temperature_average + units + "</b> by the end of the century.</li>"
