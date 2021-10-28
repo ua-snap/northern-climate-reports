@@ -18,6 +18,10 @@
   padding-top: 2rem;
 	padding-bottom: 2rem;
 }
+.place::v-deep .watershed {
+		color: #888;
+		font-weight: 800;
+}
 </style>
 <script>
   export default {
@@ -42,7 +46,13 @@
           return
         }
 
+        let path = this.$route.path
+
         let place = this.place
+
+        if (!place) {
+          return
+        }
 
         let seasons = ['MAM', 'JJA', 'SON', 'DJF']
         let season_names = {'DJF': 'Winter', 'MAM': 'Spring', 'JJA': 'Summer', 'SON': 'Fall'}
@@ -137,8 +147,17 @@
           // Average value against the 4 seasons included.
           annual_temperature_average = Math.round(annual_temperature_average / 4)
           
+          var returned_string = ""
+
+          if (path.includes("community")) {
+            returned_string += "<li class='place'>In " + place
+          } else if (path.includes("huc")) {
+            returned_string += "<li class='place'>In the " + place
+          } else {
+            returned_string += "<li class='place'>At " + place
+          }
           // Create the returned string using the values from the loop above.
-          var returned_string = "<li>In <b>" + place + "</b>, annual temperatures are likely to increase by up to <b>" + annual_temperature_average + units + "</b> by the end of the century.</li>"
+          returned_string += ", average annual temperatures are likely to increase by up to <b>" + annual_temperature_average + units + "</b> by the end of the century.</li>"
           returned_string += "<li><b>" + season_with_highest_temp_change + "</b> temperatures are increasing the most (<b>+" + annual_highest_temp_change + units + "</b>).</li>"
           
           // If any season is marked as above freezing in the future when historically below freezing,
