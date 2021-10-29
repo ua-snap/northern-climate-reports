@@ -1,5 +1,5 @@
 <template>
-	<div class="precip-chart-wrapper">
+	<div style="display: none;" class="precip-chart-wrapper">
 		<div id="precip-chart" />
 	</div>
 </template>

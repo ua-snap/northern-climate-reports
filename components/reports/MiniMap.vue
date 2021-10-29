@@ -7,12 +7,10 @@
 </template>
 
 <style lang="scss" scoped>
-.report--minimap--wrapper {
-	margin: 2rem 0 3rem;
-}
 #report--minimmap--map {
 	height: 20vw;
-	width: 20vw;
+	min-width: 20vw;
+	width: 100%;
 }
 </style>
 
