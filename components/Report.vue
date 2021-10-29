@@ -34,8 +34,8 @@
 		<div v-else>
 			<!-- The report! -->
 			<section class="section">
-				<h3 class="title is-4 place centered">
-					Projected Future Conditions for <span v-html="place"></span>
+				<h3 class="title is-3 centered">
+					Projected Conditions for <span v-html="place"></span>
 				</h3>
 				<QualitativeText :reportData="results" :place="place" :units="units" />
 			</section>
@@ -79,7 +79,6 @@
 				<div class="report-type-wrapper">
 					<TempReport
 						:reportData="results"
-						:place="place"
 						:units="units"
 					></TempReport>
 				</div>
