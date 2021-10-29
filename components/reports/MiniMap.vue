@@ -9,7 +9,7 @@
 <style lang="scss" scoped>
 #report--minimmap--map {
 	height: 20vw;
-	min-width: 20vw;
+	min-width: 10vw;
 	width: 100%;
 }
 </style>
