@@ -1,5 +1,5 @@
 <template>
-	<div class="temp-chart-wrapper">
+	<div style="display: none;" class="temp-chart-wrapper">
 		<div id="temp-chart" />
 	</div>
 </template>
