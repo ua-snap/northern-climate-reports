@@ -4,9 +4,14 @@
       <div v-show="!this.reportIsVisible" class="place-selector">
         <div class="container">
           <section class="section">
-            <div class="content controls" id="controls">
-              <!-- ID is used as anchor target, don't remove -->
-              <PlaceSelector></PlaceSelector>
+            <div class="columns" id="controls">
+              <!-- ID above (#controls) is used as anchor target, don't remove -->
+              <div class="column is-one-half">
+                <PlaceSelector></PlaceSelector>
+              </div>
+              <div class="column is-one-half">
+                <LatLngSelector></LatLngSelector>
+              </div>
             </div>
           </section>
         </div>
@@ -20,18 +25,12 @@
   </div>
 </template>
 <style lang="scss" scoped>
-.content.controls {
-  max-width: 50rem;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 2rem;
-  margin-top: -2rem;
-}
 </style>
 <script>
 import Map from '~/components/Map'
 import Report from '~/components/Report'
 import PlaceSelector from '~/components/PlaceSelector'
+import LatLngSelector from '~/components/LatLngSelector'
 
 import { mapGetters } from 'vuex'
 
@@ -40,6 +39,8 @@ export default {
   components: {
     Map,
     Report,
+    LatLngSelector,
+    PlaceSelector,
   },
   computed: {
     ...mapGetters(['reportIsVisible']),
