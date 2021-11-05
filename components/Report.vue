@@ -109,6 +109,9 @@
 							>access these datasets</a
 						>.
 					</p>
+					<p>
+						<DownloadCsvButton />
+					</p>
 				</div>
 			</section>
 			<hr />
@@ -149,6 +152,7 @@ import TempReport from '~/components/reports/temperature/TempReport'
 import PrecipReport from '~/components/reports/precipitation/PrecipReport'
 import MiniMap from '~/components/reports/MiniMap'
 import QualitativeText from '~/components/reports/QualitativeText'
+import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import { mapGetters } from 'vuex'
 import lodash from 'lodash'
 import deepdash from 'deepdash'
@@ -157,7 +161,7 @@ const _ = deepdash(lodash)
 
 export default {
 	name: 'Report',
-	components: { TempReport, PrecipReport, MiniMap, QualitativeText },
+	components: { TempReport, PrecipReport, MiniMap, QualitativeText, DownloadCsvButton },
 	data() {
 		return {
 			originalData: undefined, // for the raw stuff back from API
