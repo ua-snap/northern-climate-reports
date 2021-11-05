@@ -1,15 +1,26 @@
 <template>
 	<div>
-		<div class="content-wrapper map-intro">
-			<p><strong>Click the map</strong> to pick a location.</p>
+		<div class="container">
+			<div class="section pullup">
+				<!-- Columns aren't strictly needed here, but it keeps things
+				aligned with the other place pickers above -->
+				<div class="columns">
+					<div class="content column is-one-half">
+						<h4>Find a place by clicking on the map</h4>
+						<p><strong>Click the map</strong> to pick a location.</p>
+					</div>
+					<div class="columns"></div>
+				</div>
+			</div>
 		</div>
 		<div id="map"></div>
 	</div>
 </template>
 
 <style lang="scss" scoped>
-.map-intro {
-	margin-bottom: 1.25rem;
+.pullup {
+	margin-top: -2rem;
+	margin-bottom: -2rem;
 }
 #map {
 	height: 100vh;

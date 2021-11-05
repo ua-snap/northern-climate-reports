@@ -1,37 +1,41 @@
 <template>
 	<div class="place-selector--wrapper">
-		<h4 class="title is-5">Find a place</h4>
-		<p>
-			Search below by <strong>community name</strong> or
-			<strong>watershed</strong> (hydrological unit name or HUC8 code).
-		</p>
-		<b-field>
-			<b-autocomplete
-				rounded
-				v-model="selectedPlace"
-				:data="filteredDataObj"
-				keep-first
-				field="name"
-				placeholder="e.g. Fairbanks"
-				icon="magnify"
-				clearable
-				clear-on-select
-				@select="(option) => (selected = option)"
-			>
-				<template #empty>No results found</template>
-				<template slot-scope="props">
-					<div class="search-item">
-						{{ props.option.name }}
-						<span class="watershed" v-if="props.option.type == 'huc'"
-							>Watershed, HUC ID {{ props.option.id }}</span
-						>
-						<span class="alt-name" v-if="props.option.alt_name"
-							>({{ props.option.alt_name }})</span
-						>
-					</div>
-				</template>
-			</b-autocomplete>
-		</b-field>
+		<div class="content">
+			<h4 class="title is-5">Find a place by name</h4>
+			<p>
+				Search below by <strong>community name</strong> or
+				<strong>watershed</strong> (hydrological unit name or HUC8 code).
+			</p>
+			<p>
+				<b-field>
+					<b-autocomplete
+						rounded
+						v-model="selectedPlace"
+						:data="filteredDataObj"
+						keep-first
+						field="name"
+						placeholder="e.g. Fairbanks"
+						icon="magnify"
+						clearable
+						clear-on-select
+						@select="(option) => (selected = option)"
+					>
+						<template #empty>No results found</template>
+						<template slot-scope="props">
+							<div class="search-item">
+								{{ props.option.name }}
+								<span class="watershed" v-if="props.option.type == 'huc'"
+									>Watershed, HUC ID {{ props.option.id }}</span
+								>
+								<span class="alt-name" v-if="props.option.alt_name"
+									>({{ props.option.alt_name }})</span
+								>
+							</div>
+						</template>
+					</b-autocomplete>
+				</b-field>
+			</p>
+		</div>
 	</div>
 </template>
 <style lang="scss" scoped>
@@ -55,7 +59,9 @@ import communities from '~/assets/communities'
 import hucs from '~/assets/hucs'
 
 // So it's not decorated with reactive stuff by Vue,
-// we don't want that.
+// we don't want that for performance reasons (the
+// reactive getters/setters on these large JSON objects
+// isn't needed and poor performance).
 Object.freeze(communities)
 Object.freeze(hucs)
 const places = _.concat(communities, hucs)
@@ -65,8 +71,8 @@ export default {
 	data() {
 		return {
 			places: places,
-			selected: undefined,
-			selectedPlace: '',
+			selected: undefined, // the actual selected place
+			selectedPlace: '', // the temporary search fragment
 		}
 	},
 	computed: {
@@ -82,7 +88,8 @@ export default {
 						.toLowerCase()
 						.indexOf(this.selectedPlace.toLowerCase()) >= 0 ||
 					// HUCID, check only if it's 4 digits or more
-					(option.id.toString().indexOf(this.selectedPlace) >= 0 && this.selectedPlace.length > 3)
+					(option.id.toString().indexOf(this.selectedPlace) >= 0 &&
+						this.selectedPlace.length > 3)
 				)
 			})
 		},
