@@ -1,23 +1,39 @@
 <template>
   <div class="qualitative-text">
-    <div v-html="generateText()"></div>
+    <div class="generated" v-html="generateText()"></div>
+    <p class="about-blurb">
+      Late&ndash;century, high-emissions (RCP8.5), MRI or NCAR model (whichever
+      shows greater change).<br />See tables below for more detailed
+      information.
+    </p>
   </div>
 </template>
 <style lang="scss" scoped>
 .qualitative-text {
-  width: 50vw;
+  width: 55vw;
   font-size: 1.55rem;
-  margin: 2.5rem auto 0;
-  padding: 1rem;
+  margin: 2.5rem auto -1rem;
+  padding: 1rem 0;
   text-align: center;
   line-height: 1.35;
   font-weight: 350;
-  
+
   // Because it's v-html injected, need to use /deep/.
   ::v-deep * {
     p:not(:last-child) {
       margin-bottom: 1.5rem;
     }
+    p:last-child {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .about-blurb {
+    margin: 1rem;
+    border-top: 1px solid #efeced;
+    padding-top: 0.5rem;
+    font-weight: 400;
+    font-size: 1rem;
   }
 }
 </style>
