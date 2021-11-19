@@ -247,7 +247,7 @@ export default {
       returnedString +=
         '<p>Models have higher uncertainty with regard to precipitation,<br/> but <strong>' +
         seasonWithHighestPrecipChange.toLowerCase() +
-        '</strong> is likely to get wetter (<strong>+' +
+        '</strong> is likely to have more precipitation (<strong>+' +
         annualHighestPrecipPercentChange +
         '%</strong>).</p>'
 
