@@ -6,10 +6,13 @@
 <style lang="scss" scoped>
 .qualitative-text {
   width: 50vw;
-  font-size: 1.25rem;
-  margin: 0 auto;
+  font-size: 1.55rem;
+  margin: 2.5rem auto 0;
+  padding: 1rem;
   text-align: center;
-
+  line-height: 1.35;
+  font-weight: 350;
+  
   // Because it's v-html injected, need to use /deep/.
   ::v-deep * {
     p:not(:last-child) {

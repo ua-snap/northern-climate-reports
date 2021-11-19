@@ -62,7 +62,11 @@ export const getters = {
         id: Number(state.route.params.communityId),
       })
       if (place) {
-        return place.name
+        let name = place.name
+        if (place.alt_name) {
+          name += ' <span class="alt_name">(' + place.alt_name + ')</span>'
+        }
+        return name
       }
       throw 'Could not find the community by ID.'
     }
