@@ -100,7 +100,6 @@ export default {
       // and use that value.
 
       // Take an average of both temperature and precipitation for the same season and RCP from both models.
-      // Ensure the values are numbers before attempting to use the Math library on them.
       let tempMax = Math.max(
         this.reportData['2070_2100'][season]['MRI-CGCM3']['rcp85']['tas'],
         this.reportData['2070_2100'][season]['CCSM4']['rcp85']['tas']
