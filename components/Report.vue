@@ -37,7 +37,7 @@
 				<h3 class="title is-3 centered">
 					Projected Conditions for <span v-html="place"></span>
 				</h3>
-				<QualitativeText :reportData="results" :place="place" :units="units" />
+				<QualitativeText :reportData="results" :units="units" />
 			</section>
 			<section class="section">
 				<div class="columns">
@@ -60,7 +60,7 @@
 									<strong>Winter</strong> is December, January and February.
 									<strong>Spring</strong> is March, April and May.
 									<strong>Summer</strong> is June, July and August, and
-									<strong>fall</strong> is September, October and November.
+									<strong>Fall</strong> is September, October and November.
 								</p>
 							</div>
 							<b-field label="Units">
