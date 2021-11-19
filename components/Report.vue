@@ -60,7 +60,7 @@
 									<strong>Winter</strong> is December, January and February.
 									<strong>Spring</strong> is March, April and May.
 									<strong>Summer</strong> is June, July and August, and
-									<strong>fall</strong> is September, October and November.
+									<strong>Fall</strong> is September, October and November.
 								</p>
 							</div>
 							<b-field label="Units">
