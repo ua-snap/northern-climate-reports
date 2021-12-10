@@ -30,12 +30,17 @@
 
 <script>
 import _ from 'lodash'
+import alaska from '!raw-loader!../assets/alaska.geojson'
 
 export default {
 	name: 'Map',
 	mounted() {
 		this.map = L.map('map', this.getBaseMapAndLayers())
 		new this.$L.Control.Zoom({ position: 'topright' }).addTo(this.map)
+		
+		// Add Alaska GeoJSON overlay
+		let alaskajson = JSON.parse(alaska)
+		L.geoJSON(alaskajson).addTo(this.map)
 
 		this.map.on('click', this.handleMapClick)
 	},
