@@ -79,11 +79,12 @@
 				<div class="report-type-wrapper">
 					<TempReport
 						:reportData="results"
+						:chartData="chartResults"
 						:units="units"
 					></TempReport>
 				</div>
 				<div class="report-type-wrapper">
-					<PrecipReport :reportData="results" :units="units"></PrecipReport>
+					<PrecipReport :reportData="results" :chartData="chartResults" :units="units"></PrecipReport>
 				</div>
 				<div class="content is-size-5">
 					<p>
@@ -166,6 +167,7 @@ export default {
 		return {
 			originalData: undefined, // for the raw stuff back from API
 			results: undefined, // may be metric or imperial
+			chartResults: undefined, // may be metric or imperial
 			units: 'metric',
 		}
 	},
@@ -178,43 +180,86 @@ export default {
 	},
 	async fetch() {
 		// TODO: add error handling here for 404 (no data) etc.
-		let queryUrl = process.env.apiUrl + '/iem/'
+		let queryUrl = 'http://earthmaps.io/iem'
+		let chartQueryUrl = process.env.apiUrl + '/taspr'
 
 		// Determine the query type to perform.
 		if (this.hucId) {
 			// Fetch areal data by HUC.
-			queryUrl += 'huc/' + this.hucId
+			queryUrl += '/huc/' + this.hucId
+			chartQueryUrl += '/huc/' + this.hucId
 		} else if (this.latLng) {
 			queryUrl += '/point/' + this.latLng[0] + '/' + this.latLng[1]
+			chartQueryUrl += '/point/' + this.latLng[0] + '/' + this.latLng[1]
 		} else {
 			// Don't know what to query, bail.
 			return
 		}
 		this.results = await this.$http.$get(queryUrl)
+		this.chartResults = await this.$http.$get(chartQueryUrl)
 		this.originalData = this.results // save a copy!
+		this.originalChartData = _.cloneDeep(this.chartResults, true)
 		this.units = 'imperial'
 	},
 	watch: {
 		units: function () {
 			if (this.units == 'metric') {
 				this.results = this.originalData
+				this.chartResults = _.cloneDeep(this.originalChartData, true)
 			} else {
-				this.results = _.mapValuesDeep(
-					this.originalData,
-					(value, key, context) => {
-						if (key == 'pr') {
-							// Convert to inches!
-							return parseFloat((value * 0.03937008).toFixed(2))
-						} else if (key == 'tas') {
-							// Convert to degrees F!
-							return parseFloat((value * 1.8 + 32).toFixed(1))
-						}
-					},
-					{
-						leavesOnly: true,
-					}
-				)
+				this.convertReportData()
+				this.convertChartData()
 			}
+		},
+	},
+	methods: {
+		convertMeans(data) {
+			return _.mapValuesDeep(
+				data,
+				(value, key, context) => {
+					if (key == 'pr') {
+						// Convert to inches!
+						return parseFloat((value * 0.03937008).toFixed(2))
+					} else if (key == 'tas') {
+						// Convert to degrees F!
+						return parseFloat((value * 1.8 + 32).toFixed(1))
+					}
+				},
+				{
+					leavesOnly: true,
+				}
+			)
+		},
+		convertHistorical(data) {
+			let convertedData = _.cloneDeep(data)
+			Object.keys(convertedData).forEach(season => {
+				let seasonObj = convertedData[season]['CRU-TS40']['CRU_historical']
+				Object.keys(seasonObj).forEach(climate_variable => {
+					Object.keys(seasonObj[climate_variable]).forEach(stat => {
+						let original = seasonObj[climate_variable][stat]
+						if (climate_variable === 'tas') {
+							let converted = parseFloat(original * 1.8 + 32).toFixed(1)
+							seasonObj[climate_variable][stat] = converted
+						} else {
+							let converted = parseFloat(original * 0.03937008).toFixed(2)
+							seasonObj[climate_variable][stat] = converted
+						}
+					})
+				})
+			})
+			return convertedData
+		},
+		convertReportData() {
+			this.results = this.convertMeans(this.results)
+		},
+		convertChartData() {
+			Object.keys(this.chartResults).forEach(decade => {
+				if (decade === '1950_2009') {
+					this.chartResults[decade] = this.convertHistorical(this.chartResults[decade])
+				} else {
+					this.chartResults[decade] = this.convertMeans(this.chartResults[decade])
+				}
+			})
 		},
 	},
 }

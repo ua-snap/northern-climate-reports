@@ -21,7 +21,13 @@
 			</p>
 		</div>
 		<div class="chart-wrapper">
-			<ReportTempChart :reportData="reportData" :units="units" />
+			<b-field label="Season">
+				<b-radio v-model="temp_season" name="temp_season" native-value="DJF">Winter</b-radio>
+				<b-radio v-model="temp_season" name="temp_season" native-value="MAM">Spring</b-radio>
+				<b-radio v-model="temp_season" name="temp_season" native-value="JJA">Summer</b-radio>
+				<b-radio v-model="temp_season" name="temp_season" native-value="SON">Fall</b-radio>
+			</b-field>
+			<ReportTempChart :reportData="reportData" :chartData="chartData" :units="units" :season="temp_season" />
 		</div>
 		<div class="table-wrapper">
 			<reportTempTable :reportData="reportData" :units="units" />
@@ -41,7 +47,12 @@ import ReportTempChart from './ReportTempChart'
 import ReportTempTable from './ReportTempTable'
 export default {
 	name: 'ReportTable',
-	props: ['reportData', 'units'],
+	props: ['reportData', 'chartData', 'units'],
 	components: { ReportTempChart, ReportTempTable },
+	data() {
+		return {
+			temp_season: 'DJF'
+		}
+	},
 }
 </script>
