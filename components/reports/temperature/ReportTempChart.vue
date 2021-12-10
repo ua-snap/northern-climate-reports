@@ -100,7 +100,7 @@ export default {
 					},
 				},
 				title: {
-					text: 'Historical and projected temperature ranges (' + season_lu[this.season] + ')',
+					text: 'Historical and projected temperature (' + season_lu[this.season] + ')',
 					font: {
 						size: 24,
 					},
