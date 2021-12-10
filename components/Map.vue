@@ -38,11 +38,17 @@ export default {
 		this.map = L.map('map', this.getBaseMapAndLayers())
 		new this.$L.Control.Zoom({ position: 'topright' }).addTo(this.map)
 		
+		// Instantiate handleMapClick function to allow for onEachFeature
+		// function to access it.
+		let hmc = this.handleMapClick
+
 		// Add Alaska GeoJSON overlay
 		let alaskajson = JSON.parse(alaska)
-		L.geoJSON(alaskajson).addTo(this.map)
-
-		this.map.on('click', this.handleMapClick)
+		L.geoJSON(alaskajson, {
+			onEachFeature: function (feature, layer) {
+				layer.on('click', hmc)
+			}
+		}).addTo(this.map)
 	},
 	data() {
 		return {
