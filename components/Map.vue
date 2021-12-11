@@ -47,6 +47,10 @@ export default {
 		L.geoJSON(alaskajson, {
 			onEachFeature: function (feature, layer) {
 				layer.on('click', hmc)
+			},
+			style: {
+				opacity: 0.0,
+				fillOpacity: 0.0
 			}
 		}).addTo(this.map)
 	},
