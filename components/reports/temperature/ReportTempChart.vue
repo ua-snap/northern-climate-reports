@@ -90,9 +90,9 @@ export default {
 
 				if (decade === '1950_2009') {
 					let tasData = this.reportData[decade][this.season]['CRU-TS40']['CRU_historical']['tas']
-					historical['median'].push(tasData['mean'])
-					historical['q1'].push(tasData['lo_std'])
-					historical['q3'].push(tasData['hi_std'])
+					historical['median'].push(tasData['median'])
+					historical['q1'].push(tasData['q1'])
+					historical['q3'].push(tasData['q3'])
 					historical['lowerfence'].push(tasData['min'])
 					historical['upperfence'].push(tasData['max'])
 				} else {

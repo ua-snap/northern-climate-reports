@@ -90,9 +90,9 @@ export default {
 
 				if (decade === '1950_2009') {
 					let prData = this.reportData[decade][this.season]['CRU-TS40']['CRU_historical']['pr']
-					historical['median'].push(prData['mean'])
-					historical['q1'].push(prData['lo_std'])
-					historical['q3'].push(prData['hi_std'])
+					historical['median'].push(prData['median'])
+					historical['q1'].push(prData['q1'])
+					historical['q3'].push(prData['q3'])
 					historical['lowerfence'].push(prData['min'])
 					historical['upperfence'].push(prData['max'])
 				} else {
