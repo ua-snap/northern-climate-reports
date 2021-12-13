@@ -25,7 +25,7 @@
 				<b-radio v-model="precip_season" name="precip_season" native-value="JJA">Summer</b-radio>
 				<b-radio v-model="precip_season" name="precip_season" native-value="SON">Fall</b-radio>
 			</b-field>
-			<ReportPrecipChart :reportData="reportData" :chartData="chartData" :units="units" :season="precip_season" />
+			<ReportPrecipChart :reportData="reportData" :units="units" :season="precip_season" />
 		</div>
 		<div class="table-wrapper">
 			<ReportPrecipTable :reportData="reportData" :units="units" />
@@ -39,7 +39,7 @@ import ReportPrecipTable from './ReportPrecipTable'
 
 export default {
 	name: 'PrecipReport',
-	props: ['reportData', 'chartData', 'units'],
+	props: ['reportData', 'units'],
 	components: { ReportPrecipChart, ReportPrecipTable },
 	data() {
 		return {

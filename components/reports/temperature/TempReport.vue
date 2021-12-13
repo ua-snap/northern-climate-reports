@@ -27,7 +27,7 @@
 				<b-radio v-model="temp_season" name="temp_season" native-value="JJA">Summer</b-radio>
 				<b-radio v-model="temp_season" name="temp_season" native-value="SON">Fall</b-radio>
 			</b-field>
-			<ReportTempChart :reportData="reportData" :chartData="chartData" :units="units" :season="temp_season" />
+			<ReportTempChart :reportData="reportData" :units="units" :season="temp_season" />
 		</div>
 		<div class="table-wrapper">
 			<reportTempTable :reportData="reportData" :units="units" />
@@ -47,7 +47,7 @@ import ReportTempChart from './ReportTempChart'
 import ReportTempTable from './ReportTempTable'
 export default {
 	name: 'ReportTable',
-	props: ['reportData', 'chartData', 'units'],
+	props: ['reportData', 'units'],
 	components: { ReportTempChart, ReportTempTable },
 	data() {
 		return {

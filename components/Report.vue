@@ -79,12 +79,11 @@
 				<div class="report-type-wrapper">
 					<TempReport
 						:reportData="results"
-						:chartData="chartResults"
 						:units="units"
 					></TempReport>
 				</div>
 				<div class="report-type-wrapper">
-					<PrecipReport :reportData="results" :chartData="chartResults" :units="units"></PrecipReport>
+					<PrecipReport :reportData="results" :units="units"></PrecipReport>
 				</div>
 				<div class="content is-size-5">
 					<p>
@@ -167,7 +166,6 @@ export default {
 		return {
 			originalData: undefined, // for the raw stuff back from API
 			results: undefined, // may be metric or imperial
-			chartResults: undefined, // may be metric or imperial
 			units: 'metric',
 		}
 	},
@@ -180,36 +178,31 @@ export default {
 	},
 	async fetch() {
 		// TODO: add error handling here for 404 (no data) etc.
-		let queryUrl = 'http://earthmaps.io/iem'
-		let chartQueryUrl = process.env.apiUrl + '/taspr'
+		let queryUrl = process.env.apiUrl + '/taspr'
 
 		// Determine the query type to perform.
 		if (this.hucId) {
 			// Fetch areal data by HUC.
 			queryUrl += '/huc/' + this.hucId
-			chartQueryUrl += '/huc/' + this.hucId
 		} else if (this.latLng) {
 			queryUrl += '/point/' + this.latLng[0] + '/' + this.latLng[1]
-			chartQueryUrl += '/point/' + this.latLng[0] + '/' + this.latLng[1]
 		} else {
 			// Don't know what to query, bail.
 			return
 		}
 		this.results = await this.$http.$get(queryUrl)
-		this.chartResults = await this.$http.$get(chartQueryUrl)
-		this.originalData = this.results // save a copy!
-		this.originalChartData = _.cloneDeep(this.chartResults, true)
+		this.originalData = _.cloneDeep(this.results) // save a copy!
 		this.units = 'imperial'
 	},
 	watch: {
 		units: function () {
 			if (this.units == 'metric') {
-				this.results = this.originalData
-				this.chartResults = _.cloneDeep(this.originalChartData, true)
+				this.results = _.cloneDeep(this.originalData)
 			} else {
+				this.results = _.cloneDeep(this.originalData)
 				this.convertReportData()
-				this.convertChartData()
 			}
+			this.combineDecades()
 		},
 	},
 	methods: {
@@ -250,17 +243,44 @@ export default {
 			return convertedData
 		},
 		convertReportData() {
-			this.results = this.convertMeans(this.results)
-		},
-		convertChartData() {
-			Object.keys(this.chartResults).forEach(decade => {
+			Object.keys(this.results).forEach(decade => {
 				if (decade === '1950_2009') {
-					this.chartResults[decade] = this.convertHistorical(this.chartResults[decade])
+					this.results[decade] = this.convertHistorical(this.results[decade])
 				} else {
-					this.chartResults[decade] = this.convertMeans(this.chartResults[decade])
+					this.results[decade] = this.convertMeans(this.results[decade])
 				}
 			})
 		},
+		combineDecades() {
+			let decades = {
+				'2040_2070': ['2040_2049', '2050_2059', '2060_2069'],
+				'2070_2100': ['2070_2079', '2080_2089', '2090_2099'],
+			}
+
+			let combined = {}
+			Object.keys(decades).forEach(decadeRange => {
+				combined[decadeRange] = {};
+				['DJF', 'JJA', 'MAM', 'SON'].forEach(season => {
+					combined[decadeRange][season] = {};
+					['CCSM4', 'MRI-CGCM3'].forEach(model => {
+						combined[decadeRange][season][model] = {};
+						['rcp45', 'rcp60', 'rcp85'].forEach(scenario => {
+							combined[decadeRange][season][model][scenario] = {}
+							let tasValues = []
+							let prValues = []
+							decades[decadeRange].forEach(decade => {
+								tasValues.push(this.results[decade][season][model][scenario]['tas'])
+								prValues.push(this.results[decade][season][model][scenario]['pr'])
+							})
+							combined[decadeRange][season][model][scenario]['tas'] = _.round(_.mean(tasValues), 1)
+							combined[decadeRange][season][model][scenario]['pr'] = _.round(_.mean(prValues), 1)
+						})
+					})
+				})
+			})
+
+			this.results = _.merge(this.results, combined)
+		}
 	},
 }
 </script>

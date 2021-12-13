@@ -46,9 +46,7 @@
 					<th scope="row">Winter</th>
 					<td class="left">
 						{{
-							reportData['1910-2009']['DJF']['CRU-TS31']['CRU_historical'][
-								'pr'
-							]
+							reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['pr']['mean']
 						}}<UnitWidget variable="pr" :units="units" type="light" />
 					</td>
 					<td>
@@ -59,9 +57,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['DJF']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="
 								reportData['2040_2070']['DJF']['MRI-CGCM3']['rcp45']['pr']
@@ -76,9 +72,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['DJF']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="reportData['2040_2070']['DJF']['CCSM4']['rcp45']['pr']"
 						/>
@@ -91,9 +85,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['DJF']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="
 								reportData['2040_2070']['DJF']['MRI-CGCM3']['rcp85']['pr']
@@ -108,9 +100,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['DJF']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="reportData['2040_2070']['DJF']['CCSM4']['rcp85']['pr']"
 						/>
@@ -123,9 +113,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['DJF']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="
 								reportData['2070_2100']['DJF']['MRI-CGCM3']['rcp45']['pr']
@@ -140,9 +128,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['DJF']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="reportData['2070_2100']['DJF']['CCSM4']['rcp45']['pr']"
 						/>
@@ -155,9 +141,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['DJF']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="
 								reportData['2070_2100']['DJF']['MRI-CGCM3']['rcp85']['pr']
@@ -172,9 +156,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['DJF']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="reportData['2070_2100']['DJF']['CCSM4']['rcp85']['pr']"
 						/>
@@ -184,9 +166,7 @@
 					<th scope="row">Spring</th>
 					<td class="left">
 						{{
-							reportData['1910-2009']['MAM']['CRU-TS31']['CRU_historical'][
-								'pr'
-							]
+							reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['pr']['mean']
 						}}<UnitWidget variable="pr" :units="units" type="light" />
 					</td>
 					<td>
@@ -197,9 +177,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['MAM']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="
 								reportData['2040_2070']['MAM']['MRI-CGCM3']['rcp45']['pr']
@@ -214,9 +192,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['MAM']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="reportData['2040_2070']['MAM']['CCSM4']['rcp45']['pr']"
 						/>
@@ -229,9 +205,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['MAM']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="
 								reportData['2040_2070']['MAM']['MRI-CGCM3']['rcp85']['pr']
@@ -246,9 +220,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['MAM']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="reportData['2040_2070']['MAM']['CCSM4']['rcp85']['pr']"
 						/>
@@ -261,9 +233,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['MAM']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="
 								reportData['2070_2100']['MAM']['MRI-CGCM3']['rcp45']['pr']
@@ -278,9 +248,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['MAM']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="reportData['2070_2100']['MAM']['CCSM4']['rcp45']['pr']"
 						/>
@@ -293,9 +261,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['MAM']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="
 								reportData['2070_2100']['MAM']['MRI-CGCM3']['rcp85']['pr']
@@ -310,9 +276,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['MAM']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="reportData['2070_2100']['MAM']['CCSM4']['rcp85']['pr']"
 						/>
@@ -322,9 +286,7 @@
 					<th scope="row">Summer</th>
 					<td class="left">
 						{{
-							reportData['1910-2009']['JJA']['CRU-TS31']['CRU_historical'][
-								'pr'
-							]
+							reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['pr']['mean']
 						}}<UnitWidget variable="pr" :units="units" type="light" />
 					</td>
 					<td>
@@ -335,9 +297,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['JJA']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="
 								reportData['2040_2070']['JJA']['MRI-CGCM3']['rcp45']['pr']
@@ -352,9 +312,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['JJA']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="reportData['2040_2070']['JJA']['CCSM4']['rcp45']['pr']"
 						/>
@@ -367,9 +325,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['JJA']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="
 								reportData['2040_2070']['JJA']['MRI-CGCM3']['rcp85']['pr']
@@ -384,9 +340,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['JJA']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="reportData['2040_2070']['JJA']['CCSM4']['rcp85']['pr']"
 						/>
@@ -399,9 +353,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['JJA']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="
 								reportData['2070_2100']['JJA']['MRI-CGCM3']['rcp45']['pr']
@@ -416,9 +368,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['JJA']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="reportData['2070_2100']['JJA']['CCSM4']['rcp45']['pr']"
 						/>
@@ -431,9 +381,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['JJA']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="
 								reportData['2070_2100']['JJA']['MRI-CGCM3']['rcp85']['pr']
@@ -448,9 +396,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['JJA']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="reportData['2070_2100']['JJA']['CCSM4']['rcp85']['pr']"
 						/>
@@ -460,9 +406,7 @@
 					<th scope="row">Fall</th>
 					<td class="left">
 						{{
-							reportData['1910-2009']['SON']['CRU-TS31']['CRU_historical'][
-								'pr'
-							]
+							reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['pr']['mean']
 						}}<UnitWidget variable="pr" :units="units" type="light" />
 					</td>
 					<td>
@@ -473,9 +417,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['SON']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="
 								reportData['2040_2070']['SON']['MRI-CGCM3']['rcp45']['pr']
@@ -490,9 +432,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['SON']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="reportData['2040_2070']['SON']['CCSM4']['rcp45']['pr']"
 						/>
@@ -505,9 +445,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['SON']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="
 								reportData['2040_2070']['SON']['MRI-CGCM3']['rcp85']['pr']
@@ -522,9 +460,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['SON']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="reportData['2040_2070']['SON']['CCSM4']['rcp85']['pr']"
 						/>
@@ -537,9 +473,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['SON']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="
 								reportData['2070_2100']['SON']['MRI-CGCM3']['rcp45']['pr']
@@ -554,9 +488,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['SON']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="reportData['2070_2100']['SON']['CCSM4']['rcp45']['pr']"
 						/>
@@ -569,9 +501,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['SON']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="
 								reportData['2070_2100']['SON']['MRI-CGCM3']['rcp85']['pr']
@@ -586,9 +516,7 @@
 							type="light"
 						/><PrecipDiffWidget
 							:past="
-								reportData['1910-2009']['SON']['CRU-TS31']['CRU_historical'][
-									'pr'
-								]
+								reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['pr']['mean']
 							"
 							:future="reportData['2070_2100']['SON']['CCSM4']['rcp85']['pr']"
 						/>

@@ -12,7 +12,7 @@
 import _ from 'lodash'
 export default {
 	name: 'ReportTempChart',
-	props: ['reportData', 'chartData', 'units', 'season'],
+	props: ['reportData', 'units', 'season'],
 	mounted() {
 		this.renderPlot()
 	},
@@ -41,7 +41,7 @@ export default {
 				'SON': 'September - November',
 			}
 
-			let decade_keys = Object.keys(this.chartData)
+			let decade_keys = Object.keys(this.reportData)
 			let decades = decade_keys.map(x => x.replace('_', '-'))
 
 			let historical = {
@@ -84,8 +84,12 @@ export default {
 			})
 
 			decade_keys.forEach(decade => {
+				if (decade === '2040_2070' || decade === '2070_2100') {
+					return
+				}
+
 				if (decade === '1950_2009') {
-					let tasData = this.chartData[decade][this.season]['CRU-TS40']['CRU_historical']['tas']
+					let tasData = this.reportData[decade][this.season]['CRU-TS40']['CRU_historical']['tas']
 					historical['median'].push(tasData['mean'])
 					historical['q1'].push(tasData['lo_std'])
 					historical['q3'].push(tasData['hi_std'])
@@ -94,7 +98,7 @@ export default {
 				} else {
 					models.forEach(model => {
 						scenarios.forEach(scenario => {
-							scatterTraces[model][scenario]['y'].push(this.chartData[decade][this.season][model][scenario]['tas'])
+							scatterTraces[model][scenario]['y'].push(this.reportData[decade][this.season][model][scenario]['tas'])
 						})
 					})
 				}

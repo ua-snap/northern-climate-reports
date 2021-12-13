@@ -12,7 +12,7 @@
 import _ from 'lodash'
 export default {
 	name: 'ReportPrecipChart',
-	props: ['reportData', 'chartData', 'units', 'season'],
+	props: ['reportData', 'units', 'season'],
 	mounted() {
 		this.renderPlot()
 	},
@@ -41,10 +41,10 @@ export default {
 				'SON': 'September - November',
 			}
 
-			let decade_keys = Object.keys(this.chartData)
+			let decade_keys = Object.keys(this.reportData)
 			let decades = decade_keys.map(x => x.replace('_', '-'))
 
-			var historical = {
+			let historical = {
 				type: 'box',
 				name: 'Historical',
 				x: decades.slice(0, 1),
@@ -84,8 +84,12 @@ export default {
 			})
 
 			decade_keys.forEach(decade => {
+				if (decade === '2040_2070' || decade === '2070_2100') {
+					return
+				}
+
 				if (decade === '1950_2009') {
-					let prData = this.chartData[decade][this.season]['CRU-TS40']['CRU_historical']['pr']
+					let prData = this.reportData[decade][this.season]['CRU-TS40']['CRU_historical']['pr']
 					historical['median'].push(prData['mean'])
 					historical['q1'].push(prData['lo_std'])
 					historical['q3'].push(prData['hi_std'])
@@ -94,7 +98,7 @@ export default {
 				} else {
 					models.forEach(model => {
 						scenarios.forEach(scenario => {
-							scatterTraces[model][scenario]['y'].push(this.chartData[decade][this.season][model][scenario]['pr'])
+							scatterTraces[model][scenario]['y'].push(this.reportData[decade][this.season][model][scenario]['pr'])
 						})
 					})
 				}

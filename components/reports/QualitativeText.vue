@@ -80,13 +80,9 @@ export default {
       return this.generateAnnualMetricsHtml()
     },
     collectSeasonalMetrics(season) {
-      let historicalTemp = this.reportData['1910-2009'][season]['CRU-TS31'][
-        'CRU_historical'
-      ]['tas']
+      let historicalTemp = this.reportData['1950_2009'][season]['CRU-TS40']['CRU_historical']['tas']['mean']
 
-      let historicalPrecip = this.reportData['1910-2009'][season]['CRU-TS31'][
-        'CRU_historical'
-      ]['pr']
+      let historicalPrecip = this.reportData['1950_2009'][season]['CRU-TS40']['CRU_historical']['pr']['mean']
 
       var seasonMetrics = {
         season: this.seasonNames[season],
@@ -101,13 +97,21 @@ export default {
 
       // Take an average of both temperature and precipitation for the same season and RCP from both models.
       let tempMax = Math.max(
-        this.reportData['2070_2100'][season]['MRI-CGCM3']['rcp85']['tas'],
-        this.reportData['2070_2100'][season]['CCSM4']['rcp85']['tas']
+      this.reportData['2070_2079'][season]['MRI-CGCM3']['rcp85']['tas'],
+      this.reportData['2080_2089'][season]['MRI-CGCM3']['rcp85']['tas'],
+      this.reportData['2090_2099'][season]['MRI-CGCM3']['rcp85']['tas'],
+      this.reportData['2070_2079'][season]['CCSM4']['rcp85']['tas'],
+      this.reportData['2080_2089'][season]['CCSM4']['rcp85']['tas'],
+      this.reportData['2090_2099'][season]['CCSM4']['rcp85']['tas']
       )
 
       let precipMax = Math.max(
-        this.reportData['2070_2100'][season]['MRI-CGCM3']['rcp85']['pr'],
-        this.reportData['2070_2100'][season]['CCSM4']['rcp85']['pr']
+        this.reportData['2070_2079'][season]['MRI-CGCM3']['rcp85']['pr'],
+        this.reportData['2080_2089'][season]['MRI-CGCM3']['rcp85']['pr'],
+        this.reportData['2090_2099'][season]['MRI-CGCM3']['rcp85']['pr'],
+        this.reportData['2070_2079'][season]['CCSM4']['rcp85']['pr'],
+        this.reportData['2080_2089'][season]['CCSM4']['rcp85']['pr'],
+        this.reportData['2090_2099'][season]['CCSM4']['rcp85']['pr']
       )
 
       // If the maximum temperature difference is less than the current temperature difference,
