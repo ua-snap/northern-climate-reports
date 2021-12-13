@@ -44,7 +44,7 @@ export default {
 			let decade_keys = Object.keys(this.chartData)
 			let decades = decade_keys.map(x => x.replace('_', '-'))
 
-			let historical = {
+			var historical = {
 				type: 'box',
 				name: 'Historical',
 				x: decades.slice(0, 1),
@@ -55,21 +55,33 @@ export default {
 				upperfence: [],
 			}
 
-			let rcp45 = {
-				type: 'scatter',
-				mode: 'markers',
-				name: 'RCP 4.5',
-				x: decades.slice(1),
-				y: [],
+			let models = ['MRI-CGCM3', 'CCSM4']
+			let scenarios = ['rcp45', 'rcp85']
+
+			let traceLabels_lu = {
+				'MRI-CGCM3': {
+					'rcp45': 'RCP 4.5 (MRI)',
+					'rcp85': 'RCP 8.5 (MRI)',
+				},
+				'CCSM4': {
+					'rcp45': 'RCP 4.5 (NCAR)',
+					'rcp85': 'RCP 8.5 (NCAR)',
+				},
 			}
 
-			let rcp85 = {
-				type: 'scatter',
-				mode: 'markers',
-				name: 'RCP 8.5',
-				x: decades.slice(1),
-				y: [],
-			}
+			let scatterTraces = {}
+			models.forEach(model => {
+				scatterTraces[model] = {}
+				scenarios.forEach(scenario => {
+					scatterTraces[model][scenario] = {
+						type: 'scatter',
+						mode: 'markers',
+						name: traceLabels_lu[model][scenario],
+						x: decades.slice(1),
+						y: [],
+					}
+				})
+			})
 
 			decade_keys.forEach(decade => {
 				if (decade === '1950_2009') {
@@ -80,14 +92,21 @@ export default {
 					historical['lowerfence'].push(prData['min'])
 					historical['upperfence'].push(prData['max'])
 				} else {
-					let rcp45_mean = this.chartData[decade][this.season]['5modelAvg']['rcp45']['pr']
-					let rcp85_mean = this.chartData[decade][this.season]['5modelAvg']['rcp85']['pr']
-					rcp45['y'].push(rcp45_mean)
-					rcp85['y'].push(rcp85_mean)
+					models.forEach(model => {
+						scenarios.forEach(scenario => {
+							scatterTraces[model][scenario]['y'].push(this.chartData[decade][this.season][model][scenario]['pr'])
+						})
+					})
 				}
 			})
 
-			data_traces.push(historical, rcp45, rcp85)
+			data_traces.push(historical)
+
+			models.forEach(model => {
+				scenarios.forEach(scenario => {
+					data_traces.push(scatterTraces[model][scenario])
+				})
+			})
 
 			let layout = {
 				boxmode: 'group',
