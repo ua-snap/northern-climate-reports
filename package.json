@@ -24,6 +24,9 @@
     "plotly.js-dist-min": "^2.3.1",
     "proj4": "^2.7.4",
     "proj4leaflet": "^1.0.2",
+    "raw-loader": "^4.0.2",
+    "sass": "*",
+    "sass-loader": "*",
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
