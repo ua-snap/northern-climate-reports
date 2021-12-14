@@ -13,6 +13,7 @@
     "@nuxt/content": "^1.11.1",
     "@nuxt/http": "^0.6.4",
     "@nuxtjs/axios": "^5.12.5",
+    "@turf/turf": "^6.5.0",
     "core-js": "^3.8.3",
     "deepdash": "^5.3.9",
     "leaflet": "^1.7.1",

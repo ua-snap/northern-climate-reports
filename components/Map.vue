@@ -30,7 +30,8 @@
 
 <script>
 import _ from 'lodash'
-import alaska from '!raw-loader!../assets/iem.geojson'
+import iem from '!raw-loader!../assets/iem.geojson'
+const iemJson = JSON.parse(iem)
 
 export default {
 	name: 'Map',
@@ -42,9 +43,7 @@ export default {
 		// function to access it.
 		let hmc = this.handleMapClick
 
-		// Add Alaska GeoJSON overlay
-		let alaskajson = JSON.parse(alaska)
-		L.geoJSON(alaskajson, {
+		L.geoJSON(iemJson, {
 			onEachFeature: function (feature, layer) {
 				layer.on('click', hmc)
 			},
