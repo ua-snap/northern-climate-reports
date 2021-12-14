@@ -193,6 +193,9 @@ export default {
 		this.originalData = _.cloneDeep(this.results) // save a copy!
 		this.units = 'imperial'
 	},
+	created() {
+		this.$fetch()
+	},
 	watch: {
 		units: function () {
 			if (this.units == 'metric') {
