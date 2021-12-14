@@ -30,14 +30,28 @@
 
 <script>
 import _ from 'lodash'
+import iem from '!raw-loader!../assets/iem.geojson'
+const iemJson = JSON.parse(iem)
 
 export default {
 	name: 'Map',
 	mounted() {
 		this.map = L.map('map', this.getBaseMapAndLayers())
 		new this.$L.Control.Zoom({ position: 'topright' }).addTo(this.map)
+		
+		// Instantiate handleMapClick function to allow for onEachFeature
+		// function to access it.
+		let hmc = this.handleMapClick
 
-		this.map.on('click', this.handleMapClick)
+		L.geoJSON(iemJson, {
+			onEachFeature: function (feature, layer) {
+				layer.on('click', hmc)
+			},
+			style: {
+				opacity: 0.0,
+				fillOpacity: 0.0
+			}
+		}).addTo(this.map)
 	},
 	data() {
 		return {
@@ -62,7 +76,7 @@ export default {
 				srs: 'EPSG:3338',
 				format: 'image/png',
 				version: '1.3.0',
-				layers: ['atlas_mapproxy:alaska_osm'],
+				layers: ['atlas_mapproxy:alaska_osm', 'shadow_mask:IEM_symmetric_difference'],
 			})
 
 			// Projection definition.

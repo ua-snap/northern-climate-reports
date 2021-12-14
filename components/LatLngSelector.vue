@@ -29,47 +29,25 @@
 <style lang="scss" scoped></style>
 <script>
 import parseDMS from 'parse-dms'
+import * as turf from '@turf/turf'
+import iem from '!raw-loader!../assets/iem.geojson'
+const iemJson = JSON.parse(iem)
 
 export default {
 	name: 'LatLngSelector',
 	data() {
 		return {
 			latlngInput: '',
+			fieldMessage: '',
 		}
 	},
 	computed: {
 		// Returns the valid lat/lng, as an object,
 		// { lat: lat, lng: lng }.  If not valid, returns False.
 		latLng() {
-			let parsedDms = undefined
-			let latLng = false
-
-			if (!this.latlngInput) {
-				return false
-			}
-
-			// Try parsing them!  This will work for
-			// DMS format or decimal.
-			try {
-				parsedDms = parseDMS(this.latlngInput)
-			} catch (e) {
-				return false // invalid
-			}
-
-			if (parsedDms && parsedDms.lat && parsedDms.lon) {
-				// Maybe valid, test bbox.
-				if (
-					51.229 <= parsedDms.lat &&
-					parsedDms.lat <= 71.3526 &&
-					-179.1506 <= parsedDms.lon &&
-					parsedDms.lon <= -129.9795
-				) {
-					latLng = { lat: parsedDms.lat.toFixed(2), lng: parsedDms.lon.toFixed(2) }
-					return latLng
-				}
-			}
-			return false
+			return this.validate()
 		},
+
 		isValid() {
 			return this.latLng // true/false
 		},
@@ -79,16 +57,16 @@ export default {
 		// the minimum for a valid combo.
 		getFieldStatus() {
 			if (this.latlngInput.length < 8 || this.isValid) {
-				return ''
+				return '' // OK
 			} else {
-				return 'is-danger'
+				return 'is-danger' // not OK
 			}
 		},
 		getFieldMessage() {
 			if (this.latlngInput.length < 8 || this.isValid) {
 				return ''
 			} else {
-				return 'Invalid format, or, the point is outside the data range.'
+				return this.fieldMessage
 			}
 		},
 	},
@@ -98,6 +76,43 @@ export default {
 				path: '/report/' + this.latLng.lat + '/' + this.latLng.lng,
 				hash: '#results',
 			})
+		},
+		validate() {
+			let parsedDms = undefined
+			let latLng = false
+
+			if (!this.latlngInput) {
+				return false // do nothing if it's empty
+			}
+
+			// Try parsing them!  This will work for
+			// DMS format or decimal.
+			try {
+				parsedDms = parseDMS(this.latlngInput)
+			} catch (e) {
+				this.fieldMessage = "I can't figure out how to make that a point."
+				return false // invalid
+			}
+
+			if (parsedDms && parsedDms.lat && parsedDms.lon) {
+				let latLng = turf.point([parsedDms.lon, parsedDms.lat])
+				let iemPoly = turf.multiPolygon(
+					iemJson.features[0].geometry.coordinates
+				)
+
+				// Maybe valid, test for inclusion in polygon.
+				if (turf.booleanPointInPolygon(latLng, iemPoly)) {
+					latLng = {
+						lat: parsedDms.lat.toFixed(2),
+						lng: parsedDms.lon.toFixed(2),
+					}
+					return latLng
+				} else {
+					this.fieldMessage =
+						'That point is outside of the domain of these datasets.'
+					return false
+				}
+			}
 		},
 	},
 }

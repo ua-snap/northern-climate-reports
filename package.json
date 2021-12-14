@@ -13,6 +13,7 @@
     "@nuxt/content": "^1.11.1",
     "@nuxt/http": "^0.6.4",
     "@nuxtjs/axios": "^5.12.5",
+    "@turf/turf": "^6.5.0",
     "core-js": "^3.8.3",
     "deepdash": "^5.3.9",
     "leaflet": "^1.7.1",
@@ -27,12 +28,13 @@
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
-    "sass": "*",
-    "sass-loader": "*",
     "chromedriver": "^88.0.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",
     "nightwatch": "^1.5.1",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "raw-loader": "^4.0.2",
+    "sass": "*",
+    "sass-loader": "*"
   }
 }
