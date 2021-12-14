@@ -30,7 +30,7 @@
 
 <script>
 import _ from 'lodash'
-import alaska from '!raw-loader!../assets/alaska.geojson'
+import alaska from '!raw-loader!../assets/iem.geojson'
 
 export default {
 	name: 'Map',
@@ -77,7 +77,7 @@ export default {
 				srs: 'EPSG:3338',
 				format: 'image/png',
 				version: '1.3.0',
-				layers: ['atlas_mapproxy:alaska_osm'],
+				layers: ['atlas_mapproxy:alaska_osm', 'shadow_mask:IEM_symmetric_difference'],
 			})
 
 			// Projection definition.
