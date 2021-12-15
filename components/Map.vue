@@ -76,7 +76,7 @@ export default {
 				srs: 'EPSG:3338',
 				format: 'image/png',
 				version: '1.3.0',
-				layers: ['atlas_mapproxy:alaska_osm', 'shadow_mask:IEM_symmetric_difference'],
+				layers: ['atlas_mapproxy:alaska_osm', 'shadow_mask:iem_with_ak_aleutians_symmetric_difference'],
 			})
 
 			// Projection definition.
