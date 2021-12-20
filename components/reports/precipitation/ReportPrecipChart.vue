@@ -89,8 +89,8 @@ export default {
 						type: 'scatter',
 						mode: 'markers',
 						name: traceLabels_lu[model][scenario],
-						text: traceLabels_lu[model][scenario],
 						hoverinfo: 'x+y+z+text',
+						hovertemplate: '%{y}' + units,
 						x: decades.slice(1),
 						y: [],
 					}
