@@ -33,6 +33,7 @@ export default {
 
 			let data_traces = []
 			let units = this.units == 'metric' ? 'ºC' : 'ºF'
+			let freezing = this.units == 'metric' ? 0 : 32
 
 			let season_lu = {
 				'DJF': 'December - February',
@@ -97,6 +98,7 @@ export default {
 				})
 			})
 
+			let allValues = []
 			decade_keys.forEach(decade => {
 				if (decade === '2040_2069' || decade === '2070_2099') {
 					return
@@ -109,10 +111,12 @@ export default {
 					historical['q3'].push(tasData['q3'])
 					historical['lowerfence'].push(tasData['min'])
 					historical['upperfence'].push(tasData['max'])
+					allValues.push(tasData['median'], tasData['q1'], tasData['q3'], tasData['min'], tasData['max'])
 				} else {
 					models.forEach(model => {
 						scenarios.forEach(scenario => {
 							scatterTraces[model][scenario]['y'].push(this.reportData[decade][this.season][model][scenario]['tas'])
+							allValues.push(this.reportData[decade][this.season][model][scenario]['tas'])
 						})
 					})
 				}
@@ -135,6 +139,7 @@ export default {
 							size: 18,
 						},
 					},
+					zeroline: false,
 				},
 				title: {
 					text: 'Historical and projected temperature (' + season_lu[this.season] + ')',
@@ -156,6 +161,24 @@ export default {
 						opacity: 0.2
 					},
 				],
+			}
+
+			// Draw freezing line only if it falls within range of displayed data to
+			// prevent it from extending the y-axis.
+			if (_.inRange(freezing, _.min(allValues), _.max(allValues))) {
+				layout.shapes.push({
+					type: 'line',
+					x0: 0,
+					x1: 1,
+					xref: 'paper',
+					y0: freezing,
+					y1: freezing,
+					yref: 'y',
+					line: {
+						width: 1,
+						color: 'rgb(175, 175, 175)',
+					},
+				})
 			}
 
 			this.$Plotly.newPlot('temp-chart', data_traces, layout, {
