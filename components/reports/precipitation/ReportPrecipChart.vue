@@ -98,7 +98,7 @@ export default {
 			})
 
 			decade_keys.forEach(decade => {
-				if (decade === '2040_2070' || decade === '2070_2100') {
+				if (decade === '2040_2069' || decade === '2070_2099') {
 					return
 				}
 

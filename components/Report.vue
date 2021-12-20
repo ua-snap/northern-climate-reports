@@ -202,7 +202,6 @@ export default {
 				this.results = _.cloneDeep(this.originalData)
 				this.convertReportData()
 			}
-			this.combineDecades()
 		},
 	},
 	methods: {
@@ -251,36 +250,6 @@ export default {
 				}
 			})
 		},
-		combineDecades() {
-			let decades = {
-				'2040_2070': ['2040_2049', '2050_2059', '2060_2069'],
-				'2070_2100': ['2070_2079', '2080_2089', '2090_2099'],
-			}
-
-			let combined = {}
-			Object.keys(decades).forEach(decadeRange => {
-				combined[decadeRange] = {};
-				['DJF', 'JJA', 'MAM', 'SON'].forEach(season => {
-					combined[decadeRange][season] = {};
-					['CCSM4', 'MRI-CGCM3'].forEach(model => {
-						combined[decadeRange][season][model] = {};
-						['rcp45', 'rcp60', 'rcp85'].forEach(scenario => {
-							combined[decadeRange][season][model][scenario] = {}
-							let tasValues = []
-							let prValues = []
-							decades[decadeRange].forEach(decade => {
-								tasValues.push(this.results[decade][season][model][scenario]['tas'])
-								prValues.push(this.results[decade][season][model][scenario]['pr'])
-							})
-							combined[decadeRange][season][model][scenario]['tas'] = _.round(_.mean(tasValues), 1)
-							combined[decadeRange][season][model][scenario]['pr'] = _.round(_.mean(prValues), 1)
-						})
-					})
-				})
-			})
-
-			this.results = _.merge(this.results, combined)
-		}
 	},
 }
 </script>
