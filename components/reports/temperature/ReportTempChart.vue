@@ -42,6 +42,11 @@ export default {
 			}
 
 			let decade_keys = Object.keys(this.reportData)
+			decade_keys = decade_keys.filter(value => {
+				if (value !== '2040_2069' && value !== '2070_2099') {
+					return value
+				}
+			})
 			let decades = decade_keys.map(x => x.replace('_', '-'))
 
 			let historical = {
