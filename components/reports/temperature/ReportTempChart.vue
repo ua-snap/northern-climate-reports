@@ -60,16 +60,23 @@ export default {
 				upperfence: [],
 			}
 
-			let models = ['MRI-CGCM3', 'CCSM4']
-			let scenarios = ['rcp45', 'rcp85']
+			let models = ['5modelAvg', 'MRI-CGCM3', 'CCSM4']
+			let scenarios = ['rcp45', 'rcp60', 'rcp85']
 
 			let traceLabels_lu = {
+				'5modelAvg': {
+					'rcp45': 'RCP 4.5 (5 Model Avg.)',
+					'rcp60': 'RCP 6.0 (5 Model Avg.)',
+					'rcp85': 'RCP 8.5 (5 Model Avg.)',
+				},
 				'MRI-CGCM3': {
 					'rcp45': 'RCP 4.5 (MRI)',
+					'rcp60': 'RCP 6.0 (MRI)',
 					'rcp85': 'RCP 8.5 (MRI)',
 				},
 				'CCSM4': {
 					'rcp45': 'RCP 4.5 (NCAR)',
+					'rcp60': 'RCP 6.0 (NCAR)',
 					'rcp85': 'RCP 8.5 (NCAR)',
 				},
 			}
@@ -82,6 +89,8 @@ export default {
 						type: 'scatter',
 						mode: 'markers',
 						name: traceLabels_lu[model][scenario],
+						text: traceLabels_lu[model][scenario],
+						hoverinfo: 'x+y+z+text',
 						x: decades.slice(1),
 						y: [],
 					}
