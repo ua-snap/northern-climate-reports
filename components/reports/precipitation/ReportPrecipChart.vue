@@ -146,9 +146,11 @@ export default {
 					{
 						type: 'rect',
 						x0: 0,
+						x1: 1,
+						xref: 'paper',
 						y0: this.reportData['1950_2009'][this.season]['CRU-TS40']['CRU_historical']['pr']['q1'],
-						x1: decades.length - 1,
 						y1: this.reportData['1950_2009'][this.season]['CRU-TS40']['CRU_historical']['pr']['q3'],
+						yref: 'y',
 						line: {
 							width: 0
 						},
