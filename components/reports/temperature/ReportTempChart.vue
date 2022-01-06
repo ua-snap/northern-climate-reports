@@ -83,6 +83,11 @@ export default {
 			}
 
 			let scatterTraces = {}
+			let symbols = {
+				'5modelAvg': 'circle',
+				'MRI-CGCM3': 'square',
+				'CCSM4': 'diamond',
+			}
 			models.forEach(model => {
 				scatterTraces[model] = {}
 				scenarios.forEach(scenario => {
@@ -92,6 +97,10 @@ export default {
 						name: traceLabels_lu[model][scenario],
 						hoverinfo: 'x+y+z+text',
 						hovertemplate: '%{y}' + units,
+						marker: {
+							symbol: Array(decades.length).fill(symbols[model]),
+							size: 8,
+						},
 						x: decades.slice(1),
 						y: [],
 					}
