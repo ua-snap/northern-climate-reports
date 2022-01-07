@@ -178,12 +178,12 @@ export default {
 	},
 	async fetch() {
 		// TODO: add error handling here for 404 (no data) etc.
-		let queryUrl = process.env.apiUrl + '/iem/'
+		let queryUrl = process.env.apiUrl + '/taspr'
 
 		// Determine the query type to perform.
 		if (this.hucId) {
 			// Fetch areal data by HUC.
-			queryUrl += 'huc/' + this.hucId
+			queryUrl += '/huc/' + this.hucId
 		} else if (this.latLng) {
 			queryUrl += '/point/' + this.latLng[0] + '/' + this.latLng[1]
 		} else {
@@ -191,30 +191,64 @@ export default {
 			return
 		}
 		this.results = await this.$http.$get(queryUrl)
-		this.originalData = this.results // save a copy!
+		this.originalData = _.cloneDeep(this.results) // save a copy!
 		this.units = 'imperial'
 	},
 	watch: {
 		units: function () {
 			if (this.units == 'metric') {
-				this.results = this.originalData
+				this.results = _.cloneDeep(this.originalData)
 			} else {
-				this.results = _.mapValuesDeep(
-					this.originalData,
-					(value, key, context) => {
-						if (key == 'pr') {
-							// Convert to inches!
-							return parseFloat((value * 0.03937008).toFixed(2))
-						} else if (key == 'tas') {
-							// Convert to degrees F!
-							return parseFloat((value * 1.8 + 32).toFixed(1))
-						}
-					},
-					{
-						leavesOnly: true,
-					}
-				)
+				this.results = _.cloneDeep(this.originalData)
+				this.convertReportData()
 			}
+		},
+	},
+	methods: {
+		convertMeans(data) {
+			return _.mapValuesDeep(
+				data,
+				(value, key, context) => {
+					if (key == 'pr') {
+						// Convert to inches!
+						return parseFloat((value * 0.03937008).toFixed(2))
+					} else if (key == 'tas') {
+						// Convert to degrees F!
+						return parseFloat((value * 1.8 + 32).toFixed(1))
+					}
+				},
+				{
+					leavesOnly: true,
+				}
+			)
+		},
+		convertHistorical(data) {
+			let convertedData = _.cloneDeep(data)
+			Object.keys(convertedData).forEach(season => {
+				let seasonObj = convertedData[season]['CRU-TS40']['CRU_historical']
+				Object.keys(seasonObj).forEach(climate_variable => {
+					Object.keys(seasonObj[climate_variable]).forEach(stat => {
+						let original = seasonObj[climate_variable][stat]
+						if (climate_variable === 'tas') {
+							let converted = parseFloat(original * 1.8 + 32).toFixed(1)
+							seasonObj[climate_variable][stat] = converted
+						} else {
+							let converted = parseFloat(original * 0.03937008).toFixed(2)
+							seasonObj[climate_variable][stat] = converted
+						}
+					})
+				})
+			})
+			return convertedData
+		},
+		convertReportData() {
+			Object.keys(this.results).forEach(decade => {
+				if (decade === '1950_2009') {
+					this.results[decade] = this.convertHistorical(this.results[decade])
+				} else {
+					this.results[decade] = this.convertMeans(this.results[decade])
+				}
+			})
 		},
 	},
 }

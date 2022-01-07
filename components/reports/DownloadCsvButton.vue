@@ -18,7 +18,7 @@ export default {
 				// HUC.
 				urlFragment = 'huc/' + this.$store.getters.getHucId
 			}
-			return process.env.apiUrl + '/iem/' + urlFragment + "?format=csv"
+			return process.env.apiUrl + '/taspr/' + urlFragment + "?format=csv"
 		},
 	},
 }

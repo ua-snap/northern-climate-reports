@@ -1,23 +1,26 @@
 <template>
-	<div style="display: none;" class="precip-chart-wrapper">
+	<div class="precip-chart-wrapper">
 		<div id="precip-chart" />
 	</div>
 </template>
 <style lang="scss" scoped>
 .precip-chart-wrapper {
-	padding-bottom: 6rem;
+	padding-bottom: 0rem;
 }
 </style>
 <script>
 import _ from 'lodash'
 export default {
 	name: 'ReportPrecipChart',
-	props: ['reportData', 'units'],
+	props: ['reportData', 'units', 'season'],
 	mounted() {
 		this.renderPlot()
 	},
 	watch: {
 		reportData: function () {
+			this.renderPlot()
+		},
+		season: function () {
 			this.renderPlot()
 		},
 	},
@@ -28,108 +31,112 @@ export default {
 				return
 			}
 
-			let seasons = ['DJF', 'MAM', 'JJA', 'SON']
-			let seasons_names = ['Winter', 'Spring', 'Summer', 'Fall']
 			let data_traces = []
-			let axisGroups = {
-				DJF: { x: 'x1', y: 'y1' },
-				MAM: { x: 'x2', y: 'y2' },
-				JJA: { x: 'x3', y: 'y3' },
-				SON: { x: 'x4', y: 'y4' },
-			}
 			let units = this.units == 'metric' ? 'mm' : 'in'
-			function get_seasonal_subplot(season) {
-				let xAxisDef = [
-					'<b>2040-2070</b>, MRI-CGCM3',
-					'<b>2040-2070</b>, NCAR-CCSM4',
-					'<b>2070-2100</b>, MRI-CGCM3',
-					'<b>2070-2100</b>, NCAR-CCSM4',
-				]
 
-				let trace_rcp45 = {
-					x: xAxisDef,
-					y: [
-						reportData['2040_2070'][season]['MRI-CGCM3']['rcp45']['pr'],
-						reportData['2040_2070'][season]['CCSM4']['rcp45']['pr'],
-						reportData['2070_2100'][season]['MRI-CGCM3']['rcp45']['pr'],
-						reportData['2070_2100'][season]['CCSM4']['rcp45']['pr'],
-					],
-					xaxis: axisGroups[season]['x'],
-					yaxis: axisGroups[season]['y'],
-					type: 'scatter',
-					mode: 'markers',
-					showlegend: false,
-					marker: { color: '#999', size: 8, symbol: 'square' },
-				}
-
-				let trace_rcp85 = {
-					x: xAxisDef,
-					y: [
-						reportData['2040_2070'][season]['MRI-CGCM3']['rcp85']['pr'],
-						reportData['2040_2070'][season]['CCSM4']['rcp85']['pr'],
-						reportData['2070_2100'][season]['MRI-CGCM3']['rcp85']['pr'],
-						reportData['2070_2100'][season]['CCSM4']['rcp85']['pr'],
-					],
-					xaxis: axisGroups[season]['x'],
-					yaxis: axisGroups[season]['y'],
-					type: 'scatter',
-					mode: 'markers',
-					showlegend: false,
-					marker: { color: '#333', size: 8 },
-				}
-
-				let historical_precip =
-					reportData['1910-2009'][season]['CRU-TS31']['CRU_historical']['pr']
-				let trace_historical = {
-					x: xAxisDef,
-					y: [
-						historical_precip,
-						historical_precip,
-						historical_precip,
-						historical_precip,
-					],
-					xaxis: axisGroups[season]['x'],
-					yaxis: axisGroups[season]['y'],
-					name: 'cats',
-					type: 'scatter',
-					mode: 'lines+text',
-					showlegend: false,
-					text: [
-						'Historical (CRU TS 3.1), <b>' + historical_precip + units + '</b>',
-						'',
-						'',
-						'',
-					],
-					textposition: 'top right',
-				}
-
-				data_traces.push(trace_rcp45, trace_rcp85, trace_historical)
+			let season_lu = {
+				'DJF': 'December - February',
+				'MAM': 'March - May',
+				'JJA': 'June - August',
+				'SON': 'September - November',
 			}
 
-			seasons.forEach((season) => {
-				get_seasonal_subplot(season)
+			let decade_keys = Object.keys(this.reportData)
+			decade_keys = decade_keys.filter(value => {
+				if (value !== '2040_2069' && value !== '2070_2099') {
+					return value
+				}
+			})
+			let decades = decade_keys.map(x => x.replace('_', '-'))
+
+			let historical = {
+				type: 'box',
+				name: 'Historical',
+				x: decades.slice(0, 1),
+				q1: [],
+				median: [],
+				q3: [],
+				lowerfence: [],
+				upperfence: [],
+			}
+
+			let models = ['5modelAvg', 'MRI-CGCM3', 'CCSM4']
+			let scenarios = ['rcp45', 'rcp60', 'rcp85']
+
+			let traceLabels_lu = {
+				'5modelAvg': {
+					'rcp45': 'RCP 4.5 (5-model Avg.)',
+					'rcp60': 'RCP 6.0 (5-model Avg.)',
+					'rcp85': 'RCP 8.5 (5-model Avg.)',
+				},
+				'MRI-CGCM3': {
+					'rcp45': 'RCP 4.5 (MRI)',
+					'rcp60': 'RCP 6.0 (MRI)',
+					'rcp85': 'RCP 8.5 (MRI)',
+				},
+				'CCSM4': {
+					'rcp45': 'RCP 4.5 (NCAR)',
+					'rcp60': 'RCP 6.0 (NCAR)',
+					'rcp85': 'RCP 8.5 (NCAR)',
+				},
+			}
+
+			let scatterTraces = {}
+			let symbols = {
+				'5modelAvg': 'circle',
+				'MRI-CGCM3': 'square',
+				'CCSM4': 'diamond',
+			}
+			models.forEach(model => {
+				scatterTraces[model] = {}
+				scenarios.forEach(scenario => {
+					scatterTraces[model][scenario] = {
+						type: 'scatter',
+						mode: 'markers',
+						name: traceLabels_lu[model][scenario],
+						hoverinfo: 'x+y+z+text',
+						hovertemplate: '%{y}' + units,
+						marker: {
+							symbol: Array(decades.length).fill(symbols[model]),
+							size: 8,
+						},
+						x: decades.slice(1),
+						y: [],
+					}
+				})
 			})
 
-			var annotations = _.map(seasons_names, (season, index) => {
-				return {
-					xref: 'paper',
-					yref: 'paper',
-					x: index * 0.25 + 0.015 * index, // wiggle a bit
-					y: 1.025,
-					xanchor: 'left',
-					yanchor: 'bottom',
-					text: season,
-					font: {
-						family: 'Arial',
-						size: 18,
-						color: 'rgb(37,37,37)',
-					},
-					showarrow: false,
+			decade_keys.forEach(decade => {
+				if (decade === '2040_2069' || decade === '2070_2099') {
+					return
+				}
+
+				if (decade === '1950_2009') {
+					let prData = this.reportData[decade][this.season]['CRU-TS40']['CRU_historical']['pr']
+					historical['median'].push(prData['median'])
+					historical['q1'].push(prData['q1'])
+					historical['q3'].push(prData['q3'])
+					historical['lowerfence'].push(prData['min'])
+					historical['upperfence'].push(prData['max'])
+				} else {
+					models.forEach(model => {
+						scenarios.forEach(scenario => {
+							scatterTraces[model][scenario]['y'].push(this.reportData[decade][this.season][model][scenario]['pr'])
+						})
+					})
 				}
 			})
 
-			var layout = {
-				grid: { rows: 1, columns: 4, pattern: 'independent' },
+			data_traces.push(historical)
+
+			models.forEach(model => {
+				scenarios.forEach(scenario => {
+					data_traces.push(scatterTraces[model][scenario])
+				})
+			})
+
+			let layout = {
+				boxmode: 'group',
 				yaxis: {
 					title: {
 						text: 'Precipitation ' + units,
@@ -139,13 +146,28 @@ export default {
 					},
 				},
 				title: {
-					text: 'Projected precipitation',
+					text: 'Historical and projected precipitation (' + season_lu[this.season] + ')',
 					font: {
 						size: 24,
 					},
 				},
-				annotations: annotations,
-				// showlegend: false,
+				shapes: [
+					{
+						type: 'rect',
+						x0: 0,
+						x1: 1,
+						xref: 'paper',
+						y0: this.reportData['1950_2009'][this.season]['CRU-TS40']['CRU_historical']['pr']['q1'],
+						y1: this.reportData['1950_2009'][this.season]['CRU-TS40']['CRU_historical']['pr']['q3'],
+						yref: 'y',
+						line: {
+							width: 0
+						},
+						fillcolor: '#cccccc',
+						opacity: 0.2
+					},
+				],
+				hovermode: 'x unified',
 			}
 
 			this.$Plotly.newPlot('precip-chart', data_traces, layout, {
