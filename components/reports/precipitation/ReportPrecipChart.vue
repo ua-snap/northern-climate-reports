@@ -167,6 +167,7 @@ export default {
 						opacity: 0.2
 					},
 				],
+				hovermode: 'x unified',
 			}
 
 			this.$Plotly.newPlot('precip-chart', data_traces, layout, {

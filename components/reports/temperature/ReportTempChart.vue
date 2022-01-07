@@ -171,6 +171,7 @@ export default {
 						opacity: 0.2
 					},
 				],
+				hovermode: 'x unified',
 			}
 
 			// Draw freezing line only if it falls within range of displayed data to
