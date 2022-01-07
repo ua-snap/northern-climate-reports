@@ -168,7 +168,7 @@ export default {
 							width: 0
 						},
 						fillcolor: '#cccccc',
-						opacity: 0.2
+						opacity: 0.2,
 					},
 				],
 				hovermode: 'x unified',
@@ -194,6 +194,7 @@ export default {
 						color: '#aaaaff',
 					},
 					opacity: 0.5,
+					layer: 'below',
 				})
 				layout.annotations.push({
 					x: 1,
