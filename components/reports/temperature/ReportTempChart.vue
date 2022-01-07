@@ -139,6 +139,7 @@ export default {
 				})
 			})
 
+			let hoverformat = this.units == 'metric' ? '.1f' : '.0f'
 			var layout = {
 				boxmode: 'group',
 				yaxis: {
@@ -149,6 +150,7 @@ export default {
 						},
 					},
 					zeroline: false,
+					hoverformat: hoverformat,
 				},
 				title: {
 					text: 'Historical and projected temperature (' + season_lu[this.season] + ')',
