@@ -472,9 +472,8 @@
 			<tfoot>
 				<tr>
 					<td colspan="10" class="about">
-						<nuxt-link :to="{ name: 'about' }"
-							>Values show averages for the indicated date ranges. Read more
-							about models (MRI-CGCM3 and NCAR-CCSM4) and emissions scenarios
+						Values show averages for the indicated date ranges. <nuxt-link :to="{ name: 'about' }"
+							>Read more about models (MRI-CGCM3 and NCAR-CCSM4) and emissions scenarios
 							(RCPs).</nuxt-link
 						>
 					</td>
