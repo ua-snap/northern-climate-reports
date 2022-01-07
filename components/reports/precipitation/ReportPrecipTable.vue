@@ -8,7 +8,7 @@
 			<thead>
 				<tr>
 					<th scope="col" rowspan="3" class="left">Season</th>
-					<th scope="col" rowspan="3" class="left">Historical Average</th>
+					<th scope="col" rowspan="3" class="left">Historical (1950&ndash;2009)</th>
 					<th scope="col" colspan="4" class="light-border">
 						Mid&ndash;Century (2040&ndash;2069)
 					</th>
@@ -526,7 +526,7 @@
 			<tfoot>
 				<tr>
 					<td colspan="10" class="about">
-						<nuxt-link :to="{ name: 'about' }"
+						Values show averages for the indicated date ranges.  <nuxt-link :to="{ name: 'about' }"
 							>Read more about models (MRI-CGCM3 and NCAR-CCSM4) and emissions
 							scenarios (RCPs).</nuxt-link
 						>
