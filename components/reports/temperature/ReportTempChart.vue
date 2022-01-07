@@ -59,6 +59,10 @@ export default {
 				q3: [],
 				lowerfence: [],
 				upperfence: [],
+				marker: {
+					color: '#888888'
+				},
+				fillcolor: '#cccccc',
 			}
 
 			let models = ['5modelAvg', 'MRI-CGCM3', 'CCSM4']
@@ -191,9 +195,8 @@ export default {
 					yref: 'y',
 					line: {
 						width: 2,
-						color: '#aaaaff',
+						color: '#cccccc',
 					},
-					opacity: 0.5,
 					layer: 'below',
 				})
 				layout.annotations.push({
@@ -203,13 +206,12 @@ export default {
 					yref: 'y',
 					text: 'Freezing',
 					showarrow: true,
-					arrowcolor: '#aaaaff',
+					arrowcolor: '#cccccc',
 					arrowhead: 6,
-					opacity: 1,
 					ax: 0,
 					ay: -12,
 					font: {
-						color: '#aaaaff',
+						color: '#999999',
 					}
 				})
 			}

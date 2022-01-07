@@ -58,6 +58,10 @@ export default {
 				q3: [],
 				lowerfence: [],
 				upperfence: [],
+				marker: {
+					color: '#888888'
+				},
+				fillcolor: '#cccccc',
 			}
 
 			let models = ['5modelAvg', 'MRI-CGCM3', 'CCSM4']
