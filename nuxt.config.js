@@ -14,7 +14,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'iem-webapp',
+    title: 'Northern Climate Reports',
     htmlAttrs: {
       lang: 'en',
     },
