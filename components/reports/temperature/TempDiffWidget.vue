@@ -32,13 +32,18 @@ export default {
 			type: Number,
 			required: true,
 		},
+		units: {
+			type: String,
+			required: true,
+		},
 	},
 	computed: {
 		rawDiff() {
 			return (this.future - this.past).toFixed(1)
 		},
 		diff() {
-			let diff = (this.future - this.past).toFixed(1)
+			let precision = this.units == 'metric' ? 1 : 0
+			let diff = (this.future - this.past).toFixed(precision)
 			if (diff > 0) {
 				diff = '&plus;' + diff
 			}

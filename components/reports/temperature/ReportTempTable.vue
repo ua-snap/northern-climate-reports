@@ -58,6 +58,7 @@
 							:past="
 								reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -67,6 +68,7 @@
 							:past="
 								reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -78,6 +80,7 @@
 							:past="
 								reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -87,6 +90,7 @@
 							:past="
 								reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -98,6 +102,7 @@
 							:past="
 								reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -107,6 +112,7 @@
 							:past="
 								reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -118,6 +124,7 @@
 							:past="
 								reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -127,6 +134,7 @@
 							:past="
 								reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 				</tr>
@@ -146,6 +154,7 @@
 							:past="
 								reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -155,6 +164,7 @@
 							:past="
 								reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -166,6 +176,7 @@
 							:past="
 								reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -175,6 +186,7 @@
 							:past="
 								reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -186,6 +198,7 @@
 							:past="
 								reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -195,6 +208,7 @@
 							:past="
 								reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -206,6 +220,7 @@
 							:past="
 								reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -215,6 +230,7 @@
 							:past="
 								reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 				</tr>
@@ -234,6 +250,7 @@
 							:past="
 								reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -243,6 +260,7 @@
 							:past="
 								reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -254,6 +272,7 @@
 							:past="
 								reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -263,6 +282,7 @@
 							:past="
 								reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -274,6 +294,7 @@
 							:past="
 								reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -283,6 +304,7 @@
 							:past="
 								reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -294,6 +316,7 @@
 							:past="
 								reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -303,6 +326,7 @@
 							:past="
 								reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 				</tr>
@@ -322,6 +346,7 @@
 							:past="
 								reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -331,6 +356,7 @@
 							:past="
 								reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -342,6 +368,7 @@
 							:past="
 								reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -351,6 +378,7 @@
 							:past="
 								reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -362,6 +390,7 @@
 							:past="
 								reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -371,6 +400,7 @@
 							:past="
 								reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -382,6 +412,7 @@
 							:past="
 								reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 					<td>
@@ -391,6 +422,7 @@
 							:past="
 								reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['tas']['mean']
 							"
+							:units="units"
 						/>
 					</td>
 				</tr>
