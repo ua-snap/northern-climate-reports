@@ -206,12 +206,12 @@ export default {
 					yref: 'y',
 					text: 'Freezing',
 					showarrow: true,
-					arrowcolor: '#cccccc',
+					arrowcolor: '#aaaaaa',
 					arrowhead: 6,
 					ax: 0,
 					ay: -12,
 					font: {
-						color: '#999999',
+						color: '#888888',
 					}
 				})
 			}
