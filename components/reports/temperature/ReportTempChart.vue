@@ -180,6 +180,10 @@ export default {
 					},
 				],
 				hovermode: 'x unified',
+				annotations: [],
+				legend: {
+					x: 1.03
+				},
 			}
 
 			// Draw freezing line only if it falls within range of displayed data to
@@ -194,9 +198,26 @@ export default {
 					y1: freezing,
 					yref: 'y',
 					line: {
-						width: 1,
-						color: 'rgb(175, 175, 175)',
+						width: 2,
+						color: '#aaaaff',
 					},
+					opacity: 0.5,
+				})
+				layout.annotations.push({
+					x: 1,
+					y: freezing,
+					xref: 'paper',
+					yref: 'y',
+					text: 'Freezing',
+					showarrow: true,
+					arrowcolor: '#aaaaff',
+					arrowhead: 6,
+					opacity: 1,
+					ax: 0,
+					ay: -12,
+					font: {
+						color: '#aaaaff',
+					}
 				})
 			}
 

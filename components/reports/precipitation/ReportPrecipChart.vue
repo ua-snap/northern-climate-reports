@@ -176,6 +176,9 @@ export default {
 					},
 				],
 				hovermode: 'x unified',
+				legend: {
+					x: 1.03
+				},
 			}
 
 			this.$Plotly.newPlot('precip-chart', data_traces, layout, {
