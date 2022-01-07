@@ -51,7 +51,7 @@ export default {
 
 			let historical = {
 				type: 'box',
-				name: 'Historical',
+				name: 'Historical (1950-2009)',
 				x: decades.slice(0, 1),
 				q1: [],
 				median: [],
