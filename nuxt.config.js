@@ -14,7 +14,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Northern Climate Reports',
+    title: 'Climate Impact Reports for Changing Northern Ecosystems',
     htmlAttrs: {
       lang: 'en',
     },
