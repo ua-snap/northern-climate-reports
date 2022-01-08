@@ -93,11 +93,31 @@ export default {
 			}
 
 			let scatterTraces = {}
+
 			let symbols = {
 				'5modelAvg': 'circle',
 				'MRI-CGCM3': 'square',
 				'CCSM4': 'diamond',
 			}
+
+			let colors = {
+				'5modelAvg': {
+					'rcp45': 'rgb(190, 30, 30)',
+					'rcp60': 'rgb(210, 90, 90)',
+					'rcp85': 'rgb(230, 150, 150)',
+				},
+				'MRI-CGCM3': {
+					'rcp45': 'rgb(30, 30, 190)',
+					'rcp60': 'rgb(90, 90, 210)',
+					'rcp85': 'rgb(150, 150, 230)',
+				},
+				'CCSM4': {
+					'rcp45': 'rgb(140, 140, 30)',
+					'rcp60': 'rgb(180, 180, 90)',
+					'rcp85': 'rgb(210, 210, 150)',
+				},
+			}
+
 			models.forEach(model => {
 				scatterTraces[model] = {}
 				scenarios.forEach(scenario => {
@@ -110,6 +130,7 @@ export default {
 						marker: {
 							symbol: Array(decades.length).fill(symbols[model]),
 							size: 8,
+							color: colors[model][scenario],
 						},
 						x: decades.slice(1),
 						y: [],
