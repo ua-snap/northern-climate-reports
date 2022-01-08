@@ -69,6 +69,7 @@ export default {
 					color: '#888888'
 				},
 				fillcolor: '#cccccc',
+				hoverinfo: 'skip',
 			}
 
 			let models = ['5modelAvg', 'MRI-CGCM3', 'CCSM4']
@@ -152,6 +153,9 @@ export default {
 			let hoverformat = '.1f'
 			var layout = {
 				boxmode: 'group',
+				xaxis: {
+					tickangle: 0,
+				},
 				yaxis: {
 					title: {
 						text: 'Temperature ' + units,
@@ -188,7 +192,32 @@ export default {
 				legend: {
 					x: 1.03
 				},
+				margin: {
+					b: 120
+				},
+				height: 500,
 			}
+
+			let footer_y = -0.4
+			if (window.innerWidth < 1250) {
+				layout['xaxis'] = {
+					tickangle: 45,
+				}
+				layout['margin']['b'] = 160
+				footer_y = -0.65
+			}
+
+			layout.annotations.push({
+				x: 0.5,
+				y: footer_y,
+				xref: 'paper',
+				yref: 'paper',
+				showarrow: false,
+				text: 'The boxplot represents the interquartile range (IQR) of historical means for the season, from 1950-2009.<br /> \
+					The shaded gray region shows the extent of common variation for the historical period.<br /> \
+					Credit: Scenarios Network for Alaska + Arctic Planning, University of Alaska Fairbanks.<br /> \
+					Visit northernclimatereports.org for more information.',
+			})
 
 			// Draw freezing line only if it falls within range of displayed data to
 			// prevent it from extending the y-axis.
