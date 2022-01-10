@@ -41,7 +41,7 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'QualitativeText',
-  props: ['reportData', 'units'],
+  props: ['reportData'],
   watch: {
     reportData: function () {
       this.generateText()
@@ -62,6 +62,7 @@ export default {
     ...mapGetters({
       hucName: 'getRawHucName',
       place: 'getPlaceName',
+      units: 'units',
     }),
     unitsText() {
       if (this.units) {

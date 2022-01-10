@@ -25,10 +25,10 @@
 				<b-radio v-model="precip_season" name="precip_season" native-value="JJA">Summer</b-radio>
 				<b-radio v-model="precip_season" name="precip_season" native-value="SON">Fall</b-radio>
 			</b-field>
-			<ReportPrecipChart :reportData="reportData" :units="units" :season="precip_season" />
+			<ReportPrecipChart :reportData="reportData" :season="precip_season" />
 		</div>
 		<div class="table-wrapper">
-			<ReportPrecipTable :reportData="reportData" :units="units" />
+			<ReportPrecipTable :reportData="reportData" />
 		</div>
 	</div>
 </template>
@@ -36,15 +36,21 @@
 <script>
 import ReportPrecipChart from './ReportPrecipChart'
 import ReportPrecipTable from './ReportPrecipTable'
+import { mapGetters } from 'vuex'
 
 export default {
 	name: 'PrecipReport',
-	props: ['reportData', 'units'],
+	props: ['reportData'],
 	components: { ReportPrecipChart, ReportPrecipTable },
 	data() {
 		return {
 			precip_season: 'DJF'
 		}
 	},
+	computed: {
+		...mapGetters({
+			units: 'units',
+		})
+	}
 }
 </script>

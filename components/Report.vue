@@ -37,7 +37,7 @@
 				<h3 class="title is-3 centered">
 					Projected Conditions for <span v-html="place"></span>
 				</h3>
-				<QualitativeText :reportData="results" :units="units" />
+				<QualitativeText :reportData="results" />
 			</section>
 			<section class="section">
 				<div class="columns">
@@ -79,11 +79,10 @@
 				<div class="report-type-wrapper">
 					<TempReport
 						:reportData="results"
-						:units="units"
 					></TempReport>
 				</div>
 				<div class="report-type-wrapper">
-					<PrecipReport :reportData="results" :units="units"></PrecipReport>
+					<PrecipReport :reportData="results"></PrecipReport>
 				</div>
 				<div class="content is-size-5">
 					<p>
@@ -166,7 +165,7 @@ export default {
 		return {
 			originalData: undefined, // for the raw stuff back from API
 			results: undefined, // may be metric or imperial
-			units: 'metric',
+			units: 'imperial',
 		}
 	},
 	computed: {
@@ -197,8 +196,10 @@ export default {
 	watch: {
 		units: function () {
 			if (this.units == 'metric') {
+				this.$store.commit('setMetric')
 				this.results = _.cloneDeep(this.originalData)
 			} else {
+				this.$store.commit('setImperial')
 				this.results = _.cloneDeep(this.originalData)
 				this.convertReportData()
 			}
