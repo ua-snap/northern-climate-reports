@@ -9,12 +9,14 @@
 		</h4>
 		<div class="content is-size-5">
 			<p>
-				Projections for two future time periods are shown for average (mean)
-				temperature. Results are averaged by season (three month averages) for
-				two different climate models (MRI-CGCM3 and NCAR-CCSM4) and two
+				Projections for each decade through the end of the century are shown for
+				average (mean) temperature, compared with a historical range. Results
+				are averaged by season (three month averages) for two specific climate
+				models (MRI-CGCM3 and NCAR-CCSM4) as well as a 5-model average. Three
 				different greenhouse gas scenarios or Representative Concentration
-				Pathways (RCPs). RCP4.5 is an optimistic future, and RCP8.5 is more
-				pessimistic, but also more likely.
+				Pathways (RCPs) are shown for each model. RCP4.5 is an optimistic future,
+				and RCP8.5 is more pessimistic but also more likely. RCP6.0 is an
+				emissions scenario between RCP4.5 and RCP8.5.
 				<nuxt-link :to="{ name: 'about' }"
 					>Read more about models and RCPs.</nuxt-link
 				>
