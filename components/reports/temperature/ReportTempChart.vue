@@ -139,7 +139,7 @@ export default {
 				})
 			})
 
-			let hoverformat = this.units == 'metric' ? '.1f' : '.0f'
+			let hoverformat = '.1f'
 			var layout = {
 				boxmode: 'group',
 				yaxis: {

@@ -23,9 +23,6 @@
 }
 </style>
 <script>
-// Important note -- the Template block above must have NO SPACES otherwise the
-// whitespace creates an awkward gap in the rendered content.  Don't auto-format
-// this file with JS Prettier!
 export default {
 	name: 'PrecipDiffWidget',
 	props: {
@@ -60,7 +57,7 @@ export default {
 			if (diff > 0) {
 				diff = '&plus;' + diff + '%'
 			} else if (diff < 0) {
-				diff = '&minus;' + Math.abs(diff) + '%'
+				diff = '&minus;' + Math.abs(diff) + '&percent;'
 			} else {
 				diff = '&lt;1%'
 			}
