@@ -3,7 +3,7 @@
 		<table class="table report-table" v-if="reportData">
 			<caption>
 				Projected Precipitation
-				<UnitWidget variable="pr" :units="units" type="heavy" />
+				<UnitWidget variable="pr" type="heavy" />
 			</caption>
 			<thead>
 				<tr>
@@ -47,13 +47,12 @@
 					<td class="left">
 						{{
 							reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical']['pr']['mean']
-						}}<UnitWidget variable="pr" :units="units" type="light" />
+						}}<UnitWidget variable="pr" type="light" />
 					</td>
 					<td>
 						{{ reportData['2040_2069']['DJF']['MRI-CGCM3']['rcp45']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -68,7 +67,6 @@
 						{{ reportData['2040_2069']['DJF']['CCSM4']['rcp45']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -81,7 +79,6 @@
 						{{ reportData['2040_2069']['DJF']['MRI-CGCM3']['rcp85']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -96,7 +93,6 @@
 						{{ reportData['2040_2069']['DJF']['CCSM4']['rcp85']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -109,7 +105,6 @@
 						{{ reportData['2070_2099']['DJF']['MRI-CGCM3']['rcp45']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -124,7 +119,6 @@
 						{{ reportData['2070_2099']['DJF']['CCSM4']['rcp45']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -137,7 +131,6 @@
 						{{ reportData['2070_2099']['DJF']['MRI-CGCM3']['rcp85']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -152,7 +145,6 @@
 						{{ reportData['2070_2099']['DJF']['CCSM4']['rcp85']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -167,13 +159,12 @@
 					<td class="left">
 						{{
 							reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical']['pr']['mean']
-						}}<UnitWidget variable="pr" :units="units" type="light" />
+						}}<UnitWidget variable="pr" type="light" />
 					</td>
 					<td>
 						{{ reportData['2040_2069']['MAM']['MRI-CGCM3']['rcp45']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -188,7 +179,6 @@
 						{{ reportData['2040_2069']['MAM']['CCSM4']['rcp45']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -201,7 +191,6 @@
 						{{ reportData['2040_2069']['MAM']['MRI-CGCM3']['rcp85']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -216,7 +205,6 @@
 						{{ reportData['2040_2069']['MAM']['CCSM4']['rcp85']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -229,7 +217,6 @@
 						{{ reportData['2070_2099']['MAM']['MRI-CGCM3']['rcp45']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -244,7 +231,6 @@
 						{{ reportData['2070_2099']['MAM']['CCSM4']['rcp45']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -257,7 +243,6 @@
 						{{ reportData['2070_2099']['MAM']['MRI-CGCM3']['rcp85']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -272,7 +257,6 @@
 						{{ reportData['2070_2099']['MAM']['CCSM4']['rcp85']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -287,13 +271,12 @@
 					<td class="left">
 						{{
 							reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical']['pr']['mean']
-						}}<UnitWidget variable="pr" :units="units" type="light" />
+						}}<UnitWidget variable="pr" type="light" />
 					</td>
 					<td>
 						{{ reportData['2040_2069']['JJA']['MRI-CGCM3']['rcp45']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -308,7 +291,6 @@
 						{{ reportData['2040_2069']['JJA']['CCSM4']['rcp45']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -321,7 +303,6 @@
 						{{ reportData['2040_2069']['JJA']['MRI-CGCM3']['rcp85']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -336,7 +317,6 @@
 						{{ reportData['2040_2069']['JJA']['CCSM4']['rcp85']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -349,7 +329,6 @@
 						{{ reportData['2070_2099']['JJA']['MRI-CGCM3']['rcp45']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -364,7 +343,6 @@
 						{{ reportData['2070_2099']['JJA']['CCSM4']['rcp45']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -377,7 +355,6 @@
 						{{ reportData['2070_2099']['JJA']['MRI-CGCM3']['rcp85']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -392,7 +369,6 @@
 						{{ reportData['2070_2099']['JJA']['CCSM4']['rcp85']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -407,13 +383,12 @@
 					<td class="left">
 						{{
 							reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical']['pr']['mean']
-						}}<UnitWidget variable="pr" :units="units" type="light" />
+						}}<UnitWidget variable="pr" type="light" />
 					</td>
 					<td>
 						{{ reportData['2040_2069']['SON']['MRI-CGCM3']['rcp45']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -428,7 +403,6 @@
 						{{ reportData['2040_2069']['SON']['CCSM4']['rcp45']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -441,7 +415,6 @@
 						{{ reportData['2040_2069']['SON']['MRI-CGCM3']['rcp85']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -456,7 +429,6 @@
 						{{ reportData['2040_2069']['SON']['CCSM4']['rcp85']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -469,7 +441,6 @@
 						{{ reportData['2070_2099']['SON']['MRI-CGCM3']['rcp45']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -484,7 +455,6 @@
 						{{ reportData['2070_2099']['SON']['CCSM4']['rcp45']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -497,7 +467,6 @@
 						{{ reportData['2070_2099']['SON']['MRI-CGCM3']['rcp85']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -512,7 +481,6 @@
 						{{ reportData['2070_2099']['SON']['CCSM4']['rcp85']['pr']
 						}}<UnitWidget
 							variable="pr"
-							:units="units"
 							type="light"
 						/><PrecipDiffWidget
 							:past="
@@ -542,9 +510,10 @@
 <script>
 import UnitWidget from '~/components/UnitWidget'
 import PrecipDiffWidget from './PrecipDiffWidget'
+import { mapGetters } from 'vuex'
 export default {
 	name: 'PrecipReportTable',
-	props: ['reportData', 'units'],
+	props: ['reportData'],
 	components: { PrecipDiffWidget, UnitWidget },
 }
 </script>

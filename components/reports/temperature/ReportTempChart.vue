@@ -10,11 +10,17 @@
 </style>
 <script>
 import _ from 'lodash'
+import { mapGetters } from 'vuex'
 export default {
 	name: 'ReportTempChart',
-	props: ['reportData', 'units', 'season'],
+	props: ['reportData', 'season'],
 	mounted() {
 		this.renderPlot()
+	},
+	computed: {
+		...mapGetters({
+			units: 'units',
+		})
 	},
 	watch: {
 		reportData: function () {
