@@ -127,7 +127,7 @@ export default {
 						mode: 'markers',
 						name: traceLabels_lu[model][scenario],
 						hoverinfo: 'x+y+z+text',
-						hovertemplate: '%{y}' + units,
+						hovertemplate: '%{y}' + units + ' <b>(%{customdata}' + units + ')</b>',
 						marker: {
 							symbol: Array(decades.length).fill(symbols[model]),
 							size: 8,
@@ -135,6 +135,7 @@ export default {
 						},
 						x: decades.slice(1),
 						y: [],
+						customdata: [],
 					}
 				})
 			})
@@ -156,7 +157,16 @@ export default {
 				} else {
 					models.forEach(model => {
 						scenarios.forEach(scenario => {
-							scatterTraces[model][scenario]['y'].push(this.reportData[decade][this.season][model][scenario]['tas'])
+							let scenarioTas = this.reportData[decade][this.season][model][scenario]['tas']
+							let historicalTas = this.reportData['1950_2009'][this.season]['CRU-TS40']['CRU_historical']['tas']['median']
+							let tasDiff = scenarioTas - historicalTas
+							if (tasDiff > 0) {
+								tasDiff = '+' + tasDiff.toFixed(1)
+							} else {
+								tasDiff = tasDiff.toFixed(1)
+							}
+							scatterTraces[model][scenario]['y'].push(scenarioTas)
+							scatterTraces[model][scenario]['customdata'].push(tasDiff)
 							allValues.push(this.reportData[decade][this.season][model][scenario]['tas'])
 						})
 					})
