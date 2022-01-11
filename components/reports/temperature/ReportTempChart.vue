@@ -211,13 +211,13 @@ export default {
 				height: 500,
 			}
 
-			let footer_y = -0.4
+			let footer_y = -0.25
 			if (window.innerWidth < 1250) {
 				layout['xaxis'] = {
 					tickangle: 45,
 				}
 				layout['margin']['b'] = 160
-				footer_y = -0.65
+				footer_y = -0.50
 			}
 
 			layout.annotations.push({
@@ -226,10 +226,10 @@ export default {
 				xref: 'paper',
 				yref: 'paper',
 				showarrow: false,
-				text: 'The boxplot represents the interquartile range (IQR) of historical means for the season, from 1950-2009.<br /> \
-					The shaded gray region shows the extent of common variation for the historical period.<br /> \
-					Credit: Scenarios Network for Alaska + Arctic Planning, University of Alaska Fairbanks.<br /> \
-					Visit northernclimatereports.org for more information.',
+				text: 'The boxplot represents the interquartile range (IQR) of ' +
+					'historical means for the season, from 1950-2009.<br />The shaded ' +
+					'gray region shows the extent of common variation for the ' +
+					'historical period.',
 			})
 
 			// Draw freezing line only if it falls within range of displayed data to
