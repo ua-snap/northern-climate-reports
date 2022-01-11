@@ -18,9 +18,6 @@
 }
 </style>
 <script>
-// Important note -- the Template block above must have NO SPACES otherwise the
-// whitespace creates an awkward gap in the rendered content.  Don't auto-format
-// this file with JS Prettier!
 export default {
 	name: 'TempDiffWidget',
 	props: {
@@ -35,10 +32,10 @@ export default {
 	},
 	computed: {
 		rawDiff() {
-			return (this.future - this.past).toFixed(1)
+			return this.future - this.past
 		},
 		diff() {
-			let diff = (this.future - this.past).toFixed(1)
+			let diff = (this.future - this.past).toFixed(1) // for trailing 0's + consistency
 			if (diff > 0) {
 				diff = '&plus;' + diff
 			}

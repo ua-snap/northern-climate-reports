@@ -141,6 +141,7 @@ export default {
 				})
 			})
 
+			let hoverformat = this.units == 'metric' ? '.0f' : '.1f'
 			let layout = {
 				boxmode: 'group',
 				yaxis: {
@@ -150,6 +151,7 @@ export default {
 							size: 18,
 						},
 					},
+					hoverformat: hoverformat,
 				},
 				title: {
 					text: 'Historical and projected precipitation (' + season_lu[this.season] + ')',

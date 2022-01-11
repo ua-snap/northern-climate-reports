@@ -212,13 +212,13 @@ export default {
 				(value, key, context) => {
 					if (key == 'pr') {
 						// Convert to inches!
-						return parseFloat((value * 0.03937008).toFixed(2))
+						return parseFloat((value * 0.03937008).toFixed(1))
 					} else if (key == 'tas') {
 						// Convert to degrees F!
 						return parseFloat((value * 1.8 + 32).toFixed(1))
 					}
 				},
-				{
+				{	
 					leavesOnly: true,
 				}
 			)
@@ -231,10 +231,10 @@ export default {
 					Object.keys(seasonObj[climate_variable]).forEach(stat => {
 						let original = seasonObj[climate_variable][stat]
 						if (climate_variable === 'tas') {
-							let converted = parseFloat(original * 1.8 + 32).toFixed(1)
+							let converted = parseFloat((original * 1.8 + 32).toFixed(1))
 							seasonObj[climate_variable][stat] = converted
 						} else {
-							let converted = parseFloat(original * 0.03937008).toFixed(2)
+							let converted = parseFloat((original * 0.03937008).toFixed(1))
 							seasonObj[climate_variable][stat] = converted
 						}
 					})
