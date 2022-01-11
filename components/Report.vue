@@ -192,6 +192,7 @@ export default {
 		this.results = await this.$http.$get(queryUrl)
 		this.originalData = _.cloneDeep(this.results) // save a copy!
 		this.units = 'imperial'
+		this.convertReportData()
 	},
 	created() {
 		// Switch back to clean URL after S3 redirect. Adapted from here:
