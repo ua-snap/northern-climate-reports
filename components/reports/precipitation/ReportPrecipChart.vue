@@ -221,6 +221,7 @@ export default {
 					b: 120
 				},
 				height: 500,
+				dragmode: false,
 			}
 
 			let footer_y = -0.25
