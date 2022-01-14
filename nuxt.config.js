@@ -86,7 +86,7 @@ export default {
   env: {
     geoserverUrl:
       process.env.GEOSERVER_URL || 'https://gs.mapventure.org/geoserver/wms',
-    apiUrl: process.env.SNAP_API_URL || 'http://earthmaps.io',
+    apiUrl: process.env.SNAP_API_URL || 'https://earthmaps.io',
   },
 
   // Router customizations
