@@ -18,7 +18,7 @@
 				>Read more about models and RCPs.</nuxt-link
 			>
 		</div>
-		<div class="chart-wrapper">
+		<div class="chart-wrapper permafrost">
 			<ReportPermafrostChart :permafrostData="permafrostData" />
 		</div>
 	</div>

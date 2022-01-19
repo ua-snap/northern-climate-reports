@@ -36,6 +36,13 @@ label.label {
   padding: 1.25rem;
 }
 
+.chart-wrapper {
+  &.permafrost {
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+
 // Formatting common for both report tables.
 table.table.report-table {
   width: 100%;
