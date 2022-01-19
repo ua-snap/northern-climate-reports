@@ -19,7 +19,7 @@
 			>
 		</div>
 		<div class="chart-wrapper">
-			<ReportPermafrostChart :reportData="reportData" />
+			<ReportPermafrostChart :permafrostData="permafrostData" />
 		</div>
 	</div>
 </template>
@@ -30,7 +30,7 @@ import { mapGetters } from 'vuex'
 
 export default {
 	name: 'PermafrostReport',
-	props: ['reportData'],
+	props: ['permafrostData'],
 	components: { ReportPermafrostChart },
 	computed: {
 		...mapGetters({

@@ -85,7 +85,7 @@
 					<PrecipReport :reportData="results"></PrecipReport>
 				</div>
 				<div class="report-type-wrapper">
-					<PermafrostReport :reportData="permafrostResults"></PermafrostReport>
+					<PermafrostReport :permafrostData="permafrostResults"></PermafrostReport>
 				</div>
 				<div class="content is-size-5">
 					<p>

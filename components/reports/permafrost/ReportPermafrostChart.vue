@@ -13,7 +13,7 @@ import _ from 'lodash'
 import { mapGetters } from 'vuex'
 export default {
 	name: 'ReportPermafrostChart',
-	props: ['reportData'],
+	props: ['permafrostData'],
 	mounted() {
 		this.renderPlot()
 	},
@@ -23,7 +23,7 @@ export default {
 		})
 	},
 	watch: {
-		reportData: function () {
+		permafrostData: function () {
 			this.renderPlot()
 		},
 		units: function () {
@@ -32,8 +32,8 @@ export default {
 	},
 	methods: {
 		renderPlot: function () {
-			let reportData = this.reportData
-			if (!reportData) {
+			let permafrostData = this.permafrostData
+			if (!permafrostData) {
 				return
 			}
 
@@ -52,7 +52,7 @@ export default {
 			let eras = Object.values(eras_lu)
 
 			let historical_y = Array(eras.length).fill(null)
-			historical_y[0] = this.reportData['gipl']['1995']['cruts31']['historical']['alt']
+			historical_y[0] = this.permafrostData['gipl']['1995']['cruts31']['historical']['alt']
 
 			let historical = {
 				type: 'scatter',
@@ -152,7 +152,7 @@ export default {
 				years.forEach(year => {
 					if (year != '1995') {
 						scenarios.forEach(scenario => {
-							let scenarioAlt = this.reportData['gipl'][year][model][scenario]['alt']
+							let scenarioAlt = this.permafrostData['gipl'][year][model][scenario]['alt']
 							scatterTraces[model][scenario]['y'].push(scenarioAlt)
 						})
 					}
