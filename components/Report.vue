@@ -84,6 +84,9 @@
 				<div class="report-type-wrapper">
 					<PrecipReport :reportData="results"></PrecipReport>
 				</div>
+				<div class="report-type-wrapper">
+					<PermafrostReport :reportData="permafrostResults"></PermafrostReport>
+				</div>
 				<div class="content is-size-5">
 					<p>
 						Comparing projections with historical data in the first column
@@ -149,6 +152,7 @@
 <script>
 import TempReport from '~/components/reports/temperature/TempReport'
 import PrecipReport from '~/components/reports/precipitation/PrecipReport'
+import PermafrostReport from '~/components/reports/permafrost/PermafrostReport'
 import MiniMap from '~/components/reports/MiniMap'
 import QualitativeText from '~/components/reports/QualitativeText'
 import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
@@ -160,11 +164,12 @@ const _ = deepdash(lodash)
 
 export default {
 	name: 'Report',
-	components: { TempReport, PrecipReport, MiniMap, QualitativeText, DownloadCsvButton },
+	components: { TempReport, PrecipReport, PermafrostReport, MiniMap, QualitativeText, DownloadCsvButton },
 	data() {
 		return {
 			originalData: undefined, // for the raw stuff back from API
 			results: undefined, // may be metric or imperial
+			permafrostResults: undefined,
 			units: 'imperial',
 		}
 	},
@@ -178,19 +183,27 @@ export default {
 	async fetch() {
 		// TODO: add error handling here for 404 (no data) etc.
 		let queryUrl = process.env.apiUrl + '/taspr'
+		let permafrostQueryUrl = process.env.apiUrl + '/permafrost'
 
 		// Determine the query type to perform.
 		if (this.hucId) {
 			// Fetch areal data by HUC.
 			queryUrl += '/huc/' + this.hucId
+			permafrostQueryUrl += '/huc/' + this.hucId
 		} else if (this.latLng) {
 			queryUrl += '/point/' + this.latLng[0] + '/' + this.latLng[1]
+			permafrostQueryUrl += '/point/' + this.latLng[0] + '/' + this.latLng[1]
 		} else {
 			// Don't know what to query, bail.
 			return
 		}
 		this.results = await this.$http.$get(queryUrl)
-		this.originalData = _.cloneDeep(this.results) // save a copy!
+		this.permafrostResults = await this.$http.$get(permafrostQueryUrl)
+
+		// save copies!
+		this.originalData = _.cloneDeep(this.results)
+		this.originalPermafrostData = _.cloneDeep(this.permafrostResults)
+
 		this.units = 'imperial'
 		this.convertReportData()
 	},
@@ -208,15 +221,17 @@ export default {
 			if (this.units == 'metric') {
 				this.$store.commit('setMetric')
 				this.results = _.cloneDeep(this.originalData)
+				this.permafrostResults = _.cloneDeep(this.originalPermafrostData)
 			} else {
 				this.$store.commit('setImperial')
 				this.results = _.cloneDeep(this.originalData)
+				this.permafrostResults = _.cloneDeep(this.originalPermafrostData)
 				this.convertReportData()
 			}
 		},
 	},
 	methods: {
-		convertMeans(data) {
+		convertTasPrMeans(data) {
 			return _.mapValuesDeep(
 				data,
 				(value, key, context) => {
@@ -228,12 +243,12 @@ export default {
 						return parseFloat((value * 1.8 + 32).toFixed(1))
 					}
 				},
-				{	
+				{
 					leavesOnly: true,
 				}
 			)
 		},
-		convertHistorical(data) {
+		convertTasPrHistorical(data) {
 			let convertedData = _.cloneDeep(data)
 			Object.keys(convertedData).forEach(season => {
 				let seasonObj = convertedData[season]['CRU-TS40']['CRU_historical']
@@ -252,13 +267,30 @@ export default {
 			})
 			return convertedData
 		},
+		convertPermafrostMeans(data) {
+			return _.mapValuesDeep(
+				data,
+				(value, key, context) => {
+					if (key == 'alt') {
+						// Convert to inches!
+						return parseFloat((value * 39.37008).toFixed(1))
+					}
+				},
+				{
+					leavesOnly: true,
+				}
+			)
+		},
 		convertReportData() {
 			Object.keys(this.results).forEach(decade => {
 				if (decade === '1950_2009') {
-					this.results[decade] = this.convertHistorical(this.results[decade])
+					this.results[decade] = this.convertTasPrHistorical(this.results[decade])
 				} else {
-					this.results[decade] = this.convertMeans(this.results[decade])
+					this.results[decade] = this.convertTasPrMeans(this.results[decade])
 				}
+			})
+			Object.keys(this.permafrostResults['gipl']).forEach(year => {
+				this.permafrostResults['gipl'][year] = this.convertPermafrostMeans(this.permafrostResults['gipl'][year])
 			})
 		},
 	},
