@@ -84,7 +84,7 @@
 				<div class="report-type-wrapper">
 					<PrecipReport :reportData="results"></PrecipReport>
 				</div>
-				<div class="report-type-wrapper">
+				<div class="report-type-wrapper" v-show="showPermafrost">
 					<PermafrostReport :permafrostData="permafrostResults"></PermafrostReport>
 				</div>
 				<div class="content is-size-5">
@@ -170,6 +170,7 @@ export default {
 			originalData: undefined, // for the raw stuff back from API
 			results: undefined, // may be metric or imperial
 			permafrostResults: undefined,
+			showPermafrost: undefined,
 			units: 'imperial',
 		}
 	},
@@ -205,6 +206,8 @@ export default {
 		this.originalPermafrostData = _.cloneDeep(this.permafrostResults)
 
 		this.units = 'imperial'
+
+		this.checkPermafrost()
 		this.convertReportData()
 	},
 	created() {
@@ -292,6 +295,10 @@ export default {
 			Object.keys(this.permafrostResults['gipl']).forEach(year => {
 				this.permafrostResults['gipl'][year] = this.convertPermafrostMeans(this.permafrostResults['gipl'][year])
 			})
+		},
+		checkPermafrost() {
+			let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['alt']
+			this.showPermafrost = historicalAlt == -9999 ? false : true
 		},
 	},
 }
