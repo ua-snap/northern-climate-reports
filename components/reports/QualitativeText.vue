@@ -138,6 +138,12 @@ export default {
       return seasonMetrics
     },
     permafrostChange() {
+      let thicknessHistorical = this.permafrostData['gipl']['1995']['cruts31']['historical']['alt']
+
+      if (thicknessHistorical == -9999) {
+        return 0
+      }
+
       let thicknesses = []
       let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
       let scenarios = ['rcp45', 'rcp85']
@@ -146,9 +152,9 @@ export default {
           thicknesses.push(this.permafrostData['gipl']['2095'][model][scenario]['alt'])
         })
       })
-      let thicknessMax = _.max(thicknesses)
-      let thicknessHistorical = this.permafrostData['gipl']['1995']['cruts31']['historical']['alt']
-      return Math.round(thicknessMax / thicknessHistorical * 100 - 100)
+      let thicknessMean = _.mean(thicknesses)
+
+      return Math.round(thicknessMean / thicknessHistorical * 100 - 100)
     },
     // Subfunction: Generate annual metrics HTML string
     // Input: None. (Uses constant seasons)
@@ -264,12 +270,12 @@ export default {
         '%</strong>).</p>'
 
       let permafrostChange = this.permafrostChange()
-      if (permafrostChange > 0) {
+      if (permafrostChange < 0) {
         returnedString += '<p>By the late century, the active layer permafrost thickness may '
-        if (permafrostChange < 100) {
-          returnedString += 'decrease by <strong>' + permafrostChange + '%</strong>.</p>'
-        } else {
+        if (permafrostChange == -100) {
           returnedString += 'disappear.</p>'
+        } else {
+          returnedString += 'decrease by <strong>' + Math.abs(permafrostChange) + '%</strong>.</p>'
         }
       }
 
