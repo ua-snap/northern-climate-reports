@@ -4,7 +4,7 @@ var metas = {
   description:
     'Three forms of heat-related phenomena—warming temperatures, thawing permafrost, and more fire—are driving landscape change in Northern ecosystems. This tool uses climate data to construct a variety of possible futures for a warming North.',
   preview: '/preview.png',
-  url: 'https://northernclimatereports.org/',
+  url: 'https://northernclimatereports.org',
 }
 
 // NuxtJS Config object!
