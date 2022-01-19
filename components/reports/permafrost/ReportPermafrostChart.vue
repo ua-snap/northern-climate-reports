@@ -206,9 +206,31 @@ export default {
 				margin: {
 					b: 40
 				},
-				height: 400,
+				margin: {
+					b: 120
+				},
+				height: 500,
 				dragmode: false,
 			}
+
+			let footer_y = -0.25
+			if (window.innerWidth < 1250) {
+				layout['xaxis'] = {
+					tickangle: 45,
+				}
+				layout['margin']['b'] = 160
+				footer_y = -0.50
+			}
+
+			layout.annotations.push({
+				x: 0.5,
+				y: footer_y,
+				xref: 'paper',
+				yref: 'paper',
+				showarrow: false,
+				text: 'Historical active layer thickness is taken from the CRU TS 3.1 ' +
+					'dataset.<br />Projected values are taken from GIPL 2.0 model output.',
+			})
 
 			this.$Plotly.newPlot('permafrost-chart', data_traces, layout, {
 				displaylogo: false,
