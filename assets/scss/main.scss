@@ -36,10 +36,12 @@ label.label {
   padding: 1.25rem;
 }
 
-.chart-wrapper {
-  &.permafrost {
-    width: 70%;
-    margin: 0 auto;
+@media (min-width: 768px) {
+  .chart-wrapper {
+    &.permafrost {
+      width: 70%;
+      margin: 0 auto;
+    }
   }
 }
 
