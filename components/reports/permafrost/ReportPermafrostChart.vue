@@ -1,10 +1,10 @@
 <template>
-	<div class="Permafrost-chart-wrapper">
-		<div id="Permafrost-chart" />
+	<div class="permafrost-chart-wrapper">
+		<div id="permafrost-chart" />
 	</div>
 </template>
 <style lang="scss" scoped>
-.Permafrost-chart-wrapper {
+.permafrost-chart-wrapper {
 	padding-bottom: 0rem;
 }
 </style>
@@ -210,7 +210,7 @@ export default {
 				dragmode: false,
 			}
 
-			this.$Plotly.newPlot('Permafrost-chart', data_traces, layout, {
+			this.$Plotly.newPlot('permafrost-chart', data_traces, layout, {
 				displaylogo: false,
 				modeBarButtonsToRemove: [
 					'zoom2d',
