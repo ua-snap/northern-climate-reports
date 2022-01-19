@@ -30,7 +30,7 @@ export default {
       { name: 'twitter:title', content: metas.title },
       { name: 'twitter:description', content: metas.description },
       { name: 'twitter:creator', content: '@SNAPandACCAP' },
-      { name: 'twitter:image:src', content: metas.preview },
+      { name: 'twitter:image', content: metas.url + metas.preview },
       { property: 'og:title', content: metas.title },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: metas.url },
