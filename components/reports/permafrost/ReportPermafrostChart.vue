@@ -143,6 +143,7 @@ export default {
 				})
 			})
 
+			let historicalAlt = this.permafrostData['gipl']['1995']['cruts31']['historical']['alt']
 			let hoverformat = '.1f'
 			let layout = {
 				boxmode: 'group',
@@ -170,8 +171,8 @@ export default {
 						x0: 0,
 						x1: 1,
 						xref: 'paper',
-						y0: this.permafrostData['gipl']['1995']['cruts31']['historical']['alt'],
-						y1: this.permafrostData['gipl']['1995']['cruts31']['historical']['alt'],
+						y0: historicalAlt,
+						y1: historicalAlt,
 						yref: 'y',
 						line: {
 							width: 2
@@ -186,7 +187,7 @@ export default {
 				},
 				annotations: [{
 					x: 1,
-					y: this.permafrostData['gipl']['1995']['cruts31']['historical']['alt'],
+					y: historicalAlt,
 					xref: 'paper',
 					yref: 'y',
 					text: '1995',
