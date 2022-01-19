@@ -152,7 +152,7 @@ export default {
 				},
 				yaxis: {
 					title: {
-						text: 'Thickness ' + units,
+						text: 'Thickness (' + units + ')',
 						font: {
 							size: 18,
 						},

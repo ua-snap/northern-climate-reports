@@ -189,7 +189,7 @@ export default {
 				},
 				yaxis: {
 					title: {
-						text: 'Temperature ' + units,
+						text: 'Temperature (' + units + ')',
 						font: {
 							size: 18,
 						},
