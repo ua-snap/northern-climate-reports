@@ -41,7 +41,6 @@ export default {
 			let units = this.units == 'metric' ? 'm' : 'in'
 
 			let eras_lu = {
-				'1995': '1995',
 				'2025': '2011 - 2040',
 				'2050': '2036 - 2065',
 				'2075': '2061 – 2090',
@@ -50,25 +49,6 @@ export default {
 
 			let years = Object.keys(eras_lu)
 			let eras = Object.values(eras_lu)
-
-			let historical_y = Array(eras.length).fill(null)
-			historical_y[0] = this.permafrostData['gipl']['1995']['cruts31']['historical']['alt']
-
-			let historical = {
-				type: 'scatter',
-				mode: 'markers',
-				name: 'Historical (1995)',
-				hoverinfo: 'x+y+z+text',
-				hovertemplate: '%{y}' + units,
-				marker: {
-					symbol: Array(eras.length).fill('star'),
-					size: 9,
-					color: '#888888',
-				},
-				x: eras,
-				y: historical_y,
-			}
-
 			let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
 			let scenarios = ['rcp45', 'rcp85']
 
@@ -143,23 +123,19 @@ export default {
 							color: colors[model][scenario],
 						},
 						x: eras,
-						y: [null],
+						y: [],
 					}
 				})
 			})
 
 			models.forEach(model => {
 				years.forEach(year => {
-					if (year != '1995') {
-						scenarios.forEach(scenario => {
-							let scenarioAlt = this.permafrostData['gipl'][year][model][scenario]['alt']
-							scatterTraces[model][scenario]['y'].push(scenarioAlt)
-						})
-					}
+					scenarios.forEach(scenario => {
+						let scenarioAlt = this.permafrostData['gipl'][year][model][scenario]['alt']
+						scatterTraces[model][scenario]['y'].push(scenarioAlt)
+					})
 				})
 			})
-
-			data_traces.push(historical)
 
 			models.forEach(model => {
 				scenarios.forEach(scenario => {
@@ -188,12 +164,41 @@ export default {
 						size: 24,
 					},
 				},
-				shapes: [],
+				shapes: [
+					{
+						type: 'rect',
+						x0: 0,
+						x1: 1,
+						xref: 'paper',
+						y0: this.permafrostData['gipl']['1995']['cruts31']['historical']['alt'],
+						y1: this.permafrostData['gipl']['1995']['cruts31']['historical']['alt'],
+						yref: 'y',
+						line: {
+							width: 2
+						},
+						fillcolor: '#cccccc',
+						opacity: 0.2
+					},
+				],
 				hovermode: 'x unified',
 				hoverlabel: {
 					namelength: -1,
 				},
-				annotations: [],
+				annotations: [{
+					x: 1,
+					y: this.permafrostData['gipl']['1995']['cruts31']['historical']['alt'],
+					xref: 'paper',
+					yref: 'y',
+					text: '1995',
+					showarrow: true,
+					arrowcolor: '#aaaaaa',
+					arrowhead: 6,
+					ax: 0,
+					ay: -12,
+					font: {
+						color: '#888888',
+					}
+				}],
 				legend: {
 					x: 1.03
 				},
