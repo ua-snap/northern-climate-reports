@@ -152,7 +152,7 @@ export default {
 				},
 				yaxis: {
 					title: {
-						text: 'Permafrost ' + units,
+						text: 'Thickness ' + units,
 						font: {
 							size: 18,
 						},
