@@ -37,7 +37,7 @@
 				<h3 class="title is-3 centered">
 					Projected Conditions for <span v-html="place"></span>
 				</h3>
-				<QualitativeText :reportData="results" />
+				<QualitativeText :reportData="results" :permafrostData="permafrostResults" />
 			</section>
 			<section class="section">
 				<div class="columns">

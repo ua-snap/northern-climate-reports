@@ -41,9 +41,12 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'QualitativeText',
-  props: ['reportData'],
+  props: ['reportData', 'permafrostData'],
   watch: {
     reportData: function () {
+      this.generateText()
+    },
+    permafrostData: function () {
       this.generateText()
     },
   },
@@ -133,6 +136,19 @@ export default {
       }
 
       return seasonMetrics
+    },
+    permafrostChange() {
+      let thicknesses = []
+      let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
+      let scenarios = ['rcp45', 'rcp85']
+      models.forEach(model => {
+        scenarios.forEach(scenario => {
+          thicknesses.push(this.permafrostData['gipl']['2095'][model][scenario]['alt'])
+        })
+      })
+      let thicknessMax = _.max(thicknesses)
+      let thicknessHistorical = this.permafrostData['gipl']['1995']['cruts31']['historical']['alt']
+      return Math.round(thicknessMax / thicknessHistorical * 100 - 100)
     },
     // Subfunction: Generate annual metrics HTML string
     // Input: None. (Uses constant seasons)
@@ -246,6 +262,16 @@ export default {
         '</strong> is likely to have more precipitation (<strong>+' +
         annualHighestPrecipPercentChange +
         '%</strong>).</p>'
+
+      let permafrostChange = this.permafrostChange()
+      if (permafrostChange > 0) {
+        returnedString += '<p>By the late century, the active layer permafrost thickness may '
+        if (permafrostChange < 100) {
+          returnedString += 'decrease by <strong>' + permafrostChange + '%</strong>.</p>'
+        } else {
+          returnedString += 'disappear.</p>'
+        }
+      }
 
       return returnedString
     },
