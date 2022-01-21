@@ -136,7 +136,11 @@ export default {
 					let previousMagt = historicalMagt
 					years.forEach(year => {
 						let scenarioAlt = this.permafrostData['gipl'][year][model][scenario]['alt']
-						if (previousMagt > 0) {
+						if (this.units == 'metric' && scenarioAlt <= 0.07) {
+							scatterTraces[model][scenario]['y'].push(null)
+						} else if (this.units == 'imperial' && scenarioAlt <= 2.8) {
+							scatterTraces[model][scenario]['y'].push(null)
+						} else if (previousMagt > 0) {
 							scatterTraces[model][scenario]['y'].push(scenarioAlt)
 							showChart = true
 						} else {
