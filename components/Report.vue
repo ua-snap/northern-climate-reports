@@ -274,7 +274,7 @@ export default {
 			return _.mapValuesDeep(
 				data,
 				(value, key, context) => {
-					if (key == 'alt') {
+					if (key == 'alt' || key == 'magt') {
 						// Convert to inches!
 						return parseFloat((value * 39.37008).toFixed(1))
 					}

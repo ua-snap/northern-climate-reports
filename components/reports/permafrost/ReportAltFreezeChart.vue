@@ -1,6 +1,6 @@
 <template>
 	<div class="permafrost-chart-wrapper">
-		<div id="permafrost-chart" />
+		<div id="permafrost-alt-freeze-chart" />
 	</div>
 </template>
 <style lang="scss" scoped>
@@ -12,7 +12,7 @@
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
 export default {
-	name: 'ReportPermafrostChart',
+	name: 'ReportAltFreezeChart',
 	props: ['permafrostData'],
 	mounted() {
 		this.renderPlot()
@@ -128,11 +128,21 @@ export default {
 				})
 			})
 
+			let historicalAlt = this.permafrostData['gipl']['1995']['cruts31']['historical']['alt']
+			let historicalMagt = this.permafrostData['gipl']['1995']['cruts31']['historical']['magt']
+			let showChart = false
 			models.forEach(model => {
-				years.forEach(year => {
-					scenarios.forEach(scenario => {
+				scenarios.forEach(scenario => {
+					let previousMagt = historicalMagt
+					years.forEach(year => {
 						let scenarioAlt = this.permafrostData['gipl'][year][model][scenario]['alt']
-						scatterTraces[model][scenario]['y'].push(scenarioAlt)
+						if (previousMagt > 0) {
+							scatterTraces[model][scenario]['y'].push(scenarioAlt)
+							showChart = true
+						} else {
+							scatterTraces[model][scenario]['y'].push(null)
+						}
+						previousMagt = this.permafrostData['gipl'][year][model][scenario]['magt']
 					})
 				})
 			})
@@ -143,16 +153,12 @@ export default {
 				})
 			})
 
-			let historicalAlt = this.permafrostData['gipl']['1995']['cruts31']['historical']['alt']
 			let hoverformat = '.1f'
 			let layout = {
 				boxmode: 'group',
-				xaxis: {
-					type: 'category'
-				},
 				yaxis: {
 					title: {
-						text: 'Thickness (' + units + ')',
+						text: 'Depth (' + units + ')',
 						font: {
 							size: 18,
 						},
@@ -160,32 +166,49 @@ export default {
 					hoverformat: hoverformat,
 				},
 				title: {
-					text: 'Historical and projected active layer permafrost thickness',
+					text: 'Projected ground freeze depth',
 					font: {
 						size: 24,
 					},
 				},
-				shapes: [
-					{
-						type: 'rect',
-						x0: 0,
-						x1: 1,
-						xref: 'paper',
-						y0: historicalAlt,
-						y1: historicalAlt,
-						yref: 'y',
-						line: {
-							width: 2
-						},
-						fillcolor: '#cccccc',
-						opacity: 0.2
-					},
-				],
+				shapes: [],
 				hovermode: 'x unified',
 				hoverlabel: {
 					namelength: -1,
 				},
-				annotations: [{
+				annotations: [],
+				legend: {
+					x: 1.03
+				},
+				margin: {
+					b: 40
+				},
+				margin: {
+					b: 120
+				},
+				height: 500,
+				dragmode: false,
+			}
+
+			let footerText = 'Projected values are taken from GIPL 2.0 model output.'
+
+			if (historicalMagt > 0) {
+				layout.shapes.push({
+					type: 'rect',
+					x0: 0,
+					x1: 1,
+					xref: 'paper',
+					y0: historicalAlt,
+					y1: historicalAlt,
+					yref: 'y',
+					line: {
+						width: 2
+					},
+					fillcolor: '#cccccc',
+					opacity: 0.2
+				})
+
+				layout.annotations.push({
 					x: 1,
 					y: historicalAlt,
 					xref: 'paper',
@@ -199,18 +222,10 @@ export default {
 					font: {
 						color: '#888888',
 					}
-				}],
-				legend: {
-					x: 1.03
-				},
-				margin: {
-					b: 40
-				},
-				margin: {
-					b: 120
-				},
-				height: 500,
-				dragmode: false,
+				})
+				
+				footerText = 'Historical value is taken from the CRU TS 3.1 dataset.' +
+					'<br />' + footerText
 			}
 
 			let footer_y = -0.25
@@ -228,23 +243,24 @@ export default {
 				xref: 'paper',
 				yref: 'paper',
 				showarrow: false,
-				text: 'Historical active layer thickness is taken from the CRU TS 3.1 ' +
-					'dataset.<br />Projected values are taken from GIPL 2.0 model output.',
+				text: footerText,
 			})
 
-			this.$Plotly.newPlot('permafrost-chart', data_traces, layout, {
-				displaylogo: false,
-				modeBarButtonsToRemove: [
-					'zoom2d',
-					'pan2d',
-					'select2d',
-					'lasso2d',
-					'zoomIn2d',
-					'zoomOut2d',
-					'autoScale2d',
-					'resetScale2d',
-				],
-			})
+			if (showChart) {
+				this.$Plotly.newPlot('permafrost-alt-freeze-chart', data_traces, layout, {
+					displaylogo: false,
+					modeBarButtonsToRemove: [
+						'zoom2d',
+						'pan2d',
+						'select2d',
+						'lasso2d',
+						'zoomIn2d',
+						'zoomOut2d',
+						'autoScale2d',
+						'resetScale2d',
+					],
+				})
+			}
 		},
 	},
 }
