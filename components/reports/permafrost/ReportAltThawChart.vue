@@ -166,7 +166,7 @@ export default {
 					hoverformat: hoverformat,
 				},
 				title: {
-					text: 'Projected permafrost thaw depth',
+					text: 'Projected active layer thickness',
 					font: {
 						size: 24,
 					},
