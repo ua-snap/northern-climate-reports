@@ -158,7 +158,7 @@ export default {
 				boxmode: 'group',
 				yaxis: {
 					title: {
-						text: 'Depth (' + units + ')',
+						text: 'Thickness (' + units + ')',
 						font: {
 							size: 18,
 						},
