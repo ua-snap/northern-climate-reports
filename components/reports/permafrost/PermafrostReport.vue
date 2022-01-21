@@ -8,7 +8,13 @@
 			</span>
 		</h4>
 		<div class="content is-size-5">
-			Explanation text goes here.
+			Projected permafrost active layer thickness and ground freeze depth
+			through the end of the century. The active layer is the layer of soil
+			above permafrost that thaws seasonally. Results were produced by the
+			GIPL 2.0 permafrost model using five separate climate models and two
+			different greenhouse gas scenarios or Representative Concentration
+			Pathways (RCPs). RCP4.5 is an optimistic future, and RCP8.5 is more
+			pessimistic but also more likely.
 			<nuxt-link :to="{ name: 'about' }"
 				>Read more about models and RCPs.</nuxt-link
 			>
