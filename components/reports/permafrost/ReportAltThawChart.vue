@@ -13,7 +13,7 @@ import _ from 'lodash'
 import { mapGetters } from 'vuex'
 export default {
 	name: 'ReportAltThawChart',
-	props: ['permafrostData'],
+	props: ['altThawData'],
 	mounted() {
 		this.renderPlot()
 	},
@@ -23,7 +23,7 @@ export default {
 		})
 	},
 	watch: {
-		permafrostData: function () {
+		altThawData: function () {
 			this.renderPlot()
 		},
 		units: function () {
@@ -32,8 +32,8 @@ export default {
 	},
 	methods: {
 		renderPlot: function () {
-			let permafrostData = this.permafrostData
-			if (!permafrostData) {
+			let altThawData = this.altThawData
+			if (!altThawData) {
 				return
 			}
 
@@ -128,21 +128,12 @@ export default {
 				})
 			})
 
-			let historicalAlt = this.permafrostData['gipl']['1995']['cruts31']['historical']['alt']
-			let historicalMagt = this.permafrostData['gipl']['1995']['cruts31']['historical']['magt']
-			let showChart = false
+			let historicalYear = Object.keys(altThawData).slice(0, 1)
+			let projectedYears = Object.keys(altThawData).slice(1)
 			models.forEach(model => {
 				scenarios.forEach(scenario => {
-					let previousMagt = historicalMagt
-					years.forEach(year => {
-						let scenarioAlt = this.permafrostData['gipl'][year][model][scenario]['alt']
-						if (previousMagt < 0) {
-							scatterTraces[model][scenario]['y'].push(scenarioAlt)
-							showChart = true
-						} else {
-							scatterTraces[model][scenario]['y'].push(null)
-						}
-						previousMagt = this.permafrostData['gipl'][year][model][scenario]['magt']
+					projectedYears.forEach(year => {
+						scatterTraces[model][scenario]['y'].push(altThawData[year][model][scenario])
 					})
 				})
 			})
@@ -192,14 +183,14 @@ export default {
 
 			let footerText = 'Projected values are taken from GIPL 2.0 model output.'
 
-			if (historicalMagt < 0) {
+			if (altThawData[historicalYear]) {
 				layout.shapes.push({
 					type: 'rect',
 					x0: 0,
 					x1: 1,
 					xref: 'paper',
-					y0: historicalAlt,
-					y1: historicalAlt,
+					y0: altThawData[historicalYear],
+					y1: altThawData[historicalYear],
 					yref: 'y',
 					line: {
 						width: 2
@@ -210,7 +201,7 @@ export default {
 
 				layout.annotations.push({
 					x: 1,
-					y: historicalAlt,
+					y: altThawData[historicalYear],
 					xref: 'paper',
 					yref: 'y',
 					text: '1995',
@@ -246,21 +237,19 @@ export default {
 				text: footerText,
 			})
 
-			if (showChart) {
-				this.$Plotly.newPlot('permafrost-alt-thaw-chart', data_traces, layout, {
-					displaylogo: false,
-					modeBarButtonsToRemove: [
-						'zoom2d',
-						'pan2d',
-						'select2d',
-						'lasso2d',
-						'zoomIn2d',
-						'zoomOut2d',
-						'autoScale2d',
-						'resetScale2d',
-					],
-				})
-			}
+			this.$Plotly.newPlot('permafrost-alt-thaw-chart', data_traces, layout, {
+				displaylogo: false,
+				modeBarButtonsToRemove: [
+					'zoom2d',
+					'pan2d',
+					'select2d',
+					'lasso2d',
+					'zoomIn2d',
+					'zoomOut2d',
+					'autoScale2d',
+					'resetScale2d',
+				],
+			})
 		},
 	},
 }

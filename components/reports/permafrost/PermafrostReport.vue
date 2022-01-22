@@ -19,11 +19,11 @@
 				>Read more about models and RCPs.</nuxt-link
 			>
 		</div>
-		<div class="chart-wrapper permafrost">
-			<ReportAltThawChart :permafrostData="permafrostData" />
+		<div class="chart-wrapper permafrost" v-show="showThawChart">
+			<ReportAltThawChart :altThawData="altThawData" />
 		</div>
-		<div class="chart-wrapper permafrost">
-			<ReportAltFreezeChart :permafrostData="permafrostData" />
+		<div class="chart-wrapper permafrost" v-show="showFreezeChart">
+			<ReportAltFreezeChart :altFreezeData="altFreezeData" />
 		</div>
 	</div>
 </template>
@@ -35,12 +35,12 @@ import { mapGetters } from 'vuex'
 
 export default {
 	name: 'PermafrostReport',
-	props: ['permafrostData'],
+	props: ['altThawData', 'altFreezeData', 'showThawChart', 'showFreezeChart'],
 	components: { ReportAltThawChart, ReportAltFreezeChart },
 	computed: {
 		...mapGetters({
 			units: 'units',
 		})
-	}
+	},
 }
 </script>

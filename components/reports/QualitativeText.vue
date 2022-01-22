@@ -41,12 +41,12 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'QualitativeText',
-  props: ['reportData', 'permafrostData'],
+  props: ['reportData', 'altThawData'],
   watch: {
     reportData: function () {
       this.generateText()
     },
-    permafrostData: function () {
+    altThawData: function () {
       this.generateText()
     },
   },
@@ -138,23 +138,37 @@ export default {
       return seasonMetrics
     },
     permafrostChange() {
-      let thicknessHistorical = this.permafrostData['gipl']['1995']['cruts31']['historical']['alt']
+      let years = Object.keys(this.altThawData)
+      let historicalYear = years.slice(0, 1)
+      let lastYear = years.slice(-1)[0]
+      let thicknessHistorical = this.altThawData[historicalYear]
 
-      if (thicknessHistorical == -9999) {
+      if (thicknessHistorical == null) {
         return 0
       }
 
       let thicknesses = []
       let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
       let scenarios = ['rcp45', 'rcp85']
+
+      let permafrostLost = false
       models.forEach(model => {
         scenarios.forEach(scenario => {
-          thicknesses.push(this.permafrostData['gipl']['2095'][model][scenario]['alt'])
+          let value = this.altThawData[lastYear][model][scenario]
+          if (value == null) {
+            permafrostLost = true
+          }
+          thicknesses.push(value)
         })
       })
-      let thicknessMean = _.mean(thicknesses)
+      let thicknessMax = _.max(thicknesses)
 
-      return Math.round(thicknessMean / thicknessHistorical * 100 - 100)
+      if (permafrostLost) {
+        // Active layer has increased 100%. Permafrost has disappeared.
+        return 100
+      }
+
+      return Math.round(thicknessMax / thicknessHistorical * 100 - 100)
     },
     // Subfunction: Generate annual metrics HTML string
     // Input: None. (Uses constant seasons)
@@ -270,12 +284,12 @@ export default {
         '%</strong>).</p>'
 
       let permafrostChange = this.permafrostChange()
-      if (permafrostChange < 0) {
-        returnedString += '<p>By the late century, the active layer permafrost thickness may '
-        if (permafrostChange == -100) {
-          returnedString += 'disappear.</p>'
+      if (permafrostChange > 0) {
+        returnedString += '<p>By the late century, '
+        if (permafrostChange == 100) {
+          returnedString += 'permafrost may <strong>disappear</strong>.</p>'
         } else {
-          returnedString += 'decrease by <strong>' + Math.abs(permafrostChange) + '%</strong>.</p>'
+          returnedString += 'active layer permafrost thickness may increase by <strong>' + Math.abs(permafrostChange) + '%</strong>.</p>'
         }
       }
 

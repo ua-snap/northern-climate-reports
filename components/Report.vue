@@ -37,7 +37,7 @@
 				<h3 class="title is-3 centered">
 					Projected Conditions for <span v-html="place"></span>
 				</h3>
-				<QualitativeText :reportData="results" :permafrostData="permafrostResults" />
+				<QualitativeText :reportData="results" :altThawData="altThawData" />
 			</section>
 			<section class="section">
 				<div class="columns">
@@ -85,7 +85,7 @@
 					<PrecipReport :reportData="results"></PrecipReport>
 				</div>
 				<div class="report-type-wrapper" v-show="showPermafrost">
-					<PermafrostReport :permafrostData="permafrostResults"></PermafrostReport>
+					<PermafrostReport :altThawData="altThawData" :altFreezeData="altFreezeData" :showThawChart="showThawChart" :showFreezeChart="showFreezeChart"></PermafrostReport>
 				</div>
 				<div class="content is-size-5">
 					<p>
@@ -172,6 +172,10 @@ export default {
 			permafrostResults: undefined,
 			showPermafrost: undefined,
 			units: 'imperial',
+			altThawData: undefined,
+			altFreezeData: undefined,
+			showThawChart: undefined,
+			showFreezeChart: undefined,
 		}
 	},
 	computed: {
@@ -206,9 +210,11 @@ export default {
 		this.originalPermafrostData = _.cloneDeep(this.permafrostResults)
 
 		this.units = 'imperial'
-
-		this.checkPermafrost()
 		this.convertReportData()
+
+		this.altThawData = this.getAltThaw()
+		this.altFreezeData = this.getAltFreeze()
+		this.checkPermafrost()
 	},
 	created() {
 		// Switch back to clean URL after S3 redirect. Adapted from here:
@@ -274,15 +280,103 @@ export default {
 			return _.mapValuesDeep(
 				data,
 				(value, key, context) => {
-					if (key == 'alt' || key == 'magt') {
+					if (key == 'alt') {
 						// Convert to inches!
 						return parseFloat((value * 39.37008).toFixed(1))
+					} else if (key == 'magt') {
+						return parseFloat((value * 1.8 + 32).toFixed(1))
 					}
 				},
 				{
 					leavesOnly: true,
 				}
 			)
+		},
+		getAltThaw() {
+			let freezing = this.units == 'metric' ? 0 : 32
+			let thawData = {}
+			let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
+			let scenarios = ['rcp45', 'rcp85']
+			let projectedYears = Object.keys(this.permafrostResults['gipl']).slice(1)
+
+			let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['alt']
+			let historicalMagt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['magt']
+
+			if (historicalMagt < freezing) {
+				thawData['1995'] = historicalAlt
+			} else {
+				thawData['1995'] = null
+			}
+
+			projectedYears.forEach(year => {
+				thawData[year] = {}
+				models.forEach(model => {
+					thawData[year][model] ={}
+				})
+			})
+
+			models.forEach(model => {
+				scenarios.forEach(scenario => {
+					let previousMagt = historicalMagt
+					projectedYears.forEach(year => {
+						let scenarioAlt = this.permafrostResults['gipl'][year][model][scenario]['alt']
+						if (previousMagt < freezing) {
+							thawData[year][model][scenario] = scenarioAlt
+							this.showThawChart = true
+						} else {
+							thawData[year][model][scenario] = null
+						}
+						previousMagt = this.permafrostResults['gipl'][year][model][scenario]['magt']
+					})
+				})
+			})
+
+			return thawData
+		},
+		getAltFreeze() {
+			let freezing = this.units == 'metric' ? 0 : 32
+			let freezeData = {}
+			let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
+			let scenarios = ['rcp45', 'rcp85']
+			let projectedYears = Object.keys(this.permafrostResults['gipl']).slice(1)
+
+			let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['alt']
+			let historicalMagt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['magt']
+
+			if (historicalMagt > freezing) {
+				freezeData['1995'] = historicalAlt
+			} else {
+				freezeData['1995'] = null
+			}
+
+			projectedYears.forEach(year => {
+				freezeData[year] = {}
+				models.forEach(model => {
+					freezeData[year][model] ={}
+				})
+			})
+
+			models.forEach(model => {
+				scenarios.forEach(scenario => {
+					let previousMagt = historicalMagt
+					projectedYears.forEach(year => {
+						let scenarioAlt = this.permafrostResults['gipl'][year][model][scenario]['alt']
+						if (this.units == 'metric' && scenarioAlt <= 0.07) {
+							freezeData[year][model][scenario] = null
+						} else if (this.units == 'imperial' && scenarioAlt <= 2.8) {
+							freezeData[year][model][scenario] = null
+						} else if (previousMagt > freezing) {
+							freezeData[year][model][scenario] = scenarioAlt
+							this.showFreezeChart = true
+						} else {
+							freezeData[year][model][scenario] = null
+						}
+						previousMagt = this.permafrostResults['gipl'][year][model][scenario]['magt']
+					})
+				})
+			})
+
+			return freezeData
 		},
 		convertReportData() {
 			Object.keys(this.results).forEach(decade => {
@@ -299,6 +393,9 @@ export default {
 		checkPermafrost() {
 			let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['alt']
 			this.showPermafrost = historicalAlt == -9999 ? false : true
+			if (!this.showThawChart && !this.showFreezeChart) {
+				this.showPermafrost = false
+			}
 		},
 	},
 }
