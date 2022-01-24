@@ -84,8 +84,11 @@
 				<div class="report-type-wrapper">
 					<PrecipReport :reportData="results"></PrecipReport>
 				</div>
-				<div class="report-type-wrapper" v-show="showPermafrost">
-					<PermafrostReport :altThawData="altThawData" :altFreezeData="altFreezeData" :showThawChart="showThawChart" :showFreezeChart="showFreezeChart"></PermafrostReport>
+				<div class="report-type-wrapper">
+					<PermafrostReport :altThawData="altThawData" :altFreezeData="altFreezeData" :showThawChart="showThawChart" :showFreezeChart="showFreezeChart" v-show="showPermafrost"></PermafrostReport>
+					<p v-show="!showPermafrost" class="is-size-5">
+						Permafrost data are not available for this location.
+					</p>
 				</div>
 				<div class="content is-size-5">
 					<p>
