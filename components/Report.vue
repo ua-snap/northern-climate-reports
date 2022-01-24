@@ -280,7 +280,9 @@ export default {
 			return _.mapValuesDeep(
 				data,
 				(value, key, context) => {
-					if (key == 'alt') {
+					if (value == -9999) {
+						return null
+					} else if (key == 'alt') {
 						// Convert to inches!
 						return parseFloat((value * 39.37008).toFixed(1))
 					} else if (key == 'magt') {
@@ -392,7 +394,7 @@ export default {
 		},
 		checkPermafrost() {
 			let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['alt']
-			this.showPermafrost = historicalAlt == -9999 ? false : true
+			this.showPermafrost = historicalAlt == null ? false : true
 			if (!this.showThawChart && !this.showFreezeChart) {
 				this.showPermafrost = false
 			}
