@@ -3,7 +3,9 @@ import communities from '~/assets/communities'
 import hucs from '~/assets/hucs'
 
 export const state = () => ({
-  units: 'imperial'
+  units: 'imperial',
+  permafrostPresent: false,
+  permafrostDisappears: false,
 })
 
 export const mutations = {
@@ -12,6 +14,12 @@ export const mutations = {
   },
   setImperial (state) {
     state.units = 'imperial'
+  },
+  setPermafrostPresent(state, value) {
+    state.permafrostPresent = value
+  },
+  setPermafrostDisappears (state, value) {
+    state.permafrostDisappears = value
   }
 }
 
@@ -20,6 +28,13 @@ export const mutations = {
 export const getters = {
   units: (state) => {
     return state.units
+  },
+
+  permafrostPresent: (state) => {
+    return state.permafrostPresent
+  },
+  permafrostDisappears: (state) => {
+    return state.permafrostDisappears
   },
 
   // Boolean if any combo of place identifiers are active,

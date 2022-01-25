@@ -85,7 +85,7 @@
 					<PrecipReport :reportData="results"></PrecipReport>
 				</div>
 				<div class="report-type-wrapper">
-					<PermafrostReport :altThawData="altThawData" :altFreezeData="altFreezeData" :showThawChart="showThawChart" :showFreezeChart="showFreezeChart" v-show="showPermafrost"></PermafrostReport>
+					<PermafrostReport :altThawData="altThawData" :altFreezeData="altFreezeData" v-show="showPermafrost"></PermafrostReport>
 					<p v-show="!showPermafrost" class="is-size-5">
 						Permafrost data are not available for this location.
 					</p>
@@ -177,8 +177,8 @@ export default {
 			units: 'imperial',
 			altThawData: undefined,
 			altFreezeData: undefined,
-			showThawChart: undefined,
-			showFreezeChart: undefined,
+			permafrostPresent: undefined,
+			permafrostDisappears: undefined,
 		}
 	},
 	computed: {
@@ -320,6 +320,7 @@ export default {
 				})
 			})
 
+			this.permafrostPresent = false
 			models.forEach(model => {
 				scenarios.forEach(scenario => {
 					let previousMagt = historicalMagt
@@ -327,7 +328,7 @@ export default {
 						let scenarioAlt = this.permafrostResults['gipl'][year][model][scenario]['alt']
 						if (previousMagt < freezing) {
 							thawData[year][model][scenario] = scenarioAlt
-							this.showThawChart = true
+							this.permafrostPresent = true
 						} else {
 							thawData[year][model][scenario] = null
 						}
@@ -335,6 +336,7 @@ export default {
 					})
 				})
 			})
+			this.$store.commit('setPermafrostPresent', this.permafrostPresent)
 
 			return thawData
 		},
@@ -361,6 +363,7 @@ export default {
 				})
 			})
 
+			this.permafrostDisappears = false
 			models.forEach(model => {
 				scenarios.forEach(scenario => {
 					let previousMagt = historicalMagt
@@ -372,7 +375,7 @@ export default {
 							freezeData[year][model][scenario] = null
 						} else if (previousMagt > freezing) {
 							freezeData[year][model][scenario] = scenarioAlt
-							this.showFreezeChart = true
+							this.permafrostDisappears = true
 						} else {
 							freezeData[year][model][scenario] = null
 						}
@@ -380,6 +383,7 @@ export default {
 					})
 				})
 			})
+			this.$store.commit('setPermafrostDisappears', this.permafrostDisappears)
 
 			return freezeData
 		},
@@ -398,7 +402,7 @@ export default {
 		checkPermafrost() {
 			let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['alt']
 			this.showPermafrost = historicalAlt == null ? false : true
-			if (!this.showThawChart && !this.showFreezeChart) {
+			if (!this.permafrostPresent && !this.permafrostDisappears) {
 				this.showPermafrost = false
 			}
 		},

@@ -66,6 +66,8 @@ export default {
       hucName: 'getRawHucName',
       place: 'getPlaceName',
       units: 'units',
+      permafrostPresent: 'permafrostPresent',
+      permafrostDisappears: 'permafrostDisappears',
     }),
     unitsText() {
       if (this.units) {
@@ -151,22 +153,13 @@ export default {
       let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
       let scenarios = ['rcp45', 'rcp85']
 
-      let permafrostLost = false
       models.forEach(model => {
         scenarios.forEach(scenario => {
           let value = this.altThawData[lastYear][model][scenario]
-          if (value == null) {
-            permafrostLost = true
-          }
           thicknesses.push(value)
         })
       })
       let thicknessMax = _.max(thicknesses)
-
-      if (permafrostLost) {
-        // Active layer has increased 100%. Permafrost has disappeared.
-        return 100
-      }
 
       return Math.round(thicknessMax / thicknessHistorical * 100 - 100)
     },
@@ -284,13 +277,10 @@ export default {
         '%</strong>).</p>'
 
       let permafrostChange = this.permafrostChange()
-      if (permafrostChange > 0) {
-        returnedString += '<p>By the late century, '
-        if (permafrostChange == 100) {
-          returnedString += 'permafrost may <strong>disappear</strong>.</p>'
-        } else {
-          returnedString += 'active layer permafrost thickness may increase by <strong>' + Math.abs(permafrostChange) + '%</strong>.</p>'
-        }
+      if (this.permafrostPresent && this.permafrostDisappears) {
+        returnedString += '<p>By the late century, permafrost may <strong>disappear</strong>.</p>'
+      } else if (permafrostChange > 0) {
+        returnedString += '<p>By the late century, active layer permafrost thickness may increase by <strong>' + Math.abs(permafrostChange) + '%</strong>.</p>'
       }
 
       return returnedString
