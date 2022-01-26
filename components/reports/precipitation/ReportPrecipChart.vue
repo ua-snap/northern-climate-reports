@@ -242,7 +242,8 @@ export default {
 				text: 'The boxplot represents the interquartile range (IQR) of ' +
 					'historical means for the season, from 1950-2009.<br />The shaded ' +
 					'gray region shows the extent of common variation for the ' +
-					'historical period.',
+					'historical period.<br />The line inside the boxplot represents ' +
+					'the median historical precipitation.',
 			})
 
 			this.$Plotly.newPlot('precip-chart', data_traces, layout, {
