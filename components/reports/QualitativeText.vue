@@ -268,7 +268,7 @@ export default {
         }
         returnedString +=
           transitioningSeasons +
-          ' may transition from below freezing to <strong>above freezing</strong> in the future.</p>'
+          ' may transition from below freezing<br/>to <strong>above freezing</strong> in the future.</p>'
       }
       returnedString +=
         '<p>Models have higher uncertainty with regard to precipitation,<br/> but <strong>' +
