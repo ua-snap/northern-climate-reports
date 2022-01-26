@@ -5,6 +5,9 @@ import protectedAreas from '~/assets/protected_areas'
 
 export const state = () => ({
   units: 'imperial',
+  showPermafrost: false,
+  permafrostPresent: false,
+  permafrostDisappears: false,
 })
 
 export const mutations = {
@@ -14,6 +17,15 @@ export const mutations = {
   setImperial(state) {
     state.units = 'imperial'
   },
+  setShowPermafrost(state, value) {
+    state.showPermafrost = value
+  },
+  setPermafrostPresent(state, value) {
+    state.permafrostPresent = value
+  },
+  setPermafrostDisappears (state, value) {
+    state.permafrostDisappears = value
+  }
 }
 
 // We use vuex-router-sync so some of our state handled from
@@ -21,6 +33,16 @@ export const mutations = {
 export const getters = {
   units: (state) => {
     return state.units
+  },
+
+  showPermafrost: (state) => {
+    return state.showPermafrost
+  },
+  permafrostPresent: (state) => {
+    return state.permafrostPresent
+  },
+  permafrostDisappears: (state) => {
+    return state.permafrostDisappears
   },
 
   // Boolean if any combo of place identifiers are active,

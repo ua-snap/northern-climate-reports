@@ -183,7 +183,7 @@ export default {
 				boxmode: 'group',
 				yaxis: {
 					title: {
-						text: 'Precipitation ' + units,
+						text: 'Precipitation (' + units + ')',
 						font: {
 							size: 18,
 						},
