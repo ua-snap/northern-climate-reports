@@ -77,9 +77,7 @@
 			</section>
 			<section class="section">
 				<div class="report-type-wrapper">
-					<TempReport
-						:reportData="results"
-					></TempReport>
+					<TempReport :reportData="results"></TempReport>
 				</div>
 				<div class="report-type-wrapper">
 					<PrecipReport :reportData="results"></PrecipReport>
@@ -167,16 +165,22 @@ const _ = deepdash(lodash)
 
 export default {
 	name: 'Report',
-	components: { TempReport, PrecipReport, PermafrostReport, MiniMap, QualitativeText, DownloadCsvButton },
-	data() {
+	components: {
+		TempReport,
+		PrecipReport,
+		PermafrostReport,
+		MiniMap,
+		QualitativeText,
+		DownloadCsvButton,
+	},	data() {
 		return {
 			originalData: undefined, // for the raw stuff back from API
 			results: undefined, // may be metric or imperial
 			permafrostResults: undefined,
-			showPermafrost: undefined,
 			units: 'imperial',
 			altThawData: undefined,
 			altFreezeData: undefined,
+			showPermafrost: false,
 			permafrostPresent: undefined,
 			permafrostDisappears: undefined,
 		}
@@ -186,6 +190,7 @@ export default {
 			place: 'getPlaceName',
 			latLng: 'getLatLng',
 			hucId: 'getHucId',
+			protectedAreaId: 'getProtectedAreaId',
 		}),
 	},
 	async fetch() {
@@ -197,10 +202,12 @@ export default {
 		if (this.hucId) {
 			// Fetch areal data by HUC.
 			queryUrl += '/huc/' + this.hucId
-			permafrostQueryUrl += '/huc/' + this.hucId
+		} else if (this.protectedAreaId) {
+			queryUrl += '/protectedarea/' + this.protectedAreaId
 		} else if (this.latLng) {
 			queryUrl += '/point/' + this.latLng[0] + '/' + this.latLng[1]
 			permafrostQueryUrl += '/point/' + this.latLng[0] + '/' + this.latLng[1]
+			this.showPermafrost = true
 		} else {
 			// Don't know what to query, bail.
 			return
@@ -215,9 +222,12 @@ export default {
 		this.units = 'imperial'
 		this.convertReportData()
 
-		this.altThawData = this.getAltThaw()
-		this.altFreezeData = this.getAltFreeze()
-		this.checkPermafrost()
+		if (this.showPermafrost) {
+			this.altThawData = this.getAltThaw()
+			this.altFreezeData = this.getAltFreeze()
+			this.checkPermafrost()
+		}
+		this.$store.commit('setShowPermafrost', this.showPermafrost)
 	},
 	created() {
 		// Switch back to clean URL after S3 redirect. Adapted from here:
@@ -262,10 +272,10 @@ export default {
 		},
 		convertTasPrHistorical(data) {
 			let convertedData = _.cloneDeep(data)
-			Object.keys(convertedData).forEach(season => {
+			Object.keys(convertedData).forEach((season) => {
 				let seasonObj = convertedData[season]['CRU-TS40']['CRU_historical']
-				Object.keys(seasonObj).forEach(climate_variable => {
-					Object.keys(seasonObj[climate_variable]).forEach(stat => {
+				Object.keys(seasonObj).forEach((climate_variable) => {
+					Object.keys(seasonObj[climate_variable]).forEach((stat) => {
 						let original = seasonObj[climate_variable][stat]
 						if (climate_variable === 'tas') {
 							let converted = parseFloat((original * 1.8 + 32).toFixed(1))
@@ -388,22 +398,25 @@ export default {
 			return freezeData
 		},
 		convertReportData() {
-			Object.keys(this.results).forEach(decade => {
+			Object.keys(this.results).forEach((decade) => {
 				if (decade === '1950_2009') {
 					this.results[decade] = this.convertTasPrHistorical(this.results[decade])
 				} else {
 					this.results[decade] = this.convertTasPrMeans(this.results[decade])
 				}
 			})
-			Object.keys(this.permafrostResults['gipl']).forEach(year => {
-				this.permafrostResults['gipl'][year] = this.convertPermafrostMeans(this.permafrostResults['gipl'][year])
-			})
+			if (this.showPermafrost) {
+				Object.keys(this.permafrostResults['gipl']).forEach(year => {
+					this.permafrostResults['gipl'][year] = this.convertPermafrostMeans(this.permafrostResults['gipl'][year])
+				})
+			}
 		},
 		checkPermafrost() {
 			let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['alt']
 			this.showPermafrost = historicalAlt == null ? false : true
-			if (!this.permafrostPresent && !this.permafrostDisappears) {
-				this.showPermafrost = false
+			if (this.permafrostPresent || this.permafrostDisappears) {
+				this.showPermafrost = true
+				this.$store.commit('setShowPermafrost', this.showPermafrost)
 			}
 		},
 	},
