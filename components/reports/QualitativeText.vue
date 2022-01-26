@@ -41,9 +41,12 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'QualitativeText',
-  props: ['reportData'],
+  props: ['reportData', 'altThawData'],
   watch: {
     reportData: function () {
+      this.generateText()
+    },
+    altThawData: function () {
       this.generateText()
     },
   },
@@ -63,6 +66,8 @@ export default {
       hucName: 'getRawHucName',
       place: 'getPlaceName',
       units: 'units',
+      permafrostPresent: 'permafrostPresent',
+      permafrostDisappears: 'permafrostDisappears',
     }),
     unitsText() {
       if (this.units) {
@@ -133,6 +138,30 @@ export default {
       }
 
       return seasonMetrics
+    },
+    permafrostChange() {
+      let years = Object.keys(this.altThawData)
+      let historicalYear = years.slice(0, 1)
+      let lastYear = years.slice(-1)[0]
+      let thicknessHistorical = this.altThawData[historicalYear]
+
+      if (thicknessHistorical == null) {
+        return 0
+      }
+
+      let thicknesses = []
+      let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
+      let scenarios = ['rcp45', 'rcp85']
+
+      models.forEach(model => {
+        scenarios.forEach(scenario => {
+          let value = this.altThawData[lastYear][model][scenario]
+          thicknesses.push(value)
+        })
+      })
+      let thicknessMax = _.max(thicknesses)
+
+      return Math.round(thicknessMax / thicknessHistorical * 100 - 100)
     },
     // Subfunction: Generate annual metrics HTML string
     // Input: None. (Uses constant seasons)
@@ -246,6 +275,13 @@ export default {
         '</strong> is likely to have more precipitation (<strong>+' +
         annualHighestPrecipPercentChange +
         '%</strong>).</p>'
+
+      let permafrostChange = this.permafrostChange()
+      if (this.permafrostPresent && this.permafrostDisappears) {
+        returnedString += '<p>By the late century, permafrost up to 3 meters below ground may <strong>disappear</strong>.</p>'
+      } else if (permafrostChange > 0) {
+        returnedString += '<p>By the late century, active layer permafrost thickness may increase by <strong>' + Math.abs(permafrostChange) + '%</strong>.</p>'
+      }
 
       return returnedString
     },
