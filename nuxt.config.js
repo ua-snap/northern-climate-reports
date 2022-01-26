@@ -102,6 +102,10 @@ export default {
         component: resolve(__dirname, 'pages/index'),
       })
       routes.push({
+        path: '/report/protected_area/:protectedAreaId',
+        component: resolve(__dirname, 'pages/index'),
+      })
+      routes.push({
         path: '/report/:lat/:lng',
         component: resolve(__dirname, 'pages/index'),
       })

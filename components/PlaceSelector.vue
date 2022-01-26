@@ -3,8 +3,8 @@
 		<div class="content">
 			<h4 class="title is-5">Find a place by name</h4>
 			<p>
-				Search below by <strong>community name</strong> or
-				<strong>watershed</strong> (hydrological unit name or HUC8 code).
+				Search below by <strong>community name</strong>, 
+				<strong>watershed</strong> (hydrological unit name or HUC8 code) or <strong>protected area</strong> (National Park, National Forest, etc).
 			</p>
 			<p>
 				<b-field>
@@ -30,6 +30,12 @@
 								<span class="alt-name" v-if="props.option.alt_name"
 									>({{ props.option.alt_name }})</span
 								>
+								<span
+									class="protected-area"
+									v-if="props.option.type == 'protected_area'"
+								>
+									{{ props.option.area_type }}
+								</span>
 							</div>
 						</template>
 					</b-autocomplete>
@@ -45,7 +51,9 @@
 
 .search-item {
 	font-weight: 600;
-	.watershed {
+	white-space: normal;
+	.watershed,
+	.protected-area {
 		text-transform: uppercase;
 		display: inline-block;
 		padding-left: 1ex;
@@ -57,6 +65,7 @@
 import _ from 'lodash'
 import communities from '~/assets/communities'
 import hucs from '~/assets/hucs'
+import protected_places from '~/assets/protected_areas.js'
 
 // So it's not decorated with reactive stuff by Vue,
 // we don't want that for performance reasons (the
@@ -64,7 +73,8 @@ import hucs from '~/assets/hucs'
 // isn't needed and poor performance).
 Object.freeze(communities)
 Object.freeze(hucs)
-const places = _.concat(communities, hucs)
+Object.freeze(protected_places)
+const places = _.concat(communities, hucs, protected_places)
 
 export default {
 	name: 'PlaceSelector',
@@ -83,10 +93,16 @@ export default {
 						.toString()
 						.toLowerCase()
 						.indexOf(this.selectedPlace.toLowerCase()) >= 0 ||
-					option.alt_name
-						.toString()
-						.toLowerCase()
-						.indexOf(this.selectedPlace.toLowerCase()) >= 0 ||
+					(option.alt_name &&
+						option.alt_name
+							.toString()
+							.toLowerCase()
+							.indexOf(this.selectedPlace.toLowerCase()) >= 0) ||
+					(option.area_type &&
+						option.area_type
+							.toString()
+							.toLowerCase()
+							.indexOf(this.selectedPlace.toLowerCase()) >= 0) ||
 					// HUCID, check only if it's 4 digits or more
 					(option.id.toString().indexOf(this.selectedPlace) >= 0 &&
 						this.selectedPlace.length > 3)
@@ -98,11 +114,18 @@ export default {
 		selected: function (selected) {
 			if (selected) {
 				// If it's a HUC, route it properly...
-				if (selected.type && selected.type == 'huc') {
-					this.$router.push({
-						path: '/report/huc/' + selected.id,
-						hash: '#results',
-					})
+				if (selected.type) {
+					if (selected.type == 'huc') {
+						this.$router.push({
+							path: '/report/huc/' + selected.id,
+							hash: '#results',
+						})
+					} else if (selected.type == 'protected_area') {
+						this.$router.push({
+							path: '/report/protected_area/' + selected.id,
+							hash: '#results',
+						})
+					}
 				} else {
 					// It's a community point.
 					this.$router.push({

@@ -1,18 +1,19 @@
 import _ from 'lodash'
 import communities from '~/assets/communities'
 import hucs from '~/assets/hucs'
+import protectedAreas from '~/assets/protected_areas'
 
 export const state = () => ({
-  units: 'imperial'
+  units: 'imperial',
 })
 
 export const mutations = {
-  setMetric (state) {
+  setMetric(state) {
     state.units = 'metric'
   },
-  setImperial (state) {
+  setImperial(state) {
     state.units = 'imperial'
-  }
+  },
 }
 
 // We use vuex-router-sync so some of our state handled from
@@ -29,6 +30,7 @@ export const getters = {
     return (
       (state.route.params.lat && state.route.params.lng) ||
       state.route.params.communityId ||
+      state.route.params.protectedAreaId ||
       state.route.params.hucId
     )
   },
@@ -57,6 +59,13 @@ export const getters = {
   getHucId: (state) => {
     if (state.route.params.hucId) {
       return state.route.params.hucId
+    }
+  },
+
+  // Fetch the protected area ID
+  getProtectedAreaId: (state) => {
+    if (state.route.params.protectedAreaId) {
+      return state.route.params.protectedAreaId
     }
   },
 
@@ -101,6 +110,16 @@ export const getters = {
           huc.id +
           '</span>'
         )
+      }
+    }
+
+    // Protected area!
+    if (state.route.params.protectedAreaId) {
+      let pa = _.find(protectedAreas, {
+        id: state.route.params.protectedAreaId,
+      })
+      if (pa) {
+        return pa.name
       }
     }
   },

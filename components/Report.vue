@@ -77,9 +77,7 @@
 			</section>
 			<section class="section">
 				<div class="report-type-wrapper">
-					<TempReport
-						:reportData="results"
-					></TempReport>
+					<TempReport :reportData="results"></TempReport>
 				</div>
 				<div class="report-type-wrapper">
 					<PrecipReport :reportData="results"></PrecipReport>
@@ -160,7 +158,13 @@ const _ = deepdash(lodash)
 
 export default {
 	name: 'Report',
-	components: { TempReport, PrecipReport, MiniMap, QualitativeText, DownloadCsvButton },
+	components: {
+		TempReport,
+		PrecipReport,
+		MiniMap,
+		QualitativeText,
+		DownloadCsvButton,
+	},
 	data() {
 		return {
 			originalData: undefined, // for the raw stuff back from API
@@ -173,6 +177,7 @@ export default {
 			place: 'getPlaceName',
 			latLng: 'getLatLng',
 			hucId: 'getHucId',
+			protectedAreaId: 'getProtectedAreaId',
 		}),
 	},
 	async fetch() {
@@ -183,6 +188,8 @@ export default {
 		if (this.hucId) {
 			// Fetch areal data by HUC.
 			queryUrl += '/huc/' + this.hucId
+		} else if (this.protectedAreaId) {
+			queryUrl += '/protectedarea/' + this.protectedAreaId
 		} else if (this.latLng) {
 			queryUrl += '/point/' + this.latLng[0] + '/' + this.latLng[1]
 		} else {
@@ -228,17 +235,17 @@ export default {
 						return parseFloat((value * 1.8 + 32).toFixed(1))
 					}
 				},
-				{	
+				{
 					leavesOnly: true,
 				}
 			)
 		},
 		convertHistorical(data) {
 			let convertedData = _.cloneDeep(data)
-			Object.keys(convertedData).forEach(season => {
+			Object.keys(convertedData).forEach((season) => {
 				let seasonObj = convertedData[season]['CRU-TS40']['CRU_historical']
-				Object.keys(seasonObj).forEach(climate_variable => {
-					Object.keys(seasonObj[climate_variable]).forEach(stat => {
+				Object.keys(seasonObj).forEach((climate_variable) => {
+					Object.keys(seasonObj[climate_variable]).forEach((stat) => {
 						let original = seasonObj[climate_variable][stat]
 						if (climate_variable === 'tas') {
 							let converted = parseFloat((original * 1.8 + 32).toFixed(1))
@@ -253,7 +260,7 @@ export default {
 			return convertedData
 		},
 		convertReportData() {
-			Object.keys(this.results).forEach(decade => {
+			Object.keys(this.results).forEach((decade) => {
 				if (decade === '1950_2009') {
 					this.results[decade] = this.convertHistorical(this.results[decade])
 				} else {

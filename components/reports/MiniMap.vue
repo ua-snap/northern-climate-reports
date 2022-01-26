@@ -24,6 +24,7 @@ export default {
 		...mapGetters({
 			latLng: 'getLatLng',
 			hucId: 'getHucId',
+			protectedAreaId: 'getProtectedAreaId',
 		}),
 	},
 	data() {
@@ -38,14 +39,19 @@ export default {
 		if (this.latLng) {
 			this.marker = L.marker(this.latLng).addTo(this.map)
 			this.map.panTo(this.latLng)
-		} else if (this.hucId) {
+		} else if (this.hucId || this.protectedAreaId) {
 			// Fetch the GeoJSON outline
-			this.loadHucGeoJSON()
+			this.loadPolyGeoJSON()
 		}
 	},
 	methods: {
-		async loadHucGeoJSON() {
-			let queryUrl = process.env.apiUrl + '/huc/huc8/' + this.hucId
+		async loadPolyGeoJSON() {
+			let queryUrl = process.env.apiUrl
+			if (this.hucId) {
+				queryUrl += '/boundary/huc8/' + this.hucId
+			} else if (this.protectedAreaId) {
+				queryUrl += '/boundary/protectedarea/' + this.protectedAreaId
+			}
 			// TODO, add error handling here.
 			let geoJson = await this.$http.$get(queryUrl)
 			this.geoJsonLayer = L.geoJSON(geoJson).addTo(this.map)
@@ -53,14 +59,14 @@ export default {
 		},
 		getBaseMapAndLayers() {
 			var baseLayer = new L.tileLayer.wms(
-				"https://basemap.nationalmap.gov/arcgis/services/USGSTopo/MapServer/WmsServer?",
+				'https://basemap.nationalmap.gov/arcgis/services/USGSTopo/MapServer/WmsServer?',
 				{
 					transparent: true,
-					format: "image/png",
-					version: "1.3.0",
-					layers: ["0"]
+					format: 'image/png',
+					version: '1.3.0',
+					layers: ['0'],
 				}
-			);
+			)
 			// Map base configuration
 			var config = {
 				zoom: 11,
@@ -71,9 +77,9 @@ export default {
 				zoomControl: false,
 				doubleClickZoom: false,
 				attributionControl: false,
-				layers: [baseLayer]
-			};
-			return config;
+				layers: [baseLayer],
+			}
+			return config
 		},
 	},
 }
