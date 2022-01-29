@@ -39,7 +39,7 @@
 				</h3>
 				<QualitativeText :reportData="results" :altThawData="altThawData" />
 			</section>
-			<section class="section">
+			<section class="section" id="toc">
 				<div class="columns">
 					<div class="column is-one-quarter">
 						<MiniMap />
@@ -76,18 +76,44 @@
 				</div>
 			</section>
 			<section class="section">
-				<div class="report-type-wrapper">
+				<h4 class="title is-4">Contents</h4>
+				<div class="content is-size-5">
+				<ul>
+					<li><a href="#temperature">Temperature</a> charts and tables with multiple models and scenarios, grouped decadally and into mid/late century</li>
+					<li><a href="#precipitation">Precipitation</a> charts and tables with multiple models and scenarios, grouped decadally and into mid/late century</li>
+					<li><a href="#permafrost">Permafrost</a> with specific visualizations depending on the presence or absence of permafrost</li>
+					<li>
+						<a href="#data-overview-download">Data overview &amp; download</a> with notes on interpreting these visualizations and a button to click to get a CSV of data
+					</li>
+				</ul>
+			</div>
+			</section>
+			<section class="section">
+				<div class="report-type-wrapper" id="temperature">
 					<TempReport :reportData="results"></TempReport>
 				</div>
-				<div class="report-type-wrapper">
+				<BackToTopButton />
+			</section>
+			<section class="section">
+				<div class="report-type-wrapper" id="precipitation">
 					<PrecipReport :reportData="results"></PrecipReport>
 				</div>
-				<div class="report-type-wrapper">
-					<PermafrostReport :altThawData="altThawData" :altFreezeData="altFreezeData" v-show="showPermafrost"></PermafrostReport>
+				<BackToTopButton />
+			</section>
+			<section class="section">
+				<div class="report-type-wrapper" id="permafrost">
+					<PermafrostReport
+						:altThawData="altThawData"
+						:altFreezeData="altFreezeData"
+						v-show="showPermafrost"
+					></PermafrostReport>
 					<p v-show="!showPermafrost" class="is-size-5">
 						Permafrost data are not available for this location.
 					</p>
 				</div>
+				<BackToTopButton />
+			</section>
+			<section class="section" id="data-overview-download">
 				<div class="content is-size-5">
 					<p>
 						Comparing projections with historical data in the first column
@@ -116,6 +142,7 @@
 						<DownloadCsvButton />
 					</p>
 				</div>
+				<BackToTopButton />
 			</section>
 			<hr />
 			<div class="back">
@@ -157,6 +184,7 @@ import PermafrostReport from '~/components/reports/permafrost/PermafrostReport'
 import MiniMap from '~/components/reports/MiniMap'
 import QualitativeText from '~/components/reports/QualitativeText'
 import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
+import BackToTopButton from '~/components/reports/BackToTopButton'
 import { mapGetters } from 'vuex'
 import lodash from 'lodash'
 import deepdash from 'deepdash'
@@ -172,7 +200,9 @@ export default {
 		MiniMap,
 		QualitativeText,
 		DownloadCsvButton,
-	},	data() {
+		BackToTopButton,
+	},
+	data() {
 		return {
 			originalData: undefined, // for the raw stuff back from API
 			results: undefined, // may be metric or imperial
@@ -314,8 +344,12 @@ export default {
 			let scenarios = ['rcp45', 'rcp85']
 			let projectedYears = Object.keys(this.permafrostResults['gipl']).slice(1)
 
-			let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['alt']
-			let historicalMagt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['magt']
+			let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31'][
+				'historical'
+			]['alt']
+			let historicalMagt = this.permafrostResults['gipl']['1995']['cruts31'][
+				'historical'
+			]['magt']
 
 			if (historicalMagt < freezing) {
 				thawData['1995'] = historicalAlt
@@ -323,26 +357,30 @@ export default {
 				thawData['1995'] = null
 			}
 
-			projectedYears.forEach(year => {
+			projectedYears.forEach((year) => {
 				thawData[year] = {}
-				models.forEach(model => {
-					thawData[year][model] ={}
+				models.forEach((model) => {
+					thawData[year][model] = {}
 				})
 			})
 
 			this.permafrostPresent = false
-			models.forEach(model => {
-				scenarios.forEach(scenario => {
+			models.forEach((model) => {
+				scenarios.forEach((scenario) => {
 					let previousMagt = historicalMagt
-					projectedYears.forEach(year => {
-						let scenarioAlt = this.permafrostResults['gipl'][year][model][scenario]['alt']
+					projectedYears.forEach((year) => {
+						let scenarioAlt = this.permafrostResults['gipl'][year][model][
+							scenario
+						]['alt']
 						if (previousMagt < freezing) {
 							thawData[year][model][scenario] = scenarioAlt
 							this.permafrostPresent = true
 						} else {
 							thawData[year][model][scenario] = null
 						}
-						previousMagt = this.permafrostResults['gipl'][year][model][scenario]['magt']
+						previousMagt = this.permafrostResults['gipl'][year][model][
+							scenario
+						]['magt']
 					})
 				})
 			})
@@ -357,8 +395,12 @@ export default {
 			let scenarios = ['rcp45', 'rcp85']
 			let projectedYears = Object.keys(this.permafrostResults['gipl']).slice(1)
 
-			let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['alt']
-			let historicalMagt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['magt']
+			let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31'][
+				'historical'
+			]['alt']
+			let historicalMagt = this.permafrostResults['gipl']['1995']['cruts31'][
+				'historical'
+			]['magt']
 
 			if (historicalMagt > freezing) {
 				freezeData['1995'] = historicalAlt
@@ -366,19 +408,21 @@ export default {
 				freezeData['1995'] = null
 			}
 
-			projectedYears.forEach(year => {
+			projectedYears.forEach((year) => {
 				freezeData[year] = {}
-				models.forEach(model => {
-					freezeData[year][model] ={}
+				models.forEach((model) => {
+					freezeData[year][model] = {}
 				})
 			})
 
 			this.permafrostDisappears = false
-			models.forEach(model => {
-				scenarios.forEach(scenario => {
+			models.forEach((model) => {
+				scenarios.forEach((scenario) => {
 					let previousMagt = historicalMagt
-					projectedYears.forEach(year => {
-						let scenarioAlt = this.permafrostResults['gipl'][year][model][scenario]['alt']
+					projectedYears.forEach((year) => {
+						let scenarioAlt = this.permafrostResults['gipl'][year][model][
+							scenario
+						]['alt']
 						if (this.units == 'metric' && scenarioAlt <= 0.07) {
 							freezeData[year][model][scenario] = null
 						} else if (this.units == 'imperial' && scenarioAlt <= 2.8) {
@@ -389,7 +433,9 @@ export default {
 						} else {
 							freezeData[year][model][scenario] = null
 						}
-						previousMagt = this.permafrostResults['gipl'][year][model][scenario]['magt']
+						previousMagt = this.permafrostResults['gipl'][year][model][
+							scenario
+						]['magt']
 					})
 				})
 			})
@@ -400,19 +446,25 @@ export default {
 		convertReportData() {
 			Object.keys(this.results).forEach((decade) => {
 				if (decade === '1950_2009') {
-					this.results[decade] = this.convertTasPrHistorical(this.results[decade])
+					this.results[decade] = this.convertTasPrHistorical(
+						this.results[decade]
+					)
 				} else {
 					this.results[decade] = this.convertTasPrMeans(this.results[decade])
 				}
 			})
 			if (this.showPermafrost) {
-				Object.keys(this.permafrostResults['gipl']).forEach(year => {
-					this.permafrostResults['gipl'][year] = this.convertPermafrostMeans(this.permafrostResults['gipl'][year])
+				Object.keys(this.permafrostResults['gipl']).forEach((year) => {
+					this.permafrostResults['gipl'][year] = this.convertPermafrostMeans(
+						this.permafrostResults['gipl'][year]
+					)
 				})
 			}
 		},
 		checkPermafrost() {
-			let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['alt']
+			let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31'][
+				'historical'
+			]['alt']
 			this.showPermafrost = historicalAlt == null ? false : true
 			if (this.permafrostPresent || this.permafrostDisappears) {
 				this.showPermafrost = true
