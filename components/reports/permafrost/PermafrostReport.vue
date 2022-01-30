@@ -1,12 +1,6 @@
 <template>
 	<div>
-		<h4 class="subtitle is-4">
-			Permafrost
-			<span class="units">
-				<span v-if="units == 'imperial'">(inches)</span>
-				<span v-if="units == 'metric'">(meters)</span>
-			</span>
-		</h4>
+		<h4 class="title is-3">Permafrost</h4>
 		<div class="content is-size-5">
 			<span v-show="permafrostPresent && permafrostDisappears">
 				Projected permafrost active layer thickness and ground freeze depth
@@ -30,10 +24,10 @@
 			>
 		</div>
 		<div class="chart-wrapper permafrost" v-show="this.permafrostPresent">
-			<ReportAltThawChart :altThawData="altThawData" />
+			<ReportAltThawChart />
 		</div>
 		<div class="chart-wrapper permafrost" v-show="this.permafrostDisappears">
-			<ReportAltFreezeChart :altFreezeData="altFreezeData" />
+			<ReportAltFreezeChart />
 		</div>
 	</div>
 </template>
@@ -45,14 +39,12 @@ import { mapGetters } from 'vuex'
 
 export default {
 	name: 'PermafrostReport',
-	props: ['altThawData', 'altFreezeData'],
 	components: { ReportAltThawChart, ReportAltFreezeChart },
 	computed: {
 		...mapGetters({
-			units: 'units',
-			permafrostPresent: 'permafrostPresent',
-			permafrostDisappears: 'permafrostDisappears',
-		})
+			permafrostPresent: 'permafrost/present',
+			permafrostDisappears: 'permafrost/disappears',
+		}),
 	},
 }
 </script>

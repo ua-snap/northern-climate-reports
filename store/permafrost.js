@@ -2,46 +2,44 @@
 
 import _ from 'lodash'
 
-// Helper functions
-var convertReportData = function (permafrostData) {
-  Object.keys(permafrostData['gipl']).forEach((year) => {
-    permafrostData['gipl'][year] = this.convertPermafrostMeans(
-      permafrostData['gipl'][year]
-    )
-  })
-}
+// Helper functions first.
 
-var convertPermafrostMeans = function (data) {
-  return _.mapValuesDeep(
-    data,
-    (value, key, context) => {
-      if (value == -9999) {
+var convertToImperial = function (permafrostData) {
+  
+  if (!permafrostData) {
+    return
+  }
+
+  let t = _.mapValuesDeep(
+    permafrostData,
+    (value) => {
+      if (!value || value == -9999) {
         return null
-      } else if (key == 'alt') {
-        // Convert to inches!
+      } else {
         return parseFloat((value * 39.37008).toFixed(1))
-      } else if (key == 'magt') {
-        return parseFloat((value * 1.8 + 32).toFixed(1))
       }
     },
     {
       leavesOnly: true,
     }
   )
+  return t
 }
-var getAltThaw = function () {
-  let freezing = this.units == 'metric' ? 0 : 32
+
+// Takes permafrost data (metric), determines if
+// permafrost is present, or ALT Thaw, or I don't even know what
+// TODO comment this code more
+var getAltThaw = function (permafrostData) {
+  let freezing = 0
   let thawData = {}
   let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
   let scenarios = ['rcp45', 'rcp85']
-  let projectedYears = Object.keys(this.permafrostResults['gipl']).slice(1)
+  let projectedYears = Object.keys(permafrostData['gipl']).slice(1)
 
-  let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31'][
-    'historical'
-  ]['alt']
-  let historicalMagt = this.permafrostResults['gipl']['1995']['cruts31'][
-    'historical'
-  ]['magt']
+  let historicalAlt =
+    permafrostData['gipl']['1995']['cruts31']['historical']['alt']
+  let historicalMagt =
+    permafrostData['gipl']['1995']['cruts31']['historical']['magt']
 
   if (historicalMagt < freezing) {
     thawData['1995'] = historicalAlt
@@ -56,43 +54,43 @@ var getAltThaw = function () {
     })
   })
 
-  this.permafrostPresent = false
+  let permafrostPresent = false
   models.forEach((model) => {
     scenarios.forEach((scenario) => {
       let previousMagt = historicalMagt
       projectedYears.forEach((year) => {
-        let scenarioAlt = this.permafrostResults['gipl'][year][model][scenario][
-          'alt'
-        ]
+        let scenarioAlt = permafrostData['gipl'][year][model][scenario]['alt']
         if (previousMagt < freezing) {
           thawData[year][model][scenario] = scenarioAlt
-          this.permafrostPresent = true
+          permafrostPresent = true
         } else {
           thawData[year][model][scenario] = null
         }
-        previousMagt = this.permafrostResults['gipl'][year][model][scenario][
-          'magt'
-        ]
+        previousMagt = permafrostData['gipl'][year][model][scenario]['magt']
       })
     })
   })
-  this.$store.commit('setPermafrostPresent', this.permafrostPresent)
 
-  return thawData
+  return {
+    thawData: thawData,
+    present: permafrostPresent,
+  }
 }
-var getAltFreeze = function () {
-  let freezing = this.units == 'metric' ? 0 : 32
+
+// Takes source permafrost data (metric),
+// determines if ...I dunno this needs more comments.
+// TODO comment this code more.
+var getAltFreeze = function (permafrostData) {
+  let freezing = 0
   let freezeData = {}
   let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
   let scenarios = ['rcp45', 'rcp85']
-  let projectedYears = Object.keys(this.permafrostResults['gipl']).slice(1)
+  let projectedYears = Object.keys(permafrostData['gipl']).slice(1)
 
-  let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31'][
-    'historical'
-  ]['alt']
-  let historicalMagt = this.permafrostResults['gipl']['1995']['cruts31'][
-    'historical'
-  ]['magt']
+  let historicalAlt =
+    permafrostData['gipl']['1995']['cruts31']['historical']['alt']
+  let historicalMagt =
+    permafrostData['gipl']['1995']['cruts31']['historical']['magt']
 
   if (historicalMagt > freezing) {
     freezeData['1995'] = historicalAlt
@@ -107,106 +105,137 @@ var getAltFreeze = function () {
     })
   })
 
-  this.permafrostDisappears = false
+  let permafrostDisappears = false
   models.forEach((model) => {
     scenarios.forEach((scenario) => {
       let previousMagt = historicalMagt
       projectedYears.forEach((year) => {
-        let scenarioAlt = this.permafrostResults['gipl'][year][model][scenario][
-          'alt'
-        ]
-        if (this.units == 'metric' && scenarioAlt <= 0.07) {
-          freezeData[year][model][scenario] = null
-        } else if (this.units == 'imperial' && scenarioAlt <= 2.8) {
+        let scenarioAlt = permafrostData['gipl'][year][model][scenario]['alt']
+        if (scenarioAlt <= 0.07) {
           freezeData[year][model][scenario] = null
         } else if (previousMagt > freezing) {
           freezeData[year][model][scenario] = scenarioAlt
-          this.permafrostDisappears = true
+          permafrostDisappears = true
         } else {
           freezeData[year][model][scenario] = null
         }
-        previousMagt = this.permafrostResults['gipl'][year][model][scenario][
-          'magt'
-        ]
+        previousMagt = permafrostData['gipl'][year][model][scenario]['magt']
       })
     })
   })
-  this.$store.commit('setPermafrostDisappears', this.permafrostDisappears)
 
-  return freezeData
-}
-var checkPermafrost = function () {
-  let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31'][
-    'historical'
-  ]['alt']
-  this.showPermafrost = historicalAlt == null ? false : true
-  if (this.permafrostPresent || this.permafrostDisappears) {
-    this.showPermafrost = true
-    this.$store.commit('setShowPermafrost', this.showPermafrost)
+  return {
+    disappears: permafrostDisappears,
+    freezeData: freezeData,
   }
 }
 
 // Store, namespaced as `permafrost/`
 export const state = () => ({
-  climateData: undefined,
+  permafrostData: undefined,
+  altThaw: undefined,
+  altFreeze: undefined,
+
+  // True if permafrost is present but disappears over time
+  disappears: undefined,
+  // True if permafrost is still present here
+  present: undefined,
 })
 
 export const getters = {
-  getClimateData(state) {
-    return state.climateData
+  permafrostData(state) {
+    return state.permafrostData
+  },
+  altThaw(state, getters, rootState, rootGetters) {
+    var tempData = _.cloneDeep(state.altThaw)
+    return rootGetters.units == 'imperial'
+      ? convertToImperial(tempData)
+      : tempData
+  },
+  altFreeze(state, getters, rootState, rootGetters) {
+    var tempData = _.cloneDeep(state.altFreeze)
+    return rootGetters.units == 'imperial'
+      ? convertToImperial(tempData)
+      : tempData
+  },
+  present(state) {
+    return state.present
+  },
+  disappears(state) {
+    return state.disappears
+  },
+
+  // Returns true if there's "valid" permafrost data here, i.e.
+  // Permafrost was present historically.
+  valid(state) {
+    {
+      // Bail if there's no data yet.
+      if (!state.permafrostData) {
+        return
+      }
+
+      // If permafrost wasn't present in the past, it's not here now.
+      if (
+        state.permafrostData['gipl']['1995']['cruts31']['historical']['alt'] ==
+        null
+      ) {
+        return false
+      }
+
+      // If permafrost is currently present, or was present, this is true.
+      if (state.present || state.disappears) {
+        return true
+      }
+
+      console.error('Indeterminate permafrost state?')
+    }
   },
 }
 
 export const mutations = {
-  setClimateData(state, climateData) {
-    state.climateData = climateData
+  setPermafrostData(state, permafrostData) {
+    state.permafrostData = permafrostData
+  },
+  setAltThaw(state, altThaw) {
+    state.altThaw = altThaw
+  },
+  setAltFreeze(state, altFreeze) {
+    state.altFreeze = altFreeze
+  },
+  setPresent(state, present) {
+    state.present = present
+  },
+  setDisappears(state, disappears) {
+    state.disappears = disappears
   },
 }
 
 export const actions = {
-  async fetchClimateData(context) {
+  async fetch(context) {
     // TODO: add error handling here for 404 (no data) etc.
 
-    let queryUrl = process.env.apiUrl + '/taspr'
-    // let permafrostQueryUrl = process.env.apiUrl + '/permafrost'
-
-    // Determine the query type to perform.
-    if (context.rootGetters.hucId) {
-      // Fetch areal data by HUC.
-      queryUrl += '/huc/' + context.rootGetters.hucId
-    } else if (context.rootGetters.protectedAreaId) {
-      queryUrl += '/protectedarea/' + context.rootGetters.protectedAreaId
-    } else if (context.rootGetters.latLng) {
-      queryUrl +=
-        '/point/' +
+    if (context.rootGetters.latLng) {
+      let permafrostQueryUrl =
+        process.env.apiUrl +
+        '/permafrost/point/' +
         context.rootGetters.latLng[0] +
         '/' +
         context.rootGetters.latLng[1]
-      // permafrostQueryUrl += '/point/' + context.rootGetters.latLng[0] + '/' + context.rootGetters.latLng[1]
-      // this.showPermafrost = true
+
+      let permafrostData = await this.$http.$get(permafrostQueryUrl)
+      context.commit('setPermafrostData', permafrostData)
+
+      let altThaw = getAltThaw(permafrostData)
+      let altFreeze = getAltFreeze(permafrostData)
+
+      context.commit('setAltThaw', altThaw.thawData)
+      context.commit('setPresent', altThaw.present)
+      context.commit('setAltFreeze', altFreeze.freezeData)
+      context.commit('setDisappears', altFreeze.disappears)
     } else {
-      // Don't know what to query, this is an error situation.
-      console.error("Unknown place type, can't fetch data")
-      return
+      // This case means "won't query",
+      // How to handle this case?
+      return false
     }
-
-    let climateData = await this.$http.$get(queryUrl)
-    context.commit('setClimateData', climateData)
-
-    // let permafrostData = await this.$http.$get(permafrostQueryUrl)
-
-    // save copies!
-    // context.commit('setPermafrostData', permafrostData)
-
-    // this.units = 'imperial'
-    // this.convertReportData()
-
-    // if (this.showPermafrost) {
-    //   this.altThawData = this.getAltThaw()
-    //   this.altFreezeData = this.getAltFreeze()
-    //   this.checkPermafrost()
-    // }
-
-    // context.commit('setShowPermafrost', this.showPermafrost)
   },
 }

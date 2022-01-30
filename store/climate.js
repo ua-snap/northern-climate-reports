@@ -1,4 +1,4 @@
-// This store fetches/manages "climate" variables (temp + precip)
+// This store fetches/manages "climate" variables (taspr = temp + precip)
 import _ from 'lodash'
 
 // Helper functions

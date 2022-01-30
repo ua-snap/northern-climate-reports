@@ -83,14 +83,12 @@
 					<PrecipReport></PrecipReport>
 				</div>
 				<div class="report-type-wrapper">
-<!-- 					<PermafrostReport
-						:altThawData="altThawData"
-						:altFreezeData="altFreezeData"
+					<PermafrostReport
 						v-show="showPermafrost"
 					></PermafrostReport>
 					<p v-show="!showPermafrost" class="is-size-5">
 						Permafrost data are not available for this location.
-					</p> -->
+					</p>
 				</div>
 				<div class="content is-size-5">
 					<p>
@@ -179,24 +177,20 @@ export default {
 	},
 	data() {
 		return {
-			// originalData: undefined, // for the raw stuff back from API
-			// results: undefined, // may be metric or imperial
-			// permafrostResults: undefined,
 			units: 'imperial',
-			// altThawData: undefined,
-			// altFreezeData: undefined,
-			// showPermafrost: false,
-			// permafrostPresent: undefined,
-			// permafrostDisappears: undefined,
 		}
 	},
 	computed: {
 		...mapGetters({
-			place: 'placeName'
+			place: 'placeName',
+			showPermafrost: 'permafrost/valid'
 		}),
 	},
+	// This component initiates the data fetching so that
+	// error handling, etc, can all be done in one spot.
 	async fetch() {
 		this.$store.dispatch('climate/fetch')
+		this.$store.dispatch('permafrost/fetch')
 	},
 	created() {
 		// Switch back to clean URL after S3 redirect. Adapted from here:

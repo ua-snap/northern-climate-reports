@@ -81,10 +81,11 @@ export default {
     // Input: None. (Uses reportData, place, and units properties)
     // Output: Text string containing HTML list items of processed seasonal metrics.
     generateText: function () {
+      // Guard if data not present yet.
       if (!this.reportData || !this.place) {
-        console.error('no report data or place found')
         return
       }
+
       return this.generateAnnualMetricsHtml()
     },
     collectSeasonalMetrics(season) {
