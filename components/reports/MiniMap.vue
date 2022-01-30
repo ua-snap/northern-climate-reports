@@ -21,11 +21,7 @@ import { mapGetters } from 'vuex'
 export default {
 	name: 'MiniMap',
 	computed: {
-		...mapGetters({
-			latLng: 'getLatLng',
-			hucId: 'getHucId',
-			protectedAreaId: 'getProtectedAreaId',
-		}),
+		...mapGetters(['latLng', 'hucId', 'protectedAreaId']),
 	},
 	data() {
 		return {

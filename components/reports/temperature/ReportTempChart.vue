@@ -13,14 +13,15 @@ import _ from 'lodash'
 import { mapGetters } from 'vuex'
 export default {
 	name: 'ReportTempChart',
-	props: ['reportData', 'season'],
+	props: ['season'],
 	mounted() {
 		this.renderPlot()
 	},
 	computed: {
 		...mapGetters({
 			units: 'units',
-		})
+			reportData: 'climate/climateData',
+		}),
 	},
 	watch: {
 		reportData: function () {
@@ -42,19 +43,19 @@ export default {
 			let freezing = this.units == 'metric' ? 0 : 32
 
 			let season_lu = {
-				'DJF': 'December - February',
-				'MAM': 'March - May',
-				'JJA': 'June - August',
-				'SON': 'September - November',
+				DJF: 'December - February',
+				MAM: 'March - May',
+				JJA: 'June - August',
+				SON: 'September - November',
 			}
 
 			let decade_keys = Object.keys(this.reportData)
-			decade_keys = decade_keys.filter(value => {
+			decade_keys = decade_keys.filter((value) => {
 				if (value !== '2040_2069' && value !== '2070_2099') {
 					return value
 				}
 			})
-			let decades = decade_keys.map(x => x.replace('_', '-'))
+			let decades = decade_keys.map((x) => x.replace('_', '-'))
 
 			let historical = {
 				type: 'box',
@@ -66,7 +67,7 @@ export default {
 				lowerfence: [],
 				upperfence: [],
 				marker: {
-					color: '#888888'
+					color: '#888888',
 				},
 				fillcolor: '#cccccc',
 				hoverinfo: 'skip',
@@ -77,19 +78,19 @@ export default {
 
 			let traceLabels_lu = {
 				'5modelAvg': {
-					'rcp45': 'RCP 4.5 (5 Model Avg.)',
-					'rcp60': 'RCP 6.0 (5 Model Avg.)',
-					'rcp85': 'RCP 8.5 (5 Model Avg.)',
+					rcp45: 'RCP 4.5 (5 Model Avg.)',
+					rcp60: 'RCP 6.0 (5 Model Avg.)',
+					rcp85: 'RCP 8.5 (5 Model Avg.)',
 				},
 				'MRI-CGCM3': {
-					'rcp45': 'RCP 4.5 (MRI)',
-					'rcp60': 'RCP 6.0 (MRI)',
-					'rcp85': 'RCP 8.5 (MRI)',
+					rcp45: 'RCP 4.5 (MRI)',
+					rcp60: 'RCP 6.0 (MRI)',
+					rcp85: 'RCP 8.5 (MRI)',
 				},
-				'CCSM4': {
-					'rcp45': 'RCP 4.5 (NCAR)',
-					'rcp60': 'RCP 6.0 (NCAR)',
-					'rcp85': 'RCP 8.5 (NCAR)',
+				CCSM4: {
+					rcp45: 'RCP 4.5 (NCAR)',
+					rcp60: 'RCP 6.0 (NCAR)',
+					rcp85: 'RCP 8.5 (NCAR)',
 				},
 			}
 
@@ -98,36 +99,37 @@ export default {
 			let symbols = {
 				'5modelAvg': 'circle',
 				'MRI-CGCM3': 'square',
-				'CCSM4': 'diamond',
+				CCSM4: 'diamond',
 			}
 
 			let colors = {
 				'5modelAvg': {
-					'rcp45': 'rgb(230, 150, 150)',
-					'rcp60': 'rgb(210, 90, 90)',
-					'rcp85': 'rgb(190, 30, 30)',
+					rcp45: 'rgb(230, 150, 150)',
+					rcp60: 'rgb(210, 90, 90)',
+					rcp85: 'rgb(190, 30, 30)',
 				},
 				'MRI-CGCM3': {
-					'rcp45': 'rgb(150, 150, 230)',
-					'rcp60': 'rgb(90, 90, 210)',
-					'rcp85': 'rgb(30, 30, 190)',
+					rcp45: 'rgb(150, 150, 230)',
+					rcp60: 'rgb(90, 90, 210)',
+					rcp85: 'rgb(30, 30, 190)',
 				},
-				'CCSM4': {
-					'rcp45': 'rgb(210, 210, 150)',
-					'rcp60': 'rgb(180, 180, 90)',
-					'rcp85': 'rgb(140, 140, 30)',
+				CCSM4: {
+					rcp45: 'rgb(210, 210, 150)',
+					rcp60: 'rgb(180, 180, 90)',
+					rcp85: 'rgb(140, 140, 30)',
 				},
 			}
 
-			models.forEach(model => {
+			models.forEach((model) => {
 				scatterTraces[model] = {}
-				scenarios.forEach(scenario => {
+				scenarios.forEach((scenario) => {
 					scatterTraces[model][scenario] = {
 						type: 'scatter',
 						mode: 'markers',
 						name: traceLabels_lu[model][scenario],
 						hoverinfo: 'x+y+z+text',
-						hovertemplate: '%{y}' + units + ' <b>(%{customdata}' + units + ')</b>',
+						hovertemplate:
+							'%{y}' + units + ' <b>(%{customdata}' + units + ')</b>',
 						marker: {
 							symbol: Array(decades.length).fill(symbols[model]),
 							size: 8,
@@ -141,24 +143,36 @@ export default {
 			})
 
 			let allValues = []
-			decade_keys.forEach(decade => {
+			decade_keys.forEach((decade) => {
 				if (decade === '2040_2069' || decade === '2070_2099') {
 					return
 				}
 
 				if (decade === '1950_2009') {
-					let tasData = this.reportData[decade][this.season]['CRU-TS40']['CRU_historical']['tas']
+					let tasData = this.reportData[decade][this.season]['CRU-TS40'][
+						'CRU_historical'
+					]['tas']
 					historical['median'].push(tasData['median'])
 					historical['q1'].push(tasData['q1'])
 					historical['q3'].push(tasData['q3'])
 					historical['lowerfence'].push(tasData['min'])
 					historical['upperfence'].push(tasData['max'])
-					allValues.push(tasData['median'], tasData['q1'], tasData['q3'], tasData['min'], tasData['max'])
+					allValues.push(
+						tasData['median'],
+						tasData['q1'],
+						tasData['q3'],
+						tasData['min'],
+						tasData['max']
+					)
 				} else {
-					models.forEach(model => {
-						scenarios.forEach(scenario => {
-							let scenarioTas = this.reportData[decade][this.season][model][scenario]['tas']
-							let historicalTas = this.reportData['1950_2009'][this.season]['CRU-TS40']['CRU_historical']['tas']['median']
+					models.forEach((model) => {
+						scenarios.forEach((scenario) => {
+							let scenarioTas = this.reportData[decade][this.season][model][
+								scenario
+							]['tas']
+							let historicalTas = this.reportData['1950_2009'][this.season][
+								'CRU-TS40'
+							]['CRU_historical']['tas']['median']
 							let tasDiff = scenarioTas - historicalTas
 							if (tasDiff > 0) {
 								tasDiff = '+' + tasDiff.toFixed(1)
@@ -167,7 +181,9 @@ export default {
 							}
 							scatterTraces[model][scenario]['y'].push(scenarioTas)
 							scatterTraces[model][scenario]['customdata'].push(tasDiff)
-							allValues.push(this.reportData[decade][this.season][model][scenario]['tas'])
+							allValues.push(
+								this.reportData[decade][this.season][model][scenario]['tas']
+							)
 						})
 					})
 				}
@@ -175,8 +191,8 @@ export default {
 
 			data_traces.push(historical)
 
-			models.forEach(model => {
-				scenarios.forEach(scenario => {
+			models.forEach((model) => {
+				scenarios.forEach((scenario) => {
 					data_traces.push(scatterTraces[model][scenario])
 				})
 			})
@@ -198,7 +214,10 @@ export default {
 					hoverformat: hoverformat,
 				},
 				title: {
-					text: 'Historical and projected temperature (' + season_lu[this.season] + ')',
+					text:
+						'Historical and projected temperature (' +
+						season_lu[this.season] +
+						')',
 					font: {
 						size: 24,
 					},
@@ -209,10 +228,14 @@ export default {
 						x0: 0,
 						x1: 1,
 						xref: 'paper',
-						y0: this.reportData['1950_2009'][this.season]['CRU-TS40']['CRU_historical']['tas']['q1'],
-						y1: this.reportData['1950_2009'][this.season]['CRU-TS40']['CRU_historical']['tas']['q3'],
+						y0: this.reportData['1950_2009'][this.season]['CRU-TS40'][
+							'CRU_historical'
+						]['tas']['q1'],
+						y1: this.reportData['1950_2009'][this.season]['CRU-TS40'][
+							'CRU_historical'
+						]['tas']['q3'],
 						line: {
-							width: 0
+							width: 0,
 						},
 						fillcolor: '#cccccc',
 						opacity: 0.2,
@@ -221,10 +244,10 @@ export default {
 				hovermode: 'x unified',
 				annotations: [],
 				legend: {
-					x: 1.03
+					x: 1.03,
 				},
 				margin: {
-					b: 120
+					b: 120,
 				},
 				height: 500,
 				dragmode: false,
@@ -236,7 +259,7 @@ export default {
 					tickangle: 45,
 				}
 				layout['margin']['b'] = 160
-				footer_y = -0.50
+				footer_y = -0.5
 			}
 
 			layout.annotations.push({
@@ -245,7 +268,8 @@ export default {
 				xref: 'paper',
 				yref: 'paper',
 				showarrow: false,
-				text: 'The boxplot represents the interquartile range (IQR) of ' +
+				text:
+					'The boxplot represents the interquartile range (IQR) of ' +
 					'historical means for the season, from 1950-2009.<br />The shaded ' +
 					'gray region shows the extent of common variation for the ' +
 					'historical period.<br />The line inside the boxplot represents ' +
@@ -282,7 +306,7 @@ export default {
 					ay: -12,
 					font: {
 						color: '#888888',
-					}
+					},
 				})
 			}
 
