@@ -223,18 +223,18 @@ export const actions = {
 
       try {
         let permafrostData = await this.$http.$get(permafrostQueryUrl)
+        context.commit('setPermafrostData', permafrostData)
+
+        let altThaw = getAltThaw(permafrostData)
+        let altFreeze = getAltFreeze(permafrostData)
+
+        context.commit('setAltThaw', altThaw.thawData)
+        context.commit('setPresent', altThaw.present)
+        context.commit('setAltFreeze', altFreeze.freezeData)
+        context.commit('setDisappears', altFreeze.disappears)
       } catch (error) {
         throw error
       }
-      context.commit('setPermafrostData', permafrostData)
-
-      let altThaw = getAltThaw(permafrostData)
-      let altFreeze = getAltFreeze(permafrostData)
-
-      context.commit('setAltThaw', altThaw.thawData)
-      context.commit('setPresent', altThaw.present)
-      context.commit('setAltFreeze', altFreeze.freezeData)
-      context.commit('setDisappears', altFreeze.disappears)
     } else {
       // This case means "won't query",
       // How to handle this case?

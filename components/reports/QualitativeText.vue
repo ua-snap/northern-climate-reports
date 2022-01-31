@@ -58,9 +58,10 @@ export default {
       place: 'placeName',
       units: 'units',
       reportData: 'climate/climateData',
-      // showPermafrost: 'showPermafrost',
-      // permafrostPresent: 'permafrostPresent',
-      // permafrostDisappears: 'permafrostDisappears',
+      altThawData: 'permafrost/altThaw',
+      showPermafrost: 'permafrost/valid',
+      permafrostPresent: 'permafrost/present',
+      permafrostDisappears: 'permafrost/disappears'
     }),
     unitsText() {
       if (this.units) {
@@ -72,9 +73,9 @@ export default {
     reportData: function () {
       this.generateText()
     },
-    // altThawData: function () {
-    //   this.generateText()
-    // },
+    altThawData: function () {
+      this.generateText()
+    },
   },
   methods: {
     // Generate Qualitative Text
@@ -287,10 +288,10 @@ export default {
         let permafrostChange = this.permafrostChange()
         if (this.permafrostPresent && this.permafrostDisappears) {
           returnedString +=
-            '<p>By the late century, permafrost up to 3 meters below ground may <strong>disappear</strong>.</p>'
+            '<p>By the late century, permafrost up to 3 meters below ground<br/> may <strong>disappear</strong>.</p>'
         } else if (permafrostChange > 0) {
           returnedString +=
-            '<p>By the late century, active layer permafrost thickness may increase by <strong>' +
+            '<p>By the late century, active layer permafrost thickness<br/> may increase by <strong>' +
             Math.abs(permafrostChange) +
             '%</strong>.</p>'
         }
