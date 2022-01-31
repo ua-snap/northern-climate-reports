@@ -13,7 +13,6 @@ import _ from 'lodash'
 import { mapGetters } from 'vuex'
 export default {
 	name: 'ReportAltFreezeChart',
-	// props: ['altFreezeData'],
 	mounted() {
 		this.renderPlot()
 	},

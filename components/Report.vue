@@ -77,18 +77,13 @@
 			</section>
 			<section class="section">
 				<div class="report-type-wrapper">
-					<TempReport></TempReport>
+					<TempReport />
 				</div>
 				<div class="report-type-wrapper">
-					<PrecipReport></PrecipReport>
+					<PrecipReport />
 				</div>
 				<div class="report-type-wrapper">
-					<PermafrostReport
-						v-show="showPermafrost"
-					></PermafrostReport>
-					<p v-show="!showPermafrost" class="is-size-5">
-						Permafrost data are not available for this location.
-					</p>
+					<PermafrostReport />
 				</div>
 				<div class="content is-size-5">
 					<p>
@@ -183,14 +178,18 @@ export default {
 	computed: {
 		...mapGetters({
 			place: 'placeName',
-			showPermafrost: 'permafrost/valid'
 		}),
 	},
 	// This component initiates the data fetching so that
 	// error handling, etc, can all be done in one spot.
 	async fetch() {
-		this.$store.dispatch('climate/fetch')
-		this.$store.dispatch('permafrost/fetch')
+		// TODO: Error handling.
+		this.$store.dispatch('climate/fetch').catch((e) => {
+			console.error(e)
+		})
+		this.$store.dispatch('permafrost/fetch').catch((e) => {
+			console.error(e)
+		})
 	},
 	created() {
 		// Switch back to clean URL after S3 redirect. Adapted from here:

@@ -5,7 +5,6 @@ import _ from 'lodash'
 // Helper functions first.
 
 var convertToImperial = function (permafrostData) {
-  
   if (!permafrostData) {
     return
   }
@@ -217,12 +216,16 @@ export const actions = {
     if (context.rootGetters.latLng) {
       let permafrostQueryUrl =
         process.env.apiUrl +
-        '/permafrost/point/' +
+        '/permafrost/pointz/' +
         context.rootGetters.latLng[0] +
         '/' +
         context.rootGetters.latLng[1]
 
-      let permafrostData = await this.$http.$get(permafrostQueryUrl)
+      try {
+        let permafrostData = await this.$http.$get(permafrostQueryUrl)
+      } catch (error) {
+        throw error
+      }
       context.commit('setPermafrostData', permafrostData)
 
       let altThaw = getAltThaw(permafrostData)
