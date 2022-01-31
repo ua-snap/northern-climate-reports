@@ -216,7 +216,7 @@ export const actions = {
     if (context.rootGetters.latLng) {
       let permafrostQueryUrl =
         process.env.apiUrl +
-        '/permafrost/pointz/' +
+        '/permafrost/point/' +
         context.rootGetters.latLng[0] +
         '/' +
         context.rootGetters.latLng[1]
