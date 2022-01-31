@@ -5,9 +5,6 @@ import protectedAreas from '~/assets/protected_areas'
 
 export const state = () => ({
   units: 'imperial',
-  showPermafrost: false,
-  permafrostPresent: false,
-  permafrostDisappears: false,
 })
 
 export const mutations = {
@@ -17,15 +14,6 @@ export const mutations = {
   setImperial(state) {
     state.units = 'imperial'
   },
-  setShowPermafrost(state, value) {
-    state.showPermafrost = value
-  },
-  setPermafrostPresent(state, value) {
-    state.permafrostPresent = value
-  },
-  setPermafrostDisappears (state, value) {
-    state.permafrostDisappears = value
-  }
 }
 
 // We use vuex-router-sync so some of our state handled from
@@ -33,16 +21,6 @@ export const mutations = {
 export const getters = {
   units: (state) => {
     return state.units
-  },
-
-  showPermafrost: (state) => {
-    return state.showPermafrost
-  },
-  permafrostPresent: (state) => {
-    return state.permafrostPresent
-  },
-  permafrostDisappears: (state) => {
-    return state.permafrostDisappears
   },
 
   // Boolean if any combo of place identifiers are active,
@@ -58,7 +36,7 @@ export const getters = {
   },
 
   // Gets the currently-selected lat/lon [directly or by placeID]
-  getLatLng: (state) => {
+  latLng: (state) => {
     if (state.route.params.lat && state.route.params.lng) {
       return [state.route.params.lat, state.route.params.lng]
     }
@@ -74,26 +52,28 @@ export const getters = {
     }
 
     // It's not a point-based location with a defined lat/lon.
-    return undefined
+    return false
   },
 
   // If present, returns the HucID in the URL.
-  getHucId: (state) => {
+  hucId: (state) => {
     if (state.route.params.hucId) {
       return state.route.params.hucId
     }
+    return false
   },
 
   // Fetch the protected area ID
-  getProtectedAreaId: (state) => {
+  protectedAreaId: (state) => {
     if (state.route.params.protectedAreaId) {
       return state.route.params.protectedAreaId
     }
+    return false
   },
 
   // Returns a string for the correct current selected place,
   // whether lat/lon, community name, or other regional name.
-  getPlaceName: (state) => {
+  placeName: (state) => {
     // Lat/lon!
     if (state.route.params.lat && state.route.params.lng) {
       return (
@@ -146,7 +126,7 @@ export const getters = {
     }
   },
 
-  getRawHucName(state) {
+  rawHucName(state) {
     if (state.route.params.hucId) {
       let huc = _.find(hucs, {
         id: Number(state.route.params.hucId),

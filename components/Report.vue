@@ -37,7 +37,7 @@
 				<h3 class="title is-3 centered">
 					Projected Conditions for <span v-html="place"></span>
 				</h3>
-				<QualitativeText :reportData="results" :altThawData="altThawData" />
+				<QualitativeText />
 			</section>
 			<section class="section">
 				<div class="columns">
@@ -77,16 +77,13 @@
 			</section>
 			<section class="section">
 				<div class="report-type-wrapper">
-					<TempReport :reportData="results"></TempReport>
+					<TempReport />
 				</div>
 				<div class="report-type-wrapper">
-					<PrecipReport :reportData="results"></PrecipReport>
+					<PrecipReport />
 				</div>
 				<div class="report-type-wrapper">
-					<PermafrostReport :altThawData="altThawData" :altFreezeData="altFreezeData" v-show="showPermafrost"></PermafrostReport>
-					<p v-show="!showPermafrost" class="is-size-5">
-						Permafrost data are not available for this location.
-					</p>
+					<PermafrostReport />
 				</div>
 				<div class="content is-size-5">
 					<p>
@@ -172,62 +169,27 @@ export default {
 		MiniMap,
 		QualitativeText,
 		DownloadCsvButton,
-	},	data() {
+	},
+	data() {
 		return {
-			originalData: undefined, // for the raw stuff back from API
-			results: undefined, // may be metric or imperial
-			permafrostResults: undefined,
 			units: 'imperial',
-			altThawData: undefined,
-			altFreezeData: undefined,
-			showPermafrost: false,
-			permafrostPresent: undefined,
-			permafrostDisappears: undefined,
 		}
 	},
 	computed: {
 		...mapGetters({
-			place: 'getPlaceName',
-			latLng: 'getLatLng',
-			hucId: 'getHucId',
-			protectedAreaId: 'getProtectedAreaId',
+			place: 'placeName',
 		}),
 	},
+	// This component initiates the data fetching so that
+	// error handling, etc, can all be done in one spot.
 	async fetch() {
-		// TODO: add error handling here for 404 (no data) etc.
-		let queryUrl = process.env.apiUrl + '/taspr'
-		let permafrostQueryUrl = process.env.apiUrl + '/permafrost'
-
-		// Determine the query type to perform.
-		if (this.hucId) {
-			// Fetch areal data by HUC.
-			queryUrl += '/huc/' + this.hucId
-		} else if (this.protectedAreaId) {
-			queryUrl += '/protectedarea/' + this.protectedAreaId
-		} else if (this.latLng) {
-			queryUrl += '/point/' + this.latLng[0] + '/' + this.latLng[1]
-			permafrostQueryUrl += '/point/' + this.latLng[0] + '/' + this.latLng[1]
-			this.showPermafrost = true
-		} else {
-			// Don't know what to query, bail.
-			return
-		}
-		this.results = await this.$http.$get(queryUrl)
-		this.permafrostResults = await this.$http.$get(permafrostQueryUrl)
-
-		// save copies!
-		this.originalData = _.cloneDeep(this.results)
-		this.originalPermafrostData = _.cloneDeep(this.permafrostResults)
-
-		this.units = 'imperial'
-		this.convertReportData()
-
-		if (this.showPermafrost) {
-			this.altThawData = this.getAltThaw()
-			this.altFreezeData = this.getAltFreeze()
-			this.checkPermafrost()
-		}
-		this.$store.commit('setShowPermafrost', this.showPermafrost)
+		// TODO: Error handling.
+		this.$store.dispatch('climate/fetch').catch((e) => {
+			console.error(e)
+		})
+		this.$store.dispatch('permafrost/fetch').catch((e) => {
+			console.error(e)
+		})
 	},
 	created() {
 		// Switch back to clean URL after S3 redirect. Adapted from here:
@@ -242,181 +204,8 @@ export default {
 		units: function () {
 			if (this.units == 'metric') {
 				this.$store.commit('setMetric')
-				this.results = _.cloneDeep(this.originalData)
-				this.permafrostResults = _.cloneDeep(this.originalPermafrostData)
 			} else {
 				this.$store.commit('setImperial')
-				this.results = _.cloneDeep(this.originalData)
-				this.permafrostResults = _.cloneDeep(this.originalPermafrostData)
-				this.convertReportData()
-			}
-		},
-	},
-	methods: {
-		convertTasPrMeans(data) {
-			return _.mapValuesDeep(
-				data,
-				(value, key, context) => {
-					if (key == 'pr') {
-						// Convert to inches!
-						return parseFloat((value * 0.03937008).toFixed(1))
-					} else if (key == 'tas') {
-						// Convert to degrees F!
-						return parseFloat((value * 1.8 + 32).toFixed(1))
-					}
-				},
-				{
-					leavesOnly: true,
-				}
-			)
-		},
-		convertTasPrHistorical(data) {
-			let convertedData = _.cloneDeep(data)
-			Object.keys(convertedData).forEach((season) => {
-				let seasonObj = convertedData[season]['CRU-TS40']['CRU_historical']
-				Object.keys(seasonObj).forEach((climate_variable) => {
-					Object.keys(seasonObj[climate_variable]).forEach((stat) => {
-						let original = seasonObj[climate_variable][stat]
-						if (climate_variable === 'tas') {
-							let converted = parseFloat((original * 1.8 + 32).toFixed(1))
-							seasonObj[climate_variable][stat] = converted
-						} else {
-							let converted = parseFloat((original * 0.03937008).toFixed(1))
-							seasonObj[climate_variable][stat] = converted
-						}
-					})
-				})
-			})
-			return convertedData
-		},
-		convertPermafrostMeans(data) {
-			return _.mapValuesDeep(
-				data,
-				(value, key, context) => {
-					if (value == -9999) {
-						return null
-					} else if (key == 'alt') {
-						// Convert to inches!
-						return parseFloat((value * 39.37008).toFixed(1))
-					} else if (key == 'magt') {
-						return parseFloat((value * 1.8 + 32).toFixed(1))
-					}
-				},
-				{
-					leavesOnly: true,
-				}
-			)
-		},
-		getAltThaw() {
-			let freezing = this.units == 'metric' ? 0 : 32
-			let thawData = {}
-			let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
-			let scenarios = ['rcp45', 'rcp85']
-			let projectedYears = Object.keys(this.permafrostResults['gipl']).slice(1)
-
-			let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['alt']
-			let historicalMagt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['magt']
-
-			if (historicalMagt < freezing) {
-				thawData['1995'] = historicalAlt
-			} else {
-				thawData['1995'] = null
-			}
-
-			projectedYears.forEach(year => {
-				thawData[year] = {}
-				models.forEach(model => {
-					thawData[year][model] ={}
-				})
-			})
-
-			this.permafrostPresent = false
-			models.forEach(model => {
-				scenarios.forEach(scenario => {
-					let previousMagt = historicalMagt
-					projectedYears.forEach(year => {
-						let scenarioAlt = this.permafrostResults['gipl'][year][model][scenario]['alt']
-						if (previousMagt < freezing) {
-							thawData[year][model][scenario] = scenarioAlt
-							this.permafrostPresent = true
-						} else {
-							thawData[year][model][scenario] = null
-						}
-						previousMagt = this.permafrostResults['gipl'][year][model][scenario]['magt']
-					})
-				})
-			})
-			this.$store.commit('setPermafrostPresent', this.permafrostPresent)
-
-			return thawData
-		},
-		getAltFreeze() {
-			let freezing = this.units == 'metric' ? 0 : 32
-			let freezeData = {}
-			let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
-			let scenarios = ['rcp45', 'rcp85']
-			let projectedYears = Object.keys(this.permafrostResults['gipl']).slice(1)
-
-			let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['alt']
-			let historicalMagt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['magt']
-
-			if (historicalMagt > freezing) {
-				freezeData['1995'] = historicalAlt
-			} else {
-				freezeData['1995'] = null
-			}
-
-			projectedYears.forEach(year => {
-				freezeData[year] = {}
-				models.forEach(model => {
-					freezeData[year][model] ={}
-				})
-			})
-
-			this.permafrostDisappears = false
-			models.forEach(model => {
-				scenarios.forEach(scenario => {
-					let previousMagt = historicalMagt
-					projectedYears.forEach(year => {
-						let scenarioAlt = this.permafrostResults['gipl'][year][model][scenario]['alt']
-						if (this.units == 'metric' && scenarioAlt <= 0.07) {
-							freezeData[year][model][scenario] = null
-						} else if (this.units == 'imperial' && scenarioAlt <= 2.8) {
-							freezeData[year][model][scenario] = null
-						} else if (previousMagt > freezing) {
-							freezeData[year][model][scenario] = scenarioAlt
-							this.permafrostDisappears = true
-						} else {
-							freezeData[year][model][scenario] = null
-						}
-						previousMagt = this.permafrostResults['gipl'][year][model][scenario]['magt']
-					})
-				})
-			})
-			this.$store.commit('setPermafrostDisappears', this.permafrostDisappears)
-
-			return freezeData
-		},
-		convertReportData() {
-			Object.keys(this.results).forEach((decade) => {
-				if (decade === '1950_2009') {
-					this.results[decade] = this.convertTasPrHistorical(this.results[decade])
-				} else {
-					this.results[decade] = this.convertTasPrMeans(this.results[decade])
-				}
-			})
-			if (this.showPermafrost) {
-				Object.keys(this.permafrostResults['gipl']).forEach(year => {
-					this.permafrostResults['gipl'][year] = this.convertPermafrostMeans(this.permafrostResults['gipl'][year])
-				})
-			}
-		},
-		checkPermafrost() {
-			let historicalAlt = this.permafrostResults['gipl']['1995']['cruts31']['historical']['alt']
-			this.showPermafrost = historicalAlt == null ? false : true
-			if (this.permafrostPresent || this.permafrostDisappears) {
-				this.showPermafrost = true
-				this.$store.commit('setShowPermafrost', this.showPermafrost)
 			}
 		},
 	},

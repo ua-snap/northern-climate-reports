@@ -488,9 +488,14 @@
 <script>
 import UnitWidget from '~/components/UnitWidget'
 import TempDiffWidget from './TempDiffWidget'
+import { mapGetters } from 'vuex'
 export default {
 	name: 'ReportTempTable',
-	props: ['reportData'],
 	components: { UnitWidget, TempDiffWidget },
+	computed: {
+		...mapGetters({
+			reportData: 'climate/climateData',
+		}),
+	},
 }
 </script>

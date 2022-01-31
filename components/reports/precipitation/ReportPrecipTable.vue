@@ -513,7 +513,11 @@ import PrecipDiffWidget from './PrecipDiffWidget'
 import { mapGetters } from 'vuex'
 export default {
 	name: 'PrecipReportTable',
-	props: ['reportData'],
 	components: { PrecipDiffWidget, UnitWidget },
+		computed: {
+		...mapGetters({
+			reportData: 'climate/climateData',
+		}),
+	},
 }
 </script>

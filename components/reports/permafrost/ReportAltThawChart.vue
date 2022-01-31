@@ -13,13 +13,13 @@ import _ from 'lodash'
 import { mapGetters } from 'vuex'
 export default {
 	name: 'ReportAltThawChart',
-	props: ['altThawData'],
 	mounted() {
 		this.renderPlot()
 	},
 	computed: {
 		...mapGetters({
 			units: 'units',
+			altThawData: 'permafrost/altThaw'
 		})
 	},
 	watch: {

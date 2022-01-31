@@ -22,15 +22,14 @@ export default {
 	name: 'MiniMap',
 	computed: {
 		...mapGetters({
-			latLng: 'getLatLng',
-			hucId: 'getHucId',
-			protectedAreaId: 'getProtectedAreaId',
+			latLng: 'latLng',
+			geoJSON: 'place/geoJSON',
 		}),
 	},
 	data() {
 		return {
 			marker: undefined,
-			geoJsonLayer: undefined,
+			geoJSONLayer: undefined,
 		}
 	},
 	mounted() {
@@ -39,23 +38,23 @@ export default {
 		if (this.latLng) {
 			this.marker = L.marker(this.latLng).addTo(this.map)
 			this.map.panTo(this.latLng)
-		} else if (this.hucId || this.protectedAreaId) {
+		} else {
 			// Fetch the GeoJSON outline
-			this.loadPolyGeoJSON()
+			this.$store.dispatch('place/fetch')
 		}
 	},
+	watch: {
+		// After geoJSON is loaded, display on map.
+		geoJSON: function () {
+			this.addGeoJSONtoMap()
+		},
+	},
 	methods: {
-		async loadPolyGeoJSON() {
-			let queryUrl = process.env.apiUrl
-			if (this.hucId) {
-				queryUrl += '/boundary/huc8/' + this.hucId
-			} else if (this.protectedAreaId) {
-				queryUrl += '/boundary/protectedarea/' + this.protectedAreaId
+		addGeoJSONtoMap() {
+			if (this.geoJSON) {
+				this.geoJSONLayer = L.geoJSON(this.geoJSON).addTo(this.map)
+				this.map.fitBounds(this.geoJSONLayer.getBounds())
 			}
-			// TODO, add error handling here.
-			let geoJson = await this.$http.$get(queryUrl)
-			this.geoJsonLayer = L.geoJSON(geoJson).addTo(this.map)
-			this.map.fitBounds(this.geoJsonLayer.getBounds())
 		},
 		getBaseMapAndLayers() {
 			var baseLayer = new L.tileLayer.wms(
