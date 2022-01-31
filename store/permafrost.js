@@ -15,6 +15,7 @@ var convertToImperial = function (permafrostData) {
       if (!value || value == -9999) {
         return null
       } else {
+        // Convert meters to inches.
         return parseFloat((value * 39.37008).toFixed(1))
       }
     },
@@ -25,9 +26,12 @@ var convertToImperial = function (permafrostData) {
   return t
 }
 
-// Takes permafrost data (metric), determines if
-// permafrost is present, or ALT Thaw, or I don't even know what
-// TODO comment this code more
+// Takes permafrost data (metric) and uses the sign of the MAGT value to
+// determine if the ALT value for the next time interval should be interpreted
+// as "has permafrost". For example, if the MAGT value for 1995 is negative,
+// the ALT value for the next time interval (the 2025 era) is interpreted as
+// "has permafrost", meaning the ALT value represents the thickness of the
+// active layer above the permafrost during the summer.
 var getAltThaw = function (permafrostData) {
   let freezing = 0
   let thawData = {}
@@ -76,9 +80,12 @@ var getAltThaw = function (permafrostData) {
   }
 }
 
-// Takes source permafrost data (metric),
-// determines if ...I dunno this needs more comments.
-// TODO comment this code more.
+// Takes permafrost data (metric) and uses the sign of the MAGT value to
+// determine if the ALT value for the next time interval should be interpreted
+// as "does not have permafrost". For example, if the MAGT value for 1995 is
+// positive, the ALT value for the next time interval (the 2025 era) is
+// interpreted as "does not have permafrost", meaning the ALT value represents
+// the depth at which the ground freezes during the winter.
 var getAltFreeze = function (permafrostData) {
   let freezing = 0
   let freezeData = {}
