@@ -205,7 +205,8 @@ export default {
         dragmode: false,
       }
 
-      let footerText = 'Projected values are taken from GIPL 2.0 model output.'
+      let footerLines = []
+      footerLines.push('Projected values are taken from GIPL 2.0 model output.')
 
       if (altThawData[historicalYear]) {
         layout.shapes.push({
@@ -223,28 +224,45 @@ export default {
           opacity: 0.2,
         })
 
-        footerText =
-          'Historical value is taken from the CRU TS 3.1 dataset.' +
-          '<br />' +
-          footerText
+        footerLines.push(
+          'Historical value is taken from the CRU TS 3.1 dataset'
+        )
       }
 
-      let footer_y = -0.25
+      // Determine if any of the chart columns are missing data.
+      let emptyColumn = false
+      allYears.forEach(year => {
+        let dataFound = _.findDeep(altThawData[year], (value, key, parent) => {
+          if (value != null) return true
+        })
+        if (dataFound == undefined) {
+          emptyColumn = true
+        }
+      })
+
+      if (emptyColumn) {
+        footerLines.push(
+          'Empty columns indicate that permafrost has disappeared for all models.'
+        )
+      }
+
+      let footerOffset = 0.05 * footerLines.length
+      let footerY = -0.2 - footerOffset
       if (window.innerWidth < 1250) {
         layout['xaxis'] = {
           tickangle: 45,
         }
         layout['margin']['b'] = 160
-        footer_y = -0.5
+        footerY = -0.5 - footerOffset
       }
 
       layout.annotations.push({
         x: 0.5,
-        y: footer_y,
+        y: footerY,
         xref: 'paper',
         yref: 'paper',
         showarrow: false,
-        text: footerText,
+        text: footerLines.join('<br />'),
       })
 
       this.$Plotly.newPlot('permafrost-alt-thaw-chart', data_traces, layout, {
