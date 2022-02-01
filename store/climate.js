@@ -1,56 +1,37 @@
 // This store fetches/manages "climate" variables (taspr = temp + precip)
 import _ from 'lodash'
+import { convertToInches, convertToFahrenheit } from '../utils/convert'
 
 // Helper functions
 var convertReportData = function (climateData) {
   if (climateData) {
-    Object.keys(climateData).forEach((decade) => {
-      if (decade === '1950_2009') {
-        climateData[decade] = convertTasPrHistorical(climateData[decade])
-      } else {
-        climateData[decade] = convertTasPrMeans(climateData[decade])
-      }
+    let historicalPeriod = Object.keys(climateData).slice(0, 1)
+    let seasons = Object.keys(climateData['1950_2009'])
+    seasons.forEach(season => {
+      let historicalTas =
+        climateData['1950_2009'][season]['CRU-TS40']['CRU_historical']['tas']
+      let historicalPr =
+        climateData['1950_2009'][season]['CRU-TS40']['CRU_historical']['pr']
+      historicalTas = convertToFahrenheit(historicalTas, 'c')
+      historicalPr = convertToInches(historicalPr, 'mm')
+      climateData['1950_2009'][season]['CRU-TS40']['CRU_historical'][
+        'tas'
+      ] = historicalTas
+      climateData['1950_2009'][season]['CRU-TS40']['CRU_historical'][
+        'pr'
+      ] = historicalPr
     })
+
+    let projectedDecades = Object.keys(climateData).slice(1)
+    projectedDecades.forEach(decade => {
+      climateData[decade] = convertToInches(climateData[decade], 'mm', ['pr'])
+      climateData[decade] = convertToFahrenheit(climateData[decade], 'c', [
+        'tas',
+      ])
+    })
+
     return climateData
   }
-}
-
-var convertTasPrMeans = function (data) {
-  return _.mapValuesDeep(
-    data,
-    (value, key, context) => {
-      if (key == 'pr') {
-        // Convert to inches!
-        return parseFloat((value * 0.03937008).toFixed(1))
-      } else if (key == 'tas') {
-        // Convert to degrees F!
-        return parseFloat((value * 1.8 + 32).toFixed(1))
-      }
-    },
-    {
-      leavesOnly: true,
-    }
-  )
-}
-
-var convertTasPrHistorical = function (data) {
-  let convertedData = _.cloneDeep(data)
-  Object.keys(convertedData).forEach((season) => {
-    let seasonObj = convertedData[season]['CRU-TS40']['CRU_historical']
-    Object.keys(seasonObj).forEach((climate_variable) => {
-      Object.keys(seasonObj[climate_variable]).forEach((stat) => {
-        let original = seasonObj[climate_variable][stat]
-        if (climate_variable === 'tas') {
-          let converted = parseFloat((original * 1.8 + 32).toFixed(1))
-          seasonObj[climate_variable][stat] = converted
-        } else {
-          let converted = parseFloat((original * 0.03937008).toFixed(1))
-          seasonObj[climate_variable][stat] = converted
-        }
-      })
-    })
-  })
-  return convertedData
 }
 
 // Store, namespaced as `climate/`
