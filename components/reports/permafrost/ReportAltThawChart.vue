@@ -19,7 +19,7 @@ export default {
 	computed: {
 		...mapGetters({
 			units: 'units',
-			altThawData: 'permafrost/altThaw',
+			altThawData: 'permafrost/altThaw'
 		}),
 	},
 	watch: {

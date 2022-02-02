@@ -14,7 +14,7 @@ export default {
 	computed: {
 		...mapGetters({
 			units: 'units',
-			altFreezeData: 'permafrost/altFreeze',
+			altFreezeData: 'permafrost/altFreeze'
 		}),
 	},
 	watch: {
