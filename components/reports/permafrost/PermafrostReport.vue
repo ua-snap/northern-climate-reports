@@ -8,29 +8,17 @@
 			</span>
 		</h4>
 		<div class="content is-size-5">
-			<span
-				v-show="
-					permafrostPresent && permafrostDisappears && !permafrostUncertain
-				"
-			>
+			<span v-show="permafrostPresent && permafrostDisappears && !permafrostUncertain">
 				Projected permafrost active layer thickness and ground freeze depth
 				through the end of the century is shown below. The active layer is the
 				layer of soil above permafrost that thaws seasonally.
 			</span>
-			<span
-				v-show="
-					permafrostPresent && !permafrostDisappears && !permafrostUncertain
-				"
-			>
+			<span v-show="permafrostPresent && !permafrostDisappears && !permafrostUncertain">
 				Projected permafrost active layer thickness through the end of the
 				century is shown below. The active layer is the layer of soil above
 				permafrost that thaws seasonally.
 			</span>
-			<span
-				v-show="
-					!permafrostPresent && permafrostDisappears && !permafrostUncertain
-				"
-			>
+			<span v-show="!permafrostPresent && permafrostDisappears && !permafrostUncertain">
 				There is no permafrost within three meters of the ground surface at this
 				location. Projected ground freeze depth through the end of the century
 				is shown below.
