@@ -81,7 +81,7 @@ export default {
       let symbols = {
         gfdlcm3: 'circle',
         gisse2r: 'square',
-        ipslcm5alr: 'diamond',
+        ipslcm5alr: 'pentagon',
         mricgcm3: 'cross',
         ncarccsm4: 'x',
       }
