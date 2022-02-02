@@ -113,24 +113,26 @@ export default {
       let historicalYear = allYears.slice(0, 1)
       let projectedYears = allYears.slice(1)
 
-      let historicY = Array(years.length).fill(null)
-      historicY[0] = altThawData[historicalYear]
-      let historicalTrace = {
-        type: 'scatter',
-        mode: 'markers',
-        name: 'Historical',
-        hoverinfo: 'x+y+z+text',
-        hovertemplate: '%{y}' + units,
-        marker: {
-          symbol: 'diamond',
-          size: 8,
-          color: '#888888',
-        },
-        x: eras,
-        y: historicY,
+      let historicValue = altThawData[historicalYear]
+      if (historicValue != null) {
+        let historicY = Array(years.length).fill(null)
+        historicY[0] = historicValue
+        let historicalTrace = {
+          type: 'scatter',
+          mode: 'markers',
+          name: 'Historical',
+          hoverinfo: 'x+y+z+text',
+          hovertemplate: '%{y}' + units,
+          marker: {
+            symbol: 'diamond',
+            size: 8,
+            color: '#888888',
+          },
+          x: eras,
+          y: historicY,
+        }
+        data_traces.push(historicalTrace)
       }
-
-      data_traces.push(historicalTrace)
 
       models.forEach(model => {
         scatterTraces[model] = {}
@@ -149,22 +151,20 @@ export default {
             x: eras,
             y: [null],
           }
-        })
-      })
 
-      models.forEach(model => {
-        scenarios.forEach(scenario => {
+          let dataFound = false
           projectedYears.forEach(year => {
+            let value = altThawData[year][model][scenario]
+            if (value != null) {
+              dataFound = true
+            }
             scatterTraces[model][scenario]['y'].push(
               altThawData[year][model][scenario]
             )
           })
-        })
-      })
-
-      models.forEach(model => {
-        scenarios.forEach(scenario => {
-          data_traces.push(scatterTraces[model][scenario])
+          if (dataFound) {
+            data_traces.push(scatterTraces[model][scenario])
+          }
         })
       })
 
