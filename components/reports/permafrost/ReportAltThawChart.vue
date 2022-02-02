@@ -175,6 +175,7 @@ export default {
 						standoff: 30,
 					},
 					hoverformat: hoverformat,
+					tickformat: ',d',
 				},
 				title: {
 					text: 'Active layer thickness',
