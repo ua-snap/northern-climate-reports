@@ -182,7 +182,7 @@ export default {
           hoverformat: hoverformat,
         },
         title: {
-          text: 'Projected ground freeze depth',
+          text: 'Ground freeze depth',
           font: {
             size: 24,
           },

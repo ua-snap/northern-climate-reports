@@ -182,7 +182,7 @@ export default {
           hoverformat: hoverformat,
         },
         title: {
-          text: 'Projected active layer thickness',
+          text: 'Active layer thickness',
           font: {
             size: 24,
           },
