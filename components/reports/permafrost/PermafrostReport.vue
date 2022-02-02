@@ -8,8 +8,8 @@
         "
       >
         Projected permafrost active layer thickness and ground freeze depth
-        through the end of the century. The active layer is the layer of soil
-        above permafrost that thaws seasonally.
+        through the end of the century is shown below. The active layer is the
+        layer of soil above permafrost that thaws seasonally.
       </span>
       <span
         v-show="
@@ -17,20 +17,22 @@
         "
       >
         Projected permafrost active layer thickness through the end of the
-        century. The active layer is the layer of soil above permafrost that
-        thaws seasonally.
+        century is shown below. The active layer is the layer of soil above
+        permafrost that thaws seasonally.
       </span>
       <span
         v-show="
           !permafrostPresent && permafrostDisappears && !permafrostUncertain
         "
       >
-        Projected ground freeze depth through the end of the century.
+        There is no permafrost within three meters of the ground surface at this
+        location. Projected ground freeze depth through the end of the century
+        is shown below.
       </span>
       <span v-show="permafrostUncertain">
         The presence or absence of permafrost could not be determined for this
         location because the historical mean annual ground temperature falls
-        within the uncertainty threshold. A chart of the historical and
+        within the threshold of uncertainty. A chart of the historical and
         projected mean annual ground temperature is provided below.
       </span>
       Results were produced by the GIPL 2.0 permafrost model using five separate

@@ -155,9 +155,7 @@ export default {
           let dataFound = false
           projectedYears.forEach(year => {
             let value = altFreezeData[year][model][scenario]
-            if (value != null) {
-              dataFound = true
-            }
+            if (value != null) dataFound = true
             scatterTraces[model][scenario]['y'].push(
               altFreezeData[year][model][scenario]
             )

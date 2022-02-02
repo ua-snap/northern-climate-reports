@@ -1,18 +1,16 @@
 <template>
-<div class="permafrost-chart-wrapper">
-  <div id="permafrost-magt-chart" />
-</div>
+  <div class="permafrost-chart-wrapper">
+    <div id="permafrost-magt-chart" />
+  </div>
 </template>
 <style lang="scss" scoped>
 .permafrost-chart-wrapper {
-    padding-bottom: 0;
+  padding-bottom: 0;
 }
 </style>
 <script>
 import _ from 'lodash'
-import {
-  mapGetters
-} from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: 'ReportMagtChart',
   mounted() {
@@ -25,15 +23,15 @@ export default {
     }),
   },
   watch: {
-    magtData: function() {
+    magtData: function () {
       this.renderPlot()
     },
-    units: function() {
+    units: function () {
       this.renderPlot()
     },
   },
   methods: {
-    renderPlot: function() {
+    renderPlot: function () {
       let magtData = this.magtData
       if (!magtData) {
         return
