@@ -3,11 +3,6 @@
 		<div id="permafrost-alt-thaw-chart" />
 	</div>
 </template>
-<style lang="scss" scoped>
-.permafrost-chart-wrapper {
-	padding-bottom: 0rem;
-}
-</style>
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
