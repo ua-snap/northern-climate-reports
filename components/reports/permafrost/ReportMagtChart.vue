@@ -202,8 +202,6 @@ export default {
 				dragmode: false,
 			}
 
-			let footerText = 'Projected values are taken from GIPL 2.0 model output.'
-
 			if (magtData[historicalYear]) {
 				layout.shapes.push({
 					type: 'rect',
@@ -234,31 +232,33 @@ export default {
 					fillcolor: '#cccccc',
 					opacity: 0.2,
 				})
-
-				footerText =
-					'Historical value is taken from the CRU TS 3.1 dataset.' +
-					'<br />' +
-					footerText +
-					'<br />The shaded gray region is the ' +
-					'uncertainty threshold.'
 			}
 
-			let footer_y = -0.3
+			let footerLines = [
+				'Projected values are taken from GIPL 2.0 model output.',
+				'Historical value is taken from the CRU TS 3.1 dataset.',
+				'The shaded gray region is the uncertainty threshold.',
+			]
+
+			let footerOffset = 0.05 * footerLines.length
+			let footerY = -0.2 - footerOffset
+			let yAxisAnnotationX = -0.04
 			if (window.innerWidth < 1250) {
 				layout['xaxis'] = {
 					tickangle: 45,
 				}
 				layout['margin']['b'] = 160
-				footer_y = -0.55
+				footerY = -0.4 - footerOffset
+				yAxisAnnotationX = -0.06
 			}
 
 			layout.annotations.push({
 				x: 0.5,
-				y: footer_y,
+				y: footerY,
 				xref: 'paper',
 				yref: 'paper',
 				showarrow: false,
-				text: footerText,
+				text: footerLines.join('<br />'),
 			})
 
 			this.$Plotly.newPlot('permafrost-magt-chart', data_traces, layout, {
