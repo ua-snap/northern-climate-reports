@@ -186,6 +186,7 @@ export default {
 					namelength: -1,
 				},
 				annotations: [],
+				showlegend: true,
 				legend: {
 					x: 1.03,
 				},
