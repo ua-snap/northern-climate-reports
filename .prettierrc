@@ -1,8 +1,8 @@
 {
   "semi": false,
   "singleQuote": true,
-  "tabWidth": 2,
   "trailingComma": "es5",
   "arrowParens": "avoid",
-  "vueIndentScriptAndStyle": false
+  "vueIndentScriptAndStyle": false,
+  "useTabs": true
 }
