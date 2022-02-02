@@ -177,6 +177,7 @@ export default {
             font: {
               size: 18,
             },
+            standoff: 30,
           },
           hoverformat: hoverformat,
         },
@@ -191,7 +192,20 @@ export default {
         hoverlabel: {
           namelength: -1,
         },
-        annotations: [],
+        annotations: [
+          {
+            x: -0.06,
+            y: 0.1,
+            xref: 'paper',
+            yref: 'paper',
+            showarrow: true,
+            text: 'Less frozen →',
+            textangle: '-90',
+            font: {
+              size: 13,
+            },
+          },
+        ],
         legend: {
           x: 1.03,
         },
