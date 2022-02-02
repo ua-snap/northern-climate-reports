@@ -173,7 +173,6 @@ export default {
 						standoff: 30,
 					},
 					hoverformat: hoverformat,
-					tickformat: ',d',
 				},
 				title: {
 					text: 'Ground freeze depth',
