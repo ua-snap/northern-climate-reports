@@ -190,20 +190,7 @@ export default {
         hoverlabel: {
           namelength: -1,
         },
-        annotations: [
-          {
-            x: -0.06,
-            y: 0.12,
-            xref: 'paper',
-            yref: 'paper',
-            showarrow: true,
-            text: 'More frozen →',
-            textangle: '-90',
-            font: {
-              size: 13,
-            },
-          },
-        ],
+        annotations: [],
         legend: {
           x: 1.03,
         },
@@ -263,13 +250,28 @@ export default {
 
       let footerOffset = 0.05 * footerLines.length
       let footerY = -0.2 - footerOffset
+      let yAxisAnnotationX = -0.04
       if (window.innerWidth < 1250) {
         layout['xaxis'] = {
           tickangle: 45,
         }
         layout['margin']['b'] = 160
-        footerY = -0.5 - footerOffset
+        footerY = -0.4 - footerOffset
+        yAxisAnnotationX = -0.06
       }
+
+      layout.annotations.push({
+        x: yAxisAnnotationX,
+        y: 0.1,
+        xref: 'paper',
+        yref: 'paper',
+        showarrow: true,
+        text: 'Deeper freeze →',
+        textangle: '-90',
+        font: {
+          size: 13,
+        },
+      })
 
       layout.annotations.push({
         x: 0.5,
