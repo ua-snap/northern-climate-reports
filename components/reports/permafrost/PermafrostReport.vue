@@ -60,6 +60,7 @@ export default {
 	components: { ReportAltThawChart, ReportAltFreezeChart, ReportMagtChart },
 	computed: {
 		...mapGetters({
+			units: 'units',
 			permafrostPresent: 'permafrost/present',
 			permafrostDisappears: 'permafrost/disappears',
 			permafrostUncertain: 'permafrost/uncertain',
