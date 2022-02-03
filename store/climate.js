@@ -76,26 +76,8 @@ export const mutations = {
 export const actions = {
   async fetch(context) {
     // TODO: add error handling here for 404 (no data) etc.
-    let queryUrl = process.env.apiUrl + '/taspr'
-
-    // Determine the query type to perform.
-    if (context.rootGetters.hucId) {
-      // Fetch areal data by HUC.
-      queryUrl += '/huc/' + context.rootGetters.hucId
-    } else if (context.rootGetters.protectedAreaId) {
-      queryUrl += '/protectedarea/' + context.rootGetters.protectedAreaId
-    } else if (context.rootGetters.latLng) {
-      queryUrl +=
-        '/point/' +
-        context.rootGetters.latLng[0] +
-        '/' +
-        context.rootGetters.latLng[1]
-    } else {
-      // Don't know what to query, this is an error situation.
-      console.error("Unknown place type, can't fetch data")
-      return
-    }
-
+    let queryUrl =
+      process.env.apiUrl + '/taspr/' + context.rootGetters['place/urlFragment']
     let climateData = await this.$http.$get(queryUrl)
     context.commit('setClimateData', climateData)
   },

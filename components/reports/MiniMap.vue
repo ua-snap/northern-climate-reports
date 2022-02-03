@@ -22,7 +22,7 @@ export default {
 	name: 'MiniMap',
 	computed: {
 		...mapGetters({
-			latLng: 'latLng',
+			latLng: 'place/latLng',
 			geoJSON: 'place/geoJSON',
 		}),
 	},
@@ -35,6 +35,7 @@ export default {
 	mounted() {
 		this.map = L.map('report--minimmap--map', this.getBaseMapAndLayers())
 
+		// It's a lat/Lng location (community or point)
 		if (this.latLng) {
 			this.marker = L.marker(this.latLng).addTo(this.map)
 			this.map.panTo(this.latLng)

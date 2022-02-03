@@ -223,10 +223,8 @@ export const actions = {
     if (context.rootGetters.latLng) {
       let permafrostQueryUrl =
         process.env.apiUrl +
-        '/permafrost/point/' +
-        context.rootGetters.latLng[0] +
-        '/' +
-        context.rootGetters.latLng[1]
+        '/permafrost' +
+        context.rootGetters['place/urlFragment']
 
       try {
         let permafrostData = await this.$http.$get(permafrostQueryUrl)

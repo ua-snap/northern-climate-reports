@@ -54,14 +54,15 @@ export default {
   },
   computed: {
     ...mapGetters({
-      hucName: 'rawHucName',
-      place: 'placeName',
+      placeType: 'place/type',
+      hucName: 'place/rawHucName',
+      place: 'place/name',
       units: 'units',
       reportData: 'climate/climateData',
       altThawData: 'permafrost/altThaw',
       showPermafrost: 'permafrost/valid',
       permafrostPresent: 'permafrost/present',
-      permafrostDisappears: 'permafrost/disappears'
+      permafrostDisappears: 'permafrost/disappears',
     }),
     unitsText() {
       if (this.units) {
@@ -214,18 +215,17 @@ export default {
       // Average value against the 4 seasons included.
       annualTemperatureAverage = Math.round(annualTemperatureAverage / 4)
 
-      var returnedString = ''
-
-      // TODO.  If we do these kinds of comparisons a lot, we probably want
-      // to move this logic to the store or another component in some way.
-      // This code does need some special grammar, though, which wouldn't
-      // generalize!
-      if (this.$route.path.includes('community')) {
-        returnedString += '<p>In <strong>' + this.place + '</strong>'
-      } else if (this.$route.path.includes('huc')) {
-        returnedString += '<p>In the <strong>' + this.hucName + '</strong>'
-      } else {
-        returnedString += '<p>At <strong>' + this.place + '</strong>'
+      let returnedString = ''
+      switch (this.placeType) {
+        case 'community':
+          returnedString += '<p>In <strong>' + this.place + '</strong>'
+          break
+        case 'huc':
+          returnedString += '<p>In the <strong>' + this.hucName + '</strong>'
+          break
+        default:
+          returnedString += '<p>At <strong>' + this.place + '</strong>'
+          break
       }
 
       // Create the returned string using the values from the loop above.
