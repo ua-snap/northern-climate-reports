@@ -161,7 +161,8 @@ export const mutations = {
 export const actions = {
   async fetch(context) {
     // TODO: add error handling here for 404 (no data) etc.
-    let queryUrl = process.env.apiUrl + '/boundary/' + context.getters.urlFragment
+    let queryUrl =
+      process.env.apiUrl + '/boundary/' + context.getters.urlFragment
     let geoJSON = await this.$http.$get(queryUrl)
     context.commit('setGeoJSON', geoJSON)
   },

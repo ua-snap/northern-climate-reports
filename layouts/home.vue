@@ -33,8 +33,8 @@
       width: 100%;
 
       h1 {
-      font-size: 5.5rem;
-      line-height: 1;
+        font-size: 5.5rem;
+        line-height: 1;
       }
       h2 {
         margin-top: 1.25rem;

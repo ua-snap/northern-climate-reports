@@ -16,7 +16,7 @@ export const mutations = {
 // We use vuex-router-sync so some of our state handled from
 // the routes.
 export const getters = {
-  units: (state) => {
+  units: state => {
     return state.units
   },
 
@@ -25,5 +25,5 @@ export const getters = {
   // been selected.
   reportIsVisible: (state, getters) => {
     return getters['place/type']
-  }
+  },
 }

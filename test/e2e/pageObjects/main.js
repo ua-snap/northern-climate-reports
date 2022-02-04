@@ -3,10 +3,10 @@ module.exports = {
   url: 'http://localhost:3000',
   elements: {
     docButton: {
-      selector: '.button--green'
+      selector: '.button--green',
     },
     githubButton: {
-      selector: '.button--grey'
-    }
-  }
+      selector: '.button--grey',
+    },
+  },
 }
