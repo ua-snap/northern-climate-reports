@@ -37,6 +37,9 @@
 						to see our full suite of interactive web tools.
 					</p>
 					<p>
+						Data available through this tool are subject to the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a> license.
+					</p>
+					<p>
 						Copyright &copy; {{ year }} University of Alaska Fairbanks. All
 						rights reserved.
 					</p>
