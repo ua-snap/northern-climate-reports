@@ -1,12 +1,6 @@
 <template>
 	<div class="report--temperature">
-		<h4 class="subtitle is-4">
-			Temperature
-			<span class="units">
-				<span v-if="units == 'imperial'">(&deg;F)</span>
-				<span v-if="units == 'metric'">(&deg;C)</span>
-			</span>
-		</h4>
+		<h4 class="title is-3">Temperature</h4>
 		<div class="content is-size-5">
 			<p>
 				Projections for each decade through the end of the century are shown for

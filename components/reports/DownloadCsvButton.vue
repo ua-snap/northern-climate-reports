@@ -1,5 +1,5 @@
 <template>
-	<a :href="downloadTarget" class="button">Download data as CSV</a>
+	<a :href="downloadTarget" class="button is-link">Download data as CSV</a>
 </template>
 <style lang="scss" scoped></style>
 <script>

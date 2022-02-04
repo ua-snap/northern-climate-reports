@@ -39,7 +39,7 @@
 				</h3>
 				<QualitativeText />
 			</section>
-			<section class="section">
+			<section class="section" id="toc">
 				<div class="columns">
 					<div class="column is-one-quarter">
 						<MiniMap />
@@ -76,15 +76,37 @@
 				</div>
 			</section>
 			<section class="section">
-				<div class="report-type-wrapper">
+				<h4 class="title is-4">Contents</h4>
+				<div class="content is-size-5">
+				<ul>
+					<li><a href="#temperature">Temperature</a> charts and tables with multiple models and scenarios, grouped decadally and into mid/late century</li>
+					<li><a href="#precipitation">Precipitation</a> charts and tables with multiple models and scenarios, grouped decadally and into mid/late century</li>
+					<li><a href="#permafrost">Permafrost</a> with specific visualizations depending on the presence or absence of permafrost</li>
+					<li>
+						<a href="#data-overview-download">Data overview &amp; download</a> with notes on interpreting these visualizations and a button to click to get a CSV of data
+					</li>
+				</ul>
+			</div>
+			</section>
+			<section class="section">
+				<div class="report-type-wrapper" id="temperature">
 					<TempReport />
 				</div>
-				<div class="report-type-wrapper">
+				<BackToTopButton />
+			</section>
+			<section class="section">
+				<div class="report-type-wrapper" id="precipitation">
 					<PrecipReport />
 				</div>
-				<div class="report-type-wrapper">
+				<BackToTopButton />
+			</section>
+			<section class="section">
+				<div class="report-type-wrapper" id="permafrost">
 					<PermafrostReport />
 				</div>
+				<BackToTopButton />
+			</section>
+			<section class="section" id="data-overview-download">
 				<div class="content is-size-5">
 					<p>
 						Comparing projections with historical data in the first column
@@ -113,6 +135,7 @@
 						<DownloadCsvButton />
 					</p>
 				</div>
+				<BackToTopButton />
 			</section>
 			<hr />
 			<div class="back">
@@ -154,6 +177,7 @@ import PermafrostReport from '~/components/reports/permafrost/PermafrostReport'
 import MiniMap from '~/components/reports/MiniMap'
 import QualitativeText from '~/components/reports/QualitativeText'
 import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
+import BackToTopButton from '~/components/reports/BackToTopButton'
 import { mapGetters } from 'vuex'
 import lodash from 'lodash'
 import deepdash from 'deepdash'
@@ -169,6 +193,7 @@ export default {
 		MiniMap,
 		QualitativeText,
 		DownloadCsvButton,
+		BackToTopButton,
 	},
 	data() {
 		return {
