@@ -23,9 +23,9 @@ export default {
 			return process.env.apiUrl + '/taspr/' + urlFragment + "?format=csv"
 		},
 		...mapGetters({
-			latLng: 'getLatLng',
-			hucId: 'getHucId',
-			protectedAreaId: 'getProtectedAreaId',
+			latLng: 'latLng',
+			hucId: 'hucId',
+			protectedAreaId: 'protectedAreaId',
 		}),
 	},
 }

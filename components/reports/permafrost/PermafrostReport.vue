@@ -24,10 +24,10 @@
 			>
 		</div>
 		<div class="chart-wrapper permafrost" v-show="this.permafrostPresent">
-			<ReportAltThawChart :altThawData="altThawData" />
+			<ReportAltThawChart />
 		</div>
 		<div class="chart-wrapper permafrost" v-show="this.permafrostDisappears">
-			<ReportAltFreezeChart :altFreezeData="altFreezeData" />
+			<ReportAltFreezeChart />
 		</div>
 	</div>
 </template>
@@ -39,13 +39,11 @@ import { mapGetters } from 'vuex'
 
 export default {
 	name: 'PermafrostReport',
-	props: ['altThawData', 'altFreezeData'],
 	components: { ReportAltThawChart, ReportAltFreezeChart },
 	computed: {
 		...mapGetters({
-			units: 'units',
-			permafrostPresent: 'permafrostPresent',
-			permafrostDisappears: 'permafrostDisappears',
+			permafrostPresent: 'permafrost/present',
+			permafrostDisappears: 'permafrost/disappears',
 		}),
 	},
 }

@@ -41,15 +41,6 @@
 import { mapGetters } from 'vuex'
 export default {
   name: 'QualitativeText',
-  props: ['reportData', 'altThawData'],
-  watch: {
-    reportData: function () {
-      this.generateText()
-    },
-    altThawData: function () {
-      this.generateText()
-    },
-  },
   data: function () {
     return {
       seasons: ['MAM', 'JJA', 'SON', 'DJF'],
@@ -63,12 +54,14 @@ export default {
   },
   computed: {
     ...mapGetters({
-      hucName: 'getRawHucName',
-      place: 'getPlaceName',
+      hucName: 'rawHucName',
+      place: 'placeName',
       units: 'units',
-      showPermafrost: 'showPermafrost',
-      permafrostPresent: 'permafrostPresent',
-      permafrostDisappears: 'permafrostDisappears',
+      reportData: 'climate/climateData',
+      altThawData: 'permafrost/altThaw',
+      showPermafrost: 'permafrost/valid',
+      permafrostPresent: 'permafrost/present',
+      permafrostDisappears: 'permafrost/disappears'
     }),
     unitsText() {
       if (this.units) {
@@ -76,20 +69,34 @@ export default {
       }
     },
   },
+  watch: {
+    reportData: function () {
+      this.generateText()
+    },
+    altThawData: function () {
+      this.generateText()
+    },
+  },
   methods: {
     // Generate Qualitative Text
     // Input: None. (Uses reportData, place, and units properties)
     // Output: Text string containing HTML list items of processed seasonal metrics.
     generateText: function () {
+      // Guard if data not present yet.
       if (!this.reportData || !this.place) {
         return
       }
+
       return this.generateAnnualMetricsHtml()
     },
     collectSeasonalMetrics(season) {
-      let historicalTemp = this.reportData['1950_2009'][season]['CRU-TS40']['CRU_historical']['tas']['mean']
+      let historicalTemp = this.reportData['1950_2009'][season]['CRU-TS40'][
+        'CRU_historical'
+      ]['tas']['mean']
 
-      let historicalPrecip = this.reportData['1950_2009'][season]['CRU-TS40']['CRU_historical']['pr']['mean']
+      let historicalPrecip = this.reportData['1950_2009'][season]['CRU-TS40'][
+        'CRU_historical'
+      ]['pr']['mean']
 
       var seasonMetrics = {
         season: this.seasonNames[season],
@@ -104,13 +111,13 @@ export default {
 
       // Take an average of both temperature and precipitation for the same season and RCP from both models.
       let tempMax = Math.max(
-      this.reportData['2070_2099'][season]['MRI-CGCM3']['rcp85']['tas'],
-      this.reportData['2070_2099'][season]['CCSM4']['rcp85']['tas'],
+        this.reportData['2070_2099'][season]['MRI-CGCM3']['rcp85']['tas'],
+        this.reportData['2070_2099'][season]['CCSM4']['rcp85']['tas']
       )
 
       let precipMax = Math.max(
         this.reportData['2070_2099'][season]['MRI-CGCM3']['rcp85']['pr'],
-        this.reportData['2070_2099'][season]['CCSM4']['rcp85']['pr'],
+        this.reportData['2070_2099'][season]['CCSM4']['rcp85']['pr']
       )
 
       // If the maximum temperature difference is less than the current temperature difference,
@@ -154,15 +161,15 @@ export default {
       let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
       let scenarios = ['rcp45', 'rcp85']
 
-      models.forEach(model => {
-        scenarios.forEach(scenario => {
+      models.forEach((model) => {
+        scenarios.forEach((scenario) => {
           let value = this.altThawData[lastYear][model][scenario]
           thicknesses.push(value)
         })
       })
       let thicknessMax = _.max(thicknesses)
 
-      return Math.round(thicknessMax / thicknessHistorical * 100 - 100)
+      return Math.round((thicknessMax / thicknessHistorical) * 100 - 100)
     },
     // Subfunction: Generate annual metrics HTML string
     // Input: None. (Uses constant seasons)
@@ -280,9 +287,13 @@ export default {
       if (this.showPermafrost) {
         let permafrostChange = this.permafrostChange()
         if (this.permafrostPresent && this.permafrostDisappears) {
-          returnedString += '<p>By the late century, permafrost up to 3 meters below ground may <strong>disappear</strong>.</p>'
+          returnedString +=
+            '<p>By the late century, permafrost up to 3 meters below ground<br/> may <strong>disappear</strong>.</p>'
         } else if (permafrostChange > 0) {
-          returnedString += '<p>By the late century, active layer permafrost thickness may increase by <strong>' + Math.abs(permafrostChange) + '%</strong>.</p>'
+          returnedString +=
+            '<p>By the late century, active layer permafrost thickness<br/> may increase by <strong>' +
+            Math.abs(permafrostChange) +
+            '%</strong>.</p>'
         }
       }
 

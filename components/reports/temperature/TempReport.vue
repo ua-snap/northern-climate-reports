@@ -31,10 +31,10 @@
 					>Fall</b-radio
 				>
 			</b-field>
-			<ReportTempChart :reportData="reportData" :season="temp_season" />
+			<ReportTempChart :season="temp_season" />
 		</div>
 		<div class="table-wrapper">
-			<reportTempTable :reportData="reportData" />
+			<reportTempTable />
 		</div>
 	</div>
 </template>
@@ -52,7 +52,6 @@ import ReportTempTable from './ReportTempTable'
 import { mapGetters } from 'vuex'
 export default {
 	name: 'ReportTable',
-	props: ['reportData'],
 	components: { ReportTempChart, ReportTempTable },
 	data() {
 		return {
