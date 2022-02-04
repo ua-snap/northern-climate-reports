@@ -31,24 +31,24 @@ export const mutations = {
 // We use vuex-router-sync so some of our state handled from
 // the routes.
 export const getters = {
-  units: (state) => {
+  units: state => {
     return state.units
   },
 
-  showPermafrost: (state) => {
+  showPermafrost: state => {
     return state.showPermafrost
   },
-  permafrostPresent: (state) => {
+  permafrostPresent: state => {
     return state.permafrostPresent
   },
-  permafrostDisappears: (state) => {
+  permafrostDisappears: state => {
     return state.permafrostDisappears
   },
 
   // Boolean if any combo of place identifiers are active,
   // so the report section can be shown when a place has
   // been selected.
-  reportIsVisible: (state) => {
+  reportIsVisible: state => {
     return (
       (state.route.params.lat && state.route.params.lng) ||
       state.route.params.communityId ||
@@ -58,7 +58,7 @@ export const getters = {
   },
 
   // Gets the currently-selected lat/lon [directly or by placeID]
-  getLatLng: (state) => {
+  getLatLng: state => {
     if (state.route.params.lat && state.route.params.lng) {
       return [state.route.params.lat, state.route.params.lng]
     }
@@ -78,14 +78,14 @@ export const getters = {
   },
 
   // If present, returns the HucID in the URL.
-  getHucId: (state) => {
+  getHucId: state => {
     if (state.route.params.hucId) {
       return state.route.params.hucId
     }
   },
 
   // Fetch the protected area ID
-  getProtectedAreaId: (state) => {
+  getProtectedAreaId: state => {
     if (state.route.params.protectedAreaId) {
       return state.route.params.protectedAreaId
     }
@@ -93,7 +93,7 @@ export const getters = {
 
   // Returns a string for the correct current selected place,
   // whether lat/lon, community name, or other regional name.
-  getPlaceName: (state) => {
+  getPlaceName: state => {
     // Lat/lon!
     if (state.route.params.lat && state.route.params.lng) {
       return (

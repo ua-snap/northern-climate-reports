@@ -217,19 +217,22 @@ export default [
   },
   {
     id: 'USFS4',
-    name: 'Chugach National Forest Alaska National Interest Lands Conservation Act 501(b)-1',
+    name:
+      'Chugach National Forest Alaska National Interest Lands Conservation Act 501(b)-1',
     area_type: 'ANILCA: Alaska National Interest Lands Conservation Act',
     type: 'protected_area',
   },
   {
     id: 'USFS5',
-    name: 'Chugach National Forest Alaska National Interest Lands Conservation Act 501(b)-2 Prescription',
+    name:
+      'Chugach National Forest Alaska National Interest Lands Conservation Act 501(b)-2 Prescription',
     area_type: 'ANILCA: Alaska National Interest Lands Conservation Act',
     type: 'protected_area',
   },
   {
     id: 'USFS6',
-    name: 'Chugach National Forest Alaska National Interest Lands Conservation Act 501(b)-3 Prescription',
+    name:
+      'Chugach National Forest Alaska National Interest Lands Conservation Act 501(b)-3 Prescription',
     area_type: 'ANILCA: Alaska National Interest Lands Conservation Act',
     type: 'protected_area',
   },
@@ -1213,7 +1216,8 @@ export default [
   },
   {
     id: 'USFS25',
-    name: 'Tongass National Forest Land Use Designation Ii Research Natural Area',
+    name:
+      'Tongass National Forest Land Use Designation Ii Research Natural Area',
     area_type: 'Research Natural Area (USFS)',
     type: 'protected_area',
   },
