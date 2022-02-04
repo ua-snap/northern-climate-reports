@@ -8,26 +8,52 @@
 			</span>
 		</h4>
 		<div class="content is-size-5">
-			<span v-show="permafrostPresent && permafrostDisappears && !permafrostUncertain">
+			<span
+				v-show="
+					permafrostPresent && permafrostDisappears && !permafrostUncertain
+				"
+			>
+				Historical data and model projections indicate that
+				<strong
+					>this place has permafrost which disappears under <span v-html="depthFragment"></span> over
+					time.</strong
+				>
 				Projected permafrost active layer thickness and ground freeze depth
 				through the end of the century is shown below. The active layer is the
 				layer of soil above permafrost that thaws seasonally.
 			</span>
-			<span v-show="permafrostPresent && !permafrostDisappears && !permafrostUncertain">
+			<span
+				v-show="
+					permafrostPresent && !permafrostDisappears && !permafrostUncertain
+				"
+			>Historical data and model projections indicate that
+				<strong
+					>this place has permafrost.</strong
+				>
 				Projected permafrost active layer thickness through the end of the
 				century is shown below. The active layer is the layer of soil above
 				permafrost that thaws seasonally.
 			</span>
-			<span v-show="!permafrostPresent && permafrostDisappears && !permafrostUncertain">
-				There is no permafrost within three meters of the ground surface at this
-				location. Projected ground freeze depth through the end of the century
-				is shown below.
+			<span
+				v-show="
+					!permafrostPresent && permafrostDisappears && !permafrostUncertain
+				"
+			>
+				<strong>
+					There is no permafrost within <span v-html="depthFragment"></span> of the ground surface at
+					this location</strong
+				>. Projected ground freeze depth through the end of the century is shown
+				below.
 			</span>
 			<span v-show="permafrostUncertain">
-				The presence or absence of permafrost could not be determined for this
-				location because the historical mean annual ground temperature falls
-				within the threshold of uncertainty. A chart of the historical and
-				projected mean annual ground temperature is provided below.
+				<strong
+					>The presence or absence of permafrost could not be determined for
+					this location</strong
+				>
+				because the historical mean annual ground temperature falls within the
+				threshold of uncertainty (<span v-html="uncertaintyFragment"></span>). A
+				chart of the historical and projected mean annual ground temperature is
+				provided below.
 			</span>
 			Results were produced by the GIPL 2.0 permafrost model using five separate
 			climate models and two different greenhouse gas scenarios or
@@ -59,6 +85,17 @@ export default {
 	name: 'PermafrostReport',
 	components: { ReportAltThawChart, ReportAltFreezeChart, ReportMagtChart },
 	computed: {
+		// The range of uncertainty, within 1ºC of freezing.
+		uncertaintyFragment() {
+			return this.units == 'imperial'
+				? '30.2&ndash;33.8&deg;F'
+				: '&#x00B1;1&deg;C'
+		},
+		depthFragment() {
+			return this.units == 'imperial'
+				? '9.8ft'
+				: '3m'
+		},
 		...mapGetters({
 			units: 'units',
 			permafrostPresent: 'permafrost/present',
