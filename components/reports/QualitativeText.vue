@@ -162,8 +162,8 @@ export default {
       let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
       let scenarios = ['rcp45', 'rcp85']
 
-      models.forEach((model) => {
-        scenarios.forEach((scenario) => {
+      models.forEach(model => {
+        scenarios.forEach(scenario => {
           let value = this.altThawData[lastYear][model][scenario]
           thicknesses.push(value)
         })
@@ -184,7 +184,7 @@ export default {
       var seasonWithHighestPrecipChange = 'None'
       var aboveFreezingSeasons = []
 
-      this.seasons.forEach((season) => {
+      this.seasons.forEach(season => {
         let seasonOutput = this.collectSeasonalMetrics(season)
 
         // Collect highest seasonal temperature averages to compute annual average later.

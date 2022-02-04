@@ -1,23 +1,24 @@
 <template>
-	<div class="headerbanner">
-		University of Alaska Fairbanks&nbsp;&nbsp;|&nbsp;&nbsp;Alaska Climate Adaptation Science Center
-	</div>
+  <div class="headerbanner">
+    University of Alaska Fairbanks&nbsp;&nbsp;|&nbsp;&nbsp;Alaska Climate
+    Adaptation Science Center
+  </div>
 </template>
 
 <script>
 export default {
-	name: 'HeaderBanner',
+  name: 'HeaderBanner',
 }
 </script>
 
 <style lang="scss" scoped>
 .headerbanner {
-	font-size: 1rem;
-	text-align: center;
-	letter-spacing: 0.50ex;
-	text-transform: uppercase;
-	padding: 0.5rem;
-	color: white;
-	background-color: rgb(54, 79, 119);
+  font-size: 1rem;
+  text-align: center;
+  letter-spacing: 0.5ex;
+  text-transform: uppercase;
+  padding: 0.5rem;
+  color: white;
+  background-color: rgb(54, 79, 119);
 }
 </style>

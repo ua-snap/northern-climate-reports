@@ -1,5 +1,6 @@
 // Refer to the online docs for more details: https://nightwatchjs.org/gettingstarted/configuration/
-const Services = {}; loadServices()
+const Services = {}
+loadServices()
 
 module.exports = {
   // An array of folders (excluding subfolders) where your tests are located;
@@ -30,32 +31,32 @@ module.exports = {
       screenshots: {
         enabled: false,
         path: 'screens',
-        on_failure: true
+        on_failure: true,
       },
 
       desiredCapabilities: {
-        browserName: 'chrome'
+        browserName: 'chrome',
       },
 
       webdriver: {
         start_process: true,
         server_path: 'node_modules/.bin/chromedriver',
-        port: 9515
-      }
+        port: 9515,
+      },
     },
 
     safari: {
       desiredCapabilities: {
         browserName: 'safari',
         alwaysMatch: {
-          acceptInsecureCerts: false
-        }
+          acceptInsecureCerts: false,
+        },
       },
       webdriver: {
         port: 4445,
         start_process: true,
-        server_path: '/usr/bin/safaridriver'
-      }
+        server_path: '/usr/bin/safaridriver',
+      },
     },
 
     firefox: {
@@ -68,21 +69,21 @@ module.exports = {
             args: [
               // '-headless',
               // '-verbose'
-            ]
-          }
-        }
+            ],
+          },
+        },
       },
       webdriver: {
         start_process: true,
         // default_path_prefix: '/wd/hub',
         use_legacy_jsonwire: true,
         port: 4444,
-        server_path: (Services.geckodriver ? Services.geckodriver.path : ''),
+        server_path: Services.geckodriver ? Services.geckodriver.path : '',
         cli_args: [
           // very verbose geckodriver logs
           // '-vv'
-        ]
-      }
+        ],
+      },
     },
 
     chrome: {
@@ -97,18 +98,18 @@ module.exports = {
             // '--ignore-certificate-errors',
             // '--allow-insecure-localhost',
             // '--headless'
-          ]
-        }
+          ],
+        },
       },
 
       webdriver: {
         start_process: true,
         port: 9515,
-        server_path: (Services.chromedriver ? Services.chromedriver.path : ''),
+        server_path: Services.chromedriver ? Services.chromedriver.path : '',
         cli_args: [
           // --verbose
-        ]
-      }
+        ],
+      },
     },
 
     // ////////////////////////////////////////////////////////////////////////////////
@@ -122,7 +123,7 @@ module.exports = {
     browserstack: {
       selenium: {
         host: 'hub-cloud.browserstack.com',
-        port: 443
+        port: 443,
       },
       // More info on configuring capabilities can be found on:
       // https://www.browserstack.com/automate/capabilities?tag=selenium-4
@@ -130,15 +131,15 @@ module.exports = {
         'bstack:options': {
           local: 'false',
           userName: '{BROWSERSTACK_USER}',
-          accessKey: '{BROWSERSTACK_KEY}'
-        }
+          accessKey: '{BROWSERSTACK_KEY}',
+        },
       },
 
       disable_error_log: true,
       webdriver: {
         keep_alive: true,
-        start_process: false
-      }
+        start_process: false,
+      },
     },
 
     'browserstack.chrome': {
@@ -148,16 +149,16 @@ module.exports = {
         chromeOptions: {
           // This tells Chromedriver to run using the legacy JSONWire protocol
           // More info on Chromedriver: https://sites.google.com/a/chromium.org/chromedriver/
-          w3c: false
-        }
-      }
+          w3c: false,
+        },
+      },
     },
 
     'browserstack.firefox': {
       extends: 'browserstack',
       desiredCapabilities: {
-        browserName: 'firefox'
-      }
+        browserName: 'firefox',
+      },
     },
 
     'browserstack.ie': {
@@ -170,9 +171,9 @@ module.exports = {
           osVersion: '10',
           local: 'false',
           seleniumVersion: '3.5.2',
-          resolution: '1366x768'
-        }
-      }
+          resolution: '1366x768',
+        },
+      },
     },
 
     // ////////////////////////////////////////////////////////////////////////////////
@@ -184,12 +185,18 @@ module.exports = {
       selenium: {
         start_process: true,
         port: 4444,
-        server_path: (Services.seleniumServer ? Services.seleniumServer.path : ''),
+        server_path: Services.seleniumServer
+          ? Services.seleniumServer.path
+          : '',
         cli_args: {
-          'webdriver.gecko.driver': (Services.geckodriver ? Services.geckodriver.path : ''),
-          'webdriver.chrome.driver': (Services.chromedriver ? Services.chromedriver.path : '')
-        }
-      }
+          'webdriver.gecko.driver': Services.geckodriver
+            ? Services.geckodriver.path
+            : '',
+          'webdriver.chrome.driver': Services.chromedriver
+            ? Services.chromedriver.path
+            : '',
+        },
+      },
     },
 
     'selenium.chrome': {
@@ -197,9 +204,9 @@ module.exports = {
       desiredCapabilities: {
         browserName: 'chrome',
         chromeOptions: {
-          w3c: false
-        }
-      }
+          w3c: false,
+        },
+      },
     },
 
     'selenium.firefox': {
@@ -210,14 +217,14 @@ module.exports = {
           args: [
             // '-headless',
             // '-verbose'
-          ]
-        }
-      }
-    }
-  }
+          ],
+        },
+      },
+    },
+  },
 }
 
-function loadServices () {
+function loadServices() {
   try {
     Services.seleniumServer = require('selenium-server')
   } catch (err) {}
