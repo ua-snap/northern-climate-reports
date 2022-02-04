@@ -15,7 +15,7 @@
 			>
 				Historical data and model projections indicate that
 				<strong
-					>this place has permafrost which disappears under <span v-html="depthFragment"></span> over
+					>this place has permafrost which disappears within <span v-html="depthFragment"></span> of the ground surface over
 					time.</strong
 				>
 				Projected permafrost active layer thickness and ground freeze depth
