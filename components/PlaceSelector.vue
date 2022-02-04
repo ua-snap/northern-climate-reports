@@ -19,7 +19,7 @@
             icon="magnify"
             clearable
             clear-on-select
-            @select="(option) => (selected = option)"
+            @select="option => (selected = option)"
           >
             <template #empty>No results found</template>
             <template slot-scope="props">
@@ -88,7 +88,7 @@ export default {
   },
   computed: {
     filteredDataObj() {
-      return this.places.filter((option) => {
+      return this.places.filter(option => {
         return (
           option.name
             .toString()

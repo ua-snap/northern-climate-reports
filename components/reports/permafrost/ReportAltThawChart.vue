@@ -108,9 +108,9 @@ export default {
         },
       }
 
-      models.forEach((model) => {
+      models.forEach(model => {
         scatterTraces[model] = {}
-        scenarios.forEach((scenario) => {
+        scenarios.forEach(scenario => {
           scatterTraces[model][scenario] = {
             type: 'scatter',
             mode: 'markers',
@@ -130,9 +130,9 @@ export default {
 
       let historicalYear = Object.keys(altThawData).slice(0, 1)
       let projectedYears = Object.keys(altThawData).slice(1)
-      models.forEach((model) => {
-        scenarios.forEach((scenario) => {
-          projectedYears.forEach((year) => {
+      models.forEach(model => {
+        scenarios.forEach(scenario => {
+          projectedYears.forEach(year => {
             scatterTraces[model][scenario]['y'].push(
               altThawData[year][model][scenario]
             )
@@ -140,8 +140,8 @@ export default {
         })
       })
 
-      models.forEach((model) => {
-        scenarios.forEach((scenario) => {
+      models.forEach(model => {
+        scenarios.forEach(scenario => {
           data_traces.push(scatterTraces[model][scenario])
         })
       })

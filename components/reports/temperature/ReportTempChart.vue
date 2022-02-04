@@ -49,12 +49,12 @@ export default {
       }
 
       let decade_keys = Object.keys(this.reportData)
-      decade_keys = decade_keys.filter((value) => {
+      decade_keys = decade_keys.filter(value => {
         if (value !== '2040_2069' && value !== '2070_2099') {
           return value
         }
       })
-      let decades = decade_keys.map((x) => x.replace('_', '-'))
+      let decades = decade_keys.map(x => x.replace('_', '-'))
 
       let historical = {
         type: 'box',
@@ -119,9 +119,9 @@ export default {
         },
       }
 
-      models.forEach((model) => {
+      models.forEach(model => {
         scatterTraces[model] = {}
-        scenarios.forEach((scenario) => {
+        scenarios.forEach(scenario => {
           scatterTraces[model][scenario] = {
             type: 'scatter',
             mode: 'markers',
@@ -142,7 +142,7 @@ export default {
       })
 
       let allValues = []
-      decade_keys.forEach((decade) => {
+      decade_keys.forEach(decade => {
         if (decade === '2040_2069' || decade === '2070_2099') {
           return
         }
@@ -164,8 +164,8 @@ export default {
             tasData['max']
           )
         } else {
-          models.forEach((model) => {
-            scenarios.forEach((scenario) => {
+          models.forEach(model => {
+            scenarios.forEach(scenario => {
               let scenarioTas = this.reportData[decade][this.season][model][
                 scenario
               ]['tas']
@@ -190,8 +190,8 @@ export default {
 
       data_traces.push(historical)
 
-      models.forEach((model) => {
-        scenarios.forEach((scenario) => {
+      models.forEach(model => {
+        scenarios.forEach(scenario => {
           data_traces.push(scatterTraces[model][scenario])
         })
       })

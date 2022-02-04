@@ -277,10 +277,10 @@ export default {
     },
     convertTasPrHistorical(data) {
       let convertedData = _.cloneDeep(data)
-      Object.keys(convertedData).forEach((season) => {
+      Object.keys(convertedData).forEach(season => {
         let seasonObj = convertedData[season]['CRU-TS40']['CRU_historical']
-        Object.keys(seasonObj).forEach((climate_variable) => {
-          Object.keys(seasonObj[climate_variable]).forEach((stat) => {
+        Object.keys(seasonObj).forEach(climate_variable => {
+          Object.keys(seasonObj[climate_variable]).forEach(stat => {
             let original = seasonObj[climate_variable][stat]
             if (climate_variable === 'tas') {
               let converted = parseFloat((original * 1.8 + 32).toFixed(1))
@@ -332,18 +332,18 @@ export default {
         thawData['1995'] = null
       }
 
-      projectedYears.forEach((year) => {
+      projectedYears.forEach(year => {
         thawData[year] = {}
-        models.forEach((model) => {
+        models.forEach(model => {
           thawData[year][model] = {}
         })
       })
 
       this.permafrostPresent = false
-      models.forEach((model) => {
-        scenarios.forEach((scenario) => {
+      models.forEach(model => {
+        scenarios.forEach(scenario => {
           let previousMagt = historicalMagt
-          projectedYears.forEach((year) => {
+          projectedYears.forEach(year => {
             let scenarioAlt = this.permafrostResults['gipl'][year][model][
               scenario
             ]['alt']
@@ -383,18 +383,18 @@ export default {
         freezeData['1995'] = null
       }
 
-      projectedYears.forEach((year) => {
+      projectedYears.forEach(year => {
         freezeData[year] = {}
-        models.forEach((model) => {
+        models.forEach(model => {
           freezeData[year][model] = {}
         })
       })
 
       this.permafrostDisappears = false
-      models.forEach((model) => {
-        scenarios.forEach((scenario) => {
+      models.forEach(model => {
+        scenarios.forEach(scenario => {
           let previousMagt = historicalMagt
-          projectedYears.forEach((year) => {
+          projectedYears.forEach(year => {
             let scenarioAlt = this.permafrostResults['gipl'][year][model][
               scenario
             ]['alt']
@@ -419,7 +419,7 @@ export default {
       return freezeData
     },
     convertReportData() {
-      Object.keys(this.results).forEach((decade) => {
+      Object.keys(this.results).forEach(decade => {
         if (decade === '1950_2009') {
           this.results[decade] = this.convertTasPrHistorical(
             this.results[decade]
@@ -429,7 +429,7 @@ export default {
         }
       })
       if (this.showPermafrost) {
-        Object.keys(this.permafrostResults['gipl']).forEach((year) => {
+        Object.keys(this.permafrostResults['gipl']).forEach(year => {
           this.permafrostResults['gipl'][year] = this.convertPermafrostMeans(
             this.permafrostResults['gipl'][year]
           )
