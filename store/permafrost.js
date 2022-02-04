@@ -1,40 +1,17 @@
 // This store manages permafrost data!
 
 import _ from 'lodash'
+import { convertToInches, convertToFahrenheit } from '../utils/convert'
 
-// Helper functions first.
-
-var convertToImperial = function (permafrostData) {
-  if (!permafrostData) {
-    return
-  }
-
-  let t = _.mapValuesDeep(
-    permafrostData,
-    (value) => {
-      if (!value || value == -9999) {
-        return null
-      } else {
-        // Convert meters to inches.
-        return parseFloat((value * 39.37008).toFixed(1))
-      }
-    },
-    {
-      leavesOnly: true,
-    }
-  )
-  return t
-}
-
-// Takes permafrost data (metric) and uses the sign of the MAGT value to
-// determine if the ALT value for the next time interval should be interpreted
-// as "has permafrost". For example, if the MAGT value for 1995 is negative,
-// the ALT value for the next time interval (the 2025 era) is interpreted as
-// "has permafrost", meaning the ALT value represents the thickness of the
-// active layer above the permafrost during the summer.
-var getAltThaw = function (permafrostData) {
+var getProcessedData = function (permafrostData) {
   let freezing = 0
-  let thawData = {}
+  let categories = ['thaw', 'freeze']
+  let categorizedData = {}
+  let magtData = {}
+  let permafrostPresent = false
+  let permafrostDisappears = false
+  let permafrostUncertain = false
+
   let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
   let scenarios = ['rcp45', 'rcp85']
   let projectedYears = Object.keys(permafrostData['gipl']).slice(1)
@@ -44,95 +21,94 @@ var getAltThaw = function (permafrostData) {
   let historicalMagt =
     permafrostData['gipl']['1995']['cruts31']['historical']['magt']
 
-  if (historicalMagt < freezing) {
-    thawData['1995'] = historicalAlt
-  } else {
-    thawData['1995'] = null
+  // We cannot determine presence/absence of permafrost when the magnitude of
+  // the historical MAGT value is very small.
+  if (_.inRange(historicalMagt, -1, 1)) {
+    permafrostUncertain = true
   }
 
-  projectedYears.forEach((year) => {
-    thawData[year] = {}
-    models.forEach((model) => {
-      thawData[year][model] = {}
+  magtData['1995'] = historicalMagt
+
+  categories.forEach(category => {
+    categorizedData[category] = {}
+    if (category == 'freeze' && historicalMagt <= freezing) {
+      categorizedData[category]['1995'] = null
+    } else {
+      categorizedData[category]['1995'] = historicalAlt
+    }
+
+    projectedYears.forEach(year => {
+      categorizedData[category][year] = {}
+      magtData[year] = {}
+      models.forEach(model => {
+        categorizedData[category][year][model] = {}
+        magtData[year][model] = {}
+      })
     })
   })
 
-  let permafrostPresent = false
-  models.forEach((model) => {
-    scenarios.forEach((scenario) => {
+  models.forEach(model => {
+    scenarios.forEach(scenario => {
       let previousMagt = historicalMagt
-      projectedYears.forEach((year) => {
+      projectedYears.forEach(year => {
         let scenarioAlt = permafrostData['gipl'][year][model][scenario]['alt']
+        let scenarioMagt = permafrostData['gipl'][year][model][scenario]['magt']
+
+        if (permafrostUncertain) {
+          magtData[year][model][scenario] = scenarioMagt
+          return
+        }
+
+        // An ALT value of 0.07 appears to be nodata.
+        // TODO: Convert 0.07 to proper nodata values in the API or GeoServer.
+        if (scenarioAlt <= 0.07) {
+          categorizedData['thaw'][year][model][scenario] = null
+          categorizedData['freeze'][year][model][scenario] = null
+          return
+        }
+
+        // Populate with thaw data, or null if no permafrost is present.
+        // The presence of permafrost is detected by using the sign of the MAGT
+        // value to determine if the ALT value for the next time interval should
+        // be interpreted as "has permafrost". For example, if the MAGT value
+        // for 1995 is negative, the ALT value for the next time interval (the
+        // 2025 era) is interpreted as "has permafrost", meaning the ALT value
+        // represents the thickness of the active layer above the permafrost
+        // during the summer.
         if (previousMagt < freezing) {
-          thawData[year][model][scenario] = scenarioAlt
+          categorizedData['thaw'][year][model][scenario] = scenarioAlt
           permafrostPresent = true
         } else {
-          thawData[year][model][scenario] = null
+          categorizedData['thaw'][year][model][scenario] = null
         }
-        previousMagt = permafrostData['gipl'][year][model][scenario]['magt']
-      })
-    })
-  })
 
-  return {
-    thawData: thawData,
-    present: permafrostPresent,
-  }
-}
-
-// Takes permafrost data (metric) and uses the sign of the MAGT value to
-// determine if the ALT value for the next time interval should be interpreted
-// as "does not have permafrost". For example, if the MAGT value for 1995 is
-// positive, the ALT value for the next time interval (the 2025 era) is
-// interpreted as "does not have permafrost", meaning the ALT value represents
-// the depth at which the ground freezes during the winter.
-var getAltFreeze = function (permafrostData) {
-  let freezing = 0
-  let freezeData = {}
-  let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
-  let scenarios = ['rcp45', 'rcp85']
-  let projectedYears = Object.keys(permafrostData['gipl']).slice(1)
-
-  let historicalAlt =
-    permafrostData['gipl']['1995']['cruts31']['historical']['alt']
-  let historicalMagt =
-    permafrostData['gipl']['1995']['cruts31']['historical']['magt']
-
-  if (historicalMagt > freezing) {
-    freezeData['1995'] = historicalAlt
-  } else {
-    freezeData['1995'] = null
-  }
-
-  projectedYears.forEach((year) => {
-    freezeData[year] = {}
-    models.forEach((model) => {
-      freezeData[year][model] = {}
-    })
-  })
-
-  let permafrostDisappears = false
-  models.forEach((model) => {
-    scenarios.forEach((scenario) => {
-      let previousMagt = historicalMagt
-      projectedYears.forEach((year) => {
-        let scenarioAlt = permafrostData['gipl'][year][model][scenario]['alt']
-        if (scenarioAlt <= 0.07) {
-          freezeData[year][model][scenario] = null
-        } else if (previousMagt > freezing) {
-          freezeData[year][model][scenario] = scenarioAlt
+        // Populate with freeze data, or null if permafrost is present.
+        // The absence of permafrost is detected by usingthe sign of the MAGT
+        // value to determine if the ALT value for the next time interval should
+        // be interpreted as "does not have permafrost". For example, if the
+        // MAGT value for 1995 is positive, the ALT value for the next time
+        // interval (the 2025 era) is interpreted as "does not have permafrost",
+        // meaning the ALT value represents the depth at which the ground
+        // freezes during the winter.
+        if (previousMagt > freezing) {
+          categorizedData['freeze'][year][model][scenario] = scenarioAlt
           permafrostDisappears = true
         } else {
-          freezeData[year][model][scenario] = null
+          categorizedData['freeze'][year][model][scenario] = null
         }
+
         previousMagt = permafrostData['gipl'][year][model][scenario]['magt']
       })
     })
   })
 
   return {
+    present: permafrostPresent,
     disappears: permafrostDisappears,
-    freezeData: freezeData,
+    uncertain: permafrostUncertain,
+    thawData: categorizedData['thaw'],
+    freezeData: categorizedData['freeze'],
+    magtData: magtData,
   }
 }
 
@@ -141,11 +117,14 @@ export const state = () => ({
   permafrostData: undefined,
   altThaw: undefined,
   altFreeze: undefined,
+  magt: undefined,
 
   // True if permafrost is present but disappears over time
   disappears: undefined,
   // True if permafrost is still present here
   present: undefined,
+  // True if presence/absence of permafrost cannot be determined
+  uncertain: undefined,
 })
 
 export const getters = {
@@ -155,13 +134,19 @@ export const getters = {
   altThaw(state, getters, rootState, rootGetters) {
     var tempData = _.cloneDeep(state.altThaw)
     return rootGetters.units == 'imperial'
-      ? convertToImperial(tempData)
+      ? convertToInches(tempData, 'm')
       : tempData
   },
   altFreeze(state, getters, rootState, rootGetters) {
     var tempData = _.cloneDeep(state.altFreeze)
     return rootGetters.units == 'imperial'
-      ? convertToImperial(tempData)
+      ? convertToInches(tempData, 'm')
+      : tempData
+  },
+  magt(state, getters, rootState, rootGetters) {
+    var tempData = _.cloneDeep(state.magt)
+    return rootGetters.units == 'imperial'
+      ? convertToFahrenheit(tempData, 'c')
       : tempData
   },
   present(state) {
@@ -169,6 +154,9 @@ export const getters = {
   },
   disappears(state) {
     return state.disappears
+  },
+  uncertain(state) {
+    return state.uncertain
   },
 
   // Returns true if there's "valid" permafrost data here, i.e.
@@ -188,12 +176,12 @@ export const getters = {
         return false
       }
 
-      // If permafrost is currently present, or was present, this is true.
-      if (state.present || state.disappears) {
+      // If permafrost is currently present, or was present, and was
+      // successfully sorted into one or more of the three possible categories,
+      // this is true.
+      if (state.present || state.disappears || state.uncertain) {
         return true
       }
-
-      console.error('Indeterminate permafrost state?')
     }
   },
 }
@@ -208,11 +196,17 @@ export const mutations = {
   setAltFreeze(state, altFreeze) {
     state.altFreeze = altFreeze
   },
+  setMagt(state, magt) {
+    state.magt = magt
+  },
   setPresent(state, present) {
     state.present = present
   },
   setDisappears(state, disappears) {
     state.disappears = disappears
+  },
+  setUncertain(state, uncertain) {
+    state.uncertain = uncertain
   },
 }
 
@@ -232,13 +226,14 @@ export const actions = {
         let permafrostData = await this.$http.$get(permafrostQueryUrl)
         context.commit('setPermafrostData', permafrostData)
 
-        let altThaw = getAltThaw(permafrostData)
-        let altFreeze = getAltFreeze(permafrostData)
+        let processedData = getProcessedData(permafrostData)
 
-        context.commit('setAltThaw', altThaw.thawData)
-        context.commit('setPresent', altThaw.present)
-        context.commit('setAltFreeze', altFreeze.freezeData)
-        context.commit('setDisappears', altFreeze.disappears)
+        context.commit('setAltThaw', processedData.thawData)
+        context.commit('setPresent', processedData.present)
+        context.commit('setAltFreeze', processedData.freezeData)
+        context.commit('setDisappears', processedData.disappears)
+        context.commit('setMagt', processedData.magtData)
+        context.commit('setUncertain', processedData.uncertain)
       } catch (error) {
         throw error
       }

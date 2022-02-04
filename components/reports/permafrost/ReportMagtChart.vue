@@ -1,24 +1,24 @@
 <template>
 	<div class="permafrost-chart-wrapper">
-		<div id="permafrost-alt-thaw-chart" />
+		<div id="permafrost-magt-chart" />
 	</div>
 </template>
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
 export default {
-	name: 'ReportAltThawChart',
+	name: 'ReportMagtChart',
 	mounted() {
 		this.renderPlot()
 	},
 	computed: {
 		...mapGetters({
 			units: 'units',
-			altThawData: 'permafrost/altThaw'
-		})
+			magtData: 'permafrost/magt',
+		}),
 	},
 	watch: {
-		altThawData: function () {
+		magtData: function () {
 			this.renderPlot()
 		},
 		units: function () {
@@ -27,13 +27,15 @@ export default {
 	},
 	methods: {
 		renderPlot: function () {
-			let altThawData = this.altThawData
-			if (!altThawData) {
+			let magtData = this.magtData
+			if (!magtData) {
 				return
 			}
 
 			let data_traces = []
-			let units = this.units == 'metric' ? 'm' : 'in'
+			let units = this.units == 'metric' ? 'ºC' : 'ºF'
+			let freezing = this.units == 'metric' ? 0 : 32
+			let uncertaintyOffset = this.units == 'metric' ? 1 : 1.8
 
 			let eras_lu = {
 				1995: '1995',
@@ -76,7 +78,7 @@ export default {
 			let symbols = {
 				gfdlcm3: 'circle',
 				gisse2r: 'square',
-				ipslcm5alr: 'pentagon',
+				ipslcm5alr: 'diamond',
 				mricgcm3: 'cross',
 				ncarccsm4: 'x',
 			}
@@ -104,30 +106,28 @@ export default {
 				},
 			}
 
-			let allYears = Object.keys(altThawData)
+			let allYears = Object.keys(magtData)
 			let historicalYear = allYears.slice(0, 1)
 			let projectedYears = allYears.slice(1)
 
-			let historicValue = altThawData[historicalYear]
-			if (historicValue != null) {
-				let historicY = Array(years.length).fill(null)
-				historicY[0] = historicValue
-				let historicalTrace = {
-					type: 'scatter',
-					mode: 'markers',
-					name: 'Historical',
-					hoverinfo: 'x+y+z+text',
-					hovertemplate: '%{y}' + units,
-					marker: {
-						symbol: 'diamond',
-						size: 8,
-						color: '#888888',
-					},
-					x: eras,
-					y: historicY,
-				}
-				data_traces.push(historicalTrace)
+			let historicY = Array(years.length).fill(null)
+			historicY[0] = magtData[historicalYear]
+			let historicalTrace = {
+				type: 'scatter',
+				mode: 'markers',
+				name: 'Historical',
+				hoverinfo: 'x+y+z+text',
+				hovertemplate: '%{y}' + units,
+				marker: {
+					symbol: 'diamond',
+					size: 8,
+					color: '#888888',
+				},
+				x: eras,
+				y: historicY,
 			}
+
+			data_traces.push(historicalTrace)
 
 			models.forEach(model => {
 				scatterTraces[model] = {}
@@ -146,20 +146,22 @@ export default {
 						x: eras,
 						y: [null],
 					}
+				})
+			})
 
-					let dataFound = false
+			models.forEach(model => {
+				scenarios.forEach(scenario => {
 					projectedYears.forEach(year => {
-						let value = altThawData[year][model][scenario]
-						if (value != null) {
-							dataFound = true
-						}
 						scatterTraces[model][scenario]['y'].push(
-							altThawData[year][model][scenario]
+							magtData[year][model][scenario]
 						)
 					})
-					if (dataFound) {
-						data_traces.push(scatterTraces[model][scenario])
-					}
+				})
+			})
+
+			models.forEach(model => {
+				scenarios.forEach(scenario => {
+					data_traces.push(scatterTraces[model][scenario])
 				})
 			})
 
@@ -168,16 +170,15 @@ export default {
 				boxmode: 'group',
 				yaxis: {
 					title: {
-						text: 'Thickness (' + units + ')',
+						text: 'Temperature (' + units + ')',
 						font: {
 							size: 18,
 						},
-						standoff: 30,
 					},
 					hoverformat: hoverformat,
 				},
 				title: {
-					text: 'Active layer thickness',
+					text: 'Mean annual ground temperature',
 					font: {
 						size: 24,
 					},
@@ -202,17 +203,29 @@ export default {
 				dragmode: false,
 			}
 
-			let footerLines = []
-			footerLines.push('Projected values are taken from GIPL 2.0 model output.')
-
-			if (altThawData[historicalYear]) {
+			if (magtData[historicalYear]) {
 				layout.shapes.push({
 					type: 'rect',
 					x0: 0,
 					x1: 1,
 					xref: 'paper',
-					y0: altThawData[historicalYear],
-					y1: altThawData[historicalYear],
+					y0: freezing - uncertaintyOffset,
+					y1: freezing + uncertaintyOffset,
+					yref: 'y',
+					line: {
+						width: 0,
+					},
+					fillcolor: '#cccccc',
+					opacity: 0.2,
+				})
+
+				layout.shapes.push({
+					type: 'line',
+					x0: 0,
+					x1: 1,
+					xref: 'paper',
+					y0: magtData[historicalYear],
+					y1: magtData[historicalYear],
 					yref: 'y',
 					line: {
 						width: 2,
@@ -220,28 +233,13 @@ export default {
 					fillcolor: '#cccccc',
 					opacity: 0.2,
 				})
-
-				footerLines.push(
-					'Historical value is taken from the CRU TS 3.1 dataset'
-				)
 			}
 
-			// Determine if any of the chart columns are missing data.
-			let emptyColumn = false
-			allYears.forEach(year => {
-				let dataFound = _.findDeep(altThawData[year], (value, key, parent) => {
-					if (value != null) return true
-				})
-				if (dataFound == undefined) {
-					emptyColumn = true
-				}
-			})
-
-			if (emptyColumn) {
-				footerLines.push(
-					'Empty columns indicate that permafrost has disappeared for all models.'
-				)
-			}
+			let footerLines = [
+				'Projected values are taken from GIPL 2.0 model output.',
+				'Historical value is taken from the CRU TS 3.1 dataset.',
+				'The shaded gray region is the uncertainty threshold.',
+			]
 
 			let footerOffset = 0.05 * footerLines.length
 			let footerY = -0.2 - footerOffset
@@ -256,19 +254,6 @@ export default {
 			}
 
 			layout.annotations.push({
-				x: yAxisAnnotationX,
-				y: 0.14,
-				xref: 'paper',
-				yref: 'paper',
-				showarrow: true,
-				text: 'Less permafrost →',
-				textangle: '-90',
-				font: {
-					size: 13,
-				},
-			})
-
-			layout.annotations.push({
 				x: 0.5,
 				y: footerY,
 				xref: 'paper',
@@ -277,7 +262,7 @@ export default {
 				text: footerLines.join('<br />'),
 			})
 
-			this.$Plotly.newPlot('permafrost-alt-thaw-chart', data_traces, layout, {
+			this.$Plotly.newPlot('permafrost-magt-chart', data_traces, layout, {
 				displaylogo: false,
 				modeBarButtonsToRemove: [
 					'zoom2d',
