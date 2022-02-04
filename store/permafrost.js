@@ -213,14 +213,11 @@ export const mutations = {
 export const actions = {
   async fetch(context) {
     // TODO: add error handling here for 404 (no data) etc.
-
-    if (context.rootGetters.latLng) {
+    if (context.rootGetters['place/latLng']) {
       let permafrostQueryUrl =
         process.env.apiUrl +
-        '/permafrost/point/' +
-        context.rootGetters.latLng[0] +
-        '/' +
-        context.rootGetters.latLng[1]
+        '/permafrost/' +
+        context.rootGetters['place/urlFragment']
 
       try {
         let permafrostData = await this.$http.$get(permafrostQueryUrl)

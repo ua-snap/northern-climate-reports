@@ -202,7 +202,7 @@ export default {
 	},
 	computed: {
 		...mapGetters({
-			place: 'placeName',
+			place: 'place/name',
 		}),
 	},
 	// This component initiates the data fetching so that
