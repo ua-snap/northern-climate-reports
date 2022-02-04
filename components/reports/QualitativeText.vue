@@ -87,9 +87,13 @@ export default {
       return this.generateAnnualMetricsHtml()
     },
     collectSeasonalMetrics(season) {
-      let historicalTemp = this.reportData['1950_2009'][season]['CRU-TS40']['CRU_historical']['tas']['mean']
+      let historicalTemp = this.reportData['1950_2009'][season]['CRU-TS40'][
+        'CRU_historical'
+      ]['tas']['mean']
 
-      let historicalPrecip = this.reportData['1950_2009'][season]['CRU-TS40']['CRU_historical']['pr']['mean']
+      let historicalPrecip = this.reportData['1950_2009'][season]['CRU-TS40'][
+        'CRU_historical'
+      ]['pr']['mean']
 
       var seasonMetrics = {
         season: this.seasonNames[season],
@@ -104,13 +108,13 @@ export default {
 
       // Take an average of both temperature and precipitation for the same season and RCP from both models.
       let tempMax = Math.max(
-      this.reportData['2070_2099'][season]['MRI-CGCM3']['rcp85']['tas'],
-      this.reportData['2070_2099'][season]['CCSM4']['rcp85']['tas'],
+        this.reportData['2070_2099'][season]['MRI-CGCM3']['rcp85']['tas'],
+        this.reportData['2070_2099'][season]['CCSM4']['rcp85']['tas']
       )
 
       let precipMax = Math.max(
         this.reportData['2070_2099'][season]['MRI-CGCM3']['rcp85']['pr'],
-        this.reportData['2070_2099'][season]['CCSM4']['rcp85']['pr'],
+        this.reportData['2070_2099'][season]['CCSM4']['rcp85']['pr']
       )
 
       // If the maximum temperature difference is less than the current temperature difference,
@@ -154,15 +158,15 @@ export default {
       let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
       let scenarios = ['rcp45', 'rcp85']
 
-      models.forEach(model => {
-        scenarios.forEach(scenario => {
+      models.forEach((model) => {
+        scenarios.forEach((scenario) => {
           let value = this.altThawData[lastYear][model][scenario]
           thicknesses.push(value)
         })
       })
       let thicknessMax = _.max(thicknesses)
 
-      return Math.round(thicknessMax / thicknessHistorical * 100 - 100)
+      return Math.round((thicknessMax / thicknessHistorical) * 100 - 100)
     },
     // Subfunction: Generate annual metrics HTML string
     // Input: None. (Uses constant seasons)
@@ -280,9 +284,13 @@ export default {
       if (this.showPermafrost) {
         let permafrostChange = this.permafrostChange()
         if (this.permafrostPresent && this.permafrostDisappears) {
-          returnedString += '<p>By the late century, permafrost up to 3 meters below ground may <strong>disappear</strong>.</p>'
+          returnedString +=
+            '<p>By the late century, permafrost up to 3 meters below ground may <strong>disappear</strong>.</p>'
         } else if (permafrostChange > 0) {
-          returnedString += '<p>By the late century, active layer permafrost thickness may increase by <strong>' + Math.abs(permafrostChange) + '%</strong>.</p>'
+          returnedString +=
+            '<p>By the late century, active layer permafrost thickness may increase by <strong>' +
+            Math.abs(permafrostChange) +
+            '%</strong>.</p>'
         }
       }
 

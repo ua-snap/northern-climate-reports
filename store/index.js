@@ -23,9 +23,9 @@ export const mutations = {
   setPermafrostPresent(state, value) {
     state.permafrostPresent = value
   },
-  setPermafrostDisappears (state, value) {
+  setPermafrostDisappears(state, value) {
     state.permafrostDisappears = value
-  }
+  },
 }
 
 // We use vuex-router-sync so some of our state handled from

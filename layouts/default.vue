@@ -39,7 +39,7 @@
     <div class="container">
       <nuxt />
     </div>
-    
+
     <Footer></Footer>
   </div>
 </template>

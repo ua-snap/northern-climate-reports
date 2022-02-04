@@ -24,8 +24,7 @@
     </client-only>
   </div>
 </template>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
 <script>
 import Map from '~/components/Map'
 import Report from '~/components/Report'

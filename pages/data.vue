@@ -22,12 +22,16 @@
         </p>
         <ul>
           <li>
-            <a href="http://ckan.snap.uaf.edu/dataset?tags=IEM-Input">Model inputs</a>. These data were prepared specifically to support
-            modelling runs used in the IEM project.
+            <a href="http://ckan.snap.uaf.edu/dataset?tags=IEM-Input"
+              >Model inputs</a
+            >. These data were prepared specifically to support modelling runs
+            used in the IEM project.
           </li>
           <li>
-            <a href="http://ckan.snap.uaf.edu/dataset?tags=IEM-Output">Model outputs</a>. These data consist of outputs from the model runs
-            performed through the IEM project.
+            <a href="http://ckan.snap.uaf.edu/dataset?tags=IEM-Output"
+              >Model outputs</a
+            >. These data consist of outputs from the model runs performed
+            through the IEM project.
           </li>
         </ul>
         <p>
@@ -49,8 +53,11 @@
         <code>[tbd]</code>
         <h2 class="title is-3">Contact us if you have any questions</h2>
         <p>
-          Email us at <a href="mailto:uaf-snap-data-tools@alaska.edu">uaf-snap-data-tools@alaska.edu</a> if you have any questions
-          about these data.
+          Email us at
+          <a href="mailto:uaf-snap-data-tools@alaska.edu"
+            >uaf-snap-data-tools@alaska.edu</a
+          >
+          if you have any questions about these data.
         </p>
       </div>
     </div>
