@@ -1,12 +1,6 @@
 <template>
   <div>
-    <h4 class="subtitle is-4">
-      Permafrost
-      <span class="units">
-        <span v-if="units == 'imperial'">(inches)</span>
-        <span v-if="units == 'metric'">(meters)</span>
-      </span>
-    </h4>
+    <h4 class="title is-3">Permafrost</h4>
     <div class="content is-size-5">
       <span
         v-show="
