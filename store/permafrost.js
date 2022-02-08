@@ -14,7 +14,7 @@ var getProcessedData = function (permafrostData) {
 
   let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
   let scenarios = ['rcp45', 'rcp85']
-  let projectedYears = Object.keys(permafrostData['gipl']).slice(1)
+  let projectedYears = ['2025', '2050', '2075', '2095']
 
   let historicalAlt =
     permafrostData['gipl']['1995']['cruts31']['historical']['alt']
