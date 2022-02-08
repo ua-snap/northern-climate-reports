@@ -18,7 +18,7 @@
         <!-- Map can't be wrapped in container/section, if we want it full-screen. -->
         <Map></Map>
       </div>
-      <div v-show="this.reportIsVisible" class="report-wrapper">
+      <div v-if="this.reportIsVisible" class="report-wrapper">
         <Report></Report>
       </div>
     </client-only>
