@@ -111,7 +111,8 @@ export default {
       let projectedYears = allYears.slice(1)
 
       let historicY = Array(years.length).fill(null)
-      historicY[0] = magtData[historicalYear]
+      let historicValue = magtData[historicalYear]
+      historicY[0] = historicValue
       let historicalTrace = {
         type: 'scatter',
         mode: 'markers',
@@ -137,7 +138,8 @@ export default {
             mode: 'markers',
             name: traceLabels_lu[model][scenario],
             hoverinfo: 'x+y+z+text',
-            hovertemplate: '%{y}' + units,
+            hovertemplate:
+              '%{y}' + units + ' <b>(%{customdata}' + units + ')</b>',
             marker: {
               symbol: Array(eras.length).fill(symbols[model]),
               size: 8,
@@ -145,6 +147,7 @@ export default {
             },
             x: eras,
             y: [null],
+            customdata: [null],
           }
         })
       })
@@ -152,9 +155,15 @@ export default {
       models.forEach(model => {
         scenarios.forEach(scenario => {
           projectedYears.forEach(year => {
-            scatterTraces[model][scenario]['y'].push(
-              magtData[year][model][scenario]
-            )
+            let value = magtData[year][model][scenario]
+            scatterTraces[model][scenario]['y'].push(value)
+            let diff = value - historicValue
+            if (diff > 0) {
+              diff = '+' + diff.toFixed(1)
+            } else {
+              diff = diff.toFixed(1)
+            }
+            scatterTraces[model][scenario]['customdata'].push(diff)
           })
         })
       })

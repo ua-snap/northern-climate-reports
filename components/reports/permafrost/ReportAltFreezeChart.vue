@@ -104,6 +104,7 @@ export default {
         },
       }
 
+      let precision = this.units == 'metric' ? 2 : 1
       let allYears = Object.keys(altFreezeData)
       let historicalYear = allYears.slice(0, 1)
       let projectedYears = allYears.slice(1)
@@ -117,7 +118,7 @@ export default {
           mode: 'markers',
           name: 'Historical',
           hoverinfo: 'x+y+z+text',
-          hovertemplate: '%{y}' + units,
+          hovertemplate: '%{y:.' + precision + 'f}' + units,
           marker: {
             symbol: 'diamond',
             size: 8,
@@ -137,7 +138,7 @@ export default {
             mode: 'markers',
             name: traceLabels_lu[model][scenario],
             hoverinfo: 'x+y+z+text',
-            hovertemplate: '%{y}' + units,
+            hovertemplate: '%{y:.' + precision + 'f}' + units,
             marker: {
               symbol: Array(eras.length).fill(symbols[model]),
               size: 8,
@@ -145,16 +146,30 @@ export default {
             },
             x: eras,
             y: [null],
+            customdata: [null],
           }
 
           let dataFound = false
           projectedYears.forEach(year => {
             let value = altFreezeData[year][model][scenario]
-            if (value != null) dataFound = true
-            scatterTraces[model][scenario]['y'].push(
-              altFreezeData[year][model][scenario]
-            )
+            if (value != null) {
+              dataFound = true
+            }
+            scatterTraces[model][scenario]['y'].push(value)
+            if (historicValue != null) {
+              let diff = value - historicValue
+              if (diff > 0) {
+                diff = '+' + diff.toFixed(precision)
+              } else {
+                diff = diff.toFixed(precision)
+              }
+              scatterTraces[model][scenario]['customdata'].push(diff)
+            }
           })
+          if (historicValue != null) {
+            scatterTraces[model][scenario]['hovertemplate'] +=
+              ' <b>(%{customdata}' + units + ')</b>'
+          }
           if (dataFound) {
             data_traces.push(scatterTraces[model][scenario])
           }
