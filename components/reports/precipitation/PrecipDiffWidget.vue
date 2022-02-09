@@ -57,7 +57,7 @@ export default {
       if (diff > 0) {
         diff = '&plus;' + diff + '%'
       } else if (diff < 0) {
-        diff = '&minus;' + Math.abs(diff) + '&percent;'
+        diff = '&minus;' + Math.abs(diff) + '%'
       } else {
         diff = '&lt;1%'
       }
