@@ -18,7 +18,7 @@
         <!-- Map can't be wrapped in container/section, if we want it full-screen. -->
         <Map></Map>
       </div>
-      <div v-show="this.reportIsVisible" class="report-wrapper">
+      <div v-if="this.reportIsVisible" class="report-wrapper">
         <Report></Report>
       </div>
     </client-only>
@@ -43,6 +43,14 @@ export default {
   },
   computed: {
     ...mapGetters(['reportIsVisible']),
+  },
+  created() {
+    // Switch back to clean URL after S3 redirect. Adapted from here:
+    // https://via.studio/journal/hosting-a-reactjs-app-with-routing-on-aws-s3
+    const path = (/#!(\/.*)$/.exec(this.$route.fullPath) || [])[1]
+    if (path) {
+      this.$router.push({ path: path })
+    }
   },
 }
 </script>
