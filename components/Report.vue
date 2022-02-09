@@ -222,10 +222,10 @@ export default {
   // error handling, etc, can all be done in one spot.
   async fetch() {
     // TODO: Error handling.
-    this.$store.dispatch('climate/fetch').catch(e => {
+    await this.$store.dispatch('climate/fetch').catch(e => {
       console.error(e)
     })
-    this.$store.dispatch('permafrost/fetch').catch(e => {
+    await this.$store.dispatch('permafrost/fetch').catch(e => {
       console.error(e)
     })
   },
