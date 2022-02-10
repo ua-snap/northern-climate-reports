@@ -69,6 +69,9 @@ export default {
         return this.units == 'metric' ? '&deg;C' : '&deg;F'
       }
     },
+    depthFragment() {
+      return this.units == 'imperial' ? '9.8ft' : '3m'
+    },
   },
   watch: {
     reportData: function () {
@@ -288,7 +291,9 @@ export default {
         let permafrostChange = this.permafrostChange()
         if (this.permafrostPresent && this.permafrostDisappears) {
           returnedString +=
-            '<p>By the late century, permafrost up to 3 meters below ground<br/> may <strong>disappear</strong>.</p>'
+            '<p>By the late century, permafrost within ' +
+            this.depthFragment +
+            ' of the ground surface may <strong>disappear</strong>.</p>'
         } else if (permafrostChange > 0) {
           returnedString +=
             '<p>By the late century, active layer permafrost thickness<br/> may increase by <strong>' +
