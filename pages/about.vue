@@ -7,19 +7,18 @@
       </h2>
       <div class="content is-size-5">
         <p>
-          Assessments of climate-change effects on ecosystem processes and
-          services in the North are hindered by a lack of decision-support tools
+          Assessments of climate-change effects on Northern ecosystems are hindered by a lack of decision-support tools
           that can visualize possible future landscapes under different
           scenarios.
         </p>
         <p>
           Model output products are publicly available, but often in formats
-          requiring considerable analytical expertise to access and process.
+          requiring considerable expertise to access and process.
           Repackaging these outputs as Climate Impact Reports moves relevant
-          climate information out of archival storage and into management
-          decision spaces—thus helping to gauge future fire hazard, reduce
-          future wildfire risk, promote ecological resilience and wildlife
-          habitat management.
+          climate information out of storage and into
+          decision-making spaces&mdash;thus helping to gauge future fire hazard, reduce
+          future wildfire risk, promote ecological resilience and manage wildlife
+          habitat.
         </p>
       </div>
       <h2 class="title is-3">What&rsquo;s changing in the Arctic?</h2>
@@ -37,8 +36,8 @@
         </p>
         <ul>
           <li>
-            Warming <strong>temperatures are driving</strong> some changes in
-            species composition&ndash;particularly warmer summers, earlier
+            <strong>Warming temperatures</strong> are driving some changes in
+            species composition&mdash;particularly warmer summers, earlier
             springs, later autumns, and less severe winters.
           </li>
           <li>
@@ -66,14 +65,14 @@
       <div class="content is-size-5">
         
 
-<p>We use weather forecasts for short-term planning.  Climate projections can be used for long-term planning—but they are not the same as forecasts.   Weather varies day to day and even minute to minute, whereas climate refers to  the average or typical conditions over much longer time periods.  However, there are uncertainties based on model limitations and unknown future human behavior that make long-range forecasting very different from predicting tomorrow's weather.</p>
+<p>We use weather forecasts for short-term planning.  Climate projections can be used for long-term planning&mdash;but they are not the same as forecasts.   Weather varies day to day, whereas climate refers to  the average or typical conditions over much longer time periods.  However, there are uncertainties based on model limitations and unknown future human behavior that make long-range forecasting very different from predicting tomorrow's weather.</p>
 <p>Climate projections look much further into the future than weather forecasts. They address uncertainties by focusing on the range of future conditions that would likely occur, given what we currently know about the climate system and how it will change in response to changes in the factors that affect it.</p>
 </div>
 
-<h3 class="subtitle is-4">How do we make projections? With climate models.</h3>
+<h3 class="subtitle is-4">How do we make these projections? We use climate models.</h3>
       <div class="content is-size-5">
 
-<p>Climate models are simplified versions of reality that try to explain climatic processes with just the most necessary parts of the system. Their usefulness  is evident when we compare observed historical climate and simulated data —the models capture the most important climate patterns.</p>
+<p>Climate models are simplified versions of reality that try to explain climatic processes with just the most necessary parts of the system. Their usefulness is evident when we compare observed historical climate and simulated data&mdash;the models capture the most important climate patterns.</p>
 <p>Climate models use data to calculate how the global climate varies. These data include:</p>
 <ul>
   <li>initial climate conditions</li>
@@ -82,7 +81,7 @@
   <li>land surface conditions</li>
   <li>feedbacks such as the carbon cycle and the water cycle</li>
 </ul>
-<p>The end product is a simulation of future climate.  Because it is based on statistical probabilities, the data are most reliable when averaged across time or space, such as the projected average of 30 years of winter precipitation for your community, or the likely hottest temperature that might occur on the North Slope.</p>
+<p>The end product is a simulation of future climate.  Because the end product is based on statistical probabilities, the data are most reliable when averaged across time or space, such as the projected average of 30 years of winter precipitation for your community, or the likely hottest temperature that might occur on the North Slope.</p>
 </div>
 
 <h3 class="subtitle is-4">Climate models aren&rsquo;t perfect, though.</h3>
@@ -106,7 +105,7 @@
 
 <div class="content is-size-5">
   <p>The future climate we experience will not look exactly like any of these projections, but it will look like a lot of them. There are a range of future climates we may experience, and best practices are to plan for the likely range of climates, impacts, and associated risks for the time frame and region you&rsquo;re planning for.</p>
-  <p><strong>Projections are always improving incrementally. Don&rsquo;t wait for a better projection&mdash;you&rsquo;ll always be waiting and the costs of waiting will start increasing. In general, plan for the range of historical variability plus the range of climates described by a less warm (none show cooling!) climate model under a lower emissions scenario.</strong></p>
+  <p><strong>Projections are always improving incrementally. Don&rsquo;t wait for a better projection&mdash;you&rsquo;ll always be waiting and the costs of waiting will increase. In general, plan for the range of historical variability plus the range of climates described by a less warm (none show cooling!) climate model under a lower emissions scenario.</strong></p>
 </div>
       </div>
     </div>
