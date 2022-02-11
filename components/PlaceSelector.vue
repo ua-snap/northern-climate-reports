@@ -5,7 +5,7 @@
       <p>
         Search below by <strong>community name</strong>,
         <strong>watershed</strong> (hydrological unit name or HUC8 code) or
-        <strong>protected area</strong> (National Park, National Forest, etc).
+        <strong>protected area</strong> (National Park, National Forest, etc).  <nuxt-link :to="{ name: 'data', hash: '#places'}">Read about all places included in this tool.</nuxt-link>
       </p>
       <p>
         <b-field>
@@ -105,8 +105,12 @@ export default {
               .toLowerCase()
               .indexOf(this.selectedPlace.toLowerCase()) >= 0) ||
           // HUCID, check only if it's 4 digits or more
-          (option.id.toString().indexOf(this.selectedPlace) >= 0 &&
-            this.selectedPlace.length > 3)
+          (this.selectedPlace.length > 3 &&
+            (option.id.toString().indexOf(this.selectedPlace) >= 0 ||
+              option.id.toString().indexOf('huc ' + this.selectedPlace) >= 0 ||
+              option.id.toString().indexOf('HUC ' + this.selectedPlace) >= 0 ||
+              option.id.toString().indexOf('huc-' + this.selectedPlace) >= 0 ||
+              option.id.toString().indexOf('HUC-' + this.selectedPlace) >= 0))
         )
       })
     },

@@ -2,7 +2,7 @@
   <section class="section">
     <div class="content-wrapper">
       <div class="content is-size-5">
-        <h2 class="title is-3">About the data used in this tool</h2>
+        <h2 class="title is-3">About the data available in this tool</h2>
         <p>
           Data used in this tool consist of inputs and outputs from the
           Integrated Ecosystem Management (IEM) project. This project originally
@@ -11,67 +11,89 @@
           ALFRESCO, a stochastic wildfire and landscape model.
         </p>
         <p>
-          This tool doesn&rsquo;t offer the full range of data produced for the
-          IEM project. If you are looking for models or scenarios not present on
-          this site, you can download source data.
-        </p>
-        <p>
           Data available through this tool are subject to the
           <a href="https://creativecommons.org/licenses/by/4.0/"
             >Creative Commons Attribution 4.0</a
           >
           license.
         </p>
-        <h2 class="title is-3">How to obtain source data</h2>
-        <p>
-          Data used on this site is distributed from the data repository at the
-          Scenarios Network for Alaska + Arctic Planning:
-        </p>
+        <h2 id="datasets" class="title is-3">
+          What datasets are shown in this tool?
+        </h2>
+        <h3 class="title is-4">Temperature &amp; Precipitation</h3>
         <ul>
-          <li>
-            <a href="http://ckan.snap.uaf.edu/dataset?tags=IEM-Input"
-              >Model inputs</a
-            >. These data were prepared specifically to support modelling runs
-            used in the IEM project.
-          </li>
-          <li>
-            <a href="http://ckan.snap.uaf.edu/dataset?tags=IEM-Output"
-              >Model outputs</a
-            >. These data consist of outputs from the model runs performed
-            through the IEM project.
-          </li>
+          <li><a href="http://ckan.snap.uaf.edu/dataset/historical-monthly-and-derived-temperature-products-downscaled-from-cru-ts-data-via-the-delta-m">Historical Monthly and Derived Temperature Products - 2km CRU TS 4.0</a></li>
+          <li><a href="http://ckan.snap.uaf.edu/dataset/historical-monthly-and-derived-precipitation-products-downscaled-from-cru-ts-data-via-the-delta">Historical Monthly and Derived Precipitation Products - 2km CRU TS 4.0</a></li>
+          <li><a href="http://ckan.snap.uaf.edu/dataset/projected-monthly-and-derived-temperature-products-2km-cmip5-ar5">Projected Monthly and Derived Temperature Products - 2km CMIP5/AR5</a></li>
+          <li><a href="http://ckan.snap.uaf.edu/dataset/projected-monthly-and-derived-precipitation-products-2km-cmip5-ar5">Projected Monthly and Derived Temperature Products - 2km CMIP5/AR5</a></a></li>
+        </ul>
+        <h3 class="title is-4">Permafrost</h3>
+        <ul>
+          <li><a href="https://doi.org/10.1073/pnas.1611056113">Geophysical Institute Permafrost Lab (GIPL) Model 2.0, Melvin et al. (2017)</a></li>
+        </ul>
+        <h3 class="title is-4">Wildfire</h3>
+        <ul>
+          <li>TBD</li>
         </ul>
         <p>
-          There, you can filter and search for specific datasets and variables
-          of interest to download the full range of model and scenario options.
-          These data are generally offered as gridded multiband GeoTIFF
-          products.
+          This tool doesn&rsquo;t offer the full range of data produced for the
+          IEM project. If you are looking for models or scenarios not present on
+          this site, you can download source data.
         </p>
+        <h2 id="places" class="title is-3">
+          What places are available in this tool?
+        </h2>
+        <p>
+          This tool has a variety of places which can be chosen for reports:
+        </p>
+        <ul>
+          <li><strong>communities</strong>,</li>
+          <li>
+            <strong>watersheds/hydrological units</strong> at the HU-8 level
+            (subbasin), searchable by name or HUC code (&lsquo;Middle Copper
+            River&rsquo; or &lsquo;HUC 19020102&rsquo;, for example),
+          </li>
+          <li>
+            <strong>protected areas</strong> such as National Parks, National
+            Forests, Wilderness Areas and more, searchable by name and agency
+            (NPS, USFS, etc),
+          </li>
+          <li><strong>Alaska Native Corporation geographic boundaries</strong>...?</li>
+          <li><strong>Fire Management Units...?</strong></li>
+          <li><strong>Ethnolinguistic regions...?</strong></li>
+        </ul>
         <h2 class="title is-3">Data API access</h2>
         <p>
-          In addition to downloading source data as GeoTIFFs, all the data that
-          are used in this web tool may be accessed via an API. Documentation
-          and examples are provided on the API site.
+          All the data used in this web tool may be accessed directly via an API. Documentation, examples, and links to source datasets are provided on the API site.
         </p>
         <p>
           <a class="button is-link" href="https://earthmaps.io"
             >Visit the Data API</a
           >
         </p>
-        <h2 class="title is-3">Code examples</h2>
-        <code
-          >Placeholder for a link to a Python notebook doing a point extraction
-          from a stack of GeoTIFFs (say, GIPL).</code
-        >
-        <h2 class="title is-3">Contact us if you have any questions</h2>
+        <h2 class="title is-3">Contact us</h2>
         <p>
           Email us at
           <a href="mailto:uaf-snap-data-tools@alaska.edu"
             >uaf-snap-data-tools@alaska.edu</a
           >
-          if you have any questions about these data.
+           questions about these data, data access, or using these data in your work.
         </p>
       </div>
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  name: 'DataPlacesPage',
+  layout: 'default',
+  mounted() {
+    var section = this.$router.currentRoute.hash.replace('#', '')
+    if (section && window.document.getElementById(section))
+      this.$nextTick(() =>
+        window.document.getElementById(section).scrollIntoView()
+      )
+  },
+}
+</script>
