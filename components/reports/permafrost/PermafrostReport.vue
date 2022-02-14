@@ -56,6 +56,7 @@
         >Read more about models and RCPs.</nuxt-link
       >
     </div>
+    <ReportMagtMaps />
     <div class="chart-wrapper permafrost" v-show="this.permafrostPresent">
       <ReportAltThawChart />
     </div>
@@ -69,6 +70,7 @@
 </template>
 <style></style>
 <script>
+import ReportMagtMaps from './ReportMagtMaps'
 import ReportAltThawChart from './ReportAltThawChart'
 import ReportAltFreezeChart from './ReportAltFreezeChart'
 import ReportMagtChart from './ReportMagtChart'
@@ -76,7 +78,12 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'PermafrostReport',
-  components: { ReportAltThawChart, ReportAltFreezeChart, ReportMagtChart },
+  components: {
+    ReportMagtMaps,
+    ReportAltThawChart,
+    ReportAltFreezeChart,
+    ReportMagtChart,
+  },
   computed: {
     // The range of uncertainty, within 1ºC of freezing.
     uncertaintyFragment() {
