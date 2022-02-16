@@ -3,17 +3,11 @@
     <h4 class="title is-3">Temperature</h4>
     <div class="content is-size-5">
       <p>
-        Projections for each decade through the end of the century are shown for
-        average (mean) temperature, compared with a historical range. Results
-        are averaged by season (three month averages) for two specific climate
-        models (MRI-CGCM3 and NCAR-CCSM4) as well as a 5-model average. Three
-        different greenhouse gas scenarios or Representative Concentration
-        Pathways (RCPs) are shown for each model. RCP4.5 is an optimistic
-        future, and RCP8.5 is more pessimistic but also more likely. RCP6.0 is
-        an emissions scenario between RCP4.5 and RCP8.5.
-        <nuxt-link :to="{ name: 'about' }"
-          >Read more about models and RCPs.</nuxt-link
-        >
+        This section shows projections for average (mean) temperature, compared
+        with a historical range (1950&ndash;2009). Results are averaged by
+        season (three month averages) for two specific climate models (MRI-CGCM3
+        and NCAR-CCSM4) as well as average of five models which perform well in
+        Alaska and the Arctic.  <nuxt-link :to="{ name: 'data', hash: '#datasets'}">See information about the dataset shown here.</nuxt-link>
       </p>
     </div>
     <div class="chart-wrapper">

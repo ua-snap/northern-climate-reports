@@ -76,6 +76,13 @@
         </div>
       </section>
       <section class="section">
+        <h3 class="title is-3">Introduction</h3>
+        <div class="content is-size-5">
+          <p>The sections below show output from different scientific simulations for possible future conditions for temperature, precipitation, permafrost and wildfire.  These simulations use different Global Circulation Models (GCMs), such as the National Center for Atmospheric Research Community Climate System Model 4.0 (NCAR-CCSM4) model.  The GCMs use Representative Concentration Pathways (RCPs) to compare different future greenhouse gas emissions scenarios.  Compared to current emissions, RCP 4.5 is consistent with reduced emissions, RCP 8.5 is consistent with (and possibly higher than) current emissions trajectories, and RCP 6.0 is between these two trajectories. <nuxt-link :to="{ name: 'about' }"
+            >Read more about models and RCPs.</nuxt-link
+          >
+        </p>
+        </div>
         <h4 class="title is-4">Contents</h4>
         <div class="content is-size-5">
           <ul>
@@ -119,35 +126,7 @@
         </div>
         <BackToTopButton />
       </section>
-      <section class="section" id="data-overview-download">
-        <div class="content is-size-5">
-          <p>
-            Comparing projections with historical data in the first column
-            offers broad insights into future trends. Comparisons between models
-            and RCPs offers a range of uncertainty with regard to these trends.
-            It is important to note that even small changes in precipitation and
-            temperature may result in profound landscape effects, particularly
-            if threshold values are crossed. For example, a shift from
-            below-freezing to above-freezing temperature can alter permafrost
-            and active layer, while hotter sping and summer temperatures can
-            increase fire frequency. Temperature and precipitation data are used
-            as inputs in many other models.
-          </p>
-          <p>
-            Many of these datasets were produced as part of the Integrated
-            Ecosystem Management (IEM) Project.
-            <a
-              href="https://uaf-snap.org/project/iem-an-integrated-ecosystem-model-for-alaska-and-northwest-canada/"
-              >Read more about this project</a
-            >, or
-            <a href="http://ckan.snap.uaf.edu/dataset?tags=IEM"
-              >access these datasets</a
-            >.
-          </p>
-          <p>
-            <DownloadCsvButton />
-          </p>
-        </div>
+        <DownloadCsvButton />
         <BackToTopButton />
       </section>
       <hr />
