@@ -6,13 +6,11 @@
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
+import { getPlotSettings, getLayout, getFooter } from '../../../utils/charts'
 import {
-  getPlotSettings,
-  getLayout,
   getHistoricalTrace,
   getHistoricalLine,
   getProjectedTraces,
-  getFooter,
   detectEmptyColumns,
 } from '../../../utils/permafrost_charts'
 

@@ -5,14 +5,12 @@
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
+import { getPlotSettings, getLayout, getFooter } from '../../../utils/charts'
 import {
-  getPlotSettings,
-  getLayout,
   getHistoricalTrace,
   getHistoricalRegion,
   getProjectedTraces,
-  getFooter,
-  seasons
+  seasons,
 } from '../../../utils/climate_charts'
 
 export default {
