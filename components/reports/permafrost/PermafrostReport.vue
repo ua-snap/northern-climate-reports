@@ -48,13 +48,7 @@
         chart of the historical and projected mean annual ground temperature is
         provided below.
       </span>
-      Results were produced by the GIPL 2.0 permafrost model using five separate
-      climate models and two different greenhouse gas scenarios or
-      Representative Concentration Pathways (RCPs). RCP4.5 is an optimistic
-      future, and RCP8.5 is more pessimistic but also more likely.
-      <nuxt-link :to="{ name: 'about' }"
-        >Read more about models and RCPs.</nuxt-link
-      >
+      <nuxt-link :to="{ name: 'data', hash: '#datasets'}">See information about the dataset shown here.</nuxt-link>
     </div>
     <div class="chart-wrapper permafrost" v-show="this.permafrostPresent">
       <ReportAltThawChart />

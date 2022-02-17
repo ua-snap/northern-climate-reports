@@ -1,3 +1,8 @@
+// Meters to feet
+export const convertToFeet = function (value) {
+  return Math.round(value * 3.28084)
+}
+
 export const convertToInches = function (
   permafrostData,
   fromUnit,

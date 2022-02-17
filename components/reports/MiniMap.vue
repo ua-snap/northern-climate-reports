@@ -10,7 +10,8 @@
 #report--minimmap--map {
   height: 20vw;
   min-width: 10vw;
-  width: 100%;
+  width: 20vw;
+  margin: 3rem auto 1rem;
 }
 </style>
 
