@@ -33,14 +33,14 @@
           </th>
         </tr>
         <tr class="models">
-          <th scope="col">MRI Model</th>
-          <th scope="col">NCAR Model</th>
-          <th scope="col">MRI Model</th>
-          <th scope="col">NCAR Model</th>
-          <th scope="col">MRI Model</th>
-          <th scope="col">NCAR Model</th>
-          <th scope="col">MRI Model</th>
-          <th scope="col">NCAR Model</th>
+          <th scope="col">MRI-CGCM3</th>
+          <th scope="col">NCAR-CCSM4</th>
+          <th scope="col">MRI-CGCM3</th>
+          <th scope="col">NCAR-CCSM4</th>
+          <th scope="col">MRI-CGCM3</th>
+          <th scope="col">NCAR-CCSM4</th>
+          <th scope="col">MRI-CGCM3</th>
+          <th scope="col">NCAR-CCSM4</th>
         </tr>
       </thead>
       <tbody>
@@ -472,10 +472,10 @@
       <tfoot>
         <tr>
           <td colspan="10" class="about">
-            Values show averages for the indicated date ranges.
+            Values show averages for the indicated date ranges.  Bold text indicates greater change. 
             <nuxt-link :to="{ name: 'about' }"
-              >Read more about models (MRI-CGCM3 and NCAR-CCSM4) and emissions
-              scenarios (RCPs).</nuxt-link
+              >Read more about models and emissions
+              scenarios.</nuxt-link
             >
           </td>
         </tr>
