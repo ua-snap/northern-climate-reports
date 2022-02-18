@@ -7,27 +7,29 @@
           This section shows projections for average (mean) temperature,
           compared with a historical range (1950&ndash;2009). Results are
           averaged by season (three month averages) for two specific climate
-          models (MRI-CGCM3 and NCAR-CCSM4) as well as average of five models
+          models (MRI CGCM3 and NCAR CCSM4) as well as average of five models
           which perform well in Alaska and the Arctic.
           <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
             >See information about the dataset shown here.</nuxt-link
           >
         </p>
       </div>
-      <b-field label="Season">
-        <b-radio v-model="temp_season" name="temp_season" native-value="DJF"
-          >Winter</b-radio
-        >
-        <b-radio v-model="temp_season" name="temp_season" native-value="MAM"
-          >Spring</b-radio
-        >
-        <b-radio v-model="temp_season" name="temp_season" native-value="JJA"
-          >Summer</b-radio
-        >
-        <b-radio v-model="temp_season" name="temp_season" native-value="SON"
-          >Fall</b-radio
-        >
-      </b-field>
+      <div class="is-size-6 mt-4">
+        <b-field label="Season">
+          <b-radio v-model="temp_season" name="temp_season" native-value="DJF"
+            >Winter</b-radio
+          >
+          <b-radio v-model="temp_season" name="temp_season" native-value="MAM"
+            >Spring</b-radio
+          >
+          <b-radio v-model="temp_season" name="temp_season" native-value="JJA"
+            >Summer</b-radio
+          >
+          <b-radio v-model="temp_season" name="temp_season" native-value="SON"
+            >Fall</b-radio
+          >
+        </b-field>
+      </div>
     </div>
     <ReportTempChart :season="temp_season" />
     <ReportTempTable />

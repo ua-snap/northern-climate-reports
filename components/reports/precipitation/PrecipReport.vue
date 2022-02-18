@@ -7,7 +7,7 @@
           This section shows projections for average (mean) precipitation,
           compared with a historical range (1950&ndash;2009). Results are
           averaged by season (three month averages) for two specific climate
-          models (MRI-CGCM3 and NCAR-CCSM4) as well as average of five models
+          models (MRI CGCM3 and NCAR CCSM4) as well as average of five models
           which perform well in Alaska and the Arctic.
           <strong
             >Models have higher uncertainty with regard to precipitation</strong
@@ -16,7 +16,8 @@
             >See information about the dataset shown here.</nuxt-link
           >
         </p>
-
+      </div>
+      <div class="is-size-6 mt-4">
         <b-field label="Season">
           <b-radio
             v-model="precip_season"

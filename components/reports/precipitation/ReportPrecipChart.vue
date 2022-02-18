@@ -36,10 +36,10 @@ export default {
       let units = this.units == 'metric' ? 'mm' : 'in'
 
       let season_lu = {
-        DJF: 'December - February',
-        MAM: 'March - May',
-        JJA: 'June - August',
-        SON: 'September - November',
+        DJF: 'December-February',
+        MAM: 'March-May',
+        JJA: 'June-August',
+        SON: 'September-November',
       }
 
       let decade_keys = Object.keys(this.reportData)
@@ -76,14 +76,14 @@ export default {
           rcp85: 'RCP 8.5 (5-model Avg.)',
         },
         'MRI-CGCM3': {
-          rcp45: 'RCP 4.5 (MRI)',
-          rcp60: 'RCP 6.0 (MRI)',
-          rcp85: 'RCP 8.5 (MRI)',
+          rcp45: 'RCP 4.5 (MRI CGCM3)',
+          rcp60: 'RCP 6.0 (MRI CGCM3)',
+          rcp85: 'RCP 8.5 (MRI CGCM3)',
         },
         CCSM4: {
-          rcp45: 'RCP 4.5 (NCAR)',
-          rcp60: 'RCP 6.0 (NCAR)',
-          rcp85: 'RCP 8.5 (NCAR)',
+          rcp45: 'RCP 4.5 (NCAR CCSM4)',
+          rcp60: 'RCP 6.0 (NCAR CCSM4)',
+          rcp85: 'RCP 8.5 (NCAR CCSM4)',
         },
       }
 
@@ -244,7 +244,7 @@ export default {
 
       layout.annotations.push({
         x: 0.5,
-        y: footer_y,
+        y: footer_y - 0.05,
         xref: 'paper',
         yref: 'paper',
         showarrow: false,

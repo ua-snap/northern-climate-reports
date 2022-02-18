@@ -20,27 +20,27 @@
         </tr>
         <tr>
           <th scope="col" colspan="2" class="light-border">
-            Low Emissions (RCP4.5)
+            Low Emissions (RCP 4.5)
           </th>
           <th scope="col" colspan="2" class="light-border">
-            High Emissions (RCP8.5)
+            High Emissions (RCP 8.5)
           </th>
           <th scope="col" colspan="2" class="light-border">
-            Low Emissions (RCP4.5)
+            Low Emissions (RCP 4.5)
           </th>
           <th scope="col" colspan="2" class="light-border">
-            High Emissions (RCP8.5)
+            High Emissions (RCP 8.5)
           </th>
         </tr>
         <tr class="models">
-          <th scope="col">MRI-CGCM3</th>
-          <th scope="col">NCAR-CCSM4</th>
-          <th scope="col">MRI-CGCM3</th>
-          <th scope="col">NCAR-CCSM4</th>
-          <th scope="col">MRI-CGCM3</th>
-          <th scope="col">NCAR-CCSM4</th>
-          <th scope="col">MRI-CGCM3</th>
-          <th scope="col">NCAR-CCSM4</th>
+          <th scope="col">MRI CGCM3</th>
+          <th scope="col">NCAR CCSM4</th>
+          <th scope="col">MRI CGCM3</th>
+          <th scope="col">NCAR CCSM4</th>
+          <th scope="col">MRI CGCM3</th>
+          <th scope="col">NCAR CCSM4</th>
+          <th scope="col">MRI CGCM3</th>
+          <th scope="col">NCAR CCSM4</th>
         </tr>
       </thead>
       <tbody>

@@ -33,14 +33,14 @@
           </th>
         </tr>
         <tr class="models">
-          <th scope="col">MRI-CGCM3</th>
-          <th scope="col">NCAR-CCSM4</th>
-          <th scope="col">MRI-CGCM3</th>
-          <th scope="col">NCAR-CCSM4</th>
-          <th scope="col">MRI-CGCM3</th>
-          <th scope="col">NCAR-CCSM4</th>
-          <th scope="col">MRI-CGCM3</th>
-          <th scope="col">NCAR-CCSM4</th>
+          <th scope="col">MRI CGCM3</th>
+          <th scope="col">NCAR CCSM4</th>
+          <th scope="col">MRI CGCM3</th>
+          <th scope="col">NCAR CCSM4</th>
+          <th scope="col">MRI CGCM3</th>
+          <th scope="col">NCAR CCSM4</th>
+          <th scope="col">MRI CGCM3</th>
+          <th scope="col">NCAR CCSM4</th>
         </tr>
       </thead>
       <tbody>
