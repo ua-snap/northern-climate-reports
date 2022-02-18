@@ -2,8 +2,10 @@
   <div>
     <table class="table report-table" v-if="reportData">
       <caption>
-        Projected Precipitation
-        <UnitWidget variable="pr" type="heavy" />
+        Precipitation,
+        {{
+          place
+        }}
       </caption>
       <thead>
         <tr>
@@ -472,10 +474,10 @@
       <tfoot>
         <tr>
           <td colspan="10" class="about">
-            Values show averages for the indicated date ranges.  Bold text indicates greater change. 
+            Values show averages for the indicated date ranges. Bold text
+            indicates greater change.
             <nuxt-link :to="{ name: 'about' }"
-              >Read more about models and emissions
-              scenarios.</nuxt-link
+              >Read more about models and emissions scenarios.</nuxt-link
             >
           </td>
         </tr>
@@ -496,6 +498,7 @@ export default {
   computed: {
     ...mapGetters({
       reportData: 'climate/climateData',
+      place: 'place/name',
     }),
   },
 }

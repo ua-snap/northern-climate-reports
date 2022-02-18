@@ -17,6 +17,7 @@ export default {
     ...mapGetters({
       units: 'units',
       altFreezeData: 'permafrost/altFreeze',
+      place: 'place/name',
     }),
   },
   watch: {
@@ -169,7 +170,7 @@ export default {
           hoverformat: hoverformat,
         },
         title: {
-          text: 'Ground freeze depth',
+          text: 'Ground freeze depth, ' + this.place,
           font: {
             size: 24,
           },
@@ -273,6 +274,7 @@ export default {
       })
 
       this.$Plotly.newPlot('permafrost-alt-freeze-chart', data_traces, layout, {
+        displayModeBar: true, // always show the camera icon
         displaylogo: false,
         modeBarButtonsToRemove: [
           'zoom2d',

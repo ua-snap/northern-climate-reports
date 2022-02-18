@@ -15,6 +15,7 @@ export default {
     ...mapGetters({
       units: 'units',
       reportData: 'climate/climateData',
+      place: 'place/name',
     }),
   },
   watch: {
@@ -193,10 +194,7 @@ export default {
           hoverformat: hoverformat,
         },
         title: {
-          text:
-            'Historical and projected precipitation (' +
-            season_lu[this.season] +
-            ')',
+          text: 'Precipitation, ' + this.place + ', ' + season_lu[this.season],
           font: {
             size: 24,
           },
@@ -257,6 +255,7 @@ export default {
       })
 
       this.$Plotly.newPlot('precip-chart', data_traces, layout, {
+        displayModeBar: true, // always show the camera icon
         displaylogo: false,
         modeBarButtonsToRemove: [
           'zoom2d',

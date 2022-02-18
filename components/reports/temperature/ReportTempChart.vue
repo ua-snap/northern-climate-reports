@@ -20,6 +20,7 @@ export default {
   computed: {
     ...mapGetters({
       units: 'units',
+      place: 'place/name',
       reportData: 'climate/climateData',
     }),
   },
@@ -215,9 +216,10 @@ export default {
         },
         title: {
           text:
-            'Historical and projected temperature (' +
-            season_lu[this.season] +
-            ')',
+            'Temperature, ' +
+            this.place +
+            ', ' +
+            season_lu[this.season],
           font: {
             size: 24,
           },
@@ -311,6 +313,7 @@ export default {
       }
 
       this.$Plotly.newPlot('temp-chart', data_traces, layout, {
+        displayModeBar: true, // always show the camera icon
         displaylogo: false,
         modeBarButtonsToRemove: [
           'zoom2d',

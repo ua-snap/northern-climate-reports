@@ -17,6 +17,7 @@ export default {
     ...mapGetters({
       units: 'units',
       altThawData: 'permafrost/altThaw',
+      place: 'place/name',
     }),
   },
   watch: {
@@ -169,7 +170,7 @@ export default {
           hoverformat: hoverformat,
         },
         title: {
-          text: 'Active layer thickness',
+          text: 'Active layer thickness, ' + this.place,
           font: {
             size: 24,
           },
@@ -270,6 +271,7 @@ export default {
       })
 
       this.$Plotly.newPlot('permafrost-alt-thaw-chart', data_traces, layout, {
+        displayModeBar: true, // always show the camera icon
         displaylogo: false,
         modeBarButtonsToRemove: [
           'zoom2d',

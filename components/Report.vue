@@ -69,15 +69,15 @@
           </p>
           <p>
             The sections below show output from different scientific simulations
-            for possible future conditions for temperature, precipitation,
+            of possible future conditions for temperature, precipitation,
             permafrost and wildfire. These simulations use different
-            <strong> Global Circulation Models (GCMs) </strong>&mdash;climate
+            <strong>Global Circulation Models (GCMs)</strong>&mdash;climate
             models&mdash;such as the National Center for Atmospheric Research
-            Community Climate System Model 4.0 (NCAR-CCSM4).
+            Community Climate System Model 4.0 (NCAR CCSM4).
           </p>
           <p>
             These climate models use
-            <strong> Representative Concentration Pathways (RCPs) </strong> to
+            <strong>Representative Concentration Pathways (RCPs)</strong> to
             compare different future greenhouse gas emissions scenarios.
             Compared to current emissions RCP 4.5 is a scenario representing a
             reduction in global emissions, while RCP 8.5 represents a scenario
@@ -95,7 +95,24 @@
             <li><strong>Fall</strong> is September, October and November.</li>
           </ul>
           <p>
-            You can display these visualizations in Imperial or Metric units.
+            Click the
+            <span class="camera-icon">
+              <svg
+                viewBox="0 0 1000 1000"
+                class="icon"
+                height="1em"
+                width="1em"
+              >
+                <path
+                  d="m500 450c-83 0-150-67-150-150 0-83 67-150 150-150 83 0 150 67 150 150 0 83-67 150-150 150z m400 150h-120c-16 0-34 13-39 29l-31 93c-6 15-23 28-40 28h-340c-16 0-34-13-39-28l-31-94c-6-15-23-28-40-28h-120c-55 0-100-45-100-100v-450c0-55 45-100 100-100h800c55 0 100 45 100 100v450c0 55-45 100-100 100z m-400-550c-138 0-250 112-250 250 0 138 112 250 250 250 138 0 250-112 250-250 0-138-112-250-250-250z m365 380c-19 0-35 16-35 35 0 19 16 35 35 35 19 0 35-16 35-35 0-19-16-35-35-35z"
+                  transform="matrix(1 0 0 -1 0 850)"
+                ></path>
+              </svg>
+            </span>
+            icon in the upper&ndash;right of the chart to download it.
+          </p>
+          <p>
+            You can display these visualizations in Imperial or metric units.
           </p>
         </div>
         <div class="pb-6">
@@ -172,6 +189,16 @@
 }
 .b-radio.radio:not(.button) {
   margin-right: 1rem;
+}
+.camera-icon {
+  display: inline-block;
+  position: relative;
+  top: 0.25rem;
+  padding: 0 3px;
+
+  & path {
+    fill: #ccc;
+  }
 }
 </style>
 

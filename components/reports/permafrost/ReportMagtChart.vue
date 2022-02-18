@@ -17,6 +17,7 @@ export default {
     ...mapGetters({
       units: 'units',
       magtData: 'permafrost/magt',
+      place: 'place/name',
     }),
   },
   watch: {
@@ -166,7 +167,7 @@ export default {
           hoverformat: hoverformat,
         },
         title: {
-          text: 'Mean annual ground temperature',
+          text: 'Mean annual ground temperature, ' + this.place,
           font: {
             size: 24,
           },
@@ -251,6 +252,7 @@ export default {
       })
 
       this.$Plotly.newPlot('permafrost-magt-chart', data_traces, layout, {
+        displayModeBar: true, // always show the camera icon
         displaylogo: false,
         modeBarButtonsToRemove: [
           'zoom2d',
