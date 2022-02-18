@@ -3,9 +3,7 @@
     <table class="table report-table" v-if="reportData">
       <caption>
         Temperature,
-        {{
-          place
-        }}
+        <span v-html="place"></span>
       </caption>
       <thead>
         <tr>
