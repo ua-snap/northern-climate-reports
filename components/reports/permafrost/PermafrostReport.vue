@@ -90,15 +90,15 @@
           temperature is provided below.
         </span>
       </div>
-      <div class="chart" v-show="this.permafrostPresent">
-        <ReportAltThawChart />
-      </div>
-      <div class="chart" v-show="this.permafrostDisappears">
-        <ReportAltFreezeChart />
-      </div>
-      <div class="chart" v-show="this.permafrostUncertain">
-        <ReportMagtChart />
-      </div>
+    </div>
+    <div class="chart" v-show="this.permafrostPresent">
+      <ReportAltThawChart />
+    </div>
+    <div class="chart" v-show="this.permafrostDisappears">
+      <ReportAltFreezeChart />
+    </div>
+    <div class="chart" v-show="this.permafrostUncertain">
+      <ReportMagtChart />
     </div>
   </div>
 </template>
