@@ -65,8 +65,8 @@
           "
         >
           Projected permafrost active layer thickness and ground freeze depth
-          through the end of the century is shown below. The active layer is the
-          layer of soil above permafrost that thaws seasonally.
+          through the end of the century are shown below. The active layer is
+          the layer of soil above permafrost that thaws seasonally.
         </span>
         <span
           v-show="
