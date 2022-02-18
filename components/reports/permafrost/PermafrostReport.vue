@@ -31,13 +31,18 @@
             There is no permafrost within
             <span v-html="depthFragment"></span> of the ground surface at this
             location</strong
-          >.</span
-        >
+          >.
+        </span>
         <span v-show="permafrostUncertain">
           <strong
             >The presence or absence of permafrost could not be determined for
             this location</strong
-          ></span
+          >
+          because the historical mean annual ground temperature falls within the
+          threshold of uncertainty (<span v-html="uncertaintyFragment"></span>).
+        </span>
+        <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
+          >See information about the dataset shown here.</nuxt-link
         >
 
         <div class="mt-5">
