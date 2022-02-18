@@ -91,8 +91,8 @@
           <li><strong>communities</strong>,</li>
           <li>
             <strong>watersheds/hydrological units</strong> at the HU-8 level
-            (subbasin), searchable by name or HUC code (&lsquo;Middle Copper
-            River&rsquo; or &lsquo;HUC 19020102&rsquo;, for example),
+            (subbasin), searchable by name or HUC code (&ldquo;Middle Copper
+            River&rdquo; or &ldquo;HUC 19020102&rdquo;, for example),
           </li>
           <li>
             <strong>protected areas</strong> such as National Parks, National
@@ -122,7 +122,7 @@
           <a href="mailto:uaf-snap-data-tools@alaska.edu"
             >uaf-snap-data-tools@alaska.edu</a
           >
-          questions about these data, data access, or using these data in your
+          with questions about these data, data access, or using these data in your
           work.
         </p>
       </div>

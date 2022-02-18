@@ -98,12 +98,7 @@ export const getters = {
       })
       // It's a little meh for the HTML to be here...
       if (huc) {
-        return (
-          huc.name +
-          ' Watershed <span class="watershed">HUC ' +
-          huc.id +
-          '</span>'
-        )
+        return huc.name + ' Watershed HUC ' + huc.id
       }
     }
 
