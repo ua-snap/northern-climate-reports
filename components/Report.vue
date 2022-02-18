@@ -69,6 +69,7 @@
           </p>
           <p>
             The sections below show output from different scientific simulations
+<<<<<<< HEAD
             of possible future conditions for temperature, precipitation,
             permafrost and wildfire. These simulations use different
             <strong>Global Circulation Models (GCMs)</strong>&mdash;climate
@@ -85,6 +86,20 @@
             trajectories. RCP 6.0 is between these two trajectories.
             <nuxt-link :to="{ name: 'about' }"
               >Read more about climate models and RCPs.</nuxt-link
+=======
+            for possible future conditions for temperature, precipitation,
+            permafrost and wildfire. These simulations use different Global
+            Circulation Models (GCMs), such as the National Center for
+            Atmospheric Research Community Climate System Model 4.0 (NCAR-CCSM4)
+            model. The GCMs use Representative Concentration Pathways (RCPs) to
+            compare different future greenhouse gas emissions scenarios.
+            Compared to current emissions, RCP 4.5 is consistent with reduced
+            emissions, RCP 8.5 is consistent with (and possibly higher than)
+            current emissions trajectories, and RCP 6.0 is between these two
+            trajectories.
+            <nuxt-link :to="{ name: 'about' }"
+              >Read more about models and RCPs.</nuxt-link
+>>>>>>> c0a904a (Rebase branch from main.)
             >
           </p>
           <p>Some of these data have been averaged by season.</p>
@@ -95,6 +110,7 @@
             <li><strong>Fall</strong> is September, October and November.</li>
           </ul>
           <p>
+<<<<<<< HEAD
             Click the
             <span class="camera-icon">
               <svg
@@ -113,6 +129,9 @@
           </p>
           <p>
             You can display these visualizations in Imperial or metric units.
+=======
+            You can display these visualizations in Imperial or Metric units.
+>>>>>>> c0a904a (Rebase branch from main.)
           </p>
         </div>
         <div class="pb-6">
@@ -126,7 +145,11 @@
           </b-field>
         </div>
         <h4 class="title is-4" id="toc">Contents</h4>
+<<<<<<< HEAD
         <div class="is-size-5">
+=======
+        <div class="content is-size-5">
+>>>>>>> c0a904a (Rebase branch from main.)
           <ul>
             <li>
               <a href="#temperature">Temperature</a> charts and tables with
