@@ -79,10 +79,10 @@
             These climate models use
             <strong> Representative Concentration Pathways (RCPs) </strong> to
             compare different future greenhouse gas emissions scenarios.
-            Compared to current emissions, RCP 4.5 is consistent with reduced
-            emissions, RCP 8.5 is consistent with (and possibly higher than)
-            current emissions trajectories, and RCP 6.0 is between these two
-            trajectories.
+            Compared to current emissions RCP 4.5 is a scenario representing a
+            reduction in global emissions, while RCP 8.5 represents a scenario
+            similar to, or possibly higher than, current global emissions
+            trajectories. RCP 6.0 is between these two trajectories.
             <nuxt-link :to="{ name: 'about' }"
               >Read more about climate models and RCPs.</nuxt-link
             >
