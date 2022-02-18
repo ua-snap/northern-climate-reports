@@ -1,13 +1,7 @@
 <template>
-  <div class="precip-chart-wrapper">
-    <div id="precip-chart" />
-  </div>
+  <div id="precip-chart" />
 </template>
-<style lang="scss" scoped>
-.precip-chart-wrapper {
-  padding-bottom: 0rem;
-}
-</style>
+<style lang="scss" scoped></style>
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'

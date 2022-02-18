@@ -1,67 +1,77 @@
 <template>
   <div>
-    <h4 class="title is-3">Permafrost</h4>
-    <div class="content is-size-5">
-      <span
-        v-show="
-          permafrostPresent && permafrostDisappears && !permafrostUncertain
-        "
-      >
-        Historical data and model projections indicate that
-        <strong
-          >this place has permafrost which disappears within
-          <span v-html="depthFragment"></span> of the ground surface over
-          time.</strong
+    <div class="content">
+      <h4 class="title is-3">Permafrost</h4>
+      <div class="is-size-5">
+        <span
+          v-show="
+            permafrostPresent && permafrostDisappears && !permafrostUncertain
+          "
         >
-        Projected permafrost active layer thickness and ground freeze depth
-        through the end of the century is shown below. The active layer is the
-        layer of soil above permafrost that thaws seasonally.
-      </span>
-      <span
-        v-show="
-          permafrostPresent && !permafrostDisappears && !permafrostUncertain
-        "
-        >Historical data and model projections indicate that
-        <strong>this place has permafrost.</strong>
-        Projected permafrost active layer thickness through the end of the
-        century is shown below. The active layer is the layer of soil above
-        permafrost that thaws seasonally.
-      </span>
-      <span
-        v-show="
-          !permafrostPresent && permafrostDisappears && !permafrostUncertain
-        "
-      >
-        <strong>
-          There is no permafrost within <span v-html="depthFragment"></span> of
-          the ground surface at this location</strong
-        >. Projected ground freeze depth through the end of the century is shown
-        below.
-      </span>
-      <span v-show="permafrostUncertain">
-        <strong
-          >The presence or absence of permafrost could not be determined for
-          this location</strong
+          Historical data and model projections indicate that
+          <strong
+            >this place has permafrost which disappears within
+            <span v-html="depthFragment"></span> of the ground surface over
+            time.</strong
+          >
+          Projected permafrost active layer thickness and ground freeze depth
+          through the end of the century is shown below. The active layer is the
+          layer of soil above permafrost that thaws seasonally.
+        </span>
+        <span
+          v-show="
+            permafrostPresent && !permafrostDisappears && !permafrostUncertain
+          "
+          >Historical data and model projections indicate that
+          <strong>this place has permafrost.</strong>
+          Projected permafrost active layer thickness through the end of the
+          century is shown below. The active layer is the layer of soil above
+          permafrost that thaws seasonally.
+        </span>
+        <span
+          v-show="
+            !permafrostPresent && permafrostDisappears && !permafrostUncertain
+          "
         >
-        because the historical mean annual ground temperature falls within the
-        threshold of uncertainty (<span v-html="uncertaintyFragment"></span>). A
-        chart of the historical and projected mean annual ground temperature is
-        provided below.
-      </span>
-      <nuxt-link :to="{ name: 'data', hash: '#datasets'}">See information about the dataset shown here.</nuxt-link>
+          <strong>
+            There is no permafrost within
+            <span v-html="depthFragment"></span> of the ground surface at this
+            location</strong
+          >. Projected ground freeze depth through the end of the century is
+          shown below.
+        </span>
+        <span v-show="permafrostUncertain">
+          <strong
+            >The presence or absence of permafrost could not be determined for
+            this location</strong
+          >
+          because the historical mean annual ground temperature falls within the
+          threshold of uncertainty (<span v-html="uncertaintyFragment"></span>).
+          A chart of the historical and projected mean annual ground temperature
+          is provided below.
+        </span>
+        <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
+          >See information about the dataset shown here.</nuxt-link
+        >
+      </div>
     </div>
-    <div class="chart-wrapper permafrost" v-show="this.permafrostPresent">
+    <div class="chart" v-show="this.permafrostPresent">
       <ReportAltThawChart />
     </div>
-    <div class="chart-wrapper permafrost" v-show="this.permafrostDisappears">
+    <div class="chart" v-show="this.permafrostDisappears">
       <ReportAltFreezeChart />
     </div>
-    <div class="chart-wrapper permafrost" v-show="this.permafrostUncertain">
+    <div class="chart" v-show="this.permafrostUncertain">
       <ReportMagtChart />
     </div>
   </div>
 </template>
-<style></style>
+<style lang="scss" scoped>
+.chart {
+  width: 698px;
+  margin: 0 auto;
+}
+</style>
 <script>
 import ReportAltThawChart from './ReportAltThawChart'
 import ReportAltFreezeChart from './ReportAltFreezeChart'

@@ -18,7 +18,11 @@ export const getters = {
 				max: convertToFeet(tempData.max),
 			}
 		}
-		return tempData
+		return {
+			mean: tempData.mean.toLocaleString('en-US'),
+			min: tempData.min.toLocaleString('en-US'),
+			max: tempData.max.toLocaleString('en-US'),
+		}
 	},
 }
 

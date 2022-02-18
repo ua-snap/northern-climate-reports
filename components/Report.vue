@@ -12,13 +12,13 @@
       >
     </div>
     <hr />
-    <div v-if="$fetchState.pending">
+    <section v-if="$fetchState.pending" class="section content">
       <!-- Drama dots -->
       <h4 class="title is-5">Loading data&hellip;</h4>
       <b-progress type="is-info"></b-progress>
-    </div>
-    <div v-else-if="$fetchState.error" class="error">
-      <p class="content is-size-5">
+    </section>
+    <section v-else-if="$fetchState.error" class="section content error">
+      <p class="is-size-5">
         Oh no! Something&rsquo;s amiss and the report for this place
         couldn&rsquo;t be loaded.
       </p>
@@ -30,7 +30,7 @@
       >
         <strong>We&rsquo;re sorry</strong>, please try again</b-button
       >
-    </div>
+    </section>
     <div v-else>
       <!-- The report! -->
       <section class="section">
@@ -40,9 +40,9 @@
         <MiniMap />
         <QualitativeText />
       </section>
-      <section class="section">
+      <section class="section content">
         <h3 class="title is-3">Introduction</h3>
-        <div class="content is-size-5">
+        <div class="is-size-5">
           <p>
             <span v-if="type == 'latLng'"
               >The tables and charts below are specific to the gridded data
@@ -109,7 +109,7 @@
           </b-field>
         </div>
         <h4 class="title is-4" id="toc">Contents</h4>
-        <div class="content is-size-5">
+        <div class="is-size-5">
           <ul>
             <li>
               <a href="#temperature">Temperature</a> charts and tables with
@@ -129,19 +129,19 @@
         </div>
       </section>
       <section class="section">
-        <div class="report-type-wrapper" id="temperature">
+        <div id="temperature">
           <TempReport />
         </div>
         <BackToTopButton />
       </section>
       <section class="section">
-        <div class="report-type-wrapper" id="precipitation">
+        <div id="precipitation">
           <PrecipReport />
         </div>
         <BackToTopButton />
       </section>
       <section class="section">
-        <div class="report-type-wrapper" id="permafrost">
+        <div id="permafrost">
           <PermafrostReport />
         </div>
         <BackToTopButton />
@@ -166,12 +166,6 @@
 <style lang="scss" scoped>
 .centered {
   text-align: center;
-}
-.report-controls {
-  margin-bottom: 1.25rem;
-}
-.report-type-wrapper {
-  margin: 1rem 0 2.5rem;
 }
 .back {
   margin-bottom: 2rem;
