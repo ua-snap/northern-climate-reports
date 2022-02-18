@@ -2,8 +2,8 @@
   <div class="qualitative-text">
     <div class="generated" v-html="generateText()"></div>
     <p class="about-blurb">
-      Late&ndash;century, high-emissions (RCP8.5), MRI or NCAR model (whichever
-      shows greater change).<br />See tables below for more detailed
+      Late&ndash;century, high-emissions (RCP8.5), MRI CGCM3 or NCAR CCSM4 model
+      (whichever shows greater change).<br />See tables below for more detailed
       information.
     </p>
   </div>
@@ -33,7 +33,7 @@
     border-top: 1px solid #efeced;
     padding-top: 0.5rem;
     font-weight: 400;
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 }
 </style>

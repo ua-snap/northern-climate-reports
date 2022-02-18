@@ -6,6 +6,8 @@
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
+import traceLabels_lu from './luts'
+
 export default {
   name: 'ReportAltFreezeChart',
   mounted() {
@@ -15,6 +17,7 @@ export default {
     ...mapGetters({
       units: 'units',
       altFreezeData: 'permafrost/altFreeze',
+      place: 'place/name',
     }),
   },
   watch: {
@@ -37,39 +40,16 @@ export default {
 
       let eras_lu = {
         1995: '1995',
-        2025: '2011 - 2040',
-        2050: '2036 - 2065',
-        2075: '2061 – 2090',
-        2095: '2086 – 2100',
+        2025: '2011-2040',
+        2050: '2036-2065',
+        2075: '2061–2090',
+        2095: '2086–2100',
       }
 
       let years = Object.keys(eras_lu)
       let eras = Object.values(eras_lu)
       let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
       let scenarios = ['rcp45', 'rcp85']
-
-      let traceLabels_lu = {
-        gfdlcm3: {
-          rcp45: 'RCP 4.5 (gfdlcm3)',
-          rcp85: 'RCP 8.5 (gfdlcm3)',
-        },
-        gisse2r: {
-          rcp45: 'RCP 4.5 (gisse2r)',
-          rcp85: 'RCP 8.5 (gisse2r)',
-        },
-        ipslcm5alr: {
-          rcp45: 'RCP 4.5 (ipslcm5alr)',
-          rcp85: 'RCP 8.5 (ipslcm5alr)',
-        },
-        mricgcm3: {
-          rcp45: 'RCP 4.5 (mricgcm3)',
-          rcp85: 'RCP 8.5 (mricgcm3)',
-        },
-        ncarccsm4: {
-          rcp45: 'RCP 4.5 (ncarccsm4)',
-          rcp85: 'RCP 8.5 (ncarccsm4)',
-        },
-      }
 
       let scatterTraces = {}
 
@@ -190,7 +170,7 @@ export default {
           hoverformat: hoverformat,
         },
         title: {
-          text: 'Ground freeze depth',
+          text: 'Ground freeze depth, ' + this.place,
           font: {
             size: 24,
           },
@@ -294,6 +274,7 @@ export default {
       })
 
       this.$Plotly.newPlot('permafrost-alt-freeze-chart', data_traces, layout, {
+        displayModeBar: true, // always show the camera icon
         displaylogo: false,
         modeBarButtonsToRemove: [
           'zoom2d',

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h4 class="title is-3">Permafrost</h4>
-    <div class="content is-size-5">
-      <p>
+    <div class="content">
+      <h4 class="title is-3">Permafrost</h4>
+      <div class="is-size-5">
         <span
           v-show="
             permafrostPresent && permafrostDisappears && !permafrostUncertain
@@ -31,79 +31,83 @@
             There is no permafrost within
             <span v-html="depthFragment"></span> of the ground surface at this
             location</strong
-          >.</span
-        >
+          >.
+        </span>
         <span v-show="permafrostUncertain">
           <strong
             >The presence or absence of permafrost could not be determined for
             this location</strong
-          ></span
+          >
+          because the historical mean annual ground temperature falls within the
+          threshold of uncertainty (<span v-html="uncertaintyFragment"></span>).
+        </span>
+        <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
+          >See information about the dataset shown here.</nuxt-link
         >
-        Results were produced by the GIPL 2.0 permafrost model using five
-        separate climate models and two different greenhouse gas scenarios or
-        Representative Concentration Pathways (RCPs). RCP4.5 is an optimistic
-        future, and RCP8.5 is more pessimistic but also more likely.
-        <nuxt-link :to="{ name: 'about' }"
-          >Read more about models and RCPs.</nuxt-link
-        >
-      </p>
-      <p>
-        The following maps show the historical and projected mean annual ground
-        temperature over time. This is the temperature of the soil directly
-        above the permafrost layer. Red represents temperatures above freezing,
-        blue represents temperatures below freezing, and white represents
-        temperatures near the freezing point. Darker reds represent warmer
-        temperatures. Darker blues represent colder temperatures.
-      </p>
+
+        <div class="mt-5">
+          The following maps show the historical and projected mean annual
+          ground temperature over time. This is the temperature of the soil
+          directly above the permafrost layer. Red represents temperatures above
+          freezing, blue represents temperatures below freezing, and white
+          represents temperatures near the freezing point. Darker reds represent
+          warmer temperatures. Darker blues represent colder temperatures.
+        </div>
+      </div>
     </div>
     <ReportMagtMaps />
 
-    <div class="content is-size-5">
-      <span
-        v-show="
-          permafrostPresent && permafrostDisappears && !permafrostUncertain
-        "
-      >
-        Projected permafrost active layer thickness and ground freeze depth
-        through the end of the century is shown below. The active layer is the
-        layer of soil above permafrost that thaws seasonally.
-      </span>
-      <span
-        v-show="
-          permafrostPresent && !permafrostDisappears && !permafrostUncertain
-        "
-      >
-        Projected permafrost active layer thickness through the end of the
-        century is shown below. The active layer is the layer of soil above
-        permafrost that thaws seasonally.
-      </span>
-      <span
-        v-show="
-          !permafrostPresent && permafrostDisappears && !permafrostUncertain
-        "
-      >
-        Projected ground freeze depth through the end of the century is shown
-        below.
-      </span>
-      <span v-show="permafrostUncertain">
-        because the historical mean annual ground temperature falls within the
-        threshold of uncertainty (<span v-html="uncertaintyFragment"></span>). A
-        chart of the historical and projected mean annual ground temperature is
-        provided below.
-      </span>
+    <div class="content">
+      <div class="is-size-5">
+        <span
+          v-show="
+            permafrostPresent && permafrostDisappears && !permafrostUncertain
+          "
+        >
+          Projected permafrost active layer thickness and ground freeze depth
+          through the end of the century are shown below. The active layer is
+          the layer of soil above permafrost that thaws seasonally.
+        </span>
+        <span
+          v-show="
+            permafrostPresent && !permafrostDisappears && !permafrostUncertain
+          "
+        >
+          Projected permafrost active layer thickness through the end of the
+          century is shown below. The active layer is the layer of soil above
+          permafrost that thaws seasonally.
+        </span>
+        <span
+          v-show="
+            !permafrostPresent && permafrostDisappears && !permafrostUncertain
+          "
+        >
+          Projected ground freeze depth through the end of the century is shown
+          below.
+        </span>
+        <span v-show="permafrostUncertain"
+          >A chart of the historical and projected mean annual ground
+          temperature is provided below.
+        </span>
+      </div>
     </div>
-    <div class="chart-wrapper permafrost" v-show="this.permafrostPresent">
+    <div class="chart" v-show="this.permafrostPresent">
       <ReportAltThawChart />
     </div>
-    <div class="chart-wrapper permafrost" v-show="this.permafrostDisappears">
+    <div class="chart" v-show="this.permafrostDisappears">
       <ReportAltFreezeChart />
     </div>
-    <div class="chart-wrapper permafrost" v-show="this.permafrostUncertain">
+    <div class="chart" v-show="this.permafrostUncertain">
       <ReportMagtChart />
     </div>
   </div>
 </template>
-<style></style>
+<style lang="scss" scoped>
+.chart {
+  width: 698px;
+  margin: 0 auto;
+}
+</style>
 <script>
 import ReportMagtMaps from './ReportMagtMaps'
 import ReportAltThawChart from './ReportAltThawChart'

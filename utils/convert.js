@@ -1,3 +1,8 @@
+// Meters to feet
+export const convertToFeet = function (value) {
+  return Math.round(value * 3.28084)
+}
+
 export const convertToInches = function (
   permafrostData,
   fromUnit,
@@ -14,7 +19,9 @@ export const convertToInches = function (
       if (keys != null && !keys.includes(key)) {
         return value
       }
-      if (!value || nodata.includes(value)) {
+      // Trap edge cases where the value isn't 0 (usually valid)
+      // but is equivalent to a missing/nodata value
+      if (value !== 0 && (!value || nodata.includes(value))) {
         return null
       }
       switch (fromUnit) {
@@ -49,7 +56,9 @@ export const convertToFahrenheit = function (
       if (keys != null && !keys.includes(key)) {
         return value
       }
-      if (!value || nodata.includes(value)) {
+      // Trap edge cases where the value isn't 0 (usually valid)
+      // but is equivalent to a missing/nodata value
+      if (value !== 0 && (!value || nodata.includes(value))) {
         return null
       }
       switch (fromUnit) {

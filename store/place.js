@@ -84,7 +84,7 @@ export const getters = {
       if (place) {
         let name = place.name
         if (place.alt_name) {
-          name += ' <span class="alt_name">(' + place.alt_name + ')</span>'
+          name += ' (' + place.alt_name + ')'
         }
         return name
       }
@@ -98,12 +98,7 @@ export const getters = {
       })
       // It's a little meh for the HTML to be here...
       if (huc) {
-        return (
-          huc.name +
-          ' Watershed <span class="watershed">HUC ' +
-          huc.id +
-          '</span>'
-        )
+        return huc.name + ' Watershed HUC ' + huc.id
       }
     }
 

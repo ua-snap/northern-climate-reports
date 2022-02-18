@@ -2,8 +2,10 @@
   <div class="report--temperature">
     <table class="table report-table" v-if="reportData">
       <caption>
-        Projected Temperatures
-        <UnitWidget type="heavy" />
+        Temperature,
+        {{
+          place
+        }}
       </caption>
       <thead>
         <tr>
@@ -20,27 +22,27 @@
         </tr>
         <tr>
           <th scope="col" colspan="2" class="light-border">
-            Low Emissions (RCP4.5)
+            Low Emissions (RCP 4.5)
           </th>
           <th scope="col" colspan="2" class="light-border">
-            High Emissions (RCP8.5)
+            High Emissions (RCP 8.5)
           </th>
           <th scope="col" colspan="2" class="light-border">
-            Low Emissions (RCP4.5)
+            Low Emissions (RCP 4.5)
           </th>
           <th scope="col" colspan="2" class="light-border">
-            High Emissions (RCP8.5)
+            High Emissions (RCP 8.5)
           </th>
         </tr>
         <tr class="models">
-          <th scope="col">MRI Model</th>
-          <th scope="col">NCAR Model</th>
-          <th scope="col">MRI Model</th>
-          <th scope="col">NCAR Model</th>
-          <th scope="col">MRI Model</th>
-          <th scope="col">NCAR Model</th>
-          <th scope="col">MRI Model</th>
-          <th scope="col">NCAR Model</th>
+          <th scope="col">MRI CGCM3</th>
+          <th scope="col">NCAR CCSM4</th>
+          <th scope="col">MRI CGCM3</th>
+          <th scope="col">NCAR CCSM4</th>
+          <th scope="col">MRI CGCM3</th>
+          <th scope="col">NCAR CCSM4</th>
+          <th scope="col">MRI CGCM3</th>
+          <th scope="col">NCAR CCSM4</th>
         </tr>
       </thead>
       <tbody>
@@ -472,10 +474,10 @@
       <tfoot>
         <tr>
           <td colspan="10" class="about">
-            Values show averages for the indicated date ranges.
+            Values show averages for the indicated date ranges. Red text means
+            warmer temperatures.
             <nuxt-link :to="{ name: 'about' }"
-              >Read more about models (MRI-CGCM3 and NCAR-CCSM4) and emissions
-              scenarios (RCPs).</nuxt-link
+              >Read more about models and emissions scenarios.</nuxt-link
             >
           </td>
         </tr>
@@ -496,6 +498,7 @@ export default {
   computed: {
     ...mapGetters({
       reportData: 'climate/climateData',
+      place: 'place/name',
     }),
   },
 }

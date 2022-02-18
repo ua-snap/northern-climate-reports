@@ -1,13 +1,7 @@
 <template>
-  <div class="precip-chart-wrapper">
-    <div id="precip-chart" />
-  </div>
+  <div id="precip-chart" />
 </template>
-<style lang="scss" scoped>
-.precip-chart-wrapper {
-  padding-bottom: 0rem;
-}
-</style>
+<style lang="scss" scoped></style>
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
@@ -21,6 +15,7 @@ export default {
     ...mapGetters({
       units: 'units',
       reportData: 'climate/climateData',
+      place: 'place/name',
     }),
   },
   watch: {
@@ -42,10 +37,10 @@ export default {
       let units = this.units == 'metric' ? 'mm' : 'in'
 
       let season_lu = {
-        DJF: 'December - February',
-        MAM: 'March - May',
-        JJA: 'June - August',
-        SON: 'September - November',
+        DJF: 'December-February',
+        MAM: 'March-May',
+        JJA: 'June-August',
+        SON: 'September-November',
       }
 
       let decade_keys = Object.keys(this.reportData)
@@ -82,14 +77,14 @@ export default {
           rcp85: 'RCP 8.5 (5-model Avg.)',
         },
         'MRI-CGCM3': {
-          rcp45: 'RCP 4.5 (MRI)',
-          rcp60: 'RCP 6.0 (MRI)',
-          rcp85: 'RCP 8.5 (MRI)',
+          rcp45: 'RCP 4.5 (MRI CGCM3)',
+          rcp60: 'RCP 6.0 (MRI CGCM3)',
+          rcp85: 'RCP 8.5 (MRI CGCM3)',
         },
         CCSM4: {
-          rcp45: 'RCP 4.5 (NCAR)',
-          rcp60: 'RCP 6.0 (NCAR)',
-          rcp85: 'RCP 8.5 (NCAR)',
+          rcp45: 'RCP 4.5 (NCAR CCSM4)',
+          rcp60: 'RCP 6.0 (NCAR CCSM4)',
+          rcp85: 'RCP 8.5 (NCAR CCSM4)',
         },
       }
 
@@ -199,10 +194,7 @@ export default {
           hoverformat: hoverformat,
         },
         title: {
-          text:
-            'Historical and projected precipitation (' +
-            season_lu[this.season] +
-            ')',
+          text: 'Precipitation, ' + this.place + ', ' + season_lu[this.season],
           font: {
             size: 24,
           },
@@ -250,7 +242,7 @@ export default {
 
       layout.annotations.push({
         x: 0.5,
-        y: footer_y,
+        y: footer_y - 0.05,
         xref: 'paper',
         yref: 'paper',
         showarrow: false,
@@ -263,6 +255,7 @@ export default {
       })
 
       this.$Plotly.newPlot('precip-chart', data_traces, layout, {
+        displayModeBar: true, // always show the camera icon
         displaylogo: false,
         modeBarButtonsToRemove: [
           'zoom2d',
