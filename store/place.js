@@ -1,11 +1,10 @@
-// This store manages place-based information.
-import communities from '~/assets/communities'
-import hucs from '~/assets/hucs'
-import protectedAreas from '~/assets/protected_areas'
-
 // Store, namespaced as `place/`
 export const state = () => ({
+  // GeoJSON outline for a HUC or protected area.
   geoJSON: undefined,
+
+  // List of all places defined in the application.
+  places: undefined,
 })
 
 export const getters = {
@@ -14,15 +13,21 @@ export const getters = {
     return state.geoJSON
   },
 
+  places(state) {
+    return state.places
+  },
+
   // Gets the currently-selected lat/lon [directly or by placeID]
   latLng: (state, getters, rootState) => {
+    // It's in the URL/state, return that.
     if (rootState.route.params.lat && rootState.route.params.lng) {
       return [rootState.route.params.lat, rootState.route.params.lng]
     }
 
+    // Look it up by place name.
     if (rootState.route.params.communityId) {
-      let place = _.find(communities, {
-        id: Number(rootState.route.params.communityId),
+      let place = _.find(state.places, {
+        id: rootState.route.params.communityId,
       })
       if (place) {
         return [place.latitude, place.longitude]
@@ -65,6 +70,8 @@ export const getters = {
 
   // Returns a string for the correct current selected place,
   // whether lat/lon, community name, or other regional name.
+  // The code here is pretty similar between the different cases,
+  // but each has a few slight differences.
   name: (state, getters, rootState) => {
     // Lat/lon!
     if (getters.type == 'latLng') {
@@ -78,8 +85,8 @@ export const getters = {
 
     // Community name!
     if (getters.type == 'community') {
-      let place = _.find(communities, {
-        id: Number(rootState.route.params.communityId),
+      let place = _.find(state.places, {
+        id: rootState.route.params.communityId,
       })
       if (place) {
         let name = place.name
@@ -88,15 +95,13 @@ export const getters = {
         }
         return name
       }
-      throw 'Could not find the community by ID.'
     }
 
     // HUC!
     if (getters.type == 'huc') {
-      let huc = _.find(hucs, {
-        id: Number(rootState.route.params.hucId),
+      let huc = _.find(state.places, {
+        id: rootState.route.params.hucId,
       })
-      // It's a little meh for the HTML to be here...
       if (huc) {
         return huc.name + ' Watershed HUC ' + huc.id
       }
@@ -104,7 +109,7 @@ export const getters = {
 
     // Protected area!
     if (getters.type == 'protected_area') {
-      let pa = _.find(protectedAreas, {
+      let pa = _.find(state.places, {
         id: rootState.route.params.protectedAreaId,
       })
       if (pa) {
@@ -116,10 +121,11 @@ export const getters = {
     return false
   },
 
+  // This returns the name of the HUC without any extra stuff.
   rawHucName(state, getters, rootState) {
     if (rootState.route.params.hucId) {
-      let huc = _.find(hucs, {
-        id: Number(rootState.route.params.hucId),
+      let huc = _.find(state.places, {
+        id: rootState.route.params.hucId,
       })
       if (huc) {
         return huc.name
@@ -127,6 +133,8 @@ export const getters = {
     }
   },
 
+  // Returns a fragment URL for accessing
+  // different resources on the API.
   urlFragment(state, getters) {
     switch (getters.type) {
       // These are the same.
@@ -151,6 +159,9 @@ export const mutations = {
   setGeoJSON(state, geoJSON) {
     state.geoJSON = geoJSON
   },
+  setPlaces(state, places) {
+    state.places = places
+  },
 }
 
 export const actions = {
@@ -160,5 +171,12 @@ export const actions = {
       process.env.apiUrl + '/boundary/' + context.getters.urlFragment
     let geoJSON = await this.$http.$get(queryUrl)
     context.commit('setGeoJSON', geoJSON)
+  },
+
+  async fetchPlaces(context) {
+    // TODO: add error handling here for 404 (no data) etc.
+    let queryUrl = process.env.apiUrl + '/places/all'
+    let places = await this.$http.$get(queryUrl)
+    context.commit('setPlaces', places)
   },
 }

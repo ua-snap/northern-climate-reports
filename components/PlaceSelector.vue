@@ -5,7 +5,10 @@
       <p>
         Search below by <strong>community name</strong>,
         <strong>watershed</strong> (hydrological unit name or HUC8 code) or
-        <strong>protected area</strong> (National Park, National Forest, etc).  <nuxt-link :to="{ name: 'data', hash: '#places'}">Read about all places included in this tool.</nuxt-link>
+        <strong>protected area</strong> (National Park, National Forest, etc).
+        <nuxt-link :to="{ name: 'data', hash: '#places' }"
+          >Read about all places included in this tool.</nuxt-link
+        >
       </p>
       <p>
         <b-field>
@@ -64,80 +67,74 @@
 </style>
 <script>
 import _ from 'lodash'
-import communities from '~/assets/communities'
-import hucs from '~/assets/hucs'
-import protected_places from '~/assets/protected_areas.js'
-
-// So it's not decorated with reactive stuff by Vue,
-// we don't want that for performance reasons (the
-// reactive getters/setters on these large JSON objects
-// isn't needed and poor performance).
-Object.freeze(communities)
-Object.freeze(hucs)
-Object.freeze(protected_places)
-const places = _.concat(communities, hucs, protected_places)
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'PlaceSelector',
   data() {
     return {
-      places: places,
       selected: undefined, // the actual selected place
       selectedPlace: '', // the temporary search fragment
     }
   },
   computed: {
     filteredDataObj() {
-      return this.places.filter(option => {
-        return (
-          option.name
-            .toString()
-            .toLowerCase()
-            .indexOf(this.selectedPlace.toLowerCase()) >= 0 ||
-          (option.alt_name &&
-            option.alt_name
+      // Guard in case the async loading of places isn't done yet.
+      if (this.places) {
+        return this.places.filter(option => {
+          return (
+            option.name
               .toString()
               .toLowerCase()
-              .indexOf(this.selectedPlace.toLowerCase()) >= 0) ||
-          (option.area_type &&
-            option.area_type
-              .toString()
-              .toLowerCase()
-              .indexOf(this.selectedPlace.toLowerCase()) >= 0) ||
-          // HUCID, check only if it's 4 digits or more
-          (this.selectedPlace.length > 3 &&
-            (option.id.toString().indexOf(this.selectedPlace) >= 0 ||
-              option.id.toString().indexOf('huc ' + this.selectedPlace) >= 0 ||
-              option.id.toString().indexOf('HUC ' + this.selectedPlace) >= 0 ||
-              option.id.toString().indexOf('huc-' + this.selectedPlace) >= 0 ||
-              option.id.toString().indexOf('HUC-' + this.selectedPlace) >= 0))
-        )
-      })
+              .indexOf(this.selectedPlace.toLowerCase()) >= 0 ||
+            (option.alt_name &&
+              option.alt_name
+                .toString()
+                .toLowerCase()
+                .indexOf(this.selectedPlace.toLowerCase()) >= 0) ||
+            (option.area_type &&
+              option.area_type
+                .toString()
+                .toLowerCase()
+                .indexOf(this.selectedPlace.toLowerCase()) >= 0) ||
+            // HUCID, check only if it's 4 digits or more
+            (this.selectedPlace.length > 3 &&
+              (option.id.toString().indexOf(this.selectedPlace) >= 0 ||
+                option.id.toString().indexOf('huc ' + this.selectedPlace) >=
+                  0 ||
+                option.id.toString().indexOf('HUC ' + this.selectedPlace) >=
+                  0 ||
+                option.id.toString().indexOf('huc-' + this.selectedPlace) >=
+                  0 ||
+                option.id.toString().indexOf('HUC-' + this.selectedPlace) >= 0))
+          )
+        })
+      }
     },
+    ...mapGetters({
+      places: 'place/places',
+    }),
   },
   watch: {
     selected: function (selected) {
-      if (selected) {
-        // If it's a HUC, route it properly...
-        if (selected.type) {
-          if (selected.type == 'huc') {
-            this.$router.push({
-              path: '/report/huc/' + selected.id,
-              hash: '#results',
-            })
-          } else if (selected.type == 'protected_area') {
-            this.$router.push({
-              path: '/report/protected_area/' + selected.id,
-              hash: '#results',
-            })
-          }
-        } else {
-          // It's a community point.
-          this.$router.push({
-            path: '/report/community/' + selected.id,
-            hash: '#results',
-          })
+      if (selected && selected.type) {
+        let path
+        switch (selected.type) {
+          case 'huc':
+            path = '/report/huc/' + selected.id
+            break
+          case 'protected_area':
+            path = '/report/protected_area/' + selected.id
+            break
+          case 'community':
+            path = '/report/community/' + selected.id
         }
+        // Triggers the navigation to the route path,
+        // which loads the report + queries API, etc.
+        this.$router.push({
+          path: path,
+          hash: '#results',
+        })
       }
     },
   },
