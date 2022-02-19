@@ -36,13 +36,16 @@ export default {
   mounted() {
     this.map = L.map('report--minimmap--map', this.getBaseMapAndLayers())
 
-    // It's a lat/Lng location (community or point)
+    // It's a lat/Lng location (community or point) add the point to the map.
     if (this.latLng) {
       this.marker = L.marker(this.latLng).addTo(this.map)
       this.map.panTo(this.latLng)
-    } else {
-      // Fetch the GeoJSON outline
-      this.$store.dispatch('place/fetch')
+    }
+  },
+  async fetch() {
+    // Only fetch the GeoJSON if this is not a point location.
+    if (!this.latLng) {
+      await this.$store.dispatch('place/fetch')
     }
   },
   watch: {
