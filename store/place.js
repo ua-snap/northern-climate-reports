@@ -135,7 +135,7 @@ export const getters = {
         return 'point/' + getters.latLng[0] + '/' + getters.latLng[1]
         break
       case 'huc':
-        return 'huc/huc8/' + getters.hucId
+        return 'huc/' + getters.hucId
         break
       case 'protected_area':
         return 'protectedarea/' + getters.protectedAreaId
