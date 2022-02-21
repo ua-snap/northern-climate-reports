@@ -15,7 +15,7 @@ export const getPlotSettings = function () {
   }
 }
 
-export const getLayout = function (title, yAxisLabel) {
+export const getLayout = function (title, yAxisLabel, height = 500) {
   return {
     boxmode: 'group',
     yaxis: {
@@ -51,7 +51,7 @@ export const getLayout = function (title, yAxisLabel) {
     margin: {
       b: 120,
     },
-    height: 500,
+    height: height,
     dragmode: false,
   }
 }
