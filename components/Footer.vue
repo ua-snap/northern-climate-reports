@@ -98,8 +98,8 @@ export default {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom;
-
   text-align: center;
+  padding-bottom: 10rem;
 
   h3 {
     margin: 1rem 0 0.5rem; padding: 0;
