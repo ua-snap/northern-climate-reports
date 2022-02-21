@@ -51,6 +51,12 @@ export default {
     if (path) {
       this.$router.push({ path: path })
     }
+
+    // Populate the store with places.
+    this.$fetch()
+  },
+  async fetch() {
+    await this.$store.dispatch('place/fetchPlaces')
   },
 }
 </script>
