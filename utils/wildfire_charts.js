@@ -36,29 +36,29 @@ let traceLabels = {
     rcp85: 'RCP 8.5 (5modelAvg)',
   },
   'GFDL-CM3': {
-    rcp45: 'RCP 4.5 (GFDL-CM3)',
-    rcp60: 'RCP 6.0 (GFDL-CM3)',
+    rcp45: 'RCP 4.5 (GFDL CM3)',
+    rcp60: 'RCP 6.0 (GFDL CM3)',
     rcp85: 'RCP 8.5 (GFDL-CM3)',
   },
   'GISS-E2-R': {
-    rcp45: 'RCP 4.5 (GISS-E2-R)',
-    rcp60: 'RCP 6.0 (GISS-E2-R)',
-    rcp85: 'RCP 8.5 (GISS-E2-R)',
+    rcp45: 'RCP 4.5 (GISS E2-R)',
+    rcp60: 'RCP 6.0 (GISS E2-R)',
+    rcp85: 'RCP 8.5 (GISS E2-R)',
   },
   'IPSL-CM5A-LR': {
-    rcp45: 'RCP 4.5 (IPSL-CM5A-LR)',
-    rcp60: 'RCP 6.0 (IPSL-CM5A-LR)',
-    rcp85: 'RCP 8.5 (IPSL-CM5A-LR)',
+    rcp45: 'RCP 4.5 (IPSL CM5A-LR)',
+    rcp60: 'RCP 6.0 (IPSL CM5A-LR)',
+    rcp85: 'RCP 8.5 (IPSL CM5A-LR)',
   },
   'MRI-CGCM3': {
-    rcp45: 'RCP 4.5 (MRI-CGCM3)',
-    rcp60: 'RCP 6.0 (MRI-CGCM3)',
-    rcp85: 'RCP 8.5 (MRI-CGCM3)',
+    rcp45: 'RCP 4.5 (MRI CGCM3)',
+    rcp60: 'RCP 6.0 (MRI CGCM3)',
+    rcp85: 'RCP 8.5 (MRI CGCM3)',
   },
   'NCAR-CCSM4': {
-    rcp45: 'RCP 4.5 (NCAR-CCSM4)',
-    rcp60: 'RCP 6.0 (NCAR-CCSM4)',
-    rcp85: 'RCP 8.5 (NCAR-CCSM4)',
+    rcp45: 'RCP 4.5 (NCAR CCSM4)',
+    rcp60: 'RCP 6.0 (NCAR CCSM4)',
+    rcp85: 'RCP 8.5 (NCAR CCSM4)',
   },
 }
 
@@ -99,7 +99,7 @@ let colors = {
   },
   'NCAR-CCSM4': {
     rcp45: 'rgb(150, 210, 150)',
-    rcp45: 'rgb(90, 180, 90)',
+    rcp60: 'rgb(90, 180, 90)',
     rcp85: 'rgb(30, 140, 30)',
   },
 }
