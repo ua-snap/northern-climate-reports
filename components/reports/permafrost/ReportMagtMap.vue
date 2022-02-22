@@ -34,6 +34,7 @@ export default {
       title: this.getTitle(),
       marker: undefined,
       geoJsonLayer: undefined,
+      baseLayer: undefined,
     }
   },
   mounted() {
@@ -47,12 +48,32 @@ export default {
     }
   },
   watch: {
+    model: function () {
+      this.map.removeLayer(this.baseLayer)
+      this.baseLayer = this.getBaseLayer()
+      this.map.addLayer(this.baseLayer)
+    },
     // After geoJSON is loaded, display on map.
     geoJSON: function () {
       this.addGeoJSONtoMap()
     },
   },
   methods: {
+    getBaseLayer() {
+      return new L.tileLayer.wms(
+        'http://apollo.snap.uaf.edu:8080/rasdaman/ows',
+        {
+          transparent: true,
+          format: 'image/png',
+          version: '1.3.0',
+          layers: 'test_iem_gipl_magt_alt_4km',
+          dim_era: this.era,
+          dim_model: this.model,
+          dim_scenario: this.scenario,
+          styles: 'climate_impact_reports',
+        }
+      )
+    },
     addGeoJSONtoMap() {
       if (this.geoJSON) {
         this.geoJSONLayer = L.geoJSON(this.geoJSON, {
@@ -89,19 +110,7 @@ export default {
           resolutions: [4096, 2048, 1024, 512, 256, 128, 64],
         }
       )
-      var baseLayer = new L.tileLayer.wms(
-        'http://apollo.snap.uaf.edu:8080/rasdaman/ows',
-        {
-          transparent: true,
-          format: 'image/png',
-          version: '1.3.0',
-          layers: 'test_iem_gipl_magt_alt_4km',
-          dim_era: this.era,
-          dim_model: this.model,
-          dim_scenario: this.scenario,
-          styles: 'climate_impact_reports',
-        }
-      )
+      this.baseLayer = this.getBaseLayer()
       // Map base configuration
       var config = {
         zoom: 1,
@@ -113,7 +122,7 @@ export default {
         zoomControl: false,
         doubleClickZoom: false,
         attributionControl: false,
-        layers: [baseLayer],
+        layers: [this.baseLayer],
         crs: proj,
       }
       return config

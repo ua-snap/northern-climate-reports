@@ -27,28 +27,24 @@
         <ReportMagtMap
           scenario="1"
           :model="model_selection"
-          :key="model_selection + '-rcp45-2025'"
           era="1"
           class="report--deltamap--map"
         />
         <ReportMagtMap
           scenario="1"
           :model="model_selection"
-          :key="model_selection + '-rcp45-2050'"
           era="2"
           class="report--deltamap--map"
         />
         <ReportMagtMap
           scenario="1"
           :model="model_selection"
-          :key="model_selection + '-rcp45-2075'"
           era="3"
           class="report--deltamap--map"
         />
         <ReportMagtMap
           scenario="1"
           :model="model_selection"
-          :key="model_selection + '-rcp45-2095'"
           era="4"
           class="report--deltamap--map"
         />
@@ -60,28 +56,24 @@
         <ReportMagtMap
           scenario="2"
           :model="model_selection"
-          :key="model_selection + '-rcp85-2025'"
           era="1"
           class="report--deltamap--map"
         />
         <ReportMagtMap
           scenario="2"
           :model="model_selection"
-          :key="model_selection + '-rcp85-2050'"
           era="2"
           class="report--deltamap--map"
         />
         <ReportMagtMap
           scenario="2"
           :model="model_selection"
-          :key="model_selection + '-rcp85-2075'"
           era="3"
           class="report--deltamap--map"
         />
         <ReportMagtMap
           scenario="2"
           :model="model_selection"
-          :key="model_selection + '-rcp85-2095'"
           era="4"
           class="report--deltamap--map"
         />
