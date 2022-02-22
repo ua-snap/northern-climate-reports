@@ -27,11 +27,20 @@ export default {
       latLng: 'place/latLng',
       geoJSON: 'place/geoJSON',
     }),
+    title() {
+      var title = ''
+      if (this.scenario > 0) {
+        title += scenarios[this.scenario] + ', '
+      }
+      title += eras[this.era]
+      return title
+    },
+    mapID() {
+      return this.scenario + '_' + this.model + '_' + this.era
+    },
   },
   data() {
     return {
-      mapID: this.getMapID(),
-      title: this.getTitle(),
       marker: undefined,
       geoJsonLayer: undefined,
       baseLayer: undefined,
@@ -86,17 +95,6 @@ export default {
       // TODO, add error handling here.
       let geoJson = await this.$http.$get(queryUrl)
       this.map.fitBounds(this.geoJsonLayer.getBounds())
-    },
-    getTitle() {
-      var title = ''
-      if (this.scenario > 0) {
-        title += scenarios[this.scenario] + ', '
-      }
-      title += eras[this.era]
-      return title
-    },
-    getMapID() {
-      return this.scenario + '_' + this.model + '_' + this.era
     },
     getBaseMapAndLayers() {
       // Projection definition.
