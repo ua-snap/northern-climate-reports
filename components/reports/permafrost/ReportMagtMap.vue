@@ -60,19 +60,16 @@ export default {
   },
   methods: {
     getBaseLayer() {
-      return new L.tileLayer.wms(
-        'http://apollo.snap.uaf.edu:8080/rasdaman/ows',
-        {
-          transparent: true,
-          format: 'image/png',
-          version: '1.3.0',
-          layers: 'test_iem_gipl_magt_alt_4km',
-          dim_era: this.era,
-          dim_model: this.model,
-          dim_scenario: this.scenario,
-          styles: 'climate_impact_reports',
-        }
-      )
+      return new L.tileLayer.wms(process.env.rasdamanUrl, {
+        transparent: true,
+        format: 'image/png',
+        version: '1.3.0',
+        layers: 'test_iem_gipl_magt_alt_4km',
+        dim_era: this.era,
+        dim_model: this.model,
+        dim_scenario: this.scenario,
+        styles: 'climate_impact_reports',
+      })
     },
     addGeoJSONtoMap() {
       if (this.geoJSON) {
