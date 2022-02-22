@@ -33,7 +33,6 @@ export const actions = {
       '/alfresco/flammability/' +
       context.rootGetters['place/urlFragment']
     let flammability = await this.$http.$get(flammabilityQueryUrl)
-    console.log(flammability)
     context.commit('setFlammability', flammability)
 
     let vegChangeQueryUrl =
@@ -41,7 +40,6 @@ export const actions = {
       '/alfresco/veg_change/' +
       context.rootGetters['place/urlFragment']
     let veg_change = await this.$http.$get(vegChangeQueryUrl)
-    console.log(veg_change)
     context.commit('setVegChange', veg_change)
   },
 }
