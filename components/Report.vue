@@ -142,6 +142,10 @@
               <a href="#permafrost">Permafrost</a> with specific visualizations
               depending on the presence or absence of permafrost
             </li>
+            <li>
+              <a href="#wildfire">Wildfire</a> charts of relative flammability
+              and vegetation change with with multiple models and scenarios
+            </li>
           </ul>
         </div>
       </section>
@@ -160,6 +164,12 @@
       <section class="section">
         <div id="permafrost">
           <PermafrostReport />
+        </div>
+        <BackToTopButton />
+      </section>
+      <section class="section">
+        <div id="wildfire">
+          <WildfireReport />
         </div>
         <BackToTopButton />
       </section>
@@ -206,6 +216,7 @@
 import TempReport from '~/components/reports/temperature/TempReport'
 import PrecipReport from '~/components/reports/precipitation/PrecipReport'
 import PermafrostReport from '~/components/reports/permafrost/PermafrostReport'
+import WildfireReport from '~/components/reports/wildfire/WildfireReport'
 import MiniMap from '~/components/reports/MiniMap'
 import QualitativeText from '~/components/reports/QualitativeText'
 import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
@@ -222,6 +233,7 @@ export default {
     TempReport,
     PrecipReport,
     PermafrostReport,
+    WildfireReport,
     MiniMap,
     QualitativeText,
     DownloadCsvButton,
@@ -250,6 +262,9 @@ export default {
       console.error(e)
     })
     await this.$store.dispatch('permafrost/fetch').catch(e => {
+      console.error(e)
+    })
+    await this.$store.dispatch('wildfire/fetch').catch(e => {
       console.error(e)
     })
     this.$store.dispatch('elevation/fetch').catch(e => {
