@@ -49,11 +49,8 @@ export default {
   mounted() {
     this.map = L.map(this.mapID, this.getBaseMapAndLayers())
     if (this.latLng) {
-      this.map.panTo(this.latLng)
       this.marker = L.marker(this.latLng).addTo(this.map)
-    } else if (this.hucId) {
-      // Fetch the GeoJSON outline
-      this.loadHucGeoJSON()
+      this.map.panTo(this.latLng)
     }
   },
   watch: {
@@ -89,12 +86,6 @@ export default {
         }).addTo(this.map)
         this.map.fitBounds(this.geoJSONLayer.getBounds())
       }
-    },
-    async loadHucGeoJSON() {
-      let queryUrl = process.env.apiUrl + '/huc/huc8/' + this.hucId
-      // TODO, add error handling here.
-      let geoJson = await this.$http.$get(queryUrl)
-      this.map.fitBounds(this.geoJsonLayer.getBounds())
     },
     getBaseMapAndLayers() {
       // Projection definition.
