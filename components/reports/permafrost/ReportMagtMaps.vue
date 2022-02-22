@@ -83,10 +83,6 @@
 </template>
 
 <style lang="scss" scoped>
-h1 {
-  text-align: center;
-  font-size: 3rem;
-}
 .report--deltamap--map {
   height: 17vw;
   min-width: 10vw;
