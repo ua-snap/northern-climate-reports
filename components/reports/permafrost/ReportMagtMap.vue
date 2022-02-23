@@ -1,12 +1,12 @@
 <template>
-  <div class="report--minimap--wrapper has-text-centered has-text-weight-bold">
+  <div class="has-text-centered has-text-weight-bold">
     {{ title }}
-    <div :id="mapID" class="report--deltamap--map"></div>
+    <div :id="mapID" class="permafrost-minimap"></div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.report--deltamap--map {
+.permafrost-minimap {
   height: 15vw;
   width: 100%;
 }
