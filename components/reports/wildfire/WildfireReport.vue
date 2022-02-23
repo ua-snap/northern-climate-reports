@@ -13,12 +13,12 @@
           >
         </p>
       </div>
-      <div class="chart-wrapper">
-        <ReportFlammabilityChart />
-      </div>
-      <div class="chart-wrapper">
-        <ReportVegChangeChart />
-      </div>
+    </div>
+    <div class="chart-wrapper">
+      <ReportFlammabilityChart />
+    </div>
+    <div class="chart-wrapper">
+      <ReportVegChangeChart />
     </div>
   </div>
 </template>
