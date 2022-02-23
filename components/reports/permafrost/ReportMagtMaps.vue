@@ -1,65 +1,85 @@
 <template>
   <section class="section">
+    <h5 class="permafrost-minimaps-title has-text-centered">
+      Mean annual ground temperature,
+      <span v-html="place"></span>
+    </h5>
+    <div class="is-size-6 mb-4">
+      <b-field label="Model">
+        <b-radio
+          v-model="model_selection"
+          name="model_selection"
+          native-value="3"
+          >NCAR CCSM4</b-radio
+        >
+        <b-radio
+          v-model="model_selection"
+          name="model_selection"
+          native-value="4"
+          >MRI CGCM3</b-radio
+        >
+      </b-field>
+    </div>
     <div class="columns">
       <div class="column is-flex">
         <ReportMagtMap
           scenario="0"
           model="0"
           era="0"
-          class="report--deltamap--map"
+          class="permafrost-minimaps-map"
         />
         <ReportMagtMap
           scenario="1"
-          model="1"
+          :model="model_selection"
           era="1"
-          class="report--deltamap--map"
+          class="permafrost-minimaps-map"
         />
         <ReportMagtMap
           scenario="1"
-          model="1"
+          :model="model_selection"
           era="2"
-          class="report--deltamap--map"
+          class="permafrost-minimaps-map"
         />
         <ReportMagtMap
           scenario="1"
-          model="1"
+          :model="model_selection"
           era="3"
-          class="report--deltamap--map"
+          class="permafrost-minimaps-map"
         />
         <ReportMagtMap
           scenario="1"
-          model="1"
+          :model="model_selection"
           era="4"
-          class="report--deltamap--map"
+          class="permafrost-minimaps-map"
         />
       </div>
     </div>
     <div class="columns">
       <div class="column is-flex">
-        <div class="report--deltamap--map" />
+        <div class="permafrost-minimaps-map" />
         <ReportMagtMap
           scenario="2"
-          model="1"
+          :model="model_selection"
           era="1"
-          class="report--deltamap--map"
+          class="permafrost-minimaps-map"
         />
         <ReportMagtMap
           scenario="2"
-          model="1"
+          :model="model_selection"
           era="2"
-          class="report--deltamap--map"
+          class="permafrost-minimaps-map"
         />
         <ReportMagtMap
           scenario="2"
-          model="1"
+          :model="model_selection"
           era="3"
-          class="report--deltamap--map"
+          class="permafrost-minimaps-map"
         />
         <ReportMagtMap
           scenario="2"
-          model="1"
+          :model="model_selection"
           era="4"
-          class="report--deltamap--map"
+          class="permafrost-minimaps-map"
         />
       </div>
     </div>
@@ -67,11 +87,11 @@
 </template>
 
 <style lang="scss" scoped>
-h1 {
-  text-align: center;
-  font-size: 3rem;
+.permafrost-minimaps-title {
+  font-size: 150%;
+  padding-bottom: 1rem;
 }
-.report--deltamap--map {
+.permafrost-minimaps-map {
   height: 17vw;
   min-width: 10vw;
   width: 20%;
@@ -81,10 +101,21 @@ h1 {
 
 <script>
 import ReportMagtMap from './ReportMagtMap'
+import { mapGetters } from 'vuex'
 export default {
   name: 'ReportMagtMaps',
   components: {
     ReportMagtMap,
+  },
+  computed: {
+    ...mapGetters({
+      place: 'place/name',
+    }),
+  },
+  data() {
+    return {
+      model_selection: 3,
+    }
   },
 }
 </script>

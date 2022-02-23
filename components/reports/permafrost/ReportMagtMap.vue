@@ -1,12 +1,12 @@
 <template>
-  <div class="report--minimap--wrapper has-text-centered has-text-weight-bold">
+  <div class="has-text-centered has-text-weight-bold">
     {{ title }}
-    <div :id="mapID" class="report--deltamap--map"></div>
+    <div :id="mapID" class="permafrost-minimap"></div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.report--deltamap--map {
+.permafrost-minimap {
   height: 15vw;
   width: 100%;
 }
@@ -27,32 +27,56 @@ export default {
       latLng: 'place/latLng',
       geoJSON: 'place/geoJSON',
     }),
+    title() {
+      var title = ''
+      if (this.scenario > 0) {
+        title += scenarios[this.scenario] + ', '
+      }
+      title += eras[this.era]
+      return title
+    },
+    mapID() {
+      return this.scenario + '_' + this.model + '_' + this.era
+    },
   },
   data() {
     return {
-      mapID: this.getMapID(),
-      title: this.getTitle(),
       marker: undefined,
       geoJsonLayer: undefined,
+      baseLayer: undefined,
     }
   },
   mounted() {
     this.map = L.map(this.mapID, this.getBaseMapAndLayers())
     if (this.latLng) {
-      this.map.panTo(this.latLng)
       this.marker = L.marker(this.latLng).addTo(this.map)
-    } else if (this.hucId) {
-      // Fetch the GeoJSON outline
-      this.loadHucGeoJSON()
+      this.map.panTo(this.latLng)
     }
   },
   watch: {
+    model: function () {
+      this.map.removeLayer(this.baseLayer)
+      this.baseLayer = this.getBaseLayer()
+      this.map.addLayer(this.baseLayer)
+    },
     // After geoJSON is loaded, display on map.
     geoJSON: function () {
       this.addGeoJSONtoMap()
     },
   },
   methods: {
+    getBaseLayer() {
+      return new L.tileLayer.wms(process.env.rasdamanUrl, {
+        transparent: true,
+        format: 'image/png',
+        version: '1.3.0',
+        layers: 'test_iem_gipl_magt_alt_4km',
+        dim_era: this.era,
+        dim_model: this.model,
+        dim_scenario: this.scenario,
+        styles: 'climate_impact_reports',
+      })
+    },
     addGeoJSONtoMap() {
       if (this.geoJSON) {
         this.geoJSONLayer = L.geoJSON(this.geoJSON, {
@@ -63,23 +87,6 @@ export default {
         this.map.fitBounds(this.geoJSONLayer.getBounds())
       }
     },
-    async loadHucGeoJSON() {
-      let queryUrl = process.env.apiUrl + '/huc/huc8/' + this.hucId
-      // TODO, add error handling here.
-      let geoJson = await this.$http.$get(queryUrl)
-      this.map.fitBounds(this.geoJsonLayer.getBounds())
-    },
-    getTitle() {
-      var title = ''
-      if (this.scenario > 0) {
-        title += scenarios[this.scenario] + ', '
-      }
-      title += eras[this.era]
-      return title
-    },
-    getMapID() {
-      return this.scenario + '_' + this.model + '_' + this.era
-    },
     getBaseMapAndLayers() {
       // Projection definition.
       var proj = new this.$L.Proj.CRS(
@@ -89,19 +96,7 @@ export default {
           resolutions: [4096, 2048, 1024, 512, 256, 128, 64],
         }
       )
-      var baseLayer = new L.tileLayer.wms(
-        'http://apollo.snap.uaf.edu:8080/rasdaman/ows',
-        {
-          transparent: true,
-          format: 'image/png',
-          version: '1.3.0',
-          layers: 'test_iem_gipl_magt_alt_4km',
-          dim_era: this.era,
-          dim_model: this.model,
-          dim_scenario: this.scenario,
-          styles: 'climate_impact_reports',
-        }
-      )
+      this.baseLayer = this.getBaseLayer()
       // Map base configuration
       var config = {
         zoom: 1,
@@ -113,7 +108,7 @@ export default {
         zoomControl: false,
         doubleClickZoom: false,
         attributionControl: false,
-        layers: [baseLayer],
+        layers: [this.baseLayer],
         crs: proj,
       }
       return config
