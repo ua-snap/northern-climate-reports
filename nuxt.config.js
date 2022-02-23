@@ -87,7 +87,7 @@ export default {
     geoserverUrl:
       process.env.GEOSERVER_URL || 'https://gs.mapventure.org/geoserver/wms',
     rasdamanUrl:
-      process.env.RASDAMAN_URL || 'https://apollo.snap.uaf.edu/rasdaman/ows',
+      process.env.RASDAMAN_URL || 'https://zeus.snap.uaf.edu/rasdaman/ows',
     apiUrl: process.env.SNAP_API_URL || 'https://earthmaps.io',
   },
 
