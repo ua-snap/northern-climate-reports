@@ -87,7 +87,7 @@ export default {
         xref: 'paper',
         yref: 'paper',
         showarrow: true,
-        text: 'Less permafrost →',
+        text: 'More thaw →',
         textangle: '-90',
         font: {
           size: 13,
