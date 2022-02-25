@@ -30,6 +30,9 @@ export const mutations = {
   setElevation(state, elevation) {
     state.elevation = elevation
   },
+  clear(state) {
+    state.elevation = undefined
+  },
 }
 
 export const actions = {
