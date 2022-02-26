@@ -77,7 +77,7 @@ export default {
         format: 'image/png',
         version: '1.3.0',
         layers: [
-          'atlas_mapproxy:alaska_osm',
+          'atlas_mapproxy:alaska_osm_retina',
           'shadow_mask:iem_with_ak_aleutians_symmetric_difference',
         ],
       })
