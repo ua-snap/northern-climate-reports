@@ -208,6 +208,15 @@ export const mutations = {
   setUncertain(state, uncertain) {
     state.uncertain = uncertain
   },
+  clear(state) {
+    state.permafrostData = undefined
+    state.altThaw = undefined
+    state.altFreeze = undefined
+    state.magt = undefined
+    state.disappears = undefined
+    state.present = undefined
+    state.uncertain = undefined
+  },
 }
 
 export const actions = {
