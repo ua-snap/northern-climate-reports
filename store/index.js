@@ -24,6 +24,18 @@ export const getters = {
   // so the report section can be shown when a place has
   // been selected.
   reportIsVisible: (state, getters) => {
-    return getters['place/type']
+    // If the path contains `report` then the report should be active.
+    if(state.route.path) {
+      return state.route.path.includes('report')
+    }
+    return false
   },
+
+  mapSearchIsVisible: (state) => {
+    // If the path contains `search` then the map search pane should be active.
+    if(state.route.path) {
+      return state.route.path.includes('search')
+    }
+    return false
+  }
 }

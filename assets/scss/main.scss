@@ -24,7 +24,7 @@ label.label {
 }
 
 // Narrow the default content blocks, in general.
-.content {
+.content:not(.fullbleed) {
   max-width: 50em;
   margin: 1rem auto;
 }

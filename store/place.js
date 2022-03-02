@@ -1,3 +1,6 @@
+// Shim for dev/testing
+const searchResults = require('./search.json')
+
 // Store, namespaced as `place/`
 export const state = () => ({
   // GeoJSON outline for a HUC or protected area.
@@ -5,6 +8,9 @@ export const state = () => ({
 
   // List of all places defined in the application.
   places: undefined,
+
+  // Search results from a point query
+  searchResults: undefined,
 })
 
 export const getters = {
@@ -15,6 +21,10 @@ export const getters = {
 
   places(state) {
     return state.places
+  },
+
+  searchResults(state) {
+    return state.searchResults
   },
 
   // Gets the currently-selected lat/lon [directly or by placeID]
@@ -162,6 +172,9 @@ export const mutations = {
   setPlaces(state, places) {
     state.places = places
   },
+  setSearchResults(state, searchResults) {
+    state.searchResults = searchResults
+  },
 }
 
 export const actions = {
@@ -178,5 +191,9 @@ export const actions = {
     let queryUrl = process.env.apiUrl + '/places/all'
     let places = await this.$http.$get(queryUrl)
     context.commit('setPlaces', places)
+  },
+
+  async search(context) {
+    context.commit('setSearchResults', searchResults)
   },
 }

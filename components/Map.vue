@@ -1,73 +1,168 @@
 <template>
-  <div>
-    <div class="container">
-      <div class="section pullup">
-        <!-- Columns aren't strictly needed here, but it keeps things
-				aligned with the other place pickers above -->
-        <div class="columns">
-          <div class="content column is-one-half">
-            <h4>Find a place by clicking on the map</h4>
-            <p><strong>Click the map</strong> to pick a location.</p>
-          </div>
-          <div class="columns"></div>
-        </div>
-      </div>
-    </div>
-    <div id="map"></div>
-  </div>
+  <div id="map"></div>
 </template>
 
 <style lang="scss" scoped>
-.pullup {
-  margin-top: -2rem;
-  margin-bottom: -2rem;
-}
 #map {
-  height: 100vh;
-  width: 100vw;
+  min-height: 50vw;
+  height: 100%;
+  width: 100%;
+}
+
+::v-deep .community-label {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 0.25rem;
+  font-size: 16pt;
 }
 </style>
 
 <script>
 import _ from 'lodash'
+import { mapGetters } from 'vuex'
+import * as turf from '@turf/turf'
 import iem from '!raw-loader!../assets/iem.geojson'
 const iemJson = JSON.parse(iem)
 
 export default {
   name: 'Map',
+  computed: {
+    ...mapGetters({
+      searchResults: 'place/searchResults',
+      mapSearchIsVisible: 'mapSearchIsVisible',
+      latLng: 'place/latLng',
+    }),
+  },
   mounted() {
     this.map = L.map('map', this.getBaseMapAndLayers())
-    new this.$L.Control.Zoom({ position: 'topright' }).addTo(this.map)
 
-    // Instantiate handleMapClick function to allow for onEachFeature
-    // function to access it.
-    let hmc = this.handleMapClick
+    // The map is either being drawn for a broad search interface,
+    // or to show the results of a search.
+    if (this.mapSearchIsVisible) {
+      // this.latlng = {
+      //   lat: event.latlng.lat.toFixed(2),
+      //   lng: event.latlng.lng.toFixed(2),
+      // }
+      // this.lat = this.latlng.lat
+      // this.lng = this.latlng.lng
 
-    L.geoJSON(iemJson, {
-      onEachFeature: function (feature, layer) {
-        layer.on('click', hmc)
-      },
-      style: {
-        opacity: 0.0,
-        fillOpacity: 0.0,
-      },
-    }).addTo(this.map)
+      // let map = this.map
+
+      // let fakeLatLng = [63.85, -150.96]
+
+      // Add the clicked point to the map
+      this.marker = L.marker(this.latLng).addTo(this.map)
+
+      // Get the enclosing BBOX for all the GeoJSON
+      var bboxPolys = []
+      _.each(
+        _.concat(this.searchResults.protected_areas, this.searchResults.hucs),
+        function (area) {
+          if (area.geoJSON) {
+            bboxPolys.push(turf.bboxPolygon(turf.bbox(area.geoJSON)))
+          }
+        }
+      )
+      _.each(this.searchResults.communities, function (place) {
+        bboxPolys.push(turf.point([place.lng, place.lat]))
+      })
+      if (bboxPolys.length) {
+        var bboxPolyFeatureExtent = turf.bbox(turf.featureCollection(bboxPolys))
+      }
+
+      // Zoom to the region where the user clicked,
+      // Let a moment pass so the invalidation works properly
+      // with animated CSS -- then, add the GeoJSON / Markers to the map!
+      setTimeout(() => {
+        this.map.invalidateSize(true)
+        this.map.fitBounds([
+          [bboxPolyFeatureExtent[1], bboxPolyFeatureExtent[0]],
+          [bboxPolyFeatureExtent[3], bboxPolyFeatureExtent[2]],
+        ])
+
+        // Add GeoJSON for Protected Areas
+        _.each(this.searchResults.protected_areas, area => {
+          L.geoJSON(area.geoJSON, {
+            style: {
+              color: '#888888',
+            },
+            onEachFeature: (feature, layer) => {
+              L.marker(layer.getBounds().getCenter(), {
+                icon: L.divIcon({
+                  className: 'label',
+                  html: area.name,
+                }),
+              }).addTo(this.map)
+            },
+          }).addTo(this.map)
+        })
+
+        // Add GeoJSON for HUCs
+        _.each(this.searchResults.hucs, huc => {
+          L.geoJSON(huc.geoJSON, {
+            onEachFeature: (feature, layer) => {
+              L.marker(layer.getBounds().getCenter(), {
+                icon: L.divIcon({
+                  className: 'label',
+                  html: huc.name,
+                }),
+              }).addTo(this.map)
+            },
+          }).addTo(this.map)
+        })
+
+        var geojsonMarkerOptions = {
+          radius: 8,
+          fillColor: '#357a76',
+          color: '#000',
+          weight: 1,
+          opacity: 1,
+          fillOpacity: 0.8,
+        }
+
+        // Add points for each matching community
+        _.each(this.searchResults.communities, community => {
+          L.circleMarker(
+            [community.lat, community.lng],
+            geojsonMarkerOptions
+          ).addTo(this.map)
+        })
+      }, 50)
+    } else {
+      new this.$L.Control.Zoom({ position: 'topright' }).addTo(this.map)
+
+      // Instantiate handleMapClick function to allow for onEachFeature
+      // function to access it.
+      let hmc = this.handleMapClick
+
+      L.geoJSON(iemJson, {
+        onEachFeature: function (feature, layer) {
+          layer.on('click', hmc)
+        },
+        style: {
+          opacity: 0.0,
+          fillOpacity: 0.0,
+        },
+      }).addTo(this.map)
+    }
   },
   data() {
     return {
       // Currently selected lat/lon on the map.
+      lat: 0,
+      lng: 0,
       latlng: undefined,
+      minimized: false,
     }
   },
   methods: {
-    handleMapClick(event) {
-      this.latlng = {
-        lat: event.latlng.lat.toFixed(2),
-        lng: event.latlng.lng.toFixed(2),
-      }
+    async handleMapClick(event) {
       this.$router.push({
-        path: '/report/' + this.latlng.lat + '/' + this.latlng.lng,
-        hash: '#results',
+        path:
+          '/search/' +
+          event.latlng.lat.toFixed(2) +
+          '/' +
+          event.latlng.lng.toFixed(2),
+        hash: '#map-search',
       })
     },
     getBaseMapAndLayers() {
