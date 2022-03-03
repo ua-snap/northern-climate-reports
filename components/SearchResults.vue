@@ -4,7 +4,7 @@
       Locations matching {{ lat }}&deg;N, {{ lng }}&deg;E
     </h3>
     <p>These areas of interest are at, or near, this point:</p>
-    <ul>
+    <ul v-if="searchResults.protected_areas_near || searchResults.hucs_near">
       <li
         v-for="place in searchResults.protected_areas_near"
         :key="place.id"
@@ -51,9 +51,13 @@
     </ul>
     <p>
       Or
-      <a href=""
+      <nuxt-link
+        :to="{
+          path: '/report/' + lat + '/' + lng,
+          hash: '#results',
+        }"
         >show data extracted for the point at {{ lat }}&deg;N,
-        {{ lng }}&deg;W</a
+        {{ lng }}&deg;E</nuxt-link
       >.
     </p>
     <b-button

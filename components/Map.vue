@@ -120,9 +120,8 @@ export default {
       // This can be triggered before the data are ready;
       // guard!
       if (this.searchResults) {
-        
         // Clear prior results, if any.
-        if(this.layerGroup) {
+        if (this.layerGroup) {
           this.map.removeLayer(this.layerGroup)
         }
 
