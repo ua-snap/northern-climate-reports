@@ -38,95 +38,8 @@ export default {
     // The map is either being drawn for a broad search interface,
     // or to show the results of a search.
     if (this.mapSearchIsVisible) {
-      // this.latlng = {
-      //   lat: event.latlng.lat.toFixed(2),
-      //   lng: event.latlng.lng.toFixed(2),
-      // }
-      // this.lat = this.latlng.lat
-      // this.lng = this.latlng.lng
-
-      // let map = this.map
-
-      // let fakeLatLng = [63.85, -150.96]
-
-      // Add the clicked point to the map
       this.marker = L.marker(this.latLng).addTo(this.map)
-
-      // Get the enclosing BBOX for all the GeoJSON
-      var bboxPolys = []
-      _.each(
-        _.concat(this.searchResults.protected_areas, this.searchResults.hucs),
-        function (area) {
-          if (area.geoJSON) {
-            bboxPolys.push(turf.bboxPolygon(turf.bbox(area.geoJSON)))
-          }
-        }
-      )
-      _.each(this.searchResults.communities, function (place) {
-        bboxPolys.push(turf.point([place.lng, place.lat]))
-      })
-      if (bboxPolys.length) {
-        var bboxPolyFeatureExtent = turf.bbox(turf.featureCollection(bboxPolys))
-      }
-
-      // Zoom to the region where the user clicked,
-      // Let a moment pass so the invalidation works properly
-      // with animated CSS -- then, add the GeoJSON / Markers to the map!
-      setTimeout(() => {
-        this.map.invalidateSize(true)
-        this.map.fitBounds([
-          [bboxPolyFeatureExtent[1], bboxPolyFeatureExtent[0]],
-          [bboxPolyFeatureExtent[3], bboxPolyFeatureExtent[2]],
-        ])
-
-        // Add GeoJSON for Protected Areas
-        _.each(this.searchResults.protected_areas, area => {
-          L.geoJSON(area.geoJSON, {
-            style: {
-              color: '#888888',
-            },
-            onEachFeature: (feature, layer) => {
-              L.marker(layer.getBounds().getCenter(), {
-                icon: L.divIcon({
-                  className: 'label',
-                  html: area.name,
-                }),
-              }).addTo(this.map)
-            },
-          }).addTo(this.map)
-        })
-
-        // Add GeoJSON for HUCs
-        _.each(this.searchResults.hucs, huc => {
-          L.geoJSON(huc.geoJSON, {
-            onEachFeature: (feature, layer) => {
-              L.marker(layer.getBounds().getCenter(), {
-                icon: L.divIcon({
-                  className: 'label',
-                  html: huc.name,
-                }),
-              }).addTo(this.map)
-            },
-          }).addTo(this.map)
-        })
-
-        var geojsonMarkerOptions = {
-          radius: 8,
-          fillColor: '#357a76',
-          color: '#000',
-          weight: 1,
-          opacity: 1,
-          fillOpacity: 0.8,
-        }
-
-        // Add points for each matching community
-        _.each(this.searchResults.communities, community => {
-          L.circleMarker(
-            [community.lat, community.lng],
-            geojsonMarkerOptions
-          ).addTo(this.map)
-        })
-      }, 50)
+      this.drawSearchResults()
     } else {
       new this.$L.Control.Zoom({ position: 'topright' }).addTo(this.map)
 
@@ -155,7 +68,7 @@ export default {
     }
   },
   methods: {
-    async handleMapClick(event) {
+    handleMapClick(event) {
       this.$router.push({
         path:
           '/search/' +
@@ -202,6 +115,79 @@ export default {
       }
 
       return config
+    },
+    drawSearchResults() {
+      // This can be triggered before the data are ready;
+      // guard!
+      if (this.searchResults) {
+        
+        // Clear prior results, if any.
+        if(this.layerGroup) {
+          this.map.removeLayer(this.layerGroup)
+        }
+
+        // Zoom to the region where the user clicked,
+        // Let a moment pass so the invalidation works properly
+        // with animated CSS -- then, add the GeoJSON / Markers to the map!
+        setTimeout(() => {
+          this.map.invalidateSize(true)
+          this.map.fitBounds([
+            [
+              this.searchResults.total_bounds['ymin'],
+              this.searchResults.total_bounds['xmin'],
+            ],
+            [
+              this.searchResults.total_bounds['ymax'],
+              this.searchResults.total_bounds['xmax'],
+            ],
+          ])
+
+          // LayerGroup for the GeoJSON and stuff so it's easy to remove.
+          // This property is non-reactive.
+          this.layerGroup = new L.LayerGroup()
+          this.layerGroup.addTo(this.map)
+
+          // Add GeoJSON for Protected Areas
+          _.each(this.searchResults.protected_areas_near, area => {
+            this.layerGroup.addLayer(
+              L.geoJSON(area.geojson, {
+                style: {
+                  color: '#888888',
+                },
+              })
+            )
+          })
+
+          // Add GeoJSON for HUCs
+          _.each(this.searchResults.hucs_near, huc => {
+            this.layerGroup.addLayer(
+              L.geoJSON(huc.geojson).addTo(this.layerGroup)
+            )
+          })
+
+          var geojsonMarkerOptions = {
+            radius: 8,
+            fillColor: '#357a76',
+            color: '#000',
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8,
+          }
+
+          // Add points for each matching community
+          _.each(this.searchResults.communities, community => {
+            L.circleMarker(
+              [community.lat, community.lng],
+              geojsonMarkerOptions
+            ).addTo(this.map)
+          })
+        }, 50)
+      }
+    },
+  },
+  watch: {
+    searchResults: function () {
+      this.drawSearchResults()
     },
   },
 }

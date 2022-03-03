@@ -68,6 +68,7 @@
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
+import { getAppPathFragment } from '~/utils/path.js'
 
 export default {
   name: 'PlaceSelector',
@@ -118,21 +119,11 @@ export default {
   watch: {
     selected: function (selected) {
       if (selected && selected.type) {
-        let path
-        switch (selected.type) {
-          case 'huc':
-            path = '/report/huc/' + selected.id
-            break
-          case 'protected_area':
-            path = '/report/protected_area/' + selected.id
-            break
-          case 'community':
-            path = '/report/community/' + selected.id
-        }
+        
         // Triggers the navigation to the route path,
         // which loads the report + queries API, etc.
         this.$router.push({
-          path: path,
+          path: getAppPathFragment(selected.type, selected.id),
           hash: '#results',
         })
       }

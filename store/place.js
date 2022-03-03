@@ -1,5 +1,5 @@
 // Shim for dev/testing
-const searchResults = require('./search.json')
+import _ from 'lodash'
 
 // Store, namespaced as `place/`
 export const state = () => ({
@@ -175,6 +175,9 @@ export const mutations = {
   setSearchResults(state, searchResults) {
     state.searchResults = searchResults
   },
+  clearSearchResults(state, searchResults) {
+    state.searchResults = undefined
+  },
 }
 
 export const actions = {
@@ -194,6 +197,18 @@ export const actions = {
   },
 
   async search(context) {
-    context.commit('setSearchResults', searchResults)
+    if (context.getters.latLng) {
+      let queryUrl =
+        process.env.apiUrl +
+        '/places/search/' +
+        context.getters.latLng[0] +
+        '/' +
+        context.getters.latLng[1]
+
+      await this.$http.$get(queryUrl).then(res => {
+        Object.freeze(res) // remove reactivity of Vue, this is static
+        context.commit('setSearchResults', res)
+      })
+    }
   },
 }

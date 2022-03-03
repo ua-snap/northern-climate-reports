@@ -16,13 +16,34 @@
 					v-bind:class="{ minimized: !mapSearchIsVisible }"
 					class="content fullbleed"
 				>
-					<SearchResults />
+					<div v-if="$fetchState.pending" class="pending">
+						<!-- Drama dots -->
+						<h4 class="title is-5">Loading search results&hellip;</h4>
+						<b-progress type="is-info"></b-progress>
+					</div>
+					<div v-else-if="$fetchState.error" class="error">
+						<p class="is-size-5">Oh no! {{ $fetchState.error.message }}</p>
+						<b-button
+							class="is-warning"
+							tag="nuxt-link"
+							to="/#map"
+							icon-left="emoticon-sad-outline"
+						>
+							<strong>We&rsquo;re sorry</strong>, please try again</b-button
+						>
+					</div>
+					<div v-else>
+						<SearchResults />
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </template>
 <style lang="scss" scoped>
+.pending {
+	width: 80%;
+}
 #map-search {
 	padding-top: 2rem;
 }
@@ -63,6 +84,11 @@ export default {
 			mapSearchIsVisible: 'mapSearchIsVisible',
 		}),
 	},
+	mounted() {
+		// Flush any cached search results when this component
+		// is mounted.
+		this.$store.commit('place/clearSearchResults')
+	},
 	async fetch() {
 		await this.$store
 			.dispatch('place/search', {
@@ -73,7 +99,13 @@ export default {
 				// Some work remains TBD here.
 			})
 			.catch(e => {
-				console.error(e)
+				if (e.statusCode == 500) {
+					throw 'The server had a problem trying to execute this request.'
+				} else if (e.statusCode == 404) {
+					throw 'No results were found for this place.'
+				} else {
+					throw 'Something unexpected went wrong.'
+				}
 			})
 	},
 }

@@ -1,19 +1,33 @@
 <template>
-  <div>
+  <div v-if="searchResults">
     <h3 class="title is-4">
       Locations matching {{ lat }}&deg;N, {{ lng }}&deg;E
     </h3>
     <p>These areas of interest are at, or near, this point:</p>
     <ul>
       <li
-        v-for="place in searchResults.protected_areas"
+        v-for="place in searchResults.protected_areas_near"
         :key="place.id"
         class="protected-area"
       >
-        <a>{{ place.name }}</a> <span>{{ place.area_type }}</span>
+        <nuxt-link
+          :to="{
+            path: formUrl(place),
+            hash: '#results',
+          }"
+          >{{ place.name }}</nuxt-link
+        >
+        <span>{{ place.area_type }}</span>
       </li>
-      <li v-for="huc in searchResults.hucs" :key="huc.id" class="huc">
-        <a>{{ huc.name }}</a> <span>HUC ID {{ huc.id }}</span>
+      <li v-for="huc in searchResults.hucs_near" :key="huc.id" class="huc">
+        <nuxt-link
+          :to="{
+            path: formUrl(huc),
+            hash: '#results',
+          }"
+          >{{ huc.name }}</nuxt-link
+        >
+        <span>HUC ID {{ huc.id }}</span>
       </li>
     </ul>
     <p>Nearby communities listed in this tool:</p>
@@ -23,9 +37,15 @@
         :key="community.id"
         class="community"
       >
-        <a
+        <nuxt-link
+          :to="{
+            path: formUrl(community),
+            hash: '#results',
+          }"
           >{{ community.name }}
-          <span v-if="community.alt_name">({{ community.alt_name }})</span></a
+          <span v-if="community.alt_name"
+            >({{ community.alt_name }})</span
+          ></nuxt-link
         >
       </li>
     </ul>
@@ -39,7 +59,7 @@
     <b-button
       class="default"
       tag="nuxt-link"
-      to="/"
+      to="/#map"
       type="is-info"
       icon-left="arrow-left-circle"
     >
@@ -57,6 +77,8 @@ li.huc span {
 </style>
 <script>
 import { mapGetters } from 'vuex'
+import { getAppPathFragment } from '~/utils/path.js'
+
 export default {
   name: 'SearchResults',
   computed: {
@@ -70,6 +92,11 @@ export default {
       searchResults: 'place/searchResults',
       latLng: 'place/latLng',
     }),
+  },
+  methods: {
+    formUrl(place) {
+      return getAppPathFragment(place.type, place.id)
+    },
   },
 }
 </script>
