@@ -59,14 +59,6 @@ var getProcessedData = function (permafrostData) {
           return
         }
 
-        // An ALT value of 0.07 appears to be nodata.
-        // TODO: Convert 0.07 to proper nodata values in the API or GeoServer.
-        if (scenarioAlt <= 0.07) {
-          categorizedData['thaw'][year][model][scenario] = null
-          categorizedData['freeze'][year][model][scenario] = null
-          return
-        }
-
         // Populate with thaw data, or null if no permafrost is present.
         // The presence of permafrost is detected by using the sign of the MAGT
         // value to determine if the ALT value for the next time interval should
