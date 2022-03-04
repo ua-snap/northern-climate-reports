@@ -59,7 +59,7 @@ export default {
 
     // The map is either being drawn for a broad search interface,
     // or to show the results of a search.
-    if (this.mapSearchIsVisible) {
+    if (this.mapSearchIsVisible && this.searchResults) {
       this.marker = L.marker(this.latLng).addTo(this.map)
       this.drawSearchResults()
     } else {
@@ -144,9 +144,11 @@ export default {
       // This can be triggered before the data are ready;
       // guard!
       if (this.searchResults) {
+        
         // Clear prior results, if any.
-        if (this.layerGroup) {
+        if (this.layerGroup || this.communityLayerGroup) {
           this.map.removeLayer(this.layerGroup)
+          this.map.removeLayer(this.communityLayerGroup)
         }
 
         // Zoom to the region where the user clicked,
@@ -169,6 +171,10 @@ export default {
           // This property is non-reactive.
           this.layerGroup = new L.LayerGroup()
           this.layerGroup.addTo(this.map)
+
+          this.communityLayerGroup = new L.LayerGroup()
+          this.communityLayerGroup.addTo(this.map)
+          this.communityLayerGroup.setZIndex(0)
 
           // Add GeoJSON for Protected Areas, along
           // with event handlers; it's a little messy
@@ -264,10 +270,22 @@ export default {
 
           // Add points for each matching community
           _.each(this.searchResults.communities, community => {
+            let communityName = community.name
+            if (community.alt_name) {
+              communityName += ' (' + community.alt_name + ')'
+            }
             L.circleMarker(
               [community.latitude, community.longitude],
               geojsonMarkerOptions
-            ).addTo(this.map).bringToFront()
+            )
+              .bindTooltip(communityName)
+              .on('click', e => {
+                this.$router.push({
+                  path: getAppPathFragment('community', community.id),
+                  hash: '#results',
+                })
+              })
+              .addTo(this.communityLayerGroup)
           })
         }, 50)
       }

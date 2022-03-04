@@ -30,25 +30,27 @@
         <span>HUC ID {{ huc.id }}</span>
       </li>
     </ul>
-    <p>Nearby communities listed in this tool:</p>
-    <ul>
-      <li
-        v-for="community in searchResults.communities"
-        :key="community.id"
-        class="community"
-      >
-        <nuxt-link
-          :to="{
-            path: formUrl(community),
-            hash: '#results',
-          }"
-          >{{ community.name }}
-          <span v-if="community.alt_name"
-            >({{ community.alt_name }})</span
-          ></nuxt-link
+    <div v-if="searchResults.communities" class="mb-4">
+      <p>Nearby places and communities listed in this tool:</p>
+      <ul>
+        <li
+          v-for="community in searchResults.communities"
+          :key="community.id"
+          class="community"
         >
-      </li>
-    </ul>
+          <nuxt-link
+            :to="{
+              path: formUrl(community),
+              hash: '#results',
+            }"
+            >{{ community.name }}
+            <span v-if="community.alt_name"
+              >({{ community.alt_name }})</span
+            ></nuxt-link
+          >
+        </li>
+      </ul>
+    </div>
     <p>
       Or
       <nuxt-link
