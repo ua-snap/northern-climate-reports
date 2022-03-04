@@ -16,7 +16,7 @@
           </section>
         </div>
         <!-- Map can't be wrapped in container/section, if we want it full-screen. -->
-        <Map></Map>
+        <MapWrapper />
       </div>
       <div v-if="this.reportIsVisible" class="report-wrapper">
         <Report></Report>
@@ -26,7 +26,7 @@
 </template>
 <style lang="scss" scoped></style>
 <script>
-import Map from '~/components/Map'
+import MapWrapper from '~/components/MapWrapper'
 import Report from '~/components/Report'
 import PlaceSelector from '~/components/PlaceSelector'
 import LatLngSelector from '~/components/LatLngSelector'
@@ -36,7 +36,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'App',
   components: {
-    Map,
+    MapWrapper,
     Report,
     LatLngSelector,
     PlaceSelector,

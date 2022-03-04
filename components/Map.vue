@@ -1,73 +1,105 @@
 <template>
-  <div>
-    <div class="container">
-      <div class="section pullup">
-        <!-- Columns aren't strictly needed here, but it keeps things
-				aligned with the other place pickers above -->
-        <div class="columns">
-          <div class="content column is-one-half">
-            <h4>Find a place by clicking on the map</h4>
-            <p><strong>Click the map</strong> to pick a location.</p>
-          </div>
-          <div class="columns"></div>
-        </div>
-      </div>
-    </div>
-    <div id="map"></div>
-  </div>
+  <div id="map"></div>
 </template>
 
 <style lang="scss" scoped>
-.pullup {
-  margin-top: -2rem;
-  margin-bottom: -2rem;
-}
 #map {
-  height: 100vh;
-  width: 100vw;
+  min-height: 50vw;
+  height: 100%;
+  width: 100%;
+}
+
+::v-deep .community-label {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 0.25rem;
+  font-size: 16pt;
 }
 </style>
 
 <script>
 import _ from 'lodash'
+import { mapGetters } from 'vuex'
+import * as turf from '@turf/turf'
+import { getAppPathFragment } from '~/utils/path.js'
 import iem from '!raw-loader!../assets/iem.geojson'
 const iemJson = JSON.parse(iem)
 
+// Set up styles for managing polygon highlights, etc.
+var protectedAreaDefaultStyle = {
+  color: '#20a003',
+  fillOpacity: 0.2,
+}
+
+var protectedAreaHighlightedStyle = {
+  color: '#fcf1b5',
+  fillOpacity: 0.9,
+}
+
+var hucDefaultStyle = {
+  color: '#09a3ea',
+  fillOpacity: 0.2,
+}
+
+var hucHighlightedStyle = {
+  color: '#fcf1b5',
+  fillOpacity: 0.9,
+}
+
 export default {
   name: 'Map',
+  computed: {
+    ...mapGetters({
+      searchResults: 'place/searchResults',
+      mapSearchIsVisible: 'mapSearchIsVisible',
+      latLng: 'place/latLng',
+    }),
+  },
   mounted() {
     this.map = L.map('map', this.getBaseMapAndLayers())
-    new this.$L.Control.Zoom({ position: 'topright' }).addTo(this.map)
 
-    // Instantiate handleMapClick function to allow for onEachFeature
-    // function to access it.
-    let hmc = this.handleMapClick
+    // The map is either being drawn for a broad search interface,
+    // or to show the results of a search.
+    if (this.mapSearchIsVisible && this.searchResults) {
+      this.marker = L.marker(this.latLng).addTo(this.map)
+      this.drawSearchResults()
+    } else {
+      new this.$L.Control.Zoom({ position: 'topright' }).addTo(this.map)
 
-    L.geoJSON(iemJson, {
-      onEachFeature: function (feature, layer) {
-        layer.on('click', hmc)
-      },
-      style: {
-        opacity: 0.0,
-        fillOpacity: 0.0,
-      },
-    }).addTo(this.map)
+      // Instantiate handleMapClick function to allow for onEachFeature
+      // function to access it.
+      let hmc = this.handleMapClick
+
+      L.geoJSON(iemJson, {
+        onEachFeature: function (feature, layer) {
+          layer.on('click', hmc)
+        },
+        style: {
+          opacity: 0.0,
+          fillOpacity: 0.0,
+        },
+      }).addTo(this.map)
+    }
   },
   data() {
     return {
       // Currently selected lat/lon on the map.
+      lat: 0,
+      lng: 0,
       latlng: undefined,
+      minimized: false,
     }
   },
   methods: {
+    // Handle a mouse click on the map when it's in full view / default mode,
+    // trigger a search event!
     handleMapClick(event) {
-      this.latlng = {
-        lat: event.latlng.lat.toFixed(2),
-        lng: event.latlng.lng.toFixed(2),
-      }
       this.$router.push({
-        path: '/report/' + this.latlng.lat + '/' + this.latlng.lng,
-        hash: '#results',
+        path:
+          '/search/' +
+          event.latlng.lat.toFixed(2) +
+          '/' +
+          event.latlng.lng.toFixed(2),
+        hash: '#map-search',
       })
     },
     getBaseMapAndLayers() {
@@ -107,6 +139,161 @@ export default {
       }
 
       return config
+    },
+    drawSearchResults() {
+      // This can be triggered before the data are ready;
+      // guard!
+      if (this.searchResults) {
+        
+        // Clear prior results, if any.
+        if (this.layerGroup || this.communityLayerGroup) {
+          this.map.removeLayer(this.layerGroup)
+          this.map.removeLayer(this.communityLayerGroup)
+        }
+
+        // Zoom to the region where the user clicked,
+        // Let a moment pass so the invalidation works properly
+        // with animated CSS -- then, add the GeoJSON / Markers to the map!
+        setTimeout(() => {
+          this.map.invalidateSize(true)
+          this.map.fitBounds([
+            [
+              this.searchResults.total_bounds['ymin'],
+              this.searchResults.total_bounds['xmin'],
+            ],
+            [
+              this.searchResults.total_bounds['ymax'],
+              this.searchResults.total_bounds['xmax'],
+            ],
+          ])
+
+          // LayerGroup for the GeoJSON and stuff so it's easy to remove.
+          // This property is non-reactive.
+          this.layerGroup = new L.LayerGroup()
+          this.layerGroup.addTo(this.map)
+
+          this.communityLayerGroup = new L.LayerGroup()
+          this.communityLayerGroup.addTo(this.map)
+          this.communityLayerGroup.setZIndex(0)
+
+          // Add GeoJSON for Protected Areas, along
+          // with event handlers; it's a little messy
+          // to have things bound here instead of factored into
+          // other methods on this object but we need to
+          // bind the `this` context throughout.
+          _.each(this.searchResults.protected_areas_near, area => {
+            area.geojson.properties = {
+              id: area.id,
+              name: area.name,
+              type: area.type,
+            }
+            this.layerGroup.addLayer(
+              L.geoJSON(area.geojson, {
+                style: protectedAreaDefaultStyle,
+                onEachFeature: (feature, layer) => {
+                  layer.bindTooltip(feature.properties.name)
+                  layer.on({
+                    mouseover: e => {
+                      let layer = e.target
+                      layer.bringToFront()
+                      layer.setStyle(protectedAreaHighlightedStyle)
+                      layer.openTooltip()
+                    },
+                    mouseout: e => {
+                      let layer = e.target
+                      layer.setStyle(protectedAreaDefaultStyle)
+                      layer.closeTooltip()
+                    },
+                    click: e => {
+                      let layer = e.target
+                      this.$router.push({
+                        path: getAppPathFragment(
+                          feature.properties.type,
+                          feature.properties.id
+                        ),
+                        hash: '#results',
+                      })
+                    },
+                  })
+                },
+              })
+            )
+          })
+
+          _.each(this.searchResults.hucs_near, huc => {
+            huc.geojson.properties = {
+              id: huc.id,
+              name: huc.name,
+              type: huc.type,
+            }
+            this.layerGroup.addLayer(
+              L.geoJSON(huc.geojson, {
+                style: hucDefaultStyle,
+                onEachFeature: (feature, layer) => {
+                  layer.bindTooltip(feature.properties.name)
+                  layer.on({
+                    mouseover: e => {
+                      let layer = e.target
+                      layer.bringToFront()
+                      layer.setStyle(hucHighlightedStyle)
+                      layer.openTooltip()
+                    },
+                    mouseout: e => {
+                      let layer = e.target
+                      layer.setStyle(hucDefaultStyle)
+                      layer.closeTooltip()
+                    },
+                    click: e => {
+                      let layer = e.target
+                      this.$router.push({
+                        path: getAppPathFragment(
+                          feature.properties.type,
+                          feature.properties.id
+                        ),
+                        hash: '#results',
+                      })
+                    },
+                  })
+                },
+              })
+            )
+          })
+
+          var geojsonMarkerOptions = {
+            radius: 8,
+            fillColor: '#357a76',
+            color: '#000',
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8,
+          }
+
+          // Add points for each matching community
+          _.each(this.searchResults.communities, community => {
+            let communityName = community.name
+            if (community.alt_name) {
+              communityName += ' (' + community.alt_name + ')'
+            }
+            L.circleMarker(
+              [community.latitude, community.longitude],
+              geojsonMarkerOptions
+            )
+              .bindTooltip(communityName)
+              .on('click', e => {
+                this.$router.push({
+                  path: getAppPathFragment('community', community.id),
+                  hash: '#results',
+                })
+              })
+              .addTo(this.communityLayerGroup)
+          })
+        }, 50)
+      }
+    },
+  },
+  watch: {
+    searchResults: function () {
+      this.drawSearchResults()
     },
   },
 }

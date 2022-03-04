@@ -108,6 +108,10 @@ export default {
         component: resolve(__dirname, 'pages/index'),
       })
       routes.push({
+        path: '/search/:lat/:lng',
+        component: resolve(__dirname, 'pages/index'),
+      })
+      routes.push({
         path: '/report/:lat/:lng',
         component: resolve(__dirname, 'pages/index'),
       })
