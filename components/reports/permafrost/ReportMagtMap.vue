@@ -70,7 +70,7 @@ export default {
         transparent: true,
         format: 'image/png',
         version: '1.3.0',
-        layers: 'test_iem_gipl_magt_alt_4km',
+        layers: 'iem_gipl_magt_alt_4km',
         dim_era: this.era,
         dim_model: this.model,
         dim_scenario: this.scenario,

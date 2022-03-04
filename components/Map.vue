@@ -126,7 +126,7 @@ export default {
       // Map base configuration
       var config = {
         zoom: 1,
-        minZoom: 0,
+        minZoom: 1,
         maxZoom: 6,
         center: [64.7, -155],
         scrollWheelZoom: false,

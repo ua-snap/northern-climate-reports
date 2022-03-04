@@ -190,6 +190,11 @@ export const actions = {
   },
 
   async fetchPlaces(context) {
+    // If we've already fetched this, don't do that again.
+    if (context.state.places) {
+      return
+    }
+
     // TODO: add error handling here for 404 (no data) etc.
     let queryUrl = process.env.apiUrl + '/places/all'
     let places = await this.$http.$get(queryUrl)

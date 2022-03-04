@@ -52,6 +52,9 @@ export const mutations = {
   setClimateData(state, climateData) {
     state.climateData = climateData
   },
+  clear(state) {
+    state.climateData = undefined
+  },
 }
 
 export const actions = {

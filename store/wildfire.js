@@ -23,6 +23,10 @@ export const mutations = {
   setVegChange(state, veg_change) {
     state.veg_change = veg_change
   },
+  clear(state) {
+    state.flammability = undefined
+    state.veg_change = undefined
+  }
 }
 
 export const actions = {
