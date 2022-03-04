@@ -14,9 +14,11 @@
         </p>
       </div>
     </div>
+    <ReportFlammabilityMaps />
     <div class="chart-wrapper">
       <ReportFlammabilityChart />
     </div>
+    <ReportVegChangeMaps />
     <div class="chart-wrapper">
       <ReportVegChangeChart />
     </div>
@@ -24,12 +26,19 @@
 </template>
 <style></style>
 <script>
+import ReportFlammabilityMaps from './ReportFlammabilityMaps'
 import ReportFlammabilityChart from './ReportFlammabilityChart'
+import ReportVegChangeMaps from './ReportVegChangeMaps'
 import ReportVegChangeChart from './ReportVegChangeChart'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'WildfireReport',
-  components: { ReportFlammabilityChart, ReportVegChangeChart },
+  components: {
+    ReportFlammabilityMaps,
+    ReportFlammabilityChart,
+    ReportVegChangeMaps,
+    ReportVegChangeChart,
+  },
 }
 </script>
