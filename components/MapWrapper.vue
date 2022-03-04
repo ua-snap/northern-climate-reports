@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="section pullup content fullbleed">
 				<h4>Find a place by clicking on the map</h4>
-				<p><strong>Click the map</strong> to pick a location.</p>
+				<p><strong>Click the map</strong> to pick a location.  Nearby communities, protected areas and watersheds will be shown.</p>
 			</div>
 		</div>
 		<div id="map-search">
@@ -14,7 +14,7 @@
 				<div
 					id="map--sidebar"
 					v-bind:class="{ minimized: !mapSearchIsVisible }"
-					class="content fullbleed"
+					class="content fullbleed pb-5"
 				>
 					<div v-if="$fetchState.pending" class="pending">
 						<!-- Drama dots -->
@@ -62,7 +62,7 @@
 #map--sidebar {
 	display: block;
 	width: 50vw;
-	height: 50vw;
+	min-height: 100vh;
 
 	&.minimized {
 		display: none;
