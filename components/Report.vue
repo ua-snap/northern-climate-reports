@@ -14,7 +14,7 @@
     <hr />
     <section v-if="$fetchState.pending" class="section content">
       <!-- Drama dots -->
-      <h4 class="title is-5">Loading data for {{ place }}&hellip;</h4>
+      <h4 class="title is-5">Loading data for <span v-html=place />&hellip;</h4>
       <b-progress type="is-info"></b-progress>
     </section>
     <section v-else-if="$fetchState.error" class="section content error">
