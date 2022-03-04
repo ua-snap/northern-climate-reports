@@ -20,8 +20,30 @@
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
 import * as turf from '@turf/turf'
+import { getAppPathFragment } from '~/utils/path.js'
 import iem from '!raw-loader!../assets/iem.geojson'
 const iemJson = JSON.parse(iem)
+
+// Set up styles for managing polygon highlights, etc.
+var protectedAreaDefaultStyle = {
+  color: '#20a003',
+  fillOpacity: 0.2,
+}
+
+var protectedAreaHighlightedStyle = {
+  color: '#fcf1b5',
+  fillOpacity: 0.9,
+}
+
+var hucDefaultStyle = {
+  color: '#09a3ea',
+  fillOpacity: 0.2,
+}
+
+var hucHighlightedStyle = {
+  color: '#fcf1b5',
+  fillOpacity: 0.9,
+}
 
 export default {
   name: 'Map',
@@ -68,6 +90,8 @@ export default {
     }
   },
   methods: {
+    // Handle a mouse click on the map when it's in full view / default mode,
+    // trigger a search event!
     handleMapClick(event) {
       this.$router.push({
         path:
@@ -146,21 +170,86 @@ export default {
           this.layerGroup = new L.LayerGroup()
           this.layerGroup.addTo(this.map)
 
-          // Add GeoJSON for Protected Areas
+          // Add GeoJSON for Protected Areas, along
+          // with event handlers; it's a little messy
+          // to have things bound here instead of factored into
+          // other methods on this object but we need to
+          // bind the `this` context throughout.
           _.each(this.searchResults.protected_areas_near, area => {
+            area.geojson.properties = {
+              id: area.id,
+              name: area.name,
+              type: area.type,
+            }
             this.layerGroup.addLayer(
               L.geoJSON(area.geojson, {
-                style: {
-                  color: '#888888',
+                style: protectedAreaDefaultStyle,
+                onEachFeature: (feature, layer) => {
+                  layer.bindTooltip(feature.properties.name)
+                  layer.on({
+                    mouseover: e => {
+                      let layer = e.target
+                      layer.bringToFront()
+                      layer.setStyle(protectedAreaHighlightedStyle)
+                      layer.openTooltip()
+                    },
+                    mouseout: e => {
+                      let layer = e.target
+                      layer.setStyle(protectedAreaDefaultStyle)
+                      layer.closeTooltip()
+                    },
+                    click: e => {
+                      let layer = e.target
+                      this.$router.push({
+                        path: getAppPathFragment(
+                          feature.properties.type,
+                          feature.properties.id
+                        ),
+                        hash: '#results',
+                      })
+                    },
+                  })
                 },
               })
             )
           })
 
-          // Add GeoJSON for HUCs
           _.each(this.searchResults.hucs_near, huc => {
+            huc.geojson.properties = {
+              id: huc.id,
+              name: huc.name,
+              type: huc.type,
+            }
             this.layerGroup.addLayer(
-              L.geoJSON(huc.geojson).addTo(this.layerGroup)
+              L.geoJSON(huc.geojson, {
+                style: hucDefaultStyle,
+                onEachFeature: (feature, layer) => {
+                  layer.bindTooltip(feature.properties.name)
+                  layer.on({
+                    mouseover: e => {
+                      let layer = e.target
+                      layer.bringToFront()
+                      layer.setStyle(hucHighlightedStyle)
+                      layer.openTooltip()
+                    },
+                    mouseout: e => {
+                      let layer = e.target
+                      layer.setStyle(hucDefaultStyle)
+                      layer.closeTooltip()
+                    },
+                    click: e => {
+                      let layer = e.target
+                      this.$router.push({
+                        path: getAppPathFragment(
+                          feature.properties.type,
+                          feature.properties.id
+                        ),
+                        hash: '#results',
+                      })
+                    },
+                  })
+                },
+              })
             )
           })
 
@@ -176,9 +265,9 @@ export default {
           // Add points for each matching community
           _.each(this.searchResults.communities, community => {
             L.circleMarker(
-              [community.lat, community.lng],
+              [community.latitude, community.longitude],
               geojsonMarkerOptions
-            ).addTo(this.map)
+            ).addTo(this.map).bringToFront()
           })
         }, 50)
       }

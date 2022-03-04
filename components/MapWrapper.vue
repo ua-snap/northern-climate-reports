@@ -48,9 +48,8 @@
 	padding-top: 2rem;
 }
 #map--wrapper {
-	height: 100vh;
+	min-height: 100vh;
 	width: 100vw;
-
 	&.minimized {
 		width: 50vw;
 		height: 50vw; // square
