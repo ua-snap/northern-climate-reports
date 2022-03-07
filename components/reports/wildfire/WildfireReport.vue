@@ -6,8 +6,8 @@
         <p>
           The following charts show the historical and projected relative
           flammability and vegetation change for this location. Values represent
-          the average number of times the pixel at this location has burned or
-          changed dominant vegetation type for varios models and scenarios.
+          the percentage of times the pixel at this location has burned, or
+          changed dominant vegetation type, for varios models and scenarios.
           <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
             >See information about the dataset shown here.</nuxt-link
           >

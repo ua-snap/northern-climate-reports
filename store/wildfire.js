@@ -43,10 +43,6 @@ export const mutations = {
   setVegChangeHttpError(state, error) {
     state.vegChangeHttpError = error
   },
-  clear(state) {
-    state.flammability = undefined
-    state.veg_change = undefined
-  },
 }
 
 export const actions = {

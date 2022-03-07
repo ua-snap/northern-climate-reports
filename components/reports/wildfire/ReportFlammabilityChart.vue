@@ -1,5 +1,21 @@
 <template>
   <div class="wildfire-chart-wrapper">
+    <div class="is-size-6">
+      <b-field label="Projected Data">
+        <b-radio
+          v-model="plotType"
+          name="flammabilityPlotType"
+          native-value="box"
+          >Box Plot</b-radio
+        >
+        <b-radio
+          v-model="plotType"
+          name="flammabilityPlotType"
+          native-value="scatter"
+          >Scatter Plot</b-radio
+        >
+      </b-field>
+    </div>
     <div id="wildfire-flammability-chart" />
   </div>
 </template>
@@ -10,19 +26,29 @@ import { getPlotSettings, getLayout, getFooter } from '../../../utils/charts'
 import {
   getHistoricalTrace,
   getProjectedTraces,
+  allZeros,
 } from '../../../utils/wildfire_charts'
 export default {
   name: 'ReportFlammabilityChart',
   mounted() {
     this.renderPlot()
   },
+  data() {
+    return {
+      plotType: 'box',
+    }
+  },
   computed: {
     ...mapGetters({
       flammabilityData: 'wildfire/flammability',
+      place: 'place/name',
     }),
   },
   watch: {
     flammabilityData: function () {
+      this.renderPlot()
+    },
+    plotType: function () {
       this.renderPlot()
     },
   },
@@ -33,9 +59,15 @@ export default {
         return
       }
 
-      let title = 'Relative flammability'
-      let yAxisLabel = 'Average pixels burned'
-      let layout = getLayout(title, yAxisLabel, 600)
+      let title = 'Relative flammability, ' + this.place
+      let yAxisLabel = 'Annual chance of burning (%)'
+      let layout = getLayout(title, yAxisLabel)
+
+      // Prevent all-zero charts from showing negative y-axis.
+      // Subtract a small buffer from 0 value to avoid cropping scatter marker.
+      if (allZeros(flammabilityData)) {
+        layout['yaxis']['range'] = [-0.1, 2]
+      }
 
       let dataTraces = []
 
@@ -44,7 +76,11 @@ export default {
         dataTraces.push(historicalTrace)
       }
 
-      let projectedTraces = getProjectedTraces(flammabilityData, 'rf')
+      let projectedTraces = getProjectedTraces(
+        flammabilityData,
+        'rf',
+        this.plotType
+      )
       dataTraces = dataTraces.concat(projectedTraces)
 
       let footerLines = [
