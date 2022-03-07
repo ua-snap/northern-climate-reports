@@ -82,6 +82,11 @@ export default {
     filteredDataObj() {
       // Guard in case the async loading of places isn't done yet.
       if (this.places) {
+        // Strip non-digit characters at the start to allow for
+        // searching by "huc 1901..." etc -- the numeric HucID will
+        // be searched.
+        let strippedHucSearch = this.selectedPlace.replace(/^[\D]*/g, '')
+
         return this.places.filter(option => {
           return (
             option.name
@@ -101,13 +106,9 @@ export default {
             // HUCID, check only if it's 4 digits or more
             (this.selectedPlace.length > 3 &&
               (option.id.toString().indexOf(this.selectedPlace) >= 0 ||
-                option.id.toString().indexOf('huc ' + this.selectedPlace) >=
-                  0 ||
-                option.id.toString().indexOf('HUC ' + this.selectedPlace) >=
-                  0 ||
-                option.id.toString().indexOf('huc-' + this.selectedPlace) >=
-                  0 ||
-                option.id.toString().indexOf('HUC-' + this.selectedPlace) >= 0))
+                // Check for nonzero length of strippedHucSearch!
+                (strippedHucSearch &&
+                  option.id.toString().indexOf(strippedHucSearch) >= 0)))
           )
         })
       }
@@ -119,7 +120,6 @@ export default {
   watch: {
     selected: function (selected) {
       if (selected && selected.type) {
-        
         // Triggers the navigation to the route path,
         // which loads the report + queries API, etc.
         this.$router.push({
