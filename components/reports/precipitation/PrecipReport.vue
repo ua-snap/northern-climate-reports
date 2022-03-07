@@ -48,18 +48,19 @@
     </div>
     <ReportPrecipChart :season="precip_season" />
     <ReportPrecipTable />
+    <BackToTopButton />
   </div>
 </template>
 <style></style>
 <script>
 import ReportPrecipChart from './ReportPrecipChart'
 import ReportPrecipTable from './ReportPrecipTable'
+import BackToTopButton from '~/components/reports/BackToTopButton'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'PrecipReport',
-  props: ['reportData'],
-  components: { ReportPrecipChart, ReportPrecipTable },
+  components: { ReportPrecipChart, ReportPrecipTable, BackToTopButton },
   data() {
     return {
       precip_season: 'DJF',
@@ -68,6 +69,7 @@ export default {
   computed: {
     ...mapGetters({
       units: 'units',
+      reportData: 'climate/climateData',
     }),
   },
 }

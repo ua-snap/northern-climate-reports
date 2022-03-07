@@ -1,6 +1,7 @@
 // This store fetches/manages "climate" variables (taspr = temp + precip)
 import _ from 'lodash'
 import { convertToInches, convertToFahrenheit } from '../utils/convert'
+import { getHttpError } from '../utils/http_errors'
 
 // Helper functions
 var convertReportData = function (climateData) {
@@ -37,6 +38,7 @@ var convertReportData = function (climateData) {
 // Store, namespaced as `climate/`
 export const state = () => ({
   climateData: undefined,
+  httpError: null,
 })
 
 export const getters = {
@@ -45,6 +47,9 @@ export const getters = {
     return rootGetters.units == 'imperial'
       ? convertReportData(tempData)
       : tempData
+  },
+  httpError(state) {
+    return state.httpError
   },
 }
 
@@ -55,14 +60,19 @@ export const mutations = {
   clear(state) {
     state.climateData = undefined
   },
+  setHttpError(state, error) {
+    state.httpError = error
+  },
 }
 
 export const actions = {
   async fetch(context) {
-    // TODO: add error handling here for 404 (no data) etc.
     let queryUrl =
       process.env.apiUrl + '/taspr/' + context.rootGetters['place/urlFragment']
-    let climateData = await this.$http.$get(queryUrl)
+    let climateData = await this.$axios.$get(queryUrl).catch(err => {
+      let httpError = getHttpError(err)
+      context.commit('setHttpError', httpError)
+    })
     context.commit('setClimateData', climateData)
   },
 }
