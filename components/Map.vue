@@ -60,7 +60,6 @@ export default {
     // The map is either being drawn for a broad search interface,
     // or to show the results of a search.
     if (this.mapSearchIsVisible && this.searchResults) {
-      this.marker = L.marker(this.latLng).addTo(this.map)
       this.drawSearchResults()
     } else {
       new this.$L.Control.Zoom({ position: 'topright' }).addTo(this.map)
@@ -166,6 +165,8 @@ export default {
               this.searchResults.total_bounds['xmax'],
             ],
           ])
+          // Add marker where the user clicked.
+          this.marker = L.marker(this.latLng).addTo(this.map)
 
           // LayerGroup for the GeoJSON and stuff so it's easy to remove.
           // This property is non-reactive.
