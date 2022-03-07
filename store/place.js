@@ -175,6 +175,11 @@ export const mutations = {
   setSearchResults(state, searchResults) {
     state.searchResults = searchResults
   },
+  clear(state) {
+    // Flush the geoJSON.
+    state.geoJSON = undefined
+    // Don't clear the list of places, that's always the same for the UX.
+  },
   clearSearchResults(state, searchResults) {
     state.searchResults = undefined
   },
