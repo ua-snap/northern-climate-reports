@@ -17,7 +17,6 @@ export const getPlotSettings = function () {
 
 export const getLayout = function (title, yAxisLabel, height = 500) {
   return {
-    boxmode: 'group',
     yaxis: {
       title: {
         text: yAxisLabel,
@@ -44,9 +43,6 @@ export const getLayout = function (title, yAxisLabel, height = 500) {
     showlegend: true,
     legend: {
       x: 1.03,
-    },
-    margin: {
-      b: 40,
     },
     margin: {
       b: 120,

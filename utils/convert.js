@@ -73,3 +73,15 @@ export const convertToFahrenheit = function (
   )
   return t
 }
+
+export const convertToPercent = function (wildfireData) {
+  return _.mapValuesDeep(
+    wildfireData,
+    value => {
+      return value * 100
+    },
+    {
+      leavesOnly: true,
+    }
+  )
+}
