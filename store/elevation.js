@@ -1,7 +1,9 @@
 import { convertToFeet } from '../utils/convert'
+import { getHttpError } from '../utils/http_errors'
 
 export const state = () => ({
   elevation: undefined,
+  httpError: null,
 })
 
 export const getters = {
@@ -24,6 +26,9 @@ export const getters = {
       max: tempData.max.toLocaleString('en-US'),
     }
   },
+  httpError(state) {
+    return state.httpError
+  },
 }
 
 export const mutations = {
@@ -33,16 +38,21 @@ export const mutations = {
   clear(state) {
     state.elevation = undefined
   },
+  setHttpError(state, error) {
+    state.httpError = error
+  },
 }
 
 export const actions = {
   async fetch(context) {
-    // TODO: add error handling here for 404 (no data) etc.
     let queryUrl =
       process.env.apiUrl +
       '/elevation/' +
       context.rootGetters['place/urlFragment']
-    let elevation = await this.$http.$get(queryUrl)
+    let elevation = await this.$axios.$get(queryUrl).catch(err => {
+      let httpError = getHttpError(err)
+      context.commit('setHttpError', httpError)
+    })
     context.commit('setElevation', elevation)
   },
 }

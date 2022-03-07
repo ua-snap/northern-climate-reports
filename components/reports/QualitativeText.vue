@@ -1,10 +1,10 @@
 <template>
-  <div class="qualitative-text">
-    <div class="generated" v-html="generateText()"></div>
+  <div class="qualitative-text" v-if="qualitativeText">
+    <div class="generated" v-html="qualitativeText"></div>
     <p class="about-blurb">
-      Late&ndash;century, high-emissions (RCP8.5), MRI CGCM3 or NCAR CCSM4 model
-      (whichever shows greater change).<br />See tables below for more detailed
-      information.
+      Late&ndash;century, high-emissions (RCP 8.5), MRI CGCM3 or NCAR CCSM4
+      model (whichever shows greater change).<br />See tables below for more
+      detailed information.
     </p>
   </div>
 </template>
@@ -58,7 +58,7 @@ export default {
       hucName: 'place/rawHucName',
       place: 'place/name',
       units: 'units',
-      reportData: 'climate/climateData',
+      climateData: 'climate/climateData',
       altThawData: 'permafrost/altThaw',
       showPermafrost: 'permafrost/valid',
       permafrostPresent: 'permafrost/present',
@@ -72,9 +72,12 @@ export default {
     depthFragment() {
       return this.units == 'imperial' ? '9.8ft' : '3m'
     },
+    qualitativeText() {
+      return this.generateText()
+    },
   },
   watch: {
-    reportData: function () {
+    climateData: function () {
       this.generateText()
     },
     altThawData: function () {
@@ -83,22 +86,22 @@ export default {
   },
   methods: {
     // Generate Qualitative Text
-    // Input: None. (Uses reportData, place, and units properties)
+    // Input: None. (Uses climateData, place, and units properties)
     // Output: Text string containing HTML list items of processed seasonal metrics.
     generateText: function () {
       // Guard if data not present yet.
-      if (!this.reportData || !this.place) {
+      if (!this.place) {
         return
       }
 
       return this.generateAnnualMetricsHtml()
     },
     collectSeasonalMetrics(season) {
-      let historicalTemp = this.reportData['1950_2009'][season]['CRU-TS40'][
+      let historicalTemp = this.climateData['1950_2009'][season]['CRU-TS40'][
         'CRU_historical'
       ]['tas']['mean']
 
-      let historicalPrecip = this.reportData['1950_2009'][season]['CRU-TS40'][
+      let historicalPrecip = this.climateData['1950_2009'][season]['CRU-TS40'][
         'CRU_historical'
       ]['pr']['mean']
 
@@ -115,13 +118,13 @@ export default {
 
       // Take an average of both temperature and precipitation for the same season and RCP from both models.
       let tempMax = Math.max(
-        this.reportData['2070_2099'][season]['MRI-CGCM3']['rcp85']['tas'],
-        this.reportData['2070_2099'][season]['CCSM4']['rcp85']['tas']
+        this.climateData['2070_2099'][season]['MRI-CGCM3']['rcp85']['tas'],
+        this.climateData['2070_2099'][season]['CCSM4']['rcp85']['tas']
       )
 
       let precipMax = Math.max(
-        this.reportData['2070_2099'][season]['MRI-CGCM3']['rcp85']['pr'],
-        this.reportData['2070_2099'][season]['CCSM4']['rcp85']['pr']
+        this.climateData['2070_2099'][season]['MRI-CGCM3']['rcp85']['pr'],
+        this.climateData['2070_2099'][season]['CCSM4']['rcp85']['pr']
       )
 
       // If the maximum temperature difference is less than the current temperature difference,
@@ -151,40 +154,13 @@ export default {
 
       return seasonMetrics
     },
-    permafrostChange() {
-      let years = Object.keys(this.altThawData)
-      let historicalYear = years.slice(0, 1)
-      let lastYear = years.slice(-1)[0]
-      let thicknessHistorical = this.altThawData[historicalYear]
+    temperatureString() {
+      // Average value against the 4 seasons included.
+      annualTemperatureAverage = Math.round(annualTemperatureAverage / 4)
 
-      if (thicknessHistorical == null) {
-        return 0
-      }
-
-      let thicknesses = []
-      let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
-      let scenarios = ['rcp45', 'rcp85']
-
-      models.forEach(model => {
-        scenarios.forEach(scenario => {
-          let value = this.altThawData[lastYear][model][scenario]
-          thicknesses.push(value)
-        })
-      })
-      let thicknessMax = _.max(thicknesses)
-
-      return Math.round((thicknessMax / thicknessHistorical) * 100 - 100)
-    },
-    // Subfunction: Generate annual metrics HTML string
-    // Input: None. (Uses constant seasons)
-    // Output: A string containing HTML for a linked list of all
-    //         annual metrics of importance.
-    generateAnnualMetricsHtml: function () {
       var annualTemperatureAverage = 0
       var annualHighestTempChange = 0
       var seasonWithHighestTempChange = 'None'
-      var annualHighestPrecipPercentChange = 0
-      var seasonWithHighestPrecipChange = 'None'
       var aboveFreezingSeasons = []
 
       this.seasons.forEach(season => {
@@ -200,14 +176,6 @@ export default {
           seasonWithHighestTempChange = seasonOutput['season']
         }
 
-        // Check if this prepitation change is the highest out of all the seasons thus far.
-        if (
-          annualHighestPrecipPercentChange < seasonOutput['precipPercentChange']
-        ) {
-          annualHighestPrecipPercentChange = seasonOutput['precipPercentChange']
-          seasonWithHighestPrecipChange = seasonOutput['season']
-        }
-
         // If a season was marked as being above freezing when historically below freezing,
         // push it onto an array of seasons.
         if (seasonOutput['aboveFreezing'] == true) {
@@ -215,30 +183,14 @@ export default {
         }
       })
 
-      // Average value against the 4 seasons included.
-      annualTemperatureAverage = Math.round(annualTemperatureAverage / 4)
-
-      let returnedString = ''
-      switch (this.placeType) {
-        case 'community':
-          returnedString += '<p>In <strong>' + this.place + '</strong>'
-          break
-        case 'huc':
-          returnedString += '<p>In the <strong>' + this.hucName + '</strong>'
-          break
-        default:
-          returnedString += '<p>At <strong>' + this.place + '</strong>'
-          break
-      }
-
       // Create the returned string using the values from the loop above.
-      returnedString +=
-        ',<br/>average annual temperatures<br/>may increase by about <strong>' +
+      let string =
+        '<p>Average annual temperatures<br/>may increase by about <strong>' +
         annualTemperatureAverage +
         this.unitsText +
         '</strong> by the end of the century.</p>'
 
-      returnedString +=
+      string +=
         '<p><strong>' +
         seasonWithHighestTempChange +
         '</strong> temperatures are increasing the most (<strong>+' +
@@ -249,7 +201,7 @@ export default {
       // If any season is marked as above freezing in the future when historically below freezing,
       // expand those values out to be added as an additional list item.
       if (aboveFreezingSeasons.length > 0) {
-        returnedString += '<p>'
+        string += '<p>'
         let transitioningSeasons = ''
 
         switch (aboveFreezingSeasons.length) {
@@ -276,32 +228,120 @@ export default {
               '</strong>'
             break
         }
-        returnedString +=
+        string +=
           transitioningSeasons +
           ' may transition from below freezing<br/>to <strong>above freezing</strong> in the future.</p>'
       }
-      returnedString +=
-        '<p>Models have higher uncertainty with regard to precipitation,<br/> but <strong>' +
+
+      return string
+    },
+    precipitationString() {
+      var annualHighestPrecipPercentChange = 0
+      var seasonWithHighestPrecipChange = 'None'
+
+      this.seasons.forEach(season => {
+        let seasonOutput = this.collectSeasonalMetrics(season)
+        // Check if this prepitation change is the highest out of all the seasons thus far.
+        if (
+          annualHighestPrecipPercentChange < seasonOutput['precipPercentChange']
+        ) {
+          annualHighestPrecipPercentChange = seasonOutput['precipPercentChange']
+          seasonWithHighestPrecipChange = seasonOutput['season']
+        }
+      })
+
+      return (
+        '<p>Models have higher uncertainty with regard to precipitation,<br/> ' +
+        'but <strong>' +
         seasonWithHighestPrecipChange.toLowerCase() +
         '</strong> is likely to have more precipitation (<strong>+' +
         annualHighestPrecipPercentChange +
         '%</strong>).</p>'
+      )
+    },
+    permafrostString() {
+      let years = Object.keys(this.altThawData)
+      let historicalYear = years.slice(0, 1)
+      let lastYear = years.slice(-1)[0]
+      let thicknessHistorical = this.altThawData[historicalYear]
 
-      if (this.showPermafrost) {
-        let permafrostChange = this.permafrostChange()
-        if (this.permafrostPresent && this.permafrostDisappears) {
-          returnedString +=
-            '<p>By the late century, permafrost within ' +
-            this.depthFragment +
-            ' of the ground surface may <strong>disappear</strong>.</p>'
-        } else if (permafrostChange > 0) {
-          returnedString +=
-            '<p>By the late century, active layer permafrost thickness<br/> may increase by <strong>' +
-            Math.abs(permafrostChange) +
-            '%</strong>.</p>'
-        }
+      if (thicknessHistorical == null) {
+        return 0
       }
 
+      let thicknesses = []
+      let models = ['mricgcm3', 'ncarccsm4']
+      let scenarios = ['rcp85']
+
+      models.forEach(model => {
+        scenarios.forEach(scenario => {
+          let value = this.altThawData[lastYear][model][scenario]
+          thicknesses.push(value)
+        })
+      })
+      let thicknessMax = _.max(thicknesses)
+
+      let permafrostChange = Math.round(
+        (thicknessMax / thicknessHistorical) * 100 - 100
+      )
+
+      let string = ''
+      if (this.permafrostPresent && this.permafrostDisappears) {
+        string =
+          '<p>By the late century, permafrost within ' +
+          this.depthFragment +
+          ' of the ground surface may <strong>disappear</strong>.</p>'
+      } else if (permafrostChange > 0) {
+        string =
+          '<p>By the late century, active layer permafrost thickness<br/> may increase by <strong>' +
+          Math.abs(permafrostChange) +
+          '%</strong>.</p>'
+      }
+
+      return string
+    },
+    // Subfunction: Generate annual metrics HTML string
+    // Input: None. (Uses constant seasons)
+    // Output: A string containing HTML for a linked list of all
+    //         annual metrics of importance.
+    generateAnnualMetricsHtml: function () {
+      let prefix
+      switch (this.placeType) {
+        case 'community':
+          prefix = '<p>In <strong>' + this.place + '</strong>'
+          break
+        case 'huc':
+          prefix = '<p>In the <strong>' + this.hucName + '</strong>'
+          break
+        default:
+          prefix = '<p>At <strong>' + this.place + '</strong>'
+          break
+      }
+
+      let text = ''
+      if (this.climateData) {
+        text += this.temperatureString()
+        text += this.precipitationString()
+      }
+
+      if (this.showPermafrost) {
+        text += this.permafrostString()
+      }
+
+      if (text == '') {
+        return text
+      }
+
+      // Make first qualitative text line a continuation of the sentence
+      // "At <location>, ..."
+      if (text.length > 0) {
+        text = text.replace('<p>', '')
+        let firstLetter = text.charAt(0)
+        text = text.replace(firstLetter, firstLetter.toLowerCase())
+        text = ',<br />' + text
+      }
+
+      let returnedString = prefix + text
       return returnedString
     },
   },

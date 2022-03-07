@@ -33,16 +33,18 @@
     </div>
     <ReportTempChart :season="temp_season" />
     <ReportTempTable />
+    <BackToTopButton />
   </div>
 </template>
 <style lang="scss" scoped></style>
 <script>
 import ReportTempChart from './ReportTempChart'
 import ReportTempTable from './ReportTempTable'
+import BackToTopButton from '~/components/reports/BackToTopButton'
 import { mapGetters } from 'vuex'
 export default {
   name: 'ReportTable',
-  components: { ReportTempChart, ReportTempTable },
+  components: { ReportTempChart, ReportTempTable, BackToTopButton },
   data() {
     return {
       temp_season: 'DJF',
@@ -51,6 +53,7 @@ export default {
   computed: {
     ...mapGetters({
       units: 'units',
+      reportData: 'climate/climateData',
     }),
   },
 }

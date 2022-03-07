@@ -2,6 +2,7 @@
 
 import _ from 'lodash'
 import { convertToInches, convertToFahrenheit } from '../utils/convert'
+import { getHttpError } from '../utils/http_errors'
 
 var getProcessedData = function (permafrostData) {
   let freezing = 0
@@ -117,6 +118,8 @@ export const state = () => ({
   present: undefined,
   // True if presence/absence of permafrost cannot be determined
   uncertain: undefined,
+
+  httpError: null,
 })
 
 export const getters = {
@@ -162,8 +165,9 @@ export const getters = {
 
       // If permafrost wasn't present in the past, it's not here now.
       if (
+        state.permafrostData['gipl'] == null ||
         state.permafrostData['gipl']['1995']['cruts31']['historical']['alt'] ==
-        null
+          null
       ) {
         return false
       }
@@ -175,6 +179,10 @@ export const getters = {
         return true
       }
     }
+  },
+
+  httpError(state) {
+    return state.httpError
   },
 }
 
@@ -209,11 +217,13 @@ export const mutations = {
     state.present = undefined
     state.uncertain = undefined
   },
+  setHttpError(state, error) {
+    state.httpError = error
+  },
 }
 
 export const actions = {
   async fetch(context) {
-    // TODO: add error handling here for 404 (no data) etc.
     if (context.rootGetters['place/latLng']) {
       let permafrostQueryUrl =
         process.env.apiUrl +
@@ -221,17 +231,27 @@ export const actions = {
         context.rootGetters['place/urlFragment']
 
       try {
-        let permafrostData = await this.$http.$get(permafrostQueryUrl)
-        context.commit('setPermafrostData', permafrostData)
+        let permafrostData = await this.$axios
+          .$get(permafrostQueryUrl)
+          .catch(err => {
+            let httpError = getHttpError(err)
+            context.commit('setHttpError', httpError)
+          })
 
-        let processedData = getProcessedData(permafrostData)
-
-        context.commit('setAltThaw', processedData.thawData)
-        context.commit('setPresent', processedData.present)
-        context.commit('setAltFreeze', processedData.freezeData)
-        context.commit('setDisappears', processedData.disappears)
-        context.commit('setMagt', processedData.magtData)
-        context.commit('setUncertain', processedData.uncertain)
+        if (permafrostData != null) {
+          if (permafrostData['gipl'] != null) {
+            context.commit('setPermafrostData', permafrostData)
+            let processedData = getProcessedData(permafrostData)
+            context.commit('setAltThaw', processedData.thawData)
+            context.commit('setPresent', processedData.present)
+            context.commit('setAltFreeze', processedData.freezeData)
+            context.commit('setDisappears', processedData.disappears)
+            context.commit('setMagt', processedData.magtData)
+            context.commit('setUncertain', processedData.uncertain)
+          } else {
+            context.commit('setHttpError', 'no_data')
+          }
+        }
       } catch (error) {
         throw error
       }

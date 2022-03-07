@@ -40,17 +40,19 @@
         <MiniMap />
         <QualitativeText />
       </section>
-      <section class="section content">
+      <section class="section content pb-0" v-if="dataPresent">
         <h3 class="title is-3">Introduction</h3>
         <div class="is-size-5">
           <p>
             <span v-if="type == 'latLng'"
-              >The tables and charts below are specific to the gridded data
-              extracted at <span v-html="place"></span>.</span
+              >The <span v-if="climateData">tables and </span>charts below are
+              specific to the gridded data extracted at
+              <span v-html="place"></span>.</span
             >
             <span v-else-if="type == 'community'"
-              >The tables and charts below are specific to the gridded data
-              extracted from the location of <span v-html="place"></span>.</span
+              >The <span v-if="climateData">tables and </span>charts below are
+              specific to the gridded data extracted from the location of
+              <span v-html="place"></span>.</span
             >
             <span v-else
               >Data for the tables and charts below have been averaged across
@@ -69,8 +71,8 @@
           </p>
           <p>
             The sections below show output from different scientific simulations
-            of possible future conditions for temperature, precipitation,
-            permafrost and wildfire. These simulations use different
+            of possible future conditions for {{ presentDataTypesString }}.
+            These simulations use different
             <strong>Global Circulation Models (GCMs)</strong>&mdash;climate
             models&mdash;such as the National Center for Atmospheric Research
             Community Climate System Model 4.0 (NCAR CCSM4).
@@ -87,13 +89,17 @@
               >Read more about climate models and RCPs.</nuxt-link
             >
           </p>
-          <p>Some of these data have been averaged by season.</p>
-          <ul>
-            <li><strong>Winter</strong> is December, January and February,</li>
-            <li><strong>Spring</strong> is March, April and May,</li>
-            <li><strong>Summer</strong> is June, July and August,</li>
-            <li><strong>Fall</strong> is September, October and November.</li>
-          </ul>
+          <span v-if="climateData">
+            <p>Some of the data has been averaged by season.</p>
+            <ul class="mb-5">
+              <li>
+                <strong>Winter</strong> is December, January and February,
+              </li>
+              <li><strong>Spring</strong> is March, April and May,</li>
+              <li><strong>Summer</strong> is June, July and August,</li>
+              <li><strong>Fall</strong> is September, October and November.</li>
+            </ul>
+          </span>
           <p>
             Click the
             <span class="camera-icon">
@@ -115,7 +121,7 @@
             You can display these visualizations in Imperial or metric units.
           </p>
         </div>
-        <div class="pb-6">
+        <div>
           <b-field label="Units">
             <b-radio v-model="units" name="units" native-value="imperial">
               Imperial
@@ -125,49 +131,81 @@
             </b-radio>
           </b-field>
         </div>
+      </section>
+      <section class="section content" v-if="dataPresent">
         <h4 class="title is-4" id="toc">Contents</h4>
         <div class="is-size-5">
           <ul>
-            <li>
+            <li v-if="climateData">
               <a href="#temperature">Temperature</a> charts and tables with
               multiple models and scenarios, grouped decadally and into mid/late
               century
             </li>
-            <li>
+            <li v-if="climateData">
               <a href="#precipitation">Precipitation</a> charts and tables with
               multiple models and scenarios, grouped decadally and into mid/late
               century
             </li>
-            <li>
+            <li v-if="permafrostData || type != 'latLng'">
               <a href="#permafrost">Permafrost</a> with specific visualizations
               depending on the presence or absence of permafrost
             </li>
-            <li>
+            <li v-if="flammabilityData || vegChangeData">
               <a href="#wildfire">Wildfire</a> charts of relative flammability
               and vegetation change with with multiple models and scenarios
             </li>
           </ul>
         </div>
       </section>
-      <section class="section">
+      <section class="section content py-0" v-if="dataMissing">
+        <div class="is-size-5">
+          <p class="no-data mt-6" v-if="uniformHttpError">
+            {{ httpErrors[uniformHttpError] }}
+          </p>
+          <div v-if="dataMissing && uniformHttpError == null">
+            The following data is not available at this location:
+            <ul class="mb-5">
+              <li v-if="climateHttpError">
+                <strong>Temperature and precipitation:</strong>
+                {{ httpErrors[climateHttpError] }}
+              </li>
+              <li v-if="elevationHttpError">
+                <strong>Elevation:</strong>
+                {{ httpErrors[elevationHttpError] }}
+              </li>
+              <li v-if="permafrostHttpError && type == 'latLng'">
+                <strong>Permafrost:</strong>
+                {{ httpErrors[permafrostHttpError] }}
+              </li>
+              <li v-if="flammabilityHttpError">
+                <strong>Relative flammability:</strong>
+                {{ httpErrors[flammabilityHttpError] }}
+              </li>
+              <li v-if="vegChangeHttpError">
+                <strong>Vegetation change:</strong>
+                {{ httpErrors[vegChangeHttpError] }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div v-if="!dataPresent" class="pb-3" />
+      </section>
+      <section class="section" v-if="climateData">
         <div id="temperature">
           <TempReport />
         </div>
-        <BackToTopButton />
       </section>
-      <section class="section">
+      <section class="section" v-if="climateData">
         <div id="precipitation">
           <PrecipReport />
         </div>
-        <BackToTopButton />
       </section>
       <section class="section">
-        <div id="permafrost">
+        <div id="permafrost" v-if="permafrostData || type != 'latLng'">
           <PermafrostReport />
         </div>
-        <BackToTopButton />
       </section>
-      <section class="section">
+      <section class="section" v-if="flammabilityData || vegChangeData">
         <div id="wildfire">
           <WildfireReport />
         </div>
@@ -210,6 +248,10 @@
     fill: #ccc;
   }
 }
+.no-data {
+  font-size: 1.55rem;
+  text-align: center;
+}
 </style>
 
 <script>
@@ -222,6 +264,7 @@ import QualitativeText from '~/components/reports/QualitativeText'
 import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import BackToTopButton from '~/components/reports/BackToTopButton'
 import { mapGetters } from 'vuex'
+import { httpErrors } from '../utils/http_errors'
 import lodash from 'lodash'
 import deepdash from 'deepdash'
 
@@ -242,16 +285,65 @@ export default {
   data() {
     return {
       units: 'imperial',
+      httpErrors: httpErrors,
     }
   },
   computed: {
     elevationUnits() {
       return this.units == 'imperial' ? 'ft' : 'm'
     },
+    dataPresent() {
+      let types = this.presentDataTypes()
+      if (types.length == 0) {
+        return false
+      }
+      return true
+    },
+    dataMissing() {
+      let types = this.presentDataTypes()
+      if (types.length < 5) {
+        return true
+      }
+      return false
+    },
+    uniformHttpError() {
+      let returnError = null
+      let apiHttpErrors = [
+        this.climateHttpError,
+        this.elevationHttpError,
+        this.flammabilityHttpError,
+        this.vegChangeHttpError,
+      ]
+
+      if (this.type == 'latLng') {
+        apiHttpErrors.push(this.permafrostHttpError)
+      }
+
+      apiHttpErrors.forEach(error => {
+        let uniform = apiHttpErrors.every(err => err == error)
+        if (uniform) {
+          returnError = error
+        }
+      })
+      return returnError
+    },
+    presentDataTypesString() {
+      let types = this.presentDataTypes()
+      return this.formatTypeString(types)
+    },
     ...mapGetters({
       place: 'place/name',
       type: 'place/type',
       elevation: 'elevation/elevation',
+      climateData: 'climate/climateData',
+      permafrostData: 'permafrost/permafrostData',
+      flammabilityData: 'wildfire/flammability',
+      vegChangeData: 'wildfire/veg_change',
+      climateHttpError: 'climate/httpError',
+      elevationHttpError: 'elevation/httpError',
+      permafrostHttpError: 'permafrost/httpError',
+      flammabilityHttpError: 'wildfire/flammabilityHttpError',
+      vegChangeHttpError: 'wildfire/vegChangeHttpError',
     }),
   },
   // This component initiates the data fetching so that
@@ -278,6 +370,44 @@ export default {
       } else {
         this.$store.commit('setImperial')
       }
+    },
+  },
+  methods: {
+    presentDataTypes() {
+      let types = []
+      if (this.climateData) {
+        types.push('temperature', 'precipitation')
+      }
+
+      // Always show the permafrost section for area reports.
+      if (this.permafrostData || this.type != 'latLng') {
+        types.push('permafrost')
+      }
+
+      if (this.flammabilityData) {
+        types.push('relative flammability')
+      }
+      if (this.vegChangeData) {
+        types.push('vegetation change')
+      }
+
+      return types
+    },
+    formatTypeString(types) {
+      if (types.length == 0) {
+        return null
+      }
+      if (types.length == 1) {
+        return types[0]
+      }
+      if (types.length == 2) {
+        return types[0] + ' and ' + types[1]
+      }
+      let allButLast = types.slice(0, -1)
+      let last = types.slice(-1)[0]
+      let string = allButLast.join(', ')
+      string = string + ', and ' + last
+      return string
     },
   },
 }
