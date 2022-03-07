@@ -155,9 +155,7 @@ export default {
       return seasonMetrics
     },
     temperatureString() {
-      // Average value against the 4 seasons included.
-      annualTemperatureAverage = Math.round(annualTemperatureAverage / 4)
-
+      
       var annualTemperatureAverage = 0
       var annualHighestTempChange = 0
       var seasonWithHighestTempChange = 'None'
@@ -182,6 +180,9 @@ export default {
           aboveFreezingSeasons.push(seasonOutput['season'])
         }
       })
+
+      // Average value against the 4 seasons included.
+      annualTemperatureAverage = Math.round(annualTemperatureAverage / 4)
 
       // Create the returned string using the values from the loop above.
       let string =
