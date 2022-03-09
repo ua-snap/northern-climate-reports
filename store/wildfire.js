@@ -57,7 +57,8 @@ export const actions = {
         let httpError = getHttpError(err)
         context.commit('setFlammabilityHttpError', httpError)
       })
-    context.commit('setFlammability', flammability)
+    let convertedFlammability = convertToPercent(flammability)
+    context.commit('setFlammability', convertedFlammability)
 
     let vegChangeQueryUrl =
       process.env.apiUrl +
@@ -67,6 +68,7 @@ export const actions = {
       let httpError = getHttpError(err)
       context.commit('setVegChangeHttpError', httpError)
     })
-    context.commit('setVegChange', veg_change)
+    let convertedVegChange = convertToPercent(veg_change)
+    context.commit('setVegChange', convertedVegChange)
   },
 }
