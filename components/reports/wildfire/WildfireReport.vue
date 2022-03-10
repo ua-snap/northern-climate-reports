@@ -18,10 +18,20 @@
     <div class="chart-wrapper">
       <ReportFlammabilityChart />
     </div>
+    <DownloadCsvButton
+      text="Download flammability data as CSV"
+      endpoint="flammability"
+      class="mt-3 mb-5"
+    />
     <ReportVegChangeMaps />
     <div class="chart-wrapper">
       <ReportVegChangeChart />
     </div>
+    <DownloadCsvButton
+      text="Download vegetation change data as CSV"
+      endpoint="veg_change"
+      class="mt-3 mb-5"
+    />
   </div>
 </template>
 <style></style>
@@ -30,6 +40,7 @@ import ReportFlammabilityMaps from './ReportFlammabilityMaps'
 import ReportFlammabilityChart from './ReportFlammabilityChart'
 import ReportVegChangeMaps from './ReportVegChangeMaps'
 import ReportVegChangeChart from './ReportVegChangeChart'
+import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -39,6 +50,7 @@ export default {
     ReportFlammabilityChart,
     ReportVegChangeMaps,
     ReportVegChangeChart,
+    DownloadCsvButton,
   },
 }
 </script>

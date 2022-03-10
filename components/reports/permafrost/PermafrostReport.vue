@@ -105,6 +105,11 @@
       <div class="chart" v-show="this.permafrostUncertain">
         <ReportMagtChart />
       </div>
+      <DownloadCsvButton
+        text="Download permafrost data as CSV"
+        endpoint="permafrost"
+        class="mt-3 mb-5"
+      />
     </div>
     <div v-else>
       <div class="content">
@@ -129,6 +134,7 @@ import ReportAltThawChart from './ReportAltThawChart'
 import ReportAltFreezeChart from './ReportAltFreezeChart'
 import ReportMagtChart from './ReportMagtChart'
 import BackToTopButton from '~/components/reports/BackToTopButton'
+import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -139,6 +145,7 @@ export default {
     ReportAltFreezeChart,
     ReportMagtChart,
     BackToTopButton,
+    DownloadCsvButton,
   },
   computed: {
     // The range of uncertainty, within 1ºC of freezing.

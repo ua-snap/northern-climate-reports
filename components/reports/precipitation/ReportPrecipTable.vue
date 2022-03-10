@@ -481,6 +481,11 @@
         </tr>
       </tfoot>
     </table>
+    <DownloadCsvButton
+      text="Download precipitation data as CSV"
+      endpoint="precipitation"
+      class="mt-3 mb-5"
+    />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -489,10 +494,11 @@
 <script>
 import UnitWidget from '~/components/UnitWidget'
 import PrecipDiffWidget from './PrecipDiffWidget'
+import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import { mapGetters } from 'vuex'
 export default {
   name: 'PrecipReportTable',
-  components: { PrecipDiffWidget, UnitWidget },
+  components: { PrecipDiffWidget, UnitWidget, DownloadCsvButton },
   computed: {
     ...mapGetters({
       reportData: 'climate/climateData',

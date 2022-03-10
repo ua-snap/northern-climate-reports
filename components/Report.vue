@@ -14,7 +14,9 @@
     <hr />
     <section v-if="$fetchState.pending" class="section content">
       <!-- Drama dots -->
-      <h4 class="title is-5">Loading data for <span v-html=place />&hellip;</h4>
+      <h4 class="title is-5">
+        Loading data for <span v-html="place" />&hellip;
+      </h4>
       <b-progress type="is-info"></b-progress>
     </section>
     <section v-else-if="$fetchState.error" class="section content error">
@@ -211,7 +213,6 @@
         </div>
         <BackToTopButton />
       </section>
-      <DownloadCsvButton />
       <BackToTopButton />
       <hr />
       <div class="back">
@@ -261,7 +262,6 @@ import PermafrostReport from '~/components/reports/permafrost/PermafrostReport'
 import WildfireReport from '~/components/reports/wildfire/WildfireReport'
 import MiniMap from '~/components/reports/MiniMap'
 import QualitativeText from '~/components/reports/QualitativeText'
-import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import BackToTopButton from '~/components/reports/BackToTopButton'
 import { mapGetters } from 'vuex'
 import { httpErrors } from '../utils/http_errors'
@@ -279,7 +279,6 @@ export default {
     WildfireReport,
     MiniMap,
     QualitativeText,
-    DownloadCsvButton,
     BackToTopButton,
   },
   data() {

@@ -33,6 +33,11 @@
     </div>
     <ReportTempChart :season="temp_season" />
     <ReportTempTable />
+    <DownloadCsvButton
+      text="Download temperature data as CSV"
+      endpoint="temperature"
+      class="mt-3 mb-5"
+    />
     <BackToTopButton />
   </div>
 </template>
@@ -41,10 +46,16 @@
 import ReportTempChart from './ReportTempChart'
 import ReportTempTable from './ReportTempTable'
 import BackToTopButton from '~/components/reports/BackToTopButton'
+import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import { mapGetters } from 'vuex'
 export default {
   name: 'ReportTable',
-  components: { ReportTempChart, ReportTempTable, BackToTopButton },
+  components: {
+    ReportTempChart,
+    ReportTempTable,
+    BackToTopButton,
+    DownloadCsvButton,
+  },
   data() {
     return {
       temp_season: 'DJF',
