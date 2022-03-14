@@ -73,7 +73,7 @@
             The sections below show output from different scientific simulations
             of possible future conditions for {{ presentDataTypesString }}.
             These simulations use different
-            <strong>Global Circulation Models (GCMs)</strong>&mdash;climate
+            <strong>Global Climate Models (GCMs)</strong>&mdash;climate
             models&mdash;such as the National Center for Atmospheric Research
             Community Climate System Model 4.0 (NCAR CCSM4).
           </p>
