@@ -40,7 +40,7 @@
         <MiniMap />
         <QualitativeText />
       </section>
-      <section class="section content pb-0" v-if="dataPresent">
+      <section class="section content pb-0 large-screen" v-if="dataPresent">
         <h3 class="title is-3">Introduction</h3>
         <div class="is-size-5">
           <p>
@@ -132,7 +132,7 @@
           </b-field>
         </div>
       </section>
-      <section class="section content" v-if="dataPresent">
+      <section class="section content large-screen" v-if="dataPresent">
         <h4 class="title is-4" id="toc">Contents</h4>
         <div class="is-size-5">
           <ul>
@@ -190,26 +190,29 @@
         </div>
         <div v-if="!dataPresent" class="pb-3" />
       </section>
-      <section class="section" v-if="climateData">
+      <section class="section large-screen" v-if="climateData">
         <div id="temperature">
           <TempReport />
         </div>
       </section>
-      <section class="section" v-if="climateData">
+      <section class="section large-screen" v-if="climateData">
         <div id="precipitation">
           <PrecipReport />
         </div>
       </section>
-      <section class="section">
+      <section class="section large-screen">
         <div id="permafrost" v-if="permafrostData || type != 'latLng'">
           <PermafrostReport />
         </div>
       </section>
-      <section class="section" v-if="flammabilityData || vegChangeData">
+      <section class="section large-screen" v-if="flammabilityData || vegChangeData">
         <div id="wildfire">
           <WildfireReport />
         </div>
         <BackToTopButton />
+      </section>
+      <section class="section !large-screen">
+          <span class="centered"><b-icon icon="phone-rotate-landscape" size="is-medium" />&nbsp;&nbsp;To see additional charts and data, please rotate your device into landscape mode.</span>
       </section>
       <DownloadCsvButton />
       <BackToTopButton />
@@ -229,6 +232,11 @@
   </div>
 </template>
 <style lang="scss" scoped>
+@media screen and (max-width: 480px) {
+  .large-screen {
+    display: none !important;
+  }
+}
 .centered {
   text-align: center;
 }
