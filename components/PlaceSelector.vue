@@ -28,17 +28,29 @@
             <template slot-scope="props">
               <div class="search-item">
                 {{ props.option.name }}
-                <span class="watershed" v-if="props.option.type == 'huc'"
+                <span class="area-additional-info" v-if="props.option.type == 'huc'"
                   >Watershed, HUC ID {{ props.option.id }}</span
                 >
                 <span class="alt-name" v-if="props.option.alt_name"
                   >({{ props.option.alt_name }})</span
                 >
                 <span
-                  class="protected-area"
+                  class="area-additional-info"
                   v-if="props.option.type == 'protected_area'"
                 >
                   {{ props.option.area_type }}
+                </span>
+                <span
+                  class="area-additional-info"
+                  v-if="props.option.type == 'climate_division'"
+                >
+                  Climate Division
+                </span>
+                <span
+                  class="area-additional-info"
+                  v-if="props.option.type == 'ethnolinguistic_region'"
+                >
+                  Ethnolinguistic Region
                 </span>
               </div>
             </template>
@@ -56,8 +68,7 @@
 .search-item {
   font-weight: 600;
   white-space: normal;
-  .watershed,
-  .protected-area {
+  .area-additional-info {
     text-transform: uppercase;
     display: inline-block;
     padding-left: 1ex;
