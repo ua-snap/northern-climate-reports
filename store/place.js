@@ -116,7 +116,7 @@ export const getters = {
     }
 
     // Everything else!
-    if (getters.type == 'protected_area' || getters.type == 'corporation' || getters.type == 'climate_division' || getters.type == 'ethnolinguistic_region') {
+    if (getters.type == 'protected_area' || getters.type == 'corporation' || getters.type == 'climate_division' || getters.type == 'ethnolinguistic_region' || getters.type == 'fire_zone') {
       let area = _.find(state.places, {
         id: getters.areaId,
       })
@@ -124,8 +124,6 @@ export const getters = {
         return area.name
       }
     }
-
-    // Native corps, ethnolinguistic regions, etc...
 
     // Unknown or unset or invalid.
     return false

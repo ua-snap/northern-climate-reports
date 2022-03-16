@@ -71,6 +71,20 @@
         >
         <span>Native Corporation</span>
       </li>
+      <li
+        v-for="place in searchResults.fire_management_units_near"
+        :key="place.id"
+        class="additional-info"
+      >
+        <nuxt-link
+          :to="{
+            path: formUrl(place),
+            hash: '#results',
+          }"
+          >{{ place.name }}</nuxt-link
+        >
+        <span>Fire Management Unit</span>
+      </li>
     </ul>
     <div v-if="searchResults.communities" class="mb-4">
       <p>Nearby places and communities listed in this tool:</p>

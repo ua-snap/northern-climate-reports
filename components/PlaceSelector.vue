@@ -52,6 +52,12 @@
                 >
                   Ethnolinguistic Region
                 </span>
+                <span
+                  class="area-additional-info"
+                  v-if="props.option.type == 'fire_zone'"
+                >
+                  Fire Management Unit
+                </span>
               </div>
             </template>
           </b-autocomplete>
