@@ -1,27 +1,11 @@
 export const getAppPathFragment = function (type, id) {
   let path
-  console.log(path)
-  switch (type) {
-    case 'huc':
-      path = '/report/area/' + id
-      break
-    case 'protected_area':
-      path = '/report/area/' + id
-      break
-    case 'corporation':
-      path = '/report/area/' + id
-      break
-    case 'climate_division':
-      path = '/report/area/' + id
-      break
-    case 'ethnolinguistic_region':
-      path = '/report/area/' + id
-      break
-    case 'community':
-      path = '/report/community/' + id
-      break;
-    default:
-      throw "Unknown path fragment type in utils/path.js"
+  if (type == 'community') {
+    path = '/report/community/' + id
+  } else if (type =='huc' || type == 'protected_area' || type == 'corporation' || type == 'climate_division' || type == 'ethnolinguistic_region') {
+    path = '/report/area/' + id
+  } else {
+    throw "Unknown path fragment type in utils/path.js"
   }
   return path
 }
