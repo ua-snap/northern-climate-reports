@@ -115,13 +115,13 @@ export const getters = {
       }
     }
 
-    // Protected area!
-    if (getters.type == 'protected_area') {
-      let pa = _.find(state.places, {
+    // Everything else!
+    if (getters.type == 'protected_area' || getters.type == 'corporation' || getters.type == 'climate_division' || getters.type == 'ethnolinguistic_region') {
+      let area = _.find(state.places, {
         id: getters.areaId,
       })
-      if (pa) {
-        return pa.name
+      if (area) {
+        return area.name
       }
     }
 
@@ -146,18 +146,10 @@ export const getters = {
   // Returns a fragment URL for accessing
   // different resources on the API.
   urlFragment(state, getters) {
-    switch (getters.type) {
-      // These are the same.
-      case 'community':
-      case 'latLng':
-        return 'point/' + getters.latLng[0] + '/' + getters.latLng[1]
-        break
-      case 'area':
-        return 'area/' + getters.areaId
-        break
-      default:
-        // Unknown.
-        return undefined
+    if (getters.type == 'community' || getters.type == 'latLng') {
+      return 'point/' + getters.latLng[0] + '/' + getters.latLng[1]
+    } else {
+      return 'area/' + getters.areaId
     }
   },
 }
