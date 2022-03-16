@@ -101,11 +101,7 @@ export default {
         component: resolve(__dirname, 'pages/index'),
       })
       routes.push({
-        path: '/report/huc/:hucId',
-        component: resolve(__dirname, 'pages/index'),
-      })
-      routes.push({
-        path: '/report/protected_area/:protectedAreaId',
+        path: '/report/area/:areaId',
         component: resolve(__dirname, 'pages/index'),
       })
       routes.push({
