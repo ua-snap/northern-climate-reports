@@ -75,9 +75,9 @@ export default {
 
       let yAxisAnnotationX
       if (window.innerWidth < 1250) {
-        yAxisAnnotationX = -0.06
+        yAxisAnnotationX = -0.07
       } else {
-        yAxisAnnotationX = -0.04
+        yAxisAnnotationX = -0.06
       }
 
       layout.annotations.push({
