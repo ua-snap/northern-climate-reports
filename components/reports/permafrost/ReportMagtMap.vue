@@ -1,24 +1,21 @@
 <template>
   <div class="has-text-centered has-text-weight-bold">
-    {{ title }}
     <div :id="mapID" class="permafrost-minimap"></div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+/* CSS trick to make height same as dynamic width */
 .permafrost-minimap {
-  height: 15vw;
-  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
 }
 </style>
 
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
-import { getBaseMapAndLayers, addGeoJSONtoMap } from '../../../utils/maps'
-
-let scenarios = ['', 'RCP 4.5', 'RCP 8.5']
-let eras = ['1995', '2011-2040', '2036-2065', '2061–2090', '2086–2100']
+import { getBaseMapAndLayers, addGeoJSONtoMap } from '~/utils/maps'
 
 export default {
   name: 'ReportMagtMap',
@@ -28,14 +25,6 @@ export default {
       latLng: 'place/latLng',
       geoJSON: 'place/geoJSON',
     }),
-    title() {
-      var title = ''
-      if (this.scenario > 0) {
-        title += scenarios[this.scenario] + ', '
-      }
-      title += eras[this.era]
-      return title
-    },
     mapID() {
       return this.scenario + '_' + this.model + '_' + this.era
     },
