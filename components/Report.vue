@@ -426,11 +426,8 @@ export default {
     },
     validPermafrost() {
       // Hide permafrost section for locations known to have bad MAGT maps.
-      let badMagtMapIds = ['19030103', 'AK26']
-      if (
-        badMagtMapIds.indexOf(this.hucId) != -1 ||
-        badMagtMapIds.indexOf(this.communityId) != -1
-      ) {
+      let badMagtMapAreas = ['19030103']
+      if (badMagtMapAreas.indexOf(this.hucId) != -1) {
         return false
       }
 
