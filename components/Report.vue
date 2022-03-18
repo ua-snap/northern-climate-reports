@@ -184,7 +184,7 @@
                 <span v-if="permafrostHttpError && type == 'latLng'">{{
                   httpErrors[permafrostHttpError]
                 }}</span>
-                <span v-if="!showPermafrost">
+                <span v-else-if="!showPermafrost">
                   {{ httpErrors['no_data'] }}
                 </span>
               </li>
@@ -435,7 +435,10 @@ export default {
       }
 
       // Always show the permafrost section for area reports.
-      if (this.permafrostData || this.type != 'latLng') {
+      if (
+        this.permafrostData ||
+        (this.type != 'latLng' && this.type != 'community')
+      ) {
         return true
       }
 
