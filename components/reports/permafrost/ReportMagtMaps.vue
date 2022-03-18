@@ -23,11 +23,21 @@
     <div class="columns">
       <table class="permafrost-minimaps">
         <tr>
-          <td><ReportMagtMapTitle scenario="0" era="0" /></td>
-          <td><ReportMagtMapTitle scenario="1" era="1" /></td>
-          <td><ReportMagtMapTitle scenario="1" era="2" /></td>
-          <td><ReportMagtMapTitle scenario="1" era="3" /></td>
-          <td><ReportMagtMapTitle scenario="1" era="4" /></td>
+          <td>
+            <ReportMagtMapTitle :model="model_selection" scenario="0" era="0" />
+          </td>
+          <td>
+            <ReportMagtMapTitle :model="model_selection" scenario="1" era="1" />
+          </td>
+          <td>
+            <ReportMagtMapTitle :model="model_selection" scenario="1" era="2" />
+          </td>
+          <td>
+            <ReportMagtMapTitle :model="model_selection" scenario="1" era="3" />
+          </td>
+          <td>
+            <ReportMagtMapTitle :model="model_selection" scenario="1" era="4" />
+          </td>
         </tr>
         <tr>
           <td>
@@ -73,10 +83,38 @@
         </tr>
         <tr>
           <td></td>
-          <td><ReportMagtMapTitle scenario="2" era="1" class="mt-5" /></td>
-          <td><ReportMagtMapTitle scenario="2" era="2" class="mt-5" /></td>
-          <td><ReportMagtMapTitle scenario="2" era="3" class="mt-5" /></td>
-          <td><ReportMagtMapTitle scenario="2" era="4" class="mt-5" /></td>
+          <td>
+            <ReportMagtMapTitle
+              :model="model_selection"
+              scenario="2"
+              era="1"
+              class="mt-5"
+            />
+          </td>
+          <td>
+            <ReportMagtMapTitle
+              :model="model_selection"
+              scenario="2"
+              era="2"
+              class="mt-5"
+            />
+          </td>
+          <td>
+            <ReportMagtMapTitle
+              :model="model_selection"
+              scenario="2"
+              era="3"
+              class="mt-5"
+            />
+          </td>
+          <td>
+            <ReportMagtMapTitle
+              :model="model_selection"
+              scenario="2"
+              era="4"
+              class="mt-5"
+            />
+          </td>
         </tr>
         <tr>
           <td></td>
@@ -129,6 +167,7 @@
   td {
     width: 20%;
     padding: 5px;
+    vertical-align: middle;
   }
 }
 @media (min-width: 1000px) {
