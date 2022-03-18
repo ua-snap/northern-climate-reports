@@ -105,7 +105,7 @@ export const getters = {
       }
     }
 
-    // HUC!
+    // HUC
     if (getters.type == 'huc') {
       let huc = _.find(state.places, {
         id: getters.areaId,
@@ -115,18 +115,24 @@ export const getters = {
       }
     }
 
-    // Everything else!
+    // Protected Area
     if (getters.type == 'protected_area' || getters.type == 'corporation' || getters.type == 'climate_division' || getters.type == 'ethnolinguistic_region' || getters.type == 'fire_zone') {
       let area = _.find(state.places, {
         id: getters.areaId,
       })
       if (area) {
-        return area.name
+        switch(getters.type) {
+          case 'corporation':
+            return area.name + ' (Native Corporation)'
+          case 'climate_division':
+            return area.name + ' (Climate Division)'
+          case 'ethnolinguistic_region':
+            return area.name + ' (Ethnolinguistic Region)'
+          default:
+            return area.name
+        }
       }
     }
-
-    // Unknown or unset or invalid.
-    return false
   },
 
   // This returns the name of the HUC without any extra stuff.

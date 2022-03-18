@@ -42,6 +42,12 @@
                 </span>
                 <span
                   class="area-additional-info"
+                  v-if="props.option.type == 'corporation'"
+                >
+                  Native Corporation
+                </span>
+                <span
+                  class="area-additional-info"
                   v-if="props.option.type == 'climate_division'"
                 >
                   Climate Division
