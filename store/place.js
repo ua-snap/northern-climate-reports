@@ -49,6 +49,14 @@ export const getters = {
     return false
   },
 
+  // If present, returns the community ID in the URL.
+  communityId: (state, getters, rootState) => {
+    if (rootState.route && rootState.route.params.communityId) {
+      return rootState.route.params.communityId
+    }
+    return false
+  },
+
   // If present, returns the HucID in the URL.
   hucId: (state, getters, rootState) => {
     if (rootState.route && rootState.route.params.hucId) {

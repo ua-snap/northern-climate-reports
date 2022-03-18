@@ -350,6 +350,7 @@ export default {
     ...mapGetters({
       place: 'place/name',
       type: 'place/type',
+      communityId: 'place/communityId',
       hucId: 'place/hucId',
       elevation: 'elevation/elevation',
       climateData: 'climate/climateData',
@@ -424,14 +425,20 @@ export default {
       return string
     },
     validPermafrost() {
-      let badMagtMapAreas = ['19030103']
+      // Hide permafrost section for locations known to have bad MAGT maps.
+      let badMagtMapIds = ['19030103', 'AK26']
+      if (
+        badMagtMapIds.indexOf(this.hucId) != -1 ||
+        badMagtMapIds.indexOf(this.communityId) != -1
+      ) {
+        return false
+      }
+
       // Always show the permafrost section for area reports.
       if (this.permafrostData || this.type != 'latLng') {
-        // Except for area IDs known to have bad MAGT mini-maps.
-        if (badMagtMapAreas.indexOf(this.hucId) == -1) {
-          return true
-        }
+        return true
       }
+
       return false
     },
   },
