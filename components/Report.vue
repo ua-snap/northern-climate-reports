@@ -14,7 +14,9 @@
     <hr />
     <section v-if="$fetchState.pending" class="section content">
       <!-- Drama dots -->
-      <h4 class="title is-5">Loading data for <span v-html=place />&hellip;</h4>
+      <h4 class="title is-5">
+        Loading data for <span v-html="place" />&hellip;
+      </h4>
       <b-progress type="is-info"></b-progress>
     </section>
     <section v-else-if="$fetchState.error" class="section content error">
@@ -146,7 +148,7 @@
               multiple models and scenarios, grouped decadally and into mid/late
               century
             </li>
-            <li v-if="permafrostData || type != 'latLng'">
+            <li v-if="showPermafrost">
               <a href="#permafrost">Permafrost</a> with specific visualizations
               depending on the presence or absence of permafrost
             </li>
@@ -173,9 +175,18 @@
                 <strong>Elevation:</strong>
                 {{ httpErrors[elevationHttpError] }}
               </li>
-              <li v-if="permafrostHttpError && type == 'latLng'">
+              <li
+                v-if="
+                  (permafrostHttpError && type == 'latLng') || !showPermafrost
+                "
+              >
                 <strong>Permafrost:</strong>
-                {{ httpErrors[permafrostHttpError] }}
+                <span v-if="permafrostHttpError && type == 'latLng'">{{
+                  httpErrors[permafrostHttpError]
+                }}</span>
+                <span v-if="!showPermafrost">
+                  {{ httpErrors['no_data'] }}
+                </span>
               </li>
               <li v-if="flammabilityHttpError">
                 <strong>Relative flammability:</strong>
@@ -201,7 +212,7 @@
         </div>
       </section>
       <section class="section">
-        <div id="permafrost" v-if="permafrostData || type != 'latLng'">
+        <div id="permafrost" v-if="showPermafrost">
           <PermafrostReport />
         </div>
       </section>
@@ -317,6 +328,8 @@ export default {
 
       if (this.type == 'latLng') {
         apiHttpErrors.push(this.permafrostHttpError)
+      } else if (!this.validPermafrost()) {
+        apiHttpErrors.push('no_data')
       }
 
       apiHttpErrors.forEach(error => {
@@ -331,9 +344,13 @@ export default {
       let types = this.presentDataTypes()
       return this.formatTypeString(types)
     },
+    showPermafrost() {
+      return this.validPermafrost()
+    },
     ...mapGetters({
       place: 'place/name',
       type: 'place/type',
+      hucId: 'place/hucId',
       elevation: 'elevation/elevation',
       climateData: 'climate/climateData',
       permafrostData: 'permafrost/permafrostData',
@@ -378,12 +395,9 @@ export default {
       if (this.climateData) {
         types.push('temperature', 'precipitation')
       }
-
-      // Always show the permafrost section for area reports.
-      if (this.permafrostData || this.type != 'latLng') {
+      if (this.validPermafrost()) {
         types.push('permafrost')
       }
-
       if (this.flammabilityData) {
         types.push('relative flammability')
       }
@@ -408,6 +422,17 @@ export default {
       let string = allButLast.join(', ')
       string = string + ', and ' + last
       return string
+    },
+    validPermafrost() {
+      let badMagtMapAreas = ['19030103']
+      // Always show the permafrost section for area reports.
+      if (this.permafrostData || this.type != 'latLng') {
+        // Except for area IDs known to have bad MAGT mini-maps.
+        if (badMagtMapAreas.indexOf(this.hucId) == -1) {
+          return true
+        }
+      }
+      return false
     },
   },
 }
