@@ -69,9 +69,9 @@ export const getters = {
       })
       if (place) {
         return place.type
-      } 
+      }
     }
-    throw "Unknown place type!"
+    throw 'Unknown place type!'
   },
 
   // Returns a string for the correct current selected place,
@@ -105,36 +105,27 @@ export const getters = {
       }
     }
 
-    // HUC
-    if (getters.type == 'huc') {
-      let huc = _.find(state.places, {
-        id: getters.areaId,
-      })
-      if (huc) {
-        return huc.name + ' Watershed HUC ' + huc.id
+    // Area types
+    let area = _.find(state.places, {
+      id: getters.areaId,
+    })
+    if (area) {
+      switch (getters.type) {
+        case 'huc':
+          return huc.name + ' Watershed HUC ' + huc.id
+        case 'corporation':
+          return area.name + ' (Native Corporation)'
+        case 'climate_division':
+          return area.name + ' (Climate Division)'
+        case 'ethnolinguistic_region':
+          return area.name + ' (Ethnolinguistic Region)'
+        case 'fire_zone':
+          return area.name + ' (Fire Management Unit)'
+        default:
+          return area.name
       }
     }
-
-    // Protected Area
-    if (getters.type == 'protected_area' || getters.type == 'corporation' || getters.type == 'climate_division' || getters.type == 'ethnolinguistic_region' || getters.type == 'fire_zone') {
-      let area = _.find(state.places, {
-        id: getters.areaId,
-      })
-      if (area) {
-        switch(getters.type) {
-          case 'corporation':
-            return area.name + ' (Native Corporation)'
-          case 'climate_division':
-            return area.name + ' (Climate Division)'
-          case 'ethnolinguistic_region':
-            return area.name + ' (Ethnolinguistic Region)'
-          case 'fire_zone':
-            return area.name + ' (Fire Management Unit)'
-          default:
-            return area.name
-        }
-      }
-    }
+    throw 'Could not determine name of place from ID.'
   },
 
   // This returns the name of the HUC without any extra stuff.
