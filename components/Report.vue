@@ -232,16 +232,6 @@
   </div>
 </template>
 <style lang="scss" scoped>
-@media screen and (max-width: 860px) {
-  .large-screen {
-    display: none;
-  }
-}
-@media screen and (min-width: 861px) {
-  .small-screen {
-    display: none;
-  }
-}
 .centered {
   text-align: center;
 }

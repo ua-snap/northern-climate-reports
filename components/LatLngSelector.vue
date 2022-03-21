@@ -1,5 +1,5 @@
 <template>
-  <div class="latlon-picker--wrapper">
+  <div class="latlon-picker--wrapper large-screen">
     <div class="content">
       <h4 class="title is-5">Find a place by latitude & longitude</h4>
       <p>

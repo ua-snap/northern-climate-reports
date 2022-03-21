@@ -41,11 +41,6 @@
 	</div>
 </template>
 <style lang="scss" scoped>
-@media screen and (max-width: 860px) {
-  .large-screen {
-    display: none;
-  }
-}
 .pending {
 	width: 80%;
 }
