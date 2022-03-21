@@ -211,8 +211,8 @@
         </div>
         <BackToTopButton />
       </section>
-      <section class="section !large-screen">
-          <span class="centered"><b-icon icon="phone-rotate-landscape" size="is-medium" />&nbsp;&nbsp;To see additional charts and data, please rotate your device into landscape mode.</span>
+      <section class="section small-screen">
+          <div class="is-size-5"><span class="centered"><b-icon icon="monitor" size="is-medium" />&nbsp;&nbsp;To view additional charts, tables, and data, please view this URL on a desktop computer with a wider display.</span></div>
       </section>
       <DownloadCsvButton />
       <BackToTopButton />
@@ -232,9 +232,14 @@
   </div>
 </template>
 <style lang="scss" scoped>
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 860px) {
   .large-screen {
-    display: none !important;
+    display: none;
+  }
+}
+@media screen and (min-width: 861px) {
+  .small-screen {
+    display: none;
   }
 }
 .centered {
