@@ -157,7 +157,7 @@
           </ul>
         </div>
       </section>
-      <section class="section content py-0" v-if="dataMissing">
+      <section class="section content py-0 large-screen" v-if="dataMissing">
         <div class="is-size-5">
           <p class="no-data mt-6" v-if="uniformHttpError">
             {{ httpErrors[uniformHttpError] }}
