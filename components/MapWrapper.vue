@@ -1,5 +1,5 @@
 <template>
-	<div class="map-wrapper--outer">
+	<div class="map-wrapper--outer large-screen">
 		<div class="container">
 			<div class="section pullup content fullbleed">
 				<h4>Find a place by clicking on the map</h4>
@@ -41,6 +41,11 @@
 	</div>
 </template>
 <style lang="scss" scoped>
+@media screen and (max-width: 860px) {
+  .large-screen {
+    display: none;
+  }
+}
 .pending {
 	width: 80%;
 }
