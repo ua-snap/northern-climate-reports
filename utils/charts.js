@@ -1,5 +1,6 @@
 export const getPlotSettings = function () {
   return {
+    responsive: true, // changes the height / width dynamically for charts
     displayModeBar: true, // always show the camera icon
     displaylogo: false,
     modeBarButtonsToRemove: [
