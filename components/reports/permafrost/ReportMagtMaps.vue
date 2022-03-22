@@ -94,7 +94,9 @@
               <span v-html="legendRedMax"></span>
             </span>
           </td>
-          <td class="legend-0 has-text-centered">0</td>
+          <td class="legend-0 has-text-centered">
+            <span v-html="legendWhite"></span>
+          </td>
           <td class="legend-20-above px-2">
             <span class="is-pulled-left">
               <span v-html="legendBlueMin"></span>
@@ -121,7 +123,7 @@
   margin: 5px;
 }
 .magt-legend {
-  width: 700px;
+  width: 800px;
   border: 1px solid #999;
   margin: 40px auto 0 auto;
   font-weight: 700;
@@ -161,6 +163,9 @@ export default {
     },
     legendRedMax() {
       return this.units == 'imperial' ? '30.2&deg;F' : '-1&deg;C'
+    },
+    legendWhite() {
+      return this.units == 'imperial' ? '32&deg;F' : '0&deg;C'
     },
     legendBlueMin() {
       return this.units == 'imperial' ? '33.8&deg;F' : '1&deg;C'
