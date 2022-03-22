@@ -57,18 +57,10 @@ export const getters = {
     return false
   },
 
-  // If present, returns the HucID in the URL.
-  hucId: (state, getters, rootState) => {
-    if (rootState.route && rootState.route.params.hucId) {
-      return rootState.route.params.hucId
-    }
-    return false
-  },
-
-  // Fetch the protected area ID
-  protectedAreaId: (state, getters, rootState) => {
-    if (rootState.route.params.protectedAreaId) {
-      return rootState.route.params.protectedAreaId
+  // If present, returns the area ID from the URL.
+  areaId: (state, getters, rootState) => {
+    if (rootState.route && rootState.route.params.areaId) {
+      return rootState.route.params.areaId
     }
     return false
   },
@@ -79,17 +71,23 @@ export const getters = {
       return 'latLng'
     } else if (rootState.route.params.communityId) {
       return 'community'
-    } else if (rootState.route.params.hucId) {
-      return 'huc'
-    } else if (rootState.route.params.protectedAreaId) {
-      return 'protected_area'
+    } else if (rootState.route.params.areaId) {
+      let place = _.find(state.places, {
+        id: rootState.route.params.areaId,
+      })
+      if (place) {
+        return place.type
+      }
     }
+    throw 'Unknown place type!'
   },
 
   // Returns a string for the correct current selected place,
   // whether lat/lon, community name, or other regional name.
   // The code here is pretty similar between the different cases,
-  // but each has a few slight differences.
+  // but each has a few slight differences -- the point of this
+  // code is to return a "decorated" version of each place for use
+  // in titles, etc.
   name: (state, getters, rootState) => {
     // Lat/lon!
     if (getters.type == 'latLng') {
@@ -115,37 +113,36 @@ export const getters = {
       }
     }
 
-    // HUC!
-    if (getters.type == 'huc') {
-      let huc = _.find(state.places, {
-        id: rootState.route.params.hucId,
-      })
-      if (huc) {
-        return huc.name + ' Watershed HUC ' + huc.id
+    // Area types
+    let area = _.find(state.places, {
+      id: getters.areaId,
+    })
+    if (area) {
+      switch (getters.type) {
+        case 'huc':
+          return area.name + ' Watershed HUC ' + area.id
+        case 'corporation':
+          return area.name + ' (Native Corporation)'
+        case 'climate_division':
+          return area.name + ' (Climate Division)'
+        case 'ethnolinguistic_region':
+          return area.name + ' (Ethnolinguistic Region)'
+        case 'fire_zone':
+          return area.name + ' (Fire Management Unit)'
+        default:
+          return area.name
       }
     }
-
-    // Protected area!
-    if (getters.type == 'protected_area') {
-      let pa = _.find(state.places, {
-        id: rootState.route.params.protectedAreaId,
-      })
-      if (pa) {
-        return pa.name
-      }
-    }
-
-    // Unknown or unset or invalid.
-    return false
+    throw 'Could not determine name of place from ID.'
   },
 
   // This returns the name of the HUC without any extra stuff.
   rawHucName(state, getters, rootState) {
-    if (rootState.route.params.hucId) {
+    if (rootState.route.params.areaId) {
       let huc = _.find(state.places, {
-        id: rootState.route.params.hucId,
+        id: rootState.route.params.areaId,
       })
-      if (huc) {
+      if (huc && huc.type == 'huc') {
         return huc.name
       }
     }
@@ -154,21 +151,10 @@ export const getters = {
   // Returns a fragment URL for accessing
   // different resources on the API.
   urlFragment(state, getters) {
-    switch (getters.type) {
-      // These are the same.
-      case 'community':
-      case 'latLng':
-        return 'point/' + getters.latLng[0] + '/' + getters.latLng[1]
-        break
-      case 'huc':
-        return 'huc/' + getters.hucId
-        break
-      case 'protected_area':
-        return 'protectedarea/' + getters.protectedAreaId
-        break
-      default:
-        // Unknown.
-        return undefined
+    if (getters.type == 'community' || getters.type == 'latLng') {
+      return 'point/' + getters.latLng[0] + '/' + getters.latLng[1]
+    } else {
+      return 'area/' + getters.areaId
     }
   },
 }

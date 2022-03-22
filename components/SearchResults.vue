@@ -4,11 +4,39 @@
       Locations matching {{ lat }}&deg;N, {{ lng }}&deg;E
     </h3>
     <p>These areas of interest are at, or near, this point:</p>
-    <ul v-if="searchResults.protected_areas_near || searchResults.hucs_near">
+    <ul v-if="searchResults.protected_areas_near || searchResults.hucs_near || searchResults.corporations_near || searchResults.climate_divisions_near || searchResults.ethnolinguistic_regions_near">
+      <li
+        v-for="place in searchResults.climate_divisions_near"
+        :key="place.id"
+        class="additional-info"
+      >
+        <nuxt-link
+          :to="{
+            path: formUrl(place),
+            hash: '#results',
+          }"
+          >{{ place.name }}</nuxt-link
+        >
+        <span>Climate Division</span>
+      </li>
+      <li
+        v-for="place in searchResults.ethnolinguistic_region"
+        :key="place.id"
+        class="additional-info"
+      >
+        <nuxt-link
+          :to="{
+            path: formUrl(place),
+            hash: '#results',
+          }"
+          >{{ place.name }}</nuxt-link
+        >
+        <span>Ethnolinguistic Region</span>
+      </li>
       <li
         v-for="place in searchResults.protected_areas_near"
         :key="place.id"
-        class="protected-area"
+        class="additional-info"
       >
         <nuxt-link
           :to="{
@@ -19,7 +47,7 @@
         >
         <span>{{ place.area_type }}</span>
       </li>
-      <li v-for="huc in searchResults.hucs_near" :key="huc.id" class="huc">
+      <li v-for="huc in searchResults.hucs_near" :key="huc.id" class="additional-info">
         <nuxt-link
           :to="{
             path: formUrl(huc),
@@ -28,6 +56,34 @@
           >{{ huc.name }}</nuxt-link
         >
         <span>HUC ID {{ huc.id }}</span>
+      </li>
+      <li
+        v-for="place in searchResults.corporations_near"
+        :key="place.id"
+        class="additional-info"
+      >
+        <nuxt-link
+          :to="{
+            path: formUrl(place),
+            hash: '#results',
+          }"
+          >{{ place.name }}</nuxt-link
+        >
+        <span>Native Corporation</span>
+      </li>
+      <li
+        v-for="place in searchResults.fire_management_units_near"
+        :key="place.id"
+        class="additional-info"
+      >
+        <nuxt-link
+          :to="{
+            path: formUrl(place),
+            hash: '#results',
+          }"
+          >{{ place.name }}</nuxt-link
+        >
+        <span>Fire Management Unit</span>
       </li>
     </ul>
     <div v-if="searchResults.communities" class="mb-4">
@@ -74,8 +130,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
-li.protected-area span,
-li.huc span {
+li.additional-info span {
   color: #888;
   text-transform: uppercase;
   font-weight: 600;

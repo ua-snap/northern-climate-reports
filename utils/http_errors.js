@@ -1,9 +1,10 @@
 export let httpErrors = {
-  bad_request: 'Bad request',
+  bad_request: 'Data request was not understood',
   no_data: 'No data at this location',
-  invalid_coordinates: 'Invalid coordinates',
-  timeout: 'Server timeout',
-  server_error: 'Server error',
+  invalid_coordinates:
+    'Provided coordinates or area are not included in coverage',
+  timeout: 'Data request timed out',
+  server_error: 'A problem occurred while requesting data',
 }
 
 export const getHttpError = function (error) {

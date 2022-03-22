@@ -160,16 +160,20 @@ export const getProjectedTraces = function (data, variable, plotType = 'box') {
   return projectedTraces
 }
 
-export const allZeros = function (data) {
-  let allValues = []
-  _.eachDeep(
-    data,
-    (value, key) => {
-      allValues.push(parseFloat(value))
-    },
-    {
-      leavesOnly: true,
-    }
-  )
-  return allValues.every(value => value == 0)
+export const allZeros = function (data, variable) {
+  let displayedValues = []
+
+  historicalDecades.forEach(decade => {
+    displayedValues.push(data[decade]['CRU-TS40']['CRU_historical'][variable])
+  })
+
+  projectedEras.forEach(era => {
+    models.forEach(model => {
+      scenarios.forEach(scenario => {
+        displayedValues.push(data[era][model][scenario][variable])
+      })
+    })
+  })
+
+  return displayedValues.every(value => value == 0)
 }

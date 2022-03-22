@@ -15,7 +15,7 @@
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
-import { getBaseMapAndLayers, addGeoJSONtoMap } from '../../../utils/maps'
+import { getBaseMapAndLayers, addGeoJSONtoMap } from '~/utils/maps'
 
 let scenarios = ['', 'RCP 4.5', 'RCP 8.5']
 let eras = ['1995', '2011-2040', '2036-2065', '2061–2090', '2086–2100']
@@ -61,6 +61,7 @@ export default {
       this.map.removeLayer(this.baseLayer)
       this.baseLayer = this.getBaseLayer()
       this.map.addLayer(this.baseLayer)
+      this.baseLayer.bringToBack()
     },
     // After geoJSON is loaded, display on map.
     geoJSON: function () {
