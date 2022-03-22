@@ -8,39 +8,10 @@ export const getBaseMapAndLayers = function () {
     }
   )
   this.baseLayer = this.getBaseLayer()
-  let coastline = new L.tileLayer.wms(process.env.geoserverUrl, {
+  let naturalEarth = new L.tileLayer.wms(process.env.geoserverUrl, {
     transparent: true,
     format: 'image/png',
-    layers: 'natural_earth:ne_10m_coastline',
-    styles: 'natural_earth:iem_line',
-  })
-
-  let rivers = new L.tileLayer.wms(process.env.geoserverUrl, {
-    transparent: true,
-    format: 'image/png',
-    layers: 'natural_earth:ne_10m_rivers_lake_centerlines',
-    styles: 'natural_earth:iem_line',
-  })
-
-  let lakes = new L.tileLayer.wms(process.env.geoserverUrl, {
-    transparent: true,
-    format: 'image/png',
-    layers: 'natural_earth:ne_10m_lakes',
-    styles: 'natural_earth:iem_polygon',
-  })
-
-  let roads = new L.tileLayer.wms(process.env.geoserverUrl, {
-    transparent: true,
-    format: 'image/png',
-    layers: 'natural_earth:ne_10m_roads',
-    styles: 'natural_earth:iem_line',
-  })
-
-  let places = new L.tileLayer.wms(process.env.geoserverUrl, {
-    transparent: true,
-    format: 'image/png',
-    layers: 'natural_earth:ne_10m_populated_places',
-    styles: 'natural_earth:iem_place',
+    layers: 'natural_earth:iem-natural-earth',
   })
 
   // Map base configuration
@@ -54,7 +25,7 @@ export const getBaseMapAndLayers = function () {
     zoomControl: false,
     doubleClickZoom: false,
     attributionControl: false,
-    layers: [this.baseLayer, coastline, rivers, lakes, roads, places],
+    layers: [this.baseLayer, naturalEarth],
     crs: proj,
   }
   return config
