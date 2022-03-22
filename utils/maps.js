@@ -8,6 +8,12 @@ export const getBaseMapAndLayers = function () {
     }
   )
   this.baseLayer = this.getBaseLayer()
+  let naturalEarth = new L.tileLayer.wms(process.env.geoserverUrl, {
+    transparent: true,
+    format: 'image/png',
+    layers: 'natural_earth:iem-natural-earth',
+  })
+
   // Map base configuration
   var config = {
     zoom: 1,
@@ -19,7 +25,7 @@ export const getBaseMapAndLayers = function () {
     zoomControl: false,
     doubleClickZoom: false,
     attributionControl: false,
-    layers: [this.baseLayer],
+    layers: [this.baseLayer, naturalEarth],
     crs: proj,
   }
   return config
