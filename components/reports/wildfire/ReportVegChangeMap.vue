@@ -7,7 +7,7 @@
         <span>{{ mapScenario }}</span>
       </div>
     </div>
-    <div :id="mapID" class="map"></div>
+    <div :id="mapID" class="minimap"></div>
   </div>
 </template>
 
@@ -24,11 +24,6 @@
   .narrow-br {
     display: none;
   }
-}
-/* CSS trick to make height same as dynamic width */
-.map {
-  height: 0;
-  padding-bottom: 100%;
 }
 </style>
 

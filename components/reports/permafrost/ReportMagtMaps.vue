@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <h5 class="permafrost-minimaps-title has-text-centered">
+    <h5 class="minimaps-section-title has-text-centered">
       Mean annual ground temperature,
       <span v-html="place"></span>
     </h5>
@@ -21,34 +21,34 @@
       </b-field>
     </div>
     <div class="columns is-flex-direction-row">
-      <div class="permafrost-minimap my-4 p-1">
+      <div class="minimap-container my-4 p-1">
         <ReportMagtMap scenario="0" model="0" era="0" />
       </div>
-      <div class="permafrost-minimap my-4 p-1">
+      <div class="minimap-container my-4 p-1">
         <ReportMagtMap scenario="1" :model="model_selection" era="1" />
       </div>
-      <div class="permafrost-minimap my-4 p-1">
+      <div class="minimap-container my-4 p-1">
         <ReportMagtMap scenario="1" :model="model_selection" era="2" />
       </div>
-      <div class="permafrost-minimap my-4 p-1">
+      <div class="minimap-container my-4 p-1">
         <ReportMagtMap scenario="1" :model="model_selection" era="3" />
       </div>
-      <div class="permafrost-minimap my-4 p-1">
+      <div class="minimap-container my-4 p-1">
         <ReportMagtMap scenario="1" :model="model_selection" era="4" />
       </div>
     </div>
     <div class="columns is-flex-direction-row">
-      <div class="permafrost-minimap my-4 p-1"></div>
-      <div class="permafrost-minimap my-4 p-1">
+      <div class="minimap-container my-4 p-1"></div>
+      <div class="minimap-container my-4 p-1">
         <ReportMagtMap scenario="2" :model="model_selection" era="1" />
       </div>
-      <div class="permafrost-minimap my-4 p-1">
+      <div class="minimap-container my-4 p-1">
         <ReportMagtMap scenario="2" :model="model_selection" era="2" />
       </div>
-      <div class="permafrost-minimap my-4 p-1">
+      <div class="minimap-container my-4 p-1">
         <ReportMagtMap scenario="2" :model="model_selection" era="3" />
       </div>
-      <div class="permafrost-minimap my-4 p-1">
+      <div class="minimap-container my-4 p-1">
         <ReportMagtMap scenario="2" :model="model_selection" era="4" />
       </div>
     </div>
@@ -81,13 +81,6 @@
 </template>
 
 <style lang="scss" scoped>
-.permafrost-minimaps-title {
-  font-size: 150%;
-  padding-bottom: 1rem;
-}
-.permafrost-minimap {
-  width: 20%;
-}
 .magt-legend {
   width: 800px;
   border: 1px solid #999;
