@@ -112,7 +112,7 @@ export const getters = {
     if (area) {
       switch (getters.type) {
         case 'huc':
-          return huc.name + ' Watershed HUC ' + huc.id
+          return area.name + ' Watershed HUC ' + area.id
         case 'corporation':
           return area.name + ' (Native Corporation)'
         case 'climate_division':
