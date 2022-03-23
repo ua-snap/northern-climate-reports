@@ -1,5 +1,5 @@
 <template>
-  <a :href="downloadTarget" class="button is-primary">{{ text }}</a>
+  <a :href="downloadTarget" class="button is-info">{{ text }}</a>
 </template>
 <style lang="scss" scoped></style>
 <script>
