@@ -4,89 +4,41 @@
       Relative flammability,
       <span v-html="place"></span>
     </h5>
-    <div class="columns">
-      <table class="flammability-minimaps">
-        <tr>
-          <td></td>
-          <td><ReportWildfireMapTitle historical="true" /></td>
-          <td><ReportWildfireMapTitle model="0" scenario="0" era="4" /></td>
-          <td><ReportWildfireMapTitle model="0" scenario="0" era="8" /></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>
-            <ReportFlammabilityMap
-              historical="true"
-              era="1"
-              class="flammability-minimaps-map"
-            />
-          </td>
-          <td>
-            <ReportFlammabilityMap
-              historical="false"
-              scenario="0"
-              model="0"
-              era="4"
-              class="flammability-minimaps-map"
-            />
-          </td>
-          <td>
-            <ReportFlammabilityMap
-              historical="false"
-              scenario="0"
-              model="0"
-              era="8"
-              class="flammability-minimaps-map"
-            />
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td>
-            <ReportWildfireMapTitle
-              model="0"
-              scenario="2"
-              era="4"
-              class="mt-5"
-            />
-          </td>
-          <td>
-            <ReportWildfireMapTitle
-              model="0"
-              scenario="2"
-              era="8"
-              class="mt-5"
-            />
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td>
-            <ReportFlammabilityMap
-              historical="false"
-              scenario="2"
-              model="0"
-              era="4"
-              class="flammability-minimaps-map"
-            />
-          </td>
-          <td>
-            <ReportFlammabilityMap
-              historical="false"
-              scenario="2"
-              model="0"
-              era="8"
-              class="flammability-minimaps-map"
-            />
-          </td>
-          <td></td>
-        </tr>
-      </table>
+    <div class="columns is-flex-direction-row">
+      <div class="flammability-minimap my-4 p-1"></div>
+      <div class="flammability-minimap my-4 p-1">
+        <ReportFlammabilityMap historical="true" era="1" />
+      </div>
+      <div class="flammability-minimap my-4 p-1">
+        <ReportFlammabilityMap model="0" scenario="0" era="4" />
+      </div>
+      <div class="flammability-minimap my-4 p-1">
+        <ReportFlammabilityMap model="0" scenario="0" era="8" />
+      </div>
+      <div class="flammability-minimap my-4 p-1"></div>
+    </div>
+    <div class="columns is-flex-direction-row">
+      <div class="flammability-minimap my-4 p-1"></div>
+      <div class="flammability-minimap my-4 p-1"></div>
+      <div class="flammability-minimap my-4 p-1">
+        <ReportFlammabilityMap
+          historical="false"
+          scenario="2"
+          model="0"
+          era="4"
+          class="flammability-minimaps-map"
+        />
+      </div>
+      <div class="flammability-minimap my-4 p-1">
+        <ReportFlammabilityMap
+          historical="false"
+          scenario="2"
+          model="0"
+          era="8"
+          class="flammability-minimaps-map"
+        />
+      </div>
+      <div class="flammability-minimap my-4 p-1"></div>
     </div>
   </section>
 </template>
@@ -96,25 +48,17 @@
   font-size: 150%;
   padding-bottom: 1rem;
 }
-.flammability-minimaps {
-  width: 100%;
-  margin-top: 15px;
-  td {
-    width: 20%;
-    padding: 5px;
-    vertical-align: middle;
-  }
+.flammability-minimap {
+  width: 20%;
 }
 </style>
 
 <script>
-import ReportWildfireMapTitle from './ReportWildfireMapTitle'
 import ReportFlammabilityMap from './ReportFlammabilityMap'
 import { mapGetters } from 'vuex'
 export default {
   name: 'ReportFlammabilityMaps',
   components: {
-    ReportWildfireMapTitle,
     ReportFlammabilityMap,
   },
   computed: {

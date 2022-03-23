@@ -1,12 +1,41 @@
 <template>
-  <div class="has-text-centered has-text-weight-bold">
-    <div :id="mapID" class="flammability-minimap"></div>
+  <div>
+    <div class="map-title map-container has-text-centered has-text-weight-bold">
+      <div>
+        <span v-if="mapModel">{{ mapModel }}<br /></span>
+        <span>{{ mapScenario }}</span>
+        <br class="narrow-br" />
+        <span>{{ mapEra }}</span>
+      </div>
+    </div>
+    <div :id="mapID" class="map"></div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.map-title {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+@media (max-width: 899px) {
+  .map-title {
+    min-height: 90px;
+  }
+}
+@media (min-width: 900px) {
+  .map-title {
+    min-height: 60px;
+  }
+}
+@media (min-width: 900px) {
+  .narrow-br {
+    display: none;
+  }
+}
 /* CSS trick to make height same as dynamic width */
-.flammability-minimap {
+.map {
   height: 0;
   padding-bottom: 100%;
 }
@@ -16,6 +45,29 @@
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
 import { getBaseMapAndLayers, addGeoJSONtoMap } from '~/utils/maps'
+
+let models = [
+  '5 Model Average',
+  'GFDL CM3',
+  'GISS E2-R',
+  'IPSL CM5A-LR',
+  'MRI CGCM3',
+  'NCAR CCSM4',
+]
+
+let scenarios = ['RCP 4.5', 'RCP 6.0', 'RCP 8.5']
+
+let eras = [
+  '2010-2019',
+  '2020-2029',
+  '2030-2039',
+  '2040-2049',
+  '2050-2059',
+  '2060-2069',
+  '2070-2079',
+  '2080-2089',
+  '2090-2099',
+]
 
 export default {
   name: 'ReportFlammabilityMap',
@@ -27,6 +79,25 @@ export default {
     }),
     mapID() {
       return 'flammability_' + this.scenario + '_' + this.model + '_' + this.era
+    },
+    mapModel() {
+      if (this.historical != 'true') {
+        return models[this.model] + ', '
+      }
+    },
+    mapScenario() {
+      if (this.historical == 'true') {
+        return 'CRU TS 4.0, '
+      } else {
+        return scenarios[this.scenario] + ', '
+      }
+    },
+    mapEra() {
+      if (this.historical == 'true') {
+        return '1950-2008'
+      } else {
+        return eras[this.era]
+      }
     },
   },
   data() {

@@ -20,138 +20,37 @@
         >
       </b-field>
     </div>
-    <div class="columns">
-      <table class="permafrost-minimaps">
-        <tr>
-          <td>
-            <ReportMagtMapTitle :model="model_selection" scenario="0" era="0" />
-          </td>
-          <td>
-            <ReportMagtMapTitle :model="model_selection" scenario="1" era="1" />
-          </td>
-          <td>
-            <ReportMagtMapTitle :model="model_selection" scenario="1" era="2" />
-          </td>
-          <td>
-            <ReportMagtMapTitle :model="model_selection" scenario="1" era="3" />
-          </td>
-          <td>
-            <ReportMagtMapTitle :model="model_selection" scenario="1" era="4" />
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <ReportMagtMap
-              scenario="0"
-              model="0"
-              era="0"
-              class="permafrost-minimaps-map"
-            />
-          </td>
-          <td>
-            <ReportMagtMap
-              scenario="1"
-              :model="model_selection"
-              era="1"
-              class="permafrost-minimaps-map"
-            />
-          </td>
-          <td>
-            <ReportMagtMap
-              scenario="1"
-              :model="model_selection"
-              era="2"
-              class="permafrost-minimaps-map"
-            />
-          </td>
-          <td>
-            <ReportMagtMap
-              scenario="1"
-              :model="model_selection"
-              era="3"
-              class="permafrost-minimaps-map"
-            />
-          </td>
-          <td>
-            <ReportMagtMap
-              scenario="1"
-              :model="model_selection"
-              era="4"
-              class="permafrost-minimaps-map"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>
-            <ReportMagtMapTitle
-              :model="model_selection"
-              scenario="2"
-              era="1"
-              class="mt-5"
-            />
-          </td>
-          <td>
-            <ReportMagtMapTitle
-              :model="model_selection"
-              scenario="2"
-              era="2"
-              class="mt-5"
-            />
-          </td>
-          <td>
-            <ReportMagtMapTitle
-              :model="model_selection"
-              scenario="2"
-              era="3"
-              class="mt-5"
-            />
-          </td>
-          <td>
-            <ReportMagtMapTitle
-              :model="model_selection"
-              scenario="2"
-              era="4"
-              class="mt-5"
-            />
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>
-            <ReportMagtMap
-              scenario="2"
-              :model="model_selection"
-              era="1"
-              class="permafrost-minimaps-map"
-            />
-          </td>
-          <td>
-            <ReportMagtMap
-              scenario="2"
-              :model="model_selection"
-              era="2"
-              class="permafrost-minimaps-map"
-            />
-          </td>
-          <td>
-            <ReportMagtMap
-              scenario="2"
-              :model="model_selection"
-              era="3"
-              class="permafrost-minimaps-map"
-            />
-          </td>
-          <td>
-            <ReportMagtMap
-              scenario="2"
-              :model="model_selection"
-              era="4"
-              class="permafrost-minimaps-map"
-            />
-          </td>
-        </tr>
-      </table>
+    <div class="columns is-flex-direction-row">
+      <div class="permafrost-minimap my-4 p-1">
+        <ReportMagtMap scenario="0" model="0" era="0" />
+      </div>
+      <div class="permafrost-minimap my-4 p-1">
+        <ReportMagtMap scenario="1" :model="model_selection" era="1" />
+      </div>
+      <div class="permafrost-minimap my-4 p-1">
+        <ReportMagtMap scenario="1" :model="model_selection" era="2" />
+      </div>
+      <div class="permafrost-minimap my-4 p-1">
+        <ReportMagtMap scenario="1" :model="model_selection" era="3" />
+      </div>
+      <div class="permafrost-minimap my-4 p-1">
+        <ReportMagtMap scenario="1" :model="model_selection" era="4" />
+      </div>
+    </div>
+    <div class="columns is-flex-direction-row">
+      <div class="permafrost-minimap my-4 p-1"></div>
+      <div class="permafrost-minimap my-4 p-1">
+        <ReportMagtMap scenario="2" :model="model_selection" era="1" />
+      </div>
+      <div class="permafrost-minimap my-4 p-1">
+        <ReportMagtMap scenario="2" :model="model_selection" era="2" />
+      </div>
+      <div class="permafrost-minimap my-4 p-1">
+        <ReportMagtMap scenario="2" :model="model_selection" era="3" />
+      </div>
+      <div class="permafrost-minimap my-4 p-1">
+        <ReportMagtMap scenario="2" :model="model_selection" era="4" />
+      </div>
     </div>
   </section>
 </template>
@@ -161,30 +60,17 @@
   font-size: 150%;
   padding-bottom: 1rem;
 }
-.permafrost-minimaps {
-  width: 100%;
-  margin-top: 15px;
-  td {
-    width: 20%;
-    padding: 5px;
-    vertical-align: middle;
-  }
-}
-@media (min-width: 1000px) {
-  .minimap-line-break {
-    display: none;
-  }
+.permafrost-minimap {
+  width: 20%;
 }
 </style>
 
 <script>
-import ReportMagtMapTitle from './ReportMagtMapTitle'
 import ReportMagtMap from './ReportMagtMap'
 import { mapGetters } from 'vuex'
 export default {
   name: 'ReportMagtMaps',
   components: {
-    ReportMagtMapTitle,
     ReportMagtMap,
   },
   computed: {
