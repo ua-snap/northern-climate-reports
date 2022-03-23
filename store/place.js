@@ -49,6 +49,14 @@ export const getters = {
     return false
   },
 
+  // If present, returns the community ID in the URL.
+  communityId: (state, getters, rootState) => {
+    if (rootState.route && rootState.route.params.communityId) {
+      return rootState.route.params.communityId
+    }
+    return false
+  },
+
   // If present, returns the area ID from the URL.
   areaId: (state, getters, rootState) => {
     if (rootState.route && rootState.route.params.areaId) {
@@ -112,7 +120,7 @@ export const getters = {
     if (area) {
       switch (getters.type) {
         case 'huc':
-          return huc.name + ' Watershed HUC ' + huc.id
+          return area.name + ' Watershed HUC ' + area.id
         case 'corporation':
           return area.name + ' (Native Corporation)'
         case 'climate_division':

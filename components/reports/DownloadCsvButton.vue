@@ -1,18 +1,34 @@
 <template>
-  <a :href="downloadTarget" class="button is-primary">Download data as CSV</a>
+  <a :href="downloadTarget" class="button is-info">{{ text }}</a>
 </template>
 <style lang="scss" scoped></style>
 <script>
 export default {
   name: 'DownloadCsvButton',
+  props: ['text', 'endpoint'],
   computed: {
     downloadTarget() {
-      return (
+      let endpointPath = this.endpoint
+      if (this.endpoint == 'flammability' || this.endpoint == 'veg_change') {
+        endpointPath = 'alfresco/' + endpointPath
+      }
+
+      let url =
         process.env.apiUrl +
-        '/taspr/' +
+        '/' +
+        endpointPath +
+        '/' +
         this.$store.getters['place/urlFragment'] +
         '?format=csv'
-      )
+
+      if (this.$store.getters['place/type'] == 'community') {
+        let communityId = this.$store.getters['place/communityId']
+        if (communityId != false) {
+          url += '&community=' + communityId
+        }
+      }
+
+      return url
     },
   },
 }
