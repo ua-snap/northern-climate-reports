@@ -26,7 +26,6 @@
           scenario="2"
           model="0"
           era="4"
-          class="flammability-minimaps-map"
         />
       </div>
       <div class="flammability-minimap my-4 p-1">
@@ -35,7 +34,6 @@
           scenario="2"
           model="0"
           era="8"
-          class="flammability-minimaps-map"
         />
       </div>
       <div class="flammability-minimap my-4 p-1"></div>

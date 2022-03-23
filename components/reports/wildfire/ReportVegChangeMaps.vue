@@ -21,22 +21,10 @@
       <div class="veg-change-minimap my-4 p-1"></div>
       <div class="veg-change-minimap my-4 p-1"></div>
       <div class="veg-change-minimap my-4 p-1">
-        <ReportVegChangeMap
-          historical="false"
-          scenario="2"
-          model="0"
-          era="4"
-          class="veg-change-minimaps-map"
-        />
+        <ReportVegChangeMap historical="false" scenario="2" model="0" era="4" />
       </div>
       <div class="veg-change-minimap my-4 p-1">
-        <ReportVegChangeMap
-          historical="false"
-          scenario="2"
-          model="0"
-          era="8"
-          class="veg-change-minimaps-map"
-        />
+        <ReportVegChangeMap historical="false" scenario="2" model="0" era="8" />
       </div>
       <div class="veg-change-minimap my-4 p-1"></div>
     </div>

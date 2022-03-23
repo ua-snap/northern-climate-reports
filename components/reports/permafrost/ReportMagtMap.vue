@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="map-title map-container has-text-centered">
+    <div class="map-title has-text-centered">
       <div>
         <span class="has-text-weight-bold">{{ mapEra }}<br /></span>
         <span v-if="mapModel">{{ mapModel }}<br class="narrow-br" /></span>
