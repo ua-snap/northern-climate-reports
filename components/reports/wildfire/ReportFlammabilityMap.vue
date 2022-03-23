@@ -32,29 +32,6 @@ import _ from 'lodash'
 import { mapGetters } from 'vuex'
 import { getBaseMapAndLayers, addGeoJSONtoMap } from '~/utils/maps'
 
-let models = [
-  '5 Model Average',
-  'GFDL CM3',
-  'GISS E2-R',
-  'IPSL CM5A-LR',
-  'MRI CGCM3',
-  'NCAR CCSM4',
-]
-
-let scenarios = ['RCP 4.5', 'RCP 6.0', 'RCP 8.5']
-
-let eras = [
-  '2010-2019',
-  '2020-2029',
-  '2030-2039',
-  '2040-2049',
-  '2050-2059',
-  '2060-2069',
-  '2070-2079',
-  '2080-2089',
-  '2090-2099',
-]
-
 export default {
   name: 'ReportFlammabilityMap',
   props: ['historical', 'scenario', 'model', 'era'],
@@ -62,27 +39,30 @@ export default {
     ...mapGetters({
       latLng: 'place/latLng',
       geoJSON: 'place/geoJSON',
+      eras: 'wildfire/eras',
+      models: 'wildfire/models',
+      scenarios: 'wildfire/scenarios',
     }),
     mapID() {
       return 'flammability_' + this.scenario + '_' + this.model + '_' + this.era
     },
+    mapEra() {
+      if (this.historical == 'true') {
+        return '1950-2008'
+      } else {
+        return this.eras[this.era]
+      }
+    },
     mapModel() {
       if (this.historical != 'true') {
-        return models[this.model] + ', '
+        return this.models[this.model] + ', '
       }
     },
     mapScenario() {
       if (this.historical == 'true') {
         return 'CRU TS 4.0'
       } else {
-        return scenarios[this.scenario]
-      }
-    },
-    mapEra() {
-      if (this.historical == 'true') {
-        return '1950-2008'
-      } else {
-        return eras[this.era]
+        return this.scenarios[this.scenario]
       }
     },
   },

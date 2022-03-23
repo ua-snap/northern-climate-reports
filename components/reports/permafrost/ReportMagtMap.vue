@@ -32,14 +32,6 @@ import _ from 'lodash'
 import { mapGetters } from 'vuex'
 import { getBaseMapAndLayers, addGeoJSONtoMap } from '~/utils/maps'
 
-let models = {
-  3: 'NCAR CCSM4',
-  4: 'MRI CGCM3',
-}
-
-let scenarios = ['CRU TS 3.1', 'RCP 4.5', 'RCP 8.5']
-let eras = ['1995', '2011-2040', '2036-2065', '2061–2090', '2086–2100']
-
 export default {
   name: 'ReportMagtMap',
   props: ['scenario', 'model', 'era'],
@@ -47,22 +39,25 @@ export default {
     ...mapGetters({
       latLng: 'place/latLng',
       geoJSON: 'place/geoJSON',
+      eras: 'permafrost/eras',
+      models: 'permafrost/models',
+      scenarios: 'permafrost/scenarios',
     }),
     mapID() {
       return this.scenario + '_' + this.model + '_' + this.era
     },
     mapEra() {
-      return eras[this.era]
+      return this.eras[this.era]
     },
     mapModel() {
       // The "era" at index 0 is the historical year (1995).
       if (this.era > 0) {
-        return models[this.model] + ', '
+        return this.models[this.model] + ', '
       }
     },
     mapScenario() {
       // The "scenario" at index 0 is the historical data set (CRU TS 3.1).
-      return scenarios[this.scenario]
+      return this.scenarios[this.scenario]
     },
   },
   data() {
