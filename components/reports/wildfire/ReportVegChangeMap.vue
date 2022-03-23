@@ -1,11 +1,10 @@
 <template>
   <div>
-    <div class="map-title map-container has-text-centered has-text-weight-bold">
+    <div class="map-title map-container has-text-centered">
       <div>
-        <span v-if="mapModel">{{ mapModel }}<br /></span>
+        <span class="has-text-weight-bold">{{ mapEra }}<br /></span>
+        <span v-if="mapModel">{{ mapModel }}<br class="narrow-br" /></span>
         <span>{{ mapScenario }}</span>
-        <br class="narrow-br" />
-        <span>{{ mapEra }}</span>
       </div>
     </div>
     <div :id="mapID" class="map"></div>
@@ -13,23 +12,15 @@
 </template>
 
 <style lang="scss" scoped>
-.map-title {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
-}
-@media (max-width: 899px) {
+@media (max-width: 1215px) {
   .map-title {
-    min-height: 90px;
+    min-height: 84px;
   }
 }
-@media (min-width: 900px) {
+@media (min-width: 1216px) {
   .map-title {
     min-height: 60px;
   }
-}
-@media (min-width: 900px) {
   .narrow-br {
     display: none;
   }
@@ -87,9 +78,9 @@ export default {
     },
     mapScenario() {
       if (this.historical == 'true') {
-        return 'CRU TS 4.0, '
+        return 'CRU TS 4.0'
       } else {
-        return scenarios[this.scenario] + ', '
+        return scenarios[this.scenario]
       }
     },
     mapEra() {

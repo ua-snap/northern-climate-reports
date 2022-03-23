@@ -1,11 +1,10 @@
 <template>
   <div>
-    <div class="map-title map-container has-text-centered has-text-weight-bold">
+    <div class="map-title map-container has-text-centered">
       <div>
-        <span v-if="mapModel">{{ mapModel }}<br /></span>
+        <span class="has-text-weight-bold">{{ mapEra }}<br /></span>
+        <span v-if="mapModel">{{ mapModel }}<br class="narrow-br" /></span>
         <span>{{ mapScenario }}</span>
-        <br class="narrow-br" />
-        <span>{{ mapEra }}</span>
       </div>
     </div>
     <div :id="mapID" class="map"></div>
@@ -13,23 +12,15 @@
 </template>
 
 <style lang="scss" scoped>
-.map-title {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
-}
-@media (max-width: 899px) {
+@media (max-width: 929px) {
   .map-title {
-    min-height: 90px;
+    min-height: 84px;
   }
 }
-@media (min-width: 900px) {
+@media (min-width: 930px) {
   .map-title {
     min-height: 60px;
   }
-}
-@media (min-width: 900px) {
   .narrow-br {
     display: none;
   }
@@ -65,16 +56,16 @@ export default {
     mapID() {
       return this.scenario + '_' + this.model + '_' + this.era
     },
+    mapEra() {
+      return eras[this.era]
+    },
     mapModel() {
       if (this.era > 0) {
-        return models[this.model]
+        return models[this.model] + ', '
       }
     },
     mapScenario() {
-      return scenarios[this.scenario] + ', '
-    },
-    mapEra() {
-      return eras[this.era]
+      return scenarios[this.scenario]
     },
   },
   data() {
