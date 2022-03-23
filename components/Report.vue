@@ -14,7 +14,9 @@
     <hr />
     <section v-if="$fetchState.pending" class="section content">
       <!-- Drama dots -->
-      <h4 class="title is-5">Loading data for <span v-html=place />&hellip;</h4>
+      <h4 class="title is-5">
+        Loading data for <span v-html="place" />&hellip;
+      </h4>
       <b-progress type="is-info"></b-progress>
     </section>
     <section v-else-if="$fetchState.error" class="section content error">
@@ -40,7 +42,7 @@
         <MiniMap />
         <QualitativeText />
       </section>
-      <section class="section content pb-0" v-if="dataPresent">
+      <section class="section content pb-0 large-screen" v-if="dataPresent">
         <h3 class="title is-3">Introduction</h3>
         <div class="is-size-5">
           <p>
@@ -132,7 +134,7 @@
           </b-field>
         </div>
       </section>
-      <section class="section content" v-if="dataPresent">
+      <section class="section content large-screen" v-if="dataPresent">
         <h4 class="title is-4" id="toc">Contents</h4>
         <div class="is-size-5">
           <ul>
@@ -157,7 +159,7 @@
           </ul>
         </div>
       </section>
-      <section class="section content py-0" v-if="dataMissing">
+      <section class="section content py-0 large-screen" v-if="dataMissing">
         <div class="is-size-5">
           <p class="no-data mt-6" v-if="uniformHttpError">
             {{ httpErrors[uniformHttpError] }}
@@ -190,29 +192,39 @@
         </div>
         <div v-if="!dataPresent" class="pb-3" />
       </section>
-      <section class="section" v-if="climateData">
+      <section class="section large-screen" v-if="climateData">
         <div id="temperature">
           <TempReport />
         </div>
       </section>
-      <section class="section" v-if="climateData">
+      <section class="section large-screen" v-if="climateData">
         <div id="precipitation">
           <PrecipReport />
         </div>
       </section>
-      <section class="section">
+      <section class="section large-screen">
         <div id="permafrost" v-if="permafrostData || type != 'latLng'">
           <PermafrostReport />
         </div>
       </section>
-      <section class="section" v-if="flammabilityData || vegChangeData">
+      <section
+        class="section large-screen"
+        v-if="flammabilityData || vegChangeData"
+      >
         <div id="wildfire">
           <WildfireReport />
         </div>
         <BackToTopButton />
       </section>
-      <DownloadCsvButton />
-      <BackToTopButton />
+      <section class="section small-screen">
+        <div class="is-size-5">
+          <span class="centered"
+            ><b-icon icon="monitor" size="is-medium" />&nbsp;&nbsp;To view
+            additional charts, tables, and data, please view this URL on a
+            desktop computer with a wider display.</span
+          >
+        </div>
+      </section>
       <hr />
       <div class="back">
         <b-button
@@ -261,7 +273,6 @@ import PermafrostReport from '~/components/reports/permafrost/PermafrostReport'
 import WildfireReport from '~/components/reports/wildfire/WildfireReport'
 import MiniMap from '~/components/reports/MiniMap'
 import QualitativeText from '~/components/reports/QualitativeText'
-import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import BackToTopButton from '~/components/reports/BackToTopButton'
 import { mapGetters } from 'vuex'
 import { httpErrors } from '../utils/http_errors'
@@ -279,7 +290,6 @@ export default {
     WildfireReport,
     MiniMap,
     QualitativeText,
-    DownloadCsvButton,
     BackToTopButton,
   },
   data() {

@@ -65,7 +65,7 @@ export default {
 
       // Prevent all-zero charts from showing negative y-axis.
       // Subtract a small buffer from 0 value to avoid cropping scatter marker.
-      if (allZeros(flammabilityData)) {
+      if (allZeros(flammabilityData, 'rf')) {
         layout['yaxis']['range'] = [-0.1, 2]
       }
 
