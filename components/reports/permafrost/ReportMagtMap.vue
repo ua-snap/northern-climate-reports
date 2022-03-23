@@ -60,11 +60,13 @@ export default {
       return eras[this.era]
     },
     mapModel() {
+      // The "era" at index 0 is the historical year (1995).
       if (this.era > 0) {
         return models[this.model] + ', '
       }
     },
     mapScenario() {
+      // The "scenario" at index 0 is the historical data set (CRU TS 3.1).
       return scenarios[this.scenario]
     },
   },
