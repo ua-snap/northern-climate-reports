@@ -225,8 +225,6 @@
           >
         </div>
       </section>
-      <DownloadCsvButton />
-      <BackToTopButton />
       <hr />
       <div class="back">
         <b-button
