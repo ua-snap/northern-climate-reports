@@ -63,6 +63,9 @@ export default {
       showPermafrost: 'permafrost/valid',
       permafrostPresent: 'permafrost/present',
       permafrostDisappears: 'permafrost/disappears',
+      flammabilityData: 'wildfire/flammability',
+      vegChangeData: 'wildfire/veg_change',
+      showWildfires: 'wildfire/valid'
     }),
     unitsText() {
       if (this.units) {
@@ -83,6 +86,12 @@ export default {
     altThawData: function () {
       this.generateText()
     },
+    flammabilityData: function () {
+      this.generateText()
+    },
+    vegChangeData: function () {
+      this.generateText()
+    }
   },
   methods: {
     // Generate Qualitative Text
@@ -301,6 +310,29 @@ export default {
 
       return string
     },
+    wildfireString() {
+      let historical_rf = this.flammabilityData['1950-2008']['CRU-TS40']['CRU_historical']['rf']
+
+      let highest_predicted_rf = Math.max(
+        this.flammabilityData['2070-2099']['5modelAvg']['rcp45']['rf'],
+        this.flammabilityData['2070-2099']['5modelAvg']['rcp60']['rf'],
+        this.flammabilityData['2070-2099']['5modelAvg']['rcp85']['rf']
+      )
+      
+      let string = ''
+      if (historical_rf == 0 || highest_predicted_rf == 0) {
+        return string
+      }
+      if (highest_predicted_rf > historical_rf) {
+        let percentage_change = parseInt(((highest_predicted_rf / historical_rf) - 1) * 100)
+        string = '<p>By the end of the century, models predict a <br/><strong>' + percentage_change + '% increase</strong> in the chance of wildfires in this area.</p>'
+      } else {
+        let percentage_change = parseInt(((historical_rf / highest_predicted_rf) - 1) * 100)
+        string = '<p>By the end of the century, models predict a <br/><strong>' + percentage_change + '% decrease</strong> in the chance of wildfires in this area.'
+      }
+
+      return string
+    },
     // Subfunction: Generate annual metrics HTML string
     // Input: None. (Uses constant seasons)
     // Output: A string containing HTML for a linked list of all
@@ -327,6 +359,10 @@ export default {
 
       if (this.showPermafrost) {
         text += this.permafrostString()
+      }
+
+      if (this.showWildfires) {
+        text += this.wildfireString()
       }
 
       if (text == '') {

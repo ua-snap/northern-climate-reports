@@ -2,6 +2,7 @@
 import _ from 'lodash'
 import { getHttpError } from '../utils/http_errors'
 import { convertToPercent } from '../utils/convert'
+import { objectTypeSpreadProperty } from '@babel/types'
 
 // Store, namespaced as `climate/`
 export const state = () => ({
@@ -91,6 +92,13 @@ export const getters = {
   vegChangeHttpError(state) {
     return state.vegChangeHttpError
   },
+  valid(state) {
+    if (Object.keys(state.flammability).length != 0 && Object.keys(state.veg_change).length != 0) {
+      return true
+    } else {
+      return false
+    }
+  }
 }
 
 export const mutations = {
