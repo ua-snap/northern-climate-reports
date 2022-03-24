@@ -85,6 +85,7 @@
     display: inline-block;
     padding-left: 1ex;
     color: #888;
+    font-size: 90%;
   }
 }
 </style>
