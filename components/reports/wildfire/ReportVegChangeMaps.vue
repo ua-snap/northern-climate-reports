@@ -8,25 +8,29 @@
       <div class="column is-flex">
         <div class="veg-change-minimaps-map" />
         <ReportVegChangeMap
-          historical="true"
+          scenario="0"
+          model="0"
+          era="0"
+          class="veg-change-minimaps-map"
+        />
+        <ReportVegChangeMap
+          scenario="1"
+          model="1"
           era="1"
           class="veg-change-minimaps-map"
         />
         <ReportVegChangeMap
-          historical="false"
-          scenario="0"
-          model="0"
-          era="4"
+          scenario="1"
+          model="1"
+          era="2"
           class="veg-change-minimaps-map"
         />
         <ReportVegChangeMap
-          historical="false"
-          scenario="0"
-          model="0"
-          era="8"
+          scenario="1"
+          model="1"
+          era="3"
           class="veg-change-minimaps-map"
         />
-        <div class="veg-change-minimaps-map" />
       </div>
     </div>
     <div class="columns">
@@ -34,20 +38,23 @@
         <div class="veg-change-minimaps-map" />
         <div class="veg-change-minimaps-map" />
         <ReportVegChangeMap
-          historical="false"
           scenario="2"
-          model="0"
-          era="4"
+          model="1"
+          era="1"
           class="veg-change-minimaps-map"
         />
         <ReportVegChangeMap
-          historical="false"
           scenario="2"
-          model="0"
-          era="8"
+          model="1"
+          era="2"
           class="veg-change-minimaps-map"
         />
-        <div class="veg-change-minimaps-map" />
+        <ReportVegChangeMap
+          scenario="2"
+          model="1"
+          era="3"
+          class="veg-change-minimaps-map"
+        />
       </div>
     </div>
   </section>
