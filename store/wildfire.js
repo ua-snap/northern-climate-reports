@@ -12,6 +12,22 @@ export const state = () => ({
 })
 
 export const getters = {
+  eras() {
+    return ['1950-2008', '2010-2039', '2040-2069', '2070-2099']
+  },
+  models() {
+    return [
+      'CRU TS 4.0',
+      'NCAR CCSM4',
+      'GFDL CM3',
+      'GISS E2-R',
+      'IPSL CM5A-LR',
+      'MRI CGCM3',
+    ]
+  },
+  scenarios() {
+    return ['Historical', 'RCP 4.5', 'RCP 6.0', 'RCP 8.5']
+  },
   flammability(state, getters, rootState, rootGetters) {
     return state.flammability
   },

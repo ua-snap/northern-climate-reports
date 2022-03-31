@@ -1,33 +1,36 @@
 <template>
-  <div class="has-text-centered has-text-weight-bold">
-    <span v-html="title"></span>
-    <div :id="mapID" class="veg-change-minimap"></div>
+  <div>
+    <div class="map-title has-text-centered">
+      <div>
+        <span class="has-text-weight-bold">{{ mapEra }}<br /></span>
+        <span v-if="mapModel">{{ mapModel }}<br class="narrow-br" /></span>
+        <span>{{ mapScenario }}</span>
+      </div>
+    </div>
+    <div :id="mapID" class="minimap"></div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.veg-change-minimap {
-  height: 15vw;
-  width: 100%;
+@media (max-width: 1215px) {
+  .map-title {
+    min-height: 84px;
+  }
+}
+@media (min-width: 1216px) {
+  .map-title {
+    min-height: 60px;
+  }
+  .narrow-br {
+    display: none;
+  }
 }
 </style>
 
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
-import { getBaseMapAndLayers, addGeoJSONtoMap } from '../../../utils/maps'
-
-let models = [
-  'CRU TS 4.0',
-  'NCAR-CCSM4',
-  'GFDL-CM3',
-  'GISS-E2-R',
-  'IPSL-CM5A-LR',
-  'MRI-CGCM3',
-]
-
-let scenarios = ['Historical', 'RCP 4.5', 'RCP 6.0', 'RCP 8.5']
-let eras = ['1950-2008', '2010-2039', '2040-2069', '2070-2099']
+import { getBaseMapAndLayers, addGeoJSONtoMap } from '~/utils/maps'
 
 export default {
   name: 'ReportVegChangeMap',
@@ -36,18 +39,21 @@ export default {
     ...mapGetters({
       latLng: 'place/latLng',
       geoJSON: 'place/geoJSON',
+      eras: 'wildfire/eras',
+      models: 'wildfire/models',
+      scenarios: 'wildfire/scenarios',
     }),
-    title() {
-      return (
-        models[this.model] +
-        ',<br />' +
-        scenarios[this.scenario] +
-        ', ' +
-        eras[this.era]
-      )
-    },
     mapID() {
       return 'veg_change_' + this.scenario + '_' + this.model + '_' + this.era
+    },
+    mapEra() {
+      return this.eras[this.era]
+    },
+    mapModel() {
+      return this.models[this.model] + ', '
+    },
+    mapScenario() {
+      return this.scenarios[this.scenario]
     },
   },
   data() {

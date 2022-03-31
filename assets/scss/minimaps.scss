@@ -1,0 +1,14 @@
+.minimaps-section-title {
+  font-size: 150%;
+  padding-bottom: 1rem;
+}
+
+.minimap-container {
+  width: 20%;
+}
+
+/* CSS trick to make height same as dynamic width */
+.minimap {
+  height: 0;
+  padding-bottom: 100%;
+}
