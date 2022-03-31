@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <h5 class="minimaps-section-title has-text-centered">
-      Vegetation change,
+      Relative vegetation change,
       <span v-html="place"></span>
     </h5>
     <div class="is-size-6 mb-4">

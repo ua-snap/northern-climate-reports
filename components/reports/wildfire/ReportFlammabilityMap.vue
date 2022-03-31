@@ -32,38 +32,68 @@ import _ from 'lodash'
 import { mapGetters } from 'vuex'
 import { getBaseMapAndLayers, addGeoJSONtoMap } from '~/utils/maps'
 
+let eras = {
+  relative_flammability_historical: {
+    climate_impact_reports: '1950-2008',
+  },
+  relative_flammability_future: {
+    'rcp45_2010-2039': '2010-2039',
+    'rcp45_2040-2069': '2040-2069',
+    'rcp45_2070-2099': '2070-2099',
+    'rcp85_2010-2039': '2010-2039',
+    'rcp85_2040-2069': '2040-2069',
+    'rcp85_2070-2099': '2070-2099',
+  },
+}
+
+let models = {
+  relative_flammability_historical: {
+    climate_impact_reports: 'CRU TS 4.0',
+  },
+  relative_flammability_future: {
+    'rcp45_2010-2039': 'NCAR CCSM4',
+    'rcp45_2040-2069': 'NCAR CCSM4',
+    'rcp45_2070-2099': 'NCAR CCSM4',
+    'rcp85_2010-2039': 'NCAR CCSM4',
+    'rcp85_2040-2069': 'NCAR CCSM4',
+    'rcp85_2070-2099': 'NCAR CCSM4',
+  },
+}
+
+let scenarios = {
+  relative_flammability_historical: {
+    climate_impact_reports: 'Historical',
+  },
+  relative_flammability_future: {
+    'rcp45_2010-2039': 'RCP 4.5',
+    'rcp45_2040-2069': 'RCP 4.5',
+    'rcp45_2070-2099': 'RCP 4.5',
+    'rcp85_2010-2039': 'RCP 8.5',
+    'rcp85_2040-2069': 'RCP 8.5',
+    'rcp85_2070-2099': 'RCP 8.5',
+  },
+}
+
 export default {
   name: 'ReportFlammabilityMap',
-  props: ['historical', 'scenario', 'model', 'era'],
+  props: ['layer', 'map_style'],
   computed: {
     ...mapGetters({
       latLng: 'place/latLng',
       geoJSON: 'place/geoJSON',
-      eras: 'wildfire/eras',
-      models: 'wildfire/models',
       scenarios: 'wildfire/scenarios',
     }),
     mapID() {
-      return 'flammability_' + this.scenario + '_' + this.model + '_' + this.era
+      return 'flammability_' + this.layer + '_' + this.map_style
     },
     mapEra() {
-      if (this.historical == 'true') {
-        return '1950-2008'
-      } else {
-        return this.eras[this.era]
-      }
+      return eras[this.layer][this.map_style]
     },
     mapModel() {
-      if (this.historical != 'true') {
-        return this.models[this.model] + ', '
-      }
+      return models[this.layer][this.map_style] + ', '
     },
     mapScenario() {
-      if (this.historical == 'true') {
-        return 'CRU TS 4.0'
-      } else {
-        return this.scenarios[this.scenario]
-      }
+      return scenarios[this.layer][this.map_style]
     },
   },
   data() {
@@ -99,16 +129,8 @@ export default {
         transparent: true,
         format: 'image/png',
         version: '1.3.0',
-        styles: 'climate_impact_reports',
-      }
-      if (this.historical == 'true') {
-        layerOptions['layers'] = 'relative_flammability_historical'
-        layerOptions['dim_era'] = this.era
-      } else {
-        layerOptions['layers'] = 'relative_flammability_future'
-        layerOptions['dim_era'] = this.era
-        layerOptions['dim_model'] = this.model
-        layerOptions['dim_scenario'] = this.scenario
+        layers: this.layer,
+        styles: this.map_style,
       }
       return new L.tileLayer.wms(process.env.rasdamanUrl, layerOptions)
     },

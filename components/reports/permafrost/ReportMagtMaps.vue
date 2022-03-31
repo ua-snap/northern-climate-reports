@@ -83,6 +83,7 @@
 <style lang="scss" scoped>
 .magt-legend {
   width: 800px;
+  height: 26px;
   border: 1px solid #999;
   margin: 40px auto 0 auto;
   font-weight: 700;
