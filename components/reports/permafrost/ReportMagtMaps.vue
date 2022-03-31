@@ -7,14 +7,14 @@
     <div class="is-size-6 mb-4">
       <b-field label="Model">
         <b-radio
-          v-model="model_selection"
-          name="model_selection"
+          v-model="magt_model_selection"
+          name="magt_model_selection"
           native-value="3"
           >NCAR CCSM4</b-radio
         >
         <b-radio
-          v-model="model_selection"
-          name="model_selection"
+          v-model="magt_model_selection"
+          name="magt_model_selection"
           native-value="4"
           >MRI CGCM3</b-radio
         >
@@ -25,31 +25,31 @@
         <ReportMagtMap scenario="0" model="0" era="0" />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportMagtMap scenario="1" :model="model_selection" era="1" />
+        <ReportMagtMap scenario="1" :model="magt_model_selection" era="1" />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportMagtMap scenario="1" :model="model_selection" era="2" />
+        <ReportMagtMap scenario="1" :model="magt_model_selection" era="2" />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportMagtMap scenario="1" :model="model_selection" era="3" />
+        <ReportMagtMap scenario="1" :model="magt_model_selection" era="3" />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportMagtMap scenario="1" :model="model_selection" era="4" />
+        <ReportMagtMap scenario="1" :model="magt_model_selection" era="4" />
       </div>
     </div>
     <div class="columns is-flex-direction-row">
       <div class="minimap-container my-4 p-1"></div>
       <div class="minimap-container my-4 p-1">
-        <ReportMagtMap scenario="2" :model="model_selection" era="1" />
+        <ReportMagtMap scenario="2" :model="magt_model_selection" era="1" />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportMagtMap scenario="2" :model="model_selection" era="2" />
+        <ReportMagtMap scenario="2" :model="magt_model_selection" era="2" />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportMagtMap scenario="2" :model="model_selection" era="3" />
+        <ReportMagtMap scenario="2" :model="magt_model_selection" era="3" />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportMagtMap scenario="2" :model="model_selection" era="4" />
+        <ReportMagtMap scenario="2" :model="magt_model_selection" era="4" />
       </div>
     </div>
     <table class="magt-legend">
@@ -135,7 +135,7 @@ export default {
   },
   data() {
     return {
-      model_selection: 3,
+      magt_model_selection: 3,
     }
   },
 }
