@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <h5 class="flammability-minimaps-title has-text-centered">
-      Relative flammability,
+      Flammability,
       <span v-html="place"></span>
     </h5>
     <div class="columns">

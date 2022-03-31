@@ -4,10 +4,10 @@
       <h4 class="title is-3">Wildfire</h4>
       <div class="is-size-5 mb-6">
         <p>
-          The following charts show the historical and projected relative
-          flammability and vegetation change for this location. Values represent
-          the percentage of times the pixel at this location has burned, or
-          changed dominant vegetation type, for varios models and scenarios.
+          The following charts show the historical and projected flammability
+          and vegetation change for this location. Values represent the
+          percentage of times the pixel at this location has burned, or changed
+          dominant vegetation type, for varios models and scenarios.
           <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
             >See information about the dataset shown here.</nuxt-link
           >

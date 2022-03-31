@@ -153,8 +153,8 @@
               depending on the presence or absence of permafrost
             </li>
             <li v-if="flammabilityData || vegChangeData">
-              <a href="#wildfire">Wildfire</a> charts of relative flammability
-              and vegetation change with with multiple models and scenarios
+              <a href="#wildfire">Wildfire</a> charts of flammability and
+              vegetation change with with multiple models and scenarios
             </li>
           </ul>
         </div>
@@ -180,7 +180,7 @@
                 {{ httpErrors[permafrostHttpError] }}
               </li>
               <li v-if="flammabilityHttpError">
-                <strong>Relative flammability:</strong>
+                <strong>Flammability:</strong>
                 {{ httpErrors[flammabilityHttpError] }}
               </li>
               <li v-if="vegChangeHttpError">
@@ -395,7 +395,7 @@ export default {
       }
 
       if (this.flammabilityData) {
-        types.push('relative flammability')
+        types.push('flammability')
       }
       if (this.vegChangeData) {
         types.push('vegetation change')
