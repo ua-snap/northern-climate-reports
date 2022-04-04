@@ -12,6 +12,32 @@ export const state = () => ({
 })
 
 export const getters = {
+  eras() {
+    return [
+      '2010-2019',
+      '2020-2029',
+      '2030-2039',
+      '2040-2049',
+      '2050-2059',
+      '2060-2069',
+      '2070-2079',
+      '2080-2089',
+      '2090-2099',
+    ]
+  },
+  models() {
+    return [
+      '5 Model Average',
+      'GFDL CM3',
+      'GISS E2-R',
+      'IPSL CM5A-LR',
+      'MRI CGCM3',
+      'NCAR CCSM4',
+    ]
+  },
+  scenarios() {
+    return ['RCP 4.5', 'RCP 6.0', 'RCP 8.5']
+  },
   flammability(state, getters, rootState, rootGetters) {
     return state.flammability
   },
@@ -62,13 +88,12 @@ export const actions = {
 
     let vegChangeQueryUrl =
       process.env.apiUrl +
-      '/alfresco/veg_change/' +
+      '/alfresco/veg_type/' +
       context.rootGetters['place/urlFragment']
     let veg_change = await this.$axios.$get(vegChangeQueryUrl).catch(err => {
       let httpError = getHttpError(err)
       context.commit('setVegChangeHttpError', httpError)
     })
-    let convertedVegChange = convertToPercent(veg_change)
-    context.commit('setVegChange', convertedVegChange)
+    context.commit('setVegChange', veg_change)
   },
 }

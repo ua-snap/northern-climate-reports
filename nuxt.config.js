@@ -43,7 +43,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   // Main is the entrypoint for all SCSS in our app.
-  css: ['@/assets/scss/main.scss'],
+  css: ['@/assets/scss/main.scss', '@/assets/scss/minimaps.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [

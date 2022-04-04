@@ -123,6 +123,18 @@ export const state = () => ({
 })
 
 export const getters = {
+  eras() {
+    return ['1995', '2011-2040', '2036-2065', '2061–2090', '2086–2100']
+  },
+  models() {
+    return {
+      3: 'NCAR CCSM4',
+      4: 'MRI CGCM3',
+    }
+  },
+  scenarios() {
+    return ['CRU TS 3.1', 'RCP 4.5', 'RCP 8.5']
+  },
   permafrostData(state) {
     return state.permafrostData
   },

@@ -23,6 +23,18 @@
       endpoint="flammability"
       class="mt-3 mb-5"
     />
+    <div class="content">
+      <div class="is-size-5 mt-6">
+        <p>
+          Due to the inherent uncertainty involved in predicting wildfire, the
+          maps below should not be interpreted as vegetation predictions at
+          specific locations, but rather as an indicator of likely general
+          trends in vegetation type over time. Each map-pixel shows the most
+          commonly predicted vegetation type (modal value) based on 200 model
+          runs per year across all years in the map's date range.
+        </p>
+      </div>
+    </div>
     <ReportVegChangeMaps />
     <div class="chart-wrapper">
       <ReportVegChangeChart />
