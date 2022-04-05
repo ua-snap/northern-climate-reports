@@ -41,7 +41,7 @@
     </div>
     <DownloadCsvButton
       text="Download vegetation change data as CSV"
-      endpoint="veg_change"
+      endpoint="veg_type"
       class="mt-3 mb-5"
     />
   </div>

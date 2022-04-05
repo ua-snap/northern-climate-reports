@@ -9,7 +9,7 @@ export default {
   computed: {
     downloadTarget() {
       let endpointPath = this.endpoint
-      if (this.endpoint == 'flammability' || this.endpoint == 'veg_change') {
+      if (_.includes(['flammability', 'veg_type'], this.endpoint)) {
         endpointPath = 'alfresco/' + endpointPath
       }
 
