@@ -59,7 +59,7 @@ export default {
         return
       }
 
-      let title = 'Relative flammability, ' + this.place
+      let title = 'Flammability, ' + this.place
       let yAxisLabel = 'Annual chance of burning (%)'
       let layout = getLayout(title, yAxisLabel)
 
