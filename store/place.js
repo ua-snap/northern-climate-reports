@@ -210,8 +210,50 @@ export const actions = {
         context.getters.latLng[1]
 
       await this.$http.$get(queryUrl).then(res => {
+        // Change the object structure to flatten & sort the areas
+        let ssr = []
+        _.each(res.climate_divisions_near, place => {
+          ssr.push(place)
+        })
+        _.each(res.corporations_near, place => {
+          ssr.push(place)
+        })
+        _.each(res.fire_management_units_near, place => {
+          ssr.push(place)
+        })
+        _.each(res.hucs_near, place => {
+          ssr.push(place)
+        })
+        _.each(res.protected_areas_near, place => {
+          ssr.push(place)
+        })
+
+        ssr.sort((a, b) => {
+          return a.name > b.name
+        })
+
+        // Sort the community names, if present
+        let communities = []
+        if (res.communities) {
+          // Restructure communities into an array to sort
+          _.each(res.communities, community => {
+            communities.push(community)
+          })
+          communities.sort((a, b) => {
+            return a.name > b.name
+          })
+        }
+        // Specifically make the communities key false if no matching communities
+        // were found.
+        if (_.isEmpty(communities)) {
+          communities = false
+        }
         Object.freeze(res) // remove reactivity of Vue, this is static
-        context.commit('setSearchResults', res)
+        context.commit('setSearchResults', {
+          areas: ssr,
+          communities: communities,
+          total_bounds: res.total_bounds,
+        })
       })
     }
   },
