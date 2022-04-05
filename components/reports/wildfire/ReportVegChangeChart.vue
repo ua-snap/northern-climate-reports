@@ -101,7 +101,7 @@ export default {
       ]
 
       let symbols = {
-        'Not Modeled': 'Not Modeled',
+        'Not Modeled': 'circle',
         'Barren/Lichen/Moss': 'square',
         'Black Spruce': 'diamond',
         'Deciduous Forest': 'cross',
@@ -110,6 +110,18 @@ export default {
         'Temperate Rainforest': 'triangle-down',
         'Wetland Tundra': 'pentagon',
         'White Spruce': 'hexagon',
+      }
+
+      let colors = {
+        'Not Modeled': '#1d77b4',
+        'Barren/Lichen/Moss': '#ff7f0f',
+        'Black Spruce': '#2ba02b',
+        'Deciduous Forest': '#d62828',
+        'Graminoid Tundra': '#9467bd',
+        'Shrub Tundra': '#8b564c',
+        'Temperate Rainforest': '#e377c2',
+        'Wetland Tundra': '#7f7f7f',
+        'White Spruce': '#bbbd21',
       }
 
       types.forEach(type => {
@@ -127,20 +139,50 @@ export default {
           }
         })
 
-        let trace = {
+        let historicalTrace = {
           type: 'scatter',
           mode: 'markers',
           name: type,
           hoverinfo: 'x+y+z+text',
           hovertemplate: '%{y:.2f}%',
+          showlegend: false,
           marker: {
             size: 8,
             symbol: symbols[type],
+            color: colors[type],
           },
-          x: ['1950-2008', '2010-2039', '2040-2069', '2070-2099'],
-          y: yValues,
+          x: eras,
+          y: [yValues[0]],
         }
-        dataTraces.push(trace)
+
+        let projectedTrace = {
+          type: 'scatter',
+          mode: 'markers',
+          name: type,
+          hoverinfo: 'x+y+z+text',
+          hovertemplate: '%{y:.2f}% <b>(%{customdata}%)</b>',
+          marker: {
+            size: 8,
+            symbol: symbols[type],
+            color: colors[type],
+          },
+          x: eras,
+          y: [null].concat(yValues.slice(1)),
+          customdata: [null],
+        }
+
+        let historicalValue = yValues[0]
+        yValues.slice(1).forEach(value => {
+          let diff = value - historicalValue
+          if (diff >= 0) {
+            diff = '+' + diff.toFixed(2)
+          } else {
+            diff = diff.toFixed(2)
+          }
+          projectedTrace['customdata'].push(diff)
+        })
+
+        dataTraces.push(historicalTrace, projectedTrace)
       })
 
       let footerLines = [
