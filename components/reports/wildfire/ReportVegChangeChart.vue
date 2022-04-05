@@ -89,39 +89,27 @@ export default {
       let dataTraces = []
 
       let types = [
-        'not_modeled',
-        'barren_lichen_moss',
-        'black_spruce',
-        'deciduous_forest',
-        'graminoid_tundra',
-        'shrub_tundra',
-        'temperate_rainforest',
-        'wetland_tundra',
-        'white_spruce',
+        'Not Modeled',
+        'Barren/Lichen/Moss',
+        'Black Spruce',
+        'Deciduous Forest',
+        'Graminoid Tundra',
+        'Shrub Tundra',
+        'Temperate Rainforest',
+        'Wetland Tundra',
+        'White Spruce',
       ]
 
-      let traceLabels = {
-        not_modeled: 'Not Modeled',
-        barren_lichen_moss: 'Barren/Lichen/Moss',
-        black_spruce: 'Black Spruce',
-        deciduous_forest: 'Deciduous Forest',
-        graminoid_tundra: 'Graminoid Tundra',
-        shrub_tundra: 'Shrub Tundra',
-        temperate_rainforest: 'Temperate Rainforest',
-        wetland_tundra: 'Wetland Tundra',
-        white_spruce: 'White Spruce',
-      }
-
       let symbols = {
-        not_modeled: 'Not Modeled',
-        barren_lichen_moss: 'square',
-        black_spruce: 'diamond',
-        deciduous_forest: 'cross',
-        graminoid_tundra: 'x',
-        shrub_tundra: 'triangle-up',
-        temperate_rainforest: 'triangle-down',
-        wetland_tundra: 'pentagon',
-        white_spruce: 'hexagon',
+        'Not Modeled': 'Not Modeled',
+        'Barren/Lichen/Moss': 'square',
+        'Black Spruce': 'diamond',
+        'Deciduous Forest': 'cross',
+        'Graminoid Tundra': 'x',
+        'Shrub Tundra': 'triangle-up',
+        'Temperate Rainforest': 'triangle-down',
+        'Wetland Tundra': 'pentagon',
+        'White Spruce': 'hexagon',
       }
 
       types.forEach(type => {
@@ -142,7 +130,7 @@ export default {
         let trace = {
           type: 'scatter',
           mode: 'markers',
-          name: traceLabels[type],
+          name: type,
           hoverinfo: 'x+y+z+text',
           hovertemplate: '%{y:.2f}%',
           marker: {
