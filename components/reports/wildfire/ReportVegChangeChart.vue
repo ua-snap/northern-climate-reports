@@ -4,16 +4,16 @@
       <b-field label="Model" class="px-3">
         <div>
           <b-radio
-            v-model="veg_model_selection"
-            name="veg_model_selection"
+            v-model="veg_chart_model_selection"
+            name="veg_chart_model_selection"
             native-value="NCAR-CCSM4"
             >NCAR CCSM4</b-radio
           >
         </div>
         <div>
           <b-radio
-            v-model="veg_model_selection"
-            name="veg_model_selection"
+            v-model="veg_chart_model_selection"
+            name="veg_chart_model_selection"
             native-value="MRI-CGCM3"
             >MRI CGCM3</b-radio
           >
@@ -54,7 +54,7 @@ export default {
   data() {
     return {
       plotType: 'box',
-      veg_model_selection: 'NCAR-CCSM4',
+      veg_chart_model_selection: 'NCAR-CCSM4',
       veg_scenario_selection: 'rcp85',
     }
   },
@@ -68,7 +68,7 @@ export default {
     vegChangeData: function () {
       this.renderPlot()
     },
-    veg_model_selection: function () {
+    veg_chart_model_selection: function () {
       this.renderPlot()
     },
     veg_scenario_selection: function () {
@@ -132,7 +132,7 @@ export default {
             yValues.push(vegChangeData[era]['CRU-TS']['historical'][type]['vt'])
           } else {
             yValues.push(
-              vegChangeData[era][this.veg_model_selection][
+              vegChangeData[era][this.veg_chart_model_selection][
                 this.veg_scenario_selection
               ][type]['vt']
             )

@@ -7,14 +7,14 @@
     <div class="is-size-6 mb-4">
       <b-field label="Model">
         <b-radio
-          v-model="veg_model_selection"
-          name="veg_model_selection"
+          v-model="veg_maps_model_selection"
+          name="veg_maps_model_selection"
           native-value="1"
           >NCAR CCSM4</b-radio
         >
         <b-radio
-          v-model="veg_model_selection"
-          name="veg_model_selection"
+          v-model="veg_maps_model_selection"
+          name="veg_maps_model_selection"
           native-value="5"
           >MRI CGCM3</b-radio
         >
@@ -25,25 +25,49 @@
         <ReportVegChangeMap model="0" scenario="0" era="0" />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportVegChangeMap :model="veg_model_selection" scenario="1" era="1" />
+        <ReportVegChangeMap
+          :model="veg_maps_model_selection"
+          scenario="1"
+          era="1"
+        />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportVegChangeMap :model="veg_model_selection" scenario="1" era="2" />
+        <ReportVegChangeMap
+          :model="veg_maps_model_selection"
+          scenario="1"
+          era="2"
+        />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportVegChangeMap :model="veg_model_selection" scenario="1" era="3" />
+        <ReportVegChangeMap
+          :model="veg_maps_model_selection"
+          scenario="1"
+          era="3"
+        />
       </div>
     </div>
     <div class="columns is-flex-direction-row is-centered">
       <div class="minimap-container my-4 p-1"></div>
       <div class="minimap-container my-4 p-1">
-        <ReportVegChangeMap :model="veg_model_selection" scenario="3" era="1" />
+        <ReportVegChangeMap
+          :model="veg_maps_model_selection"
+          scenario="3"
+          era="1"
+        />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportVegChangeMap :model="veg_model_selection" scenario="3" era="2" />
+        <ReportVegChangeMap
+          :model="veg_maps_model_selection"
+          scenario="3"
+          era="2"
+        />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportVegChangeMap :model="veg_model_selection" scenario="3" era="3" />
+        <ReportVegChangeMap
+          :model="veg_maps_model_selection"
+          scenario="3"
+          era="3"
+        />
       </div>
     </div>
     <div class="legend">
@@ -150,7 +174,7 @@ export default {
   },
   data() {
     return {
-      veg_model_selection: 1,
+      veg_maps_model_selection: 1,
     }
   },
 }
