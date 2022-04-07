@@ -61,6 +61,7 @@ export default {
   computed: {
     ...mapGetters({
       vegChangeData: 'wildfire/veg_change',
+      vegTypes: 'wildfire/vegTypes',
       place: 'place/name',
     }),
   },
@@ -88,18 +89,6 @@ export default {
 
       let dataTraces = []
 
-      let typeLabels = {
-        not_modeled: 'Not Modeled',
-        barren_lichen_moss: 'Barren/Lichen/Moss',
-        black_spruce: 'Black Spruce',
-        deciduous_forest: 'Deciduous Forest',
-        graminoid_tundra: 'Graminoid Tundra',
-        shrub_tundra: 'Shrub Tundra',
-        temperate_rainforest: 'Temperate Rainforest',
-        wetland_tundra: 'Wetland Tundra',
-        white_spruce: 'White Spruce',
-      }
-
       let symbols = {
         not_modeled: 'circle',
         barren_lichen_moss: 'square',
@@ -112,19 +101,7 @@ export default {
         white_spruce: 'hexagon',
       }
 
-      let colors = {
-        not_modeled: '#a6cee3',
-        barren_lichen_moss: '#ff7f00',
-        black_spruce: '#1f78b4',
-        deciduous_forest: '#33a02c',
-        graminoid_tundra: '#e31a1c',
-        shrub_tundra: '#fb9a99',
-        temperate_rainforest: '#cab2d6',
-        wetland_tundra: '#fdbf6f',
-        white_spruce: '#b2df8a',
-      }
-
-      Object.keys(typeLabels).forEach(type => {
+      Object.keys(this.vegTypes).forEach(type => {
         let yValues = []
         let eras = ['1950-2008', '2010-2039', '2040-2069', '2070-2099']
         eras.forEach(era => {
@@ -142,14 +119,14 @@ export default {
         let historicalTrace = {
           type: 'scatter',
           mode: 'markers',
-          name: typeLabels[type],
+          name: this.vegTypes[type]['label'],
           hoverinfo: 'x+y+z+text',
           hovertemplate: '%{y:.2f}%',
           showlegend: false,
           marker: {
             size: 8,
             symbol: symbols[type],
-            color: colors[type],
+            color: this.vegTypes[type]['color'],
           },
           x: eras,
           y: [yValues[0]],
@@ -158,13 +135,13 @@ export default {
         let projectedTrace = {
           type: 'scatter',
           mode: 'markers',
-          name: typeLabels[type],
+          name: this.vegTypes[type]['label'],
           hoverinfo: 'x+y+z+text',
           hovertemplate: '%{y:.2f}% <b>(%{customdata}%)</b>',
           marker: {
             size: 8,
             symbol: symbols[type],
-            color: colors[type],
+            color: this.vegTypes[type]['color'],
           },
           x: eras,
           y: [null].concat(yValues.slice(1)),

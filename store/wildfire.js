@@ -28,6 +28,46 @@ export const getters = {
   scenarios() {
     return ['Historical', 'RCP 4.5', 'RCP 6.0', 'RCP 8.5']
   },
+  vegTypes() {
+    return {
+      not_modeled: {
+        label: 'Not Modeled',
+        color: '#a6cee3',
+      },
+      barren_lichen_moss: {
+        label: 'Barren/Lichen/Moss',
+        color: '#ff7f00',
+      },
+      black_spruce: {
+        label: 'Black Spruce',
+        color: '#1f78b4',
+      },
+      deciduous_forest: {
+        label: 'Deciduous Forest',
+        color: '#33a02c',
+      },
+      graminoid_tundra: {
+        label: 'Graminoid Tundra',
+        color: '#e31a1c',
+      },
+      shrub_tundra: {
+        label: 'Shrub Tundra',
+        color: '#fb9a99',
+      },
+      temperate_rainforest: {
+        label: 'Temperate Rainforest',
+        color: '#cab2d6',
+      },
+      wetland_tundra: {
+        label: 'Wetland Tundra',
+        color: '#fdbf6f',
+      },
+      white_spruce: {
+        label: 'White Spruce',
+        color: '#b2df8a',
+      },
+    }
+  },
   flammability(state, getters, rootState, rootGetters) {
     return state.flammability
   },

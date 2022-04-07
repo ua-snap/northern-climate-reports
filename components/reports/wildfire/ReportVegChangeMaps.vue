@@ -71,41 +71,12 @@
       </div>
     </div>
     <div class="legend">
-      <div class="color is-flex is-flex-direction-row">
-        <div class="swatch color-0" />
-        <div>Not Modeled</div>
-      </div>
-      <div class="color is-flex is-flex-direction-row">
-        <div class="swatch color-1" />
-        <div>Black Spruce</div>
-      </div>
-      <div class="color is-flex is-flex-direction-row">
-        <div class="swatch color-2" />
-        <div>White Spruce</div>
-      </div>
-      <div class="color is-flex is-flex-direction-row">
-        <div class="swatch color-3" />
-        <div>Deciduous Forest</div>
-      </div>
-      <div class="color is-flex is-flex-direction-row">
-        <div class="swatch color-4" />
-        <div>Shrub Tundra</div>
-      </div>
-      <div class="color is-flex is-flex-direction-row">
-        <div class="swatch color-5" />
-        <div>Graminoid Tundra</div>
-      </div>
-      <div class="color is-flex is-flex-direction-row">
-        <div class="swatch color-6" />
-        <div>Wetland Tundra</div>
-      </div>
-      <div class="color is-flex is-flex-direction-row">
-        <div class="swatch color-7" />
-        <div>Barren/Lichen/Moss</div>
-      </div>
-      <div class="color is-flex is-flex-direction-row">
-        <div class="swatch color-8" />
-        <div>Temperate Rainforest</div>
+      <div
+        class="color is-flex is-flex-direction-row"
+        v-for="vegType in vegTypes"
+      >
+        <div class="swatch" :style="'background-color: ' + vegType['color']" />
+        <div>{{ vegType['label'] }}</div>
       </div>
     </div>
   </section>
@@ -130,33 +101,6 @@
   border-radius: 3px;
   margin-right: 8px;
 }
-.color-0 {
-  background-color: #a6cee3;
-}
-.color-1 {
-  background-color: #1f78b4;
-}
-.color-2 {
-  background-color: #b2df8a;
-}
-.color-3 {
-  background-color: #33a02c;
-}
-.color-4 {
-  background-color: #fb9a99;
-}
-.color-5 {
-  background-color: #e31a1c;
-}
-.color-6 {
-  background-color: #fdbf6f;
-}
-.color-7 {
-  background-color: #ff7f00;
-}
-.color-8 {
-  background-color: #cab2d6;
-}
 </style>
 
 <script>
@@ -170,6 +114,7 @@ export default {
   computed: {
     ...mapGetters({
       place: 'place/name',
+      vegTypes: 'wildfire/vegTypes',
     }),
   },
   data() {
