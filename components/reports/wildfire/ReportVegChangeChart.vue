@@ -113,15 +113,15 @@ export default {
       }
 
       let colors = {
-        'Not Modeled': '#1d77b4',
-        'Barren/Lichen/Moss': '#ff7f0f',
-        'Black Spruce': '#2ba02b',
-        'Deciduous Forest': '#d62828',
-        'Graminoid Tundra': '#9467bd',
-        'Shrub Tundra': '#8b564c',
-        'Temperate Rainforest': '#e377c2',
-        'Wetland Tundra': '#7f7f7f',
-        'White Spruce': '#bbbd21',
+        'Not Modeled': '#a6cee3',
+        'Barren/Lichen/Moss': '#ff7f00',
+        'Black Spruce': '#1f78b4',
+        'Deciduous Forest': '#33a02c',
+        'Graminoid Tundra': '#e31a1c',
+        'Shrub Tundra': '#fb9a99',
+        'Temperate Rainforest': '#cab2d6',
+        'Wetland Tundra': '#fdbf6f',
+        'White Spruce': '#b2df8a',
       }
 
       types.forEach(type => {

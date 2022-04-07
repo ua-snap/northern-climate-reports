@@ -131,31 +131,31 @@
   margin-right: 8px;
 }
 .color-0 {
-  background-color: #cccccc;
+  background-color: #a6cee3;
 }
 .color-1 {
-  background-color: #009459;
+  background-color: #1f78b4;
 }
 .color-2 {
-  background-color: #72cb88;
+  background-color: #b2df8a;
 }
 .color-3 {
-  background-color: #fdfeec;
+  background-color: #33a02c;
 }
 .color-4 {
-  background-color: #ac916c;
+  background-color: #fb9a99;
 }
 .color-5 {
-  background-color: #ede0ce;
+  background-color: #e31a1c;
 }
 .color-6 {
-  background-color: #0d51fd;
+  background-color: #fdbf6f;
 }
 .color-7 {
-  background-color: #f2a56e;
+  background-color: #ff7f00;
 }
 .color-8 {
-  background-color: #6de1e9;
+  background-color: #cab2d6;
 }
 </style>
 
