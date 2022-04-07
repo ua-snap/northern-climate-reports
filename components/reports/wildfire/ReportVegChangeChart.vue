@@ -88,43 +88,43 @@ export default {
 
       let dataTraces = []
 
-      let types = [
-        'Not Modeled',
-        'Barren/Lichen/Moss',
-        'Black Spruce',
-        'Deciduous Forest',
-        'Graminoid Tundra',
-        'Shrub Tundra',
-        'Temperate Rainforest',
-        'Wetland Tundra',
-        'White Spruce',
-      ]
+      let typeLabels = {
+        not_modeled: 'Not Modeled',
+        barren_lichen_moss: 'Barren/Lichen/Moss',
+        black_spruce: 'Black Spruce',
+        deciduous_forest: 'Deciduous Forest',
+        graminoid_tundra: 'Graminoid Tundra',
+        shrub_tundra: 'Shrub Tundra',
+        temperate_rainforest: 'Temperate Rainforest',
+        wetland_tundra: 'Wetland Tundra',
+        white_spruce: 'White Spruce',
+      }
 
       let symbols = {
-        'Not Modeled': 'circle',
-        'Barren/Lichen/Moss': 'square',
-        'Black Spruce': 'diamond',
-        'Deciduous Forest': 'cross',
-        'Graminoid Tundra': 'x',
-        'Shrub Tundra': 'triangle-up',
-        'Temperate Rainforest': 'triangle-down',
-        'Wetland Tundra': 'pentagon',
-        'White Spruce': 'hexagon',
+        not_modeled: 'circle',
+        barren_lichen_moss: 'square',
+        black_spruce: 'diamond',
+        deciduous_forest: 'cross',
+        graminoid_tundra: 'x',
+        shrub_tundra: 'triangle-up',
+        temperate_rainforest: 'triangle-down',
+        wetland_tundra: 'pentagon',
+        white_spruce: 'hexagon',
       }
 
       let colors = {
-        'Not Modeled': '#a6cee3',
-        'Barren/Lichen/Moss': '#ff7f00',
-        'Black Spruce': '#1f78b4',
-        'Deciduous Forest': '#33a02c',
-        'Graminoid Tundra': '#e31a1c',
-        'Shrub Tundra': '#fb9a99',
-        'Temperate Rainforest': '#cab2d6',
-        'Wetland Tundra': '#fdbf6f',
-        'White Spruce': '#b2df8a',
+        not_modeled: '#a6cee3',
+        barren_lichen_moss: '#ff7f00',
+        black_spruce: '#1f78b4',
+        deciduous_forest: '#33a02c',
+        graminoid_tundra: '#e31a1c',
+        shrub_tundra: '#fb9a99',
+        temperate_rainforest: '#cab2d6',
+        wetland_tundra: '#fdbf6f',
+        white_spruce: '#b2df8a',
       }
 
-      types.forEach(type => {
+      Object.keys(typeLabels).forEach(type => {
         let yValues = []
         let eras = ['1950-2008', '2010-2039', '2040-2069', '2070-2099']
         eras.forEach(era => {
@@ -142,7 +142,7 @@ export default {
         let historicalTrace = {
           type: 'scatter',
           mode: 'markers',
-          name: type,
+          name: typeLabels[type],
           hoverinfo: 'x+y+z+text',
           hovertemplate: '%{y:.2f}%',
           showlegend: false,
@@ -158,7 +158,7 @@ export default {
         let projectedTrace = {
           type: 'scatter',
           mode: 'markers',
-          name: type,
+          name: typeLabels[type],
           hoverinfo: 'x+y+z+text',
           hovertemplate: '%{y:.2f}% <b>(%{customdata}%)</b>',
           marker: {
