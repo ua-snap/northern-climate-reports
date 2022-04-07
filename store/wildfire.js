@@ -58,6 +58,7 @@ export const actions = {
         context.commit('setFlammabilityHttpError', httpError)
       })
     let convertedFlammability = convertToPercent(flammability)
+    Object.freeze(flammability)
     context.commit('setFlammability', convertedFlammability)
 
     let vegChangeQueryUrl =
@@ -69,6 +70,7 @@ export const actions = {
       context.commit('setVegChangeHttpError', httpError)
     })
     let convertedVegChange = convertToPercent(veg_change)
+    Object.freeze(veg_change)
     context.commit('setVegChange', convertedVegChange)
   },
 }

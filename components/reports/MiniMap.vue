@@ -27,12 +27,6 @@ export default {
       geoJSON: 'place/geoJSON',
     }),
   },
-  data() {
-    return {
-      marker: undefined,
-      geoJSONLayer: undefined,
-    }
-  },
   mounted() {
     this.map = L.map('report--minimmap--map', this.getBaseMapAndLayers())
 
@@ -57,6 +51,7 @@ export default {
   methods: {
     addGeoJSONtoMap() {
       if (this.geoJSON) {
+        // Should not be a reactive property, don't define in `data` Vue section!
         this.geoJSONLayer = L.geoJSON(this.geoJSON).addTo(this.map)
         this.map.fitBounds(this.geoJSONLayer.getBounds())
       }

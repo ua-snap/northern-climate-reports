@@ -53,6 +53,7 @@ export const actions = {
       let httpError = getHttpError(err)
       context.commit('setHttpError', httpError)
     })
+    Object.freeze(elevation)
     context.commit('setElevation', elevation)
   },
 }

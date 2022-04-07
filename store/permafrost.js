@@ -237,7 +237,7 @@ export const actions = {
             let httpError = getHttpError(err)
             context.commit('setHttpError', httpError)
           })
-
+        Object.freeze(permafrostData)
         if (permafrostData != null) {
           if (permafrostData['gipl'] != null) {
             context.commit('setPermafrostData', permafrostData)

@@ -73,6 +73,7 @@ export const actions = {
       let httpError = getHttpError(err)
       context.commit('setHttpError', httpError)
     })
+    Object.freeze(climateData)
     context.commit('setClimateData', climateData)
   },
 }

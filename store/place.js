@@ -185,6 +185,7 @@ export const actions = {
     let queryUrl =
       process.env.apiUrl + '/boundary/' + context.getters.urlFragment
     let geoJSON = await this.$http.$get(queryUrl)
+    Object.freeze(geoJSON) // remove reactivity
     context.commit('setGeoJSON', geoJSON)
   },
 
@@ -197,6 +198,7 @@ export const actions = {
     // TODO: add error handling here for 404 (no data) etc.
     let queryUrl = process.env.apiUrl + '/places/all'
     let places = await this.$http.$get(queryUrl)
+    Object.freeze(places)
     context.commit('setPlaces', places)
   },
 
