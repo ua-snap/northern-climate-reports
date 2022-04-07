@@ -40,7 +40,7 @@ export default {
       latLng: 'place/latLng',
       geoJSON: 'place/geoJSON',
       eras: 'wildfire/eras',
-      models: 'wildfire/models',
+      models: 'wildfire/vegModels',
       scenarios: 'wildfire/scenarios',
     }),
     mapID() {
@@ -50,7 +50,11 @@ export default {
       return this.eras[this.era]
     },
     mapModel() {
-      return this.models[this.model] + ', '
+      if (this.models[this.model] != '') {
+        return this.models[this.model] + ', '
+      } else {
+        return ''
+      }
     },
     mapScenario() {
       return this.scenarios[this.scenario]

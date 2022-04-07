@@ -15,14 +15,25 @@ export const getters = {
   eras() {
     return ['1950-2008', '2010-2039', '2040-2069', '2070-2099']
   },
-  models() {
+  vegModels() {
     return [
-      'CRU TS 4.0',
+      '',
       'NCAR CCSM4',
       'GFDL CM3',
       'GISS E2-R',
       'IPSL CM5A-LR',
       'MRI CGCM3',
+    ]
+  },
+  flammabilityModels() {
+    return [
+      '',
+      '5modelAvg',
+      'GFDL-CM3',
+      'GISS-E2-R',
+      'IPSL-CM5A-LR',
+      'MRI-CGCM3',
+      'NCAR-CCSM4',
     ]
   },
   scenarios() {
