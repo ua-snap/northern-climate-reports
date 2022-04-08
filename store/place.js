@@ -228,9 +228,7 @@ export const actions = {
           ssr.push(place)
         })
 
-        ssr.sort((a, b) => {
-          return a.name > b.name
-        })
+        ssr = _.sortBy(ssr, ['name'])
 
         // Sort the community names, if present
         let communities = []
@@ -239,9 +237,7 @@ export const actions = {
           _.each(res.communities, community => {
             communities.push(community)
           })
-          communities.sort((a, b) => {
-            return a.name > b.name
-          })
+          communities = _.sortBy(communities, ['name'])
         }
         // Specifically make the communities key false if no matching communities
         // were found.
