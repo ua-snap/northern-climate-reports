@@ -65,7 +65,7 @@ export default {
       permafrostDisappears: 'permafrost/disappears',
       flammabilityData: 'wildfire/flammability',
       vegChangeData: 'wildfire/veg_change',
-      showWildfires: 'wildfire/valid'
+      showWildfires: 'wildfire/valid',
     }),
     unitsText() {
       if (this.units) {
@@ -91,7 +91,7 @@ export default {
     },
     vegChangeData: function () {
       this.generateText()
-    }
+    },
   },
   methods: {
     // Generate Qualitative Text
@@ -164,7 +164,6 @@ export default {
       return seasonMetrics
     },
     temperatureString() {
-      
       var annualTemperatureAverage = 0
       var annualHighestTempChange = 0
       var seasonWithHighestTempChange = 'None'
@@ -311,27 +310,100 @@ export default {
       return string
     },
     wildfireString() {
-      let historical_rf = this.flammabilityData['1950-2008']['CRU-TS40']['CRU_historical']['rf']
+      var categoryFromRf = function (rf) {
+        // Remove this if the data sculpting to convert
+        // raw ALF into %s is removed elsewhere.
+        rf = rf / 100
 
-      let highest_predicted_rf = Math.max(
-        this.flammabilityData['2070-2099']['5modelAvg']['rcp45']['rf'],
-        this.flammabilityData['2070-2099']['5modelAvg']['rcp60']['rf'],
-        this.flammabilityData['2070-2099']['5modelAvg']['rcp85']['rf']
+        if (rf < 0.002) return 'very low'
+        if (rf >= 0.002 && rf < 0.005) return 'low'
+        if (rf >= 0.005 && rf < 0.01) return 'moderate'
+        if (rf >= 0.01 && rf < 0.02) return 'high'
+        if (rf >= 0.02) return 'very high'
+      }
+
+      let historicalRf = this.flammabilityData['1950-2008']['CRU-TS40'][
+        'CRU_historical'
+      ]['rf']
+      let midHighestPredictedRf = Math.max(
+        this.flammabilityData['2040-2069']['MRI-CGCM3']['rcp45']['rf'],
+        this.flammabilityData['2040-2069']['MRI-CGCM3']['rcp60']['rf'],
+        this.flammabilityData['2040-2069']['MRI-CGCM3']['rcp85']['rf'],
+        this.flammabilityData['2040-2069']['NCAR-CCSM4']['rcp45']['rf'],
+        this.flammabilityData['2040-2069']['NCAR-CCSM4']['rcp60']['rf'],
+        this.flammabilityData['2040-2069']['NCAR-CCSM4']['rcp85']['rf']
       )
-      
-      let string = ''
-      if (historical_rf == 0 || highest_predicted_rf == 0) {
-        return string
-      }
-      if (highest_predicted_rf > historical_rf) {
-        let percentage_change = parseInt(((highest_predicted_rf / historical_rf) - 1) * 100)
-        string = '<p>By the end of the century, models predict a <br/><strong>' + percentage_change + '% increase</strong> in the chance of wildfires in this area.</p>'
+      let lateHighestPredictedRf = Math.max(
+        this.flammabilityData['2070-2099']['MRI-CGCM3']['rcp45']['rf'],
+        this.flammabilityData['2070-2099']['MRI-CGCM3']['rcp60']['rf'],
+        this.flammabilityData['2070-2099']['MRI-CGCM3']['rcp85']['rf'],
+        this.flammabilityData['2070-2099']['NCAR-CCSM4']['rcp45']['rf'],
+        this.flammabilityData['2070-2099']['NCAR-CCSM4']['rcp60']['rf'],
+        this.flammabilityData['2070-2099']['NCAR-CCSM4']['rcp85']['rf']
+      )
+      let historicalMidDiff = midHighestPredictedRf - historicalRf
+      let historicalLateDiff = lateHighestPredictedRf - historicalRf
+      let midSign = historicalMidDiff < 0 ? 'fewer' : 'more'
+      let lateSign = historicalLateDiff < 0 ? 'fewer' : 'more'
+      let midDeltaPercent = parseInt(
+        (midHighestPredictedRf / historicalRf - 1) * 100
+      )
+      let lateDeltaPercent = parseInt(
+        (lateHighestPredictedRf / historicalRf - 1) * 100
+      )
+
+      let quip =
+        'In the past, this area had <strong>' +
+        categoryFromRf(historicalRf) +
+        '</strong> fire activity.  '
+
+      // Special case: fire activity is about the same throughout.
+      if (
+        categoryFromRf(historicalRf) == categoryFromRf(midHighestPredictedRf) &&
+        categoryFromRf(historicalRf) == categoryFromRf(lateHighestPredictedRf)
+      ) {
+        quip += 'Future fire activity may be <strong>about the same.</strong>'
       } else {
-        let percentage_change = parseInt(((historical_rf / highest_predicted_rf) - 1) * 100)
-        string = '<p>By the end of the century, models predict a <br/><strong>' + percentage_change + '% decrease</strong> in the chance of wildfires in this area.'
+        // Mid-century fragment.
+        // If it's the same as historical...
+        if (
+          categoryFromRf(historicalRf) == categoryFromRf(midHighestPredictedRf)
+        ) {
+          quip +=
+            'By the mid&ndash;century this may remain ' +
+            categoryFromRf(midHighestPredictedRf) +
+            ', with ' +
+            historicalMidDiff +
+            '&percent; ' +
+            midSign +
+            ' fires.  '
+        } else {
+          quip +=
+            'By the mid&ndash;century, <strong>fire behavior may become ' +
+            categoryFromRf(midHighestPredictedRf) +
+            '</strong>.  '
+        }
+        // Late-century fragment, mostly as above.
+        if (
+          categoryFromRf(historicalRf) == categoryFromRf(lateHighestPredictedRf)
+        ) {
+          quip +=
+            'By the late&ndash;century this may remain ' +
+            categoryFromRf(lateHighestPredictedRf) +
+            ', with ' +
+            historicallateDiff +
+            '&percent; ' +
+            lateSign +
+            ' fires compared with historical fire behavior.'
+        } else {
+          quip +=
+            'By the late&ndash;century, fire behavior may become <strong>' +
+            categoryFromRf(lateHighestPredictedRf) +
+            '</strong> compared with historical fire behavior.'
+        }
       }
 
-      return string
+      return quip
     },
     // Subfunction: Generate annual metrics HTML string
     // Input: None. (Uses constant seasons)
