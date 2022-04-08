@@ -1,86 +1,55 @@
 <template>
   <section class="section">
-    <h5 class="permafrost-minimaps-title has-text-centered">
+    <h5 class="minimaps-section-title has-text-centered">
       Mean annual ground temperature,
       <span v-html="place"></span>
     </h5>
     <div class="is-size-6 mb-4">
       <b-field label="Model">
         <b-radio
-          v-model="model_selection"
-          name="model_selection"
+          v-model="magt_model_selection"
+          name="magt_model_selection"
           native-value="3"
           >NCAR CCSM4</b-radio
         >
         <b-radio
-          v-model="model_selection"
-          name="model_selection"
+          v-model="magt_model_selection"
+          name="magt_model_selection"
           native-value="4"
           >MRI CGCM3</b-radio
         >
       </b-field>
     </div>
-    <div class="columns">
-      <div class="column is-flex">
-        <ReportMagtMap
-          scenario="0"
-          model="0"
-          era="0"
-          class="permafrost-minimaps-map"
-        />
-        <ReportMagtMap
-          scenario="1"
-          :model="model_selection"
-          era="1"
-          class="permafrost-minimaps-map"
-        />
-        <ReportMagtMap
-          scenario="1"
-          :model="model_selection"
-          era="2"
-          class="permafrost-minimaps-map"
-        />
-        <ReportMagtMap
-          scenario="1"
-          :model="model_selection"
-          era="3"
-          class="permafrost-minimaps-map"
-        />
-        <ReportMagtMap
-          scenario="1"
-          :model="model_selection"
-          era="4"
-          class="permafrost-minimaps-map"
-        />
+    <div class="columns is-flex-direction-row">
+      <div class="minimap-container my-4 p-1">
+        <ReportMagtMap scenario="0" model="0" era="0" />
+      </div>
+      <div class="minimap-container my-4 p-1">
+        <ReportMagtMap scenario="1" :model="magt_model_selection" era="1" />
+      </div>
+      <div class="minimap-container my-4 p-1">
+        <ReportMagtMap scenario="1" :model="magt_model_selection" era="2" />
+      </div>
+      <div class="minimap-container my-4 p-1">
+        <ReportMagtMap scenario="1" :model="magt_model_selection" era="3" />
+      </div>
+      <div class="minimap-container my-4 p-1">
+        <ReportMagtMap scenario="1" :model="magt_model_selection" era="4" />
       </div>
     </div>
-    <div class="columns">
-      <div class="column is-flex">
-        <div class="permafrost-minimaps-map" />
-        <ReportMagtMap
-          scenario="2"
-          :model="model_selection"
-          era="1"
-          class="permafrost-minimaps-map"
-        />
-        <ReportMagtMap
-          scenario="2"
-          :model="model_selection"
-          era="2"
-          class="permafrost-minimaps-map"
-        />
-        <ReportMagtMap
-          scenario="2"
-          :model="model_selection"
-          era="3"
-          class="permafrost-minimaps-map"
-        />
-        <ReportMagtMap
-          scenario="2"
-          :model="model_selection"
-          era="4"
-          class="permafrost-minimaps-map"
-        />
+    <div class="columns is-flex-direction-row">
+      <div class="minimap-container my-4 p-1"></div>
+      <div class="minimap-container my-4 p-1">
+        <ReportMagtMap scenario="2" :model="magt_model_selection" era="1" />
+      </div>
+      <div class="minimap-container my-4 p-1">
+        <ReportMagtMap scenario="2" :model="magt_model_selection" era="2" />
+      </div>
+      <div class="minimap-container my-4 p-1">
+        <ReportMagtMap scenario="2" :model="magt_model_selection" era="3" />
+      </div>
+      <div class="minimap-container my-4 p-1">
+        <ReportMagtMap scenario="2" :model="magt_model_selection" era="4" />
       </div>
     </div>
     <table class="magt-legend">
@@ -112,18 +81,9 @@
 </template>
 
 <style lang="scss" scoped>
-.permafrost-minimaps-title {
-  font-size: 150%;
-  padding-bottom: 1rem;
-}
-.permafrost-minimaps-map {
-  height: 17vw;
-  min-width: 10vw;
-  width: 20%;
-  margin: 5px;
-}
 .magt-legend {
   width: 800px;
+  height: 26px;
   border: 1px solid #999;
   margin: 40px auto 0 auto;
   font-weight: 700;
@@ -176,7 +136,7 @@ export default {
   },
   data() {
     return {
-      model_selection: 3,
+      magt_model_selection: 3,
     }
   },
 }

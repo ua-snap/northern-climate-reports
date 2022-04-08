@@ -62,7 +62,22 @@
         </ul>
         <h3 class="title is-4">Wildfire</h3>
         <ul>
-          <li>TBD</li>
+          <li>
+            <strong>Flammability</strong>. A summarized data product using the
+            same underlying data shown in this app is available here:
+            <a
+              href="http://ckan.snap.uaf.edu/dataset/alfresco-model-outputs-relative-flammability"
+              >ALFRESCO Model outputs - Relative Flammability</a
+            >.
+          </li>
+          <li>
+            <strong>Vegetation</strong>. A summarized data product using the
+            same underlying data shown in this app is available here:
+            <a
+              href="http://ckan.snap.uaf.edu/dataset/alfresco-model-outputs-relative-vegetation-change"
+              >ALFRESCO Model outputs - Relative Vegetation Change</a
+            >.
+          </li>
         </ul>
         <h3 class="title is-4">Elevation</h3>
         <p>
@@ -79,8 +94,11 @@
         </p>
         <p>
           Note that the precision of the data shown in this tool depends on the
-          grid resolution (pixel size) of the underlying dataset.  Temperature and precipitation products are at 2km resolution, the GIPL outputs are 4km and ALFRESCO outputs are at 1km resolution.</p>
+          grid resolution (pixel size) of the underlying dataset. Temperature
+          and precipitation products are at 2km resolution, the GIPL outputs are
+          4km and ALFRESCO outputs are at 1km resolution.
         </p>
+
         <h2 id="places" class="title is-3">
           What places are available in this tool?
         </h2>
@@ -96,14 +114,27 @@
           </li>
           <li>
             <strong>protected areas</strong> such as National Parks, National
-            Forests, Wilderness Areas and more, searchable by name and agency
-            (NPS, USFS, etc),
+            Forests, Wilderness Areas, National Wildlife Refuges, State Parks
+            and more, searchable by name and agency (NPS, USFS, etc),
           </li>
           <li>
-            <strong>Alaska Native Corporation geographic boundaries</strong>...?
+            <strong
+              ><a
+                href="https://dhss.alaska.gov/ocs/Documents/icwa/AKNativeRegionalCorps.pdf"
+                >Alaska Native Corporation geographic boundaries</a
+              ></strong
+            >
           </li>
-          <li><strong>Fire Management Units...?</strong></li>
-          <li><strong>Ethnolinguistic regions...?</strong></li>
+          <li><strong>Fire Management Units</strong></li>
+          <li><strong><a href="https://uaf.edu/anlc/resources/mapping_alaskas_native_languages.php">Ethnolinguistic regions</a></strong></li>
+          <li>
+            <strong
+              ><a
+                href="https://www.ncdc.noaa.gov/news/climate-division-data-now-available-alaska"
+                >Alaska Climate Divisions</a
+              ></strong
+            >
+          </li>
         </ul>
         <h2 class="title is-3">Data API access</h2>
         <p>
@@ -122,8 +153,8 @@
           <a href="mailto:uaf-snap-data-tools@alaska.edu"
             >uaf-snap-data-tools@alaska.edu</a
           >
-          with questions about these data, data access, or using these data in your
-          work.
+          with questions about these data, data access, or using these data in
+          your work.
         </p>
       </div>
     </div>

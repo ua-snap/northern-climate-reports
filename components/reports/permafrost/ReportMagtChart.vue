@@ -73,7 +73,6 @@ export default {
         opacity: 0.2,
       })
 
-
       let footerLines = [
         'Projected values are taken from GIPL 2.0 model output.',
       ]
@@ -98,7 +97,6 @@ export default {
         layout,
         plotSettings
       )
-
     },
   },
 }

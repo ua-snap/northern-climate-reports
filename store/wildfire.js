@@ -12,6 +12,73 @@ export const state = () => ({
 })
 
 export const getters = {
+  eras() {
+    return ['1950-2008', '2010-2039', '2040-2069', '2070-2099']
+  },
+  vegModels() {
+    return [
+      '',
+      'NCAR CCSM4',
+      'GFDL CM3',
+      'GISS E2-R',
+      'IPSL CM5A-LR',
+      'MRI CGCM3',
+    ]
+  },
+  flammabilityModels() {
+    return [
+      '',
+      '5modelAvg',
+      'GFDL-CM3',
+      'GISS-E2-R',
+      'IPSL-CM5A-LR',
+      'MRI-CGCM3',
+      'NCAR-CCSM4',
+    ]
+  },
+  scenarios() {
+    return ['Historical', 'RCP 4.5', 'RCP 6.0', 'RCP 8.5']
+  },
+  vegTypes() {
+    return {
+      not_modeled: {
+        label: 'Not Modeled',
+        color: '#a6cee3',
+      },
+      barren_lichen_moss: {
+        label: 'Barren/Lichen/Moss',
+        color: '#ff7f00',
+      },
+      black_spruce: {
+        label: 'Black Spruce',
+        color: '#1f78b4',
+      },
+      deciduous_forest: {
+        label: 'Deciduous Forest',
+        color: '#33a02c',
+      },
+      graminoid_tundra: {
+        label: 'Graminoid Tundra',
+        color: '#e31a1c',
+      },
+      shrub_tundra: {
+        label: 'Shrub Tundra',
+        color: '#fb9a99',
+      },
+      temperate_rainforest: {
+        label: 'Temperate Rainforest',
+        color: '#cab2d6',
+      },
+      wetland_tundra: {
+        label: 'Wetland Tundra',
+        color: '#fdbf6f',
+      },
+      white_spruce: {
+        label: 'White Spruce',
+        color: '#b2df8a',
+      },
+    }
+  },
   flammability(state, getters, rootState, rootGetters) {
     return state.flammability
   },
@@ -62,13 +129,12 @@ export const actions = {
 
     let vegChangeQueryUrl =
       process.env.apiUrl +
-      '/alfresco/veg_change/' +
+      '/alfresco/veg_type/' +
       context.rootGetters['place/urlFragment']
     let veg_change = await this.$axios.$get(vegChangeQueryUrl).catch(err => {
       let httpError = getHttpError(err)
       context.commit('setVegChangeHttpError', httpError)
     })
-    let convertedVegChange = convertToPercent(veg_change)
-    context.commit('setVegChange', convertedVegChange)
+    context.commit('setVegChange', veg_change)
   },
 }

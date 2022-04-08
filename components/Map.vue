@@ -143,7 +143,6 @@ export default {
       // This can be triggered before the data are ready;
       // guard!
       if (this.searchResults) {
-        
         // Clear prior results, if any.
         if (this.layerGroup || this.communityLayerGroup) {
           this.map.removeLayer(this.layerGroup)
@@ -182,7 +181,23 @@ export default {
           // to have things bound here instead of factored into
           // other methods on this object but we need to
           // bind the `this` context throughout.
-          _.each(this.searchResults.protected_areas_near, area => {
+          _.each(this.searchResults.areas, area => {
+            // Skip all but HUCs and Protected Areas, the other polygons
+            // get so big they cause the map interface to work poorly.
+            if (area.type != 'huc' && area.type != 'protected_area') {
+              return
+            }
+
+            let defaultStyle, highlightedStyle
+            // Set up the layer styles for HUC/Protected area
+            if(area.type == 'huc') {
+              defaultStyle = hucDefaultStyle
+              highlightedStyle = hucHighlightedStyle
+            } else if(area.type == 'protected_area') {
+              defaultStyle = protectedAreaDefaultStyle
+              highlightedStyle = protectedAreaHighlightedStyle
+            }
+
             area.geojson.properties = {
               id: area.id,
               name: area.name,
@@ -190,58 +205,19 @@ export default {
             }
             this.layerGroup.addLayer(
               L.geoJSON(area.geojson, {
-                style: protectedAreaDefaultStyle,
+                style: defaultStyle,
                 onEachFeature: (feature, layer) => {
                   layer.bindTooltip(feature.properties.name)
                   layer.on({
                     mouseover: e => {
                       let layer = e.target
                       layer.bringToFront()
-                      layer.setStyle(protectedAreaHighlightedStyle)
+                      layer.setStyle(highlightedStyle)
                       layer.openTooltip()
                     },
                     mouseout: e => {
                       let layer = e.target
-                      layer.setStyle(protectedAreaDefaultStyle)
-                      layer.closeTooltip()
-                    },
-                    click: e => {
-                      let layer = e.target
-                      this.$router.push({
-                        path: getAppPathFragment(
-                          feature.properties.type,
-                          feature.properties.id
-                        ),
-                        hash: '#results',
-                      })
-                    },
-                  })
-                },
-              })
-            )
-          })
-
-          _.each(this.searchResults.hucs_near, huc => {
-            huc.geojson.properties = {
-              id: huc.id,
-              name: huc.name,
-              type: huc.type,
-            }
-            this.layerGroup.addLayer(
-              L.geoJSON(huc.geojson, {
-                style: hucDefaultStyle,
-                onEachFeature: (feature, layer) => {
-                  layer.bindTooltip(feature.properties.name)
-                  layer.on({
-                    mouseover: e => {
-                      let layer = e.target
-                      layer.bringToFront()
-                      layer.setStyle(hucHighlightedStyle)
-                      layer.openTooltip()
-                    },
-                    mouseout: e => {
-                      let layer = e.target
-                      layer.setStyle(hucDefaultStyle)
+                      layer.setStyle(defaultStyle)
                       layer.closeTooltip()
                     },
                     click: e => {

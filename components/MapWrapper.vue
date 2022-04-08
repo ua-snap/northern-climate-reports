@@ -103,6 +103,7 @@ export default {
 				} else if (e.statusCode == 404) {
 					throw 'No results were found for this place.'
 				} else {
+					console.error(e) // at least get the error in the console.
 					throw 'Something unexpected went wrong.'
 				}
 			})
