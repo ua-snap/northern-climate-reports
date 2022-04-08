@@ -3,8 +3,8 @@
     <div class="generated" v-html="qualitativeText"></div>
     <p class="about-blurb">
       Late&ndash;century, high-emissions (RCP 8.5), MRI CGCM3 or NCAR CCSM4
-      model (whichever shows greater change).<br />See tables below for more
-      detailed information.
+      model (whichever shows greater change).<br />See tables and sections below
+      for more detailed information and definitions of fire activity levels.
     </p>
   </div>
 </template>
@@ -341,21 +341,12 @@ export default {
         this.flammabilityData['2070-2099']['NCAR-CCSM4']['rcp60']['rf'],
         this.flammabilityData['2070-2099']['NCAR-CCSM4']['rcp85']['rf']
       )
-      let historicalMidDiff = midHighestPredictedRf - historicalRf
-      let historicalLateDiff = lateHighestPredictedRf - historicalRf
-      let midSign = historicalMidDiff < 0 ? 'fewer' : 'more'
-      let lateSign = historicalLateDiff < 0 ? 'fewer' : 'more'
-      let midDeltaPercent = parseInt(
-        (midHighestPredictedRf / historicalRf - 1) * 100
-      )
-      let lateDeltaPercent = parseInt(
-        (lateHighestPredictedRf / historicalRf - 1) * 100
-      )
 
-      let quip =
-        'In the past, this area had <strong>' +
-        categoryFromRf(historicalRf) +
-        '</strong> fire activity.  '
+      let quip = _.template(
+        'In the past, this area had <strong><%= category %></strong> fire activity.  '
+      )({
+        category: categoryFromRf(historicalRf),
+      })
 
       // Special case: fire activity is about the same throughout.
       if (
@@ -369,37 +360,33 @@ export default {
         if (
           categoryFromRf(historicalRf) == categoryFromRf(midHighestPredictedRf)
         ) {
-          quip +=
-            'By the mid&ndash;century this may remain ' +
-            categoryFromRf(midHighestPredictedRf) +
-            ', with ' +
-            historicalMidDiff +
-            '&percent; ' +
-            midSign +
-            ' fires.  '
+          quip += _.template(
+            'By the mid&ndash;century this may remain <%= category %>.  '
+          )({
+            category: categoryFromRf(midHighestPredictedRf),
+          })
         } else {
-          quip +=
-            'By the mid&ndash;century, <strong>fire behavior may become ' +
-            categoryFromRf(midHighestPredictedRf) +
-            '</strong>.  '
+          quip += _.template(
+            'By the mid&ndash;century, <strong>fire behavior may become <%= category %></strong>.  '
+          )({
+            category: categoryFromRf(midHighestPredictedRf),
+          })
         }
         // Late-century fragment, mostly as above.
         if (
           categoryFromRf(historicalRf) == categoryFromRf(lateHighestPredictedRf)
         ) {
-          quip +=
-            'By the late&ndash;century this may remain ' +
-            categoryFromRf(lateHighestPredictedRf) +
-            ', with ' +
-            historicallateDiff +
-            '&percent; ' +
-            lateSign +
-            ' fires compared with historical fire behavior.'
+          quip += _.template(
+            'By the late&ndash;century this may remain <%= category %> compared with historical fire behavior.'
+          )({
+            category: categoryFromRf(lateHighestPredictedRf),
+          })
         } else {
-          quip +=
-            'By the late&ndash;century, fire behavior may become <strong>' +
-            categoryFromRf(lateHighestPredictedRf) +
-            '</strong> compared with historical fire behavior.'
+          quip += _.template(
+            'By the late&ndash;century, fire behavior may become <strong><%= category %></strong> compared with historical fire behavior.'
+          )({
+            category: categoryFromRf(lateHighestPredictedRf),
+          })
         }
       }
 
