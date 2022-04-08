@@ -70,7 +70,8 @@ export default {
   mounted() {
     this.getBaseMapAndLayers = getBaseMapAndLayers.bind(this)
     this.addGeoJSONtoMap = addGeoJSONtoMap.bind(this)
-    this.map = L.map(this.mapID, this.getBaseMapAndLayers())
+    // Pass `true` to `getBaseMapAndLayers` to add land cover layer
+    this.map = L.map(this.mapID, this.getBaseMapAndLayers(true))
     if (this.latLng) {
       this.marker = L.marker(this.latLng).addTo(this.map)
       this.map.panTo(this.latLng)
@@ -95,6 +96,7 @@ export default {
         format: 'image/png',
         version: '1.3.0',
         styles: 'climate_impact_reports',
+        zIndex: 20,
       }
       layerOptions['layers'] = 'mode_vegetation'
       layerOptions['dim_era'] = this.era

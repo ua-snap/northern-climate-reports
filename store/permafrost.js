@@ -240,7 +240,7 @@ export const actions = {
       let permafrostQueryUrl =
         process.env.apiUrl +
         '/permafrost/' +
-        context.rootGetters['place/urlFragment']
+        context.rootGetters['place/urlFragment']()
 
       try {
         let permafrostData = await this.$axios

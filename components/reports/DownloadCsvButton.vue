@@ -18,7 +18,7 @@ export default {
         '/' +
         endpointPath +
         '/' +
-        this.$store.getters['place/urlFragment'] +
+        this.$store.getters['place/urlFragment']() +
         '?format=csv'
 
       if (this.$store.getters['place/type'] == 'community') {

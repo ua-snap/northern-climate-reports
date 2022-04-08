@@ -73,7 +73,6 @@ export default {
     this.map = L.map(this.mapID, this.getBaseMapAndLayers())
     if (this.latLng) {
       this.marker = L.marker(this.latLng).addTo(this.map)
-      this.map.panTo(this.latLng)
     }
   },
   watch: {

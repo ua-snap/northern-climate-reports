@@ -39,14 +39,15 @@ export default {
     // It's a lat/Lng location (community or point) add the point to the map.
     if (this.latLng) {
       this.marker = L.marker(this.latLng).addTo(this.map)
-      this.map.panTo(this.latLng)
+      this.map.flyTo(this.latLng)
     }
   },
   async fetch() {
-    // Only fetch the GeoJSON if this is not a point location.
-    if (!this.latLng) {
-      await this.$store.dispatch('place/fetch')
-    }
+    // Fetch GeoJSON, including the surrounding HUC12
+    await this.$store.dispatch(
+      'place/fetch',
+      this.$store.getters['wildfire/huc12Id']
+    )
   },
   watch: {
     // After geoJSON is loaded, display on map.
@@ -72,10 +73,11 @@ export default {
         }
       )
       // Map base configuration
+      // For EPSG:3857
       var config = {
-        zoom: 11,
+        zoom: 10,
         minZoom: 0,
-        maxZoom: 6,
+        maxZoom: 20,
         center: [64.7, -155],
         scrollWheelZoom: false,
         zoomControl: false,
