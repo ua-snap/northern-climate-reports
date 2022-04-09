@@ -322,6 +322,13 @@ export default {
         if (rf >= 0.02) return 'very high'
       }
 
+      var isModerateOrMore = function (rf) {
+        // Remove this if the data sculpting to convert
+        // raw ALF into %s is removed elsewhere.
+        rf = rf / 100
+        return rf >= 0.005
+      }
+
       let historicalRf = this.flammabilityData['1950-2008']['CRU-TS40'][
         'CRU_historical'
       ]['rf']
@@ -346,20 +353,27 @@ export default {
           midHighestPredictedRf) *
           100
       )
-      let midSign = midHighestPredictedRf - historicalRf
+      let midSign =
+        midHighestPredictedRf - historicalRf > 0 ? '&plus;' : '&minus;'
+      let midChange =
+        midHighestPredictedRf - historicalRf > 0 ? 'increase' : 'decrease'
+
       let lateDiff = parseInt(
         (Math.abs(lateHighestPredictedRf - historicalRf) /
           lateHighestPredictedRf) *
           100
       )
-      let lateSign = lateHighestPredictedRf - historicalRf
+      let lateSign =
+        lateHighestPredictedRf - historicalRf > 0 ? '&plus;' : '&minus;'
+      let lateChange =
+        lateHighestPredictedRf - historicalRf > 0 ? 'increase' : 'decrease'
 
       let historicalCategory = categoryFromRf(historicalRf)
       let midCategory = categoryFromRf(midHighestPredictedRf)
       let lateCategory = categoryFromRf(lateHighestPredictedRf)
 
       let quip = _.template(
-        'In the past, this area had <strong><%= category %></strong> fire activity.  '
+        'In the past, this area had <strong><%= category %></strong> flammability.  '
       )({
         category: historicalCategory,
       })
@@ -369,40 +383,75 @@ export default {
         historicalCategory == midCategory &&
         historicalCategory == lateCategory
       ) {
-        quip += 'Future fire activity may be <strong>about the same.</strong>'
+        quip += 'Future flammability may be <strong>about the same</strong>'
+        if (isModerateOrMore(historicalRf)) {
+          quip += _.template(' (<%= sign %><%= diff %>&#37; by late century).')(
+            {
+              sign: lateSign,
+              diff: lateDiff,
+            }
+          )
+        } else {
+          quip += '.'
+        }
       } else {
         // Mid-century fragment.
         // If it's the same as historical...
-        if (
-          historicalCategory == midCategory
-        ) {
+        if (historicalCategory == midCategory) {
           quip += _.template(
-            'By the mid&ndash;century this may remain <%= category %>.  '
-          )({
-            category: midCategory
-          })
+            'By the mid&ndash;century this may remain <%= category %>'
+          )({ category: midCategory })
+          if (isModerateOrMore(historicalRf)) {
+            quip += _.template(' (<%= sign %><%= diff %>&#37;).  ')({
+              sign: midSign,
+              diff: midDiff,
+            })
+          } else {
+            quip += '.  '
+          }
         } else {
           quip += _.template(
-            'By the mid&ndash;century, <strong>fire behavior may become <%= category %></strong>.  '
+            'By the mid&ndash;century, <strong>flammability may <%= change %> to <%= category %></strong>'
           )({
             category: midCategory,
+            change: midChange,
           })
+          if (isModerateOrMore(historicalRf)) {
+            quip += _.template(' (<%= sign %><%= diff %>&#37;).  ')({
+              sign: midSign,
+              diff: midDiff,
+            })
+          } else {
+            quip += '.  '
+          }
         }
-        // Late-century fragment, mostly as above.
-        if (
-          historicalCategory == lateCategory
-        ) {
+
+        // Late-century fragment.
+        if (historicalCategory == lateCategory) {
           quip += _.template(
-            'By the late&ndash;century this may remain <%= category %> compared with historical fire behavior.'
-          )({
-            category: lateCategory,
-          })
+            'By the late&ndash;century this may remain <%= category %>'
+          )({ category: lateCategory })
+          if (isModerateOrMore(historicalRf)) {
+            quip += _.template(' (<%= sign %><%= diff %>&#37;)')({
+              sign: lateSign,
+              diff: lateDiff,
+            })
+          }
+          quip += ' compared with historical flammability.'
         } else {
           quip += _.template(
-            'By the late&ndash;century, fire behavior may become <strong><%= category %></strong> compared with historical fire behavior.'
+            'By the late&ndash;century, <strong>flammability may <%= change %> to <%= category %></strong>'
           )({
             category: lateCategory,
+            change: lateChange,
           })
+          if (isModerateOrMore(historicalRf)) {
+            quip += _.template(' (<%= sign %><%= diff %>&#37;)')({
+              sign: lateSign,
+              diff: lateDiff,
+            })
+          }
+          quip += ' compared with historical flammability.'
         }
       }
 
