@@ -1,20 +1,83 @@
 <template>
-  <div>
-    <div class="content">
-      <h4 class="title is-3">Wildfire</h4>
-      <div class="is-size-5 mb-6">
-        <p>
-          The following charts show the historical and projected flammability
-          and vegetation change for this location. Values represent the
-          percentage of times the pixel at this location has burned, or changed
-          dominant vegetation type, for varios models and scenarios.
-          <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
-            >See information about the dataset shown here.</nuxt-link
-          >
-        </p>
-      </div>
+  <div class="content">
+    <h4 class="title is-3">Wildfire</h4>
+    <div class="is-size-5 mb-6">
+      <p>
+        The following maps charts show the historical and projected relative
+        flammability and vegetation change for this location, computed using the
+        <a href="https://uaf-snap.org/project/alfresco-and-habitat-research/"
+          >ALFRESCO</a
+        >
+        model.
+      </p>
+      <p>
+        Flammability is defined as the percentage of times the pixel at this
+        location has burned in model simulations. All data shown, including
+        historical time periods, are model ouputs.
+      </p>
+      <p>
+        <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
+          >See information about the dataset shown here.</nuxt-link
+        >
+      </p>
     </div>
+
     <ReportFlammabilityMaps />
+    <div class="content">
+      <p>
+        This table explains different categories of modeled fire activity shown
+        on the chart below and used in the introduction to this report.
+      </p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Category</th>
+            <th scope="col">Flammability</th>
+            <th scope="col">Interpretation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Very Low</th>
+            <td class="numbers">&lt;0.2&#37;</td>
+            <td>Fire is absent or very rare</td>
+          </tr>
+          <tr>
+            <th scope="row">Low</th>
+            <td class="numbers">&ge;0.2&#37;, &lt;0.5&#37;</td>
+            <td>
+              Fire is rare, and unlikely to be the primary driver of vegetation
+              patterns on this landscape
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Moderate</th>
+            <td class="numbers">&ge;0.5&#37;, &lt;1&#37;</td>
+            <td>
+              Fire is frequent enough to partially define the vegetation
+              patterns on this landscape
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">High</th>
+            <td class="numbers">&ge;1&#37;, &lt;2&#37;</td>
+            <td>
+              Fire is frequent, and likely to define the vegetation patterns on
+              this landscape
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">Very High</th>
+            <td class="numbers">&ge;2&#37;</td>
+            <td>
+              Fire is extremely frequent, and defines the vegetation patterns on
+              this landscape
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <div class="chart-wrapper">
       <ReportFlammabilityChart />
     </div>
@@ -46,7 +109,11 @@
     />
   </div>
 </template>
-<style></style>
+<style lang="scss" scoped>
+.numbers {
+  font-family: 'IBM Plex Mono', monospace;
+}
+</style>
 <script>
 import ReportFlammabilityMaps from './ReportFlammabilityMaps'
 import ReportFlammabilityChart from './ReportFlammabilityChart'
