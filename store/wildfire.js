@@ -93,12 +93,17 @@ export const getters = {
     return state.vegChangeHttpError
   },
   valid(state) {
-    if (Object.keys(state.flammability).length != 0 && Object.keys(state.veg_change).length != 0) {
+    if (
+      _.isObject(state.flammability) &&
+      _.isObject(state.veg_change) &&
+      Object.keys(state.flammability).length != 0 &&
+      Object.keys(state.veg_change).length != 0
+    ) {
       return true
     } else {
       return false
     }
-  }
+  },
 }
 
 export const mutations = {
