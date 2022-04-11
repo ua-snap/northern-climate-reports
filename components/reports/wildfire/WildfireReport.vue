@@ -25,7 +25,7 @@
       </div>
     </div>
     <ReportFlammabilityMaps />
-    <div class="content">
+    <div class="content mb-6">
       <p>
         This table explains different categories of modeled fire activity shown
         on the chart below and used in the introduction to this report.
