@@ -4,7 +4,7 @@
       <h4 class="title is-3">Wildfire</h4>
       <div class="is-size-5 mb-6">
         <p>
-          The following maps charts show the historical and projected relative
+          The following maps charts show the historical and projected
           flammability and vegetation change for this location, computed using
           the
           <a href="https://uaf-snap.org/project/alfresco-and-habitat-research/"
