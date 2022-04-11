@@ -32,7 +32,7 @@
         <thead>
           <tr>
             <th scope="col">Category</th>
-            <th scope="col">Flammability</th>
+            <th scope="col" style="min-width: 10rem;">Flammability</th>
             <th scope="col">Interpretation</th>
           </tr>
         </thead>
