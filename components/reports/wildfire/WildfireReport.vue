@@ -1,27 +1,29 @@
 <template>
-  <div class="content">
-    <h4 class="title is-3">Wildfire</h4>
-    <div class="is-size-5 mb-6">
-      <p>
-        The following maps charts show the historical and projected relative
-        flammability and vegetation change for this location, computed using the
-        <a href="https://uaf-snap.org/project/alfresco-and-habitat-research/"
-          >ALFRESCO</a
-        >
-        model.
-      </p>
-      <p>
-        Flammability is defined as the percentage of times the pixel at this
-        location has burned in model simulations. All data shown, including
-        historical time periods, are model ouputs.
-      </p>
-      <p>
-        <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
-          >See information about the dataset shown here.</nuxt-link
-        >
-      </p>
+  <div>
+    <div class="content">
+      <h4 class="title is-3">Wildfire</h4>
+      <div class="is-size-5 mb-6">
+        <p>
+          The following maps charts show the historical and projected relative
+          flammability and vegetation change for this location, computed using
+          the
+          <a href="https://uaf-snap.org/project/alfresco-and-habitat-research/"
+            >ALFRESCO</a
+          >
+          model.
+        </p>
+        <p>
+          Flammability is defined as the percentage of times the pixel at this
+          location has burned in model simulations. All data shown, including
+          historical time periods, are model ouputs.
+        </p>
+        <p>
+          <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
+            >See information about the dataset shown here.</nuxt-link
+          >
+        </p>
+      </div>
     </div>
-
     <ReportFlammabilityMaps />
     <div class="content">
       <p>
@@ -32,7 +34,7 @@
         <thead>
           <tr>
             <th scope="col">Category</th>
-            <th scope="col" style="min-width: 10rem;">Flammability</th>
+            <th scope="col" style="min-width: 10rem">Flammability</th>
             <th scope="col">Interpretation</th>
           </tr>
         </thead>
