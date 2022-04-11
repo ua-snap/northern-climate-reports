@@ -2,6 +2,7 @@
 import _ from 'lodash'
 import { getHttpError } from '../utils/http_errors'
 import { convertToPercent } from '../utils/convert'
+import { objectTypeSpreadProperty } from '@babel/types'
 
 // Store, namespaced as `climate/`
 export const state = () => ({
@@ -13,7 +14,7 @@ export const state = () => ({
 
 export const getters = {
   eras() {
-    return ['1950-2008', '2010-2039', '2040-2069', '2070-2099']
+    return ['1950-1979', '1980-2008', '2010-2039', '2040-2069', '2070-2099']
   },
   vegModels() {
     return [
@@ -90,6 +91,18 @@ export const getters = {
   },
   vegChangeHttpError(state) {
     return state.vegChangeHttpError
+  },
+  valid(state) {
+    if (
+      _.isObject(state.flammability) &&
+      _.isObject(state.veg_change) &&
+      Object.keys(state.flammability).length != 0 &&
+      Object.keys(state.veg_change).length != 0
+    ) {
+      return true
+    } else {
+      return false
+    }
   },
 }
 

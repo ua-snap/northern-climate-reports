@@ -25,11 +25,7 @@
         <ReportFlammabilityMap model="0" scenario="0" era="0" />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportFlammabilityMap
-          :model="flammability_maps_model_selection"
-          scenario="1"
-          era="1"
-        />
+        <ReportFlammabilityMap model="0" scenario="0" era="1" />
       </div>
       <div class="minimap-container my-4 p-1">
         <ReportFlammabilityMap
@@ -43,18 +39,19 @@
           :model="flammability_maps_model_selection"
           scenario="1"
           era="3"
+        />
+      </div>
+      <div class="minimap-container my-4 p-1">
+        <ReportFlammabilityMap
+          :model="flammability_maps_model_selection"
+          scenario="1"
+          era="4"
         />
       </div>
     </div>
     <div class="columns is-flex-direction-row is-centered">
       <div class="minimap-container my-4 p-1"></div>
-      <div class="minimap-container my-4 p-1">
-        <ReportFlammabilityMap
-          :model="flammability_maps_model_selection"
-          scenario="3"
-          era="1"
-        />
-      </div>
+      <div class="minimap-container my-4 p-1"></div>
       <div class="minimap-container my-4 p-1">
         <ReportFlammabilityMap
           :model="flammability_maps_model_selection"
@@ -67,6 +64,13 @@
           :model="flammability_maps_model_selection"
           scenario="3"
           era="3"
+        />
+      </div>
+      <div class="minimap-container my-4 p-1">
+        <ReportFlammabilityMap
+          :model="flammability_maps_model_selection"
+          scenario="3"
+          era="4"
         />
       </div>
     </div>
