@@ -349,9 +349,7 @@ export default {
         this.flammabilityData['2070-2099']['NCAR-CCSM4']['rcp85']['rf']
       )
       let midDiff = parseInt(
-        (Math.abs(midHighestPredictedRf - historicalRf) /
-          midHighestPredictedRf) *
-          100
+        (Math.abs(midHighestPredictedRf - historicalRf) / historicalRf) * 100
       )
       let midSign =
         midHighestPredictedRf - historicalRf > 0 ? '&plus;' : '&minus;'
@@ -359,9 +357,7 @@ export default {
         midHighestPredictedRf - historicalRf > 0 ? 'increase' : 'decrease'
 
       let lateDiff = parseInt(
-        (Math.abs(lateHighestPredictedRf - historicalRf) /
-          lateHighestPredictedRf) *
-          100
+        (Math.abs(lateHighestPredictedRf - historicalRf) / historicalRf) * 100
       )
       let lateSign =
         lateHighestPredictedRf - historicalRf > 0 ? '&plus;' : '&minus;'
