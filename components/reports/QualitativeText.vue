@@ -73,7 +73,7 @@ export default {
       }
     },
     depthFragment() {
-      return this.units == 'imperial' ? '9.8ft' : '3m'
+      return this.units == 'imperial' ? 'about 10ft' : '3m'
     },
     qualitativeText() {
       return this.generateText()
