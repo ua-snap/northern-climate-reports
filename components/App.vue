@@ -13,7 +13,7 @@
               beta, which means that we&rsquo;re still gathering feedback,
               testing the data outputs and fixing bugs. We&rsquo;d love to hear
               your feedback. Email us at
-              <a mailto="uaf-snap-data-tools@alaska.edu"
+              <a href="mailto:uaf-snap-data-tools@alaska.edu"
                 >uaf-snap-data-tools@alaska.edu</a
               >
               with your thoughts, or
