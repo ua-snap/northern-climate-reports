@@ -33,48 +33,34 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Category</th>
+            <th scope="col" style="min-width: 10rem">Category</th>
             <th scope="col" style="min-width: 10rem">Flammability</th>
             <th scope="col">Interpretation</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">Very Low</th>
-            <td class="numbers">&lt;0.2&#37;</td>
-            <td>Fire is absent or very rare</td>
-          </tr>
-          <tr>
-            <th scope="row">Low</th>
-            <td class="numbers">&ge;0.2&#37;, &lt;0.5&#37;</td>
-            <td>
-              Fire is rare, and unlikely to be the primary driver of vegetation
-              patterns on this landscape
+          <tr v-for="flamThreshold in flamThresholds">
+            <th scope="row" class="category">
+              <div
+                class="swatch"
+                :style="'background-color: ' + flamThreshold['color']"
+              />
+              {{ flamThreshold['label'] }}
+            </th>
+            <td class="numbers">
+              <span v-if="flamThreshold['min'] == 0"
+                >&lt;{{ flamThreshold['max'] }}&#37;</span
+              >
+              <span v-else-if="flamThreshold['max'] == 100"
+                >&ge;{{ flamThreshold['min'] }}&#37;</span
+              >
+              <span v-else
+                >&ge;{{ flamThreshold['min'] }}&#37;, &lt;{{
+                  flamThreshold['max']
+                }}&#37;</span
+              >
             </td>
-          </tr>
-          <tr>
-            <th scope="row">Moderate</th>
-            <td class="numbers">&ge;0.5&#37;, &lt;1&#37;</td>
-            <td>
-              Fire is frequent enough to partially define the vegetation
-              patterns on this landscape
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">High</th>
-            <td class="numbers">&ge;1&#37;, &lt;2&#37;</td>
-            <td>
-              Fire is frequent, and likely to define the vegetation patterns on
-              this landscape
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">Very High</th>
-            <td class="numbers">&ge;2&#37;</td>
-            <td>
-              Fire is extremely frequent, and defines the vegetation patterns on
-              this landscape
-            </td>
+            <td>{{ flamThreshold['interpretation'] }}</td>
           </tr>
         </tbody>
       </table>
@@ -114,6 +100,20 @@
 <style lang="scss" scoped>
 .numbers {
   font-family: 'IBM Plex Mono', monospace;
+  vertical-align: middle;
+}
+.category {
+  vertical-align: middle;
+}
+.swatch {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #999999;
+  border-radius: 3px;
+  margin-right: 8px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 2px;
 }
 </style>
 <script>
@@ -132,6 +132,11 @@ export default {
     ReportVegChangeMaps,
     ReportVegChangeChart,
     DownloadCsvButton,
+  },
+  computed: {
+    ...mapGetters({
+      flamThresholds: 'wildfire/flammabilityThresholds',
+    }),
   },
 }
 </script>

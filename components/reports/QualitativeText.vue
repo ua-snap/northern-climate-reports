@@ -329,8 +329,8 @@ export default {
         return rf >= 0.005
       }
 
-      let historicalRf = this.flammabilityData['1950-2008']['CRU-TS40'][
-        'CRU_historical'
+      let historicalRf = this.flammabilityData['1950-1979']['MODEL-SPINUP'][
+        'historical'
       ]['rf']
       let midHighestPredictedRf = Math.max(
         this.flammabilityData['2040-2069']['MRI-CGCM3']['rcp45']['rf'],

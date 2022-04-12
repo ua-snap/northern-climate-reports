@@ -96,7 +96,7 @@ export default {
         version: '1.3.0',
         styles: 'climate_impact_reports',
       }
-      layerOptions['layers'] = 'mode_vegetation'
+      layerOptions['layers'] = 'alfresco_vegetation_mode_statistic'
       layerOptions['dim_era'] = this.era
       layerOptions['dim_model'] = this.model
       layerOptions['dim_scenario'] = this.scenario

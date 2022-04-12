@@ -18,6 +18,9 @@ export const getPlotSettings = function () {
 
 export const getLayout = function (title, yAxisLabel, height = 500) {
   return {
+    xaxis: {
+      showgrid: false,
+    },
     yaxis: {
       title: {
         text: yAxisLabel,
