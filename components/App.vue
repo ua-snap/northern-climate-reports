@@ -4,6 +4,25 @@
       <div v-show="!this.reportIsVisible" class="place-selector">
         <div class="container">
           <section class="section">
+            <b-message
+              title="This is a public beta test of this tool"
+              type="is-warning"
+              aria-close-label="Close message"
+            >
+              Thanks for checking out this tool! Right now, this is a public
+              beta, which means that we&rsquo;re still gathering feedback,
+              testing the data outputs and fixing bugs. We&rsquo;d love to hear
+              your feedback. Email us at
+              <a mailto="uaf-snap-data-tools@alaska.edu"
+                >uaf-snap-data-tools@alaska.edu</a
+              >
+              with your thoughts, or
+              <a
+                href="https://uaf.us10.list-manage.com/subscribe?u=e42f589030a3adcaddd9b3304&id=d349c58c8f"
+                >sign up for our occasional newsletter</a
+              >
+              to be notified when this tool is launched.
+            </b-message>
             <div class="columns" id="controls">
               <!-- ID above (#controls) is used as anchor target, don't remove -->
               <div class="column is-one-half">
