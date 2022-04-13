@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderBanner />
-
+    <Navbar/>
     <div class="splash-title columns">
       <div class="splash-title-text column is-half">
         <div>
@@ -22,7 +22,7 @@
 .splash-title {
   height: 75vh;
   min-height: 500px;
-  margin-top: 0;
+  margin-top: 2rem;
   margin-right: 0;
   font-family: 'Paytone One';
   color: #000;
@@ -67,7 +67,8 @@
 <script>
 import HeaderBanner from '~/components/HeaderBanner'
 import Footer from '~/components/Footer'
+import Navbar from '~/components/Navbar'
 export default {
-  components: { Footer, HeaderBanner },
+  components: { Footer, HeaderBanner, Navbar },
 }
 </script>
