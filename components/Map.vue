@@ -60,6 +60,7 @@ export default {
     // The map is either being drawn for a broad search interface,
     // or to show the results of a search.
     if (this.mapSearchIsVisible && this.searchResults) {
+      this.map.fitBounds( {padding:[5000, 5000] } )
       this.drawSearchResults()
     } else {
       new this.$L.Control.Zoom({ position: 'topright' }).addTo(this.map)
