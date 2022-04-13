@@ -98,7 +98,6 @@
   width: 20px;
   height: 20px;
   border: 1px solid #999999;
-  border-radius: 3px;
   margin-right: 8px;
 }
 </style>

@@ -82,6 +82,11 @@ export const getters = {
     throw 'Unknown place type!'
   },
 
+  // Is this a point-like type?
+  isPointLocation: (state, getters) => {
+    return getters.type == 'latLng' || getters.type == 'community'
+  },
+
   // Returns a string for the correct current selected place,
   // whether lat/lon, community name, or other regional name.
   // The code here is pretty similar between the different cases,
@@ -150,9 +155,16 @@ export const getters = {
 
   // Returns a fragment URL for accessing
   // different resources on the API.
-  urlFragment(state, getters) {
+  // `local` parameter is used when a point is used to
+  // query an endpoint that retrieves a coverage over an
+  // area instead of a single pixel.
+  urlFragment: (state, getters) => local => {
     if (getters.type == 'community' || getters.type == 'latLng') {
-      return 'point/' + getters.latLng[0] + '/' + getters.latLng[1]
+      let url = ''
+      if (!local) {
+        url = 'point/'
+      }
+      return url + getters.latLng[0] + '/' + getters.latLng[1]
     } else {
       return 'area/' + getters.areaId
     }
@@ -180,10 +192,14 @@ export const mutations = {
 }
 
 export const actions = {
-  async fetch(context) {
+  // Boundary to fetch is pulled from the URL fragment by default,
+  // or we can pass `huc12Id` if we need to specify a distinct
+  // boundary ID to fetch (used for ALFRESCO data).
+  async fetch(context, huc12Id) {
+    let boundaryId = huc12Id ? 'area/' + huc12Id : context.getters.urlFragment()
+
     // TODO: add error handling here for 404 (no data) etc.
-    let queryUrl =
-      process.env.apiUrl + '/boundary/' + context.getters.urlFragment
+    let queryUrl = process.env.apiUrl + '/boundary/' + boundaryId
     let geoJSON = await this.$http.$get(queryUrl)
     context.commit('setGeoJSON', geoJSON)
   },

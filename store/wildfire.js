@@ -44,7 +44,7 @@ export const getters = {
     return {
       not_modeled: {
         label: 'Not Modeled',
-        color: '#a6cee3',
+        color: '#ffffff',
       },
       barren_lichen_moss: {
         label: 'Barren/Lichen/Moss',
@@ -80,10 +80,10 @@ export const getters = {
       },
     }
   },
-  flammability(state, getters, rootState, rootGetters) {
+  flammability(state) {
     return state.flammability
   },
-  veg_change(state, getters, rootState, rootGetters) {
+  veg_change(state) {
     return state.veg_change
   },
   flammabilityHttpError(state) {
@@ -103,6 +103,9 @@ export const getters = {
     } else {
       return false
     }
+  },
+  huc12Id(state) {
+    return state.flammability.huc_id
   },
 }
 
@@ -127,10 +130,22 @@ export const mutations = {
 
 export const actions = {
   async fetch(context) {
+    // For this query, if it's a point query it needs
+    // to use the special `/local` endpoint & pass
+    // a parameter to the `urlFragment` getter to return
+    // the correct structure.
+    let local = ''
+    if (context.rootGetters['place/isPointLocation']) {
+      local = 'local/'
+    }
+
     let flammabilityQueryUrl =
       process.env.apiUrl +
       '/alfresco/flammability/' +
-      context.rootGetters['place/urlFragment']
+      local +
+      context.rootGetters['place/urlFragment'](
+        context.rootGetters['place/isPointLocation']
+      )
     let flammability = await this.$axios
       .$get(flammabilityQueryUrl)
       .catch(err => {
@@ -143,7 +158,10 @@ export const actions = {
     let vegChangeQueryUrl =
       process.env.apiUrl +
       '/alfresco/veg_type/' +
-      context.rootGetters['place/urlFragment']
+      local +
+      context.rootGetters['place/urlFragment'](
+        context.rootGetters['place/isPointLocation']
+      )
     let veg_change = await this.$axios.$get(vegChangeQueryUrl).catch(err => {
       let httpError = getHttpError(err)
       context.commit('setVegChangeHttpError', httpError)
