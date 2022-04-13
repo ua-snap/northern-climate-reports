@@ -50,6 +50,16 @@
     background-size: cover;
   }
 }
+
+@media (max-width: 768px) {
+  .splash-title {
+    height: auto;
+    .splash-title-image {
+      // background-image: none;
+      min-height: 100vw;
+    }
+  }
+}
 </style>
 
 <script>
