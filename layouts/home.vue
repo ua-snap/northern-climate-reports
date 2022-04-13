@@ -23,6 +23,7 @@
   height: 75vh;
   min-height: 500px;
   margin-top: 0;
+  margin-right: 0;
   font-family: 'Paytone One';
   color: #000;
 
