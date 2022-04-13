@@ -2,13 +2,22 @@
   <section class="section">
     <div class="content-wrapper">
       <div class="content is-size-5">
-        <h2 class="title is-3">About the data available in this tool</h2>
+        <ul class="toc">
+          <li><a href="#data-overview">Data used in this tool</a></li>
+          <li><a href="#places">Places available to search</a></li>
+          <li><a href="#access-api">Access the data via an API</a></li>
+        </ul>
+        <h2 id="data-overview" class="title is-3">About the data available in this tool</h2>
         <p>
-          Data used in this tool consist of inputs and outputs from the
-          Integrated Ecosystem Management (IEM) project. This project originally
-          sought to couple several models: the Terrestrial Ecosystem Model
-          (TEM), the Geophysical Institute Permafrost Lab (GIPL) model, and
-          ALFRESCO, a stochastic wildfire and landscape model.
+          Data used in this tool includes inputs and outputs from the
+          <a
+            href="https://uaf-snap.org/project/iem-an-integrated-ecosystem-model-for-alaska-and-northwest-canada/"
+            >Integrated Ecosystem Management</a
+          >
+          (IEM) project, which originally sought to couple several models: the
+          Terrestrial Ecosystem Model (TEM), the Geophysical Institute
+          Permafrost Lab (GIPL) model, and ALFRESCO, a stochastic wildfire and
+          landscape model.
         </p>
         <p>
           Data available through this tool are subject to the
@@ -87,6 +96,7 @@
           averaged across a 1km square, and elevation for areas is averaged
           across the entire area.
         </p>
+        <h3 class="subtitle is-4">Notes</h3>
         <p>
           This tool doesn&rsquo;t offer the full range of data produced for the
           IEM project. If you are looking for models or scenarios not present on
@@ -103,7 +113,9 @@
           What places are available in this tool?
         </h2>
         <p>
-          This tool has a variety of places which can be chosen for reports:
+          The highlighted area on the map shows the full domain of the IEM
+          research project. Within this area, this tool has a variety of places
+          which can be chosen for reports:
         </p>
         <ul>
           <li><strong>communities</strong>,</li>
@@ -126,7 +138,14 @@
             >
           </li>
           <li><strong>Fire Management Units</strong></li>
-          <li><strong><a href="https://uaf.edu/anlc/resources/mapping_alaskas_native_languages.php">Ethnolinguistic regions</a></strong></li>
+          <li>
+            <strong
+              ><a
+                href="https://uaf.edu/anlc/resources/mapping_alaskas_native_languages.php"
+                >Ethnolinguistic regions</a
+              ></strong
+            >
+          </li>
           <li>
             <strong
               ><a
@@ -136,7 +155,7 @@
             >
           </li>
         </ul>
-        <h2 class="title is-3">Data API access</h2>
+        <h2 id="access-api" class="title is-3">Data API access</h2>
         <p>
           All the data used in this web tool may be accessed directly via an
           API. Documentation, examples, and links to source datasets are
