@@ -71,7 +71,9 @@
           >
             Projected permafrost active layer thickness and ground freeze depth
             through the end of the century are shown below. The active layer is
-            the layer of soil above permafrost that thaws seasonally.
+            the layer of soil above permafrost that thaws seasonally. Ground
+            freeze is the maximum depth to which winter freeze occurs in
+            non-permafrost areas.
           </span>
           <span
             v-show="
@@ -88,7 +90,8 @@
             "
           >
             Projected ground freeze depth through the end of the century is
-            shown below.
+            shown below. Ground freeze is the maximum depth to which winter
+            freeze occurs in non-permafrost areas.
           </span>
           <span v-show="permafrostUncertain"
             >A chart of the historical and projected mean annual ground
@@ -155,7 +158,7 @@ export default {
         : '&#x00B1;1&deg;C'
     },
     depthFragment() {
-      return this.units == 'imperial' ? '9.8ft' : '3m'
+      return this.units == 'imperial' ? 'about 10ft' : '3m'
     },
     ...mapGetters({
       units: 'units',
