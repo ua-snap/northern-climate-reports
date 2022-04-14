@@ -7,7 +7,9 @@
           <li><a href="#places">Places available to search</a></li>
           <li><a href="#access-api">Access the data via an API</a></li>
         </ul>
-        <h2 id="data-overview" class="title is-3">About the data available in this tool</h2>
+        <h2 id="data-overview" class="title is-3">
+          About the data available in this tool
+        </h2>
         <p>
           Data used in this tool includes inputs and outputs from the
           <a
@@ -179,6 +181,11 @@
     </div>
   </section>
 </template>
+<style lang="scss" scoped>
+p:last-of-type {
+  margin-bottom: 2.5rem;
+}
+</style>
 
 <script>
 export default {

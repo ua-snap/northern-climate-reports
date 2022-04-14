@@ -24,13 +24,18 @@
 
 <style lang="scss" scoped>
 .navbar {
-
-  background-color: #fafafa;
+  margin-top: 3px;
+  background-color: rgb(28, 28, 28);
   padding-right: 1rem;
   padding-left: 1rem;
   
-  .navbar-item a.is-active {
-    font-weight: bold;
+  .navbar-item a {
+    color: white;
+    &.is-active {
+      font-weight: bold;
+      text-decoration: underline rgb(54, 79, 119) 5px;
+      
+    }
   }
 }
 </style>
