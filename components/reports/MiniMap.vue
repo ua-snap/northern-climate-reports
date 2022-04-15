@@ -9,8 +9,9 @@
 <style lang="scss" scoped>
 #report--minimmap--map {
   height: 20vw;
-  min-width: 10vw;
   width: 20vw;
+  min-width: 200px;
+  min-height: 200px;
   margin: 3rem auto 1rem;
 }
 </style>

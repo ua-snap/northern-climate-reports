@@ -1,16 +1,6 @@
 <template>
   <div id="results" class="container">
-    <div class="back">
-      <b-button
-        class="default"
-        tag="nuxt-link"
-        to="/#controls"
-        type="is-info"
-        icon-left="arrow-left-circle"
-      >
-        <strong>Go back</strong>, pick another place</b-button
-      >
-    </div>
+    <BackButton/>
     <hr />
     <section v-if="$fetchState.pending" class="section content">
       <!-- Drama dots -->
@@ -226,17 +216,7 @@
         </div>
       </section>
       <hr />
-      <div class="back">
-        <b-button
-          class="default"
-          tag="nuxt-link"
-          to="/#controls"
-          type="is-info"
-          icon-left="arrow-left-circle"
-        >
-          <strong>Go back</strong>, pick another place</b-button
-        >
-      </div>
+      <BackButton />
     </div>
   </div>
 </template>
@@ -274,6 +254,7 @@ import WildfireReport from '~/components/reports/wildfire/WildfireReport'
 import MiniMap from '~/components/reports/MiniMap'
 import QualitativeText from '~/components/reports/QualitativeText'
 import BackToTopButton from '~/components/reports/BackToTopButton'
+import BackButton from '~/components/BackButton'
 import { mapGetters } from 'vuex'
 import { httpErrors } from '../utils/http_errors'
 import lodash from 'lodash'
@@ -291,6 +272,7 @@ export default {
     MiniMap,
     QualitativeText,
     BackToTopButton,
+    BackButton,
   },
   data() {
     return {
