@@ -3,9 +3,21 @@
     <div class="content-wrapper">
       <div class="content is-size-5">
         <ul class="toc">
-          <li><a href="#data-overview">Data used in this tool</a></li>
-          <li><a href="#places">Places available to search</a></li>
-          <li><a href="#access-api">Access the data via an API</a></li>
+          <li>
+            <nuxt-link :to="{ hash: 'data-overview' }"
+              >Data used in this tool</nuxt-link
+            >
+          </li>
+          <li>
+            <nuxt-link :to="{ hash: 'places' }"
+              >Places available to search</nuxt-link
+            >
+          </li>
+          <li>
+            <nuxt-link :to="{ hash: 'access-api' }"
+              >Access the data via an API</nuxt-link
+            >
+          </li>
         </ul>
         <h2 id="data-overview" class="title is-3">
           About the data available in this tool

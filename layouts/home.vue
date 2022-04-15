@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderBanner />
-    <Navbar/>
+    <Navbar />
     <div class="splash-title columns">
       <div class="splash-title-text column is-half">
         <div>

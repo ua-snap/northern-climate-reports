@@ -3,28 +3,36 @@
     <div class="content-wrapper">
       <div class="content is-size-5">
         <ul class="toc">
-          <li><a href="#why-decision-support">Why do we need this tool?</a></li>
           <li>
-            <a href="#arctic-change">What&rsquo;s changing in the Arctic?</a>
-          </li>
-          <li>
-            <a href="#models-projections-uncertainty"
-              >Models, projections, and uncertainty</a
+            <nuxt-link :to="{ hash: 'why-decision-support' }"
+              >Why do we need this tool?</nuxt-link
             >
           </li>
           <li>
-            <a href="#how-projections-work"
-              >How are climate projections made?</a
+            <nuxt-link :to="{ hash: 'arctic-change' }"
+              >What&rsquo;s changing in the Arctic?</nuxt-link
             >
           </li>
           <li>
-            <a href="#best-practices"
-              >Best practices for producing and using climate projections</a
+            <nuxt-link :to="{ hash: 'models-projections-uncertainty' }"
+              >Models, projections, and uncertainty</nuxt-link
             >
           </li>
           <li>
-            <a href="#real-compare-projection"
-              >How might the real climate conditions compare to projections?</a
+            <nuxt-link :to="{ hash: 'how-projections-work' }"
+              >How are climate projections made?</nuxt-link
+            >
+          </li>
+          <li>
+            <nuxt-link :to="{ hash: 'best-practices' }"
+              >Best practices for producing and using climate
+              projections</nuxt-link
+            >
+          </li>
+          <li>
+            <nuxt-link :to="{ hash: 'real-compare-projection' }"
+              >How might the real climate conditions compare to
+              projections?</nuxt-link
             >
           </li>
         </ul>
