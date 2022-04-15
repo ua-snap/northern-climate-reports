@@ -78,7 +78,6 @@ export default {
   methods: {
     toggleBurger() {
       this.burgerActive = !this.burgerActive
-      return this.burgerActive
     },
   },
 }
