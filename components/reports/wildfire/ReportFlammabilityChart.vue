@@ -124,7 +124,7 @@ export default {
         mode: 'markers',
         name: 'Historical',
         hoverinfo: 'x+y+z+text',
-        hovertemplate: '%{y:.2f}',
+        hovertemplate: '%{y:.2f}%',
         marker: {
           symbol: 'diamond',
           size: 8,
@@ -136,7 +136,9 @@ export default {
 
       dataTraces.push(historicalTrace)
 
-      let historicalAverage = _.mean(historicalValues)
+      // Use most recent historical era for difference calculation.
+      let historicalValue = _.last(historicalValues)
+
       models.forEach(model => {
         scenarios.forEach(scenario => {
           let projectedTrace = {
@@ -157,7 +159,7 @@ export default {
           projectedEras.forEach(era => {
             let value = flammabilityData[era][model][scenario]
             projectedTrace['y'].push(value)
-            let diff = value - historicalAverage
+            let diff = value - historicalValue
             if (diff > 0) {
               diff = '+' + diff.toFixed(2)
             } else {
@@ -166,7 +168,7 @@ export default {
             projectedTrace['customdata'].push(diff)
           })
 
-          projectedTrace['hovertemplate'] = '%{y:.2f} <b>(%{customdata})</b>'
+          projectedTrace['hovertemplate'] = '%{y:.2f}% <b>(%{customdata}%)</b>'
           dataTraces.push(projectedTrace)
         })
       })
