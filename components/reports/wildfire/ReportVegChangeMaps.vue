@@ -73,9 +73,13 @@
     <div class="legend">
       <div
         class="color is-flex is-flex-direction-row"
-        v-for="vegType in vegTypes"
+        v-for="(vegType, key, index) in vegTypes"
       >
-        <div class="swatch" :style="'background-color: ' + vegType['color']" />
+        <div
+          class="swatch"
+          :class="{ bordered: ifBordered(index) }"
+          :style="'background-color: ' + vegType['color']"
+        />
         <div>{{ vegType['label'] }}</div>
       </div>
     </div>
@@ -85,20 +89,24 @@
 <style lang="scss" scoped>
 .legend {
   overflow: hidden;
-  max-width: 600px;
+  max-width: 660px;
   margin: 20px auto;
   line-height: 1.2;
 }
 .color {
-  width: 200px;
+  width: 220px;
+  padding: 0 10px;
   float: left;
   margin: 4px 0;
 }
 .swatch {
   width: 20px;
   height: 20px;
-  border: 1px solid #999999;
   margin-right: 8px;
+
+  &.bordered {
+    border: 1px solid #ccc;
+  }
 }
 </style>
 
@@ -115,6 +123,14 @@ export default {
       place: 'place/name',
       vegTypes: 'wildfire/vegTypes',
     }),
+  },
+  methods: {
+    ifBordered(index) {
+      // Add border around pale colors to increase visibility
+      let bordered = [0]
+      console.log(index)
+      return _.includes(bordered, index)
+    },
   },
   data() {
     return {

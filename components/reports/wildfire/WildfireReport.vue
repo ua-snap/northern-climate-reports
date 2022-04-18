@@ -32,41 +32,12 @@
         categories are also used in the short blurb in the introduction to this
         report.
       </p>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col" style="min-width: 10rem">Category</th>
-            <th scope="col" style="min-width: 10rem">Flammability</th>
-            <th scope="col">Interpretation</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="flamThreshold in flamThresholds">
-            <th scope="row" class="category">
-              <div
-                class="swatch"
-                :class="{ bordered: ifBordered(flamThreshold) }"
-                :style="{ 'background-color': flamThreshold['color'] }"
-              />
-              {{ flamThreshold['label'] }}
-            </th>
-            <td class="numbers">
-              <span v-if="flamThreshold['min'] == 0"
-                >&lt;{{ flamThreshold['max'] }}&#37;</span
-              >
-              <span v-else-if="flamThreshold['max'] == 100"
-                >&ge;{{ flamThreshold['min'] }}&#37;</span
-              >
-              <span v-else
-                >&ge;{{ flamThreshold['min'] }}&#37;, &lt;{{
-                  flamThreshold['max']
-                }}&#37;</span
-              >
-            </td>
-            <td>{{ flamThreshold['interpretation'] }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <ColorTable
+        unitLabel="Flammability"
+        unitSymbol="%"
+        :thresholds="flamThresholds"
+        :borderedColors="[0]"
+      />
     </div>
 
     <div class="chart-wrapper">
@@ -127,6 +98,7 @@ import ReportFlammabilityChart from './ReportFlammabilityChart'
 import ReportVegChangeMaps from './ReportVegChangeMaps'
 import ReportVegChangeChart from './ReportVegChangeChart'
 import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
+import ColorTable from '~/components/reports/ColorTable'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -137,18 +109,12 @@ export default {
     ReportVegChangeMaps,
     ReportVegChangeChart,
     DownloadCsvButton,
+    ColorTable,
   },
   computed: {
     ...mapGetters({
       flamThresholds: 'wildfire/flammabilityThresholds',
     }),
-  },
-  methods: {
-    ifBordered(flamThreshold) {
-      // Just want the very-low category to have a border
-      // to improve visibility
-      return flamThreshold.min == 0
-    },
   },
 }
 </script>

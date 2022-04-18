@@ -135,6 +135,68 @@ export const getters = {
   scenarios() {
     return ['CRU TS 3.1', 'RCP 4.5', 'RCP 8.5']
   },
+  magtThresholds(state, getters, rootState, rootGetters) {
+    let thresholds = [
+      {
+        label: 'Continuous Permafrost',
+        min: -20,
+        max: -6,
+        color: '#2166ac',
+      },
+      {
+        label: 'Cold Discontinuous',
+        min: -6,
+        max: -4,
+        color: '#4393c3',
+      },
+      {
+        label: 'Discontinuous',
+        min: -4,
+        max: -2,
+        color: '#92c5de',
+      },
+      {
+        label: 'Cold Sporadic',
+        min: -2,
+        max: -1,
+        color: '#d1e5f0',
+      },
+      {
+        label: 'Sporadic',
+        min: -1,
+        max: 0,
+        color: '#f7f7f7',
+      },
+      {
+        label: 'Permafrost Possible',
+        min: 0,
+        max: 1,
+        color: '#fddbc7',
+      },
+      {
+        label: 'Permafrost Unlikely',
+        min: 1,
+        max: 2,
+        color: '#f4a582',
+      },
+      {
+        label: 'No Permafrost',
+        min: 2,
+        max: 20,
+        color: '#d6604d',
+      },
+    ]
+    let keys = ['min', 'max']
+    thresholds.forEach(threshold => {
+      keys.forEach(key => {
+        threshold[key] =
+          rootGetters.units == 'imperial'
+            ? parseFloat((threshold[key] * 1.8 + 32).toFixed())
+            : threshold[key]
+      })
+    })
+    return thresholds
+  },
   permafrostData(state) {
     return state.permafrostData
   },

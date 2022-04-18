@@ -60,6 +60,15 @@
       </div>
     </div>
     <ReportMagtMaps />
+    <div class="content mb-6">
+      <p>This table is a legend for the maps above.</p>
+      <ColorTable
+        unitLabel="Mean Annual Ground Temperature"
+        :unitSymbol="unitSymbol"
+        :thresholds="magtThresholds"
+        :borderedColors="[3, 4]"
+      />
+    </div>
 
     <div v-if="reportData">
       <div class="content">
@@ -133,6 +142,7 @@
 </style>
 <script>
 import ReportMagtMaps from './ReportMagtMaps'
+import ColorTable from '~/components/reports/ColorTable'
 import ReportAltThawChart from './ReportAltThawChart'
 import ReportAltFreezeChart from './ReportAltFreezeChart'
 import ReportMagtChart from './ReportMagtChart'
@@ -144,6 +154,7 @@ export default {
   name: 'PermafrostReport',
   components: {
     ReportMagtMaps,
+    ColorTable,
     ReportAltThawChart,
     ReportAltFreezeChart,
     ReportMagtChart,
@@ -160,12 +171,16 @@ export default {
     depthFragment() {
       return this.units == 'imperial' ? 'about 10ft' : '3m'
     },
+    unitSymbol() {
+      return this.units == 'imperial' ? '&deg;F' : '&deg;C'
+    },
     ...mapGetters({
       units: 'units',
       reportData: 'permafrost/permafrostData',
       permafrostPresent: 'permafrost/present',
       permafrostDisappears: 'permafrost/disappears',
       permafrostUncertain: 'permafrost/uncertain',
+      magtThresholds: 'permafrost/magtThresholds',
     }),
   },
 }
