@@ -27,8 +27,10 @@
     <ReportFlammabilityMaps />
     <div class="content mb-6">
       <p>
-        This table explains different categories of modeled fire activity shown
-        on the chart below and used in the introduction to this report.
+        This table is a legend for the maps above, and explains different
+        categories of modeled fire activity shown on the chart below. These
+        categories are also used in the short blurb in the introduction to this
+        report.
       </p>
       <table class="table">
         <thead>
@@ -43,7 +45,8 @@
             <th scope="row" class="category">
               <div
                 class="swatch"
-                :style="'background-color: ' + flamThreshold['color']"
+                :class="{ bordered: ifBordered(flamThreshold) }"
+                :style="{ 'background-color': flamThreshold['color'] }"
               />
               {{ flamThreshold['label'] }}
             </th>
@@ -80,9 +83,9 @@
           Due to the inherent uncertainty involved in predicting wildfire, the
           maps below should not be interpreted as vegetation predictions at
           specific locations, but rather as an indicator of likely general
-          trends in vegetation type over time. Each map-pixel shows the most
-          commonly predicted vegetation type (modal value) based on 200 model
-          runs per year across all years in the map's date range.
+          trends in vegetation type over time. Each map&ndash;pixel shows the
+          most commonly predicted vegetation type (modal value) based on 200
+          model runs per year across all years in the map&rsquo;s date range.
         </p>
       </div>
     </div>
@@ -108,12 +111,14 @@
 .swatch {
   width: 20px;
   height: 20px;
-  border: 1px solid #999999;
-  border-radius: 3px;
   margin-right: 8px;
   display: inline-block;
   vertical-align: middle;
   margin-bottom: 2px;
+
+  &.bordered {
+    border: 1px solid #ccc;
+  }
 }
 </style>
 <script>
@@ -137,6 +142,13 @@ export default {
     ...mapGetters({
       flamThresholds: 'wildfire/flammabilityThresholds',
     }),
+  },
+  methods: {
+    ifBordered(flamThreshold) {
+      // Just want the very-low category to have a border
+      // to improve visibility
+      return flamThreshold.min == 0
+    },
   },
 }
 </script>
