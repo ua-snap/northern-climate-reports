@@ -18,7 +18,7 @@ export const getters = {
   },
   vegModels() {
     return [
-      '',
+      '', // Leave historical blank.
       'NCAR CCSM4',
       'GFDL CM3',
       'GISS E2-R',
@@ -28,7 +28,7 @@ export const getters = {
   },
   flammabilityModels() {
     return [
-      '',
+      '', // Leave historical blank.
       '5modelAvg',
       'GFDL-CM3',
       'GISS-E2-R',
@@ -39,6 +39,49 @@ export const getters = {
   },
   scenarios() {
     return ['Historical', 'RCP 4.5', 'RCP 6.0', 'RCP 8.5']
+  },
+  flammabilityThresholds() {
+    return [
+      {
+        label: 'Very Low',
+        min: 0.0,
+        max: 0.2,
+        color: '#fef0d9',
+        interpretation: 'Fire is absent or very rare',
+      },
+      {
+        label: 'Low',
+        min: 0.2,
+        max: 0.5,
+        color: '#fdcc8a',
+        interpretation:
+          'Fire is rare, and unlikely to be the primary driver of vegetation patterns on this landscape',
+      },
+      {
+        label: 'Moderate',
+        min: 0.5,
+        max: 1.0,
+        color: '#fc8d59',
+        interpretation:
+          'Fire is frequent enough to partially define the vegetation patterns on this landscape',
+      },
+      {
+        label: 'High',
+        min: 1.0,
+        max: 2.0,
+        color: '#e34a33',
+        interpretation:
+          'Fire is frequent, and likely to define the vegetation patterns on this landscape',
+      },
+      {
+        label: 'Very High',
+        min: 2.0,
+        max: 100.0,
+        color: '#b30000',
+        interpretation:
+          'Fire is extremely frequent, and defines the vegetation patterns on this landscape',
+      },
+    ]
   },
   vegTypes() {
     return {

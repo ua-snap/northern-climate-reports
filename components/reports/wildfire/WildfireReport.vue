@@ -27,54 +27,43 @@
     <ReportFlammabilityMaps />
     <div class="content mb-6">
       <p>
-        This table explains different categories of modeled fire activity shown
-        on the chart below and used in the introduction to this report.
+        This table is a legend for the maps above, and explains different
+        categories of modeled fire activity shown on the chart below. These
+        categories are also used in the short blurb in the introduction to this
+        report.
       </p>
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Category</th>
+            <th scope="col" style="min-width: 10rem">Category</th>
             <th scope="col" style="min-width: 10rem">Flammability</th>
             <th scope="col">Interpretation</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">Very Low</th>
-            <td class="numbers">&lt;0.2&#37;</td>
-            <td>Fire is absent or very rare</td>
-          </tr>
-          <tr>
-            <th scope="row">Low</th>
-            <td class="numbers">&ge;0.2&#37;, &lt;0.5&#37;</td>
-            <td>
-              Fire is rare, and unlikely to be the primary driver of vegetation
-              patterns on this landscape
+          <tr v-for="flamThreshold in flamThresholds">
+            <th scope="row" class="category">
+              <div
+                class="swatch"
+                :class="{ bordered: ifBordered(flamThreshold) }"
+                :style="{ 'background-color': flamThreshold['color'] }"
+              />
+              {{ flamThreshold['label'] }}
+            </th>
+            <td class="numbers">
+              <span v-if="flamThreshold['min'] == 0"
+                >&lt;{{ flamThreshold['max'] }}&#37;</span
+              >
+              <span v-else-if="flamThreshold['max'] == 100"
+                >&ge;{{ flamThreshold['min'] }}&#37;</span
+              >
+              <span v-else
+                >&ge;{{ flamThreshold['min'] }}&#37;, &lt;{{
+                  flamThreshold['max']
+                }}&#37;</span
+              >
             </td>
-          </tr>
-          <tr>
-            <th scope="row">Moderate</th>
-            <td class="numbers">&ge;0.5&#37;, &lt;1&#37;</td>
-            <td>
-              Fire is frequent enough to partially define the vegetation
-              patterns on this landscape
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">High</th>
-            <td class="numbers">&ge;1&#37;, &lt;2&#37;</td>
-            <td>
-              Fire is frequent, and likely to define the vegetation patterns on
-              this landscape
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">Very High</th>
-            <td class="numbers">&ge;2&#37;</td>
-            <td>
-              Fire is extremely frequent, and defines the vegetation patterns on
-              this landscape
-            </td>
+            <td>{{ flamThreshold['interpretation'] }}</td>
           </tr>
         </tbody>
       </table>
@@ -94,9 +83,9 @@
           Due to the inherent uncertainty involved in predicting wildfire, the
           maps below should not be interpreted as vegetation predictions at
           specific locations, but rather as an indicator of likely general
-          trends in vegetation type over time. Each map-pixel shows the most
-          commonly predicted vegetation type (modal value) based on 200 model
-          runs per year across all years in the map's date range.
+          trends in vegetation type over time. Each map&ndash;pixel shows the
+          most commonly predicted vegetation type (modal value) based on 200
+          model runs per year across all years in the map&rsquo;s date range.
         </p>
       </div>
     </div>
@@ -114,6 +103,22 @@
 <style lang="scss" scoped>
 .numbers {
   font-family: 'IBM Plex Mono', monospace;
+  vertical-align: middle;
+}
+.category {
+  vertical-align: middle;
+}
+.swatch {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 2px;
+
+  &.bordered {
+    border: 1px solid #ccc;
+  }
 }
 </style>
 <script>
@@ -132,6 +137,18 @@ export default {
     ReportVegChangeMaps,
     ReportVegChangeChart,
     DownloadCsvButton,
+  },
+  computed: {
+    ...mapGetters({
+      flamThresholds: 'wildfire/flammabilityThresholds',
+    }),
+  },
+  methods: {
+    ifBordered(flamThreshold) {
+      // Just want the very-low category to have a border
+      // to improve visibility
+      return flamThreshold.min == 0
+    },
   },
 }
 </script>

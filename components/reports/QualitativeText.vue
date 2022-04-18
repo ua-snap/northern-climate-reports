@@ -310,63 +310,66 @@ export default {
       return string
     },
     wildfireString() {
-      var categoryFromRf = function (rf) {
+      var categoryFromFlam = function (flam) {
         // Remove this if the data sculpting to convert
         // raw ALF into %s is removed elsewhere.
-        rf = rf / 100
+        flam = flam / 100
 
-        if (rf < 0.002) return 'very low'
-        if (rf >= 0.002 && rf < 0.005) return 'low'
-        if (rf >= 0.005 && rf < 0.01) return 'moderate'
-        if (rf >= 0.01 && rf < 0.02) return 'high'
-        if (rf >= 0.02) return 'very high'
+        if (flam < 0.002) return 'very low'
+        if (flam >= 0.002 && flam < 0.005) return 'low'
+        if (flam >= 0.005 && flam < 0.01) return 'moderate'
+        if (flam >= 0.01 && flam < 0.02) return 'high'
+        if (flam >= 0.02) return 'very high'
       }
 
-      var isModerateOrMore = function (rf) {
+      var isModerateOrMore = function (flam) {
         // Remove this if the data sculpting to convert
         // raw ALF into %s is removed elsewhere.
-        rf = rf / 100
-        return rf >= 0.005
+        flam = flam / 100
+        return flam >= 0.005
       }
 
-      let historicalRf = this.flammabilityData['1950-2008']['CRU-TS40'][
-        'CRU_historical'
-      ]['rf']
-      let midHighestPredictedRf = Math.max(
-        this.flammabilityData['2040-2069']['MRI-CGCM3']['rcp45']['rf'],
-        this.flammabilityData['2040-2069']['MRI-CGCM3']['rcp60']['rf'],
-        this.flammabilityData['2040-2069']['MRI-CGCM3']['rcp85']['rf'],
-        this.flammabilityData['2040-2069']['NCAR-CCSM4']['rcp45']['rf'],
-        this.flammabilityData['2040-2069']['NCAR-CCSM4']['rcp60']['rf'],
-        this.flammabilityData['2040-2069']['NCAR-CCSM4']['rcp85']['rf']
+      let historicalFlam = this.flammabilityData['1980-2008']['MODEL-SPINUP'][
+        'historical'
+      ]
+      let midHighestPredictedFlam = Math.max(
+        this.flammabilityData['2040-2069']['MRI-CGCM3']['rcp45'],
+        this.flammabilityData['2040-2069']['MRI-CGCM3']['rcp60'],
+        this.flammabilityData['2040-2069']['MRI-CGCM3']['rcp85'],
+        this.flammabilityData['2040-2069']['NCAR-CCSM4']['rcp45'],
+        this.flammabilityData['2040-2069']['NCAR-CCSM4']['rcp60'],
+        this.flammabilityData['2040-2069']['NCAR-CCSM4']['rcp85']
       )
-      let lateHighestPredictedRf = Math.max(
-        this.flammabilityData['2070-2099']['MRI-CGCM3']['rcp45']['rf'],
-        this.flammabilityData['2070-2099']['MRI-CGCM3']['rcp60']['rf'],
-        this.flammabilityData['2070-2099']['MRI-CGCM3']['rcp85']['rf'],
-        this.flammabilityData['2070-2099']['NCAR-CCSM4']['rcp45']['rf'],
-        this.flammabilityData['2070-2099']['NCAR-CCSM4']['rcp60']['rf'],
-        this.flammabilityData['2070-2099']['NCAR-CCSM4']['rcp85']['rf']
+      let lateHighestPredictedFlam = Math.max(
+        this.flammabilityData['2070-2099']['MRI-CGCM3']['rcp45'],
+        this.flammabilityData['2070-2099']['MRI-CGCM3']['rcp60'],
+        this.flammabilityData['2070-2099']['MRI-CGCM3']['rcp85'],
+        this.flammabilityData['2070-2099']['NCAR-CCSM4']['rcp45'],
+        this.flammabilityData['2070-2099']['NCAR-CCSM4']['rcp60'],
+        this.flammabilityData['2070-2099']['NCAR-CCSM4']['rcp85']
       )
+
       let midDiff = parseInt(
-        (Math.abs(midHighestPredictedRf - historicalRf) / historicalRf) * 100
+        (Math.abs(midHighestPredictedFlam - historicalFlam) / historicalFlam) *
+          100
       )
       let midSign =
-        midHighestPredictedRf - historicalRf > 0 ? '&plus;' : '&minus;'
+        midHighestPredictedFlam - historicalFlam > 0 ? '&plus;' : '&minus;'
       let midChange =
-        midHighestPredictedRf - historicalRf > 0 ? 'increase' : 'decrease'
+        midHighestPredictedFlam - historicalFlam > 0 ? 'increase' : 'decrease'
 
       let lateDiff = parseInt(
-        (Math.abs(lateHighestPredictedRf - historicalRf) / historicalRf) * 100
+        (Math.abs(lateHighestPredictedFlam - historicalFlam) / historicalFlam) *
+          100
       )
       let lateSign =
-        lateHighestPredictedRf - historicalRf > 0 ? '&plus;' : '&minus;'
+        lateHighestPredictedFlam - historicalFlam > 0 ? '&plus;' : '&minus;'
       let lateChange =
-        lateHighestPredictedRf - historicalRf > 0 ? 'increase' : 'decrease'
+        lateHighestPredictedFlam - historicalFlam > 0 ? 'increase' : 'decrease'
 
-      let historicalCategory = categoryFromRf(historicalRf)
-      let midCategory = categoryFromRf(midHighestPredictedRf)
-      let lateCategory = categoryFromRf(lateHighestPredictedRf)
+      let historicalCategory = categoryFromFlam(historicalFlam)
+      let midCategory = categoryFromFlam(midHighestPredictedFlam)
+      let lateCategory = categoryFromFlam(lateHighestPredictedFlam)
 
       let quip = _.template(
         'In the past, this area had <strong><%= category %></strong> flammability.  '
@@ -380,7 +383,7 @@ export default {
         historicalCategory == lateCategory
       ) {
         quip += 'Future flammability may be <strong>about the same</strong>'
-        if (isModerateOrMore(historicalRf)) {
+        if (isModerateOrMore(historicalFlam)) {
           quip += _.template(' (<%= sign %><%= diff %>&#37; by late century).')(
             {
               sign: lateSign,
@@ -397,7 +400,7 @@ export default {
           quip += _.template(
             'By the mid&ndash;century this may remain <%= category %>'
           )({ category: midCategory })
-          if (isModerateOrMore(historicalRf)) {
+          if (isModerateOrMore(historicalFlam)) {
             quip += _.template(' (<%= sign %><%= diff %>&#37;).  ')({
               sign: midSign,
               diff: midDiff,
@@ -412,7 +415,7 @@ export default {
             category: midCategory,
             change: midChange,
           })
-          if (isModerateOrMore(historicalRf)) {
+          if (isModerateOrMore(historicalFlam)) {
             quip += _.template(' (<%= sign %><%= diff %>&#37;).  ')({
               sign: midSign,
               diff: midDiff,
@@ -427,7 +430,7 @@ export default {
           quip += _.template(
             'By the late&ndash;century this may remain <%= category %>'
           )({ category: lateCategory })
-          if (isModerateOrMore(historicalRf)) {
+          if (isModerateOrMore(historicalFlam)) {
             quip += _.template(' (<%= sign %><%= diff %>&#37;)')({
               sign: lateSign,
               diff: lateDiff,
@@ -441,7 +444,7 @@ export default {
             category: lateCategory,
             change: lateChange,
           })
-          if (isModerateOrMore(historicalRf)) {
+          if (isModerateOrMore(historicalFlam)) {
             quip += _.template(' (<%= sign %><%= diff %>&#37;)')({
               sign: lateSign,
               diff: lateDiff,

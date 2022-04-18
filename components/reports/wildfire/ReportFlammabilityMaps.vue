@@ -74,28 +74,8 @@
         />
       </div>
     </div>
-    <div class="flammability-legend">
-      <div class="tick is-pulled-left">0%</div>
-      <div class="tick is-pulled-right">3%</div>
-    </div>
   </section>
 </template>
-
-<style lang="scss" scoped>
-.flammability-legend {
-  width: 800px;
-  height: 26px;
-  border: 1px solid #999;
-  margin: 40px auto 0 auto;
-  font-weight: 700;
-  color: #fff;
-  text-shadow: 0 0 3px #000;
-  background: linear-gradient(90deg, #ffffff 0%, #ff0000 100%);
-  .tick {
-    margin: 0 8px;
-  }
-}
-</style>
 
 <script>
 import ReportFlammabilityMap from './ReportFlammabilityMap'

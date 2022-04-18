@@ -37,15 +37,16 @@
     <div id="wildfire-veg-change-chart" />
   </div>
 </template>
+<style lang="scss" scoped>
+.wildfire-chart-wrapper {
+  width: 698px;
+  margin: 0 auto;
+}
+</style>
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
 import { getPlotSettings, getLayout, getFooter } from '~/utils/charts'
-import {
-  getHistoricalTrace,
-  getProjectedTraces,
-  allZeros,
-} from '~/utils/wildfire_charts'
 export default {
   name: 'ReportVegChangeChart',
   mounted() {
@@ -53,7 +54,6 @@ export default {
   },
   data() {
     return {
-      plotType: 'box',
       veg_chart_model_selection: 'NCAR-CCSM4',
       veg_scenario_selection: 'rcp85',
     }
@@ -106,12 +106,12 @@ export default {
         let eras = ['1950-2008', '2010-2039', '2040-2069', '2070-2099']
         eras.forEach(era => {
           if (era == '1950-2008') {
-            yValues.push(vegChangeData[era]['CRU-TS']['historical'][type]['vt'])
+            yValues.push(vegChangeData[era]['MODEL-SPINUP']['historical'][type])
           } else {
             yValues.push(
               vegChangeData[era][this.veg_chart_model_selection][
                 this.veg_scenario_selection
-              ][type]['vt']
+              ][type]
             )
           }
         })
@@ -163,8 +163,7 @@ export default {
       })
 
       let footerLines = [
-        'Projected values are taken from ALFRESCO model output.',
-        'Historical values are taken from the CRU TS 4.0 dataset.',
+        'Projected and historical values are taken from ALFRESCO model output.',
       ]
 
       let footer = getFooter(footerLines, layout)
