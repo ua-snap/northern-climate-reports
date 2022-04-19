@@ -17,6 +17,11 @@
           location has burned in model simulations. All data shown, including
           historical time periods, are model ouputs.
         </p>
+        <p v-if="this.isPointLocation">
+          Data shown in the charts below are for the region of the HUC 12 watershed which contains the
+          pixel location for <span v-html="place"></span> (HUC ID
+          <span v-html="huc12Id"></span>).
+        </p>
         <p>
           <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
             >See information about the dataset shown here.</nuxt-link
@@ -141,6 +146,9 @@ export default {
   computed: {
     ...mapGetters({
       flamThresholds: 'wildfire/flammabilityThresholds',
+      isPointLocation: 'place/isPointLocation',
+      huc12Id: 'wildfire/huc12Id',
+      place: 'place/name',
     }),
   },
   methods: {
