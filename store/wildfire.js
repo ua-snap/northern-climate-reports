@@ -19,22 +19,22 @@ export const getters = {
   vegModels() {
     return [
       '', // Leave historical blank.
-      'NCAR CCSM4',
       'GFDL CM3',
       'GISS E2-R',
       'IPSL CM5A-LR',
       'MRI CGCM3',
+      'NCAR CCSM4',
     ]
   },
   flammabilityModels() {
     return [
       '', // Leave historical blank.
       '5modelAvg',
-      'GFDL-CM3',
-      'GISS-E2-R',
-      'IPSL-CM5A-LR',
-      'MRI-CGCM3',
-      'NCAR-CCSM4',
+      'GFDL CM3',
+      'GISS E2-R',
+      'IPSL CM5A-LR',
+      'MRI CGCM3',
+      'NCAR CCSM4',
     ]
   },
   scenarios() {

@@ -9,13 +9,13 @@
         <b-radio
           v-model="veg_maps_model_selection"
           name="veg_maps_model_selection"
-          native-value="1"
+          native-value="5"
           >NCAR CCSM4</b-radio
         >
         <b-radio
           v-model="veg_maps_model_selection"
           name="veg_maps_model_selection"
-          native-value="5"
+          native-value="4"
           >MRI CGCM3</b-radio
         >
       </b-field>
@@ -118,7 +118,7 @@ export default {
   },
   data() {
     return {
-      veg_maps_model_selection: 1,
+      veg_maps_model_selection: 5,
     }
   },
 }
