@@ -39,7 +39,7 @@ export default {
     ...mapGetters({
       latLng: 'place/latLng',
       geoJSON: 'place/geoJSON',
-      eras: 'wildfire/eras',
+      eras: 'wildfire/flammabilityEras',
       models: 'wildfire/flammabilityModels',
       scenarios: 'wildfire/scenarios',
     }),

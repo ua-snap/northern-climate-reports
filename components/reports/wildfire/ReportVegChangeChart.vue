@@ -60,6 +60,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      vegEras: 'wildfire/vegEras',
       vegChangeData: 'wildfire/veg_change',
       vegTypes: 'wildfire/vegTypes',
       place: 'place/name',
@@ -103,8 +104,7 @@ export default {
 
       Object.keys(this.vegTypes).forEach(type => {
         let yValues = []
-        let eras = ['1950-2008', '2010-2039', '2040-2069', '2070-2099']
-        eras.forEach(era => {
+        this.vegEras.forEach(era => {
           if (era == '1950-2008') {
             yValues.push(vegChangeData[era]['MODEL-SPINUP']['historical'][type])
           } else {
@@ -128,7 +128,7 @@ export default {
             symbol: symbols[type],
             color: this.vegTypes[type]['color'],
           },
-          x: eras,
+          x: this.vegEras,
           y: [yValues[0]],
         }
 
@@ -143,7 +143,7 @@ export default {
             symbol: symbols[type],
             color: this.vegTypes[type]['color'],
           },
-          x: eras,
+          x: this.vegEras,
           y: [null].concat(yValues.slice(1)),
           customdata: [null],
         }

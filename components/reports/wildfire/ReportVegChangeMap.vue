@@ -39,7 +39,7 @@ export default {
     ...mapGetters({
       latLng: 'place/latLng',
       geoJSON: 'place/geoJSON',
-      eras: 'wildfire/eras',
+      vegEras: 'wildfire/vegEras',
       models: 'wildfire/vegModels',
       scenarios: 'wildfire/scenarios',
     }),
@@ -47,7 +47,7 @@ export default {
       return 'veg_change_' + this.scenario + '_' + this.model + '_' + this.era
     },
     mapEra() {
-      return this.eras[this.era]
+      return this.vegEras[this.era]
     },
     mapModel() {
       if (this.models[this.model] != '') {
