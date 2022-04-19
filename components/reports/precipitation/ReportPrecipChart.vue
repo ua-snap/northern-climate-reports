@@ -60,7 +60,7 @@ export default {
       dataTraces = dataTraces.concat(projectedTraces)
 
       let title =
-        'Historical and projected precipitation (' + seasons[this.season] + ')'
+        'Precipitation, ' + this.place + ', 1950-2099, ' + seasons[this.season]
       let yAxisLabel = 'Precipitation (' + units + ')'
       let layout = getLayout(title, yAxisLabel)
 

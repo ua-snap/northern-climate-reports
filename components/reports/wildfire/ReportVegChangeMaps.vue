@@ -1,8 +1,8 @@
 <template>
   <section class="section">
     <h5 class="minimaps-section-title has-text-centered">
-      Vegetation change,
-      <span v-html="place"></span>
+      Vegetation type,
+      <span v-html="place"></span>, 1950&ndash;2099
     </h5>
     <div class="is-size-6 mb-4">
       <b-field label="Model">

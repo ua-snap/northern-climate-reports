@@ -16,7 +16,7 @@ import {
   getHistoricalTrace,
   getHistoricalRegion,
   getProjectedTraces,
-  seasons
+  seasons,
 } from '../../../utils/climate_charts'
 
 export default {
@@ -67,7 +67,11 @@ export default {
       dataTraces = dataTraces.concat(projectedTraces)
 
       let title =
-        'Historical and projected temperature (' + seasons[this.season] + ')'
+        'Temperature, ' +
+        this.place +
+        ', 1950-2099, ' +
+        seasons[this.season]
+
       let yAxisLabel = 'Temperature (' + units + ')'
       let layout = getLayout(title, yAxisLabel)
 

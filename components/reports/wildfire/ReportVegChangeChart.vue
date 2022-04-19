@@ -83,7 +83,7 @@ export default {
         return
       }
 
-      let title = 'Vegetation type, ' + this.place
+      let title = 'Vegetation type, ' + this.place + ', 1950-2099'
       let yAxisLabel = 'Vegetation type coverage (%)'
       let layout = getLayout(title, yAxisLabel)
 
