@@ -128,7 +128,6 @@ export default {
     ifBordered(index) {
       // Add border around pale colors to increase visibility
       let bordered = [0]
-      console.log(index)
       return _.includes(bordered, index)
     },
   },
