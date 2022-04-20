@@ -21,7 +21,7 @@ export const getBaseMapAndLayers = function () {
   var config = {
     zoom: 0,
     minZoom: 0,
-    maxZoom: 7,
+    maxZoom: 6,
     center: [64.7, -155],
     scrollWheelZoom: false,
     dragging: false,
