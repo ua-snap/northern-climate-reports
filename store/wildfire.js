@@ -94,35 +94,35 @@ export const getters = {
       },
       barren_lichen_moss: {
         label: 'Barren/Lichen/Moss',
-        color: '#ff7f00',
+        color: '#616161',
       },
       black_spruce: {
         label: 'Black Spruce',
-        color: '#1f78b4',
+        color: '#035500',
       },
       deciduous_forest: {
         label: 'Deciduous Forest',
-        color: '#33a02c',
+        color: '#dcdc67',
       },
       graminoid_tundra: {
         label: 'Graminoid Tundra',
-        color: '#e31a1c',
+        color: '#b9ba85',
       },
       shrub_tundra: {
         label: 'Shrub Tundra',
-        color: '#fb9a99',
+        color: '#abab02',
       },
       temperate_rainforest: {
         label: 'Temperate Rainforest',
-        color: '#cab2d6',
+        color: '#448844',
       },
       wetland_tundra: {
         label: 'Wetland Tundra',
-        color: '#fdbf6f',
+        color: '#7fc5da',
       },
       white_spruce: {
         label: 'White Spruce',
-        color: '#b2df8a',
+        color: '#51ab00',
       },
     }
   },
