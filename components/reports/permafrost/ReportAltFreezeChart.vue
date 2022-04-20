@@ -43,7 +43,7 @@ export default {
 
       let units = this.units == 'metric' ? 'm' : 'in'
       let precision = this.units == 'metric' ? 2 : 1
-      let title = 'Ground freeze depth, ' + this.place
+      let title = 'Ground freeze depth,<br>' + this.place + ', 1995-2100'
       let yAxisLabel = 'Depth (' + units + ')'
       let layout = getLayout(title, yAxisLabel)
       let dataTraces = []
