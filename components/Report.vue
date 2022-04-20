@@ -1,6 +1,6 @@
 <template>
   <div id="results" class="container">
-    <BackButton/>
+    <BackButton />
     <hr />
     <section v-if="$fetchState.pending" class="section content">
       <!-- Drama dots -->
@@ -39,12 +39,16 @@
             <span v-if="type == 'latLng'"
               >The <span v-if="climateData">tables and </span>charts below are
               specific to the gridded data extracted at
-              <span v-html="place"></span>.  The polygon region on the map corresponds to the nearest watershed (hydrological unit, level 12).</span
+              <span v-html="place"></span>. The polygon region on the map
+              corresponds to the nearest watershed (hydrological unit, level
+              12).</span
             >
             <span v-else-if="type == 'community'"
               >The <span v-if="climateData">tables and </span>charts below are
               specific to the gridded data extracted from the location of
-              <span v-html="place"></span>.  The polygon region on the map corresponds to the nearest watershed (hydrological unit, level 12).</span
+              <span v-html="place"></span>. The polygon region on the map
+              corresponds to the nearest watershed (hydrological unit, level
+              12).</span
             >
             <span v-else
               >Data for the tables and charts below have been averaged across
@@ -148,6 +152,9 @@
             </li>
           </ul>
         </div>
+      </section>
+      <section class="content">
+        <BetaFeedback />
       </section>
       <section class="section content py-0 large-screen" v-if="dataMissing">
         <div class="is-size-5">

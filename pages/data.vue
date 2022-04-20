@@ -1,6 +1,9 @@
 <template>
   <section class="section">
     <div class="content-wrapper">
+
+      <BetaFeedback />
+
       <div class="content is-size-5">
         <ul class="toc">
           <li>
