@@ -64,6 +64,7 @@ export default {
       permafrostPresent: 'permafrost/present',
       permafrostDisappears: 'permafrost/disappears',
       flammabilityData: 'wildfire/flammability',
+      flamThresholds: 'wildfire/flammabilityThresholds',
       vegChangeData: 'wildfire/veg_change',
       showWildfires: 'wildfire/valid',
     }),
@@ -310,23 +311,20 @@ export default {
       return string
     },
     wildfireString() {
-      var categoryFromFlam = function (flam) {
-        // Remove this if the data sculpting to convert
-        // raw ALF into %s is removed elsewhere.
-        flam = flam / 100
-
-        if (flam < 0.002) return 'very low'
-        if (flam >= 0.002 && flam < 0.005) return 'low'
-        if (flam >= 0.005 && flam < 0.01) return 'moderate'
-        if (flam >= 0.01 && flam < 0.02) return 'high'
-        if (flam >= 0.02) return 'very high'
+      var categoryFromFlam = flam => {
+        let label
+        this.flamThresholds.forEach(threshold => {
+          if (flam >= threshold['min'] && flam < threshold['max']) {
+            label = threshold['label'].toLowerCase()
+          }
+        })
+        return label
       }
 
-      var isModerateOrMore = function (flam) {
-        // Remove this if the data sculpting to convert
-        // raw ALF into %s is removed elsewhere.
-        flam = flam / 100
-        return flam >= 0.005
+      var isModerateOrMore = flam => {
+        let results = this.flamThresholds.filter(x => x['label'] == 'Moderate')
+        let moderate = _.first(results)
+        return flam >= moderate['min']
       }
 
       let historicalFlam = this.flammabilityData['1980-2008']['MODEL-SPINUP'][
