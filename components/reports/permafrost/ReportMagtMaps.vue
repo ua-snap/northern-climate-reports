@@ -2,7 +2,7 @@
   <section class="section">
     <h5 class="minimaps-section-title has-text-centered">
       Mean annual ground temperature,
-      <span v-html="place"></span>
+      <span v-html="place"></span>, 1995&ndash;2100
     </h5>
     <div class="is-size-6 mb-4">
       <b-field label="Model">

@@ -23,6 +23,8 @@ export default {
       flammabilityData: 'wildfire/flammability',
       flamThresholds: 'wildfire/flammabilityThresholds',
       place: 'place/name',
+      isPointLocation: 'place/isPointLocation',
+      huc12Id: 'wildfire/huc12Id',
     }),
   },
   watch: {
@@ -37,7 +39,11 @@ export default {
         return
       }
 
-      let title = 'Flammability, ' + this.place
+      let name = this.isPointLocation
+        ? '<br>' + this.place + ' (HUC12 ID ' + this.huc12Id + ')'
+        : this.place
+
+      let title = 'Flammability, ' + name + ', 1950-2099'
       let yAxisLabel = 'Annual chance of burning (%)'
       let layout = getLayout(title, yAxisLabel)
 

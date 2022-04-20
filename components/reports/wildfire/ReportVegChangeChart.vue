@@ -64,6 +64,8 @@ export default {
       vegChangeData: 'wildfire/veg_change',
       vegTypes: 'wildfire/vegTypes',
       place: 'place/name',
+      isPointLocation: 'place/isPointLocation',
+      huc12Id: 'wildfire/huc12Id',
     }),
   },
   watch: {
@@ -84,7 +86,10 @@ export default {
         return
       }
 
-      let title = 'Vegetation type, ' + this.place
+      // Put the name of the HUC12 if it's a point location.
+      let name = this.isPointLocation ? '<br>' + this.place + ' (HUC12 ID ' + this.huc12Id + ')' : this.place
+
+      let title = 'Vegetation type, ' + name + ', 1950-2099'
       let yAxisLabel = 'Vegetation type coverage (%)'
       let layout = getLayout(title, yAxisLabel)
 

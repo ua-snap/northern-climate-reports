@@ -43,7 +43,7 @@ export default {
 
       let units = this.units == 'metric' ? 'm' : 'in'
       let precision = this.units == 'metric' ? 2 : 1
-      let title = 'Active layer thickness, ' + this.place
+      let title = 'Active layer thickness,<br>' + this.place + ', 1995-2100'
       let yAxisLabel = 'Thickness (' + units + ')'
       let layout = getLayout(title, yAxisLabel)
       let dataTraces = []
