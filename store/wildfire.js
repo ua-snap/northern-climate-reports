@@ -13,8 +13,11 @@ export const state = () => ({
 })
 
 export const getters = {
-  eras() {
+  flammabilityEras() {
     return ['1950-1979', '1980-2008', '2010-2039', '2040-2069', '2070-2099']
+  },
+  vegEras() {
+    return ['1950-2008', '2010-2039', '2040-2069', '2070-2099']
   },
   vegModels() {
     return [
