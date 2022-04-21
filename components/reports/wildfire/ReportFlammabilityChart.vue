@@ -5,14 +5,19 @@
 </template>
 <style lang="scss" scoped>
 .wildfire-chart-wrapper {
-  width: 850px;
+  width: 910px;
   margin: 0 auto;
 }
 </style>
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
-import { getPlotSettings, getLayout, getFooter } from '~/utils/charts'
+import {
+  getPlotSettings,
+  buildTitle,
+  getLayout,
+  getFooter,
+} from '~/utils/charts'
 export default {
   name: 'ReportFlammabilityChart',
   mounted() {
@@ -39,11 +44,14 @@ export default {
         return
       }
 
-      let name = this.isPointLocation
-        ? '<br>' + this.place + ' (HUC12 ID ' + this.huc12Id + ')'
-        : this.place
+      let title = buildTitle(
+        'Flammability',
+        '1950-2099',
+        this.place,
+        this.huc12Id,
+        this.isPointLocation
+      )
 
-      let title = 'Flammability, ' + name + ', 1950-2099'
       let yAxisLabel = 'Annual chance of burning (%)'
       let layout = getLayout(title, yAxisLabel)
 

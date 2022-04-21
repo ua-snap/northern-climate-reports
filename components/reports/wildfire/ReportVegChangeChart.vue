@@ -39,14 +39,19 @@
 </template>
 <style lang="scss" scoped>
 .wildfire-chart-wrapper {
-  width: 698px;
+  width: 730px;
   margin: 0 auto;
 }
 </style>
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
-import { getPlotSettings, getLayout, getFooter } from '~/utils/charts'
+import {
+  getPlotSettings,
+  buildTitle,
+  getLayout,
+  getFooter,
+} from '~/utils/charts'
 export default {
   name: 'ReportVegChangeChart',
   mounted() {
@@ -86,10 +91,14 @@ export default {
         return
       }
 
-      // Put the name of the HUC12 if it's a point location.
-      let name = this.isPointLocation ? '<br>' + this.place + ' (HUC12 ID ' + this.huc12Id + ')' : this.place
+      let title = buildTitle(
+        'Vegetation type',
+        '1950-2099',
+        this.place,
+        this.huc12Id,
+        this.isPointLocation
+      )
 
-      let title = 'Vegetation type, ' + name + ', 1950-2099'
       let yAxisLabel = 'Vegetation type coverage (%)'
       let layout = getLayout(title, yAxisLabel)
 
