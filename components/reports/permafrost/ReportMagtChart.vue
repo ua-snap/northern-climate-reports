@@ -49,11 +49,11 @@ export default {
       let units = this.units == 'metric' ? 'ºC' : 'ºF'
       let precision = this.units == 'metric' ? 2 : 1
 
-      let title = buildTitle(
-        'Mean annual ground temperature',
-        '1950-2100',
-        this.place
-      )
+      let title = buildTitle({
+        dataLabel: 'Mean annual ground temperature',
+        dateRange: '1950-2100',
+        place: this.place,
+      })
 
       let yAxisLabel = 'Temperature (' + units + ')'
       let layout = getLayout(title, yAxisLabel)

@@ -16,19 +16,23 @@ export const getPlotSettings = function () {
   }
 }
 
-export const buildTitle = function (
-  dataLabel,
-  dateRange,
-  place,
-  huc12Id = null,
-  isPointLocation = false
-) {
+export const buildTitle = function (params) {
+  let dataLabel = params['dataLabel']
+  let dateRange = params['dateRange']
+  let place = params['place']
+  let huc12Id = params['huc12Id']
+  let season = params['season']
+
   let title = dataLabel + ',<br>'
   let huc12Label = ''
   if (huc12Id) {
     huc12Label = '(HUC12 ID ' + huc12Id + ')'
   }
   let totalLength = place.length + huc12Label.length + dateRange.length
+
+  if (season) {
+    totalLength += season.length
+  }
 
   if (totalLength > 60) {
     title += place
@@ -50,6 +54,10 @@ export const buildTitle = function (
       title += ' ' + huc12Label
     }
     title += ', ' + dateRange
+  }
+
+  if (season) {
+    title += ', ' + season
   }
 
   return title

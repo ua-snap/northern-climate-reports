@@ -6,13 +6,18 @@
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
-import { getPlotSettings, getLayout, getFooter } from '../../../utils/charts'
+import {
+  getPlotSettings,
+  buildTitle,
+  getLayout,
+  getFooter,
+} from '~/utils/charts'
 import {
   getHistoricalTrace,
   getHistoricalLine,
   getProjectedTraces,
   detectEmptyColumns,
-} from '../../../utils/permafrost_charts'
+} from '~/utils/permafrost_charts'
 
 export default {
   name: 'ReportAltThawChart',
@@ -43,7 +48,13 @@ export default {
 
       let units = this.units == 'metric' ? 'm' : 'in'
       let precision = this.units == 'metric' ? 2 : 1
-      let title = 'Active layer thickness,<br>' + this.place + ', 1995-2100'
+
+      let title = buildTitle({
+        dataLabel: 'Active layer thickness',
+        dateRange: '1995-2100',
+        place: this.place,
+      })
+
       let yAxisLabel = 'Thickness (' + units + ')'
       let layout = getLayout(title, yAxisLabel)
       let dataTraces = []
