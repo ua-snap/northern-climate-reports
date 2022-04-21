@@ -74,7 +74,7 @@ export const getters = {
         max: 2.0,
         color: '#e34a33',
         interpretation:
-          'Fire is frequent, and likely to define the vegetation patterns on this landscape',
+          'Fire is more frequent and more dominant in determining vegetation patterns on this landscape',
       },
       {
         label: 'Very High',
@@ -82,7 +82,7 @@ export const getters = {
         max: 100.0,
         color: '#b30000',
         interpretation:
-          'Fire is extremely frequent, and defines the vegetation patterns on this landscape',
+          'Fire is highly frequent and dominates the vegetation patterns on this landscape',
       },
     ]
   },
