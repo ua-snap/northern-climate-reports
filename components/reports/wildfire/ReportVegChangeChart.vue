@@ -39,7 +39,7 @@
 </template>
 <style lang="scss" scoped>
 .wildfire-chart-wrapper {
-  width: 698px;
+  width: 730px;
   margin: 0 auto;
 }
 </style>

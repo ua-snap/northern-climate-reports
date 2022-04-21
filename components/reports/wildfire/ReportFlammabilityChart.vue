@@ -5,7 +5,7 @@
 </template>
 <style lang="scss" scoped>
 .wildfire-chart-wrapper {
-  width: 850px;
+  width: 910px;
   margin: 0 auto;
 }
 </style>
