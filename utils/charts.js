@@ -16,7 +16,48 @@ export const getPlotSettings = function () {
   }
 }
 
-export const getLayout = function (title, yAxisLabel, height = 500) {
+export const buildTitle = function (
+  dataLabel,
+  dateRange,
+  place,
+  huc12Id = null,
+  isPointLocation = false
+) {
+  let title = dataLabel + ',<br>'
+  let huc12Label = ''
+  if (huc12Id) {
+    huc12Label = '(HUC12 ID ' + huc12Id + ')'
+  }
+  let totalLength = place.length + huc12Label.length + dateRange.length
+
+  if (totalLength > 60) {
+    title += place + '<br>'
+    if (huc12Label != '') {
+      title += ' ' + huc12Label
+    }
+    title += ', ' + dateRange
+  } else if (totalLength > 50) {
+    title += place
+    if (huc12Label != '') {
+      title += ' ' + huc12Label
+    }
+    title += ',<br>' + dateRange
+  } else {
+    title += place
+    if (huc12Label != '') {
+      title += ' ' + huc12Label
+    }
+    title += ', ' + dateRange
+  }
+
+  return title
+}
+
+export const getLayout = function (title, yAxisLabel) {
+  let titleLineCount = title.split('<br>').length
+  let titleOffset = 40 * titleLineCount
+  let chartHeight = 450 + titleOffset
+
   return {
     xaxis: {
       showgrid: false,
@@ -37,6 +78,7 @@ export const getLayout = function (title, yAxisLabel, height = 500) {
       font: {
         size: 24,
       },
+      y: 0.93 - titleLineCount / 100,
     },
     shapes: [],
     hovermode: 'x unified',
@@ -49,9 +91,10 @@ export const getLayout = function (title, yAxisLabel, height = 500) {
       x: 1.03,
     },
     margin: {
+      t: 30 + titleOffset,
       b: 120,
     },
-    height: height,
+    height: chartHeight,
     dragmode: false,
   }
 }
