@@ -31,11 +31,13 @@ export const buildTitle = function (
   let totalLength = place.length + huc12Label.length + dateRange.length
 
   if (totalLength > 60) {
-    title += place + '<br>'
+    title += place
     if (huc12Label != '') {
-      title += ' ' + huc12Label
+      title += '<br>' + huc12Label + ', '
+    } else {
+      title += ',<br>'
     }
-    title += ', ' + dateRange
+    title += dateRange
   } else if (totalLength > 50) {
     title += place
     if (huc12Label != '') {
