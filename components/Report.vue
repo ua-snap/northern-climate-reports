@@ -65,6 +65,24 @@
             {{ elevation.max }}{{ elevationUnits }}, which should be kept in
             mind when interpreting these results.
           </p>
+          <div v-if="!isPointLocation" class="area-warning">
+            <p>
+              <strong>Note</strong>: for large areas such as climate divisions,
+              ethnolinguistic regions, or large protected areas, averaging
+              future climate conditions and changes can mask important variation
+              within the region. This is especially true for variables such as
+              snowpack or permafrost and for any variable in mountainous
+              regions.
+            </p>
+            <p>
+              Apply contextual and local knowledge to assess ecological
+              variability over large areas. To do this using this tool you may
+              wish to select a report for the larger region of interest and then
+              select reports for multiple smaller representative regions within
+              the original area to highlight the overarching conditions as well
+              as smaller scale variation.
+            </p>
+          </div>
           <p>
             The sections below show output from different scientific simulations
             of possible future conditions for {{ presentDataTypesString }}.
@@ -228,6 +246,11 @@
   </div>
 </template>
 <style lang="scss" scoped>
+  .area-warning {
+    border-left: 0.25rem solid #aaa;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+  }
 .centered {
   text-align: center;
 }
@@ -343,6 +366,7 @@ export default {
       permafrostHttpError: 'permafrost/httpError',
       flammabilityHttpError: 'wildfire/flammabilityHttpError',
       vegChangeHttpError: 'wildfire/vegChangeHttpError',
+      isPointLocation: 'place/isPointLocation',
     }),
   },
   // This component initiates the data fetching so that
