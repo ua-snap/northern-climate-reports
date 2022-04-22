@@ -41,6 +41,9 @@
 </template>
 
 <style lang="scss" scoped>
+.content table th:not([align]) {
+  text-align: left;
+}
 .numbers {
   font-family: 'IBM Plex Mono', monospace;
   vertical-align: middle;
