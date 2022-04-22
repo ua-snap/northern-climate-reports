@@ -91,13 +91,12 @@ export default {
         return
       }
 
-      let title = buildTitle(
-        'Vegetation type',
-        '1950-2099',
-        this.place,
-        this.huc12Id,
-        this.isPointLocation
-      )
+      let title = buildTitle({
+        dataLabel: 'Vegetation type',
+        dateRange: '1950-2099',
+        place: this.place,
+        huc12Id: this.huc12Id,
+      })
 
       let yAxisLabel = 'Vegetation type coverage (%)'
       let layout = getLayout(title, yAxisLabel)
