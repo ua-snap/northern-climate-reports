@@ -6,7 +6,10 @@
         <div v-if="reportData">
           <span
             v-show="
-              permafrostPresent && permafrostDisappears && !permafrostUncertain
+              permafrostPresent &&
+              permafrostDisappears &&
+              !permafrostUncertain &&
+              !noFreeze
             "
           >
             Historical data and model projections indicate that
@@ -18,14 +21,19 @@
           </span>
           <span
             v-show="
-              permafrostPresent && !permafrostDisappears && !permafrostUncertain
+              permafrostPresent &&
+              !permafrostDisappears &&
+              !permafrostUncertain &&
+              !noFreeze
             "
             >Historical data and model projections indicate that
             <strong>this place has permafrost.</strong>
           </span>
           <span
             v-show="
-              !permafrostPresent && permafrostDisappears && !permafrostUncertain
+              !permafrostPresent &&
+              (permafrostDisappears || noFreeze) &&
+              !permafrostUncertain
             "
           >
             <strong>
@@ -51,11 +59,8 @@
         </div>
         <div class="mt-5">
           The following maps show the historical and projected mean annual
-          ground temperature (MAGT) over time. In these model outputs, MAGT is
-          projected for the top of the permafrost layer, the depth of which
-          varies by location. Red represents temperatures above freezing, blue
-          represents temperatures below freezing, and white represents
-          temperatures near the freezing point.
+          ground temperature over time. This is the temperature of the soil
+          directly above the permafrost layer.
         </div>
       </div>
     </div>
@@ -102,7 +107,7 @@
             shown below. Ground freeze is the maximum depth to which winter
             freeze occurs in non-permafrost areas.
           </span>
-          <span v-show="permafrostUncertain"
+          <span v-show="permafrostUncertain || noFreeze"
             >A chart of the historical and projected mean annual ground
             temperature is provided below.
           </span>
@@ -114,7 +119,7 @@
       <div class="chart" v-show="this.permafrostDisappears">
         <ReportAltFreezeChart />
       </div>
-      <div class="chart" v-show="this.permafrostUncertain">
+      <div class="chart" v-show="this.permafrostUncertain || this.noFreeze">
         <ReportMagtChart />
       </div>
       <DownloadCsvButton
@@ -180,6 +185,7 @@ export default {
       permafrostPresent: 'permafrost/present',
       permafrostDisappears: 'permafrost/disappears',
       permafrostUncertain: 'permafrost/uncertain',
+      noFreeze: 'permafrost/noFreeze',
       magtThresholds: 'permafrost/magtThresholds',
     }),
   },

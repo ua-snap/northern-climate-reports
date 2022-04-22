@@ -69,20 +69,45 @@ export default {
       let projectedTraces = getProjectedTraces(magtData, units, precision)
       dataTraces = dataTraces.concat(projectedTraces)
 
-      layout.shapes.push({
-        type: 'rect',
-        x0: 0,
-        x1: 1,
-        xref: 'paper',
-        y0: freezing - uncertaintyOffset,
-        y1: freezing + uncertaintyOffset,
-        yref: 'y',
-        line: {
-          width: 0,
+      let uncertaintyRectMin = freezing - uncertaintyOffset
+      let uncertaintyRectMax = freezing + uncertaintyOffset
+
+      // Determine if any of the scatter markers are within the uncertainty zone
+      // before drawing the uncertainty rectangle. Otherwise it will stretch out
+      // the y-axis of the chart.
+      let withinUncertainty = _.reduceDeep(
+        magtData,
+        (acc, value) => {
+          if (acc == true) {
+            return acc
+          }
+          if (_.inRange(value, uncertaintyRectMin, uncertaintyRectMax)) {
+            return true
+          } else {
+            return false
+          }
         },
-        fillcolor: '#cccccc',
-        opacity: 0.2,
-      })
+        {
+          leavesOnly: true,
+        }
+      )
+
+      if (withinUncertainty) {
+        layout.shapes.push({
+          type: 'rect',
+          x0: 0,
+          x1: 1,
+          xref: 'paper',
+          y0: uncertaintyRectMin,
+          y1: uncertaintyRectMax,
+          yref: 'y',
+          line: {
+            width: 0,
+          },
+          fillcolor: '#cccccc',
+          opacity: 0.2,
+        })
+      }
 
       let footerLines = [
         'Projected values are taken from GIPL 2.0 model output.',

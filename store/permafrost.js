@@ -12,6 +12,7 @@ var getProcessedData = function (permafrostData) {
   let permafrostPresent = false
   let permafrostDisappears = false
   let permafrostUncertain = false
+  let noFreeze = false
 
   let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
   let scenarios = ['rcp45', 'rcp85']
@@ -21,6 +22,28 @@ var getProcessedData = function (permafrostData) {
     permafrostData['gipl']['1995']['cruts31']['historical']['alt']
   let historicalMagt =
     permafrostData['gipl']['1995']['cruts31']['historical']['magt']
+
+  // If there are no ALT values, there is no permafrost and no ground freeze at
+  // this location.
+  noFreeze = _.reduceDeep(
+    permafrostData,
+    (acc, value, key) => {
+      if (acc == false) {
+        return acc
+      }
+      if (key == 'alt') {
+        if (value == null) {
+          return true
+        } else {
+          return false
+        }
+      }
+      return true
+    },
+    {
+      leavesOnly: true,
+    }
+  )
 
   // We cannot determine presence/absence of permafrost when the magnitude of
   // the historical MAGT value is very small.
@@ -55,7 +78,7 @@ var getProcessedData = function (permafrostData) {
         let scenarioAlt = permafrostData['gipl'][year][model][scenario]['alt']
         let scenarioMagt = permafrostData['gipl'][year][model][scenario]['magt']
 
-        if (permafrostUncertain) {
+        if (permafrostUncertain || noFreeze) {
           magtData[year][model][scenario] = scenarioMagt
           return
         }
@@ -99,6 +122,7 @@ var getProcessedData = function (permafrostData) {
     present: permafrostPresent,
     disappears: permafrostDisappears,
     uncertain: permafrostUncertain,
+    noFreeze: noFreeze,
     thawData: categorizedData['thaw'],
     freezeData: categorizedData['freeze'],
     magtData: magtData,
@@ -118,6 +142,8 @@ export const state = () => ({
   present: undefined,
   // True if presence/absence of permafrost cannot be determined
   uncertain: undefined,
+  // True if permafrost is not present and the ground does not freeze
+  noFreeze: undefined,
 
   httpError: null,
 })
@@ -227,6 +253,9 @@ export const getters = {
   uncertain(state) {
     return state.uncertain
   },
+  noFreeze(state) {
+    return state.noFreeze
+  },
 
   // Returns true if there's "valid" permafrost data here, i.e.
   // Permafrost was present historically.
@@ -246,10 +275,14 @@ export const getters = {
         return false
       }
 
-      // If permafrost is currently present, or was present, and was
-      // successfully sorted into one or more of the three possible categories,
-      // this is true.
-      if (state.present || state.disappears || state.uncertain) {
+      // If permafrost data was successfully sorted into one or more of the four
+      // possible categories, this is true.
+      if (
+        state.present ||
+        state.disappears ||
+        state.uncertain ||
+        state.noFreeze
+      ) {
         return true
       }
     }
@@ -282,6 +315,9 @@ export const mutations = {
   setUncertain(state, uncertain) {
     state.uncertain = uncertain
   },
+  setNoFreeze(state, noFreeze) {
+    state.noFreeze = noFreeze
+  },
   clear(state) {
     state.permafrostData = undefined
     state.altThaw = undefined
@@ -290,6 +326,7 @@ export const mutations = {
     state.disappears = undefined
     state.present = undefined
     state.uncertain = undefined
+    state.noFreeze = undefined
   },
   setHttpError(state, error) {
     state.httpError = error
@@ -322,6 +359,7 @@ export const actions = {
             context.commit('setDisappears', processedData.disappears)
             context.commit('setMagt', processedData.magtData)
             context.commit('setUncertain', processedData.uncertain)
+            context.commit('setNoFreeze', processedData.noFreeze)
           } else {
             context.commit('setHttpError', 'no_data')
           }
