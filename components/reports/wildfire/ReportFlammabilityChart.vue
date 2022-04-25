@@ -181,7 +181,7 @@ export default {
             projectedTrace['customdata'].push(diff)
           })
 
-          projectedTrace['hovertemplate'] = '%{y:.2f}% <b>(%{customdata}%)</b>'
+          projectedTrace['hovertemplate'] = '%{y:.2f}% <b>(%{customdata})</b>'
           dataTraces.push(projectedTrace)
         })
       })
