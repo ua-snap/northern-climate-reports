@@ -90,7 +90,7 @@ export const getters = {
     return {
       not_modeled: {
         label: 'Not Modeled',
-        color: '#ffffff',
+        color: '#f8faf0',
       },
       barren_lichen_moss: {
         label: 'Barren/Lichen/Moss',

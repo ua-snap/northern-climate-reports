@@ -19,20 +19,6 @@
           >
         </div>
       </b-field>
-      <b-field label="Scenario" class="px-3">
-        <b-radio
-          v-model="veg_scenario_selection"
-          name="veg_scenario_selection"
-          native-value="rcp45"
-          >RCP 4.5</b-radio
-        >
-        <b-radio
-          v-model="veg_scenario_selection"
-          name="veg_scenario_selection"
-          native-value="rcp85"
-          >RCP 8.5</b-radio
-        >
-      </b-field>
     </div>
     <div id="wildfire-veg-change-chart" />
   </div>
@@ -100,79 +86,65 @@ export default {
 
       let yAxisLabel = 'Vegetation type coverage (%)'
       let layout = getLayout(title, yAxisLabel)
+      layout['barmode'] = 'stack'
+      layout['hoverlabel']['bgcolor'] = '#fff'
+      layout['hoverlabel']['color'] = '#000'
+      layout['xaxis']['showdividers'] = false
+      layout['yaxis']['hovermode'] = 'closest'
 
       let dataTraces = []
 
-      let symbols = {
-        not_modeled: 'circle',
-        barren_lichen_moss: 'square',
-        black_spruce: 'diamond',
-        deciduous_forest: 'cross',
-        graminoid_tundra: 'x',
-        shrub_tundra: 'triangle-up',
-        temperate_rainforest: 'triangle-down',
-        wetland_tundra: 'pentagon',
-        white_spruce: 'hexagon',
-      }
-
       Object.keys(this.vegTypes).forEach(type => {
+        // Don't include "not modeled" here.
+        if (type == 'not_modeled') {
+          return
+        }
+
         let yValues = []
         this.vegEras.forEach(era => {
           if (era == '1950-2008') {
             yValues.push(vegChangeData[era]['MODEL-SPINUP']['historical'][type])
           } else {
             yValues.push(
-              vegChangeData[era][this.veg_chart_model_selection][
-                this.veg_scenario_selection
-              ][type]
+              vegChangeData[era][this.veg_chart_model_selection]['rcp45'][type]
+            )
+            yValues.push(
+              vegChangeData[era][this.veg_chart_model_selection]['rcp85'][type]
             )
           }
         })
 
-        let historicalTrace = {
-          type: 'scatter',
-          mode: 'markers',
+        let trace = {
+          type: 'bar',
           name: this.vegTypes[type]['label'],
-          hoverinfo: 'x+y+z+text',
-          hovertemplate: '%{y:.2f}%',
-          showlegend: false,
           marker: {
-            size: 8,
-            symbol: symbols[type],
             color: this.vegTypes[type]['color'],
           },
-          x: this.vegEras,
-          y: [yValues[0]],
+          hovertemplate: '<b>%{x}</b>: %{y:.2f}%',
+          x: [
+            [
+              '1950-2008',
+              '2010-2039',
+              '2010-2039',
+              '2040-2069',
+              '2040-2069',
+              '2070-2099',
+              '2070-2099',
+            ],
+            [
+              'Historical',
+              'RCP 4.5',
+              'RCP 8.5',
+              'RCP 4.5',
+              'RCP 8.5',
+              'RCP 4.5',
+              'RCP 8.5',
+            ],
+          ],
+          y: yValues,
         }
 
-        let projectedTrace = {
-          type: 'scatter',
-          mode: 'markers',
-          name: this.vegTypes[type]['label'],
-          hoverinfo: 'x+y+z+text',
-          hovertemplate: '%{y:.2f}% <b>(%{customdata}%)</b>',
-          marker: {
-            size: 8,
-            symbol: symbols[type],
-            color: this.vegTypes[type]['color'],
-          },
-          x: this.vegEras,
-          y: [null].concat(yValues.slice(1)),
-          customdata: [null],
-        }
-
-        let historicalValue = yValues[0]
-        yValues.slice(1).forEach(value => {
-          let diff = value - historicalValue
-          if (diff >= 0) {
-            diff = '+' + diff.toFixed(2)
-          } else {
-            diff = diff.toFixed(2)
-          }
-          projectedTrace['customdata'].push(diff)
-        })
-
-        dataTraces.push(historicalTrace, projectedTrace)
+        dataTraces.push(trace)
       })
 
       let footerLines = [
