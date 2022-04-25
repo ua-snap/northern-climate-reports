@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="content">
-      <h4 class="title is-3">Wildfire</h4>
+      <h4 class="title is-3">Wildfire: Flammability and Vegetation</h4>
       <div class="is-size-5 mb-6">
         <p>
           The following maps charts show the historical and projected
@@ -18,9 +18,13 @@
           historical time periods, are model ouputs.
         </p>
         <p v-if="this.isPointLocation">
-          Data shown in the charts below are for the region of the HUC 12 watershed which contains the
-          pixel location for <span v-html="place"></span> (HUC ID
-          <span v-html="huc12Id"></span>).
+          Data shown in the charts below are the <strong>average</strong> for
+          the watershed (HUC level 12 ID <span v-html="huc12Id"></span>) which
+          contains the pixel location for <span v-html="place"></span>.
+        </p>
+        <p>
+          Water, urbanized areas, and mountainous regions are not modeled in the
+          ALFRESCO models. Pixels which are not modeled are shown as white.
         </p>
         <p>
           <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
@@ -44,7 +48,12 @@
         :borderedColors="[0]"
       />
     </div>
-
+    <div class="content mt-6 pt-6">
+      <p class="is-size-5">
+        Hovering over the future eras shown on the chart shows the difference
+        between 1980&ndash;2009 and the future era.
+      </p>
+    </div>
     <div class="chart-wrapper">
       <ReportFlammabilityChart />
     </div>

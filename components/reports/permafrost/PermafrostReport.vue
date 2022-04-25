@@ -51,11 +51,11 @@
         </div>
         <div class="mt-5">
           The following maps show the historical and projected mean annual
-          ground temperature over time. This is the temperature of the soil
-          directly above the permafrost layer. Red represents temperatures above
-          freezing, blue represents temperatures below freezing, and white
-          represents temperatures near the freezing point. Darker reds represent
-          warmer temperatures. Darker blues represent colder temperatures.
+          ground temperature (MAGT) over time. In these model outputs, MAGT is
+          projected for the top of the permafrost layer, the depth of which
+          varies by location. Red represents temperatures above freezing, blue
+          represents temperatures below freezing, and white represents
+          temperatures near the freezing point.
         </div>
       </div>
     </div>
