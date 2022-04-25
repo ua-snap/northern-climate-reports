@@ -109,17 +109,20 @@ export const getLayout = function (title, yAxisLabel) {
   }
 }
 
-export const getFooter = function (footerLines, layout) {
+export const getFooter = function (footerLines, layout, dynamicWidth = true) {
   let footerOffset = 0.05 * footerLines.length
   let footerY = -0.2 - footerOffset
   let yAxisAnnotationX = -0.04
-  if (window.innerWidth < 1250) {
-    layout['xaxis'] = {
-      tickangle: 45,
+
+  if (dynamicWidth) {
+    if (window.innerWidth < 1250) {
+      layout['xaxis'] = {
+        tickangle: 45,
+      }
+      layout['margin']['b'] = 160
+      footerY = -0.4 - footerOffset
+      yAxisAnnotationX = -0.06
     }
-    layout['margin']['b'] = 160
-    footerY = -0.4 - footerOffset
-    yAxisAnnotationX = -0.06
   }
 
   return {

@@ -25,7 +25,7 @@
 </template>
 <style lang="scss" scoped>
 .wildfire-chart-wrapper {
-  width: 730px;
+  width: 840px;
   margin: 0 auto;
 }
 </style>
@@ -88,7 +88,6 @@ export default {
       let layout = getLayout(title, yAxisLabel)
       layout['barmode'] = 'stack'
       layout['xaxis']['showdividers'] = false
-      layout['hovermode'] = 'closest'
 
       let dataTraces = []
 
@@ -99,13 +98,20 @@ export default {
         }
 
         let yValues = []
+        yValues.push(
+          vegChangeData['1950-2008']['MODEL-SPINUP']['historical'][type]
+        )
+
         this.vegEras.forEach(era => {
-          if (era == '1950-2008') {
-            yValues.push(vegChangeData[era]['MODEL-SPINUP']['historical'][type])
-          } else {
+          if (era != '1950-2008') {
             yValues.push(
               vegChangeData[era][this.veg_chart_model_selection]['rcp45'][type]
             )
+          }
+        })
+
+        this.vegEras.forEach(era => {
+          if (era != '1950-2008') {
             yValues.push(
               vegChangeData[era][this.veg_chart_model_selection]['rcp85'][type]
             )
@@ -118,27 +124,15 @@ export default {
           marker: {
             color: this.vegTypes[type]['color'],
           },
-          hovertemplate: '<b>%{x}</b>: %{y:.2f}%',
+          hovertemplate: '%{y:.2f}%',
           x: [
-            
-            [
-              'Historical',
-              'RCP 4.5',
-              'RCP 8.5',
-              'RCP 4.5',
-              'RCP 8.5',
-              'RCP 4.5',
-              'RCP 8.5',
-            ],
-            [
-              '1950-2008',
-              '2010-2039',
-              '2010-2039',
-              '2040-2069',
-              '2040-2069',
-              '2070-2099',
-              '2070-2099',
-            ],
+            '1950-2008',
+            '2010-2039_rcp45',
+            '2040-2069_rcp45',
+            '2070-2099_rcp45',
+            '2010-2039_rcp85',
+            '2040-2069_rcp85',
+            '2070-2099_rcp85',
           ],
           y: yValues,
         }
@@ -146,11 +140,82 @@ export default {
         dataTraces.push(trace)
       })
 
+      layout['xaxis']['tickmode'] = 'array'
+
+      layout['xaxis']['tickvals'] = [
+        '1950-2008',
+        '2010-2039_rcp45',
+        '2040-2069_rcp45',
+        '2070-2099_rcp45',
+        '2010-2039_rcp85',
+        '2040-2069_rcp85',
+        '2070-2099_rcp85',
+      ]
+
+      // Override x-axis tick text to remove the _rcpXX suffix. RCP information
+      // is communicated through annotations instead.
+      layout['xaxis']['ticktext'] = [
+        '1950-2008',
+        '2010-2039',
+        '2040-2069',
+        '2070-2099',
+        '2010-2039',
+        '2040-2069',
+        '2070-2099',
+      ]
+
+      let rcpLinePadding = 0.4
+      let rcpLines = [
+        {
+          label: 'RCP 4.5',
+          xCenter: 2,
+        },
+        {
+          label: 'RCP 8.5',
+          xCenter: 5,
+        },
+      ]
+
+      rcpLines.forEach(rcpLine => {
+        layout.shapes.push({
+          type: 'line',
+          x0: rcpLine['xCenter'] - 1 - rcpLinePadding,
+          x1: rcpLine['xCenter'] + 1 + rcpLinePadding,
+          xref: 'x',
+          y0: -0.1,
+          y1: -0.1,
+          yref: 'paper',
+          line: {
+            width: 3,
+            color: '#666666',
+          },
+          layer: 'below',
+        })
+
+        layout.annotations.push({
+          x: rcpLine['xCenter'],
+          y: -0.19,
+          xref: 'x',
+          yref: 'paper',
+          showarrow: false,
+          text: rcpLine['label'],
+          textangle: '0',
+          font: {
+            size: 13,
+          },
+        })
+      })
+
       let footerLines = [
         'Projected and historical values are taken from ALFRESCO model output.',
       ]
 
-      let footer = getFooter(footerLines, layout)
+      let footer = getFooter(footerLines, layout, false)
+
+      // Add more vertical whitespace between chart and footer to make room
+      // for RCP lines and annotations.
+      footer['y'] -= 0.03
+
       layout.annotations.push(footer)
 
       let plotSettings = getPlotSettings()
