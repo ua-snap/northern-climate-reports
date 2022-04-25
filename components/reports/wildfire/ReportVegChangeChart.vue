@@ -87,10 +87,8 @@ export default {
       let yAxisLabel = 'Vegetation type coverage (%)'
       let layout = getLayout(title, yAxisLabel)
       layout['barmode'] = 'stack'
-      layout['hoverlabel']['bgcolor'] = '#fff'
-      layout['hoverlabel']['color'] = '#000'
       layout['xaxis']['showdividers'] = false
-      layout['yaxis']['hovermode'] = 'closest'
+      layout['hovermode'] = 'closest'
 
       let dataTraces = []
 
@@ -122,15 +120,7 @@ export default {
           },
           hovertemplate: '<b>%{x}</b>: %{y:.2f}%',
           x: [
-            [
-              '1950-2008',
-              '2010-2039',
-              '2010-2039',
-              '2040-2069',
-              '2040-2069',
-              '2070-2099',
-              '2070-2099',
-            ],
+            
             [
               'Historical',
               'RCP 4.5',
@@ -139,6 +129,15 @@ export default {
               'RCP 8.5',
               'RCP 4.5',
               'RCP 8.5',
+            ],
+            [
+              '1950-2008',
+              '2010-2039',
+              '2010-2039',
+              '2040-2069',
+              '2040-2069',
+              '2070-2099',
+              '2070-2099',
             ],
           ],
           y: yValues,
