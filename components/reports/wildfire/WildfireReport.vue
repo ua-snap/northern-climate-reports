@@ -48,7 +48,12 @@
         :borderedColors="[0]"
       />
     </div>
-
+    <div class="content mt-6 pt-6">
+      <p class="is-size-5">
+        Hovering over the future eras shown on the chart shows the difference
+        between 1980&ndash;2009 and the future era.
+      </p>
+    </div>
     <div class="chart-wrapper">
       <ReportFlammabilityChart />
     </div>
