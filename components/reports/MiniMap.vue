@@ -59,7 +59,26 @@ export default {
   methods: {
     addGeoJSONtoMap() {
       if (this.geoJSON) {
-        this.geoJSONLayer = L.geoJSON(this.geoJSON).addTo(this.map)
+        let displayedGeoJSON = _.cloneDeep(this.geoJSON)
+
+        // If this polygon crosses the antimeridian, move points from the far
+        // east to the far west. For example, a point with longitude 175 will be
+        // converted to -185. This is needed for Leaflet to draw the polygon
+        // correctly across the antimeridian.
+        let coordinates = displayedGeoJSON.geometry.coordinates
+        coordinates.forEach((coordinate, coordIdx) => {
+          coordinate.forEach((polygon, polyIdx) => {
+            polygon.forEach((point, pointIdx) => {
+              let latlng = coordinates[coordIdx][polyIdx][pointIdx]
+              if (latlng[0] > 0) {
+                coordinates[coordIdx][polyIdx][pointIdx][0] -= 360
+              }
+            })
+          })
+        })
+
+        let polygon = L.geoJSON(displayedGeoJSON)
+        this.geoJSONLayer = polygon.addTo(this.map)
         this.map.fitBounds(this.geoJSONLayer.getBounds())
       }
     },
