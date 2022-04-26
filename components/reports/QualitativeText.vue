@@ -3,8 +3,8 @@
     <div class="generated" v-html="qualitativeText"></div>
     <p class="about-blurb">
       Late&ndash;century, high-emissions (RCP 8.5), MRI CGCM3 or NCAR CCSM4
-      model (whichever shows greater change).<br />See tables below for more
-      detailed information.
+      model (whichever shows greater change).<br />See tables and sections below
+      for more detailed information and definitions of fire activity levels.
     </p>
   </div>
 </template>
@@ -63,6 +63,10 @@ export default {
       showPermafrost: 'permafrost/valid',
       permafrostPresent: 'permafrost/present',
       permafrostDisappears: 'permafrost/disappears',
+      flammabilityData: 'wildfire/flammability',
+      flamThresholds: 'wildfire/flammabilityThresholds',
+      vegChangeData: 'wildfire/veg_change',
+      showWildfires: 'wildfire/valid',
     }),
     unitsText() {
       if (this.units) {
@@ -70,7 +74,7 @@ export default {
       }
     },
     depthFragment() {
-      return this.units == 'imperial' ? '9.8ft' : '3m'
+      return this.units == 'imperial' ? 'about 10ft' : '3m'
     },
     qualitativeText() {
       return this.generateText()
@@ -81,6 +85,12 @@ export default {
       this.generateText()
     },
     altThawData: function () {
+      this.generateText()
+    },
+    flammabilityData: function () {
+      this.generateText()
+    },
+    vegChangeData: function () {
       this.generateText()
     },
   },
@@ -155,7 +165,6 @@ export default {
       return seasonMetrics
     },
     temperatureString() {
-      
       var annualTemperatureAverage = 0
       var annualHighestTempChange = 0
       var seasonWithHighestTempChange = 'None'
@@ -301,6 +310,150 @@ export default {
 
       return string
     },
+    wildfireString() {
+      var categoryFromFlam = flam => {
+        let label
+        this.flamThresholds.forEach(threshold => {
+          if (flam >= threshold['min'] && flam < threshold['max']) {
+            label = threshold['label'].toLowerCase()
+          }
+        })
+        return label
+      }
+
+      var isModerateOrMore = flam => {
+        let results = this.flamThresholds.filter(x => x['label'] == 'Moderate')
+        let moderate = _.first(results)
+        return flam >= moderate['min']
+      }
+
+      let historicalFlam = this.flammabilityData['1980-2008']['MODEL-SPINUP'][
+        'historical'
+      ]
+      let midHighestPredictedFlam = Math.max(
+        this.flammabilityData['2040-2069']['MRI-CGCM3']['rcp45'],
+        this.flammabilityData['2040-2069']['MRI-CGCM3']['rcp60'],
+        this.flammabilityData['2040-2069']['MRI-CGCM3']['rcp85'],
+        this.flammabilityData['2040-2069']['NCAR-CCSM4']['rcp45'],
+        this.flammabilityData['2040-2069']['NCAR-CCSM4']['rcp60'],
+        this.flammabilityData['2040-2069']['NCAR-CCSM4']['rcp85']
+      )
+      let lateHighestPredictedFlam = Math.max(
+        this.flammabilityData['2070-2099']['MRI-CGCM3']['rcp45'],
+        this.flammabilityData['2070-2099']['MRI-CGCM3']['rcp60'],
+        this.flammabilityData['2070-2099']['MRI-CGCM3']['rcp85'],
+        this.flammabilityData['2070-2099']['NCAR-CCSM4']['rcp45'],
+        this.flammabilityData['2070-2099']['NCAR-CCSM4']['rcp60'],
+        this.flammabilityData['2070-2099']['NCAR-CCSM4']['rcp85']
+      )
+
+      let midDiff = parseInt(
+        (Math.abs(midHighestPredictedFlam - historicalFlam) / historicalFlam) *
+          100
+      )
+      let midSign =
+        midHighestPredictedFlam - historicalFlam > 0 ? '&plus;' : '&minus;'
+      let midChange =
+        midHighestPredictedFlam - historicalFlam > 0 ? 'increase' : 'decrease'
+
+      let lateDiff = parseInt(
+        (Math.abs(lateHighestPredictedFlam - historicalFlam) / historicalFlam) *
+          100
+      )
+      let lateSign =
+        lateHighestPredictedFlam - historicalFlam > 0 ? '&plus;' : '&minus;'
+      let lateChange =
+        lateHighestPredictedFlam - historicalFlam > 0 ? 'increase' : 'decrease'
+
+      let historicalCategory = categoryFromFlam(historicalFlam)
+      let midCategory = categoryFromFlam(midHighestPredictedFlam)
+      let lateCategory = categoryFromFlam(lateHighestPredictedFlam)
+
+      let quip = _.template(
+        'In the past, this area had <strong><%= category %></strong> flammability.  '
+      )({
+        category: historicalCategory,
+      })
+
+      // Special case: fire activity is about the same throughout.
+      if (
+        historicalCategory == midCategory &&
+        historicalCategory == lateCategory
+      ) {
+        quip += 'Future flammability may be <strong>about the same</strong>'
+        if (isModerateOrMore(historicalFlam)) {
+          quip += _.template(' (<%= sign %><%= diff %>&#37; by late century).')(
+            {
+              sign: lateSign,
+              diff: lateDiff,
+            }
+          )
+        } else {
+          quip += '.'
+        }
+      } else {
+        // Mid-century fragment.
+        // If it's the same as historical...
+        if (historicalCategory == midCategory) {
+          quip += _.template(
+            'By the mid&ndash;century this may remain <%= category %>'
+          )({ category: midCategory })
+          if (isModerateOrMore(historicalFlam)) {
+            quip += _.template(' (<%= sign %><%= diff %>&#37;).  ')({
+              sign: midSign,
+              diff: midDiff,
+            })
+          } else {
+            quip += '.  '
+          }
+        } else {
+          quip += _.template(
+            'By the mid&ndash;century, <strong>flammability may <%= change %> to <%= category %></strong>'
+          )({
+            category: midCategory,
+            change: midChange,
+          })
+          if (isModerateOrMore(historicalFlam)) {
+            quip += _.template(' (<%= sign %><%= diff %>&#37;).  ')({
+              sign: midSign,
+              diff: midDiff,
+            })
+          } else {
+            quip += '.  '
+          }
+        }
+
+        // Late-century fragment.
+        if (historicalCategory == lateCategory) {
+          quip += _.template(
+            'By the late&ndash;century this may remain <%= category %>'
+          )({ category: lateCategory })
+          if (isModerateOrMore(historicalFlam)) {
+            quip += _.template(' (<%= sign %><%= diff %>&#37;)')({
+              sign: lateSign,
+              diff: lateDiff,
+            })
+          }
+          quip += ' compared with historical flammability.'
+        } else {
+          quip += _.template(
+            'By the late&ndash;century, <strong>flammability may <%= change %> to <%= category %></strong>'
+          )({
+            category: lateCategory,
+            change: lateChange,
+          })
+          if (isModerateOrMore(historicalFlam)) {
+            quip += _.template(' (<%= sign %><%= diff %>&#37;)')({
+              sign: lateSign,
+              diff: lateDiff,
+            })
+          }
+          quip += ' compared with historical flammability.'
+        }
+      }
+
+      return quip
+    },
     // Subfunction: Generate annual metrics HTML string
     // Input: None. (Uses constant seasons)
     // Output: A string containing HTML for a linked list of all
@@ -327,6 +480,10 @@ export default {
 
       if (this.showPermafrost) {
         text += this.permafrostString()
+      }
+
+      if (this.showWildfires) {
+        text += this.wildfireString()
       }
 
       if (text == '') {

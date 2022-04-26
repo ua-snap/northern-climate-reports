@@ -48,7 +48,7 @@ export const actions = {
     let queryUrl =
       process.env.apiUrl +
       '/elevation/' +
-      context.rootGetters['place/urlFragment']
+      context.rootGetters['place/urlFragment']()
     let elevation = await this.$axios.$get(queryUrl).catch(err => {
       let httpError = getHttpError(err)
       context.commit('setHttpError', httpError)

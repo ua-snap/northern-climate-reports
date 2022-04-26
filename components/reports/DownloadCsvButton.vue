@@ -9,7 +9,7 @@ export default {
   computed: {
     downloadTarget() {
       let endpointPath = this.endpoint
-      if (this.endpoint == 'flammability' || this.endpoint == 'veg_change') {
+      if (_.includes(['flammability', 'veg_type'], this.endpoint)) {
         endpointPath = 'alfresco/' + endpointPath
       }
 
@@ -18,7 +18,7 @@ export default {
         '/' +
         endpointPath +
         '/' +
-        this.$store.getters['place/urlFragment'] +
+        this.$store.getters['place/urlFragment']() +
         '?format=csv'
 
       if (this.$store.getters['place/type'] == 'community') {

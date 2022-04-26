@@ -4,6 +4,7 @@
       <div v-show="!this.reportIsVisible" class="place-selector">
         <div class="container">
           <section class="section">
+            <BetaFeedback />
             <div class="columns" id="controls">
               <!-- ID above (#controls) is used as anchor target, don't remove -->
               <div class="column is-one-half">
@@ -30,6 +31,7 @@ import MapWrapper from '~/components/MapWrapper'
 import Report from '~/components/Report'
 import PlaceSelector from '~/components/PlaceSelector'
 import LatLngSelector from '~/components/LatLngSelector'
+import BetaFeedback from '~/components/BetaFeedback'
 
 import { mapGetters } from 'vuex'
 
@@ -40,6 +42,7 @@ export default {
     Report,
     LatLngSelector,
     PlaceSelector,
+    BetaFeedback,
   },
   computed: {
     ...mapGetters(['reportIsVisible']),

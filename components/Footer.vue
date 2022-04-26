@@ -39,7 +39,7 @@
           <a href="https://akcasc.org"
             >Alaska Climate Adaptation Science Center</a
           >
-          and the <br/><a href="https://www.usgs.gov">United States Geological Survey</a>.
+          and the <br/><a href="https://www.usgs.gov/programs/climate-adaptation-science-centers">United States Geological Survey</a>.
         </p>
         <p>
           Please contact

@@ -6,13 +6,18 @@
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
-import { getPlotSettings, getLayout, getFooter } from '../../../utils/charts'
+import {
+  getPlotSettings,
+  buildTitle,
+  getLayout,
+  getFooter,
+} from '~/utils/charts'
 import {
   getHistoricalTrace,
   getHistoricalLine,
   getProjectedTraces,
   detectEmptyColumns,
-} from '../../../utils/permafrost_charts'
+} from '~/utils/permafrost_charts'
 
 export default {
   name: 'ReportAltFreezeChart',
@@ -43,7 +48,13 @@ export default {
 
       let units = this.units == 'metric' ? 'm' : 'in'
       let precision = this.units == 'metric' ? 2 : 1
-      let title = 'Ground freeze depth, ' + this.place
+
+      let title = buildTitle({
+        dataLabel: 'Ground freeze depth',
+        dateRange: '1995-2100',
+        place: this.place,
+      })
+
       let yAxisLabel = 'Depth (' + units + ')'
       let layout = getLayout(title, yAxisLabel)
       let dataTraces = []

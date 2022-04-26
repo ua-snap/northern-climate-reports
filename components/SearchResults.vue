@@ -3,91 +3,38 @@
     <h3 class="title is-4">
       Locations matching {{ lat }}&deg;N, {{ lng }}&deg;E
     </h3>
-    <p>These areas of interest are at, or near, this point:</p>
-    <ul v-if="searchResults.protected_areas_near || searchResults.hucs_near || searchResults.corporations_near || searchResults.climate_divisions_near || searchResults.ethnolinguistic_regions_near">
-      <li
-        v-for="place in searchResults.climate_divisions_near"
-        :key="place.id"
-        class="additional-info"
-      >
-        <nuxt-link
-          :to="{
-            path: formUrl(place),
-            hash: '#results',
-          }"
-          >{{ place.name }}</nuxt-link
+
+    <div v-if="searchResults.areas">
+      <p>
+        The map on the left shows hydrological units (HUC-8) and protected areas
+        near the point you selected. Additional areas of interest
+        (ethnolinguistic regions, fire management units, climate divisions and
+        Native corporations) are not shown on the map because they are large,
+        but are included in the list of matching areas below.
+      </p>
+
+      <ul>
+        <li
+          v-for="place in searchResults.areas"
+          :key="place.id"
+          class="additional-info"
         >
-        <span>Climate Division</span>
-      </li>
-      <li
-        v-for="place in searchResults.ethnolinguistic_region"
-        :key="place.id"
-        class="additional-info"
-      >
-        <nuxt-link
-          :to="{
-            path: formUrl(place),
-            hash: '#results',
-          }"
-          >{{ place.name }}</nuxt-link
-        >
-        <span>Ethnolinguistic Region</span>
-      </li>
-      <li
-        v-for="place in searchResults.protected_areas_near"
-        :key="place.id"
-        class="additional-info"
-      >
-        <nuxt-link
-          :to="{
-            path: formUrl(place),
-            hash: '#results',
-          }"
-          >{{ place.name }}</nuxt-link
-        >
-        <span>{{ place.area_type }}</span>
-      </li>
-      <li v-for="huc in searchResults.hucs_near" :key="huc.id" class="additional-info">
-        <nuxt-link
-          :to="{
-            path: formUrl(huc),
-            hash: '#results',
-          }"
-          >{{ huc.name }}</nuxt-link
-        >
-        <span>HUC ID {{ huc.id }}</span>
-      </li>
-      <li
-        v-for="place in searchResults.corporations_near"
-        :key="place.id"
-        class="additional-info"
-      >
-        <nuxt-link
-          :to="{
-            path: formUrl(place),
-            hash: '#results',
-          }"
-          >{{ place.name }}</nuxt-link
-        >
-        <span>Native Corporation</span>
-      </li>
-      <li
-        v-for="place in searchResults.fire_management_units_near"
-        :key="place.id"
-        class="additional-info"
-      >
-        <nuxt-link
-          :to="{
-            path: formUrl(place),
-            hash: '#results',
-          }"
-          >{{ place.name }}</nuxt-link
-        >
-        <span>Fire Management Unit</span>
-      </li>
-    </ul>
-    <div v-if="searchResults.communities" class="mb-4">
-      <p>Nearby places and communities listed in this tool:</p>
+          <nuxt-link
+            :to="{
+              path: formUrl(place),
+              hash: '#results',
+            }"
+            >{{ place.name }}</nuxt-link
+          >
+          <span
+            v-if="formPlaceTypeFragment(place)"
+            v-html="formPlaceTypeFragment(place)"
+          ></span>
+        </li>
+      </ul>
+    </div>
+    <div v-if="searchResults.communities" class="mt-4 mb-4">
+      <p>Nearby places and communities included in this tool:</p>
       <ul>
         <li
           v-for="community in searchResults.communities"
@@ -107,7 +54,7 @@
         </li>
       </ul>
     </div>
-    <p>
+    <p class="mt-4">
       Or
       <nuxt-link
         :to="{
@@ -118,15 +65,7 @@
         {{ lng }}&deg;E</nuxt-link
       >.
     </p>
-    <b-button
-      class="default"
-      tag="nuxt-link"
-      to="/#map"
-      type="is-info"
-      icon-left="arrow-left-circle"
-    >
-      <strong>Go back</strong>, pick another place</b-button
-    >
+    <BackButton />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -134,14 +73,18 @@ li.additional-info span {
   color: #888;
   text-transform: uppercase;
   font-weight: 600;
+  font-size: 85%;
 }
 </style>
 <script>
+import _ from 'lodash'
 import { mapGetters } from 'vuex'
+import BackButton from '~/components/BackButton'
 import { getAppPathFragment } from '~/utils/path.js'
 
 export default {
   name: 'SearchResults',
+  components: { BackButton },
   computed: {
     lat() {
       return this.latLng[0]
@@ -157,6 +100,25 @@ export default {
   methods: {
     formUrl(place) {
       return getAppPathFragment(place.type, place.id)
+    },
+    formPlaceTypeFragment(place) {
+      let placeType = false
+      switch (place.type) {
+        case 'corporation':
+          placeType = 'Native Corporation Lands'
+          break
+        case 'huc':
+          placeType = 'HUC ID' + place.id
+          break
+        case 'climate_division':
+          placeType = 'Climate Division'
+          break
+        case 'fire_zone':
+          placeType = 'Fire Management Unit'
+          break
+        default: // Do nothing, don't decorate protected areas
+      }
+      return placeType
     },
   },
 }

@@ -1,44 +1,36 @@
 <template>
-  <div class="has-text-centered has-text-weight-bold">
-    <span v-html="title"></span>
-    <div :id="mapID" class="veg-change-minimap"></div>
+  <div>
+    <div class="map-title has-text-centered">
+      <div>
+        <span class="has-text-weight-bold">{{ mapEra }}<br /></span>
+        <span v-if="mapModel">{{ mapModel }}<br class="narrow-br" /></span>
+        <span>{{ mapScenario }}</span>
+      </div>
+    </div>
+    <div :id="mapID" class="minimap"></div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.veg-change-minimap {
-  height: 15vw;
-  width: 100%;
+@media (max-width: 1215px) {
+  .map-title {
+    min-height: 84px;
+  }
+}
+@media (min-width: 1216px) {
+  .map-title {
+    min-height: 60px;
+  }
+  .narrow-br {
+    display: none;
+  }
 }
 </style>
 
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
-import { getBaseMapAndLayers, addGeoJSONtoMap } from '../../../utils/maps'
-
-let models = [
-  '5 Model Average',
-  'GFDL CM3',
-  'GISS E2-R',
-  'IPSL CM5A-LR',
-  'MRI CGCM3',
-  'NCAR CCSM4',
-]
-
-let scenarios = ['RCP 4.5', 'RCP 6.0', 'RCP 8.5']
-
-let eras = [
-  '2010-2019',
-  '2020-2029',
-  '2030-2039',
-  '2040-2049',
-  '2050-2059',
-  '2060-2069',
-  '2070-2079',
-  '2080-2089',
-  '2090-2099',
-]
+import { getBaseMapAndLayers, addGeoJSONtoMap } from '~/utils/maps'
 
 export default {
   name: 'ReportVegChangeMap',
@@ -47,21 +39,25 @@ export default {
     ...mapGetters({
       latLng: 'place/latLng',
       geoJSON: 'place/geoJSON',
+      vegEras: 'wildfire/vegEras',
+      models: 'wildfire/vegModels',
+      scenarios: 'wildfire/scenarios',
     }),
-    title() {
-      if (this.historical == 'true') {
-        return 'CRU TS 4.0,<br />1950-2008'
-      }
-      return (
-        models[this.model] +
-        ',<br />' +
-        scenarios[this.scenario] +
-        ', ' +
-        eras[this.era]
-      )
-    },
     mapID() {
       return 'veg_change_' + this.scenario + '_' + this.model + '_' + this.era
+    },
+    mapEra() {
+      return this.vegEras[this.era]
+    },
+    mapModel() {
+      if (this.models[this.model] != '') {
+        return this.models[this.model] + ', '
+      } else {
+        return ''
+      }
+    },
+    mapScenario() {
+      return this.scenarios[this.scenario]
     },
   },
   data() {
@@ -74,7 +70,8 @@ export default {
   mounted() {
     this.getBaseMapAndLayers = getBaseMapAndLayers.bind(this)
     this.addGeoJSONtoMap = addGeoJSONtoMap.bind(this)
-    this.map = L.map(this.mapID, this.getBaseMapAndLayers())
+    // Pass `true` to `getBaseMapAndLayers` to add land cover layer
+    this.map = L.map(this.mapID, this.getBaseMapAndLayers(true))
     if (this.latLng) {
       this.marker = L.marker(this.latLng).addTo(this.map)
       this.map.panTo(this.latLng)
@@ -85,6 +82,7 @@ export default {
       this.map.removeLayer(this.baseLayer)
       this.baseLayer = this.getBaseLayer()
       this.map.addLayer(this.baseLayer)
+      this.baseLayer.bringToBack()
     },
     // After geoJSON is loaded, display on map.
     geoJSON: function () {
@@ -98,16 +96,12 @@ export default {
         format: 'image/png',
         version: '1.3.0',
         styles: 'climate_impact_reports',
+        zIndex: 20,
       }
-      if (this.historical == 'true') {
-        layerOptions['layers'] = 'relative_vegetation_change_historical'
-        layerOptions['dim_era'] = this.era
-      } else {
-        layerOptions['layers'] = 'relative_vegetation_change_future'
-        layerOptions['dim_era'] = this.era
-        layerOptions['dim_model'] = this.model
-        layerOptions['dim_scenario'] = this.scenario
-      }
+      layerOptions['layers'] = 'alfresco_vegetation_mode_statistic'
+      layerOptions['dim_era'] = this.era
+      layerOptions['dim_model'] = this.model
+      layerOptions['dim_scenario'] = this.scenario
       return new L.tileLayer.wms(process.env.rasdamanUrl, layerOptions)
     },
   },

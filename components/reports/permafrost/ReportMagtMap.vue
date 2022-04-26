@@ -1,14 +1,29 @@
 <template>
-  <div class="has-text-centered has-text-weight-bold">
-    {{ title }}
-    <div :id="mapID" class="permafrost-minimap"></div>
+  <div>
+    <div class="map-title has-text-centered">
+      <div>
+        <span class="has-text-weight-bold">{{ mapEra }}<br /></span>
+        <span v-if="mapModel">{{ mapModel }}<br class="narrow-br" /></span>
+        <span>{{ mapScenario }}</span>
+      </div>
+    </div>
+    <div :id="mapID" class="minimap"></div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.permafrost-minimap {
-  height: 15vw;
-  width: 100%;
+@media (max-width: 929px) {
+  .map-title {
+    min-height: 84px;
+  }
+}
+@media (min-width: 930px) {
+  .map-title {
+    min-height: 60px;
+  }
+  .narrow-br {
+    display: none;
+  }
 }
 </style>
 
@@ -17,9 +32,6 @@ import _ from 'lodash'
 import { mapGetters } from 'vuex'
 import { getBaseMapAndLayers, addGeoJSONtoMap } from '~/utils/maps'
 
-let scenarios = ['', 'RCP 4.5', 'RCP 8.5']
-let eras = ['1995', '2011-2040', '2036-2065', '2061–2090', '2086–2100']
-
 export default {
   name: 'ReportMagtMap',
   props: ['scenario', 'model', 'era'],
@@ -27,17 +39,25 @@ export default {
     ...mapGetters({
       latLng: 'place/latLng',
       geoJSON: 'place/geoJSON',
+      eras: 'permafrost/eras',
+      models: 'permafrost/models',
+      scenarios: 'permafrost/scenarios',
     }),
-    title() {
-      var title = ''
-      if (this.scenario > 0) {
-        title += scenarios[this.scenario] + ', '
-      }
-      title += eras[this.era]
-      return title
-    },
     mapID() {
       return this.scenario + '_' + this.model + '_' + this.era
+    },
+    mapEra() {
+      return this.eras[this.era]
+    },
+    mapModel() {
+      // The "era" at index 0 is the historical year (1995).
+      if (this.era > 0) {
+        return this.models[this.model] + ', '
+      }
+    },
+    mapScenario() {
+      // The "scenario" at index 0 is the historical data set (CRU TS 3.1).
+      return this.scenarios[this.scenario]
     },
   },
   data() {
@@ -53,7 +73,6 @@ export default {
     this.map = L.map(this.mapID, this.getBaseMapAndLayers())
     if (this.latLng) {
       this.marker = L.marker(this.latLng).addTo(this.map)
-      this.map.panTo(this.latLng)
     }
   },
   watch: {

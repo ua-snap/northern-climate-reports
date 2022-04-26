@@ -11,13 +11,18 @@
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
-import { getPlotSettings, getLayout, getFooter } from '../../../utils/charts'
+import {
+  getPlotSettings,
+  buildTitle,
+  getLayout,
+  getFooter,
+} from '~/utils/charts'
 import {
   getHistoricalTrace,
   getHistoricalRegion,
   getProjectedTraces,
-  seasons
-} from '../../../utils/climate_charts'
+  seasons,
+} from '~/utils/climate_charts'
 
 export default {
   name: 'ReportTempChart',
@@ -66,8 +71,13 @@ export default {
       )
       dataTraces = dataTraces.concat(projectedTraces)
 
-      let title =
-        'Historical and projected temperature (' + seasons[this.season] + ')'
+      let title = buildTitle({
+        dataLabel: 'Temperature',
+        dateRange: '1950-2099',
+        place: this.place,
+        season: seasons[this.season],
+      })
+
       let yAxisLabel = 'Temperature (' + units + ')'
       let layout = getLayout(title, yAxisLabel)
 

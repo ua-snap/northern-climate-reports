@@ -1,16 +1,6 @@
 <template>
   <div id="results" class="container">
-    <div class="back">
-      <b-button
-        class="default"
-        tag="nuxt-link"
-        to="/#controls"
-        type="is-info"
-        icon-left="arrow-left-circle"
-      >
-        <strong>Go back</strong>, pick another place</b-button
-      >
-    </div>
+    <BackButton />
     <hr />
     <section v-if="$fetchState.pending" class="section content">
       <!-- Drama dots -->
@@ -49,12 +39,16 @@
             <span v-if="type == 'latLng'"
               >The <span v-if="climateData">tables and </span>charts below are
               specific to the gridded data extracted at
-              <span v-html="place"></span>.</span
+              <span v-html="place"></span>. The polygon region on the map
+              corresponds to the nearest watershed (hydrological unit, level
+              12).</span
             >
             <span v-else-if="type == 'community'"
               >The <span v-if="climateData">tables and </span>charts below are
               specific to the gridded data extracted from the location of
-              <span v-html="place"></span>.</span
+              <span v-html="place"></span>. The polygon region on the map
+              corresponds to the nearest watershed (hydrological unit, level
+              12).</span
             >
             <span v-else
               >Data for the tables and charts below have been averaged across
@@ -71,6 +65,24 @@
             {{ elevation.max }}{{ elevationUnits }}, which should be kept in
             mind when interpreting these results.
           </p>
+          <div v-if="!isPointLocation" class="area-warning">
+            <p>
+              <strong>Note</strong>: for large areas such as climate divisions,
+              ethnolinguistic regions, or large protected areas, averaging
+              future climate conditions and changes can mask important variation
+              within the region. This is especially true for variables such as
+              snowpack or permafrost and for any variable in mountainous
+              regions.
+            </p>
+            <p>
+              Apply contextual and local knowledge to assess ecological
+              variability over large areas. To do this using this tool you may
+              wish to select a report for the larger region of interest and then
+              select reports for multiple smaller representative regions within
+              the original area to highlight the overarching conditions as well
+              as smaller scale variation.
+            </p>
+          </div>
           <p>
             The sections below show output from different scientific simulations
             of possible future conditions for {{ presentDataTypesString }}.
@@ -153,11 +165,14 @@
               depending on the presence or absence of permafrost
             </li>
             <li v-if="flammabilityData || vegChangeData">
-              <a href="#wildfire">Wildfire</a> charts of relative flammability
-              and vegetation change with with multiple models and scenarios
+              <a href="#wildfire">Wildfire</a> charts of flammability and
+              vegetation change with with multiple models and scenarios
             </li>
           </ul>
         </div>
+      </section>
+      <section class="content">
+        <BetaFeedback />
       </section>
       <section class="section content py-0 large-screen" v-if="dataMissing">
         <div class="is-size-5">
@@ -180,7 +195,7 @@
                 {{ httpErrors[permafrostHttpError] }}
               </li>
               <li v-if="flammabilityHttpError">
-                <strong>Relative flammability:</strong>
+                <strong>Flammability:</strong>
                 {{ httpErrors[flammabilityHttpError] }}
               </li>
               <li v-if="vegChangeHttpError">
@@ -226,21 +241,16 @@
         </div>
       </section>
       <hr />
-      <div class="back">
-        <b-button
-          class="default"
-          tag="nuxt-link"
-          to="/#controls"
-          type="is-info"
-          icon-left="arrow-left-circle"
-        >
-          <strong>Go back</strong>, pick another place</b-button
-        >
-      </div>
+      <BackButton />
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
+  .area-warning {
+    border-left: 0.25rem solid #aaa;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+  }
 .centered {
   text-align: center;
 }
@@ -274,6 +284,7 @@ import WildfireReport from '~/components/reports/wildfire/WildfireReport'
 import MiniMap from '~/components/reports/MiniMap'
 import QualitativeText from '~/components/reports/QualitativeText'
 import BackToTopButton from '~/components/reports/BackToTopButton'
+import BackButton from '~/components/BackButton'
 import { mapGetters } from 'vuex'
 import { httpErrors } from '../utils/http_errors'
 import lodash from 'lodash'
@@ -291,6 +302,7 @@ export default {
     MiniMap,
     QualitativeText,
     BackToTopButton,
+    BackButton,
   },
   data() {
     return {
@@ -354,6 +366,7 @@ export default {
       permafrostHttpError: 'permafrost/httpError',
       flammabilityHttpError: 'wildfire/flammabilityHttpError',
       vegChangeHttpError: 'wildfire/vegChangeHttpError',
+      isPointLocation: 'place/isPointLocation',
     }),
   },
   // This component initiates the data fetching so that
@@ -395,7 +408,7 @@ export default {
       }
 
       if (this.flammabilityData) {
-        types.push('relative flammability')
+        types.push('flammability')
       }
       if (this.vegChangeData) {
         types.push('vegetation change')

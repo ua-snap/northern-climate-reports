@@ -82,6 +82,11 @@ export const getters = {
     throw 'Unknown place type!'
   },
 
+  // Is this a point-like type?
+  isPointLocation: (state, getters) => {
+    return getters.type == 'latLng' || getters.type == 'community'
+  },
+
   // Returns a string for the correct current selected place,
   // whether lat/lon, community name, or other regional name.
   // The code here is pretty similar between the different cases,
@@ -150,9 +155,16 @@ export const getters = {
 
   // Returns a fragment URL for accessing
   // different resources on the API.
-  urlFragment(state, getters) {
+  // `local` parameter is used when a point is used to
+  // query an endpoint that retrieves a coverage over an
+  // area instead of a single pixel.
+  urlFragment: (state, getters) => local => {
     if (getters.type == 'community' || getters.type == 'latLng') {
-      return 'point/' + getters.latLng[0] + '/' + getters.latLng[1]
+      let url = ''
+      if (!local) {
+        url = 'point/'
+      }
+      return url + getters.latLng[0] + '/' + getters.latLng[1]
     } else {
       return 'area/' + getters.areaId
     }
@@ -180,10 +192,14 @@ export const mutations = {
 }
 
 export const actions = {
-  async fetch(context) {
+  // Boundary to fetch is pulled from the URL fragment by default,
+  // or we can pass `huc12Id` if we need to specify a distinct
+  // boundary ID to fetch (used for ALFRESCO data).
+  async fetch(context, huc12Id) {
+    let boundaryId = huc12Id ? 'area/' + huc12Id : context.getters.urlFragment()
+
     // TODO: add error handling here for 404 (no data) etc.
-    let queryUrl =
-      process.env.apiUrl + '/boundary/' + context.getters.urlFragment
+    let queryUrl = process.env.apiUrl + '/boundary/' + boundaryId
     let geoJSON = await this.$http.$get(queryUrl)
     Object.freeze(geoJSON) // remove reactivity
     context.commit('setGeoJSON', geoJSON)
@@ -212,8 +228,46 @@ export const actions = {
         context.getters.latLng[1]
 
       await this.$http.$get(queryUrl).then(res => {
+        // Change the object structure to flatten & sort the areas
+        let ssr = []
+        _.each(res.climate_divisions_near, place => {
+          ssr.push(place)
+        })
+        _.each(res.corporations_near, place => {
+          ssr.push(place)
+        })
+        _.each(res.fire_management_units_near, place => {
+          ssr.push(place)
+        })
+        _.each(res.hucs_near, place => {
+          ssr.push(place)
+        })
+        _.each(res.protected_areas_near, place => {
+          ssr.push(place)
+        })
+
+        ssr = _.sortBy(ssr, ['name'])
+
+        // Sort the community names, if present
+        let communities = []
+        if (res.communities) {
+          // Restructure communities into an array to sort
+          _.each(res.communities, community => {
+            communities.push(community)
+          })
+          communities = _.sortBy(communities, ['name'])
+        }
+        // Specifically make the communities key false if no matching communities
+        // were found.
+        if (_.isEmpty(communities)) {
+          communities = false
+        }
         Object.freeze(res) // remove reactivity of Vue, this is static
-        context.commit('setSearchResults', res)
+        context.commit('setSearchResults', {
+          areas: ssr,
+          communities: communities,
+          total_bounds: res.total_bounds,
+        })
       })
     }
   },

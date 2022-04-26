@@ -12,20 +12,23 @@ export const getBaseMapAndLayers = function () {
     transparent: true,
     format: 'image/png',
     layers: 'natural_earth:iem-natural-earth',
+    zIndex: 10,
   })
+
+  let layers = [this.baseLayer, naturalEarth]
 
   // Map base configuration
   var config = {
-    zoom: 1,
+    zoom: 0,
     minZoom: 0,
-    maxZoom: 2,
+    maxZoom: 6,
     center: [64.7, -155],
     scrollWheelZoom: false,
     dragging: false,
     zoomControl: false,
     doubleClickZoom: false,
     attributionControl: false,
-    layers: [this.baseLayer, naturalEarth],
+    layers: layers,
     crs: proj,
   }
   return config

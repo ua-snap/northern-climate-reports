@@ -6,7 +6,10 @@
         <div v-if="reportData">
           <span
             v-show="
-              permafrostPresent && permafrostDisappears && !permafrostUncertain
+              permafrostPresent &&
+              permafrostDisappears &&
+              !permafrostUncertain &&
+              !noFreeze
             "
           >
             Historical data and model projections indicate that
@@ -18,14 +21,19 @@
           </span>
           <span
             v-show="
-              permafrostPresent && !permafrostDisappears && !permafrostUncertain
+              permafrostPresent &&
+              !permafrostDisappears &&
+              !permafrostUncertain &&
+              !noFreeze
             "
             >Historical data and model projections indicate that
             <strong>this place has permafrost.</strong>
           </span>
           <span
             v-show="
-              !permafrostPresent && permafrostDisappears && !permafrostUncertain
+              !permafrostPresent &&
+              (permafrostDisappears || noFreeze) &&
+              !permafrostUncertain
             "
           >
             <strong>
@@ -52,14 +60,20 @@
         <div class="mt-5">
           The following maps show the historical and projected mean annual
           ground temperature over time. This is the temperature of the soil
-          directly above the permafrost layer. Red represents temperatures above
-          freezing, blue represents temperatures below freezing, and white
-          represents temperatures near the freezing point. Darker reds represent
-          warmer temperatures. Darker blues represent colder temperatures.
+          directly above the permafrost layer.
         </div>
       </div>
     </div>
     <ReportMagtMaps />
+    <div class="content mb-6">
+      <p>This table is a legend for the maps above.</p>
+      <ColorTable
+        unitLabel="Mean Annual Ground Temperature"
+        :unitSymbol="unitSymbol"
+        :thresholds="magtThresholds"
+        :borderedColors="[3, 4]"
+      />
+    </div>
 
     <div v-if="reportData">
       <div class="content">
@@ -71,7 +85,9 @@
           >
             Projected permafrost active layer thickness and ground freeze depth
             through the end of the century are shown below. The active layer is
-            the layer of soil above permafrost that thaws seasonally.
+            the layer of soil above permafrost that thaws seasonally. Ground
+            freeze is the maximum depth to which winter freeze occurs in
+            non-permafrost areas.
           </span>
           <span
             v-show="
@@ -88,9 +104,10 @@
             "
           >
             Projected ground freeze depth through the end of the century is
-            shown below.
+            shown below. Ground freeze is the maximum depth to which winter
+            freeze occurs in non-permafrost areas.
           </span>
-          <span v-show="permafrostUncertain"
+          <span v-show="permafrostUncertain || noFreeze"
             >A chart of the historical and projected mean annual ground
             temperature is provided below.
           </span>
@@ -102,7 +119,7 @@
       <div class="chart" v-show="this.permafrostDisappears">
         <ReportAltFreezeChart />
       </div>
-      <div class="chart" v-show="this.permafrostUncertain">
+      <div class="chart" v-show="this.permafrostUncertain || this.noFreeze">
         <ReportMagtChart />
       </div>
       <DownloadCsvButton
@@ -130,6 +147,7 @@
 </style>
 <script>
 import ReportMagtMaps from './ReportMagtMaps'
+import ColorTable from '~/components/reports/ColorTable'
 import ReportAltThawChart from './ReportAltThawChart'
 import ReportAltFreezeChart from './ReportAltFreezeChart'
 import ReportMagtChart from './ReportMagtChart'
@@ -141,6 +159,7 @@ export default {
   name: 'PermafrostReport',
   components: {
     ReportMagtMaps,
+    ColorTable,
     ReportAltThawChart,
     ReportAltFreezeChart,
     ReportMagtChart,
@@ -155,7 +174,10 @@ export default {
         : '&#x00B1;1&deg;C'
     },
     depthFragment() {
-      return this.units == 'imperial' ? '9.8ft' : '3m'
+      return this.units == 'imperial' ? 'about 10ft' : '3m'
+    },
+    unitSymbol() {
+      return this.units == 'imperial' ? '&deg;F' : '&deg;C'
     },
     ...mapGetters({
       units: 'units',
@@ -163,6 +185,8 @@ export default {
       permafrostPresent: 'permafrost/present',
       permafrostDisappears: 'permafrost/disappears',
       permafrostUncertain: 'permafrost/uncertain',
+      noFreeze: 'permafrost/noFreeze',
+      magtThresholds: 'permafrost/magtThresholds',
     }),
   },
 }

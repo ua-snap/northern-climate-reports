@@ -9,8 +9,9 @@
 <style lang="scss" scoped>
 #report--minimmap--map {
   height: 20vw;
-  min-width: 10vw;
   width: 20vw;
+  min-width: 200px;
+  min-height: 200px;
   margin: 3rem auto 1rem;
 }
 </style>
@@ -33,14 +34,15 @@ export default {
     // It's a lat/Lng location (community or point) add the point to the map.
     if (this.latLng) {
       this.marker = L.marker(this.latLng).addTo(this.map)
-      this.map.panTo(this.latLng)
+      this.map.flyTo(this.latLng)
     }
   },
   async fetch() {
-    // Only fetch the GeoJSON if this is not a point location.
-    if (!this.latLng) {
-      await this.$store.dispatch('place/fetch')
-    }
+    // Fetch GeoJSON, including the surrounding HUC12
+    await this.$store.dispatch(
+      'place/fetch',
+      this.$store.getters['wildfire/huc12Id']
+    )
   },
   watch: {
     // After geoJSON is loaded, display on map.
@@ -51,8 +53,26 @@ export default {
   methods: {
     addGeoJSONtoMap() {
       if (this.geoJSON) {
-        // Should not be a reactive property, don't define in `data` Vue section!
-        this.geoJSONLayer = L.geoJSON(this.geoJSON).addTo(this.map)
+        let displayedGeoJSON = _.cloneDeep(this.geoJSON)
+
+        // If this polygon crosses the antimeridian, move points from the far
+        // east to the far west. For example, a point with longitude 175 will be
+        // converted to -185. This is needed for Leaflet to draw the polygon
+        // correctly across the antimeridian.
+        let coordinates = displayedGeoJSON.geometry.coordinates
+        coordinates.forEach((coordinate, coordIdx) => {
+          coordinate.forEach((polygon, polyIdx) => {
+            polygon.forEach((point, pointIdx) => {
+              let latlng = coordinates[coordIdx][polyIdx][pointIdx]
+              if (latlng[0] > 0) {
+                coordinates[coordIdx][polyIdx][pointIdx][0] -= 360
+              }
+            })
+          })
+        })
+
+        let polygon = L.geoJSON(displayedGeoJSON)
+        this.geoJSONLayer = polygon.addTo(this.map)
         this.map.fitBounds(this.geoJSONLayer.getBounds())
       }
     },
@@ -67,10 +87,11 @@ export default {
         }
       )
       // Map base configuration
+      // For EPSG:3857
       var config = {
-        zoom: 11,
+        zoom: 10,
         minZoom: 0,
-        maxZoom: 6,
+        maxZoom: 20,
         center: [64.7, -155],
         scrollWheelZoom: false,
         zoomControl: false,

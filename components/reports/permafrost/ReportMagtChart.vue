@@ -6,13 +6,18 @@
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
-import { getPlotSettings, getLayout, getFooter } from '../../../utils/charts'
+import {
+  getPlotSettings,
+  buildTitle,
+  getLayout,
+  getFooter,
+} from '~/utils/charts'
 import {
   getHistoricalTrace,
   getHistoricalLine,
   getProjectedTraces,
   detectEmptyColumns,
-} from '../../../utils/permafrost_charts'
+} from '~/utils/permafrost_charts'
 
 export default {
   name: 'ReportMagtChart',
@@ -43,7 +48,13 @@ export default {
 
       let units = this.units == 'metric' ? 'ºC' : 'ºF'
       let precision = this.units == 'metric' ? 2 : 1
-      let title = 'Mean annual ground temperature, ' + this.place
+
+      let title = buildTitle({
+        dataLabel: 'Mean annual ground temperature',
+        dateRange: '1950-2100',
+        place: this.place,
+      })
+
       let yAxisLabel = 'Temperature (' + units + ')'
       let layout = getLayout(title, yAxisLabel)
       let dataTraces = []
@@ -58,21 +69,45 @@ export default {
       let projectedTraces = getProjectedTraces(magtData, units, precision)
       dataTraces = dataTraces.concat(projectedTraces)
 
-      layout.shapes.push({
-        type: 'rect',
-        x0: 0,
-        x1: 1,
-        xref: 'paper',
-        y0: freezing - uncertaintyOffset,
-        y1: freezing + uncertaintyOffset,
-        yref: 'y',
-        line: {
-          width: 0,
-        },
-        fillcolor: '#cccccc',
-        opacity: 0.2,
-      })
+      let uncertaintyRectMin = freezing - uncertaintyOffset
+      let uncertaintyRectMax = freezing + uncertaintyOffset
 
+      // Determine if any of the scatter markers are within the uncertainty zone
+      // before drawing the uncertainty rectangle. Otherwise it will stretch out
+      // the y-axis of the chart.
+      let withinUncertainty = _.reduceDeep(
+        magtData,
+        (acc, value) => {
+          if (acc == true) {
+            return acc
+          }
+          if (_.inRange(value, uncertaintyRectMin, uncertaintyRectMax)) {
+            return true
+          } else {
+            return false
+          }
+        },
+        {
+          leavesOnly: true,
+        }
+      )
+
+      if (withinUncertainty) {
+        layout.shapes.push({
+          type: 'rect',
+          x0: 0,
+          x1: 1,
+          xref: 'paper',
+          y0: uncertaintyRectMin,
+          y1: uncertaintyRectMax,
+          yref: 'y',
+          line: {
+            width: 0,
+          },
+          fillcolor: '#cccccc',
+          opacity: 0.2,
+        })
+      }
 
       let footerLines = [
         'Projected values are taken from GIPL 2.0 model output.',
@@ -98,7 +133,6 @@ export default {
         layout,
         plotSettings
       )
-
     },
   },
 }
