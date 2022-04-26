@@ -64,6 +64,18 @@
                 >
                   Fire Management Unit
                 </span>
+                <span
+                  class="area-additional-info"
+                  v-if="props.option.type == 'first_nation'"
+                >
+                  First Nation Traditional Territory
+                </span>
+                <span
+                  class="area-additional-info"
+                  v-if="props.option.type == 'game_management_unit'"
+                >
+                  Game Management Unit
+                </span>
               </div>
             </template>
           </b-autocomplete>

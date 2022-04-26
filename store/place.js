@@ -134,6 +134,10 @@ export const getters = {
           return area.name + ' (Ethnolinguistic Region)'
         case 'fire_zone':
           return area.name + ' (Fire Management Unit)'
+        case 'first_nation':
+          return area.name + ' (First Nation Traditional Territory)'
+        case 'game_management_unit':
+          return area.name + ' (Game Management Unit)'
         default:
           return area.name
       }
