@@ -19,27 +19,13 @@
           >
         </div>
       </b-field>
-      <b-field label="Scenario" class="px-3">
-        <b-radio
-          v-model="veg_scenario_selection"
-          name="veg_scenario_selection"
-          native-value="rcp45"
-          >RCP 4.5</b-radio
-        >
-        <b-radio
-          v-model="veg_scenario_selection"
-          name="veg_scenario_selection"
-          native-value="rcp85"
-          >RCP 8.5</b-radio
-        >
-      </b-field>
     </div>
     <div id="wildfire-veg-change-chart" />
   </div>
 </template>
 <style lang="scss" scoped>
 .wildfire-chart-wrapper {
-  width: 730px;
+  width: 840px;
   margin: 0 auto;
 }
 </style>
@@ -100,86 +86,136 @@ export default {
 
       let yAxisLabel = 'Vegetation type coverage (%)'
       let layout = getLayout(title, yAxisLabel)
+      layout['barmode'] = 'stack'
+      layout['xaxis']['showdividers'] = false
 
       let dataTraces = []
 
-      let symbols = {
-        not_modeled: 'circle',
-        barren_lichen_moss: 'square',
-        black_spruce: 'diamond',
-        deciduous_forest: 'cross',
-        graminoid_tundra: 'x',
-        shrub_tundra: 'triangle-up',
-        temperate_rainforest: 'triangle-down',
-        wetland_tundra: 'pentagon',
-        white_spruce: 'hexagon',
-      }
-
       Object.keys(this.vegTypes).forEach(type => {
+        // Don't include "not modeled" here.
+        if (type == 'not_modeled') {
+          return
+        }
+
         let yValues = []
+        yValues.push(
+          vegChangeData['1950-2008']['MODEL-SPINUP']['historical'][type]
+        )
+
         this.vegEras.forEach(era => {
-          if (era == '1950-2008') {
-            yValues.push(vegChangeData[era]['MODEL-SPINUP']['historical'][type])
-          } else {
+          if (era != '1950-2008') {
             yValues.push(
-              vegChangeData[era][this.veg_chart_model_selection][
-                this.veg_scenario_selection
-              ][type]
+              vegChangeData[era][this.veg_chart_model_selection]['rcp45'][type]
             )
           }
         })
 
-        let historicalTrace = {
-          type: 'scatter',
-          mode: 'markers',
-          name: this.vegTypes[type]['label'],
-          hoverinfo: 'x+y+z+text',
-          hovertemplate: '%{y:.2f}%',
-          showlegend: false,
-          marker: {
-            size: 8,
-            symbol: symbols[type],
-            color: this.vegTypes[type]['color'],
-          },
-          x: this.vegEras,
-          y: [yValues[0]],
-        }
-
-        let projectedTrace = {
-          type: 'scatter',
-          mode: 'markers',
-          name: this.vegTypes[type]['label'],
-          hoverinfo: 'x+y+z+text',
-          hovertemplate: '%{y:.2f}% <b>(%{customdata}%)</b>',
-          marker: {
-            size: 8,
-            symbol: symbols[type],
-            color: this.vegTypes[type]['color'],
-          },
-          x: this.vegEras,
-          y: [null].concat(yValues.slice(1)),
-          customdata: [null],
-        }
-
-        let historicalValue = yValues[0]
-        yValues.slice(1).forEach(value => {
-          let diff = value - historicalValue
-          if (diff >= 0) {
-            diff = '+' + diff.toFixed(2)
-          } else {
-            diff = diff.toFixed(2)
+        this.vegEras.forEach(era => {
+          if (era != '1950-2008') {
+            yValues.push(
+              vegChangeData[era][this.veg_chart_model_selection]['rcp85'][type]
+            )
           }
-          projectedTrace['customdata'].push(diff)
         })
 
-        dataTraces.push(historicalTrace, projectedTrace)
+        let trace = {
+          type: 'bar',
+          name: this.vegTypes[type]['label'],
+          marker: {
+            color: this.vegTypes[type]['color'],
+          },
+          hovertemplate: '%{y:.2f}%',
+          x: [
+            '1950-2008',
+            '2010-2039_rcp45',
+            '2040-2069_rcp45',
+            '2070-2099_rcp45',
+            '2010-2039_rcp85',
+            '2040-2069_rcp85',
+            '2070-2099_rcp85',
+          ],
+          y: yValues,
+        }
+
+        dataTraces.push(trace)
+      })
+
+      layout['xaxis']['tickmode'] = 'array'
+
+      layout['xaxis']['tickvals'] = [
+        '1950-2008',
+        '2010-2039_rcp45',
+        '2040-2069_rcp45',
+        '2070-2099_rcp45',
+        '2010-2039_rcp85',
+        '2040-2069_rcp85',
+        '2070-2099_rcp85',
+      ]
+
+      // Override x-axis tick text to remove the _rcpXX suffix. RCP information
+      // is communicated through annotations instead.
+      layout['xaxis']['ticktext'] = [
+        '1950-2008',
+        '2010-2039',
+        '2040-2069',
+        '2070-2099',
+        '2010-2039',
+        '2040-2069',
+        '2070-2099',
+      ]
+
+      let rcpLinePadding = 0.4
+      let rcpLines = [
+        {
+          label: 'RCP 4.5',
+          xCenter: 2,
+        },
+        {
+          label: 'RCP 8.5',
+          xCenter: 5,
+        },
+      ]
+
+      rcpLines.forEach(rcpLine => {
+        layout.shapes.push({
+          type: 'line',
+          x0: rcpLine['xCenter'] - 1 - rcpLinePadding,
+          x1: rcpLine['xCenter'] + 1 + rcpLinePadding,
+          xref: 'x',
+          y0: -0.1,
+          y1: -0.1,
+          yref: 'paper',
+          line: {
+            width: 3,
+            color: '#666666',
+          },
+          layer: 'below',
+        })
+
+        layout.annotations.push({
+          x: rcpLine['xCenter'],
+          y: -0.19,
+          xref: 'x',
+          yref: 'paper',
+          showarrow: false,
+          text: rcpLine['label'],
+          textangle: '0',
+          font: {
+            size: 13,
+          },
+        })
       })
 
       let footerLines = [
         'Projected and historical values are taken from ALFRESCO model output.',
       ]
 
-      let footer = getFooter(footerLines, layout)
+      let footer = getFooter(footerLines, layout, false)
+
+      // Add more vertical whitespace between chart and footer to make room
+      // for RCP lines and annotations.
+      footer['y'] -= 0.03
+
       layout.annotations.push(footer)
 
       let plotSettings = getPlotSettings()
