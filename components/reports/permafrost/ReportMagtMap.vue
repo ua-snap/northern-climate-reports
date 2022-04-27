@@ -73,6 +73,7 @@ export default {
     this.map = L.map(this.mapID, this.getBaseMapAndLayers())
     if (this.latLng) {
       this.marker = L.marker(this.latLng).addTo(this.map)
+      this.map.flyTo(this.latLng, 4)
     }
   },
   watch: {
