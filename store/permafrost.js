@@ -269,6 +269,7 @@ export const getters = {
       // If permafrost wasn't present in the past, it's not here now.
       if (
         state.permafrostData['gipl'] == null ||
+        state.permafrostData['gipl']['1995'] == null ||
         state.permafrostData['gipl']['1995']['cruts31']['historical']['alt'] ==
           null
       ) {
