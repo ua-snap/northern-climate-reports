@@ -247,6 +247,12 @@ export const actions = {
         _.each(res.protected_areas_near, place => {
           ssr.push(place)
         })
+        _.each(res.game_management_units_near, place => {
+          ssr.push(place)
+        })
+        _.each(res.first_nations_near, place => {
+          ssr.push(place)
+        })
 
         ssr = _.sortBy(ssr, ['name'])
 
