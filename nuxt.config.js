@@ -38,7 +38,21 @@ export default {
       { property: 'og:description', content: metas.description },
       { property: 'og:site_name', content: metas.title },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/favicon-16x16.png',
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/favicon-32x32.png',
+      },
+      { rel: 'manifest', href: '/site.webmanifest' },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
