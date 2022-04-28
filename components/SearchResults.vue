@@ -116,6 +116,12 @@ export default {
         case 'fire_zone':
           placeType = 'Fire Management Unit'
           break
+        case 'game_management_unit':
+          placeType = 'Game Management Unit'
+          break
+        case 'first_nation':
+          placeType = 'First Nation Traditional Territory'
+          break
         default: // Do nothing, don't decorate protected areas
       }
       return placeType
