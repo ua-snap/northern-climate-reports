@@ -190,10 +190,10 @@ export default {
 
             let defaultStyle, highlightedStyle
             // Set up the layer styles for HUC/Protected area
-            if(area.type == 'huc') {
+            if (area.type == 'huc') {
               defaultStyle = hucDefaultStyle
               highlightedStyle = hucHighlightedStyle
-            } else if(area.type == 'protected_area') {
+            } else if (area.type == 'protected_area') {
               defaultStyle = protectedAreaDefaultStyle
               highlightedStyle = protectedAreaHighlightedStyle
             }

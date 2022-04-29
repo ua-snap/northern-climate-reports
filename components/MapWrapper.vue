@@ -3,7 +3,10 @@
 		<div class="container">
 			<div class="section pullup content fullbleed">
 				<h4>Find a place by clicking on the map</h4>
-				<p><strong>Click the map</strong> to pick a location.  Nearby communities, protected areas and watersheds will be shown.</p>
+				<p>
+					<strong>Click the map</strong> to pick a location. Nearby communities,
+					protected areas and watersheds will be shown.
+				</p>
 			</div>
 		</div>
 		<div id="map-search">
@@ -83,30 +86,24 @@ export default {
 			mapSearchIsVisible: 'mapSearchIsVisible',
 		}),
 	},
-	mounted() {
-		// Flush any cached search results when this component
-		// is mounted.
-		this.$store.commit('place/clearSearchResults')
-	},
 	async fetch() {
-		await this.$store
-			.dispatch('place/search', {
-				lat: this.lat,
-				lng: this.lng,
-			})
-			.then(res => {
-				// Some work remains TBD here.
-			})
-			.catch(e => {
-				if (e.statusCode == 500) {
-					throw 'The server had a problem trying to execute this request.'
-				} else if (e.statusCode == 404) {
-					throw 'No results were found for this place.'
-				} else {
-					console.error(e) // at least get the error in the console.
-					throw 'Something unexpected went wrong.'
-				}
-			})
+		if (this.mapSearchIsVisible) {
+			await this.$store
+				.dispatch('place/search')
+				.then(res => {
+					// Some work remains TBD here.
+				})
+				.catch(e => {
+					if (e.statusCode == 500) {
+						throw 'The server had a problem trying to execute this request.'
+					} else if (e.statusCode == 404) {
+						throw 'No results were found for this place.'
+					} else {
+						console.error(e) // at least get the error in the console.
+						throw 'Something unexpected went wrong.'
+					}
+				})
+		}
 	},
 }
 </script>
