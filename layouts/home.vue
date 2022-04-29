@@ -5,8 +5,8 @@
     <div class="splash-title columns">
       <div class="splash-title-text column is-half">
         <div>
-          <h1>Climate<br />Impact<br />Reports</h1>
-          <h2>for Changing<br />Northern Ecosystems</h2>
+          <h1>Northern<br />Climate<br />Reports</h1>
+          <h2>for Changing<br />Arctic Ecosystems</h2>
         </div>
       </div>
       <div class="splash-title-image column is-half"></div>

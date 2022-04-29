@@ -1,7 +1,6 @@
 <template>
   <section class="section">
     <div class="content-wrapper">
-
       <BetaFeedback />
 
       <div class="content is-size-5">
@@ -52,8 +51,8 @@
         <p>
           Model output products are publicly available, but often in formats
           requiring considerable expertise to access and process. Repackaging
-          these outputs as Climate Impact Reports moves relevant climate
-          information out of storage and into decision-making spaces&mdash;thus
+          these outputs as climate reports moves relevant climate information
+          out of storage and into decision&ndash;making spaces&mdash;thus
           helping to gauge future fire hazard, reduce future wildfire risk,
           promote ecological resilience and manage wildlife habitat.
         </p>
