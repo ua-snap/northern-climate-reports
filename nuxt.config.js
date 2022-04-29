@@ -1,6 +1,6 @@
 // Some properties reused in the OpenGraph tags.
 var metas = {
-  title: 'Climate Impact Reports for Changing Northern Ecosystems',
+  title: 'Northern Climate Reports for Changing Arctic Ecosystems',
   description:
     'Three forms of heat-related phenomena—warming temperatures, thawing permafrost, and more fire—are driving landscape change in Northern ecosystems. This tool uses climate data to construct a variety of possible futures for a warming North.',
   preview: '/preview.png',
@@ -14,7 +14,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Climate Impact Reports for Changing Northern Ecosystems',
+    title: 'Northern Climate Reports for Changing Arctic Ecosystems',
     htmlAttrs: {
       lang: 'en',
     },
