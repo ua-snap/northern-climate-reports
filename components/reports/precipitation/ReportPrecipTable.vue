@@ -57,12 +57,12 @@
             {{ reportData['2040_2069']['DJF']['MRI-CGCM3']['rcp45']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
               :future="
-                reportData['2040_2069']['DJF']['MRI-CGCM3']['rcp45']['pr']
+                rawReportData['2040_2069']['DJF']['MRI-CGCM3']['rcp45']['pr']
               "
             />
           </td>
@@ -70,23 +70,23 @@
             {{ reportData['2040_2069']['DJF']['CCSM4']['rcp45']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
-              :future="reportData['2040_2069']['DJF']['CCSM4']['rcp45']['pr']"
+              :future="rawReportData['2040_2069']['DJF']['CCSM4']['rcp45']['pr']"
             />
           </td>
           <td>
             {{ reportData['2040_2069']['DJF']['MRI-CGCM3']['rcp85']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
               :future="
-                reportData['2040_2069']['DJF']['MRI-CGCM3']['rcp85']['pr']
+                rawReportData['2040_2069']['DJF']['MRI-CGCM3']['rcp85']['pr']
               "
             />
           </td>
@@ -94,23 +94,23 @@
             {{ reportData['2040_2069']['DJF']['CCSM4']['rcp85']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
-              :future="reportData['2040_2069']['DJF']['CCSM4']['rcp85']['pr']"
+              :future="rawReportData['2040_2069']['DJF']['CCSM4']['rcp85']['pr']"
             />
           </td>
           <td>
             {{ reportData['2070_2099']['DJF']['MRI-CGCM3']['rcp45']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
               :future="
-                reportData['2070_2099']['DJF']['MRI-CGCM3']['rcp45']['pr']
+                rawReportData['2070_2099']['DJF']['MRI-CGCM3']['rcp45']['pr']
               "
             />
           </td>
@@ -118,23 +118,23 @@
             {{ reportData['2070_2099']['DJF']['CCSM4']['rcp45']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
-              :future="reportData['2070_2099']['DJF']['CCSM4']['rcp45']['pr']"
+              :future="rawReportData['2070_2099']['DJF']['CCSM4']['rcp45']['pr']"
             />
           </td>
           <td>
             {{ reportData['2070_2099']['DJF']['MRI-CGCM3']['rcp85']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
               :future="
-                reportData['2070_2099']['DJF']['MRI-CGCM3']['rcp85']['pr']
+                rawReportData['2070_2099']['DJF']['MRI-CGCM3']['rcp85']['pr']
               "
             />
           </td>
@@ -142,11 +142,11 @@
             {{ reportData['2070_2099']['DJF']['CCSM4']['rcp85']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['DJF']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
-              :future="reportData['2070_2099']['DJF']['CCSM4']['rcp85']['pr']"
+              :future="rawReportData['2070_2099']['DJF']['CCSM4']['rcp85']['pr']"
             />
           </td>
         </tr>
@@ -163,12 +163,12 @@
             {{ reportData['2040_2069']['MAM']['MRI-CGCM3']['rcp45']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
               :future="
-                reportData['2040_2069']['MAM']['MRI-CGCM3']['rcp45']['pr']
+                rawReportData['2040_2069']['MAM']['MRI-CGCM3']['rcp45']['pr']
               "
             />
           </td>
@@ -176,23 +176,23 @@
             {{ reportData['2040_2069']['MAM']['CCSM4']['rcp45']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
-              :future="reportData['2040_2069']['MAM']['CCSM4']['rcp45']['pr']"
+              :future="rawReportData['2040_2069']['MAM']['CCSM4']['rcp45']['pr']"
             />
           </td>
           <td>
             {{ reportData['2040_2069']['MAM']['MRI-CGCM3']['rcp85']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
               :future="
-                reportData['2040_2069']['MAM']['MRI-CGCM3']['rcp85']['pr']
+                rawReportData['2040_2069']['MAM']['MRI-CGCM3']['rcp85']['pr']
               "
             />
           </td>
@@ -200,23 +200,23 @@
             {{ reportData['2040_2069']['MAM']['CCSM4']['rcp85']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
-              :future="reportData['2040_2069']['MAM']['CCSM4']['rcp85']['pr']"
+              :future="rawReportData['2040_2069']['MAM']['CCSM4']['rcp85']['pr']"
             />
           </td>
           <td>
             {{ reportData['2070_2099']['MAM']['MRI-CGCM3']['rcp45']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
               :future="
-                reportData['2070_2099']['MAM']['MRI-CGCM3']['rcp45']['pr']
+                rawReportData['2070_2099']['MAM']['MRI-CGCM3']['rcp45']['pr']
               "
             />
           </td>
@@ -224,23 +224,23 @@
             {{ reportData['2070_2099']['MAM']['CCSM4']['rcp45']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
-              :future="reportData['2070_2099']['MAM']['CCSM4']['rcp45']['pr']"
+              :future="rawReportData['2070_2099']['MAM']['CCSM4']['rcp45']['pr']"
             />
           </td>
           <td>
             {{ reportData['2070_2099']['MAM']['MRI-CGCM3']['rcp85']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
               :future="
-                reportData['2070_2099']['MAM']['MRI-CGCM3']['rcp85']['pr']
+                rawReportData['2070_2099']['MAM']['MRI-CGCM3']['rcp85']['pr']
               "
             />
           </td>
@@ -248,11 +248,11 @@
             {{ reportData['2070_2099']['MAM']['CCSM4']['rcp85']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['MAM']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
-              :future="reportData['2070_2099']['MAM']['CCSM4']['rcp85']['pr']"
+              :future="rawReportData['2070_2099']['MAM']['CCSM4']['rcp85']['pr']"
             />
           </td>
         </tr>
@@ -269,12 +269,12 @@
             {{ reportData['2040_2069']['JJA']['MRI-CGCM3']['rcp45']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
               :future="
-                reportData['2040_2069']['JJA']['MRI-CGCM3']['rcp45']['pr']
+                rawReportData['2040_2069']['JJA']['MRI-CGCM3']['rcp45']['pr']
               "
             />
           </td>
@@ -282,23 +282,23 @@
             {{ reportData['2040_2069']['JJA']['CCSM4']['rcp45']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
-              :future="reportData['2040_2069']['JJA']['CCSM4']['rcp45']['pr']"
+              :future="rawReportData['2040_2069']['JJA']['CCSM4']['rcp45']['pr']"
             />
           </td>
           <td>
             {{ reportData['2040_2069']['JJA']['MRI-CGCM3']['rcp85']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
               :future="
-                reportData['2040_2069']['JJA']['MRI-CGCM3']['rcp85']['pr']
+                rawReportData['2040_2069']['JJA']['MRI-CGCM3']['rcp85']['pr']
               "
             />
           </td>
@@ -306,23 +306,23 @@
             {{ reportData['2040_2069']['JJA']['CCSM4']['rcp85']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
-              :future="reportData['2040_2069']['JJA']['CCSM4']['rcp85']['pr']"
+              :future="rawReportData['2040_2069']['JJA']['CCSM4']['rcp85']['pr']"
             />
           </td>
           <td>
             {{ reportData['2070_2099']['JJA']['MRI-CGCM3']['rcp45']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
               :future="
-                reportData['2070_2099']['JJA']['MRI-CGCM3']['rcp45']['pr']
+                rawReportData['2070_2099']['JJA']['MRI-CGCM3']['rcp45']['pr']
               "
             />
           </td>
@@ -330,23 +330,23 @@
             {{ reportData['2070_2099']['JJA']['CCSM4']['rcp45']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
-              :future="reportData['2070_2099']['JJA']['CCSM4']['rcp45']['pr']"
+              :future="rawReportData['2070_2099']['JJA']['CCSM4']['rcp45']['pr']"
             />
           </td>
           <td>
             {{ reportData['2070_2099']['JJA']['MRI-CGCM3']['rcp85']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
               :future="
-                reportData['2070_2099']['JJA']['MRI-CGCM3']['rcp85']['pr']
+                rawReportData['2070_2099']['JJA']['MRI-CGCM3']['rcp85']['pr']
               "
             />
           </td>
@@ -354,11 +354,11 @@
             {{ reportData['2070_2099']['JJA']['CCSM4']['rcp85']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['JJA']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
-              :future="reportData['2070_2099']['JJA']['CCSM4']['rcp85']['pr']"
+              :future="rawReportData['2070_2099']['JJA']['CCSM4']['rcp85']['pr']"
             />
           </td>
         </tr>
@@ -375,12 +375,12 @@
             {{ reportData['2040_2069']['SON']['MRI-CGCM3']['rcp45']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['SON']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
               :future="
-                reportData['2040_2069']['SON']['MRI-CGCM3']['rcp45']['pr']
+                rawReportData['2040_2069']['SON']['MRI-CGCM3']['rcp45']['pr']
               "
             />
           </td>
@@ -388,23 +388,23 @@
             {{ reportData['2040_2069']['SON']['CCSM4']['rcp45']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['SON']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
-              :future="reportData['2040_2069']['SON']['CCSM4']['rcp45']['pr']"
+              :future="rawReportData['2040_2069']['SON']['CCSM4']['rcp45']['pr']"
             />
           </td>
           <td>
             {{ reportData['2040_2069']['SON']['MRI-CGCM3']['rcp85']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['SON']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
               :future="
-                reportData['2040_2069']['SON']['MRI-CGCM3']['rcp85']['pr']
+                rawReportData['2040_2069']['SON']['MRI-CGCM3']['rcp85']['pr']
               "
             />
           </td>
@@ -412,23 +412,23 @@
             {{ reportData['2040_2069']['SON']['CCSM4']['rcp85']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['SON']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
-              :future="reportData['2040_2069']['SON']['CCSM4']['rcp85']['pr']"
+              :future="rawReportData['2040_2069']['SON']['CCSM4']['rcp85']['pr']"
             />
           </td>
           <td>
             {{ reportData['2070_2099']['SON']['MRI-CGCM3']['rcp45']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['SON']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
               :future="
-                reportData['2070_2099']['SON']['MRI-CGCM3']['rcp45']['pr']
+                rawReportData['2070_2099']['SON']['MRI-CGCM3']['rcp45']['pr']
               "
             />
           </td>
@@ -436,23 +436,23 @@
             {{ reportData['2070_2099']['SON']['CCSM4']['rcp45']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['SON']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
-              :future="reportData['2070_2099']['SON']['CCSM4']['rcp45']['pr']"
+              :future="rawReportData['2070_2099']['SON']['CCSM4']['rcp45']['pr']"
             />
           </td>
           <td>
             {{ reportData['2070_2099']['SON']['MRI-CGCM3']['rcp85']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['SON']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
               :future="
-                reportData['2070_2099']['SON']['MRI-CGCM3']['rcp85']['pr']
+                rawReportData['2070_2099']['SON']['MRI-CGCM3']['rcp85']['pr']
               "
             />
           </td>
@@ -460,11 +460,11 @@
             {{ reportData['2070_2099']['SON']['CCSM4']['rcp85']['pr']
             }}<UnitWidget variable="pr" type="light" /><PrecipDiffWidget
               :past="
-                reportData['1950_2009']['SON']['CRU-TS40']['CRU_historical'][
+                rawReportData['1950_2009']['SON']['CRU-TS40']['CRU_historical'][
                   'pr'
                 ]['mean']
               "
-              :future="reportData['2070_2099']['SON']['CCSM4']['rcp85']['pr']"
+              :future="rawReportData['2070_2099']['SON']['CCSM4']['rcp85']['pr']"
             />
           </td>
         </tr>
@@ -502,6 +502,7 @@ export default {
   computed: {
     ...mapGetters({
       reportData: 'climate/climateData',
+      rawReportData: 'climate/rawClimateData',
       place: 'place/name',
     }),
   },
