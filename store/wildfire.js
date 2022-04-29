@@ -46,6 +46,11 @@ export const getters = {
   flammabilityThresholds() {
     return [
       {
+        label: 'Not modeled or no data',
+        color: '#ffffff',
+        interpretation: 'This pixel was not modeled or is not included in the dataset',
+      },
+      {
         label: 'Very Low',
         min: 0.0,
         max: 0.2,

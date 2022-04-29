@@ -25,6 +25,7 @@
             <span v-else-if="threshold['max'] == rangeMax()"
               >&ge;{{ threshold['min'] }}<span v-html="unitSymbol"
             /></span>
+            <span v-else-if="!threshold['max'] && !threshold['min']">-</span>
             <span v-else
               >&ge;{{ threshold['min'] }}<span v-html="unitSymbol" />, &lt;{{
                 threshold['max']
