@@ -39,6 +39,8 @@
 </style>
 <script>
 import { mapGetters } from 'vuex'
+import { convertToInches, convertDiffValueToFahrenheit } from '~/utils/convert'
+
 export default {
   name: 'QualitativeText',
   data: function () {
@@ -58,6 +60,7 @@ export default {
       hucName: 'place/rawHucName',
       place: 'place/name',
       units: 'units',
+      rawClimateData: 'climate/rawClimateData',
       climateData: 'climate/climateData',
       altThawData: 'permafrost/altThaw',
       showPermafrost: 'permafrost/valid',
@@ -107,18 +110,21 @@ export default {
       return this.generateAnnualMetricsHtml()
     },
     collectSeasonalMetrics(season) {
-      let historicalTemp = this.climateData['1950_2009'][season]['CRU-TS40'][
+      // We need to use the raw (not unit-converted) values here
+      // to avoid rounding issues yielding different %s.
+      // https://github.com/ua-snap/iem-webapp/issues/132
+
+      let historicalTemp = this.rawClimateData['1950_2009'][season]['CRU-TS40'][
         'CRU_historical'
       ]['tas']['mean']
 
-      let historicalPrecip = this.climateData['1950_2009'][season]['CRU-TS40'][
-        'CRU_historical'
-      ]['pr']['mean']
+      let historicalPrecip = this.rawClimateData['1950_2009'][season][
+        'CRU-TS40'
+      ]['CRU_historical']['pr']['mean']
 
       var seasonMetrics = {
         season: this.seasonNames[season],
         maxTempDiff: 0,
-        maxPrecipDiff: 0,
         precipPercentChange: 0,
         aboveFreezing: false,
       }
@@ -128,40 +134,29 @@ export default {
 
       // Take an average of both temperature and precipitation for the same season and RCP from both models.
       let tempMax = Math.max(
-        this.climateData['2070_2099'][season]['MRI-CGCM3']['rcp85']['tas'],
-        this.climateData['2070_2099'][season]['CCSM4']['rcp85']['tas']
+        this.rawClimateData['2070_2099'][season]['MRI-CGCM3']['rcp85']['tas'],
+        this.rawClimateData['2070_2099'][season]['CCSM4']['rcp85']['tas']
       )
 
       let precipMax = Math.max(
-        this.climateData['2070_2099'][season]['MRI-CGCM3']['rcp85']['pr'],
-        this.climateData['2070_2099'][season]['CCSM4']['rcp85']['pr']
+        this.rawClimateData['2070_2099'][season]['MRI-CGCM3']['rcp85']['pr'],
+        this.rawClimateData['2070_2099'][season]['CCSM4']['rcp85']['pr']
       )
 
-      // If the maximum temperature difference is less than the current temperature difference,
-      // set the new value as the greatest seasonal temperature difference.
-      if (seasonMetrics['maxTempDiff'] < tempMax - historicalTemp) {
-        seasonMetrics['maxTempDiff'] = Math.round(tempMax - historicalTemp)
-      }
+      seasonMetrics['maxTempDiff'] = tempMax - historicalTemp
 
-      // If the maximum precipitation difference is less than the current precipitation difference,
-      // set the new value as the greatest seasonal precipitation difference and compute new
-      // percentage changed stored as a rounded integer.
-      if (seasonMetrics['maxPrecipDiff'] < precipMax - historicalPrecip) {
-        seasonMetrics['maxPrecipDiff'] = precipMax - historicalPrecip
-        seasonMetrics['precipPercentChange'] = Math.round(
-          (precipMax / historicalPrecip) * 100 - 100
-        )
-      }
+      // Set the new value as the greatest seasonal precipitation
+      // difference and compute a new percentage changed stored
+      // as a rounded integer.
+      seasonMetrics['precipPercentChange'] = Math.round(
+        (precipMax / historicalPrecip) * 100 - 100
+      )
 
       // We set this season to above freezing if one of the modeled averages is above freezing
       // while the historical value for temperature is below freezing.
-      if (
-        (this.units == 'metric' && historicalTemp < 0 && tempMax > 0) ||
-        (this.units == 'imperial' && historicalTemp < 32 && tempMax >= 32)
-      ) {
+      if (historicalTemp < 0 && tempMax > 0) {
         seasonMetrics['aboveFreezing'] = true
       }
-
       return seasonMetrics
     },
     temperatureString() {
@@ -192,6 +187,15 @@ export default {
 
       // Average value against the 4 seasons included.
       annualTemperatureAverage = Math.round(annualTemperatureAverage / 4)
+
+      if (this.units == 'imperial') {
+        annualTemperatureAverage = convertDiffValueToFahrenheit(
+          annualTemperatureAverage
+        )
+        annualHighestTempChange = convertDiffValueToFahrenheit(
+          annualHighestTempChange
+        )
+      }
 
       // Create the returned string using the values from the loop above.
       let string =
