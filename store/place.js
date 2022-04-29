@@ -221,6 +221,9 @@ export const actions = {
   },
 
   async search(context) {
+    // Flush any prior results.
+    context.commit('clearSearchResults')
+    
     if (context.getters.latLng) {
       let queryUrl =
         process.env.apiUrl +
