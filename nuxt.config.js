@@ -71,7 +71,7 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [],
+  buildModules: ['@nuxtjs/google-analytics'],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -87,6 +87,11 @@ export default {
     'nuxt-leaflet',
     '@nuxt/http',
   ],
+
+  // Google Analytics configuration
+  googleAnalytics: {
+    id: 'G-HD6C2ESK1Z',
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
