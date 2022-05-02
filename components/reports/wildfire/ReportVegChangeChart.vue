@@ -4,16 +4,16 @@
       <b-field label="Model" class="px-3">
         <div>
           <b-radio
-            v-model="veg_chart_model_selection"
-            name="veg_chart_model_selection"
+            v-model="vegChartModelSelection"
+            name="vegChartModelSelection"
             native-value="NCAR-CCSM4"
             >NCAR CCSM4</b-radio
           >
         </div>
         <div>
           <b-radio
-            v-model="veg_chart_model_selection"
-            name="veg_chart_model_selection"
+            v-model="vegChartModelSelection"
+            name="vegChartModelSelection"
             native-value="MRI-CGCM3"
             >MRI CGCM3</b-radio
           >
@@ -45,11 +45,15 @@ export default {
   },
   data() {
     return {
-      veg_chart_model_selection: 'NCAR-CCSM4',
-      veg_scenario_selection: 'rcp85',
+      vegChartModelSelection: 'NCAR-CCSM4',
     }
   },
   computed: {
+    vegChartModelName() {
+      return this.vegChartModelSelection == 'NCAR-CCSM4'
+        ? 'NCAR CCSM4'
+        : 'MRI CGCM3'
+    },
     ...mapGetters({
       vegEras: 'wildfire/vegEras',
       vegChangeData: 'wildfire/veg_change',
@@ -63,10 +67,7 @@ export default {
     vegChangeData: function () {
       this.renderPlot()
     },
-    veg_chart_model_selection: function () {
-      this.renderPlot()
-    },
-    veg_scenario_selection: function () {
+    vegChartModelSelection: function () {
       this.renderPlot()
     },
   },
@@ -80,6 +81,7 @@ export default {
       let title = buildTitle({
         dataLabel: 'Vegetation type',
         dateRange: '1950-2099',
+        model: this.vegChartModelName,
         place: this.place,
         huc12Id: this.huc12Id,
       })
@@ -105,7 +107,7 @@ export default {
         this.vegEras.forEach(era => {
           if (era != '1950-2008') {
             yValues.push(
-              vegChangeData[era][this.veg_chart_model_selection]['rcp45'][type]
+              vegChangeData[era][this.vegChartModelSelection]['rcp45'][type]
             )
           }
         })
@@ -113,7 +115,7 @@ export default {
         this.vegEras.forEach(era => {
           if (era != '1950-2008') {
             yValues.push(
-              vegChangeData[era][this.veg_chart_model_selection]['rcp85'][type]
+              vegChangeData[era][this.vegChartModelSelection]['rcp85'][type]
             )
           }
         })

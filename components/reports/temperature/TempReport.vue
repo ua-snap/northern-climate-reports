@@ -5,7 +5,7 @@
       <div class="is-size-5">
         <p>
           This section shows projections for average (mean) temperature,
-          compared with a historical range (1950&ndash;2009). Results are
+          compared with a historical range (1950&ndash;2009, CRU TS 4.0). Results are
           averaged by season (three month averages) for two specific climate
           models (MRI CGCM3 and NCAR CCSM4) as well as average of five models
           which perform well in Alaska and the Arctic.
