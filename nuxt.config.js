@@ -65,6 +65,7 @@ export default {
     '~/plugins/leaflet.client.js',
     '~/plugins/vuex-router-sync',
     '~/plugins/axios',
+    '~/plugins/gtag'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
