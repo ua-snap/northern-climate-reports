@@ -65,13 +65,14 @@ export default {
     '~/plugins/leaflet.client.js',
     '~/plugins/vuex-router-sync',
     '~/plugins/axios',
+    '~/plugins/gtag'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxtjs/google-analytics'],
+  buildModules: [],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -87,11 +88,6 @@ export default {
     'nuxt-leaflet',
     '@nuxt/http',
   ],
-
-  // Google Analytics configuration
-  googleAnalytics: {
-    id: 'G-HD6C2ESK1Z',
-  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},

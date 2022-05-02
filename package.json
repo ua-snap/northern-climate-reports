@@ -25,10 +25,10 @@
     "plotly.js-dist-min": "^2.3.1",
     "proj4": "^2.7.4",
     "proj4leaflet": "^1.0.2",
+    "vue-gtag": "^1.16.1",
     "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
-    "@nuxtjs/google-analytics": "^2.4.0",
     "chromedriver": "^88.0.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.1",
