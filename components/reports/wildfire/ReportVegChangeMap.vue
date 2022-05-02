@@ -4,6 +4,7 @@
       <div>
         <span class="has-text-weight-bold">{{ mapEra }}<br /></span>
         <span v-if="mapModel">{{ mapModel }}<br class="narrow-br" /></span>
+        <span v-else>(Modeled)<br class="narrow-br" /></span>
         <span>{{ mapScenario }}</span>
       </div>
     </div>
