@@ -22,6 +22,7 @@ export const buildTitle = function (params) {
   let place = params['place']
   let huc12Id = params['huc12Id']
   let season = params['season']
+  let model = params['model']
 
   let title = dataLabel + ',<br>'
   let huc12Label = ''
@@ -32,6 +33,10 @@ export const buildTitle = function (params) {
 
   if (season) {
     totalLength += season.length
+  }
+
+  if (model) {
+    totalLength += model.length
   }
 
   if (totalLength > 60) {
@@ -59,6 +64,8 @@ export const buildTitle = function (params) {
   if (season) {
     title += ', ' + season
   }
+
+  if (model) title += ', ' + model
 
   return title
 }
