@@ -65,12 +65,16 @@
     <div class="content">
       <div class="is-size-5 mt-6">
         <p>
-          Due to the inherent uncertainty involved in predicting wildfire, the
+          Due to the inherent uncertainty involved in predicting vegetation
+          transitions driven by climate and wildfire or by climate alone, the
           maps below should not be interpreted as vegetation predictions at
           specific locations, but rather as an indicator of likely general
-          trends in vegetation type over time. Each map&ndash;pixel shows the
-          most commonly predicted vegetation type (modal value) based on 200
-          model runs per year across all years in the map&rsquo;s date range.
+          trends in ecological suitability for particular vegetation type over
+          time. Each map&ndash;pixel shows the most commonly predicted
+          vegetation type (modal value) based on 200 model runs per year across
+          all years in the map&rsquo;s date range. Some ecological regions in
+          the far north are projected to undergo marked changes, and others
+          little or no change.
         </p>
       </div>
     </div>
