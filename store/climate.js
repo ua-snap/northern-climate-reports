@@ -42,11 +42,15 @@ export const state = () => ({
 })
 
 export const getters = {
+  // Used for performing % delta computations where needed
+  rawClimateData(state) {
+    return state.climateData
+  },
   climateData(state, getters, rootState, rootGetters) {
-    var tempData = _.cloneDeep(state.climateData)
+    var convertedData = _.cloneDeep(state.climateData)
     return rootGetters.units == 'imperial'
-      ? convertReportData(tempData)
-      : tempData
+      ? convertReportData(convertedData)
+      : convertedData
   },
   httpError(state) {
     return state.httpError
