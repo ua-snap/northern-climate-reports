@@ -52,7 +52,7 @@
             >
             <span v-else
               >Data for the tables and charts below have been averaged across
-              the spatial extent of {{ place }}.</span
+              the spatial extent of {{ grammarFragment }} {{ place }}.</span
             >
           </p>
           <p v-if="elevation">
@@ -246,11 +246,11 @@
   </div>
 </template>
 <style lang="scss" scoped>
-  .area-warning {
-    border-left: 0.25rem solid #aaa;
-    padding-left: 1rem;
-    margin-bottom: 1rem;
-  }
+.area-warning {
+  border-left: 0.25rem solid #aaa;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+}
 .centered {
   text-align: center;
 }
@@ -311,6 +311,20 @@ export default {
     }
   },
   computed: {
+    // Returns grammar fragments needed to improve
+    // readability of the report for different place types.
+    grammarFragment() {
+      switch (this.type) {
+        case 'protected_area':
+        case 'corporation':
+        case 'climate_division':
+        case 'fire_zone':
+          return 'the'
+          break
+        default:
+          return ''
+      }
+    },
     elevationUnits() {
       return this.units == 'imperial' ? 'ft' : 'm'
     },

@@ -467,6 +467,17 @@ export default {
         case 'huc':
           prefix = '<p>In the <strong>' + this.hucName + '</strong>'
           break
+        case 'protected_area':
+        case 'climate_division':
+        case 'fire_zone':
+          prefix = '<p>In the <strong>' + this.place + '</strong>'
+          break
+        case 'corporation':
+        case 'ethnolinguistic_region':
+        case 'first_nation':
+        case 'game_management_unit':
+          prefix = '<p>In <strong>' + this.place + '</strong>'
+          break
         default:
           prefix = '<p>At <strong>' + this.place + '</strong>'
           break
