@@ -100,10 +100,10 @@ in the AWS CloudFront web interface, then go to:
 
 Invalidations → Create invalidation
 
-Use the following invalidation path:
+Use the following CLI command:
 
 ```
-/*
+aws cloudfront create-invalidation --distribution_id EZEXS6RHS812M --paths "/*"
 ```
 
 For detailed explanation on how things work, check out
