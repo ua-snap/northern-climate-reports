@@ -193,6 +193,14 @@ export default {
       let thresholdShapes = []
       let thresholdAnnotations = []
       this.flamThresholds.forEach(flamThreshold => {
+        // Ignore the "Not modeled or no data" category.
+        if (
+          flamThreshold['min'] == undefined ||
+          flamThreshold['max'] == undefined
+        ) {
+          return
+        }
+
         if (
           _.min(displayedValues) > flamThreshold['max'] ||
           _.max(displayedValues) < flamThreshold['min']
