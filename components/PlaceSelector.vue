@@ -84,12 +84,6 @@
                 >
                   Borough
                 </span>
-                <span
-                  class="area-additional-info"
-                  v-if="props.option.type == 'census_area'"
-                >
-                  Census Area
-                </span>
               </div>
             </template>
           </b-autocomplete>
