@@ -260,6 +260,12 @@ export const actions = {
         _.each(res.first_nations_near, place => {
           ssr.push(place)
         })
+        _.each(res.akcensus_areas_near, place => {
+          ssr.push(place)
+        })
+        _.each(res.ak_boros_near, place => {
+          ssr.push(place)
+        })
 
         ssr = _.sortBy(ssr, ['name'])
 
