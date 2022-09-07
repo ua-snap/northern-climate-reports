@@ -174,7 +174,9 @@ export default {
 
         // Check if this temperature difference is the highest out of all the seasons thus far.
         if (annualHighestTempChange < seasonOutput['maxTempDiff']) {
-          annualHighestTempChange = parseFloat(seasonOutput['maxTempDiff']).toFixed(0)
+          annualHighestTempChange = parseFloat(
+            seasonOutput['maxTempDiff']
+          ).toFixed(0)
           seasonWithHighestTempChange = seasonOutput['season']
         }
 
@@ -474,6 +476,8 @@ export default {
         case 'protected_area':
         case 'climate_division':
         case 'fire_zone':
+        case 'borough':
+        case 'census_area':
           prefix = '<p>In the <strong>' + this.place + '</strong>'
           break
         case 'corporation':
