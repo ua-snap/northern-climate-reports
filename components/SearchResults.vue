@@ -125,9 +125,6 @@ export default {
         case 'borough':
           placeType = 'Borough'
           break
-        case 'census_area':
-          placeType = 'Census Area'
-          break
         default: // Do nothing, don't decorate protected areas
       }
       return placeType

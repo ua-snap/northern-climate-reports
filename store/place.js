@@ -138,6 +138,8 @@ export const getters = {
           return area.name + ' (First Nation Traditional Territory)'
         case 'game_management_unit':
           return area.name + ' (Game Management Unit)'
+        case 'borough':
+          return area.name + ' (Borough)'
         default:
           return area.name
       }
