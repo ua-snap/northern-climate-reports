@@ -138,6 +138,10 @@ export const getters = {
           return area.name + ' (First Nation Traditional Territory)'
         case 'game_management_unit':
           return area.name + ' (Game Management Unit)'
+        case 'borough':
+          return area.name + ' (Borough)'
+        case 'census_area':
+          return area.name + ' (Census Area)'
         default:
           return area.name
       }
@@ -223,7 +227,7 @@ export const actions = {
   async search(context) {
     // Flush any prior results.
     context.commit('clearSearchResults')
-    
+
     if (context.getters.latLng) {
       let queryUrl =
         process.env.apiUrl +

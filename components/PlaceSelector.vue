@@ -28,7 +28,9 @@
             <template slot-scope="props">
               <div class="search-item">
                 {{ props.option.name }}
-                <span class="area-additional-info" v-if="props.option.type == 'huc'"
+                <span
+                  class="area-additional-info"
+                  v-if="props.option.type == 'huc'"
                   >Watershed, HUC ID {{ props.option.id }}</span
                 >
                 <span class="alt-name" v-if="props.option.alt_name"
@@ -75,6 +77,18 @@
                   v-if="props.option.type == 'game_management_unit'"
                 >
                   Game Management Unit
+                </span>
+                <span
+                  class="area-additional-info"
+                  v-if="props.option.type == 'borough'"
+                >
+                  Borough
+                </span>
+                <span
+                  class="area-additional-info"
+                  v-if="props.option.type == 'census_area'"
+                >
+                  Census Area
                 </span>
               </div>
             </template>

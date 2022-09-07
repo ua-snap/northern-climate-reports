@@ -319,6 +319,8 @@ export default {
         case 'corporation':
         case 'climate_division':
         case 'fire_zone':
+        case 'borough':
+        case 'census_area':
           return 'the'
           break
         default:

@@ -122,6 +122,12 @@ export default {
         case 'first_nation':
           placeType = 'First Nation Traditional Territory'
           break
+        case 'borough':
+          placeType = 'Borough'
+          break
+        case 'census_area':
+          placeType = 'Census Area'
+          break
         default: // Do nothing, don't decorate protected areas
       }
       return placeType

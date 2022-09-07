@@ -10,7 +10,9 @@ export const getAppPathFragment = function (type, id) {
     type == 'ethnolinguistic_region' ||
     type == 'fire_zone' ||
     type == 'first_nation' ||
-    type == 'game_management_unit'
+    type == 'game_management_unit' ||
+    type == 'borough' ||
+    type == 'census_area'
   ) {
     path = '/report/area/' + id
   } else {
