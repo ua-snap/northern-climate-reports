@@ -53,9 +53,14 @@
           half the years in a given time period:
         </p>
         <ul>
-          <li>HIGH risk = possibility of rapid increase</li>
-          <li>MEDIUM risk = possibility of moderate increase</li>
-          <li>LOW risk = unlikely to increase</li>
+          <li>
+            <strong>High risk</strong> means the possibility of rapid increase
+          </li>
+          <li>
+            <strong>Medium risk</strong> means the possibility of moderate
+            increase
+          </li>
+          <li><strong>Low risk</strong> means unlikely to increase</li>
         </ul>
         <p>See more details about this model <a href="#">here</a></p>
       </div>
