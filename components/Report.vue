@@ -234,6 +234,8 @@
         <div id="wildfire">
           <WildfireReport />
         </div>
+      </section>
+      <section class="section large-screen">
         <div id="beetle-risk">
           <BeetleRiskReport />
         </div>

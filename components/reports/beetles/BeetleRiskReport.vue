@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="content">
-      <h4 class="title is-3">Spruce Bark Beetle Risk Maps</h4>
-      <div class="is-size-5 mb-6">
+      <h4 class="title is-3">Spruce Bark Beetle Risk</h4>
+      <div class="is-size-5 mt-6">
         <p>
           These maps display three broad levels of projected
           climate&ndash;related risk of spruce bark beetle (Dendroctonus
@@ -64,8 +64,8 @@
         </ul>
         <p><a href="#">Read more detailed information</a> about this model.</p>
       </div>
-      <ReportBeetleRiskMaps />
     </div>
+    <ReportBeetleRiskMaps />
   </div>
 </template>
 <script>

@@ -6,7 +6,7 @@ export const getters = {
     return ['1988-2017', '2010-2039', '2040-2069', '2070-2099']
   },
   beetleModels() {
-    return ['daymet', 'NCAR-CCSM4', 'GFDL-ESM2M', 'HadGEM2-ES', 'MRI CGCM3']
+    return ['Daymet', 'NCAR-CCSM4', 'GFDL-ESM2M', 'HadGEM2-ES', 'MRI CGCM3']
   },
   beetleScenarios() {
     return ['historical', 'RCP 4.5', 'RCP 8.5']

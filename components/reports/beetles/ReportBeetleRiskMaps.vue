@@ -131,7 +131,7 @@
   line-height: 1.2;
 }
 .color {
-  width: 220px;
+  max-width: 240px;
   padding: 0 10px;
   float: left;
   margin: 4px 0;
