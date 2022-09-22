@@ -168,6 +168,11 @@
               <a href="#wildfire">Wildfire</a> charts of flammability and
               vegetation change with with multiple models and scenarios
             </li>
+            <li>
+              <a href="#beetle-risk">Spruce Bark Beetle Risk</a> visualizes the
+              climate-related risk of spruce bark beetles in forested areas of
+              Alaska.
+            </li>
           </ul>
         </div>
       </section>
@@ -229,6 +234,9 @@
         <div id="wildfire">
           <WildfireReport />
         </div>
+        <div id="beetle-risk">
+          <BeetleRiskReport />
+        </div>
         <BackToTopButton />
       </section>
       <section class="section small-screen">
@@ -281,6 +289,7 @@ import TempReport from '~/components/reports/temperature/TempReport'
 import PrecipReport from '~/components/reports/precipitation/PrecipReport'
 import PermafrostReport from '~/components/reports/permafrost/PermafrostReport'
 import WildfireReport from '~/components/reports/wildfire/WildfireReport'
+import BeetleRiskReport from '~/components/reports/beetles/BeetleRiskReport'
 import MiniMap from '~/components/reports/MiniMap'
 import QualitativeText from '~/components/reports/QualitativeText'
 import BackToTopButton from '~/components/reports/BackToTopButton'
@@ -299,6 +308,7 @@ export default {
     PrecipReport,
     PermafrostReport,
     WildfireReport,
+    BeetleRiskReport,
     MiniMap,
     QualitativeText,
     BackToTopButton,
