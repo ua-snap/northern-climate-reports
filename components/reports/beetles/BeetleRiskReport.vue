@@ -54,10 +54,12 @@
         </p>
         <ul>
           <li>
-            <strong>High risk</strong> means the possibility of rapid increase
+            <strong>High risk</strong> means the possibility of
+            <strong>rapid</strong> increase
           </li>
           <li>
-            <strong>Medium risk</strong> means the possibility of moderate
+            <strong>Medium risk</strong> means the possibility of
+            <strong>moderate</strong>
             increase
           </li>
           <li><strong>Low risk</strong> means unlikely to increase</li>
