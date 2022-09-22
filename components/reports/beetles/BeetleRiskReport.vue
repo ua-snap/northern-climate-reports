@@ -4,9 +4,10 @@
       <h4 class="title is-3">Spruce Bark Beetle Risk Maps</h4>
       <div class="is-size-5 mb-6">
         <p>
-          These maps display three broad levels of projected climate-related
-          risk of spruce bark beetle (Dendroctonus rufipennis) outbreaks in
-          “forested regions of Alaska” as defined by the US Forest Service.
+          These maps display three broad levels of projected
+          climate&ndash;related risk of spruce bark beetle (Dendroctonus
+          rufipennis) outbreaks in &ldquo;forested regions of Alaska&rdquo; as
+          defined by the US Forest Service.
         </p>
         <ul>
           <li>
@@ -18,9 +19,10 @@
             species comprise in areas where they do occur.
           </li>
           <li>
-            The model does not include important non-climate-related factors
-            that may affect outbreaks, including forest age, forest health,
-            fire, past outbreaks, management, and other pests or blights.
+            The model does not include important non&ndash;climate&ndash;related
+            factors that may affect outbreaks, including forest age, forest
+            health, fire, past outbreaks, management, and other pests or
+            blights.
           </li>
         </ul>
         <p>
@@ -29,7 +31,7 @@
           several years in a row.
         </p>
         <p>
-          This model incorporates three climate-based factors, which are
+          This model incorporates three climate&ndash;based factors, which are
           combined to calculate an overall outbreak risk for a given location
           and year:
         </p>
@@ -50,8 +52,8 @@
           half the years in a given time period:
         </p>
         <ul>
-          <li>HIGH risk = possibility of RAPID increase</li>
-          <li>MEDIUM risk = possibility of MODERATE increase</li>
+          <li>HIGH risk = possibility of rapid increase</li>
+          <li>MEDIUM risk = possibility of moderate increase</li>
           <li>LOW risk = unlikely to increase</li>
         </ul>
         <p>See more details about this model <a href="#">here</a></p>
