@@ -140,10 +140,6 @@
   width: 20px;
   height: 20px;
   margin-right: 8px;
-
-  &.bordered {
-    border: 1px solid #ccc;
-  }
 }
 </style>
 <script>
@@ -163,7 +159,7 @@ export default {
   data() {
     return {
       beetle_risk_maps_model_selection: 1,
-      beetle_risk_maps_snowpack_selection: 0,
+      beetle_risk_maps_snowpack_selection: 1,
     }
   },
 }
