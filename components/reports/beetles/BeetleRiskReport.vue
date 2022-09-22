@@ -62,7 +62,7 @@
           </li>
           <li><strong>Low risk</strong> means unlikely to increase</li>
         </ul>
-        <p>See more details about this model <a href="#">here</a></p>
+        <p><a href="#">Read more detailed information</a> about this model.</p>
       </div>
       <ReportBeetleRiskMaps />
     </div>
