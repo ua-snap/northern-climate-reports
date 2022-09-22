@@ -37,7 +37,8 @@
         </p>
         <ol>
           <li>
-            Beetles' rate of maturation in response to increasing summer heat
+            Beetles&rsquo; rate of maturation in response to increasing summer
+            heat
           </li>
           <li>
             Fall beetle survival in autumn based on rate of seasonal cooling
