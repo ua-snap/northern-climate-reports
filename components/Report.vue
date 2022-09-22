@@ -171,7 +171,7 @@
             <li>
               <a href="#beetle-risk">Spruce Bark Beetle Risk</a> visualizes the
               climate&ndash;related risk of spruce bark beetles in forested
-              areas of Alaska.
+              areas of Alaska
             </li>
           </ul>
         </div>
