@@ -9,7 +9,7 @@ export const getters = {
     return ['Daymet', 'NCAR-CCSM4', 'GFDL-ESM2M', 'HadGEM2-ES', 'MRI CGCM3']
   },
   beetleScenarios() {
-    return ['historical', 'RCP 4.5', 'RCP 8.5']
+    return ['Historical', 'RCP 4.5', 'RCP 8.5']
   },
   beetleSnowpacks() {
     return ['Low Snowpack', 'Medium Snowpack']
