@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <h5 class="minimaps-section-title has-text-centered">
-      Spruce Bark Beetle Risk,
+      Spruce Beetle Risk,
       <span v-html="place"></span>, 1988&ndash;2099
     </h5>
     <div class="is-size-6 mb-4">

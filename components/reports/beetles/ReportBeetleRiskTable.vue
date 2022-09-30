@@ -2,7 +2,7 @@
   <div class="report--temperature">
     <table class="table report-table" v-if="reportData">
       <caption>
-        Spruce Bark Beetle Risk,
+        Spruce Beetle Risk,
         {{
           snowpack.charAt(0).toUpperCase() + snowpack.slice(1)
         }}
@@ -232,8 +232,8 @@
       <tfoot>
         <tr>
           <td colspan="10" class="about">
-            Values show spruce bark beetle risk for the indicated date ranges
-            over all models and emission scenarios.
+            Values show spruce beetle risk for the indicated date ranges over
+            all models and emission scenarios.
             <nuxt-link :to="{ name: 'about' }"
               >Read more about models and emissions scenarios.</nuxt-link
             >
