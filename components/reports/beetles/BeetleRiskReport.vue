@@ -67,19 +67,30 @@
         <p><a href="#">Read more detailed information</a> about this model.</p>
       </div>
     </div>
+    <ReportBeetleRiskTable snowpack="low" />
+    <ReportBeetleRiskTable snowpack="medium" />
     <ReportBeetleRiskMaps />
+    <DownloadCsvButton
+      text="Download beetle risk data as CSV"
+      endpoint="beetles"
+      class="mt-3 mb-5"
+    />
   </div>
 </template>
 <script>
-import ReportBeetleRiskMaps from './ReportBeetleRiskMaps'
+import ReportBeetleRiskMaps from '~/components/reports/beetles/ReportBeetleRiskMaps'
+import ReportBeetleRiskTable from '~/components/reports/beetles/ReportBeetleRiskTable'
 import ColorTable from '~/components/reports/ColorTable'
+import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'BeetleRiskReport',
   components: {
     ReportBeetleRiskMaps,
+    ReportBeetleRiskTable,
     ColorTable,
+    DownloadCsvButton,
   },
   computed: {
     ...mapGetters({

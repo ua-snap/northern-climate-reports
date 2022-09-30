@@ -413,6 +413,9 @@ export default {
     this.$store.dispatch('elevation/fetch').catch(e => {
       console.error(e)
     })
+    this.$store.dispatch('beetle/fetch').catch(e => {
+      console.error(e)
+    })
   },
   watch: {
     units: function () {
