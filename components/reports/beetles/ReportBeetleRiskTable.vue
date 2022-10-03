@@ -43,6 +43,12 @@
               ]
             }}
           </td>
+          <td scope="col" colspan="2" />
+          <td scope="col" colspan="2" />
+          <td scope="col" colspan="2" />
+          <td scope="col" colspan="2" />
+          <td scope="col" colspan="2" />
+          <td scope="col" colspan="2" />
         </tr>
         <tr>
           <th scope="row">NCAR CCSM4</th>
@@ -231,7 +237,7 @@
       </tbody>
       <tfoot>
         <tr>
-          <td colspan="10" class="about">
+          <td colspan="14" class="about">
             Values show spruce beetle risk for the indicated date ranges over
             all models and emission scenarios.
             <nuxt-link :to="{ name: 'about' }"
