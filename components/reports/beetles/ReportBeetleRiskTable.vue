@@ -1,5 +1,5 @@
 <template>
-  <div class="report--temperature">
+  <div class="report--beetles">
     <table class="table report-table" v-if="reportData">
       <caption>
         Spruce Beetle Risk,

@@ -23,8 +23,8 @@
   .map-title {
     min-height: 60px;
   }
-  .narrow-br {
-    display: none;
+  .minimap {
+    border: 1px solid black;
   }
 }
 </style>

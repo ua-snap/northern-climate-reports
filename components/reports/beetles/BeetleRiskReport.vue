@@ -5,8 +5,9 @@
       <div class="is-size-5 mt-6">
         <p>
           These maps display three broad levels of projected
-          climate&ndash;related risk of spruce beetle (Dendroctonus rufipennis)
-          outbreaks in &ldquo;forested regions of Alaska&rdquo; as defined by
+          climate&ndash;related risk of spruce beetle (<i
+            >Dendroctonus rufipennis</i
+          >) outbreaks in &ldquo;forested regions of Alaska&rdquo; as defined by
           the US Forest Service.
         </p>
         <ul>
