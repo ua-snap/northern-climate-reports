@@ -25,12 +25,12 @@
           </th>
         </tr>
         <tr>
-          <th scope="col" colspan="2" class="light-border">RCP 4.5</th>
-          <th scope="col" colspan="2" class="light-border">RCP 8.5</th>
-          <th scope="col" colspan="2" class="light-border">RCP 4.5</th>
-          <th scope="col" colspan="2" class="light-border">RCP 8.5</th>
-          <th scope="col" colspan="2" class="light-border">RCP 4.5</th>
-          <th scope="col" colspan="2" class="light-border">RCP 8.5</th>
+          <th scope="col" colspan="2">RCP 4.5</th>
+          <th scope="col" colspan="2">RCP 8.5</th>
+          <th scope="col" colspan="2">RCP 4.5</th>
+          <th scope="col" colspan="2">RCP 8.5</th>
+          <th scope="col" colspan="2">RCP 4.5</th>
+          <th scope="col" colspan="2">RCP 8.5</th>
         </tr>
       </thead>
       <tbody>
