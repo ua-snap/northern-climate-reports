@@ -7,8 +7,12 @@
           These maps display three broad levels of projected
           climate&ndash;related risk of spruce beetle (<i
             >Dendroctonus rufipennis</i
-          >) outbreaks in &ldquo;forested regions of Alaska&rdquo; as defined by
-          the US Forest Service.
+          >) outbreaks in &ldquo;forested regions of Alaska&rdquo;
+          <a
+            href="https://data.fs.usda.gov/geodata/rastergateway/biomass/alaska_forest_nonforest.php"
+          >
+            as defined by the US Forest Service </a
+          >.
         </p>
         <ul>
           <li>
@@ -65,7 +69,13 @@
           </li>
           <li><strong>Low risk</strong> means unlikely to increase</li>
         </ul>
-        <p><a href="https://uaf-snap.org/project/modeling-spruce-bark-beetle-outbreaks-in-a-warming-climate/">Read more detailed information</a> about this model.</p>
+        <p>
+          <a
+            href="https://uaf-snap.org/project/modeling-spruce-bark-beetle-outbreaks-in-a-warming-climate/"
+            >Read more detailed information</a
+          >
+          about this model.
+        </p>
       </div>
     </div>
     <ReportBeetleRiskTable snowpack="low" />
