@@ -65,7 +65,7 @@
           </li>
           <li><strong>Low risk</strong> means unlikely to increase</li>
         </ul>
-        <p><a href="#">Read more detailed information</a> about this model.</p>
+        <p><a href="https://uaf-snap.org/project/modeling-spruce-bark-beetle-outbreaks-in-a-warming-climate/">Read more detailed information</a> about this model.</p>
       </div>
     </div>
     <ReportBeetleRiskTable snowpack="low" />
