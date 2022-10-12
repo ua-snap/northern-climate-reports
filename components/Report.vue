@@ -168,6 +168,11 @@
               <a href="#wildfire">Wildfire</a> charts of flammability and
               vegetation change with with multiple models and scenarios
             </li>
+            <li>
+              <a href="#beetle-risk">Spruce Beetle Risk</a> visualizes the
+              climate&ndash;related risk of spruce beetles in forested areas of
+              Alaska
+            </li>
           </ul>
         </div>
       </section>
@@ -229,6 +234,11 @@
         <div id="wildfire">
           <WildfireReport />
         </div>
+      </section>
+      <section class="section large-screen">
+        <div id="beetle-risk">
+          <BeetleRiskReport />
+        </div>
         <BackToTopButton />
       </section>
       <section class="section small-screen">
@@ -281,6 +291,7 @@ import TempReport from '~/components/reports/temperature/TempReport'
 import PrecipReport from '~/components/reports/precipitation/PrecipReport'
 import PermafrostReport from '~/components/reports/permafrost/PermafrostReport'
 import WildfireReport from '~/components/reports/wildfire/WildfireReport'
+import BeetleRiskReport from '~/components/reports/beetles/BeetleRiskReport'
 import MiniMap from '~/components/reports/MiniMap'
 import QualitativeText from '~/components/reports/QualitativeText'
 import BackToTopButton from '~/components/reports/BackToTopButton'
@@ -299,6 +310,7 @@ export default {
     PrecipReport,
     PermafrostReport,
     WildfireReport,
+    BeetleRiskReport,
     MiniMap,
     QualitativeText,
     BackToTopButton,
@@ -399,6 +411,9 @@ export default {
       console.error(e)
     })
     this.$store.dispatch('elevation/fetch').catch(e => {
+      console.error(e)
+    })
+    this.$store.dispatch('beetle/fetch').catch(e => {
       console.error(e)
     })
   },
