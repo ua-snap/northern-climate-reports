@@ -1,7 +1,6 @@
 <template>
   <section class="section">
     <div class="content-wrapper">
-
       <BetaFeedback />
 
       <div class="content is-size-5">
@@ -51,28 +50,28 @@
           <li>
             <a
               href="http://ckan.snap.uaf.edu/dataset/historical-monthly-and-derived-temperature-products-downscaled-from-cru-ts-data-via-the-delta-m"
-              >Historical Monthly and Derived Temperature Products - 2km CRU TS
-              4.0</a
+              >Historical Monthly and Derived Temperature Products &ndash; 2km
+              CRU TS 4.0</a
             >
           </li>
           <li>
             <a
               href="http://ckan.snap.uaf.edu/dataset/historical-monthly-and-derived-precipitation-products-downscaled-from-cru-ts-data-via-the-delta"
-              >Historical Monthly and Derived Precipitation Products - 2km CRU
-              TS 4.0</a
+              >Historical Monthly and Derived Precipitation Products &ndash; 2km
+              CRU TS 4.0</a
             >
           </li>
           <li>
             <a
               href="http://ckan.snap.uaf.edu/dataset/projected-monthly-and-derived-temperature-products-2km-cmip5-ar5"
-              >Projected Monthly and Derived Temperature Products - 2km
+              >Projected Monthly and Derived Temperature Products &ndash; 2km
               CMIP5/AR5</a
             >
           </li>
           <li>
             <a
               href="http://ckan.snap.uaf.edu/dataset/projected-monthly-and-derived-precipitation-products-2km-cmip5-ar5"
-              >Projected Monthly and Derived Temperature Products - 2km
+              >Projected Monthly and Derived Temperature Products &ndash; 2km
               CMIP5/AR5</a
             >
           </li>
@@ -93,7 +92,7 @@
             same underlying data shown in this app is available here:
             <a
               href="http://ckan.snap.uaf.edu/dataset/alfresco-model-outputs-relative-flammability"
-              >ALFRESCO Model outputs - Relative Flammability</a
+              >ALFRESCO Model outputs &ndash; Relative Flammability</a
             >.
           </li>
           <li>
@@ -101,7 +100,7 @@
             same underlying data shown in this app is available here:
             <a
               href="http://ckan.snap.uaf.edu/dataset/alfresco-model-outputs-relative-vegetation-change"
-              >ALFRESCO Model outputs - Relative Vegetation Change</a
+              >ALFRESCO Model outputs &ndash; Relative Vegetation Change</a
             >.
           </li>
         </ul>
@@ -137,9 +136,9 @@
         <ul>
           <li><strong>communities</strong>,</li>
           <li>
-            <strong>watersheds/hydrological units</strong> at the HU-8 level
-            (subbasin), searchable by name or HUC code (&ldquo;Middle Copper
-            River&rdquo; or &ldquo;HUC 19020102&rdquo;, for example),
+            <strong>watersheds/hydrological units</strong> at the HU&ndash;8
+            level (subbasin), searchable by name or HUC code (&ldquo;Middle
+            Copper River&rdquo; or &ldquo;HUC 19020102&rdquo;, for example),
           </li>
           <li>
             <strong>protected areas</strong> such as National Parks, National
@@ -161,7 +160,8 @@
                 href="https://uaf.edu/anlc/resources/mapping_alaskas_native_languages.php"
                 >Ethnolinguistic regions</a
               ></strong
-            > of Alaska
+            >
+            of Alaska
           </li>
           <li>
             <strong
@@ -171,8 +171,13 @@
               ></strong
             >
           </li>
-          <li><strong>First Nation Traditional Territories of the Yukon</strong></li>
-          <li><strong>Alaska Game Management Units (GMUs)</strong>, e.g. GMU19a, etc.</li>
+          <li>
+            <strong>First Nation Traditional Territories of the Yukon</strong>
+          </li>
+          <li>
+            <strong>Alaska Game Management Units (GMUs)</strong>, e.g. GMU19a,
+            etc.
+          </li>
         </ul>
         <h2 id="access-api" class="title is-3">Data API access</h2>
         <p>
@@ -189,7 +194,7 @@
         <p>
           Email us at
           <a href="mailto:uaf-snap-data-tools@alaska.edu"
-            >uaf-snap-data-tools@alaska.edu</a
+            >uaf&ndash;snap&ndash;data&ndash;tools@alaska.edu</a
           >
           with questions about these data, data access, or using these data in
           your work.

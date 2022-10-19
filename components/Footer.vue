@@ -29,7 +29,7 @@
           <a href="https://www.snap.uaf.edu/" title="👍"
             >Scenarios Network for Alaska + Arctic Planning</a
           >
-          at the<br>
+          at the<br />
           <a href="https://uaf-iarc.org">International Arctic Research Center</a
           >.
         </p>
@@ -39,12 +39,15 @@
           <a href="https://akcasc.org"
             >Alaska Climate Adaptation Science Center</a
           >
-          and the <br/><a href="https://www.usgs.gov/programs/climate-adaptation-science-centers">United States Geological Survey</a>.
+          and the <br /><a
+            href="https://www.usgs.gov/programs/climate-adaptation-science-centers"
+            >United States Geological Survey</a
+          >.
         </p>
         <p>
           Please contact
           <a href="mailto:uaf-snap-data-tools@alaska.edu"
-            >uaf-snap-data-tools@alaska.edu</a
+            >uaf&ndash;snap&ndash;data&ndash;tools@alaska.edu</a
           >
           if you have questions or would like to provide feedback for this tool.
           <a href="https://uaf-snap.org/web-tools/"
@@ -102,7 +105,8 @@ export default {
   padding-bottom: 10rem;
 
   h3 {
-    margin: 1rem 0 0.5rem; padding: 0;
+    margin: 1rem 0 0.5rem;
+    padding: 0;
   }
 
   p {
