@@ -1,7 +1,6 @@
 <template>
   <section class="section">
     <div class="content-wrapper">
-
       <BetaFeedback />
 
       <div class="content is-size-5">
@@ -155,13 +154,16 @@
             >
           </li>
           <li><strong>Alaska Fire Management Units</strong></li>
+          <li><strong>Alaska Boroughs</strong></li>
+          <li><strong>Alaska Census Areas</strong></li>
           <li>
             <strong
               ><a
                 href="https://uaf.edu/anlc/resources/mapping_alaskas_native_languages.php"
                 >Ethnolinguistic regions</a
               ></strong
-            > of Alaska
+            >
+            of Alaska
           </li>
           <li>
             <strong
@@ -171,8 +173,13 @@
               ></strong
             >
           </li>
-          <li><strong>First Nation Traditional Territories of the Yukon</strong></li>
-          <li><strong>Alaska Game Management Units (GMUs)</strong>, e.g. GMU19a, etc.</li>
+          <li>
+            <strong>First Nation Traditional Territories of the Yukon</strong>
+          </li>
+          <li>
+            <strong>Alaska Game Management Units (GMUs)</strong>, e.g. GMU19a,
+            etc.
+          </li>
         </ul>
         <h2 id="access-api" class="title is-3">Data API access</h2>
         <p>
