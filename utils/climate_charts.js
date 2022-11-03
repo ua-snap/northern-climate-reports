@@ -66,10 +66,11 @@ export const seasons = {
 export const getHistoricalTrace = function (data, season, variable) {
   let historicalData =
     data[historicalEra][season]['CRU-TS40']['CRU_historical'][variable]
+  let tickLabel = historicalEra.replace('_', '-')
   return {
     type: 'box',
     name: 'Historical (1950-2009)',
-    x: historicalEra,
+    x: [tickLabel],
     q1: [historicalData['q1']],
     median: [historicalData['median']],
     q3: [historicalData['q3']],
