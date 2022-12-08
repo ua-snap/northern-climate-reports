@@ -32,7 +32,7 @@
         <MiniMap />
         <QualitativeText />
       </section>
-      <section class="section content pb-0 large-screen" v-if="dataPresent">
+      <section class="section content pb-0 is-hidden-touch" v-if="dataPresent">
         <h3 class="title is-3">Introduction</h3>
         <div class="is-size-5">
           <p>
@@ -146,7 +146,7 @@
           </b-field>
         </div>
       </section>
-      <section class="section content large-screen" v-if="dataPresent">
+      <section class="section content is-hidden-touch" v-if="dataPresent">
         <h4 class="title is-4" id="toc">Contents</h4>
         <div class="is-size-5">
           <ul>
@@ -179,7 +179,7 @@
       <section class="content">
         <BetaFeedback />
       </section>
-      <section class="section content py-0 large-screen" v-if="dataMissing">
+      <section class="section content py-0 is-hidden-touch" v-if="dataMissing">
         <div class="is-size-5">
           <p class="no-data mt-6" v-if="uniformHttpError">
             {{ httpErrors[uniformHttpError] }}
@@ -212,36 +212,38 @@
         </div>
         <div v-if="!dataPresent" class="pb-3" />
       </section>
-      <section class="section large-screen" v-if="climateData">
+      <section class="section is-hidden-touch" v-if="climateData">
         <div id="temperature">
           <TempReport />
         </div>
       </section>
-      <section class="section large-screen" v-if="climateData">
+      <section class="section is-hidden-touch" v-if="climateData">
         <div id="precipitation">
           <PrecipReport />
         </div>
       </section>
-      <section class="section large-screen">
+      <section class="section is-hidden-touch">
         <div id="permafrost" v-if="permafrostData || type != 'latLng'">
           <PermafrostReport />
         </div>
       </section>
       <section
-        class="section large-screen"
+        class="section is-hidden-touch"
         v-if="flammabilityData || vegChangeData"
       >
         <div id="wildfire">
           <WildfireReport />
         </div>
       </section>
-      <section class="section large-screen">
+      <section class="section is-hidden-touch">
         <div id="beetle-risk">
           <BeetleRiskReport />
         </div>
         <BackToTopButton />
       </section>
-      <section class="section small-screen">
+      <section
+        class="section is-hidden-fullhd is-hidden-widescreen is-hidden-desktop"
+      >
         <div class="is-size-5">
           <span class="centered"
             ><b-icon icon="monitor" size="is-medium" />&nbsp;&nbsp;To view
