@@ -267,8 +267,8 @@
 .back {
   margin-bottom: 2rem;
 }
-.b-radio.radio:not(.button) {
-  margin-right: 1rem;
+::v-deep .b-radio.radio:not(.button) {
+  margin-right: 1.5rem;
 }
 .camera-icon {
   display: inline-block;
