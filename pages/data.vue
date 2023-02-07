@@ -156,8 +156,7 @@
           <li><strong>Alaska Fire Management Units</strong></li>
           <li>
             <strong
-              ><a
-                href="https://uaf.edu/anlc/resources/mapping_alaskas_native_languages.php"
+              ><a href="https://www.uaf.edu/anla/collections/map/"
                 >Ethnolinguistic regions</a
               ></strong
             >
