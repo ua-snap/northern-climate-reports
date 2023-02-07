@@ -44,8 +44,8 @@
         </h2>
 
         <p>
-          Assessments of climate-change effects on Northern ecosystems are
-          hindered by a lack of decision-support tools that can visualize
+          Assessments of climate&ndash;change effects on Northern ecosystems are
+          hindered by a lack of decision&ndash;support tools that can visualize
           possible future landscapes under different scenarios.
         </p>
         <p>
@@ -61,10 +61,10 @@
           What&rsquo;s changing in the Arctic?
         </h2>
         <p>
-          Several climate-related ecosystem features are driving rapid change in
-          the North. Using ecosystem data to envision how these changes may
-          progress in the near-term and more distant future is crucial for land
-          managers, planners, and communities.
+          Several climate&ndash;related ecosystem features are driving rapid
+          change in the North. Using ecosystem data to envision how these
+          changes may progress in the near&ndash;term and more distant future is
+          crucial for land managers, planners, and communities.
         </p>
         <p>
           These ecosystem drivers&mdash;temperature, permafrost, and
@@ -85,8 +85,9 @@
           <li>
             Increases in <strong>fire</strong> frequency&mdash;again indirectly
             driven by warming&mdash;also contributes to broad
-            landscape&ndash;level vegetation change, as early-succession species
-            increase in frequency and late-success species decrease.
+            landscape&ndash;level vegetation change, as early&ndash;succession
+            species increase in frequency and late&ndash;success species
+            decrease.
           </li>
         </ul>
         <p>
@@ -94,7 +95,7 @@
           them is high. Nonetheless, by studying and modeling each factor and
           connecting model outputs when possible, we can produce a range of
           projections that explore possible changes locally, regionally, or
-          landscape-wide across the North.
+          landscape&ndash;wide across the North.
         </p>
         <h2 id="models-projections-uncertainty" class="title is-3">
           Models, projections, uncertainties
@@ -103,13 +104,14 @@
           Climate models help us imagine possible climate futures.
         </h3>
         <p>
-          We use weather forecasts for short-term planning. Climate projections
-          can be used for long-term planning&mdash;but they are not the same as
-          forecasts. Weather varies day to day, whereas climate refers to the
-          average or typical conditions over much longer time periods. However,
-          there are uncertainties based on model limitations and unknown future
-          human behavior that make long-range forecasting very different from
-          predicting tomorrow's weather.
+          We use weather forecasts for short&ndash;term planning. Climate
+          projections can be used for long&ndash;term planning&mdash;but they
+          are not the same as forecasts. Weather varies day to day, whereas
+          climate refers to the average or typical conditions over much longer
+          time periods. However, there are uncertainties based on model
+          limitations and unknown future human behavior that make
+          long&ndash;range forecasting very different from predicting tomorrow's
+          weather.
         </p>
         <p>
           Climate projections look much further into the future than weather
@@ -157,10 +159,10 @@
         <p>
           Between now and about 20&ndash;30 years from now, current climate
           change is the best predictor of the rate of change, but year to year
-          variability is the largest source of uncertainty. Although long-term
-          climate change shows clear trends, those can be masked by natural ups
-          and downs in the short term. Climate models do simulate this kind of
-          variability, but they cannot predict it precisely.
+          variability is the largest source of uncertainty. Although
+          long&ndash;term climate change shows clear trends, those can be masked
+          by natural ups and downs in the short term. Climate models do simulate
+          this kind of variability, but they cannot predict it precisely.
         </p>
 
         <h3 id="best-practices" class="subtitle is-4">
@@ -196,11 +198,11 @@
             <strong
               >Look at medium&ndash;term and longer&ndash;term futures.</strong
             >
-            A comprehensive assessment would consider a historical, a mid-21st
-            century future, and a late&ndash;21<sup>st</sup> century future. The
-            two futures should have a high, low and middle range each, possibly
-            with multiple models and multiple emission scenarios in each future
-            window.
+            A comprehensive assessment would consider a historical, a
+            mid&ndash;21st century future, and a late&ndash;21<sup>st</sup>
+            century future. The two futures should have a high, low and middle
+            range each, possibly with multiple models and multiple emission
+            scenarios in each future window.
           </li>
           <li>
             <strong>Don&rsquo;t make your assessment area too small.</strong>
@@ -213,8 +215,8 @@
           </li>
           <li>
             <strong
-              >For fire projections and post-fire vegetation, look at averages
-              across many model runs.</strong
+              >For fire projections and post&ndash;fire vegetation, look at
+              averages across many model runs.</strong
             >
             The ALFRESCO fire and vegetation model cannot predict the precise
             behavior of future fires, but it can simulate the likelihood that
