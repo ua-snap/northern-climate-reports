@@ -154,6 +154,8 @@
             >
           </li>
           <li><strong>Alaska Fire Management Units</strong></li>
+          <li><strong>Alaska Boroughs</strong></li>
+          <li><strong>Alaska Census Areas</strong></li>
           <li>
             <strong
               ><a href="https://www.uaf.edu/anla/collections/map/"
