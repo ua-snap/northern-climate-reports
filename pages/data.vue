@@ -165,8 +165,7 @@
           </li>
           <li>
             <strong
-              ><a
-                href="https://www.ncdc.noaa.gov/news/climate-division-data-now-available-alaska"
+              ><a href="https://sites.google.com/a/alaska.edu/climatedivisions/"
                 >Alaska Climate Divisions</a
               ></strong
             >
