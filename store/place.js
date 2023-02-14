@@ -264,6 +264,9 @@ export const actions = {
         _.each(res.ak_boros_near, place => {
           ssr.push(place)
         })
+        _.each(res.ethnolinguistic_regions_near, place => {
+          ssr.push(place)
+        })
 
         ssr = _.sortBy(ssr, ['name'])
 
