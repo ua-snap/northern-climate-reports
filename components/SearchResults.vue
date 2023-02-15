@@ -125,6 +125,9 @@ export default {
         case 'borough':
           placeType = 'Borough'
           break
+        case 'ethnolinguistic_region':
+          placeType = 'Ethnolinguistic Region'
+          break
         default: // Do nothing, don't decorate protected areas
       }
       return placeType

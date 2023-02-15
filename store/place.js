@@ -255,13 +255,16 @@ export const actions = {
         _.each(res.game_management_units_near, place => {
           ssr.push(place)
         })
-        _.each(res.first_nations_near, place => {
+        _.each(res.ca_first_nations_near, place => {
           ssr.push(place)
         })
         _.each(res.akcensus_areas_near, place => {
           ssr.push(place)
         })
         _.each(res.ak_boros_near, place => {
+          ssr.push(place)
+        })
+        _.each(res.ethnolinguistic_regions_near, place => {
           ssr.push(place)
         })
 
