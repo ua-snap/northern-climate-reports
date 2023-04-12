@@ -108,7 +108,8 @@ export default {
           placeType = 'Native Corporation Lands'
           break
         case 'huc':
-          placeType = 'HUC ID' + place.id
+          placeType =
+            'HUC' + (place.id.length == 10 ? '10 ' : ' ') + 'ID' + place.id
           break
         case 'climate_division':
           placeType = 'Climate Division'

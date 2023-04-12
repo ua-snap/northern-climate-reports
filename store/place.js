@@ -125,6 +125,9 @@ export const getters = {
     if (area) {
       switch (getters.type) {
         case 'huc':
+          if (area.id.length == 10) {
+            return area.name + ' Watershed HUC10 ' + area.id
+          }
           return area.name + ' Watershed HUC ' + area.id
         case 'corporation':
           return area.name + ' (Native Corporation)'
