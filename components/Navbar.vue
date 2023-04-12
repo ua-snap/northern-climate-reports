@@ -28,7 +28,7 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <nuxt-link :to="{ name: 'about' }" exact-active-class="is-active"
-            >What are climate projections?</nuxt-link
+            >What can you learn from this tool?</nuxt-link
           >
         </div>
         <div class="navbar-item">

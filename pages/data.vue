@@ -2,7 +2,9 @@
   <section class="section">
     <div class="content-wrapper">
       <BetaFeedback />
-
+      <h2 id="main-title" class="title is-2">
+        What data and places are shown here?
+      </h2>
       <div class="content is-size-5">
         <ul class="toc">
           <li>
@@ -206,6 +208,9 @@
 <style lang="scss" scoped>
 p:last-of-type {
   margin-bottom: 2.5rem;
+}
+#main-title {
+  margin-top: 1rem;
 }
 </style>
 
