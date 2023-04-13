@@ -26,6 +26,18 @@ export const getters = {
       max: tempData.max.toLocaleString('en-US'),
     }
   },
+  elevationWarning(state) {
+    if (!state.elevation) {
+      return false
+    }
+    // If the difference between elevation is 500 feet (152.4 meters)
+    // or more, return true so the elevation warning is shown.
+    if (state.elevation.max - state.elevation.min >= 152.4) {
+      return true
+    } else {
+      return false
+    }
+  },
   httpError(state) {
     return state.httpError
   },

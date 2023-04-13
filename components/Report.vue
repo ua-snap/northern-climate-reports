@@ -65,6 +65,14 @@
             {{ elevation.max }}{{ elevationUnits }}, which should be kept in
             mind when interpreting these results.
           </p>
+          <p v-if="elevationWarning">
+            <b-icon icon="alert" type="is-warning" />
+            There is likely significant elevation variation
+            <span v-if="type == 'latLng' || type == 'community'">near</span
+            ><span v-else>in</span> this place. The data shown below represent
+            an average which may differ from specific sites near here. Consider
+            elevation when interpreting these results.
+          </p>
           <div v-if="!isPointLocation" class="area-warning">
             <p>
               <strong>Note</strong>: for large areas such as climate divisions,
@@ -387,6 +395,7 @@ export default {
       place: 'place/name',
       type: 'place/type',
       elevation: 'elevation/elevation',
+      elevationWarning: 'elevation/elevationWarning',
       climateData: 'climate/climateData',
       permafrostData: 'permafrost/permafrostData',
       flammabilityData: 'wildfire/flammability',
