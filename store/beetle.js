@@ -33,17 +33,17 @@ export const getters = {
       },
       {
         label: 'Low Risk',
-        color: '#248000',
+        color: '#00b800',
         interpretation: 'Low risk of spruce beetle damage.',
       },
       {
         label: 'Moderate Risk',
-        color: '#f7bd00',
+        color: '#ffef0a',
         interpretation: 'Moderate risk of spruce beetle damage.',
       },
       {
         label: 'High Risk',
-        color: '#8c7453',
+        color: '#fb2f18',
         interpretation: 'High risk of spruce beetle damage.',
       },
     ]
