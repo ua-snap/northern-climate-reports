@@ -176,7 +176,7 @@
               <a href="#wildfire">Wildfire</a> charts of flammability and
               vegetation change with with multiple models and scenarios
             </li>
-            <li>
+            <li v-if="beetleData">
               <a href="#beetle-risk">Spruce Beetle Risk</a> visualizes the
               climate&ndash;related risk of spruce beetles in forested areas of
               Alaska
@@ -215,6 +215,10 @@
                 <strong>Vegetation change:</strong>
                 {{ httpErrors[vegChangeHttpError] }}
               </li>
+              <li v-if="beetleHttpError">
+                <strong>Beetle climate protection:</strong>
+                {{ httpErrors[beetleHttpError] }}
+              </li>
             </ul>
           </div>
         </div>
@@ -244,7 +248,7 @@
         </div>
       </section>
       <section class="section is-hidden-touch">
-        <div id="beetle-risk">
+        <div id="beetle-risk" v-if="beetleData">
           <BeetleRiskReport />
         </div>
         <BackToTopButton />
@@ -400,11 +404,13 @@ export default {
       permafrostData: 'permafrost/permafrostData',
       flammabilityData: 'wildfire/flammability',
       vegChangeData: 'wildfire/veg_change',
+      beetleData: 'beetle/beetleData',
       climateHttpError: 'climate/httpError',
       elevationHttpError: 'elevation/httpError',
       permafrostHttpError: 'permafrost/httpError',
       flammabilityHttpError: 'wildfire/flammabilityHttpError',
       vegChangeHttpError: 'wildfire/vegChangeHttpError',
+      beetleHttpError: 'beetle/httpError',
       isPointLocation: 'place/isPointLocation',
     }),
   },
