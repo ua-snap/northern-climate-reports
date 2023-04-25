@@ -177,9 +177,11 @@
               vegetation change with with multiple models and scenarios
             </li>
             <li v-if="beetleData">
-              <a href="#beetle-risk">Spruce Beetle Risk</a> visualizes the
-              climate&ndash;related risk of spruce beetles in forested areas of
-              Alaska
+              <a href="#climate-protection-beetles"
+                >Climate Protection from Spruce Beetles</a
+              >
+              visualizes the climate&ndash;related protection from spruce
+              beetles in forested areas of Alaska
             </li>
           </ul>
         </div>
@@ -248,7 +250,7 @@
         </div>
       </section>
       <section class="section is-hidden-touch">
-        <div id="beetle-risk" v-if="beetleData">
+        <div id="climate-protection-beetles" v-if="beetleData">
           <BeetleRiskReport />
         </div>
         <BackToTopButton />
