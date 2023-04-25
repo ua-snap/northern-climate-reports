@@ -48,6 +48,9 @@ export const getters = {
       },
     ]
   },
+  httpError(state) {
+    return state.httpError
+  },
 }
 
 export const mutations = {
