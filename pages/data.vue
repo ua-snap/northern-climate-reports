@@ -73,7 +73,7 @@
           <li>
             <a
               href="http://ckan.snap.uaf.edu/dataset/projected-monthly-and-derived-precipitation-products-2km-cmip5-ar5"
-              >Projected Monthly and Derived Temperature Products &ndash; 2km
+              >Projected Monthly and Derived Precipitation Products &ndash; 2km
               CMIP5/AR5</a
             >
           </li>
