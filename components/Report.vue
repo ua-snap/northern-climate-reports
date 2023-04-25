@@ -364,8 +364,13 @@ export default {
       return true
     },
     dataMissing() {
+      // Get an array of data types present for the selected location
+      // (Temperature, Permafrost, Beetle Climate Protection, etc.)
       let types = this.presentDataTypes()
-      if (types.length < 5) {
+
+      // If there are less than 6 data types present, the corresponding
+      // section(s) of the report page will be hidden.
+      if (types.length < 6) {
         return true
       }
       return false
@@ -377,6 +382,7 @@ export default {
         this.elevationHttpError,
         this.flammabilityHttpError,
         this.vegChangeHttpError,
+        this.beetleHttpError,
       ]
 
       if (this.type == 'latLng') {
