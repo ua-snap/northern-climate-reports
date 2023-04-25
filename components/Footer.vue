@@ -80,8 +80,7 @@
         </p>
         <p>
           UA is committed to providing accessible websites.
-          <a
-            href="https://www.uaf.edu/universityrelations/guidelines/web-accessibility.php"
+          <a href="https://www.alaska.edu/webaccessibility/"
             >Learn more about UA's notice of web accessibility.</a
           >
         </p>
