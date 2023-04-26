@@ -9,8 +9,8 @@
         </p>
         <p>
           These maps display three broad levels of historical and projected
-          climate&ndash;related protection from spruce bark beetle (Dendroctonus
-          rufipennis) outbreaks in "forested regions of Alaska" as defined by
+          climate&ndash;related protection from spruce bark beetle (<i>Dendroctonus
+          rufipennis</i>) outbreaks in "forested regions of Alaska" as defined by
           the US Forest Service.
         </p>
         <p>
