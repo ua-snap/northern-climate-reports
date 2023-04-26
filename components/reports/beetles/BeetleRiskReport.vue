@@ -85,7 +85,7 @@
           <li>
             Presence and percentage cover of the Alaska tree species most at
             risk of beetle infestation&mdash;white spruce, Sitka spruce, and
-            Lutz spruce.
+            Lutz spruce
           </li>
           <li>Forest age and successional stage</li>
           <li>Forest health, including other stressors, pests, or blights</li>
