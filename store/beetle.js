@@ -32,19 +32,20 @@ export const getters = {
           'This pixel was not modeled or is not included in the dataset',
       },
       {
-        label: 'Low Risk',
+        label: 'High Protection',
         color: '#00b800',
-        interpretation: 'Low risk of spruce beetle damage.',
+        interpretation: 'High climate protection against spruce beetle damage.',
       },
       {
-        label: 'Moderate Risk',
+        label: 'Minimal Protection',
         color: '#ffef0a',
-        interpretation: 'Moderate risk of spruce beetle damage.',
+        interpretation:
+          'Minimal climate protection against spruce beetle damage.',
       },
       {
-        label: 'High Risk',
+        label: 'No Protection',
         color: '#fb2f18',
-        interpretation: 'High risk of spruce beetle damage.',
+        interpretation: 'No climate protection against spruce beetle damage.',
       },
     ]
   },

@@ -3,16 +3,16 @@
     <table class="table report-table" v-if="reportData">
       <caption>
         <div>
-          Spruce Beetle Risk,
+          Climate Protection from Spruce Beetles,
           {{ snowpack.charAt(0).toUpperCase() + snowpack.slice(1) }}
           Snowpack,
           <span v-html="place"></span>, 1988&ndash;2099
         </div>
         <div class="historical">
-          Historical modeled risk (Daymet, 1988&ndash;2017) is
+          Historical modeled climate protection (Daymet, 1988&ndash;2017) is
           <strong>{{
             reportData['1988-2017']['Daymet']['Historical']['low'][
-              'beetle-risk'
+              'climate-protection'
             ]
           }}</strong
           >.
@@ -46,42 +46,42 @@
           <td>
             {{
               reportData['2010-2039']['NCAR-CCSM4']['rcp45'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2010-2039']['NCAR-CCSM4']['rcp85'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2040-2069']['NCAR-CCSM4']['rcp45'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2040-2069']['NCAR-CCSM4']['rcp85'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2070-2099']['NCAR-CCSM4']['rcp45'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2070-2099']['NCAR-CCSM4']['rcp85'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
@@ -91,42 +91,42 @@
           <td>
             {{
               reportData['2010-2039']['GFDL-ESM2M']['rcp45'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2010-2039']['GFDL-ESM2M']['rcp85'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2040-2069']['GFDL-ESM2M']['rcp45'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2040-2069']['GFDL-ESM2M']['rcp85'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2070-2099']['GFDL-ESM2M']['rcp45'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2070-2099']['GFDL-ESM2M']['rcp85'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
@@ -136,42 +136,42 @@
           <td>
             {{
               reportData['2010-2039']['HadGEM2-ES']['rcp45'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2010-2039']['HadGEM2-ES']['rcp85'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2040-2069']['HadGEM2-ES']['rcp45'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2040-2069']['HadGEM2-ES']['rcp85'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2070-2099']['HadGEM2-ES']['rcp45'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2070-2099']['HadGEM2-ES']['rcp85'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
@@ -181,42 +181,42 @@
           <td>
             {{
               reportData['2010-2039']['MRI-CGCM3']['rcp45'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2010-2039']['MRI-CGCM3']['rcp85'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2040-2069']['MRI-CGCM3']['rcp45'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2040-2069']['MRI-CGCM3']['rcp85'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2070-2099']['MRI-CGCM3']['rcp45'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
           <td>
             {{
               reportData['2070-2099']['MRI-CGCM3']['rcp85'][snowpack][
-                'beetle-risk'
+                'climate-protection'
               ]
             }}
           </td>
@@ -225,8 +225,8 @@
       <tfoot>
         <tr>
           <td colspan="7" class="about left">
-            Values show spruce beetle risk for the indicated date ranges over
-            all models and emission scenarios.
+            Values show climate&ndash;related protection from spruce beetles for
+            the indicated date ranges over all models and emission scenarios.
             <nuxt-link :to="{ name: 'about' }"
               >Read more about models and emissions scenarios.</nuxt-link
             >

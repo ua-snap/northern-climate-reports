@@ -1,40 +1,33 @@
 <template>
   <div>
     <div class="content">
-      <h4 class="title is-3">Spruce Beetle Risk</h4>
+      <h4 class="title is-3">Climate Protection from Spruce Beetles</h4>
       <div class="is-size-5 mt-6">
         <p>
-          These maps display three broad levels of projected
-          climate&ndash;related risk of spruce beetle (<i
-            >Dendroctonus rufipennis</i
-          >) outbreaks in &ldquo;forested regions of Alaska&rdquo;
-          <a
-            href="https://data.fs.usda.gov/geodata/rastergateway/biomass/alaska_forest_nonforest.php"
-          >
-            as defined by the US Forest Service </a
-          >.
+          Alaska&rsquo;s cold climate has historically helped limit spruce
+          beetle outbreaks, but warming conditions are affecting this balance.
         </p>
-        <ul>
-          <li>
-            These regions may or may not include white spruce and Sitka spruce,
-            the Alaska tree species most at risk of beetle infestation.
-          </li>
-          <li>
-            The model does not account for what percentage of forest cover these
-            species comprise in areas where they do occur.
-          </li>
-          <li>
-            The model does not include important non&ndash;climate&ndash;related
-            factors that may affect outbreaks, including forest age, forest
-            health, fire, past outbreaks, management, and other pests or
-            blights.
-          </li>
-        </ul>
         <p>
-          Past beetle outbreaks have generally occurred when climate conditions
-          have been consistently favorable to beetle population growth over
-          several years in a row.
+          These maps display three broad levels of historical and projected
+          climate&ndash;related protection from spruce bark beetle (<i>Dendroctonus
+          rufipennis</i>) outbreaks in "forested regions of Alaska" as defined by
+          the US Forest Service.
         </p>
+        <p>
+          Note that the large outbreak on the Kenai Peninsula that peaked in
+          1996 followed relatively modest increases in climate risk in the 1980s
+          and early 1990s. Climate represented only one contributing factor in
+          these and other outbreaks.
+        </p>
+      </div>
+    </div>
+    <ReportBeetleRiskTable snowpack="low" />
+    <ReportBeetleRiskTable snowpack="medium" />
+    <ReportBeetleRiskMaps />
+
+    <div class="content">
+      <h4 class="title is-5">What&rsquo;s in the model</h4>
+      <div class="is-size-5 mt-6">
         <p>
           This model incorporates three climate&ndash;based factors, which are
           combined to calculate an overall outbreak risk for a given location
@@ -52,22 +45,25 @@
             Survival of winter extreme cold, with or without insulating snow
           </li>
         </ol>
-
         <p>
-          Modeled risk levels are based on climate conditions during more than
-          half the years in a given time period:
+          Modeled climate protection levels are based on conditions during more
+          than half the years in a given time period:
         </p>
         <ul>
           <li>
-            <strong>High risk</strong> means the possibility of
-            <strong>rapid</strong> increase
+            <strong>HIGH protection</strong> &equals; climate conditions are
+            likely to protect forests and prevent major outbreaks even if other
+            risk factors exist
           </li>
           <li>
-            <strong>Medium risk</strong> means the possibility of
-            <strong>moderate</strong>
-            increase
+            <strong>MINIMAL protection</strong> &equals; climate conditions may
+            provide some protection, but other risk factors can make outbreaks
+            likely
           </li>
-          <li><strong>Low risk</strong> means unlikely to increase</li>
+          <li>
+            <strong>NO protection</strong> &equals; beetle populations are
+            unlikely to be effectively limited by climate
+          </li>
         </ul>
         <p>
           <a
@@ -78,9 +74,32 @@
         </p>
       </div>
     </div>
-    <ReportBeetleRiskTable snowpack="low" />
-    <ReportBeetleRiskTable snowpack="medium" />
-    <ReportBeetleRiskMaps />
+    <div class="content">
+      <h4 class="title is-5">What&rsquo;s not in the model</h4>
+      <div class="is-size-5 mt-6">
+        <p>
+          This model does not include non&ndash;climate&ndash;related factors
+          that may affect outbreaks:
+        </p>
+        <ul>
+          <li>
+            Presence and percentage cover of the Alaska tree species most at
+            risk of beetle infestation&mdash;white spruce, Sitka spruce, and
+            Lutz spruce
+          </li>
+          <li>Forest age and successional stage</li>
+          <li>Forest health, including other stressors, pests, or blights</li>
+          <li>
+            Forest management, including fire management, harvest, and pest
+            control
+          </li>
+          <li>
+            Past and ongoing beetle outbreaks, including potential spread from
+            nearby regions
+          </li>
+        </ul>
+      </div>
+    </div>
     <DownloadCsvButton
       text="Download beetle risk data as CSV"
       endpoint="beetles"

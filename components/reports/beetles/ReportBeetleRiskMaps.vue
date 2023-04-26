@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <h5 class="minimaps-section-title has-text-centered">
-      Spruce Beetle Risk,
+      Climate Protection from Spruce Beetles,
       <span v-html="place"></span>, 1988&ndash;2099
     </h5>
     <div class="is-size-6 mb-4">
@@ -126,7 +126,7 @@
 <style lang="scss" scoped>
 .legend {
   overflow: hidden;
-  max-width: 660px;
+  max-width: 760px;
   margin: 20px auto;
   line-height: 1.2;
 }
