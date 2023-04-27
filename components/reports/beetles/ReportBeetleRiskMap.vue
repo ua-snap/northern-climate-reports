@@ -84,7 +84,7 @@ export default {
   },
   mounted() {
     this.getBaseMapAndLayers = getBaseMapAndLayers.bind(this)
-    this.addGeoJSONtoMap = addGeoJSONtoMap.bind(this)
+    this.addGeoJSONtoMap = addGeoJSONtoMap.bind(this, 2)
     this.map = L.map(this.mapID, this.getBaseMapAndLayers())
     if (this.latLng) {
       this.marker = L.marker(this.latLng).addTo(this.map)
