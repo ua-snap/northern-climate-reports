@@ -34,7 +34,7 @@ export const getBaseMapAndLayers = function () {
   return config
 }
 
-export const addGeoJSONtoMap = function () {
+export const addGeoJSONtoMap = function (zoomOutDelta = 0) {
   if (this.geoJSON) {
     this.geoJSONLayer = L.geoJSON(this.geoJSON, {
       style: {
@@ -44,5 +44,8 @@ export const addGeoJSONtoMap = function () {
       },
     }).addTo(this.map)
     this.map.fitBounds(this.geoJSONLayer.getBounds())
+    if (zoomOutDelta > 0) {
+      this.map.zoomOut(zoomOutDelta)
+    }
   }
 }
