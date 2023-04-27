@@ -52,6 +52,16 @@ export const getters = {
   httpError(state) {
     return state.httpError
   },
+  valid(state) {
+    if (
+      _.isObject(state.beetleData) &&
+      Object.keys(state.beetleData).length != 0
+    ) {
+      return true
+    } else {
+      return false
+    }
+  },
 }
 
 export const mutations = {
