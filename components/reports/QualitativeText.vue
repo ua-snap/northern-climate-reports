@@ -70,6 +70,8 @@ export default {
       flamThresholds: 'wildfire/flammabilityThresholds',
       vegChangeData: 'wildfire/veg_change',
       showWildfires: 'wildfire/valid',
+      beetleData: 'beetle/beetleData',
+      showBeetles: 'beetle/valid',
     }),
     unitsText() {
       if (this.units) {
@@ -94,6 +96,9 @@ export default {
       this.generateText()
     },
     vegChangeData: function () {
+      this.generateText()
+    },
+    beetleData: function () {
       this.generateText()
     },
   },
@@ -376,7 +381,7 @@ export default {
       let lateCategory = categoryFromFlam(lateHighestPredictedFlam)
 
       let quip = _.template(
-        'In the past, this area had <strong><%= category %></strong> flammability.  '
+        '<p>In the past, this area had <strong><%= category %></strong> flammability.  '
       )({
         category: historicalCategory,
       })
@@ -457,6 +462,111 @@ export default {
           quip += ' compared with historical flammability.'
         }
       }
+      quip += '</p>'
+
+      return quip
+    },
+    beetleString() {
+      // This JSON object contains the level associated with each
+      // returned climate protection level along with text to provide
+      // for the historical text based on that level of protection.
+      const protection = {
+        high: { level: 1, text: 'highly protective' },
+        minimal: { level: 2, text: 'minimally protective' },
+        none: { level: 3, text: 'not protective' },
+      }
+      const historicalProtection = this.beetleData['1988-2017']['Daymet'][
+        'Historical'
+      ]['medium']['climate-protection']
+
+      const models = ['GFDL-ESM2M', 'HadGEM2-ES', 'MRI-CGCM3', 'NCAR-CCSM4']
+      const rcps = ['rcp45', 'rcp85']
+
+      let midCenturyProtection = 'high'
+      let lateCenturyProtection = 'high'
+
+      // This loop finds the worst climate protection in the medium snowpack
+      // across all models and rcps for both the mid-century and late-century
+      // time periods.
+      for (const model of models) {
+        // If the protection level is 'none' (maximum lack of climate protection)
+        // for both mid and late century, break out of the loop
+        if (midCenturyProtection == 'none' && lateCenturyProtection == 'none')
+          break
+        for (const rcp of rcps) {
+          let currentMidProtection = this.beetleData['2040-2069'][model][rcp][
+            'medium'
+          ]['climate-protection']
+          let currentLateProtection = this.beetleData['2070-2099'][model][rcp][
+            'medium'
+          ]['climate-protection']
+
+          if (
+            protection[currentMidProtection].level >
+            protection[midCenturyProtection].level
+          ) {
+            midCenturyProtection = currentMidProtection
+          }
+
+          if (
+            protection[currentLateProtection].level >
+            protection[lateCenturyProtection].level
+          ) {
+            lateCenturyProtection = currentLateProtection
+          }
+        }
+      }
+
+      // Same is a boolean used to determine the language used to
+      // describe future scenarios against the historical value.
+      let same = false
+
+      // Quip contains the qualitative text to be returned for this location
+      let quip =
+        '<p>Historically, climate conditions were <strong>' +
+        protection[historicalProtection].text +
+        '</strong> against spruce beetle outbreaks. Under normal snow conditions, climate conditions in the future may result in <strong>'
+      if (
+        protection[midCenturyProtection].level >
+        protection[historicalProtection].level
+      ) {
+        quip += 'less '
+      } else if (
+        protection[midCenturyProtection].level ==
+        protection[historicalProtection].level
+      ) {
+        quip += 'about the same '
+        same = true
+      } else {
+        quip += 'more '
+      }
+      quip += 'protection</strong> by mid-century'
+      if (
+        protection[lateCenturyProtection].level >
+        protection[midCenturyProtection].level
+      ) {
+        if (same) {
+          quip +=
+            ' and <strong>less protection</strong> by late this century.</p>'
+        } else {
+          quip +=
+            ' and even <strong>less protection</strong> by late this century.</p>'
+        }
+      } else if (
+        protection[lateCenturyProtection].level ==
+        protection[midCenturyProtection].level
+      ) {
+        if (same) {
+          // This is instead of saying "about the same by mid-century
+          // and about the same by late this century."
+          quip += ' and continuing into late this century.</p>'
+        } else {
+          quip +=
+            ' and <strong>about the same protection</strong> by late this century.</p>'
+        }
+      } else {
+        quip += '.</p>'
+      }
 
       return quip
     },
@@ -503,6 +613,10 @@ export default {
 
       if (this.showWildfires) {
         text += this.wildfireString()
+      }
+
+      if (this.showBeetles) {
+        text += this.beetleString()
       }
 
       if (text == '') {
