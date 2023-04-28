@@ -11,7 +11,7 @@
         <div class="historical">
           Historical modeled climate protection (Daymet, 1988&ndash;2017) is
           <strong>{{
-            reportData['1988-2017']['Daymet']['Historical']['low'][
+            reportData['1988-2017']['Daymet']['Historical'][snowpack][
               'climate-protection'
             ]
           }}</strong
