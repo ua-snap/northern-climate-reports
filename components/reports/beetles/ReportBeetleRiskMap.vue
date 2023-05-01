@@ -89,6 +89,10 @@ export default {
     if (this.latLng) {
       this.marker = L.marker(this.latLng).addTo(this.map)
       this.map.panTo(this.latLng)
+    } else if (this.geoJSON != undefined) {
+      this.map.whenReady(() => {
+        this.addGeoJSONtoMap()
+      })
     }
   },
   watch: {

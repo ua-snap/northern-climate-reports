@@ -20,6 +20,7 @@ export const getBaseMapAndLayers = function () {
   // Map base configuration
   var config = {
     zoom: 0,
+    zoomSnap: 0.1,
     minZoom: 0,
     maxZoom: 6,
     center: [64.7, -155],
