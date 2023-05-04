@@ -6,7 +6,7 @@
       <div class="splash-title-text column is-half">
         <div>
           <h1>Northern<br />Climate<br />Reports</h1>
-          <h2>for Changing<br />Arctic Ecosystems</h2>
+          <h2>Data for<br />changing ecosystems</h2>
         </div>
       </div>
       <div class="splash-title-image column is-half"></div>
