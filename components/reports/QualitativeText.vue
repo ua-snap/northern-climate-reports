@@ -69,6 +69,7 @@ export default {
       flammabilityData: 'wildfire/flammability',
       flamThresholds: 'wildfire/flammabilityThresholds',
       vegChangeData: 'wildfire/veg_change',
+      vegTypes: 'wildfire/vegTypes',
       showWildfires: 'wildfire/valid',
       beetleData: 'beetle/beetleData',
       showBeetles: 'beetle/valid',
@@ -466,6 +467,88 @@ export default {
 
       return quip
     },
+    vegChangeString() {
+      // These variables will contain the historical vegetation
+      // type with the highest percentage at this point or area
+      let historical_veg_percentage = 0.0
+      let historical_veg_type = null
+
+      // Iterate through all of the vegetation types
+      Object.keys(this.vegTypes).forEach(type => {
+        if (type == 'not_modeled') {
+          return
+        }
+
+        // If the vegetation percentage is greater than the
+        // current maximum vegetation percentage, make this
+        // percentage the new maximum and record the
+        // vegetation type.
+        if (
+          this.vegChangeData['1950-2008']['MODEL-SPINUP']['historical'][type] >
+          historical_veg_percentage
+        ) {
+          historical_veg_percentage = this.vegChangeData['1950-2008'][
+            'MODEL-SPINUP'
+          ]['historical'][type]
+          historical_veg_type = type
+        }
+      })
+
+      // This variable will hold the minimum vegetation percentage
+      // of the historical vegetation type in the era
+      // 2070-2099 across all of the models and RCPs.
+      let future_veg_percentage = 100.0
+
+      let models = [
+        'GFDL-CM3',
+        'GISS-E2-R',
+        'IPSL-CM5A-LR',
+        'MRI-CGCM3',
+        'NCAR-CCSM4',
+      ]
+      let rcps = ['rcp45', 'rcp60', 'rcp85']
+
+      // For each model and each RCP, check to see if the current
+      // iteration is smaller than the current minimum percentage.
+      models.forEach(model => {
+        rcps.forEach(rcp => {
+          if (
+            this.vegChangeData['2070-2099'][model][rcp][historical_veg_type] <
+            future_veg_percentage
+          ) {
+            future_veg_percentage = this.vegChangeData['2070-2099'][model][rcp][
+              historical_veg_type
+            ]
+          }
+        })
+      })
+
+      // Take the absolute value of the percentage change to find the
+      // percentage difference between historical and future vegetation.
+      let percent_diff = Math.abs(
+        1 - future_veg_percentage / historical_veg_percentage
+      )
+
+      // If the percentage difference is less than 5%, don't show this section.
+      if (percent_diff < 0.05) {
+        return ''
+      } else {
+        let quip =
+          '<p>Based on climate and fire&ndash;driven shifts, vegetation in this area may be '
+
+        // If the percentage difference is between 5-20%,
+        // the vegetation has slighly changed. If the
+        // percentage difference is higher than 20%,
+        // the vegation has notably change.
+        if (percent_diff >= 0.05 && percent_diff <= 0.2) {
+          quip += '<strong>slightly</strong>'
+        } else {
+          quip += '<strong>notably</strong>'
+        }
+        quip += ' different by the end of the century.</p>'
+        return quip
+      }
+    },
     beetleString() {
       // This JSON object contains the level associated with each
       // returned climate protection level along with text to provide
@@ -613,6 +696,7 @@ export default {
 
       if (this.showWildfires) {
         text += this.wildfireString()
+        text += this.vegChangeString()
       }
 
       if (this.showBeetles) {
