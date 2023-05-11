@@ -2,7 +2,7 @@
   <div>
     <div class="map-title has-text-centered">
       <div>
-        <span class="has-text-weight-bold">{{ year }}<br /></span>
+        <span class="has-text-weight-bold">{{ daterange }}<br /></span>
         <span v-if="mapModel">{{ mapModel }}<br class="narrow-br" /></span>
         <span>{{ mapScenario }}</span>
       </div>
@@ -34,7 +34,7 @@ import { getBaseMapAndLayers, addGeoJSONtoMap } from '~/utils/maps'
 
 export default {
   name: 'ReportMagtMap',
-  props: ['scenario', 'model', 'year'],
+  props: ['scenario', 'model', 'daterange'],
   computed: {
     ...mapGetters({
       latLng: 'place/latLng',
@@ -43,7 +43,7 @@ export default {
       scenarios: 'gipl/scenarios',
     }),
     mapID() {
-      return this.scenario + '_' + this.model + '_' + this.year
+      return this.scenario + '_' + this.model + '_' + this.daterange
     },
 
     mapModel() {
@@ -92,11 +92,10 @@ export default {
         format: 'image/png',
         version: '1.3.0',
         layers: 'crrel_gipl_outputs',
-        dim_time: this.year,
         dim_model: this.model,
         dim_scenario: this.scenario,
         dim_variable: 1,
-        styles: 'climate_impact_reports',
+        styles: 'magt1m_' + this.daterange.replace(/-/g, '_'),
       })
     },
   },

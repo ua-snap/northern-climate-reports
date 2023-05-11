@@ -22,30 +22,48 @@
     </div>
     <div class="columns is-flex-direction-row is-centered">
       <div class="minimap-container my-4 p-1">
-        <ReportMagtMap scenario="0" :model="magt_model_selection" year="2021" />
+        <ReportMagtMap
+          scenario="0"
+          :model="magt_model_selection"
+          daterange="2021-2039"
+        />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportMagtMap scenario="0" :model="magt_model_selection" year="2045" />
+        <ReportMagtMap
+          scenario="0"
+          :model="magt_model_selection"
+          daterange="2040-2069"
+        />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportMagtMap scenario="0" :model="magt_model_selection" year="2075" />
-      </div>
-      <div class="minimap-container my-4 p-1">
-        <ReportMagtMap scenario="0" :model="magt_model_selection" year="2105" />
+        <ReportMagtMap
+          scenario="0"
+          :model="magt_model_selection"
+          daterange="2070-2099"
+        />
       </div>
     </div>
     <div class="columns is-flex-direction-row is-centered">
       <div class="minimap-container my-4 p-1">
-        <ReportMagtMap scenario="1" :model="magt_model_selection" year="2021" />
+        <ReportMagtMap
+          scenario="1"
+          :model="magt_model_selection"
+          daterange="2021-2039"
+        />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportMagtMap scenario="1" :model="magt_model_selection" year="2045" />
+        <ReportMagtMap
+          scenario="1"
+          :model="magt_model_selection"
+          daterange="2040-2069"
+        />
       </div>
       <div class="minimap-container my-4 p-1">
-        <ReportMagtMap scenario="1" :model="magt_model_selection" year="2075" />
-      </div>
-      <div class="minimap-container my-4 p-1">
-        <ReportMagtMap scenario="1" :model="magt_model_selection" year="2105" />
+        <ReportMagtMap
+          scenario="1"
+          :model="magt_model_selection"
+          daterange="2070-2099"
+        />
       </div>
     </div>
   </section>
