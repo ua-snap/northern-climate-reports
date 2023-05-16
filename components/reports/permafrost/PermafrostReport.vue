@@ -113,15 +113,15 @@
           </span>
         </div>
       </div>
-      <div class="chart" v-show="this.permafrostPresent">
-        <ReportAltThawChart />
+      <div class="chart">
+        <ReportPermafrostTopChart />
       </div>
-      <div class="chart" v-show="this.permafrostDisappears">
+      <!-- <div class="chart" v-show="this.permafrostDisappears">
         <ReportAltFreezeChart />
       </div>
       <div class="chart" v-show="this.permafrostUncertain || this.noFreeze">
         <ReportMagtChart />
-      </div>
+      </div> -->
       <DownloadCsvButton
         text="Download permafrost data as CSV"
         endpoint="permafrost"
@@ -148,6 +148,7 @@
 <script>
 import ReportMagtMaps from './ReportMagtMaps'
 import ColorTable from '~/components/reports/ColorTable'
+import ReportPermafrostTopChart from './ReportPermafrostTopChart'
 import ReportAltThawChart from './ReportAltThawChart'
 import ReportAltFreezeChart from './ReportAltFreezeChart'
 import ReportMagtChart from './ReportMagtChart'
@@ -160,6 +161,7 @@ export default {
   components: {
     ReportMagtMaps,
     ColorTable,
+    ReportPermafrostTopChart,
     ReportAltThawChart,
     ReportAltFreezeChart,
     ReportMagtChart,

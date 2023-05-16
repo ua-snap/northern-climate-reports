@@ -1,65 +1,41 @@
-let models = ['gfdlcm3', 'gisse2r', 'ipslcm5alr', 'mricgcm3', 'ncarccsm4']
-let scenarios = ['rcp45', 'rcp85']
+let models = { gfdlcm3: 'GFDL-CM3', ncarccsm4: 'NCAR-CCSM4' }
+let modelNames = ['GFDL-CM3', 'NCAR-CCSM4']
+let mmms = { max: 'gipl1kmmax', mean: 'gipl1kmmean', min: 'gipl1kmmin' }
 
 let eras = {
-  1995: '1995',
-  2025: '2011-2040',
-  2050: '2036-2065',
-  2075: '2061–2090',
-  2095: '2086–2100',
+  0: '2021-2039',
+  1: '2040-2069',
+  2: '2070–2099',
 }
 
 let traceLabels = {
   gfdlcm3: {
-    rcp45: 'RCP 4.5 (GFDL CM3)',
-    rcp85: 'RCP 8.5 (GFDL CM3)',
-  },
-  gisse2r: {
-    rcp45: 'RCP 4.5 (GISS E2-R)',
-    rcp85: 'RCP 8.5 (GISS E2-R)',
-  },
-  ipslcm5alr: {
-    rcp45: 'RCP 4.5 (IPSL CM5A-LR)',
-    rcp85: 'RCP 8.5 (IPSL CM5A-LR)',
-  },
-  mricgcm3: {
-    rcp45: 'RCP 4.5 (MRI CGCM3)',
-    rcp85: 'RCP 8.5 (MRI CGCM3)',
+    max: 'Maximum depth (GFDL CM3)',
+    mean: 'Mean depth (GFDL CM3)',
+    min: 'Minimum depth (GFDL CM3)',
   },
   ncarccsm4: {
-    rcp45: 'RCP 4.5 (NCAR CCSM4)',
-    rcp85: 'RCP 8.5 (NCAR CCSM4)',
+    max: 'Maximum depth (NCAR CCSM4)',
+    mean: 'Mean depth (NCAR CCSM4)',
+    min: 'Minimum depth (NCAR CCSM4)',
   },
 }
 
 let symbols = {
   gfdlcm3: 'circle',
-  gisse2r: 'square',
-  ipslcm5alr: 'pentagon',
-  mricgcm3: 'cross',
   ncarccsm4: 'x',
 }
 
 let colors = {
   gfdlcm3: {
-    rcp45: 'rgb(230, 150, 150)',
-    rcp85: 'rgb(190, 30, 30)',
-  },
-  gisse2r: {
-    rcp45: 'rgb(150, 150, 230)',
-    rcp85: 'rgb(30, 30, 190)',
-  },
-  ipslcm5alr: {
-    rcp45: 'rgb(210, 210, 150)',
-    rcp85: 'rgb(140, 140, 30)',
-  },
-  mricgcm3: {
-    rcp45: 'rgb(250, 150, 30)',
-    rcp85: 'rgb(210, 120, 30)',
+    max: 'rgb(230, 150, 150)',
+    mean: 'rgb(150, 150, 230)',
+    min: 'rgb(190, 30, 30)',
   },
   ncarccsm4: {
-    rcp45: 'rgb(210, 150, 210)',
-    rcp85: 'rgb(140, 30, 140)',
+    max: 'rgb(210, 150, 210)',
+    mean: 'rgb(140, 30, 140)',
+    min: 'rgb(30, 30, 190)',
   },
 }
 export const getHistoricalTrace = function (data, units, precision) {
@@ -107,77 +83,47 @@ export const getHistoricalLine = function (data) {
   }
 }
 
-const getProjectedTrace = function (
-  data,
-  model,
-  scenario,
-  units,
-  precision,
-  historicalValue,
-  showDeltas = false
-) {
-  let eraLabels = Object.values(eras)
-  let projectedYears = Object.keys(data).slice(1)
+const getProjectedTrace = function (data, era, model, mmm, units, precision) {
+  console.log(data[models[model]][mmms[mmm]]['permafrosttop'])
+  let eraLabel = eras[era]
   let projectedTrace = {
     type: 'scatter',
     mode: 'markers',
-    name: traceLabels[model][scenario],
+    name: traceLabels[model][mmm],
     hoverinfo: 'x+y+z+text',
     marker: {
-      symbol: Array(eraLabels.length).fill(symbols[model]),
+      symbol: symbols[model],
       size: 8,
-      color: colors[model][scenario],
+      color: colors[model][mmm],
     },
-    x: eraLabels,
-    y: [null],
-    customdata: [null],
+    x: [eraLabel],
+    y: [data[models[model]][mmms[mmm]]['permafrosttop']],
   }
 
-  projectedYears.forEach(year => {
-    let value = data[year][model][scenario]
-    projectedTrace['y'].push(value)
-    if (showDeltas) {
-      let diff = value - historicalValue
-      if (diff > 0) {
-        diff = '+' + diff.toFixed(precision)
-      } else {
-        diff = diff.toFixed(precision)
-      }
-      projectedTrace['customdata'].push(diff)
-    }
-  })
-
-  if (showDeltas) {
-    projectedTrace['hovertemplate'] =
-      '%{y}' + units + ' <b>(%{customdata}' + units + ')</b>'
-  } else {
-    projectedTrace['hovertemplate'] = '%{y:.' + precision + 'f}' + units
-  }
-
+  projectedTrace['hovertemplate'] = '%{y:.' + precision + 'f}' + units
+  console.log(projectedTrace)
   return projectedTrace
 }
 
 export const getProjectedTraces = function (data, units, precision) {
   let projectedTraces = []
-  let historicalYear = Object.keys(data).slice(0, 1)
-  let historicalValue = data[historicalYear]
-  models.forEach(model => {
-    scenarios.forEach(scenario => {
-      let showDeltas = historicalValue != null ? true : false
-      let eraLabels = Object.values(eras)
-      let projectedTrace = getProjectedTrace(
-        data,
-        model,
-        scenario,
-        units,
-        precision,
-        historicalValue,
-        showDeltas
-      )
-      let nonNulls = projectedTrace['y'].filter(value => value != null)
-      if (nonNulls.length > 0) {
+  Object.keys(eras).forEach(era => {
+    Object.keys(models).forEach(model => {
+      Object.keys(mmms).forEach(mmm => {
+        let projectedTrace = getProjectedTrace(
+          data[era],
+          era,
+          model,
+          mmm,
+          units,
+          precision
+        )
         projectedTraces.push(projectedTrace)
-      }
+        // let nonNulls = projectedTrace['y'].filter(value => value != null)
+        // if (nonNulls.length > 0) {
+        //   projectedTraces.push(projectedTrace)
+        // }
+      })
     })
   })
   return projectedTraces
