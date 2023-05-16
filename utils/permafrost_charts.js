@@ -28,9 +28,9 @@ let symbols = {
 
 let colors = {
   gfdlcm3: {
-    max: 'rgb(230, 150, 150)',
-    mean: 'rgb(150, 150, 230)',
-    min: 'rgb(190, 30, 30)',
+    max: 'rgb(210, 150, 210)',
+    mean: 'rgb(140, 30, 140)',
+    min: 'rgb(30, 30, 190)',
   },
   ncarccsm4: {
     max: 'rgb(210, 150, 210)',
@@ -83,9 +83,12 @@ export const getHistoricalLine = function (data) {
   }
 }
 
-const getProjectedTrace = function (data, era, model, mmm, units, precision) {
-  console.log(data[models[model]][mmms[mmm]]['permafrosttop'])
-  let eraLabel = eras[era]
+const getProjectedTrace = function (data, model, mmm, units, precision) {
+  let eraLabels = Object.values(eras)
+  let yData = []
+  for (let era of data) {
+    yData.push(era[models[model]][mmms[mmm]]['permafrosttop'])
+  }
   let projectedTrace = {
     type: 'scatter',
     mode: 'markers',
@@ -96,8 +99,8 @@ const getProjectedTrace = function (data, era, model, mmm, units, precision) {
       size: 8,
       color: colors[model][mmm],
     },
-    x: [eraLabel],
-    y: [data[models[model]][mmms[mmm]]['permafrosttop']],
+    x: eraLabels,
+    y: yData,
   }
 
   projectedTrace['hovertemplate'] = '%{y:.' + precision + 'f}' + units
@@ -107,23 +110,14 @@ const getProjectedTrace = function (data, era, model, mmm, units, precision) {
 
 export const getProjectedTraces = function (data, units, precision) {
   let projectedTraces = []
-  Object.keys(eras).forEach(era => {
-    Object.keys(models).forEach(model => {
-      Object.keys(mmms).forEach(mmm => {
-        let projectedTrace = getProjectedTrace(
-          data[era],
-          era,
-          model,
-          mmm,
-          units,
-          precision
-        )
-        projectedTraces.push(projectedTrace)
-        // let nonNulls = projectedTrace['y'].filter(value => value != null)
-        // if (nonNulls.length > 0) {
-        //   projectedTraces.push(projectedTrace)
-        // }
-      })
+  Object.keys(models).forEach(model => {
+    Object.keys(mmms).forEach(mmm => {
+      let projectedTrace = getProjectedTrace(data, model, mmm, units, precision)
+      projectedTraces.push(projectedTrace)
+      // let nonNulls = projectedTrace['y'].filter(value => value != null)
+      // if (nonNulls.length > 0) {
+      //   projectedTraces.push(projectedTrace)
+      // }
     })
   })
   return projectedTraces
