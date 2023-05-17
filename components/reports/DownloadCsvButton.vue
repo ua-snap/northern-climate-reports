@@ -22,7 +22,7 @@ export default {
           latLng[0] +
           '/' +
           latLng[1] +
-          'format=csv'
+          '?format=csv'
       } else {
         url =
           process.env.apiUrl +
