@@ -1,6 +1,5 @@
 let models = { gfdlcm3: 'GFDL-CM3', ncarccsm4: 'NCAR-CCSM4' }
-let modelNames = ['GFDL-CM3', 'NCAR-CCSM4']
-let mmms = { max: 'gipl1kmmax', mean: 'gipl1kmmean', min: 'gipl1kmmin' }
+let scenarios = { rcp45: 'RCP 4.5', rcp85: 'RCP 8.5' }
 
 let eras = {
   0: '2021-2039',
@@ -10,14 +9,12 @@ let eras = {
 
 let traceLabels = {
   gfdlcm3: {
-    max: 'Maximum depth (GFDL CM3)',
-    mean: 'Mean depth (GFDL CM3)',
-    min: 'Minimum depth (GFDL CM3)',
+    rcp45: 'Depth (GFDL CM3 at RCP 4.5)',
+    rcp85: 'Depth (GFDL CM3 at RCP 8.5)',
   },
   ncarccsm4: {
-    max: 'Maximum depth (NCAR CCSM4)',
-    mean: 'Mean depth (NCAR CCSM4)',
-    min: 'Minimum depth (NCAR CCSM4)',
+    rcp45: 'Depth (NCAR CCSM4 at RCP 4.5)',
+    rcp85: 'Depth (NCAR CCSM4 at RCP 8.5)',
   },
 }
 
@@ -27,16 +24,8 @@ let symbols = {
 }
 
 let colors = {
-  gfdlcm3: {
-    max: 'rgb(210, 150, 210)',
-    mean: 'rgb(140, 30, 140)',
-    min: 'rgb(30, 30, 190)',
-  },
-  ncarccsm4: {
-    max: 'rgb(210, 150, 210)',
-    mean: 'rgb(140, 30, 140)',
-    min: 'rgb(30, 30, 190)',
-  },
+  rcp45: 'rgb(67, 147, 195)',
+  rcp85: 'rgb(214, 96, 76)',
 }
 export const getHistoricalTrace = function (data, units, precision) {
   let eraLabels = Object.values(eras)
@@ -83,36 +72,41 @@ export const getHistoricalLine = function (data) {
   }
 }
 
-const getProjectedTrace = function (data, model, mmm, units, precision) {
+const getProjectedTrace = function (data, model, scenario, units, precision) {
   let eraLabels = Object.values(eras)
   let yData = []
   for (let era of data) {
-    yData.push(era[models[model]][mmms[mmm]]['permafrosttop'])
+    yData.push(era[models[model]][scenario]['gipl1kmmean']['permafrosttop'])
   }
   let projectedTrace = {
     type: 'scatter',
     mode: 'markers',
-    name: traceLabels[model][mmm],
+    name: traceLabels[model][scenario],
     hoverinfo: 'x+y+z+text',
     marker: {
       symbol: symbols[model],
       size: 8,
-      color: colors[model][mmm],
+      color: colors[scenario],
     },
     x: eraLabels,
     y: yData,
   }
 
   projectedTrace['hovertemplate'] = '%{y:.' + precision + 'f}' + units
-  console.log(projectedTrace)
   return projectedTrace
 }
 
 export const getProjectedTraces = function (data, units, precision) {
   let projectedTraces = []
   Object.keys(models).forEach(model => {
-    Object.keys(mmms).forEach(mmm => {
-      let projectedTrace = getProjectedTrace(data, model, mmm, units, precision)
+    Object.keys(scenarios).forEach(scenario => {
+      let projectedTrace = getProjectedTrace(
+        data,
+        model,
+        scenario,
+        units,
+        precision
+      )
       projectedTraces.push(projectedTrace)
       // let nonNulls = projectedTrace['y'].filter(value => value != null)
       // if (nonNulls.length > 0) {

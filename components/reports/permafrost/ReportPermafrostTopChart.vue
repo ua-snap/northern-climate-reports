@@ -45,13 +45,36 @@ export default {
       let precision = this.units == 'metric' ? 2 : 1
 
       let title = buildTitle({
-        dataLabel: 'Top of permafrost',
+        dataLabel: 'Depth to top of permafrost',
         dateRange: '2021-2099',
         place: this.place,
       })
 
       let yAxisLabel = 'Depth (' + units + ')'
-      let layout = getLayout(title, yAxisLabel)
+      let orig_layout = getLayout(title, yAxisLabel)
+      let layout = {
+        ...orig_layout,
+        yaxis: {
+          ...orig_layout.yaxis,
+          autorange: 'reversed',
+        },
+        images: [
+          {
+            x: 0,
+            y: 1,
+            xref: 'paper',
+            yref: 'paper',
+            xanchor: 'left',
+            yanchor: 'bottom',
+            source: '/black_spruce.png',
+            sizex: 1,
+            sizey: 1,
+          },
+        ],
+        margin: {
+          t: 230,
+        },
+      }
       // let dataTraces = []
 
       let dataTraces = getProjectedTraces(permafrostTopData, units, precision)
@@ -76,18 +99,29 @@ export default {
         yAxisAnnotationX = -0.06
       }
 
-      layout.annotations.push({
-        x: yAxisAnnotationX,
-        y: 0.1,
-        xref: 'paper',
-        yref: 'paper',
-        showarrow: true,
-        text: 'Deeper freeze →',
-        textangle: '-90',
-        font: {
-          size: 13,
-        },
-      })
+      // layout.images.push({
+      //   x: 0,
+      //   y: 0,
+      //   xref: 'paper',
+      //   yref: 'paper',
+      //   xanchor: 'left',
+      //   yanchor: 'top',
+      //   source: 'black_spruce.png"',
+      //   sizex: 0.5,
+      //   sizey: 0.5,
+      // })
+      // layout.annotations.push({
+      //   x: yAxisAnnotationX,
+      //   y: 0.1,
+      //   xref: 'paper',
+      //   yref: 'paper',
+      //   showarrow: true,
+      //   text: 'Deeper freeze →',
+      //   textangle: '-90',
+      //   font: {
+      //     size: 13,
+      //   },
+      // })
 
       let footer = getFooter(footerLines, layout)
       layout.annotations.push(footer)
