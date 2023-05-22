@@ -212,8 +212,11 @@ export const getters = {
     })
     return thresholds
   },
-  permafrostData(state) {
-    return state.permafrostData
+  permafrostData(state, getters, rootState, rootGetters) {
+    var tempData = _.cloneDeep(state.permafrostData)
+    return rootGetters.units == 'imperial'
+      ? convertToInches(tempData, 'm')
+      : tempData
   },
 
   // Returns true if there's "valid" permafrost data here, i.e.
