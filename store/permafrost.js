@@ -154,8 +154,8 @@ export const getters = {
   },
   models() {
     return {
-      3: 'NCAR CCSM4',
-      4: 'MRI CGCM3',
+      1: 'GFDL-CM3',
+      2: 'NCAR-CCSM4',
     }
   },
   scenarios() {
@@ -343,12 +343,14 @@ export const actions = {
         context.rootGetters['place/urlFragment']()
 
       try {
+        console.log(permafrostQueryUrl)
         let permafrostData = await this.$axios
           .$get(permafrostQueryUrl)
           .catch(err => {
             let httpError = getHttpError(err)
             context.commit('setHttpError', httpError)
           })
+        console.log(permafrostData)
 
         if (permafrostData != null) {
           if (permafrostData['gipl'] != null) {

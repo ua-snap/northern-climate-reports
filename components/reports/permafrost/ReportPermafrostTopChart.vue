@@ -58,39 +58,11 @@ export default {
           ...orig_layout.yaxis,
           autorange: 'reversed',
         },
-        images: [
-          {
-            x: 0,
-            y: 1,
-            xref: 'paper',
-            yref: 'paper',
-            xanchor: 'left',
-            yanchor: 'bottom',
-            source: '/black_spruce.png',
-            sizex: 1,
-            sizey: 1,
-          },
-        ],
-        margin: {
-          t: 230,
-        },
       }
-      // let dataTraces = []
 
       let dataTraces = getProjectedTraces(permafrostTopData, units, precision)
-      // console.log(projectedTraces)
-      // dataTraces = dataTraces.concat(projectedTraces)
-      console.log(dataTraces)
-
       let footerLines = []
       footerLines.push('Projected values are taken from GIPL 2.0 model output.')
-
-      // let emptyColumns = detectEmptyColumns(altFreezeData)
-      // if (emptyColumns) {
-      //   footerLines.push(
-      //     'Empty columns indicate that permafrost is still present for all models.'
-      //   )
-      // }
 
       let yAxisAnnotationX
       if (window.innerWidth < 1250) {
@@ -99,32 +71,52 @@ export default {
         yAxisAnnotationX = -0.06
       }
 
-      // layout.images.push({
-      //   x: 0,
-      //   y: 0,
-      //   xref: 'paper',
-      //   yref: 'paper',
-      //   xanchor: 'left',
-      //   yanchor: 'top',
-      //   source: 'black_spruce.png"',
-      //   sizex: 0.5,
-      //   sizey: 0.5,
-      // })
-      // layout.annotations.push({
-      //   x: yAxisAnnotationX,
-      //   y: 0.1,
-      //   xref: 'paper',
-      //   yref: 'paper',
-      //   showarrow: true,
-      //   text: 'Deeper freeze →',
-      //   textangle: '-90',
-      //   font: {
-      //     size: 13,
-      //   },
-      // })
-
       let footer = getFooter(footerLines, layout)
       layout.annotations.push(footer)
+
+      layout.shapes.push({
+        type: 'line',
+        x0: 0,
+        x1: 1,
+        xref: 'paper',
+        y0: 0,
+        y1: 0,
+        yref: 'y',
+        line: {
+          width: 2,
+          color: '#cccccc',
+        },
+        layer: 'above',
+      })
+
+      layout.annotations.push({
+        x: 1,
+        y: 0,
+        xref: 'paper',
+        yref: 'y',
+        text: 'Ground surface',
+        showarrow: true,
+        arrowcolor: '#aaaaaa',
+        arrowhead: 6,
+        ax: 0,
+        ay: -12,
+        font: {
+          color: '#888888',
+        },
+      })
+
+      layout.annotations.push({
+        x: -0.08,
+        y: 0.79,
+        xref: 'paper',
+        yref: 'paper',
+        showarrow: true,
+        text: '← Deeper',
+        textangle: '-90',
+        font: {
+          size: 13,
+        },
+      })
 
       let plotSettings = getPlotSettings()
       this.$Plotly.newPlot(

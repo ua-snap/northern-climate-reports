@@ -9,24 +9,31 @@ let eras = {
 
 let traceLabels = {
   gfdlcm3: {
-    rcp45: 'Depth (GFDL CM3 at RCP 4.5)',
-    rcp85: 'Depth (GFDL CM3 at RCP 8.5)',
+    rcp45: 'RCP 4.5 (GFDL CM3)',
+    rcp85: 'RCP 8.5 (GFDL CM3)',
   },
   ncarccsm4: {
-    rcp45: 'Depth (NCAR CCSM4 at RCP 4.5)',
-    rcp85: 'Depth (NCAR CCSM4 at RCP 8.5)',
+    rcp45: 'RCP 4.5 (NCAR CCSM4)',
+    rcp85: 'RCP 8.5 (NCAR CCSM4)',
   },
 }
 
 let symbols = {
   gfdlcm3: 'circle',
-  ncarccsm4: 'x',
+  ncarccsm4: 'square',
 }
 
 let colors = {
-  rcp45: 'rgb(67, 147, 195)',
-  rcp85: 'rgb(214, 96, 76)',
+  gfdlcm3: {
+    rcp45: 'rgb(230, 150, 150)',
+    rcp85: 'rgb(190, 30, 30)',
+  },
+  ncarccsm4: {
+    rcp45: 'rgb(150, 150, 230)',
+    rcp85: 'rgb(30, 30, 190)',
+  },
 }
+
 export const getHistoricalTrace = function (data, units, precision) {
   let eraLabels = Object.values(eras)
   let historicalYear = Object.keys(data).slice(0, 1)
@@ -86,7 +93,7 @@ const getProjectedTrace = function (data, model, scenario, units, precision) {
     marker: {
       symbol: symbols[model],
       size: 8,
-      color: colors[scenario],
+      color: colors[model][scenario],
     },
     x: eraLabels,
     y: yData,
@@ -108,10 +115,6 @@ export const getProjectedTraces = function (data, units, precision) {
         precision
       )
       projectedTraces.push(projectedTrace)
-      // let nonNulls = projectedTrace['y'].filter(value => value != null)
-      // if (nonNulls.length > 0) {
-      //   projectedTraces.push(projectedTrace)
-      // }
     })
   })
   return projectedTraces
