@@ -62,10 +62,9 @@ export default {
       units: 'units',
       rawClimateData: 'climate/rawClimateData',
       climateData: 'climate/climateData',
-      altThawData: 'permafrost/altThaw',
       showPermafrost: 'permafrost/valid',
-      permafrostPresent: 'permafrost/present',
-      permafrostDisappears: 'permafrost/disappears',
+      // permafrostPresent: 'permafrost/present',
+      // permafrostDisappears: 'permafrost/disappears',
       flammabilityData: 'wildfire/flammability',
       flamThresholds: 'wildfire/flammabilityThresholds',
       vegChangeData: 'wildfire/veg_change',
@@ -89,9 +88,9 @@ export default {
     climateData: function () {
       this.generateText()
     },
-    altThawData: function () {
-      this.generateText()
-    },
+    // altThawData: function () {
+    //   this.generateText()
+    // },
     flammabilityData: function () {
       this.generateText()
     },
@@ -280,47 +279,47 @@ export default {
         '%</strong>).</p>'
       )
     },
-    permafrostString() {
-      let years = Object.keys(this.altThawData)
-      let historicalYear = years.slice(0, 1)
-      let lastYear = years.slice(-1)[0]
-      let thicknessHistorical = this.altThawData[historicalYear]
+    // permafrostString() {
+    //   let years = Object.keys(this.altThawData)
+    //   let historicalYear = years.slice(0, 1)
+    //   let lastYear = years.slice(-1)[0]
+    //   let thicknessHistorical = this.altThawData[historicalYear]
 
-      if (thicknessHistorical == null) {
-        return 0
-      }
+    //   if (thicknessHistorical == null) {
+    //     return 0
+    //   }
 
-      let thicknesses = []
-      let models = ['mricgcm3', 'ncarccsm4']
-      let scenarios = ['rcp85']
+    //   let thicknesses = []
+    //   let models = ['mricgcm3', 'ncarccsm4']
+    //   let scenarios = ['rcp85']
 
-      models.forEach(model => {
-        scenarios.forEach(scenario => {
-          let value = this.altThawData[lastYear][model][scenario]
-          thicknesses.push(value)
-        })
-      })
-      let thicknessMax = _.max(thicknesses)
+    //   models.forEach(model => {
+    //     scenarios.forEach(scenario => {
+    //       let value = this.altThawData[lastYear][model][scenario]
+    //       thicknesses.push(value)
+    //     })
+    //   })
+    //   let thicknessMax = _.max(thicknesses)
 
-      let permafrostChange = Math.round(
-        (thicknessMax / thicknessHistorical) * 100 - 100
-      )
+    //   let permafrostChange = Math.round(
+    //     (thicknessMax / thicknessHistorical) * 100 - 100
+    //   )
 
-      let string = ''
-      if (this.permafrostPresent && this.permafrostDisappears) {
-        string =
-          '<p>By the late century, permafrost within ' +
-          this.depthFragment +
-          ' of the ground surface may <strong>disappear</strong>.</p>'
-      } else if (permafrostChange > 0) {
-        string =
-          '<p>By the late century, active layer permafrost thickness<br/> may increase by <strong>' +
-          Math.abs(permafrostChange) +
-          '%</strong>.</p>'
-      }
+    //   let string = ''
+    //   if (this.permafrostPresent && this.permafrostDisappears) {
+    //     string =
+    //       '<p>By the late century, permafrost within ' +
+    //       this.depthFragment +
+    //       ' of the ground surface may <strong>disappear</strong>.</p>'
+    //   } else if (permafrostChange > 0) {
+    //     string =
+    //       '<p>By the late century, active layer permafrost thickness<br/> may increase by <strong>' +
+    //       Math.abs(permafrostChange) +
+    //       '%</strong>.</p>'
+    //   }
 
-      return string
-    },
+    //   return string
+    // },
     wildfireString() {
       var categoryFromFlam = flam => {
         let label

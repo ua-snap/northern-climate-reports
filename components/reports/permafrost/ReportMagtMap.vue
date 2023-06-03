@@ -39,8 +39,8 @@ export default {
     ...mapGetters({
       latLng: 'place/latLng',
       geoJSON: 'place/geoJSON',
-      models: 'gipl/models',
-      scenarios: 'gipl/scenarios',
+      models: 'permafrost/models',
+      scenarios: 'permafrost/scenarios',
     }),
     mapID() {
       return this.scenario + '_' + this.model + '_' + this.daterange

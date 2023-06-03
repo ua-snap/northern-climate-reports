@@ -4,64 +4,12 @@
       <h4 class="title is-3">Permafrost</h4>
       <div class="is-size-5">
         <div v-if="reportData">
-          <span
-            v-show="
-              permafrostPresent &&
-              permafrostDisappears &&
-              !permafrostUncertain &&
-              !noFreeze
-            "
-          >
-            Historical data and model projections indicate that
-            <strong
-              >this place has permafrost which disappears within
-              <span v-html="depthFragment"></span> of the ground surface over
-              time.</strong
-            >
-          </span>
-          <span
-            v-show="
-              permafrostPresent &&
-              !permafrostDisappears &&
-              !permafrostUncertain &&
-              !noFreeze
-            "
-            >Historical data and model projections indicate that
-            <strong>this place has permafrost.</strong>
-          </span>
-          <span
-            v-show="
-              !permafrostPresent &&
-              (permafrostDisappears || noFreeze) &&
-              !permafrostUncertain
-            "
-          >
-            <strong>
-              There is no permafrost within
-              <span v-html="depthFragment"></span> of the ground surface at this
-              location</strong
-            >.
-          </span>
-          <span v-show="permafrostUncertain">
-            <strong
-              >The presence or absence of permafrost could not be determined for
-              this location</strong
-            >
-            because the historical mean annual ground temperature falls within
-            the threshold of uncertainty (<span
-              v-html="uncertaintyFragment"
-            ></span
-            >).
-          </span>
+          <span> New text here... </span>
           <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
             >See information about the dataset shown here.</nuxt-link
           >
         </div>
-        <div class="mt-5">
-          The following maps show the historical and projected mean annual
-          ground temperature over time. This is the temperature of the soil
-          directly above the permafrost layer.
-        </div>
+        <div class="mt-5">New text here also...</div>
       </div>
     </div>
     <ReportMagtMaps />
@@ -78,50 +26,12 @@
     <div v-if="reportData">
       <div class="content">
         <div class="is-size-5">
-          <span
-            v-show="
-              permafrostPresent && permafrostDisappears && !permafrostUncertain
-            "
-          >
-            Projected permafrost active layer thickness and ground freeze depth
-            through the end of the century are shown below. The active layer is
-            the layer of soil above permafrost that thaws seasonally. Ground
-            freeze is the maximum depth to which winter freeze occurs in
-            non&ndash;permafrost areas.
-          </span>
-          <span
-            v-show="
-              permafrostPresent && !permafrostDisappears && !permafrostUncertain
-            "
-          >
-            Projected permafrost active layer thickness through the end of the
-            century is shown below. The active layer is the layer of soil above
-            permafrost that thaws seasonally.
-          </span>
-          <span
-            v-show="
-              !permafrostPresent && permafrostDisappears && !permafrostUncertain
-            "
-          >
-            Projected ground freeze depth through the end of the century is
-            shown below. Ground freeze is the maximum depth to which winter
-            freeze occurs in non&ndash;permafrost areas.
-          </span>
-          <span v-show="permafrostUncertain || noFreeze"
-            >A chart of the historical and projected mean annual ground
-            temperature is provided below.
-          </span>
+          Text for new GIPL permafrost dataset goes here...
         </div>
       </div>
       <div class="chart">
         <ReportPermafrostTopChart />
       </div>
-      <!-- <div class="chart" v-show="this.permafrostDisappears">
-        <ReportAltFreezeChart />
-      </div>
-      <div class="chart" v-show="this.permafrostUncertain || this.noFreeze">
-        <ReportMagtChart />
-      </div> -->
       <DownloadCsvButton
         text="Download permafrost data as CSV"
         endpoint="permafrost"
@@ -149,9 +59,6 @@
 import ReportMagtMaps from './ReportMagtMaps'
 import ColorTable from '~/components/reports/ColorTable'
 import ReportPermafrostTopChart from './ReportPermafrostTopChart'
-import ReportAltThawChart from './ReportAltThawChart'
-import ReportAltFreezeChart from './ReportAltFreezeChart'
-import ReportMagtChart from './ReportMagtChart'
 import BackToTopButton from '~/components/reports/BackToTopButton'
 import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import { mapGetters } from 'vuex'
@@ -162,9 +69,6 @@ export default {
     ReportMagtMaps,
     ColorTable,
     ReportPermafrostTopChart,
-    ReportAltThawChart,
-    ReportAltFreezeChart,
-    ReportMagtChart,
     BackToTopButton,
     DownloadCsvButton,
   },
@@ -184,9 +88,9 @@ export default {
     ...mapGetters({
       units: 'units',
       reportData: 'permafrost/permafrostData',
-      permafrostPresent: 'permafrost/present',
-      permafrostDisappears: 'permafrost/disappears',
-      permafrostUncertain: 'permafrost/uncertain',
+      // permafrostPresent: 'permafrost/present',
+      // permafrostDisappears: 'permafrost/disappears',
+      // permafrostUncertain: 'permafrost/uncertain',
       noFreeze: 'permafrost/noFreeze',
       magtThresholds: 'permafrost/magtThresholds',
     }),

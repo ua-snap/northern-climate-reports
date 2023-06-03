@@ -24,7 +24,8 @@ var getProcessedData = function (permafrostData) {
     permafrostData['gipl']['1995']['cruts31']['historical']['magt']
 
   // If there are no ALT values, there is no permafrost and no ground freeze at
-  // this location.
+  // this location.http://<your_server>/rasdaman/ows?service=WMS&version=1.3.0&request=GetMap&layers=myLayer&styles=&width=512&height=512&crs=EPSG:4326&bbox=-180,-90,180,90&format=image/png&transparent=true&query=SELECT avg(c) FROM slice(myCoverage, 0, 30, "time") AS c GROUP BY spatiotemporal()
+
   noFreeze = _.reduceDeep(
     permafrostData,
     (acc, value, key) => {
@@ -132,34 +133,22 @@ var getProcessedData = function (permafrostData) {
 // Store, namespaced as `permafrost/`
 export const state = () => ({
   permafrostData: undefined,
-  altThaw: undefined,
-  altFreeze: undefined,
-  magt: undefined,
-
-  // True if permafrost is present but disappears over time
-  disappears: undefined,
-  // True if permafrost is still present here
-  present: undefined,
-  // True if presence/absence of permafrost cannot be determined
-  uncertain: undefined,
-  // True if permafrost is not present and the ground does not freeze
-  noFreeze: undefined,
 
   httpError: null,
 })
 
 export const getters = {
-  eras() {
-    return ['1995', '2011-2040', '2036-2065', '2061–2090', '2086–2100']
+  years() {
+    return ['2021-2039', '2040-2069', '2070-2099']
   },
   models() {
     return {
-      1: 'GFDL-CM3',
-      2: 'NCAR-CCSM4',
+      1: 'GFDL CM3',
+      2: 'NCAR CCSM4',
     }
   },
   scenarios() {
-    return ['CRU TS 3.1', 'RCP 4.5', 'RCP 8.5']
+    return ['RCP 4.5', 'RCP 8.5']
   },
   magtThresholds(state, getters, rootState, rootGetters) {
     let thresholds = [
@@ -223,38 +212,11 @@ export const getters = {
     })
     return thresholds
   },
-  permafrostData(state) {
-    return state.permafrostData
-  },
-  altThaw(state, getters, rootState, rootGetters) {
-    var tempData = _.cloneDeep(state.altThaw)
+  permafrostData(state, getters, rootState, rootGetters) {
+    var tempData = _.cloneDeep(state.permafrostData)
     return rootGetters.units == 'imperial'
       ? convertToInches(tempData, 'm')
       : tempData
-  },
-  altFreeze(state, getters, rootState, rootGetters) {
-    var tempData = _.cloneDeep(state.altFreeze)
-    return rootGetters.units == 'imperial'
-      ? convertToInches(tempData, 'm')
-      : tempData
-  },
-  magt(state, getters, rootState, rootGetters) {
-    var tempData = _.cloneDeep(state.magt)
-    return rootGetters.units == 'imperial'
-      ? convertToFahrenheit(tempData, 'c')
-      : tempData
-  },
-  present(state) {
-    return state.present
-  },
-  disappears(state) {
-    return state.disappears
-  },
-  uncertain(state) {
-    return state.uncertain
-  },
-  noFreeze(state) {
-    return state.noFreeze
   },
 
   // Returns true if there's "valid" permafrost data here, i.e.
@@ -298,36 +260,9 @@ export const mutations = {
   setPermafrostData(state, permafrostData) {
     state.permafrostData = permafrostData
   },
-  setAltThaw(state, altThaw) {
-    state.altThaw = altThaw
-  },
-  setAltFreeze(state, altFreeze) {
-    state.altFreeze = altFreeze
-  },
-  setMagt(state, magt) {
-    state.magt = magt
-  },
-  setPresent(state, present) {
-    state.present = present
-  },
-  setDisappears(state, disappears) {
-    state.disappears = disappears
-  },
-  setUncertain(state, uncertain) {
-    state.uncertain = uncertain
-  },
-  setNoFreeze(state, noFreeze) {
-    state.noFreeze = noFreeze
-  },
+
   clear(state) {
     state.permafrostData = undefined
-    state.altThaw = undefined
-    state.altFreeze = undefined
-    state.magt = undefined
-    state.disappears = undefined
-    state.present = undefined
-    state.uncertain = undefined
-    state.noFreeze = undefined
   },
   setHttpError(state, error) {
     state.httpError = error
@@ -339,33 +274,23 @@ export const actions = {
     if (context.rootGetters['place/latLng']) {
       let permafrostQueryUrl =
         process.env.apiUrl +
-        '/permafrost/' +
+        '/ncr/permafrost/' +
         context.rootGetters['place/urlFragment']()
-
+      console.log(permafrostQueryUrl)
       try {
-        console.log(permafrostQueryUrl)
         let permafrostData = await this.$axios
-          .$get(permafrostQueryUrl)
+          .$get(permafrostQueryUrl, { timeout: 60000 })
           .catch(err => {
             let httpError = getHttpError(err)
             context.commit('setHttpError', httpError)
+            console.log(httpError)
           })
+        console.log(permafrostQueryUrl)
+        console.log('permafrostData')
         console.log(permafrostData)
 
         if (permafrostData != null) {
-          if (permafrostData['gipl'] != null) {
-            context.commit('setPermafrostData', permafrostData)
-            let processedData = getProcessedData(permafrostData)
-            context.commit('setAltThaw', processedData.thawData)
-            context.commit('setPresent', processedData.present)
-            context.commit('setAltFreeze', processedData.freezeData)
-            context.commit('setDisappears', processedData.disappears)
-            context.commit('setMagt', processedData.magtData)
-            context.commit('setUncertain', processedData.uncertain)
-            context.commit('setNoFreeze', processedData.noFreeze)
-          } else {
-            context.commit('setHttpError', 'no_data')
-          }
+          context.commit('setPermafrostData', permafrostData)
         }
       } catch (error) {
         throw error

@@ -82,7 +82,10 @@ export const getHistoricalLine = function (data) {
 const getProjectedTrace = function (data, model, scenario, units, precision) {
   let eraLabels = Object.values(eras)
   let yData = []
-  for (let era of data) {
+  for (let era of Object.values(data)) {
+    console.log('WORKING!!!')
+    // console.log(era)
+    // eraLabels.push(era['title'])
     yData.push(era[models[model]][scenario]['gipl1kmmean']['permafrosttop'])
   }
   let projectedTrace = {

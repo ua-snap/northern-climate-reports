@@ -410,7 +410,6 @@ export default {
       elevationWarning: 'elevation/elevationWarning',
       climateData: 'climate/climateData',
       permafrostData: 'permafrost/permafrostData',
-      giplData: 'gipl/permafrostData',
       flammabilityData: 'wildfire/flammability',
       vegChangeData: 'wildfire/veg_change',
       beetleData: 'beetle/beetleData',
@@ -420,7 +419,6 @@ export default {
       flammabilityHttpError: 'wildfire/flammabilityHttpError',
       vegChangeHttpError: 'wildfire/vegChangeHttpError',
       beetleHttpError: 'beetle/httpError',
-      giplHttpError: 'gipl/httpError',
       isPointLocation: 'place/isPointLocation',
     }),
   },
@@ -428,9 +426,6 @@ export default {
   // error handling, etc, can all be done in one spot.
   async fetch() {
     // TODO: Error handling.
-    await this.$store.dispatch('gipl/fetch').catch(e => {
-      console.error(e)
-    })
     await this.$store.dispatch('climate/fetch').catch(e => {
       console.error(e)
     })

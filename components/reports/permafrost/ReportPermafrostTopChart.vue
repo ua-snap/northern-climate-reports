@@ -25,7 +25,7 @@ export default {
   computed: {
     ...mapGetters({
       units: 'units',
-      permafrostData: 'gipl/permafrostData',
+      permafrostData: 'permafrost/permafrostData',
       place: 'place/name',
     }),
   },
@@ -107,7 +107,7 @@ export default {
 
       layout.annotations.push({
         x: -0.08,
-        y: 0.79,
+        y: 0.75,
         xref: 'paper',
         yref: 'paper',
         showarrow: true,
