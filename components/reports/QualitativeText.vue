@@ -65,6 +65,7 @@ export default {
       showPermafrost: 'permafrost/valid',
       // permafrostPresent: 'permafrost/present',
       // permafrostDisappears: 'permafrost/disappears',
+      permafrostData: 'permafrost/permafrostData',
       flammabilityData: 'wildfire/flammability',
       flamThresholds: 'wildfire/flammabilityThresholds',
       vegChangeData: 'wildfire/veg_change',
@@ -279,47 +280,77 @@ export default {
         '%</strong>).</p>'
       )
     },
-    // permafrostString() {
-    //   let years = Object.keys(this.altThawData)
-    //   let historicalYear = years.slice(0, 1)
-    //   let lastYear = years.slice(-1)[0]
-    //   let thicknessHistorical = this.altThawData[historicalYear]
+    permafrostString() {
+      console.log('permafrostData')
+      console.log(this.permafrostData)
+      //   let years = Object.keys(this.altThawData)
+      //   let historicalYear = years.slice(0, 1)
+      //   let lastYear = years.slice(-1)[0]
+      //   let thicknessHistorical = this.altThawData[historicalYear]
 
-    //   if (thicknessHistorical == null) {
-    //     return 0
-    //   }
+      //   if (thicknessHistorical == null) {
+      //     return 0
+      //   }
 
-    //   let thicknesses = []
-    //   let models = ['mricgcm3', 'ncarccsm4']
-    //   let scenarios = ['rcp85']
+      //   let thicknesses = []
+      //   let models = ['mricgcm3', 'ncarccsm4']
+      //   let scenarios = ['rcp85']
 
-    //   models.forEach(model => {
-    //     scenarios.forEach(scenario => {
-    //       let value = this.altThawData[lastYear][model][scenario]
-    //       thicknesses.push(value)
-    //     })
-    //   })
-    //   let thicknessMax = _.max(thicknesses)
+      //   models.forEach(model => {
+      //     scenarios.forEach(scenario => {
+      //       let value = this.altThawData[lastYear][model][scenario]
+      //       thicknesses.push(value)
+      //     })
+      //   })
+      //   let thicknessMax = _.max(thicknesses)
 
-    //   let permafrostChange = Math.round(
-    //     (thicknessMax / thicknessHistorical) * 100 - 100
-    //   )
+      //   let permafrostChange = Math.round(
+      //     (thicknessMax / thicknessHistorical) * 100 - 100
+      //   )
 
-    //   let string = ''
-    //   if (this.permafrostPresent && this.permafrostDisappears) {
-    //     string =
-    //       '<p>By the late century, permafrost within ' +
-    //       this.depthFragment +
-    //       ' of the ground surface may <strong>disappear</strong>.</p>'
-    //   } else if (permafrostChange > 0) {
-    //     string =
-    //       '<p>By the late century, active layer permafrost thickness<br/> may increase by <strong>' +
-    //       Math.abs(permafrostChange) +
-    //       '%</strong>.</p>'
-    //   }
+      //   let string = ''
+      //   if (this.permafrostPresent && this.permafrostDisappears) {
+      //     string =
+      //       '<p>By the late century, permafrost within ' +
+      //       this.depthFragment +
+      //       ' of the ground surface may <strong>disappear</strong>.</p>'
+      //   } else if (permafrostChange > 0) {
+      //     string =
+      //       '<p>By the late century, active layer permafrost thickness<br/> may increase by <strong>' +
+      //       Math.abs(permafrostChange) +
+      //       '%</strong>.</p>'
+      //   }
 
-    //   return string
-    // },
+      let models = ['GFDL-CM3', 'NCAR-CCSM4']
+
+      let firstEraMinDepth = 500
+      let savedModel = undefined
+      models.forEach(model => {
+        let depth = this.permafrostData['2021-2039'][model]['rcp85'][
+          'gipl1kmmean'
+        ]['permafrosttop']
+        console.log('depth')
+        console.log(depth)
+        if (depth < firstEraMinDepth) {
+          firstEraMinDepth = depth
+          savedModel = model
+        }
+      })
+
+      if (savedModel) {
+        let difference =
+          this.permafrostData['2070-2099'][savedModel]['rcp85']['gipl1kmmean'][
+            'permafrosttop'
+          ] - firstEraMinDepth
+
+        if (difference > 100) {
+          return 'Permafrost may <strong>thaw significantly</strong> by late century.'
+        } else if (difference > 20) {
+          return 'Permafrost may <strong>thaw slightly</strong> by late century.'
+        }
+      }
+      return ''
+    },
     wildfireString() {
       var categoryFromFlam = flam => {
         let label
@@ -616,6 +647,11 @@ export default {
 
       if (this.showBeetles) {
         text += this.beetleString()
+      }
+
+      if (true) {
+        console.log('permafrostString')
+        text += this.permafrostString()
       }
 
       if (text == '') {

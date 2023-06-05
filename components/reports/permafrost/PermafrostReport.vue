@@ -4,12 +4,14 @@
       <h4 class="title is-3">Permafrost</h4>
       <div class="is-size-5">
         <div v-if="reportData">
-          <span> New text here... </span>
+          <span
+            >The following maps show the projected mean annual ground
+            temperature over time at a depth of one meter.</span
+          >
           <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
             >See information about the dataset shown here.</nuxt-link
           >
         </div>
-        <div class="mt-5">New text here also...</div>
       </div>
     </div>
     <ReportMagtMaps />
@@ -26,7 +28,9 @@
     <div v-if="reportData">
       <div class="content">
         <div class="is-size-5">
-          Text for new GIPL permafrost dataset goes here...
+          As permafrost thaws, the ground depth to the top of the permafrost
+          layer increases. The following chart shows how this depth is projected
+          to change over time.
         </div>
       </div>
       <div class="chart">
@@ -91,7 +95,7 @@ export default {
       // permafrostPresent: 'permafrost/present',
       // permafrostDisappears: 'permafrost/disappears',
       // permafrostUncertain: 'permafrost/uncertain',
-      noFreeze: 'permafrost/noFreeze',
+      // noFreeze: 'permafrost/noFreeze',
       magtThresholds: 'permafrost/magtThresholds',
     }),
   },
