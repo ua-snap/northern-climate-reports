@@ -42,7 +42,7 @@
         class="mt-3 mb-5"
       />
     </div>
-    <div v-else-if="!reportData && area != 'community' && area != 'latLng'">
+    <div v-else-if="!reportData && type != 'community' && type != 'latLng'">
       <div class="content">
         <div class="is-size-5">
           Charts are not shown because it's not meaningful to average these data
