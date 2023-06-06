@@ -87,9 +87,9 @@ export default {
     climateData: function () {
       this.generateText()
     },
-    // altThawData: function () {
-    //   this.generateText()
-    // },
+    permafrostData: function () {
+      this.generateText()
+    },
     flammabilityData: function () {
       this.generateText()
     },
