@@ -12,10 +12,7 @@ import {
   getLayout,
   getFooter,
 } from '~/utils/charts'
-import {
-  getProjectedTraces,
-  detectEmptyColumns,
-} from '~/utils/permafrost_charts'
+import { getProjectedTraces } from '~/utils/permafrost_charts'
 
 export default {
   name: 'ReportPermafrostTopChart',

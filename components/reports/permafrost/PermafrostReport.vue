@@ -25,7 +25,7 @@
       />
     </div>
 
-    <div v-if="reportData">
+    <div v-if="validTopData">
       <div class="content">
         <div class="is-size-5">
           As permafrost thaws, the ground depth to the top of the permafrost
@@ -42,11 +42,19 @@
         class="mt-3 mb-5"
       />
     </div>
-    <div v-else>
+    <div v-else-if="!reportData && area != 'community' && area != 'latLng'">
       <div class="content">
         <div class="is-size-5">
           Charts are not shown because it's not meaningful to average these data
           across a region.
+        </div>
+      </div>
+    </div>
+    <div v-else>
+      <div class="content">
+        <div class="is-size-5">
+          Charts are not shown because permafrost data is not available for this
+          location.
         </div>
       </div>
     </div>
@@ -91,12 +99,10 @@ export default {
     },
     ...mapGetters({
       units: 'units',
+      type: 'place/type',
       reportData: 'permafrost/permafrostData',
-      // permafrostPresent: 'permafrost/present',
-      // permafrostDisappears: 'permafrost/disappears',
-      // permafrostUncertain: 'permafrost/uncertain',
-      // noFreeze: 'permafrost/noFreeze',
       magtThresholds: 'permafrost/magtThresholds',
+      validTopData: 'permafrost/validTopData',
     }),
   },
 }

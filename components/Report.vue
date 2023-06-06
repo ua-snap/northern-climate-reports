@@ -382,6 +382,7 @@ export default {
       let apiHttpErrors = [
         this.climateHttpError,
         this.elevationHttpError,
+        this.permafrostHttpError,
         this.flammabilityHttpError,
         this.vegChangeHttpError,
         this.beetleHttpError,
@@ -468,6 +469,9 @@ export default {
       }
       if (this.vegChangeData) {
         types.push('vegetation change')
+      }
+      if (this.beetleData) {
+        types.push('climate protection from spruce beetle outbreaks')
       }
 
       return types
