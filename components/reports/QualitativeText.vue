@@ -282,29 +282,27 @@ export default {
       let models = ['GFDL-CM3', 'NCAR-CCSM4']
       let firstEraMinDepth = 500
       let savedModel = undefined
+      let differences = []
+
       models.forEach(model => {
-        let depth = this.permafrostData['2021-2039'][model]['rcp85'][
+        let firstEraTop = this.permafrostData['2021-2039'][model]['rcp85'][
           'gipl1kmmean'
         ]['permafrosttop']
-        if (depth < firstEraMinDepth) {
-          firstEraMinDepth = depth
-          savedModel = model
-        }
+        let lastEraTop = this.permafrostData['2070-2099'][model]['rcp85'][
+          'gipl1kmmean'
+        ]['permafrosttop']
+        let difference = lastEraTop - firstEraTop
+        differences.push(difference)
       })
 
-      if (savedModel) {
-        let difference =
-          this.permafrostData['2070-2099'][savedModel]['rcp85']['gipl1kmmean'][
-            'permafrosttop'
-          ] - firstEraMinDepth
-
-        if (difference > 100) {
-          return '<p>Permafrost may <strong>thaw significantly</strong> by late century.</p>'
-        } else if (difference > 20) {
-          return '<p>Permafrost may <strong>thaw slightly</strong> by late century.</p>'
-        }
+      let maxDifference = _.max(differences)
+      if (maxDifference > 100) {
+        return '<p>Permafrost may <strong>thaw significantly</strong> by late century.</p>'
+      } else if (maxDifference > 20) {
+        return '<p>Permafrost may <strong>thaw slightly</strong> by late century.</p>'
+      } else {
+        return ''
       }
-      return ''
     },
     wildfireString() {
       var categoryFromFlam = flam => {
