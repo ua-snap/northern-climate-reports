@@ -18,7 +18,7 @@ export default {
         url =
           process.env.apiUrl +
           '/' +
-          'permafrost/point/gipl/' +
+          'ncr/permafrost/point/' +
           latLng[0] +
           '/' +
           latLng[1] +
