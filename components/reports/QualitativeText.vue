@@ -280,8 +280,6 @@ export default {
     },
     permafrostString() {
       let models = ['GFDL-CM3', 'NCAR-CCSM4']
-      let firstEraMinDepth = 500
-      let savedModel = undefined
       let differences = []
 
       models.forEach(model => {
