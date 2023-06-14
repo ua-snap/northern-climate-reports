@@ -409,6 +409,7 @@ export default {
       elevation: 'elevation/elevation',
       elevationWarning: 'elevation/elevationWarning',
       climateData: 'climate/climateData',
+      indicatorData: 'indicators/indicatorData',
       permafrostData: 'permafrost/permafrostData',
       flammabilityData: 'wildfire/flammability',
       vegChangeData: 'wildfire/veg_change',

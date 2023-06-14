@@ -33,6 +33,7 @@
     </div>
     <ReportTempChart :season="temp_season" />
     <ReportTempTable />
+    <ReportTempTable2 />
     <DownloadCsvButton
       text="Download temperature data as CSV"
       endpoint="temperature"
@@ -45,6 +46,7 @@
 <script>
 import ReportTempChart from './ReportTempChart'
 import ReportTempTable from './ReportTempTable'
+import ReportTempIndicatorsTable from './ReportTempIndicatorsTable'
 import BackToTopButton from '~/components/reports/BackToTopButton'
 import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import { mapGetters } from 'vuex'
@@ -53,6 +55,7 @@ export default {
   components: {
     ReportTempChart,
     ReportTempTable,
+    ReportTempTable2,
     BackToTopButton,
     DownloadCsvButton,
   },
