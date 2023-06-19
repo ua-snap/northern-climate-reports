@@ -15,7 +15,10 @@
           the US Forest Service.
         </p>
         <p>
-          <a href="https://uaf-snap.org/wp-content/uploads/2023/06/20230508_spruce-beetle-climate-model-white-paper.pdf">Read a whitepaper about this model</a>, or
+          <a
+            href="https://uaf-snap.org/wp-content/uploads/2023/06/20230508_spruce-beetle-climate-model-white-paper.pdf"
+            >Read a whitepaper about this model</a
+          >, or
           <a
             href="https://uaf-snap.org/project/modeling-spruce-bark-beetle-outbreaks-in-a-warming-climate/"
             >additional information about the project</a
@@ -68,7 +71,8 @@
             likely
           </li>
           <li>
-            <strong>no protection</strong> &equals; climate is unlikely to limit beetle populations
+            <strong>no protection</strong> &equals; climate is unlikely to limit
+            beetle populations
           </li>
         </ul>
       </div>
@@ -80,9 +84,8 @@
         </p>
         <ul>
           <li>
-            Presence and percentage cover of the Alaska tree species most at
-            risk of beetle infestation&mdash;white spruce, Sitka spruce, and
-            Lutz spruce
+            Presence and percentage cover of the Alaska tree species (white
+            spruce, Sitka spruce Lutz spruce) most at risk of beetle infestation
           </li>
           <li>Forest age and successional stage</li>
           <li>Forest health, including other stressors, pests, or blights</li>
