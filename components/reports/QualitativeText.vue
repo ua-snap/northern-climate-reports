@@ -541,11 +541,11 @@ export default {
         // percentage difference is higher than 20%,
         // the vegation has notably change.
         if (percent_diff >= 0.05 && percent_diff <= 0.2) {
-          quip += '<strong>slightly</strong>'
+          quip += '<strong>slightly different</strong>'
         } else {
-          quip += '<strong>notably</strong>'
+          quip += '<strong>notably different</strong>'
         }
-        quip += ' different by the end of the century.</p>'
+        quip += ' by the end of the century.</p>'
         return quip
       }
     },
