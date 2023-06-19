@@ -534,7 +534,7 @@ export default {
         return ''
       } else {
         let quip =
-          '<p>Based on climate and fire&ndash;driven shifts, vegetation in this area may be '
+          '<p>Based on climate and fire-driven shifts, vegetation in this area may be '
 
         // If the percentage difference is between 5-20%,
         // the vegetation has slighly changed. If the
