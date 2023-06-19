@@ -2,14 +2,11 @@
   <div>
     <HeaderBanner />
     <Navbar />
-    <div class="splash-title columns">
-      <div class="splash-title-text column is-half">
-        <div>
-          <h1>Northern<br />Climate<br />Reports</h1>
-          <h2>Data for<br />changing ecosystems</h2>
-        </div>
+    <div class="header--wrapper">
+      <div class="header--text--wrapper">
+        <h1 class="">Northern <span><img src="~/assets/images/lights.svg"/>Climate</span> Reports</h1>
+        <h2 class="">Ecological futures <span>in</span> stories, charts, <span>and</span> data</h2>
       </div>
-      <div class="splash-title-image column is-half"></div>
     </div>
 
     <nuxt />
@@ -19,46 +16,43 @@
 </template>
 
 <style lang="scss" scoped>
-.splash-title {
-  height: 75vh;
-  min-height: 500px;
-  margin-top: 2rem;
-  margin-right: 0;
-  font-family: 'Paytone One';
-  color: #000;
+.header--wrapper {
+  padding: 1rem 1.75rem;
+  background-image: url('~/assets/images/topo.svg');
+  position: relative;
+  height: 209px;
+  font-family: "Lexend Peta";
+  color: white;
+  display: flex;
+  text-transform: uppercase;
 
-  .splash-title-text {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    & div {
-      width: 100%;
+  .header--text--wrapper {
+    align-self: flex-end;
+    bottom: 0px;
+    font-weight: 800;
+    h1 {
+      font-size: 3.2vw;
+      position: relative;
+      left: -3px;
 
-      h1 {
-        font-size: 5.5rem;
-        line-height: 1;
-      }
-      h2 {
-        margin-top: 1.25rem;
-        text-transform: uppercase;
-        font-size: 1.6rem;
-        letter-spacing: 0.35rem;
-        line-height: 1.8;
+      span {
+        color: #f7ae06;
+        display: inline-block;
+        
+        img {
+          position: relative;
+          top: 30px;
+        }
       }
     }
-  }
-  .splash-title-image {
-    background-image: url('~/assets/images/river-mts-bw.png');
-    background-size: cover;
-  }
-}
 
-@media (max-width: 768px) {
-  .splash-title {
-    height: auto;
-    .splash-title-image {
-      // background-image: none;
-      min-height: 100vw;
+    h2 {
+      font-size: 1.6vw;
+      margin-top: -.6rem;
+
+      span {
+        text-transform: lowercase;
+      }
     }
   }
 }
