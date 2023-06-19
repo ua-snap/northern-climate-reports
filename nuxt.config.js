@@ -135,5 +135,6 @@ export default {
     websiteId: '2e69a077-ba5f-49c5-b076-09a44ab6fafd',
     ignoreDnt: false,
     domains: 'northernclimatereports.org',
+    ignoreLocalhost: true,
   },
 }
