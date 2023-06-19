@@ -1,13 +1,5 @@
 <template>
   <div class="report--precipitation-indicators">
-    <div class="is-size-5">
-      <p>
-        The following table shows some “climate indicators” which are derived
-        from a wide range of models. Read more about the dataset and processing
-        used to generate these data.
-      </p>
-    </div>
-
     <table class="table report-table" v-if="reportData">
       <caption>
         Precipitation Indicators,
@@ -398,6 +390,18 @@
           </td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="10" class="about">
+            This table lists some climate indicators derived from a wide range
+            of models.
+            <nuxt-link :to="{ name: 'about' }"
+              >Read more about the dataset and processing used to generate these
+              data.</nuxt-link
+            >
+          </td>
+        </tr>
+      </tfoot>
     </table>
   </div>
 </template>
