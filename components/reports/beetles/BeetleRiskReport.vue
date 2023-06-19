@@ -39,7 +39,7 @@
       <h4 class="title is-4">What&rsquo;s in the model</h4>
       <div class="is-size-5">
         <p>
-          This model incorporates three climate&ndash;based factors, which are
+          This model incorporates three climate-based factors, which are
           combined to calculate an overall outbreak risk for a given location
           and year:
         </p>
