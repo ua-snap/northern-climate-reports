@@ -65,7 +65,6 @@ export default {
     '~/plugins/leaflet.client.js',
     '~/plugins/vuex-router-sync',
     '~/plugins/axios',
-    '~/plugins/gtag'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -87,6 +86,7 @@ export default {
     // https://www.npmjs.com/package/nuxt-leaflet
     'nuxt-leaflet',
     '@nuxt/http',
+    'nuxt-umami',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -128,5 +128,13 @@ export default {
         component: resolve(__dirname, 'pages/index'),
       })
     },
+  },
+
+  umami: {
+    scriptUrl: 'https://umami.snap.uaf.edu/umami.js',
+    websiteId: '2e69a077-ba5f-49c5-b076-09a44ab6fafd',
+    ignoreDnt: false,
+    domains: 'northernclimatereports.org',
+    ignoreLocalhost: true,
   },
 }
