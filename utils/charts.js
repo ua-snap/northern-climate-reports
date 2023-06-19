@@ -106,6 +106,9 @@ export const getLayout = function (title, yAxisLabel) {
     showlegend: true,
     legend: {
       x: 1.03,
+      font: {
+        family: 'sans-serif',
+      },
     },
     margin: {
       t: 30 + titleOffset,
