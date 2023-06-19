@@ -1,23 +1,25 @@
 <template>
   <div>
     <div class="content">
-      <h4 class="title is-3">Climate Protection from Spruce Beetles</h4>
-      <div class="is-size-5 mt-6">
+      <h3 class="title is-3">Climate Protection from Spruce Beetles</h3>
+      <div class="is-size-5">
         <p>
           Alaska&rsquo;s cold climate has historically helped limit spruce
           beetle outbreaks, but warming conditions are affecting this balance.
         </p>
         <p>
           These maps display three broad levels of historical and projected
-          climate&ndash;related protection from spruce bark beetle (<i>Dendroctonus
-          rufipennis</i>) outbreaks in "forested regions of Alaska" as defined by
+          climate&ndash;related protection from spruce bark beetle (<i
+            >Dendroctonus rufipennis</i
+          >) outbreaks in &ldquo;forested regions of Alaska&rdquo; as defined by
           the US Forest Service.
         </p>
         <p>
-          Note that the large outbreak on the Kenai Peninsula that peaked in
-          1996 followed relatively modest increases in climate risk in the 1980s
-          and early 1990s. Climate represented only one contributing factor in
-          these and other outbreaks.
+          <a href="https://uaf-snap.org/wp-content/uploads/2023/06/20230508_spruce-beetle-climate-model-white-paper.pdf">Read a whitepaper about this model</a>, or
+          <a
+            href="https://uaf-snap.org/project/modeling-spruce-bark-beetle-outbreaks-in-a-warming-climate/"
+            >additional information about the project</a
+          >.
         </p>
       </div>
     </div>
@@ -26,8 +28,13 @@
     <ReportBeetleRiskMaps />
 
     <div class="content">
-      <h4 class="title is-5">What&rsquo;s in the model</h4>
-      <div class="is-size-5 mt-6">
+      <DownloadCsvButton
+        text="Download beetle risk data as CSV"
+        endpoint="beetles"
+        class="mt-3 mb-5"
+      />
+      <h4 class="title is-4">What&rsquo;s in the model</h4>
+      <div class="is-size-5">
         <p>
           This model incorporates three climate&ndash;based factors, which are
           combined to calculate an overall outbreak risk for a given location
@@ -51,35 +58,25 @@
         </p>
         <ul>
           <li>
-            <strong>HIGH protection</strong> &equals; climate conditions are
+            <strong>high protection</strong> &equals; climate conditions are
             likely to protect forests and prevent major outbreaks even if other
             risk factors exist
           </li>
           <li>
-            <strong>MINIMAL protection</strong> &equals; climate conditions may
+            <strong>minimal protection</strong> &equals; climate conditions may
             provide some protection, but other risk factors can make outbreaks
             likely
           </li>
           <li>
-            <strong>NO protection</strong> &equals; beetle populations are
-            unlikely to be effectively limited by climate
+            <strong>no protection</strong> &equals; climate is unlikely to limit beetle populations
           </li>
         </ul>
-        <p>
-          <a
-            href="https://uaf-snap.org/project/modeling-spruce-bark-beetle-outbreaks-in-a-warming-climate/"
-            >Read more detailed information</a
-          >
-          about this model.
-        </p>
       </div>
-    </div>
-    <div class="content">
-      <h4 class="title is-5">What&rsquo;s not in the model</h4>
-      <div class="is-size-5 mt-6">
+      <h4 class="title is-4 mt-6">What&rsquo;s not in the model</h4>
+      <div class="is-size-5">
         <p>
-          This model does not include non&ndash;climate&ndash;related factors
-          that may affect outbreaks:
+          This model does not include non-climate-related factors that may
+          affect outbreaks:
         </p>
         <ul>
           <li>
@@ -100,11 +97,6 @@
         </ul>
       </div>
     </div>
-    <DownloadCsvButton
-      text="Download beetle risk data as CSV"
-      endpoint="beetles"
-      class="mt-3 mb-5"
-    />
   </div>
 </template>
 <script>
