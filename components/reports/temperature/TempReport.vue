@@ -5,10 +5,10 @@
       <div class="is-size-5">
         <p>
           This section shows projections for average (mean) temperature,
-          compared with a historical range (1950&ndash;2009, CRU TS 4.0). Results are
-          averaged by season (three month averages) for two specific climate
-          models (MRI CGCM3 and NCAR CCSM4) as well as average of five models
-          which perform well in Alaska and the Arctic.
+          compared with a historical range (1950&ndash;2009, CRU TS 4.0).
+          Results are averaged by season (three month averages) for two specific
+          climate models (MRI CGCM3 and NCAR CCSM4) as well as average of five
+          models which perform well in Alaska and the Arctic.
           <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
             >See information about the dataset shown here.</nuxt-link
           >
@@ -33,7 +33,7 @@
     </div>
     <ReportTempChart :season="temp_season" />
     <ReportTempTable />
-    <ReportTempTable2 />
+    <ReportTempIndicatorsTable />
     <DownloadCsvButton
       text="Download temperature data as CSV"
       endpoint="temperature"
@@ -55,7 +55,7 @@ export default {
   components: {
     ReportTempChart,
     ReportTempTable,
-    ReportTempTable2,
+    ReportTempIndicatorsTable,
     BackToTopButton,
     DownloadCsvButton,
   },
@@ -63,12 +63,6 @@ export default {
     return {
       temp_season: 'DJF',
     }
-  },
-  computed: {
-    ...mapGetters({
-      units: 'units',
-      reportData: 'climate/climateData',
-    }),
   },
 }
 </script>

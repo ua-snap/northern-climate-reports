@@ -436,6 +436,9 @@ export default {
     await this.$store.dispatch('wildfire/fetch').catch(e => {
       console.error(e)
     })
+    await this.$store.dispatch('indicators/fetch').catch(e => {
+      console.error(e)
+    })
     this.$store.dispatch('elevation/fetch').catch(e => {
       console.error(e)
     })
