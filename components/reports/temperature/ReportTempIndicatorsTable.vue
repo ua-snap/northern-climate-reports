@@ -48,83 +48,83 @@
         <tr>
           <th scope="row">Coldest Day</th>
           <td class="left">
-            {{ reportData['cd']['historical']['Daymet']['historical']['mean']
+            {{ reportData['cd']['historical']['Daymet']['historical']['min']
             }}<UnitWidget />
           </td>
           <td>
-            {{ reportData['cd']['midcentury']['MRI-CGCM3']['rcp45']['mean']
+            {{ reportData['cd']['midcentury']['MRI-CGCM3']['rcp45']['min']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['cd']['midcentury']['MRI-CGCM3']['rcp45']['mean']
+                reportData['cd']['midcentury']['MRI-CGCM3']['rcp45']['min']
               "
               :past="
-                reportData['cd']['historical']['Daymet']['historical']['mean']
+                reportData['cd']['historical']['Daymet']['historical']['min']
               "
             />
           </td>
           <td>
-            {{ reportData['cd']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
+            {{ reportData['cd']['midcentury']['NCAR-CCSM4']['rcp45']['min']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['cd']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
+                reportData['cd']['midcentury']['NCAR-CCSM4']['rcp45']['min']
               "
               :past="
-                reportData['cd']['historical']['Daymet']['historical']['mean']
+                reportData['cd']['historical']['Daymet']['historical']['min']
               "
             />
           </td>
           <td>
-            {{ reportData['cd']['midcentury']['MRI-CGCM3']['rcp85']['mean']
+            {{ reportData['cd']['midcentury']['MRI-CGCM3']['rcp85']['min']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['cd']['midcentury']['MRI-CGCM3']['rcp85']['mean']
+                reportData['cd']['midcentury']['MRI-CGCM3']['rcp85']['min']
               "
               :past="
-                reportData['cd']['historical']['Daymet']['historical']['mean']
+                reportData['cd']['historical']['Daymet']['historical']['min']
               "
             />
           </td>
           <td>
-            {{ reportData['cd']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
+            {{ reportData['cd']['midcentury']['NCAR-CCSM4']['rcp85']['min']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['cd']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
+                reportData['cd']['midcentury']['NCAR-CCSM4']['rcp85']['min']
               "
               :past="
-                reportData['cd']['historical']['Daymet']['historical']['mean']
+                reportData['cd']['historical']['Daymet']['historical']['min']
               "
             />
           </td>
           <td>
-            {{ reportData['cd']['longterm']['MRI-CGCM3']['rcp45']['mean']
+            {{ reportData['cd']['longterm']['MRI-CGCM3']['rcp45']['min']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['cd']['longterm']['MRI-CGCM3']['rcp45']['mean']
+                reportData['cd']['longterm']['MRI-CGCM3']['rcp45']['min']
               "
               :past="
-                reportData['cd']['historical']['Daymet']['historical']['mean']
+                reportData['cd']['historical']['Daymet']['historical']['min']
               "
             />
           </td>
           <td>
-            {{ reportData['cd']['longterm']['NCAR-CCSM4']['rcp45']['mean']
+            {{ reportData['cd']['longterm']['NCAR-CCSM4']['rcp45']['min']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['cd']['longterm']['NCAR-CCSM4']['rcp45']['mean']
+                reportData['cd']['longterm']['NCAR-CCSM4']['rcp45']['min']
               "
               :past="
-                reportData['cd']['historical']['Daymet']['historical']['mean']
+                reportData['cd']['historical']['Daymet']['historical']['min']
               "
             />
           </td>
           <td>
-            {{ reportData['cd']['longterm']['MRI-CGCM3']['rcp85']['mean']
+            {{ reportData['cd']['longterm']['MRI-CGCM3']['rcp85']['min']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['cd']['longterm']['MRI-CGCM3']['rcp85']['mean']
+                reportData['cd']['longterm']['MRI-CGCM3']['rcp85']['min']
               "
               :past="
-                reportData['cd']['historical']['Daymet']['historical']['mean']
+                reportData['cd']['historical']['Daymet']['historical']['min']
               "
             />
           </td>
@@ -143,94 +143,94 @@
         <tr>
           <th scope="row">Hottest Day</th>
           <td class="left">
-            {{ reportData['hd']['historical']['Daymet']['historical']['mean']
+            {{ reportData['hd']['historical']['Daymet']['historical']['max']
             }}<UnitWidget />
           </td>
           <td>
-            {{ reportData['hd']['midcentury']['MRI-CGCM3']['rcp45']['mean']
+            {{ reportData['hd']['midcentury']['MRI-CGCM3']['rcp45']['max']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['hd']['midcentury']['MRI-CGCM3']['rcp45']['mean']
+                reportData['hd']['midcentury']['MRI-CGCM3']['rcp45']['max']
               "
               :past="
-                reportData['hd']['historical']['Daymet']['historical']['mean']
+                reportData['hd']['historical']['Daymet']['historical']['max']
               "
             />
           </td>
           <td>
-            {{ reportData['hd']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
+            {{ reportData['hd']['midcentury']['NCAR-CCSM4']['rcp45']['max']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['hd']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
+                reportData['hd']['midcentury']['NCAR-CCSM4']['rcp45']['max']
               "
               :past="
-                reportData['hd']['historical']['Daymet']['historical']['mean']
+                reportData['hd']['historical']['Daymet']['historical']['max']
               "
             />
           </td>
           <td>
-            {{ reportData['hd']['midcentury']['MRI-CGCM3']['rcp85']['mean']
+            {{ reportData['hd']['midcentury']['MRI-CGCM3']['rcp85']['max']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['hd']['midcentury']['MRI-CGCM3']['rcp85']['mean']
+                reportData['hd']['midcentury']['MRI-CGCM3']['rcp85']['max']
               "
               :past="
-                reportData['hd']['historical']['Daymet']['historical']['mean']
+                reportData['hd']['historical']['Daymet']['historical']['max']
               "
             />
           </td>
           <td>
-            {{ reportData['hd']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
+            {{ reportData['hd']['midcentury']['NCAR-CCSM4']['rcp85']['max']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['hd']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
+                reportData['hd']['midcentury']['NCAR-CCSM4']['rcp85']['max']
               "
               :past="
-                reportData['hd']['historical']['Daymet']['historical']['mean']
+                reportData['hd']['historical']['Daymet']['historical']['max']
               "
             />
           </td>
           <td>
-            {{ reportData['hd']['longterm']['MRI-CGCM3']['rcp45']['mean']
+            {{ reportData['hd']['longterm']['MRI-CGCM3']['rcp45']['max']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['hd']['longterm']['MRI-CGCM3']['rcp45']['mean']
+                reportData['hd']['longterm']['MRI-CGCM3']['rcp45']['max']
               "
               :past="
-                reportData['hd']['historical']['Daymet']['historical']['mean']
+                reportData['hd']['historical']['Daymet']['historical']['max']
               "
             />
           </td>
           <td>
-            {{ reportData['hd']['longterm']['NCAR-CCSM4']['rcp45']['mean']
+            {{ reportData['hd']['longterm']['NCAR-CCSM4']['rcp45']['max']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['hd']['longterm']['NCAR-CCSM4']['rcp45']['mean']
+                reportData['hd']['longterm']['NCAR-CCSM4']['rcp45']['max']
               "
               :past="
-                reportData['hd']['historical']['Daymet']['historical']['mean']
+                reportData['hd']['historical']['Daymet']['historical']['max']
               "
             />
           </td>
           <td>
-            {{ reportData['hd']['longterm']['MRI-CGCM3']['rcp85']['mean']
+            {{ reportData['hd']['longterm']['MRI-CGCM3']['rcp85']['max']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['hd']['longterm']['MRI-CGCM3']['rcp85']['mean']
+                reportData['hd']['longterm']['MRI-CGCM3']['rcp85']['max']
               "
               :past="
-                reportData['hd']['historical']['Daymet']['historical']['mean']
+                reportData['hd']['historical']['Daymet']['historical']['max']
               "
             />
           </td>
           <td>
-            {{ reportData['hd']['longterm']['NCAR-CCSM4']['rcp85']['mean']
+            {{ reportData['hd']['longterm']['NCAR-CCSM4']['rcp85']['max']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['hd']['longterm']['NCAR-CCSM4']['rcp85']['mean']
+                reportData['hd']['longterm']['NCAR-CCSM4']['rcp85']['max']
               "
               :past="
-                reportData['hd']['historical']['Daymet']['historical']['mean']
+                reportData['hd']['historical']['Daymet']['historical']['max']
               "
             />
           </td>
