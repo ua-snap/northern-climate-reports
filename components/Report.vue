@@ -29,7 +29,7 @@
         <h3 class="title is-3 centered">
           Projected Conditions for <span v-html="place"></span>
         </h3>
-        <MiniMap />
+        <MiniMap :polystyle="polystyle" />
         <QualitativeText />
       </section>
       <section class="section content pb-0 is-hidden-touch" v-if="dataPresent">
@@ -39,16 +39,12 @@
             <span v-if="type == 'latLng'"
               >The <span v-if="climateData">tables and </span>charts below are
               specific to the gridded data extracted at
-              <span v-html="place"></span>. The polygon region on the map
-              corresponds to the nearest watershed (hydrological unit, level
-              12).</span
+              <span v-html="place"></span>, indicated by a marker on the map above. {{ hucPolyExplanation }}</span
             >
             <span v-else-if="type == 'community'"
               >The <span v-if="climateData">tables and </span>charts below are
               specific to the gridded data extracted from the location of
-              <span v-html="place"></span>. The polygon region on the map
-              corresponds to the nearest watershed (hydrological unit, level
-              12).</span
+              <span v-html="place"></span>, indicated by a marker on the map above. {{ hucPolyExplanation }}</span
             >
             <span v-else
               >Data for the tables and charts below have been averaged across
@@ -336,6 +332,7 @@ export default {
     return {
       units: 'imperial',
       httpErrors: httpErrors,
+      hucPolyExplanation: 'The shaded region on the map is the nearest watershed (hydrological unit, level 12) and is only used to summarize wildfire data around this place.'
     }
   },
   computed: {
@@ -403,6 +400,16 @@ export default {
     presentDataTypesString() {
       let types = this.presentDataTypes()
       return this.formatTypeString(types)
+    },
+    // If it's a point-based place, the associated HUC12
+    // should be a bit quieter.  If it's a polygon-based place,
+    // it should be 'vivid' (more pronounced).  Used in MiniMap.
+    // the polygon.
+    polystyle() {
+      if(this.type == 'latLng' || this.type == 'community') {
+        return '' // uses default calm MiniMap style
+      }
+      return 'vivid'
     },
     ...mapGetters({
       place: 'place/name',
