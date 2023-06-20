@@ -77,7 +77,13 @@ export default {
           })
         })
 
-        let polygon = L.geoJSON(displayedGeoJSON)
+        let polygon = L.geoJSON(displayedGeoJSON, {
+          style: {
+            stroke: false,
+            color: '#000000',
+            fillOpacity: 0.3,
+          },
+        })
         this.geoJSONLayer = polygon.addTo(this.map)
         this.map.fitBounds(this.geoJSONLayer.getBounds())
       }
