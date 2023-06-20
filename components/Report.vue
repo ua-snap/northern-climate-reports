@@ -29,7 +29,7 @@
         <h3 class="title is-3 centered">
           Projected Conditions for <span v-html="place"></span>
         </h3>
-        <MiniMap polystyle="vivid" />
+        <MiniMap :polystyle="polystyle" />
         <QualitativeText />
       </section>
       <section class="section content pb-0 is-hidden-touch" v-if="dataPresent">
@@ -399,6 +399,16 @@ export default {
     presentDataTypesString() {
       let types = this.presentDataTypes()
       return this.formatTypeString(types)
+    },
+    // If it's a point-based place, the associated HUC12
+    // should be a bit quieter.  If it's a polygon-based place,
+    // it should be 'vivid' (more pronounced).  Used in MiniMap.
+    // the polygon.
+    polystyle() {
+      if(this.type == 'latLng' || this.type == 'community') {
+        return '' // uses default calm MiniMap style
+      }
+      return 'vivid'
     },
     ...mapGetters({
       place: 'place/name',
