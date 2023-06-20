@@ -608,7 +608,7 @@ export default {
       let quip =
         '<p>Historically, climate conditions were <strong>' +
         protection[historicalProtection].text +
-        '</strong> against spruce beetle outbreaks. Under normal snow conditions, climate conditions in the future may result in <strong>'
+        '</strong> against spruce beetle outbreaks. Under normal snow conditions, climate conditions in the future may provide <strong>'
       if (
         protection[midCenturyProtection].level >
         protection[historicalProtection].level
