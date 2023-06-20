@@ -22,17 +22,31 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'MiniMap',
-  computed: {
-    ...mapGetters({
-      latLng: 'place/latLng',
-      geoJSON: 'place/geoJSON',
-    }),
-  },
   data() {
     return {
       marker: undefined,
       geoJSONLayer: undefined,
     }
+  },
+  props: ['polystyle'],
+  computed: {
+    // The 'vivid' style is the default (blue border/background).
+    polygonStyle() {
+      if (this.polystyle == 'vivid') {
+        return {}
+      }
+      return {
+        style: {
+          stroke: false,
+          color: '#000000',
+          fillOpacity: 0.3,
+        },
+      }
+    },
+    ...mapGetters({
+      latLng: 'place/latLng',
+      geoJSON: 'place/geoJSON',
+    }),
   },
   mounted() {
     this.map = L.map('report--minimmap--map', this.getBaseMapAndLayers())
@@ -77,7 +91,7 @@ export default {
           })
         })
 
-        let polygon = L.geoJSON(displayedGeoJSON)
+        let polygon = L.geoJSON(displayedGeoJSON, this.polygonStyle)
         this.geoJSONLayer = polygon.addTo(this.map)
         this.map.fitBounds(this.geoJSONLayer.getBounds())
       }
