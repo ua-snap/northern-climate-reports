@@ -21,11 +21,11 @@
           >
         </p>
       </section>
-      <section class="section">
+      <section class="section mb-6">
         <img src="~/assets/images/UAFLogo_A_black_horiz.svg" alt="UAF Logo" />
 
         <p>
-          This tool was developed by the
+          Developed by the
           <a href="https://www.snap.uaf.edu/" title="👍"
             >Scenarios Network for Alaska + Arctic Planning</a
           >
@@ -45,28 +45,33 @@
           >.
         </p>
         <p>
-          Please contact
-          <a href="mailto:uaf-snap-data-tools@alaska.edu"
-            >uaf&ndash;snap&ndash;data&ndash;tools@alaska.edu</a
-          >
-          if you have questions or would like to provide feedback for this tool.
-          <a href="https://uaf-snap.org/web-tools/"
-            >Visit the SNAP Climate + Weather Tools page</a
-          >
-          to see our full suite of interactive web tools.
-        </p>
-        <p>
           Data available through this tool are subject to the
           <a href="https://creativecommons.org/licenses/by/4.0/"
             >Creative Commons Attribution 4.0</a
           >
-          license.
+          license.<br />
+          Please contact
+          <a href="mailto:uaf-snap-data-tools@alaska.edu"
+            >uaf&ndash;snap&ndash;data&ndash;tools@alaska.edu</a
+          >
+          with questions or comments.<br />
+          <a href="https://uaf-snap.org">Visit the SNAP website</a>
+          to see all of our climate tools.
+        </p>
+        <p>
+          UA is committed to providing accessible websites.
+          <a href="https://www.alaska.edu/webaccessibility/"
+            >Learn more about UA's notice of web accessibility.</a
+          ><br />
+          If we can help you access this website’s content,
+          <a href="mailto:uaf-snap-data-tools@alaska.edu"
+            >please email us at uaf-snap-data-tools@alaska.edu</a
+          >.
         </p>
         <p>
           Copyright &copy; {{ year }} University of Alaska Fairbanks. All rights
           reserved.
-        </p>
-        <p>
+          <br />
           UA is an AA/EO employer and educational institution and prohibits
           illegal discrimination against any individual.
           <a href="https://www.alaska.edu/nondiscrimination/"
@@ -76,12 +81,6 @@
           <a
             href="https://www.alaska.edu/records/records/compliance/gdpr/ua-privacy-statement/"
             >Privacy Statement</a
-          >
-        </p>
-        <p>
-          UA is committed to providing accessible websites.
-          <a href="https://www.alaska.edu/webaccessibility/"
-            >Learn more about UA's notice of web accessibility.</a
           >
         </p>
       </section>
@@ -108,7 +107,8 @@ export default {
   background-repeat: no-repeat;
   background-position: bottom;
   text-align: center;
-  padding-bottom: 10rem;
+  padding-bottom: 12rem;
+  border-bottom: 2rem solid rgb(154,  165, 76);  
 
   h3 {
     margin: 1rem 0 0.5rem;
