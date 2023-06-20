@@ -93,16 +93,16 @@
             <strong>Flammability</strong>. A summarized data product using the
             same underlying data shown in this app is available here:
             <a
-              href="http://ckan.snap.uaf.edu/dataset/alfresco-model-outputs-relative-flammability"
-              >ALFRESCO Model outputs &ndash; Relative Flammability</a
+              href="https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/eeaaca2c-0280-4226-b126-fda42a2b6214"
+              >ALFRESCO Model Outputs &ndash; Relative Flammability</a
             >.
           </li>
           <li>
             <strong>Vegetation</strong>. A summarized data product using the
             same underlying data shown in this app is available here:
             <a
-              href="http://ckan.snap.uaf.edu/dataset/alfresco-model-outputs-relative-vegetation-change"
-              >ALFRESCO Model outputs &ndash; Relative Vegetation Change</a
+              href="https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/a077b382-c7e5-44a7-8b2a-1cf764c448f6"
+              >ALFRESCO Model Outputs &ndash; Vegetation Type</a
             >.
           </li>
         </ul>
