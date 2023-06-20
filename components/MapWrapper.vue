@@ -47,9 +47,7 @@
 .pending {
   width: 80%;
 }
-#map-search {
-  padding-top: 2rem;
-}
+
 #map--wrapper {
   min-height: 100vh;
   width: 100vw;

@@ -2,12 +2,6 @@
   <div class="latlon-picker--wrapper is-hidden-touch">
     <div class="content">
       <h4 class="title is-5">Find a place by latitude & longitude</h4>
-      <p>
-        Enter a specific lat/lon combo below. Decimal degrees or DMS formats are
-        accepted, i.e. <code>65.24, -142.22</code> or
-        <code>58° 18' 0" N, 134° 24' 57.6" W</code>.
-      </p>
-
       <div class="columns">
         <div class="column is-two-thirds">
           <b-field :type="getFieldStatus" :message="getFieldMessage">
@@ -23,6 +17,10 @@
           >
         </div>
       </div>
+      <p>
+        Enter a specific lat/lon combo above, decimal degrees or DMS format<br> i.e. <code>65.24, -142.22</code> or
+        <code>58° 18' 0" N, 134° 24' 57.6" W</code>.
+      </p>
     </div>
   </div>
 </template>

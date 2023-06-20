@@ -2,18 +2,9 @@
   <div class="place-selector--wrapper">
     <div class="content">
       <h4 class="title is-5">Find a place by name</h4>
-      <p>
-        Search below by <strong>community name</strong>,
-        <strong>watershed</strong> (hydrological unit name or HUC8 code) or
-        <strong>protected area</strong> (National Park, National Forest, etc).
-        <nuxt-link :to="{ name: 'data', hash: '#places' }"
-          >Read about all places included in this tool.</nuxt-link
-        >
-      </p>
-      <p>
+      <div>
         <b-field>
           <b-autocomplete
-            rounded
             v-model="selectedPlace"
             :data="filteredDataObj"
             keep-first
@@ -88,11 +79,67 @@
             </template>
           </b-autocomplete>
         </b-field>
-      </p>
+      </div>
+      <div class="name-types mt-2">
+        <h5 class="is-title is-5">
+          Search these names
+          <span
+            ><nuxt-link :to="{ name: 'data', hash: '#places' }"
+              >Learn more about these areas.</nuxt-link
+            ></span
+          >
+        </h5>
+        <div class="name-types-list columns">
+          <div class="column">
+            <ul>
+              <li>Alaska Climate Divisions</li>
+              <li>Alaska Fire Management Units</li>
+              <li>Alaska Game Management Units (GMUs)</li>
+              <li>Alaska Native Corporations</li>
+              <li>Communities in Alaska and Canada</li>
+              <li>Ethnolinguistic Divisions</li>
+            </ul>
+          </div>
+          <div class="column">
+            <ul>
+              <li>
+                <strong>Protected areas</strong>&nbsp;&nbsp;National Parks and
+                more, searchable by name and agency
+              </li>
+              <li>
+                <strong>Hydrological units (HUs)</strong> searchable by HU Code
+                (HUC8, HUC10, HUC12)
+              </li>
+              <li>Yukon First Nation Traditional Territories</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
+.name-types {
+  h5 span {
+    display: inline-block;
+    padding-left: 2rem;
+    font-size: 90%;
+  }
+  .name-types-list.columns {
+    .column {
+      padding-top: 0;
+      margin-top: -0.5rem;
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+        margin-left: 0;
+        li {
+        }
+      }
+    }
+  }
+}
+
 .place-selector--wrapper * {
   z-index: 10000;
 }
