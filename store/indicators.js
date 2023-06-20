@@ -89,7 +89,6 @@ export const actions = {
       let httpError = getHttpError(err)
       context.commit('setHttpError', httpError)
     })
-    console.log(indicatorData)
     context.commit('setIndicatorData', indicatorData)
   },
 }
