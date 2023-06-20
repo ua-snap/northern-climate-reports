@@ -39,7 +39,7 @@
             <span v-if="type == 'latLng'"
               >The <span v-if="climateData">tables and </span>charts below are
               specific to the gridded data extracted at
-              <span v-html="place"></span>, indicated by a marker on the map above.. {{ hucPolyExplanation }}</span
+              <span v-html="place"></span>, indicated by a marker on the map above. {{ hucPolyExplanation }}</span
             >
             <span v-else-if="type == 'community'"
               >The <span v-if="climateData">tables and </span>charts below are
