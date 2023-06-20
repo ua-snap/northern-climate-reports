@@ -350,7 +350,7 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">Number of heavy precipitation days > 10mm</th>
+          <th scope="row">Heavy precipitation days <span class="description">1-day precipitation &ge;0.4in</span></th>
           <td class="left">
             {{
               reportData['r10mm']['historical']['Daymet']['historical']['mean']

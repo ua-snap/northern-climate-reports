@@ -236,7 +236,9 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">Summer Days</th>
+          <th scope="row">Summer Days
+            <span class="description">temperature above 77&deg;F</span>
+          </th>
           <td class="left">
             {{ reportData['su']['historical']['Daymet']['historical']['mean'] }}
           </td>
@@ -266,7 +268,8 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">Deep Winter Days</th>
+          <th scope="row">Deep Winter Days
+            <span class="description">temperature below &minus;4&deg;F</span></th>
           <td class="left">
             {{ reportData['dw']['historical']['Daymet']['historical']['mean'] }}
           </td>
