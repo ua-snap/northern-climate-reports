@@ -29,17 +29,18 @@
           <a href="https://www.snap.uaf.edu/" title="👍"
             >Scenarios Network for Alaska + Arctic Planning</a
           >
-          at the<br />
+          at the
           <a href="https://uaf-iarc.org">International Arctic Research Center</a
           >.
         </p>
 
         <p>
-          Funding provided by the
+          Funding was provided by the
           <a href="https://akcasc.org"
             >Alaska Climate Adaptation Science Center</a
           >
-          and the <br /><a
+          and the
+          <a
             href="https://www.usgs.gov/programs/climate-adaptation-science-centers"
             >United States Geological Survey</a
           >.
@@ -74,6 +75,7 @@
           <br />
           UA is an AA/EO employer and educational institution and prohibits
           illegal discrimination against any individual.
+          <br />
           <a href="https://www.alaska.edu/nondiscrimination/"
             >Statement of Nondiscrimination</a
           >
@@ -108,7 +110,7 @@ export default {
   background-position: bottom;
   text-align: center;
   padding-bottom: 12rem;
-  border-bottom: 2rem solid rgb(154,  165, 76);  
+  border-bottom: 2rem solid rgb(154, 165, 76);
 
   h3 {
     margin: 1rem 0 0.5rem;
@@ -117,7 +119,6 @@ export default {
 
   p {
     font-size: 115%;
-    max-width: 58rem;
     margin: 0.5rem auto 1rem;
   }
 
