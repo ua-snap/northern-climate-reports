@@ -47,7 +47,6 @@ export default {
       return Math.abs(this.pct) > 20
     },
     isLess() {
-      console.log(this.pct)
       return this.pct < 0
     },
     isMore() {
