@@ -5,62 +5,12 @@
       <div class="is-size-5">
         <div v-if="reportData">
           <span
-            v-show="
-              permafrostPresent &&
-              permafrostDisappears &&
-              !permafrostUncertain &&
-              !noFreeze
-            "
+            >The following maps show the projected mean annual ground
+            temperature over time at a depth of {{ depthFragment }}.</span
           >
-            Historical data and model projections indicate that
-            <strong
-              >this place has permafrost which disappears within
-              <span v-html="depthFragment"></span> of the ground surface over
-              time.</strong
-            >
-          </span>
-          <span
-            v-show="
-              permafrostPresent &&
-              !permafrostDisappears &&
-              !permafrostUncertain &&
-              !noFreeze
-            "
-            >Historical data and model projections indicate that
-            <strong>this place has permafrost.</strong>
-          </span>
-          <span
-            v-show="
-              !permafrostPresent &&
-              (permafrostDisappears || noFreeze) &&
-              !permafrostUncertain
-            "
-          >
-            <strong>
-              There is no permafrost within
-              <span v-html="depthFragment"></span> of the ground surface at this
-              location</strong
-            >.
-          </span>
-          <span v-show="permafrostUncertain">
-            <strong
-              >The presence or absence of permafrost could not be determined for
-              this location</strong
-            >
-            because the historical mean annual ground temperature falls within
-            the threshold of uncertainty (<span
-              v-html="uncertaintyFragment"
-            ></span
-            >).
-          </span>
           <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
             >See information about the dataset shown here.</nuxt-link
           >
-        </div>
-        <div class="mt-5">
-          The following maps show the historical and projected mean annual
-          ground temperature over time. This is the temperature of the soil
-          directly above the permafrost layer.
         </div>
       </div>
     </div>
@@ -75,52 +25,16 @@
       />
     </div>
 
-    <div v-if="reportData">
+    <div v-if="validTopData">
       <div class="content">
         <div class="is-size-5">
-          <span
-            v-show="
-              permafrostPresent && permafrostDisappears && !permafrostUncertain
-            "
-          >
-            Projected permafrost active layer thickness and ground freeze depth
-            through the end of the century are shown below. The active layer is
-            the layer of soil above permafrost that thaws seasonally. Ground
-            freeze is the maximum depth to which winter freeze occurs in
-            non&ndash;permafrost areas.
-          </span>
-          <span
-            v-show="
-              permafrostPresent && !permafrostDisappears && !permafrostUncertain
-            "
-          >
-            Projected permafrost active layer thickness through the end of the
-            century is shown below. The active layer is the layer of soil above
-            permafrost that thaws seasonally.
-          </span>
-          <span
-            v-show="
-              !permafrostPresent && permafrostDisappears && !permafrostUncertain
-            "
-          >
-            Projected ground freeze depth through the end of the century is
-            shown below. Ground freeze is the maximum depth to which winter
-            freeze occurs in non&ndash;permafrost areas.
-          </span>
-          <span v-show="permafrostUncertain || noFreeze"
-            >A chart of the historical and projected mean annual ground
-            temperature is provided below.
-          </span>
+          As permafrost thaws, the ground depth to the top of the permafrost
+          layer increases. The following chart shows how this depth is projected
+          to change over time.
         </div>
       </div>
-      <div class="chart" v-show="this.permafrostPresent">
-        <ReportAltThawChart />
-      </div>
-      <div class="chart" v-show="this.permafrostDisappears">
-        <ReportAltFreezeChart />
-      </div>
-      <div class="chart" v-show="this.permafrostUncertain || this.noFreeze">
-        <ReportMagtChart />
+      <div class="chart">
+        <ReportPermafrostTopChart />
       </div>
       <DownloadCsvButton
         text="Download permafrost data as CSV"
@@ -128,11 +42,18 @@
         class="mt-3 mb-5"
       />
     </div>
+    <div v-else-if="!reportData && type != 'community' && type != 'latLng'">
+      <div class="content">
+        <div class="is-size-5">
+          As permafrost thaws, the ground depth to the top of the permafrost layer increases.  Because the selected place is an area, not a point location, a chart showing ground depth to the top of the permafrost layer cannot be shown because it varies across the extent of the area.
+        </div>
+      </div>
+    </div>
     <div v-else>
       <div class="content">
         <div class="is-size-5">
-          Charts are not shown because it's not meaningful to average these data
-          across a region.
+          As permafrost thaws, the ground depth to the top of the permafrost layer increases.  This cannot be shown for this place because because permafrost data is not available for this
+          location.
         </div>
       </div>
     </div>
@@ -148,9 +69,7 @@
 <script>
 import ReportMagtMaps from './ReportMagtMaps'
 import ColorTable from '~/components/reports/ColorTable'
-import ReportAltThawChart from './ReportAltThawChart'
-import ReportAltFreezeChart from './ReportAltFreezeChart'
-import ReportMagtChart from './ReportMagtChart'
+import ReportPermafrostTopChart from './ReportPermafrostTopChart'
 import BackToTopButton from '~/components/reports/BackToTopButton'
 import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import { mapGetters } from 'vuex'
@@ -160,9 +79,7 @@ export default {
   components: {
     ReportMagtMaps,
     ColorTable,
-    ReportAltThawChart,
-    ReportAltFreezeChart,
-    ReportMagtChart,
+    ReportPermafrostTopChart,
     BackToTopButton,
     DownloadCsvButton,
   },
@@ -174,19 +91,17 @@ export default {
         : '&#x00B1;1&deg;C'
     },
     depthFragment() {
-      return this.units == 'imperial' ? 'about 10ft' : '3m'
+      return this.units == 'imperial' ? 'about 3 feet' : '1 meter'
     },
     unitSymbol() {
       return this.units == 'imperial' ? '&deg;F' : '&deg;C'
     },
     ...mapGetters({
       units: 'units',
+      type: 'place/type',
       reportData: 'permafrost/permafrostData',
-      permafrostPresent: 'permafrost/present',
-      permafrostDisappears: 'permafrost/disappears',
-      permafrostUncertain: 'permafrost/uncertain',
-      noFreeze: 'permafrost/noFreeze',
       magtThresholds: 'permafrost/magtThresholds',
+      validTopData: 'permafrost/validTopData',
     }),
   },
 }

@@ -379,6 +379,7 @@ export default {
       let apiHttpErrors = [
         this.climateHttpError,
         this.elevationHttpError,
+        this.permafrostHttpError,
         this.flammabilityHttpError,
         this.vegChangeHttpError,
         this.beetleHttpError,
@@ -442,10 +443,10 @@ export default {
     await this.$store.dispatch('wildfire/fetch').catch(e => {
       console.error(e)
     })
-    this.$store.dispatch('elevation/fetch').catch(e => {
+    await this.$store.dispatch('elevation/fetch').catch(e => {
       console.error(e)
     })
-    this.$store.dispatch('beetle/fetch').catch(e => {
+    await this.$store.dispatch('beetle/fetch').catch(e => {
       console.error(e)
     })
   },
@@ -475,6 +476,9 @@ export default {
       }
       if (this.vegChangeData) {
         types.push('vegetation change')
+      }
+      if (this.beetleData) {
+        types.push('climate protection from spruce beetle outbreaks')
       }
 
       return types
