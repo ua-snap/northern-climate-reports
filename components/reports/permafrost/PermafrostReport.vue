@@ -45,15 +45,14 @@
     <div v-else-if="!reportData && type != 'community' && type != 'latLng'">
       <div class="content">
         <div class="is-size-5">
-          Charts are not shown because it's not meaningful to average these data
-          across a region.
+          As permafrost thaws, the ground depth to the top of the permafrost layer increases.  Because the selected place is an area, not a point location, a chart showing ground depth to the top of the permafrost layer cannot be shown because it varies across the extent of the area.
         </div>
       </div>
     </div>
     <div v-else>
       <div class="content">
         <div class="is-size-5">
-          Charts are not shown because permafrost data is not available for this
+          As permafrost thaws, the ground depth to the top of the permafrost layer increases.  This cannot be shown for this place because because permafrost data is not available for this
           location.
         </div>
       </div>
