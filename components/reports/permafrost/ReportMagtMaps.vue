@@ -10,13 +10,13 @@
           v-model="magt_model_selection"
           name="magt_model_selection"
           native-value="1"
-          >GFDL-CM3</b-radio
+          >GFDL CM3</b-radio
         >
         <b-radio
           v-model="magt_model_selection"
           name="magt_model_selection"
           native-value="2"
-          >NCAR-CCSM4</b-radio
+          >NCAR CCSM4</b-radio
         >
       </b-field>
     </div>
