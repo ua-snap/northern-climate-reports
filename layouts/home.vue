@@ -4,8 +4,14 @@
     <Navbar />
     <div class="header--wrapper">
       <div class="header--text--wrapper">
-        <h1 class="">Northern <span><img src="~/assets/images/lights.svg"/>Climate</span> Reports</h1>
-        <h2 class="">Ecological futures <span>in</span> stories, charts, <span>and</span> data</h2>
+        <h1 class="">
+          Northern
+          <span><img src="~/assets/images/lights.svg" />Climate</span> Reports
+        </h1>
+        <h2 class="">
+          Ecological futures <span>in</span> stories, charts,
+          <span>and</span> data
+        </h2>
       </div>
     </div>
 
@@ -17,11 +23,15 @@
 
 <style lang="scss" scoped>
 .header--wrapper {
-  padding: 1rem 1.75rem;
-  background-image: url('~/assets/images/topo.svg');
   position: relative;
-  height: 209px;
-  font-family: "Lexend Peta";
+  padding: 1rem 1.75rem;
+  
+  height: 14rem;
+
+  background-image: url('~/assets/images/topo2.svg');
+  background-size: cover;
+  
+  font-family: 'Lexend Peta', sans-serif;
   color: white;
   display: flex;
   text-transform: uppercase;
@@ -38,7 +48,7 @@
       span {
         color: #f7ae06;
         display: inline-block;
-        
+
         img {
           position: relative;
           top: 30px;
@@ -48,7 +58,7 @@
 
     h2 {
       font-size: 1.6vw;
-      margin-top: -.6rem;
+      margin-top: -0.6rem;
 
       span {
         text-transform: lowercase;

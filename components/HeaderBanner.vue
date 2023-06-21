@@ -14,13 +14,15 @@ export default {
 
 <style lang="scss" scoped>
 .headerbanner {
-  font-size: 1rem;
+  font-size: 0.8rem;
   text-align: center;
-  letter-spacing: 0.5ex;
+  letter-spacing: 0.3ex;
+  font-weight: 700;
   text-transform: uppercase;
   padding: 0.5rem;
-  color: white;
-  background-color: rgb(54, 79, 119);
+  margin-top: 0.2rem;
+  color: #333;
+  background-color: white;
 }
 
 @media screen and (max-width: 860px) {
