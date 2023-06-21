@@ -1,6 +1,7 @@
 <template>
   <div class="headerbanner">
-    <span class="uaf">University of Alaska Fairbanks</span><br /><span class="spacer"
+    <span class="uaf">University of Alaska Fairbanks</span><br /><span
+      class="spacer"
       >&nbsp;&nbsp;|&nbsp;&nbsp;</span
     >Alaska Climate Adaptation Science Center
   </div>
@@ -18,7 +19,6 @@ export default {
   z-index: 500; // stack over any other elements in headerbar
 
   padding: 0.5rem;
-  margin-top: 0.2rem;
 
   background-color: white;
 
@@ -27,7 +27,7 @@ export default {
   text-align: center;
   letter-spacing: 0.3ex;
   font-weight: 700;
-  text-transform: uppercase;  
+  text-transform: uppercase;
 }
 
 @media screen and (max-width: 860px) {

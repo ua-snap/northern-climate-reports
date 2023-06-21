@@ -28,12 +28,17 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <nuxt-link :to="{ name: 'about' }" exact-active-class="is-active"
-            >What can you learn from this tool?</nuxt-link
+            >About</nuxt-link
           >
         </div>
         <div class="navbar-item">
           <nuxt-link :to="{ name: 'data' }" exact-active-class="is-active"
-            >What data and places are shown here?</nuxt-link
+            >Data</nuxt-link
+          >
+        </div>
+        <div class="navbar-item">
+          <nuxt-link :to="{ name: 'places' }" exact-active-class="is-active"
+            >Places</nuxt-link
           >
         </div>
       </div>
@@ -43,26 +48,24 @@
 
 <style lang="scss" scoped>
 .navbar {
-  margin-top: 3px;
-  background-color: rgb(28, 28, 28);
-  padding-right: 1rem;
-  padding-left: 1rem;
+  // Note: some of these styles are interdependent with
+  // styles defined in the `layouts/default` component,
+  // which wraps this and the Header component.
+  position: absolute;
+  top: 0;
+  width: calc(100% - (1.75rem * 2));
+  padding: 0;
+  margin: 0;
+  background: transparent;
 
   .navbar-item {
     a {
       color: white;
       &.is-active {
         font-weight: bold;
-        text-decoration: underline rgb(54, 79, 119) 5px;
+        text-decoration: underline rgba(255, 255, 255, 0.5) 5px;
       }
     }
-  }
-  // Menu background needs to be dark when burger is active
-  .navbar-menu.is-active {
-    background-color: rgb(28, 28, 28);
-  }
-  .navbar-burger span {
-    color: #fff;
   }
 }
 </style>

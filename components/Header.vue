@@ -11,47 +11,35 @@
 </template>
 
 <style lang="scss" scoped>
-.header--wrapper {
-  position: relative;
-  padding: 1rem 1.75rem;
+.header--text--wrapper {
+  // Note: some of these styles are interdependent with
+  // styles defined in the `layouts/default` component,
+  // which wraps this and the Header component.
+  align-self: flex-end;
+  bottom: 0px;
+  font-weight: 800;
+  h1 {
+    font-size: 3.2vw;
+    position: relative;
+    left: -3px;
 
-  height: 14rem;
+    span {
+      color: #f7ae06;
+      display: inline-block;
 
-  background-image: url('~/assets/images/topo2.svg');
-  background-size: cover;
-
-  font-family: 'Lexend Peta', sans-serif;
-  color: white;
-  display: flex;
-  text-transform: uppercase;
-
-  .header--text--wrapper {
-    align-self: flex-end;
-    bottom: 0px;
-    font-weight: 800;
-    h1 {
-      font-size: 3.2vw;
-      position: relative;
-      left: -3px;
-
-      span {
-        color: #f7ae06;
-        display: inline-block;
-
-        img {
-          position: relative;
-          top: 30px;
-        }
+      img {
+        position: relative;
+        top: 30px;
       }
     }
+  }
 
-    h2 {
-      font-size: 1.6vw;
-      margin-top: -0.6rem;
+  h2 {
+    font-size: 1.6vw;
+    margin-top: -0.6rem;
 
-      span {
-        text-transform: lowercase;
-      }
+    span {
+      text-transform: lowercase;
     }
   }
 }
