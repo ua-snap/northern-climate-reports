@@ -3,7 +3,8 @@
     <table class="table report-table" v-if="reportData">
       <caption>
         Precipitation,
-        <span v-html="place"></span>, 1950&ndash;2099
+        <span v-html="place"></span
+        >, 1950&ndash;2099
       </caption>
       <thead>
         <tr>
@@ -74,7 +75,9 @@
                   'pr'
                 ]['mean']
               "
-              :future="rawReportData['2040_2069']['DJF']['CCSM4']['rcp45']['pr']"
+              :future="
+                rawReportData['2040_2069']['DJF']['CCSM4']['rcp45']['pr']
+              "
             />
           </td>
           <td>
@@ -98,7 +101,9 @@
                   'pr'
                 ]['mean']
               "
-              :future="rawReportData['2040_2069']['DJF']['CCSM4']['rcp85']['pr']"
+              :future="
+                rawReportData['2040_2069']['DJF']['CCSM4']['rcp85']['pr']
+              "
             />
           </td>
           <td>
@@ -122,7 +127,9 @@
                   'pr'
                 ]['mean']
               "
-              :future="rawReportData['2070_2099']['DJF']['CCSM4']['rcp45']['pr']"
+              :future="
+                rawReportData['2070_2099']['DJF']['CCSM4']['rcp45']['pr']
+              "
             />
           </td>
           <td>
@@ -146,7 +153,9 @@
                   'pr'
                 ]['mean']
               "
-              :future="rawReportData['2070_2099']['DJF']['CCSM4']['rcp85']['pr']"
+              :future="
+                rawReportData['2070_2099']['DJF']['CCSM4']['rcp85']['pr']
+              "
             />
           </td>
         </tr>
@@ -180,7 +189,9 @@
                   'pr'
                 ]['mean']
               "
-              :future="rawReportData['2040_2069']['MAM']['CCSM4']['rcp45']['pr']"
+              :future="
+                rawReportData['2040_2069']['MAM']['CCSM4']['rcp45']['pr']
+              "
             />
           </td>
           <td>
@@ -204,7 +215,9 @@
                   'pr'
                 ]['mean']
               "
-              :future="rawReportData['2040_2069']['MAM']['CCSM4']['rcp85']['pr']"
+              :future="
+                rawReportData['2040_2069']['MAM']['CCSM4']['rcp85']['pr']
+              "
             />
           </td>
           <td>
@@ -228,7 +241,9 @@
                   'pr'
                 ]['mean']
               "
-              :future="rawReportData['2070_2099']['MAM']['CCSM4']['rcp45']['pr']"
+              :future="
+                rawReportData['2070_2099']['MAM']['CCSM4']['rcp45']['pr']
+              "
             />
           </td>
           <td>
@@ -252,7 +267,9 @@
                   'pr'
                 ]['mean']
               "
-              :future="rawReportData['2070_2099']['MAM']['CCSM4']['rcp85']['pr']"
+              :future="
+                rawReportData['2070_2099']['MAM']['CCSM4']['rcp85']['pr']
+              "
             />
           </td>
         </tr>
@@ -286,7 +303,9 @@
                   'pr'
                 ]['mean']
               "
-              :future="rawReportData['2040_2069']['JJA']['CCSM4']['rcp45']['pr']"
+              :future="
+                rawReportData['2040_2069']['JJA']['CCSM4']['rcp45']['pr']
+              "
             />
           </td>
           <td>
@@ -310,7 +329,9 @@
                   'pr'
                 ]['mean']
               "
-              :future="rawReportData['2040_2069']['JJA']['CCSM4']['rcp85']['pr']"
+              :future="
+                rawReportData['2040_2069']['JJA']['CCSM4']['rcp85']['pr']
+              "
             />
           </td>
           <td>
@@ -334,7 +355,9 @@
                   'pr'
                 ]['mean']
               "
-              :future="rawReportData['2070_2099']['JJA']['CCSM4']['rcp45']['pr']"
+              :future="
+                rawReportData['2070_2099']['JJA']['CCSM4']['rcp45']['pr']
+              "
             />
           </td>
           <td>
@@ -358,7 +381,9 @@
                   'pr'
                 ]['mean']
               "
-              :future="rawReportData['2070_2099']['JJA']['CCSM4']['rcp85']['pr']"
+              :future="
+                rawReportData['2070_2099']['JJA']['CCSM4']['rcp85']['pr']
+              "
             />
           </td>
         </tr>
@@ -392,7 +417,9 @@
                   'pr'
                 ]['mean']
               "
-              :future="rawReportData['2040_2069']['SON']['CCSM4']['rcp45']['pr']"
+              :future="
+                rawReportData['2040_2069']['SON']['CCSM4']['rcp45']['pr']
+              "
             />
           </td>
           <td>
@@ -416,7 +443,9 @@
                   'pr'
                 ]['mean']
               "
-              :future="rawReportData['2040_2069']['SON']['CCSM4']['rcp85']['pr']"
+              :future="
+                rawReportData['2040_2069']['SON']['CCSM4']['rcp85']['pr']
+              "
             />
           </td>
           <td>
@@ -440,7 +469,9 @@
                   'pr'
                 ]['mean']
               "
-              :future="rawReportData['2070_2099']['SON']['CCSM4']['rcp45']['pr']"
+              :future="
+                rawReportData['2070_2099']['SON']['CCSM4']['rcp45']['pr']
+              "
             />
           </td>
           <td>
@@ -464,7 +495,9 @@
                   'pr'
                 ]['mean']
               "
-              :future="rawReportData['2070_2099']['SON']['CCSM4']['rcp85']['pr']"
+              :future="
+                rawReportData['2070_2099']['SON']['CCSM4']['rcp85']['pr']
+              "
             />
           </td>
         </tr>
@@ -481,11 +514,6 @@
         </tr>
       </tfoot>
     </table>
-    <DownloadCsvButton
-      text="Download precipitation data as CSV"
-      endpoint="precipitation"
-      class="mt-3 mb-5"
-    />
   </div>
 </template>
 <style lang="scss" scoped>

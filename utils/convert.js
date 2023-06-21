@@ -42,8 +42,8 @@ export const convertToInches = function (
 }
 
 // Convert a single value
-export const convertMmToInches = function (value) {
-  return parseFloat((value * 0.03937008).toFixed(1))
+export const convertMmToInches = function (value, roundTo = 1) {
+  return parseFloat((value * 0.03937008).toFixed(roundTo))
 }
 
 // Converts nested data structures
