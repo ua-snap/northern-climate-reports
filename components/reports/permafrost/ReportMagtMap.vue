@@ -2,7 +2,7 @@
   <div>
     <div class="map-title has-text-centered">
       <div>
-        <span class="has-text-weight-bold">{{ mapEra }}<br /></span>
+        <span class="has-text-weight-bold">{{ daterange }}<br /></span>
         <span v-if="mapModel">{{ mapModel }}<br class="narrow-br" /></span>
         <span>{{ mapScenario }}</span>
       </div>
@@ -34,29 +34,22 @@ import { getBaseMapAndLayers, addGeoJSONtoMap } from '~/utils/maps'
 
 export default {
   name: 'ReportMagtMap',
-  props: ['scenario', 'model', 'era'],
+  props: ['scenario', 'model', 'daterange'],
   computed: {
     ...mapGetters({
       latLng: 'place/latLng',
       geoJSON: 'place/geoJSON',
-      eras: 'permafrost/eras',
       models: 'permafrost/models',
       scenarios: 'permafrost/scenarios',
     }),
     mapID() {
-      return this.scenario + '_' + this.model + '_' + this.era
+      return this.scenario + '_' + this.model + '_' + this.daterange
     },
-    mapEra() {
-      return this.eras[this.era]
-    },
+
     mapModel() {
-      // The "era" at index 0 is the historical year (1995).
-      if (this.era > 0) {
-        return this.models[this.model] + ', '
-      }
+      return this.models[this.model] + ', '
     },
     mapScenario() {
-      // The "scenario" at index 0 is the historical data set (CRU TS 3.1).
       return this.scenarios[this.scenario]
     },
   },
@@ -94,11 +87,11 @@ export default {
         transparent: true,
         format: 'image/png',
         version: '1.3.0',
-        layers: 'iem_gipl_magt_alt_4km',
-        dim_era: this.era,
+        layers: 'crrel_gipl_outputs',
         dim_model: this.model,
         dim_scenario: this.scenario,
-        styles: 'climate_impact_reports',
+        dim_variable: 1,
+        styles: 'magt1m_' + this.daterange.replace(/-/g, '_'),
       })
     },
   },

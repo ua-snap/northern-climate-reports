@@ -62,10 +62,8 @@ export default {
       units: 'units',
       rawClimateData: 'climate/rawClimateData',
       climateData: 'climate/climateData',
-      altThawData: 'permafrost/altThaw',
+      permafrostData: 'permafrost/permafrostData',
       showPermafrost: 'permafrost/valid',
-      permafrostPresent: 'permafrost/present',
-      permafrostDisappears: 'permafrost/disappears',
       flammabilityData: 'wildfire/flammability',
       flamThresholds: 'wildfire/flammabilityThresholds',
       vegChangeData: 'wildfire/veg_change',
@@ -74,13 +72,13 @@ export default {
       beetleData: 'beetle/beetleData',
       showBeetles: 'beetle/valid',
     }),
-    unitsText() {
+    tempUnitsText() {
       if (this.units) {
         return this.units == 'metric' ? '&deg;C' : '&deg;F'
       }
     },
-    depthFragment() {
-      return this.units == 'imperial' ? 'about 10ft' : '3m'
+    depthUnitsText() {
+      return this.units == 'metric' ? 'meters' : 'inches'
     },
     qualitativeText() {
       return this.generateText()
@@ -90,7 +88,7 @@ export default {
     climateData: function () {
       this.generateText()
     },
-    altThawData: function () {
+    permafrostData: function () {
       this.generateText()
     },
     flammabilityData: function () {
@@ -209,7 +207,7 @@ export default {
       let string =
         '<p>Average annual temperatures<br/>may increase by about <strong>' +
         annualTemperatureAverage +
-        this.unitsText +
+        this.tempUnitsText +
         '</strong> by the end of the century.</p>'
 
       string +=
@@ -217,7 +215,7 @@ export default {
         seasonWithHighestTempChange +
         '</strong> temperatures are increasing the most (<strong>+' +
         annualHighestTempChange +
-        this.unitsText +
+        this.tempUnitsText +
         '</strong>).</p>'
 
       // If any season is marked as above freezing in the future when historically below freezing,
@@ -282,45 +280,39 @@ export default {
       )
     },
     permafrostString() {
-      let years = Object.keys(this.altThawData)
-      let historicalYear = years.slice(0, 1)
-      let lastYear = years.slice(-1)[0]
-      let thicknessHistorical = this.altThawData[historicalYear]
-
-      if (thicknessHistorical == null) {
-        return 0
-      }
-
-      let thicknesses = []
-      let models = ['mricgcm3', 'ncarccsm4']
-      let scenarios = ['rcp85']
+      let models = ['GFDL-CM3', 'NCAR-CCSM4']
+      let differences = []
 
       models.forEach(model => {
-        scenarios.forEach(scenario => {
-          let value = this.altThawData[lastYear][model][scenario]
-          thicknesses.push(value)
-        })
+        let firstEraTop = this.permafrostData['2021-2039'][model]['rcp85'][
+          'gipl1kmmean'
+        ]['permafrosttop']
+        let lastEraTop = this.permafrostData['2070-2099'][model]['rcp85'][
+          'gipl1kmmean'
+        ]['permafrosttop']
+        let difference = lastEraTop - firstEraTop
+        differences.push(difference)
       })
-      let thicknessMax = _.max(thicknesses)
 
-      let permafrostChange = Math.round(
-        (thicknessMax / thicknessHistorical) * 100 - 100
-      )
+      let maxDifference = _.max(differences)
 
-      let string = ''
-      if (this.permafrostPresent && this.permafrostDisappears) {
-        string =
-          '<p>By the late century, permafrost within ' +
-          this.depthFragment +
-          ' of the ground surface may <strong>disappear</strong>.</p>'
-      } else if (permafrostChange > 0) {
-        string =
-          '<p>By the late century, active layer permafrost thickness<br/> may increase by <strong>' +
-          Math.abs(permafrostChange) +
-          '%</strong>.</p>'
+      if (maxDifference > 0) {
+        // Inclusively, there are 79 years between 2021 and 2099.
+        let degradationRate = maxDifference / 79
+
+        let precision = this.units == 'metric' ? 2 : 1
+        degradationRate = degradationRate.toFixed(precision)
+
+        return (
+          '<p>Models indicate that permafrost degradation may occur at a rate of <strong>' +
+          degradationRate +
+          ' ' +
+          this.depthUnitsText +
+          ' per year</strong>.</p>'
+        )
+      } else {
+        return ''
       }
-
-      return string
     },
     wildfireString() {
       var categoryFromFlam = flam => {
