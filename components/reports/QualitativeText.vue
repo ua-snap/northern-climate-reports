@@ -71,13 +71,13 @@ export default {
       beetleData: 'beetle/beetleData',
       showBeetles: 'beetle/valid',
     }),
-    unitsText() {
+    tempUnitsText() {
       if (this.units) {
         return this.units == 'metric' ? '&deg;C' : '&deg;F'
       }
     },
-    depthFragment() {
-      return this.units == 'imperial' ? 'about 10ft' : '3m'
+    depthUnitsText() {
+      return this.units == 'metric' ? 'meters' : 'inches'
     },
     qualitativeText() {
       return this.generateText()
@@ -206,7 +206,7 @@ export default {
       let string =
         '<p>Average annual temperatures<br/>may increase by about <strong>' +
         annualTemperatureAverage +
-        this.unitsText +
+        this.tempUnitsText +
         '</strong> by the end of the century.</p>'
 
       string +=
@@ -214,7 +214,7 @@ export default {
         seasonWithHighestTempChange +
         '</strong> temperatures are increasing the most (<strong>+' +
         annualHighestTempChange +
-        this.unitsText +
+        this.tempUnitsText +
         '</strong>).</p>'
 
       // If any season is marked as above freezing in the future when historically below freezing,
@@ -294,10 +294,21 @@ export default {
       })
 
       let maxDifference = _.max(differences)
-      if (maxDifference > 100) {
-        return '<p>Permafrost may <strong>thaw significantly</strong> by late century.</p>'
-      } else if (maxDifference > 20) {
-        return '<p>Permafrost may <strong>thaw slightly</strong> by late century.</p>'
+
+      if (maxDifference > 0) {
+        // Inclusively, there are 79 years between 2021 and 2099.
+        let degradationRate = maxDifference / 79
+
+        let precision = this.units == 'metric' ? 2 : 1
+        degradationRate = degradationRate.toFixed(precision)
+
+        return (
+          '<p>Models indicate that permafrost degradation may occur at a rate of <strong>' +
+          degradationRate +
+          ' ' +
+          this.depthUnitsText +
+          ' per year</strong>.</p>'
+        )
       } else {
         return ''
       }
