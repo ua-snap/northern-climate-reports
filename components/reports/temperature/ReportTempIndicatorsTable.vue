@@ -249,7 +249,7 @@
           <th scope="row">
             Summer Days
             <span class="description"
-              >temperature above {{ suValue
+              >Temperature above {{ suValue
               }}<UnitWidget variable="temp" type="light"
             /></span>
           </th>
