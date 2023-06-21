@@ -139,7 +139,9 @@ export default {
           y: yValues,
         }
 
-        dataTraces.push(trace)
+        // Stacked bar charts display traces in reverse order, so use unshift
+        // instead of push to add items in reverse order.
+        dataTraces.unshift(trace)
       })
 
       layout['xaxis']['tickmode'] = 'array'
