@@ -256,6 +256,7 @@
           <td>
             {{ reportData['su']['midcentury']['MRI-CGCM3']['rcp45']['mean'] }}
             <DayDiffWidget
+              variable="temp"
               :future="
                 reportData['su']['midcentury']['MRI-CGCM3']['rcp45']['mean']
               "
@@ -267,6 +268,7 @@
           <td>
             {{ reportData['su']['midcentury']['NCAR-CCSM4']['rcp45']['mean'] }}
             <DayDiffWidget
+              variable="temp"
               :future="
                 reportData['su']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
               "
@@ -278,6 +280,7 @@
           <td>
             {{ reportData['su']['midcentury']['MRI-CGCM3']['rcp85']['mean'] }}
             <DayDiffWidget
+              variable="temp"
               :future="
                 reportData['su']['midcentury']['MRI-CGCM3']['rcp85']['mean']
               "
@@ -289,6 +292,7 @@
           <td>
             {{ reportData['su']['midcentury']['NCAR-CCSM4']['rcp85']['mean'] }}
             <DayDiffWidget
+              variable="temp"
               :future="
                 reportData['su']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
               "
@@ -300,6 +304,7 @@
           <td>
             {{ reportData['su']['longterm']['MRI-CGCM3']['rcp45']['mean'] }}
             <DayDiffWidget
+              variable="temp"
               :future="
                 reportData['su']['longterm']['MRI-CGCM3']['rcp45']['mean']
               "
@@ -311,6 +316,7 @@
           <td>
             {{ reportData['su']['longterm']['NCAR-CCSM4']['rcp45']['mean'] }}
             <DayDiffWidget
+              variable="temp"
               :future="
                 reportData['su']['longterm']['NCAR-CCSM4']['rcp45']['mean']
               "
@@ -322,6 +328,7 @@
           <td>
             {{ reportData['su']['longterm']['MRI-CGCM3']['rcp85']['mean'] }}
             <DayDiffWidget
+              variable="temp"
               :future="
                 reportData['su']['longterm']['MRI-CGCM3']['rcp85']['mean']
               "
@@ -333,6 +340,7 @@
           <td>
             {{ reportData['su']['longterm']['NCAR-CCSM4']['rcp85']['mean'] }}
             <DayDiffWidget
+              variable="temp"
               :future="
                 reportData['su']['longterm']['NCAR-CCSM4']['rcp85']['mean']
               "
@@ -353,6 +361,7 @@
           <td>
             {{ reportData['dw']['midcentury']['MRI-CGCM3']['rcp45']['mean'] }}
             <DayDiffWidget
+              variable="temp"
               :future="
                 reportData['dw']['midcentury']['MRI-CGCM3']['rcp45']['mean']
               "
@@ -364,6 +373,7 @@
           <td>
             {{ reportData['dw']['midcentury']['NCAR-CCSM4']['rcp45']['mean'] }}
             <DayDiffWidget
+              variable="temp"
               :future="
                 reportData['dw']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
               "
@@ -375,6 +385,7 @@
           <td>
             {{ reportData['dw']['midcentury']['MRI-CGCM3']['rcp85']['mean'] }}
             <DayDiffWidget
+              variable="temp"
               :future="
                 reportData['dw']['midcentury']['MRI-CGCM3']['rcp85']['mean']
               "
@@ -386,6 +397,7 @@
           <td>
             {{ reportData['dw']['midcentury']['NCAR-CCSM4']['rcp85']['mean'] }}
             <DayDiffWidget
+              variable="temp"
               :future="
                 reportData['dw']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
               "
@@ -397,6 +409,7 @@
           <td>
             {{ reportData['dw']['longterm']['MRI-CGCM3']['rcp45']['mean'] }}
             <DayDiffWidget
+              variable="temp"
               :future="
                 reportData['dw']['longterm']['MRI-CGCM3']['rcp45']['mean']
               "
@@ -408,6 +421,7 @@
           <td>
             {{ reportData['dw']['longterm']['NCAR-CCSM4']['rcp45']['mean'] }}
             <DayDiffWidget
+              variable="temp"
               :future="
                 reportData['dw']['longterm']['NCAR-CCSM4']['rcp45']['mean']
               "
@@ -419,6 +433,7 @@
           <td>
             {{ reportData['dw']['longterm']['MRI-CGCM3']['rcp85']['mean'] }}
             <DayDiffWidget
+              variable="temp"
               :future="
                 reportData['dw']['longterm']['MRI-CGCM3']['rcp85']['mean']
               "
@@ -430,6 +445,7 @@
           <td>
             {{ reportData['dw']['longterm']['NCAR-CCSM4']['rcp85']['mean'] }}
             <DayDiffWidget
+              variable="temp"
               :future="
                 reportData['dw']['longterm']['NCAR-CCSM4']['rcp85']['mean']
               "

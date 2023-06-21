@@ -1,14 +1,22 @@
 <template>
   <span
     class="diff"
-    :class="{ weak: isWeak, strong: isStrong, less: isLess, more: isMore }"
+    :class="{ weak: isWeak, strong: isStrong, less: isLess, more: isMore, precip: isPrecip, temp: isTemp }"
     v-html="diff"
   ></span>
 </template>
 <style lang="scss" scoped>
 .diff {
   display: block;
-  color: #05335e;
+
+  &.precip, &.temp.less {
+    color: #05335e;
+  }
+  
+  &.temp.more {
+    color: #5e3305;
+  }
+
   &.weak {
     font-weight: 300;
   }
@@ -29,6 +37,11 @@ export default {
       type: Number,
       required: true,
     },
+    // What kind of variable?  ["temp", "precip"] are the options
+    variable: {
+      type: String,
+      required: true,
+    }
   },
   computed: {
     pct() {
@@ -46,6 +59,12 @@ export default {
     },
     isMore() {
       return this.pct > 0
+    },
+    isPrecip() {
+      return this.variable == 'precip'
+    },
+    isTemp() {
+      return this.variable == 'temp'
     },
     diff() {
       let diff = this.future - this.past

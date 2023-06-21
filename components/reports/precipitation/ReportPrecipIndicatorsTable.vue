@@ -299,7 +299,7 @@
           </td>
           <td>
             {{ reportData['cwd']['midcentury']['MRI-CGCM3']['rcp45']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['cwd']['midcentury']['MRI-CGCM3']['rcp45']['mean']
               "
@@ -310,7 +310,7 @@
           </td>
           <td>
             {{ reportData['cwd']['midcentury']['NCAR-CCSM4']['rcp45']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['cwd']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
               "
@@ -321,7 +321,7 @@
           </td>
           <td>
             {{ reportData['cwd']['midcentury']['MRI-CGCM3']['rcp85']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['cwd']['midcentury']['MRI-CGCM3']['rcp85']['mean']
               "
@@ -332,7 +332,7 @@
           </td>
           <td>
             {{ reportData['cwd']['midcentury']['NCAR-CCSM4']['rcp85']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['cwd']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
               "
@@ -343,7 +343,7 @@
           </td>
           <td>
             {{ reportData['cwd']['longterm']['MRI-CGCM3']['rcp45']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['cwd']['longterm']['MRI-CGCM3']['rcp45']['mean']
               "
@@ -354,7 +354,7 @@
           </td>
           <td>
             {{ reportData['cwd']['longterm']['NCAR-CCSM4']['rcp45']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['cwd']['longterm']['NCAR-CCSM4']['rcp45']['mean']
               "
@@ -365,7 +365,7 @@
           </td>
           <td>
             {{ reportData['cwd']['longterm']['MRI-CGCM3']['rcp85']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['cwd']['longterm']['MRI-CGCM3']['rcp85']['mean']
               "
@@ -376,7 +376,7 @@
           </td>
           <td>
             {{ reportData['cwd']['longterm']['NCAR-CCSM4']['rcp85']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['cwd']['longterm']['NCAR-CCSM4']['rcp85']['mean']
               "
@@ -400,7 +400,7 @@
           </td>
           <td>
             {{ reportData['cdd']['midcentury']['MRI-CGCM3']['rcp45']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['cdd']['midcentury']['MRI-CGCM3']['rcp45']['mean']
               "
@@ -411,7 +411,7 @@
           </td>
           <td>
             {{ reportData['cdd']['midcentury']['NCAR-CCSM4']['rcp45']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['cdd']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
               "
@@ -422,7 +422,7 @@
           </td>
           <td>
             {{ reportData['cdd']['midcentury']['MRI-CGCM3']['rcp85']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['cdd']['midcentury']['MRI-CGCM3']['rcp85']['mean']
               "
@@ -433,7 +433,7 @@
           </td>
           <td>
             {{ reportData['cdd']['midcentury']['NCAR-CCSM4']['rcp85']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['cdd']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
               "
@@ -444,7 +444,7 @@
           </td>
           <td>
             {{ reportData['cdd']['longterm']['MRI-CGCM3']['rcp45']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['cdd']['longterm']['MRI-CGCM3']['rcp45']['mean']
               "
@@ -455,7 +455,7 @@
           </td>
           <td>
             {{ reportData['cdd']['longterm']['NCAR-CCSM4']['rcp45']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['cdd']['longterm']['NCAR-CCSM4']['rcp45']['mean']
               "
@@ -466,7 +466,7 @@
           </td>
           <td>
             {{ reportData['cdd']['longterm']['MRI-CGCM3']['rcp85']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['cdd']['longterm']['MRI-CGCM3']['rcp85']['mean']
               "
@@ -477,7 +477,7 @@
           </td>
           <td>
             {{ reportData['cdd']['longterm']['NCAR-CCSM4']['rcp85']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['cdd']['longterm']['NCAR-CCSM4']['rcp85']['mean']
               "
@@ -501,7 +501,7 @@
             {{
               reportData['r10mm']['midcentury']['MRI-CGCM3']['rcp45']['mean']
             }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['r10mm']['midcentury']['MRI-CGCM3']['rcp45']['mean']
               "
@@ -516,7 +516,7 @@
             {{
               reportData['r10mm']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
             }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['r10mm']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
               "
@@ -531,7 +531,7 @@
             {{
               reportData['r10mm']['midcentury']['MRI-CGCM3']['rcp85']['mean']
             }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['r10mm']['midcentury']['MRI-CGCM3']['rcp85']['mean']
               "
@@ -546,7 +546,7 @@
             {{
               reportData['r10mm']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
             }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['r10mm']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
               "
@@ -559,7 +559,7 @@
           </td>
           <td>
             {{ reportData['r10mm']['longterm']['MRI-CGCM3']['rcp45']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['r10mm']['longterm']['MRI-CGCM3']['rcp45']['mean']
               "
@@ -572,7 +572,7 @@
           </td>
           <td>
             {{ reportData['r10mm']['longterm']['NCAR-CCSM4']['rcp45']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['r10mm']['longterm']['NCAR-CCSM4']['rcp45']['mean']
               "
@@ -585,7 +585,7 @@
           </td>
           <td>
             {{ reportData['r10mm']['longterm']['MRI-CGCM3']['rcp85']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['r10mm']['longterm']['MRI-CGCM3']['rcp85']['mean']
               "
@@ -598,7 +598,7 @@
           </td>
           <td>
             {{ reportData['r10mm']['longterm']['NCAR-CCSM4']['rcp85']['mean'] }}
-            <DayDiffWidget
+            <DayDiffWidget variable="precip"
               :future="
                 reportData['r10mm']['longterm']['NCAR-CCSM4']['rcp85']['mean']
               "
