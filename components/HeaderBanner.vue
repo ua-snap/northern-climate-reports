@@ -14,15 +14,20 @@ export default {
 
 <style lang="scss" scoped>
 .headerbanner {
+  position: relative; // Needed so z-index is honored
+  z-index: 500; // stack over any other elements in headerbar
+
+  padding: 0.5rem;
+  margin-top: 0.2rem;
+
+  background-color: white;
+
+  color: #333;
   font-size: 0.8rem;
   text-align: center;
   letter-spacing: 0.3ex;
   font-weight: 700;
-  text-transform: uppercase;
-  padding: 0.5rem;
-  margin-top: 0.2rem;
-  color: #333;
-  background-color: white;
+  text-transform: uppercase;  
 }
 
 @media screen and (max-width: 860px) {

@@ -1,17 +1,12 @@
 <template>
   <div>
     <div class="container">
-      <section class="section leader">
-        <div class="content-wrapper">
-          <div class="content is-size-4">
-            <p>
-              Three forms of heat&ndash;related phenomena&mdash;warming temperatures,
-              thawing permafrost, and increases in wildfire&mdash;are driving landscape change in
-              Northern ecosystems. This tool uses climate data to construct a
-              variety of possible futures for a warming North.
-            </p>
-          </div>
-        </div>
+      <section class="section">
+        <p class="leader">
+          Warming temperatures, thawing permafrost, and more wildfires are
+          changing landscapes across the North. See easy-to-understand climate
+          model projections for your areas of interest.
+        </p>
       </section>
     </div>
     <!--
@@ -24,8 +19,11 @@
 
 <style type="scss" scoped>
 .leader {
-  margin-top: 3.5rem;
-  font-weight: 600;
+  line-height: 1.2;
+  font-size: 2rem;
+  font-weight: 500;
+  width: 80vw;
+  margin: 2rem auto;
 }
 </style>
 
