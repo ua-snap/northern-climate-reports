@@ -6,7 +6,7 @@
         <div v-if="reportData">
           <span
             >The following maps show the projected mean annual ground
-            temperature over time at a depth of one meter.</span
+            temperature over time at a depth of {{ depthFragment }}.</span
           >
           <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
             >See information about the dataset shown here.</nuxt-link
@@ -92,7 +92,7 @@ export default {
         : '&#x00B1;1&deg;C'
     },
     depthFragment() {
-      return this.units == 'imperial' ? 'about 10ft' : '3m'
+      return this.units == 'imperial' ? 'about 3 feet' : '1 meter'
     },
     unitSymbol() {
       return this.units == 'imperial' ? '&deg;F' : '&deg;C'

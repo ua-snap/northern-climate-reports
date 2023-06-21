@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <h5 class="minimaps-section-title has-text-centered">
-      Mean annual ground temperature at 1 meter depth,
+      Mean annual ground temperature at {{ depthFragment }} depth,
       <span v-html="place"></span>, 2021&ndash;2100
     </h5>
     <div class="is-size-6 mb-4">
@@ -78,7 +78,11 @@ export default {
     ReportMagtMap,
   },
   computed: {
+    depthFragment() {
+      return this.units == 'imperial' ? 'about 3 feet' : '1 meter'
+    },
     ...mapGetters({
+      units: 'units',
       place: 'place/name',
     }),
   },
