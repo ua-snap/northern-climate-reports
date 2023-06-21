@@ -47,9 +47,9 @@
       <tbody>
         <tr>
           <th scope="row">
-            Cold Day
+            Cold Day Threshold
             <span class="description"
-              >5 days in a year are colder than this value</span
+              >Only 5 days in a year are colder than this</span
             >
           </th>
           <td class="left">
@@ -147,9 +147,9 @@
         </tr>
         <tr>
           <th scope="row">
-            Hot Day
+            Hot Day Threshold
             <span class="description"
-              >5 days in a year are warmer than this value</span
+              >Only 5 days in a year are warmer than this</span
             >
           </th>
           <td class="left">
@@ -248,7 +248,10 @@
         <tr>
           <th scope="row">
             Summer Days
-            <span class="description">temperature above 77&deg;F</span>
+            <span class="description"
+              >temperature above {{ suValue
+              }}<UnitWidget variable="temp" type="light"
+            /></span>
           </th>
           <td class="left">
             {{ reportData['su']['historical']['Daymet']['historical']['mean'] }}
@@ -353,7 +356,10 @@
         <tr>
           <th scope="row">
             Deep Winter Days
-            <span class="description">temperature below &minus;4&deg;F</span>
+            <span class="description"
+              >temperature below {{ dwValue
+              }}<UnitWidget variable="temp" type="light"
+            /></span>
           </th>
           <td class="left">
             {{ reportData['dw']['historical']['Daymet']['historical']['mean'] }}
@@ -479,11 +485,22 @@ import UnitWidget from '~/components/UnitWidget'
 import TempDiffWidget from './TempDiffWidget'
 import DayDiffWidget from '../DayDiffWidget'
 import { mapGetters } from 'vuex'
+import { convertValueToFahrenheit } from '~/utils/convert'
+
 export default {
   name: 'ReportTempIndicatorsTable',
   components: { UnitWidget, TempDiffWidget, DayDiffWidget },
   computed: {
+    // Summer days fixed threshold value 25ºC
+    suValue() {
+      return this.units == 'imperial' ? convertValueToFahrenheit(25) : 25
+    },
+    // Deep winter days fixed threshold value -30ºC
+    dwValue() {
+      return this.units == 'imperial' ? convertValueToFahrenheit(-30) : -30
+    },
     ...mapGetters({
+      units: 'units',
       reportData: 'indicators/indicatorData',
       place: 'place/name',
     }),

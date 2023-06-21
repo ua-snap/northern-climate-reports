@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="content">
-      <h4 class="title is-3">Precipitation</h4>
+      <h3 class="title is-3">Precipitation</h3>
       <div class="is-size-5">
         <p>
           This section shows projections for average (mean) precipitation,
@@ -48,6 +48,16 @@
     </div>
     <ReportPrecipChart :season="precip_season" />
     <ReportPrecipTable />
+    <div class="content">
+      <h4 class="title is-4 mt-6">Precipitation Indicators</h4>
+      <div class="is-size-5">
+        &ldquo;Indicators&rdquo; are a tool that help us understand data. We can
+        link indicators to specific impacts or risks. Duis aute irure dolor in
+        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+        qui officia deserunt mollit anim id est laborum.
+      </div>
+    </div>
     <ReportPrecipIndicatorsTable />
     <DownloadCsvButton
       text="Download precipitation data as CSV"
