@@ -35,7 +35,7 @@ label.label {
   margin-right: auto;
 }
 
-// Formatting common for both report tables.
+// Formatting common for report tables (temp/precip, indicators)
 table.table.report-table {
   width: 100%;
   font-weight: 400;
@@ -62,6 +62,13 @@ table.table.report-table {
   }
   tbody th[scope='row'] {
     text-align: left;
+
+    // Style for "description" block for indicator tables
+    .description {
+      display: inline-block;
+      font-size: 90%;
+      font-weight: 400;
+    }
   }
   tr.models th {
     text-align: right;
