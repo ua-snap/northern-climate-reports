@@ -1,7 +1,6 @@
 <template>
   <section class="section">
     <div class="content-wrapper">
-      <BetaFeedback />
       <h2 id="main-title" class="title is-2">
         What data and places are shown here?
       </h2>
