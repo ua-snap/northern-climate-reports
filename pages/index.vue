@@ -6,7 +6,8 @@
           Warming temperatures, thawing permafrost, and more wildfires are
           changing landscapes across the North.
           <br />
-          Explore these changes with easy-to-understand climate model projections.
+          Explore these changes with easy-to-understand climate model
+          projections.
         </p>
       </section>
     </div>
@@ -25,7 +26,6 @@
   text-align: center;
   color: #787776;
   font-weight: 700;
-  width: 90vw;
   margin: 2rem auto;
 }
 </style>
