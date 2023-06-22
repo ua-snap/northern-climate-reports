@@ -26,7 +26,7 @@ export default {
   font-size: 0.8rem;
   text-align: center;
   letter-spacing: 0.3ex;
-  line-height: 0.5;
+  line-height: 1;
   font-weight: 700;
   text-transform: uppercase;
 }
