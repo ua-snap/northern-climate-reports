@@ -18,7 +18,7 @@ export default {
   position: relative; // Needed so z-index is honored
   z-index: 500; // stack over any other elements in headerbar
 
-  padding: 0.5rem;
+  padding: 1rem;
 
   background-color: white;
 
@@ -26,6 +26,7 @@ export default {
   font-size: 0.8rem;
   text-align: center;
   letter-spacing: 0.3ex;
+  line-height: 0.5;
   font-weight: 700;
   text-transform: uppercase;
 }
