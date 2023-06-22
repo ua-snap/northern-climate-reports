@@ -55,8 +55,21 @@
   top: 0;
   width: calc(100% - (1.75rem * 2));
   padding: 0;
-  margin: 0;
+  margin: 0 0 20px 0;
   background: transparent;
+
+  .navbar-burger {
+    color: white;
+  }
+  @media screen and (max-width: 1024px) {
+    .navbar-menu {
+      float: right;
+      border: 2px solid rgb(247, 174, 5);
+      width: 20%;
+      background-color: #6d31f5;
+      color: white;
+    }
+  }
 
   .navbar-item {
     a {

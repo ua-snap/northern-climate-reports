@@ -23,8 +23,6 @@
   position: relative;
   padding: 1rem 1.75rem;
 
-  height: 14rem;
-
   background-image: url('~/assets/images/topo4.svg');
   background-size: cover;
 
