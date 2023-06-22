@@ -97,7 +97,7 @@
               <li>Alaska Game Management Units (GMUs)</li>
               <li>Alaska Native Corporations</li>
               <li>Boroughs and Census Areas</li>
-              <li>Communities in Alaska and Canada</li>          
+              <li>Communities in Alaska and Canada</li>
             </ul>
           </div>
           <div class="column">
@@ -126,17 +126,21 @@
     padding-left: 2rem;
     font-size: 85%;
   }
-  .name-types-list.columns {
-    .column {
-      padding-top: 0;
-      margin-top: -0.5rem;
-      ul {
-        list-style-type: none;
-        padding-left: 0;
-        margin-left: 0;
-        li {
-          line-height: 1.2;
-          margin-bottom: 0.5rem;
+  .name-types-list {
+    position: relative;
+    z-index: -5000; // needed to prevent this div from being on top of autocomplete
+    &.columns {
+      .column {
+        padding-top: 0;
+        margin-top: -0.5rem;
+        ul {
+          list-style-type: none;
+          padding-left: 0;
+          margin-left: 0;
+          li {
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+          }
         }
       }
     }
