@@ -133,7 +133,7 @@
                 ></path>
               </svg>
             </span>
-            icon in the upper&ndash;right of the chart to download it.
+            icon in the upper&ndash;right of charts to get a hi-res download.
           </p>
           <p>
             You can display these visualizations in Imperial or metric units.
@@ -181,9 +181,6 @@
             </li>
           </ul>
         </div>
-      </section>
-      <section class="content">
-        <BetaFeedback />
       </section>
       <section class="section content py-0 is-hidden-touch" v-if="dataMissing">
         <div class="is-size-5">
