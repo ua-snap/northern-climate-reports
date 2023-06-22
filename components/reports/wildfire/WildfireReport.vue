@@ -27,7 +27,7 @@
           ALFRESCO models. Pixels which are not modeled are shown as white.
         </p>
         <p>
-          <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
+          <nuxt-link :to="{ name: 'data' }"
             >See information about the dataset shown here.</nuxt-link
           >
         </p>

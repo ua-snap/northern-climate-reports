@@ -8,7 +8,7 @@
             >The following maps show the projected mean annual ground
             temperature over time at a depth of {{ depthFragment }}.</span
           >
-          <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
+          <nuxt-link :to="{ name: 'data' }"
             >See information about the dataset shown here.</nuxt-link
           >
         </div>
