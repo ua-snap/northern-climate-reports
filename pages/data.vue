@@ -40,28 +40,41 @@
               <a
                 href="https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/c24a957b-8a56-40bf-bc09-43a567182d36"
                 >GIPL Model 2.0</a
-              >, from the <a href="https://permafrost.gi.alaska.edu">Geophysical Institute Permafrost Laboratory</a> at the University of Alaska Fairbanks
+              >, from the
+              <a href="https://permafrost.gi.alaska.edu"
+                >Geophysical Institute Permafrost Laboratory</a
+              >
+              at the University of Alaska Fairbanks
             </td>
           </tr>
           <tr>
             <th scope="row">Temperature (monthly and derived)</th>
             <td>2km</td>
-            <td><a href="https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/3b2b24ff-4916-4d92-95b7-c6b2fcefd381">Historical - 2km CRU TS 4.0</a> <br /><a href="https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/ba834996-ad15-4785-9b43-ef2af86a5ad9">Projected - 2km CMIP5/AR5</a></td>
+            <td>
+              <a
+                href="https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/3b2b24ff-4916-4d92-95b7-c6b2fcefd381"
+                >Historical - 2km CRU TS 4.0</a
+              >
+              <br /><a
+                href="https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/ba834996-ad15-4785-9b43-ef2af86a5ad9"
+                >Projected - 2km CMIP5/AR5</a
+              >
+            </td>
           </tr>
           <tr>
             <th scope="row">Wildfire (flammability)</th>
             <td>1km</td>
             <td>
-              See a summarized data product from the ALFRESCO model that’s based
-              on the same data used here.
+              See a summarized data product from the ALFRESCO model that&rsquo;s
+              based on the same data used here.
             </td>
           </tr>
           <tr>
             <th scope="row">Wildfire (vegetation change)</th>
             <td>1km</td>
             <td>
-              See a summarized data product from the ALFRESCO model that’s based
-              on the same data used here.
+              See a summarized data product from the ALFRESCO model that&rsquo;s
+              based on the same data used here.
             </td>
           </tr>
         </thead>
@@ -87,7 +100,6 @@
           >
         </p>
       </div>
-
     </div>
   </section>
 </template>
