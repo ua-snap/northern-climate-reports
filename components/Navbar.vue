@@ -69,6 +69,7 @@
       width: 20%;
       background-color: #6d31f5;
       color: white;
+      min-width: 7rem;
     }
   }
 

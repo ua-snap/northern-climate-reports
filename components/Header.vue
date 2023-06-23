@@ -46,7 +46,7 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1035px) {
   .header--text--wrapper {
     top: 1.75rem;
     padding-bottom: 1.5rem;
@@ -63,15 +63,27 @@
   }
 }
 
-@media screen and (max-width: 681px) {
+@media screen and (max-width: 696px) {
   h2 {
     display: none;
   }
 }
 
-@media screen and (max-width: 572px) {
-  h1 {
-    line-height: 1.1;
+@media screen and (max-width: 587px) {
+  .header--text--wrapper {
+    h1 {
+      line-height: 1.1;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .header--text--wrapper {
+    h1 {
+      line-height: 1.1;
+      font-size: 0.9rem;
+    }
   }
 }
 </style>
