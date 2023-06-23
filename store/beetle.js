@@ -1,6 +1,7 @@
 // This store manages ALFRESCO data!
 import _ from 'lodash'
 import { getHttpError } from '../utils/http_errors'
+import nuxtStorage from 'nuxt-storage'
 
 export const state = () => ({
   beetleData: undefined,
@@ -78,14 +79,55 @@ export const mutations = {
 
 export const actions = {
   async fetch(context) {
-    let queryUrl =
-      process.env.apiUrl +
-      '/beetles/' +
-      context.rootGetters['place/urlFragment']()
-    let beetlesData = await this.$axios.$get(queryUrl).catch(err => {
-      let httpError = getHttpError(err)
-      context.commit('setHttpError', httpError)
-    })
-    context.commit('setBeetleData', beetlesData)
+    if (
+      nuxtStorage.localStorage.getData(
+        'beetleData-' + context.rootGetters['place/urlFragment']()
+      )
+    ) {
+      context.commit(
+        'setBeetleData',
+        nuxtStorage.localStorage.getData(
+          'beetleData-' + context.rootGetters['place/urlFragment']()
+        )
+      )
+    } else {
+      let beetleData = null
+      if (
+        nuxtStorage.localStorage.getData(
+          'beetleError-' + context.rootGetters['place/urlFragment']()
+        )
+      ) {
+        context.commit(
+          'setHttpError',
+          nuxtStorage.localStorage.getData(
+            'beetleError-' + context.rootGetters['place/urlFragment']()
+          )
+        )
+      } else {
+        let queryUrl =
+          process.env.apiUrl +
+          '/beetles/' +
+          context.rootGetters['place/urlFragment']()
+        beetlesData = await this.$axios.$get(queryUrl).catch(err => {
+          let httpError = getHttpError(err)
+          nuxtStorage.localStorage.setData(
+            'beetleError-' + context.rootGetters['place/urlFragment'](),
+            httpError,
+            4,
+            'h'
+          )
+          context.commit('setHttpError', httpError)
+        })
+      }
+      if (beetleData != null) {
+        nuxtStorage.localStorage.setData(
+          'beetleData-' + context.rootGetters['place/urlFragment'](),
+          beetlesData,
+          4,
+          'h'
+        )
+        context.commit('setBeetleData', beetlesData)
+      }
+    }
   },
 }

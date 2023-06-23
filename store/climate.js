@@ -2,6 +2,7 @@
 import _ from 'lodash'
 import { convertToInches, convertToFahrenheit } from '../utils/convert'
 import { getHttpError } from '../utils/http_errors'
+import nuxtStorage from 'nuxt-storage'
 
 // Helper functions
 var convertReportData = function (climateData) {
@@ -71,14 +72,55 @@ export const mutations = {
 
 export const actions = {
   async fetch(context) {
-    let queryUrl =
-      process.env.apiUrl +
-      '/taspr/' +
-      context.rootGetters['place/urlFragment']()
-    let climateData = await this.$axios.$get(queryUrl).catch(err => {
-      let httpError = getHttpError(err)
-      context.commit('setHttpError', httpError)
-    })
-    context.commit('setClimateData', climateData)
+    if (
+      nuxtStorage.localStorage.getData(
+        'climateData-' + context.rootGetters['place/urlFragment']()
+      )
+    ) {
+      context.commit(
+        'setClimateData',
+        nuxtStorage.localStorage.getData(
+          'climateData-' + context.rootGetters['place/urlFragment']()
+        )
+      )
+    } else {
+      let climateData = null
+      if (
+        nuxtStorage.localStorage.getData(
+          'climateError-' + context.rootGetters['place/urlFragment']()
+        )
+      ) {
+        context.commit(
+          'setHttpError',
+          nuxtStorage.localStorage.getData(
+            'climateError-' + context.rootGetters['place/urlFragment']()
+          )
+        )
+      } else {
+        let queryUrl =
+          process.env.apiUrl +
+          '/taspr/' +
+          context.rootGetters['place/urlFragment']()
+        climateData = await this.$axios.$get(queryUrl).catch(err => {
+          let httpError = getHttpError(err)
+          nuxtStorage.localStorage.setData(
+            'climateError-' + context.rootGetters['place/urlFragment'](),
+            httpError,
+            4,
+            'h'
+          )
+          context.commit('setHttpError', httpError)
+        })
+      }
+      if (climateData != null) {
+        nuxtStorage.localStorage.setData(
+          'climateData-' + context.rootGetters['place/urlFragment'](),
+          climateData,
+          4,
+          'h'
+        )
+        context.commit('setClimateData', climateData)
+      }
+    }
   },
 }

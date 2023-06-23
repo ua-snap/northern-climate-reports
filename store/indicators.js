@@ -2,6 +2,7 @@
 import _ from 'lodash'
 import { convertMmToInches, convertValueToFahrenheit } from '../utils/convert'
 import { getHttpError } from '../utils/http_errors'
+import nuxtStorage from 'nuxt-storage'
 
 var convertTemperatureData = function (obj) {
   if (typeof obj === 'number') {
@@ -81,14 +82,48 @@ export const mutations = {
 
 export const actions = {
   async fetch(context) {
-    let queryUrl =
-      process.env.apiUrl +
-      '/indicators/base/' +
-      context.rootGetters['place/urlFragment']()
-    let indicatorData = await this.$axios.$get(queryUrl).catch(err => {
-      let httpError = getHttpError(err)
-      context.commit('setHttpError', httpError)
-    })
-    context.commit('setIndicatorData', indicatorData)
+    if (
+      nuxtStorage.localStorage.getData(
+        'indicatorData-' + context.rootGetters['place/urlFragment']()
+      )
+    ) {
+      context.commit('setIndicatorData', indicatorData)
+    } else {
+      let indicatorData = null
+      if (
+        nuxtStorage.localStorage.getData(
+          'indicatorError-' + context.rootGetters['place/urlFragment']()
+        )
+      ) {
+        context.commit(
+          'setHttpError',
+          nuxtStorage.localStorage.getData(
+            'indicatorError-' + context.rootGetters['place/urlFragment']()
+          )
+        )
+      } else {
+        let queryUrl =
+          process.env.apiUrl +
+          '/indicators/base/' +
+          context.rootGetters['place/urlFragment']()
+        indicatorData = await this.$axios.$get(queryUrl).catch(err => {
+          let httpError = getHttpError(err)
+          nuxtStorage.localStorage.setData(
+            'indicatorError-' + context.rootGetters['place/urlFragment'](),
+            httpError
+          )
+          context.commit('setHttpError', httpError)
+        })
+        if (indicatorData != null) {
+          nuxtStorage.localStorage.setData(
+            'indicatorData-' + context.rootGetters['place/urlFragment'](),
+            indicatorData,
+            4,
+            'h'
+          )
+          context.commit('setIndicatorData', indicatorData)
+        }
+      }
+    }
   },
 }
