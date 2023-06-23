@@ -1,8 +1,8 @@
 // Some properties reused in the OpenGraph tags.
 var metas = {
-  title: 'Northern Climate Reports for Changing Arctic Ecosystems',
+  title: 'Northern Climate Reports',
   description:
-    'Three forms of heat-related phenomena—warming temperatures, thawing permafrost, and more fire—are driving landscape change in Northern ecosystems. This tool uses climate data to construct a variety of possible futures for a warming North.',
+    'Warming temperatures, thawing permafrost, and more wildfires are changing landscapes across the North. Explore these changes with easy-to-understand climate model projections.',
   preview: '/preview.png',
   url: 'https://northernclimatereports.org',
 }
