@@ -22,7 +22,7 @@
   font-weight: 800;
   max-height: 12rem;
   h1 {
-    font-size: 2.80rem;
+    font-size: 2.8rem;
     position: relative;
     left: -3px;
 
@@ -43,6 +43,35 @@
     span {
       text-transform: lowercase;
     }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .header--text--wrapper {
+    top: 1.75rem;
+    padding-bottom: 1.5rem;
+    h1 {
+      font-size: 1.5rem;
+      span img {
+        display: none;
+      }
+    }
+    h2 {
+      font-size: 1rem;
+      margin-top: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 681px) {
+  h2 {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 572px) {
+  h1 {
+    line-height: 1.1;
   }
 }
 </style>
