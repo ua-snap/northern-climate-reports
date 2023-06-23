@@ -95,9 +95,7 @@
           provided on the API site.
         </p>
         <p>
-          <a class="button is-info" href="https://earthmaps.io"
-            >Visit the Data API</a
-          >
+          <a href="https://earthmaps.io">Visit the Data API</a>
         </p>
       </div>
     </div>
