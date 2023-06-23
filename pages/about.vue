@@ -1,267 +1,113 @@
 <template>
   <section class="section">
     <div class="content-wrapper">
-      <h2 id="main-title" class="title is-2">
-        What can you learn from this tool?
+      <h1 class="title is-2">
+        We&rsquo;ve made climate model projections for Alaska and western Canada
+        easier to understand
+      </h1>
+      <div class="content is-size-5">
+        <p>
+          See stories and graphics that show how your part of the North may
+          change over time. Use these to better understand and reduce risk, plan
+          infrastructure, manage natural resources, and communicate change. You
+          can also download data.
+        </p>
+      </div>
+      <h2 class="title is-3 mt-6">How is this region changing?</h2>
+      <div class="content is-size-5">
+        <p>
+          <strong>Temperatures are rising.</strong> Earlier springs, warmer
+          summers, later autumns, and less severe winters are changing the mix
+          of species on the Northern landscape.
+        </p>
+        <p>
+          <strong>Permafrost is thawing.</strong> This alters surface drainage
+          and increases possible rooting depths, yielding ecological shifts.
+        </p>
+        <p>
+          <strong>Wildfires are more frequent.</strong> More early-succession
+          and fewer late-succession vegetation species appear across landscapes.
+        </p>
+      </div>
+      <h2 class="title is-3 mt-6">
+        Best practices for using climate projections
       </h2>
       <div class="content is-size-5">
-        <ul class="toc">
-          <li>
-            <nuxt-link :to="{ hash: 'why-decision-support' }"
-              >Why do we need this tool?</nuxt-link
-            >
-          </li>
-          <li>
-            <nuxt-link :to="{ hash: 'arctic-change' }"
-              >What&rsquo;s changing in the Arctic?</nuxt-link
-            >
-          </li>
-          <li>
-            <nuxt-link :to="{ hash: 'models-projections-uncertainty' }"
-              >Models, projections, and uncertainty</nuxt-link
-            >
-          </li>
-          <li>
-            <nuxt-link :to="{ hash: 'how-projections-work' }"
-              >How are climate projections made?</nuxt-link
-            >
-          </li>
-          <li>
-            <nuxt-link :to="{ hash: 'best-practices' }"
-              >Best practices for producing and using climate
-              projections</nuxt-link
-            >
-          </li>
-          <li>
-            <nuxt-link :to="{ hash: 'real-compare-projection' }"
-              >How might the real climate conditions compare to
-              projections?</nuxt-link
-            >
-          </li>
-        </ul>
-        <h2 id="why-decision-support" class="title is-3">
-          Why we need easy&ndash;to&ndash;use decision&ndash;support tools for
-          climate adaptation
-        </h2>
-
         <p>
-          Assessments of climate&ndash;change effects on Northern ecosystems are
-          hindered by a lack of decision&ndash;support tools that can visualize
-          possible future landscapes under different scenarios.
-        </p>
-        <p>
-          Model output products are publicly available, but often in formats
-          requiring considerable expertise to access and process. Repackaging
-          these outputs as climate reports moves relevant climate information
-          out of storage and into decision&ndash;making spaces&mdash;thus
-          helping to gauge future fire hazard, reduce future wildfire risk,
-          promote ecological resilience and manage wildlife habitat.
+          <strong>Think broadly.</strong> Climate projections are most reliable
+          when averaged across time or space because daily variations are
+          &ldquo;smoothed out.&rdquo; Examples: &ldquo;projected average of 30
+          years of winter precipitation for Bethel, Alaska&rdquo; or
+          &ldquo;projected hottest temperature for the north coast of
+          Alaska.&rdquo;
         </p>
 
-        <h2 id="arctic-change" class="title is-3">
-          What&rsquo;s changing in the Arctic?
-        </h2>
         <p>
-          Several climate&ndash;related ecosystem features are driving rapid
-          change in the North. Using ecosystem data to envision how these
-          changes may progress in the near&ndash;term and more distant future is
-          crucial for land managers, planners, and communities.
+          <strong>What seems most likely?</strong> The climate we will
+          experience will not look exactly like any one projection, but it will
+          look like a lot of them. So, plan for the likely range of climates,
+          impacts, and risks for the time frame and region you&rsquo;re working
+          with.
         </p>
+
+        <article class="message is-info">
+          <div class="message-header">
+            <p>Pro tip!</p>
+          </div>
+          <div class="message-body">
+            Projections are always improving, but don&rsquo;t wait for a better
+            one&mdash;you&rsquo;ll always be waiting, and the costs of waiting
+            will increase. Instead, plan for the range of historical variability
+            plus the range of climates described by a less warm (none show
+            cooling!) model under a lower emissions scenario.
+          </div>
+        </article>
+      </div>
+
+      <h2 class="title is-3 mt-6">Best practices, illustrated</h2>
+      <figure class="image">
+        <img src="~/assets/images/best-practices-image.jpg" />
+      </figure>
+      <div class="content is-size-5">
         <p>
-          These ecosystem drivers&mdash;temperature, permafrost, and
-          fire&mdash;are closely linked in terms of what causes them and their
-          effects on ecosystems.
+          These models provide a range that brackets average outputs across all
+          CMIP5 models, and also perform well in Northern regions.
         </p>
+
         <ul>
           <li>
-            <strong>Warming temperatures</strong> are driving some changes in
-            species composition&mdash;particularly warmer summers, earlier
-            springs, later autumns, and less severe winters.
+            <strong>Use multiple decades and historical comparisons.</strong>
+            Longer-term averages resist model variability and natural
+            variations. Compare a future (like 2070&ndash;2099) to a historical
+            reference (like 1981&ndash;2010)&mdash;the later the reference, the
+            more climate change is already a part of it!
           </li>
           <li>
-            Thawing of <strong>permafrost</strong>, also driven by warming
-            temperatures, alters surface drainage and increases possible rooting
-            depths, yielding distinct ecological shifts.
+            <strong>Choose a large area.</strong> Large areas, such as
+            watersheds or planning units, are less affected by local variations
+            in elevation, vegetation, etc. than small areas. Use multiple
+            emissions scenarios. Humans are unpredictable, so pick at least two
+            scenarios that bracket the likely range, unless you only want the
+            &ldquo;best&rdquo; or &ldquo;worst&rdquo; case. RCP 4.5 and RCP 8.5
+            are good choices.
           </li>
           <li>
-            Increases in <strong>fire</strong> frequency&mdash;again indirectly
-            driven by warming&mdash;also contributes to broad
-            landscape&ndash;level vegetation change, as early&ndash;succession
-            species increase in frequency and late&ndash;success species
-            decrease.
+            <strong>Use multiple models and/or an average.</strong> All models
+            are plausible, if not equally likely. Use several models if the full
+            range of possibilities is important to your work. Use a model
+            average if you&rsquo;re more interested in the most likely outputs.
+          </li>
+          <li>
+            <strong>Include medium-term and longer-term futures.</strong> A
+            comprehensive assessment would consider a historical, a mid-21st
+            century future, and a late-21st century future. The two futures
+            should each have a high, low, and middle range, with multiple models
+            and multiple emission scenarios in each future window.
           </li>
         </ul>
-        <p>
-          These connections are complex, and the uncertainty associated with
-          them is high. Nonetheless, by studying and modeling each factor and
-          connecting model outputs when possible, we can produce a range of
-          projections that explore possible changes locally, regionally, or
-          landscape&ndash;wide across the North.
-        </p>
-        <h2 id="models-projections-uncertainty" class="title is-3">
-          Models, projections, uncertainties
-        </h2>
-        <h3 class="subtitle is-4">
-          Climate models help us imagine possible climate futures.
-        </h3>
-        <p>
-          We use weather forecasts for short&ndash;term planning. Climate
-          projections can be used for long&ndash;term planning&mdash;but they
-          are not the same as forecasts. Weather varies day to day, whereas
-          climate refers to the average or typical conditions over much longer
-          time periods. However, there are uncertainties based on model
-          limitations and unknown future human behavior that make
-          long&ndash;range forecasting very different from predicting tomorrow's
-          weather.
-        </p>
-        <p>
-          Climate projections look much further into the future than weather
-          forecasts. They address uncertainties by focusing on the range of
-          future conditions that would likely occur, given what we currently
-          know about the climate system and how it will change in response to
-          changes in the factors that affect it.
-        </p>
-
-        <h3 id="how-projections-work" class="subtitle is-4">
-          How do we make these projections? We use climate models.
-        </h3>
-        <p>
-          Climate models are simplified versions of reality that try to explain
-          climatic processes with just the most necessary parts of the system.
-          Their usefulness is evident when we compare observed historical
-          climate and simulated data&mdash;the models capture the most important
-          climate patterns.
-        </p>
-        <p>
-          Climate models use data to calculate how the global climate varies.
-          These data include:
-        </p>
-        <ul>
-          <li>initial climate conditions</li>
-          <li>
-            &ldquo;forcings&rdquo; such as atmospheric greenhouse gas, solar and
-            volcanic variability
-          </li>
-          <li>ocean and atmosphere variability</li>
-          <li>land surface conditions</li>
-          <li>feedbacks such as the carbon cycle and the water cycle</li>
-        </ul>
-        <p>
-          The end product is a simulation of future climate. Because the end
-          product is based on statistical probabilities, the data are most
-          reliable when averaged across time or space, such as the projected
-          average of 30 years of winter precipitation for your community, or the
-          likely hottest temperature that might occur on the North Slope.
-        </p>
-
-        <h3 class="subtitle is-4">
-          Climate models aren&rsquo;t perfect, though.
-        </h3>
-        <p>
-          Between now and about 20&ndash;30 years from now, current climate
-          change is the best predictor of the rate of change, but year to year
-          variability is the largest source of uncertainty. Although
-          long&ndash;term climate change shows clear trends, those can be masked
-          by natural ups and downs in the short term. Climate models do simulate
-          this kind of variability, but they cannot predict it precisely.
-        </p>
-
-        <h3 id="best-practices" class="subtitle is-4">
-          Best practices for making projections
-        </h3>
-        <ul>
-          <li>
-            <strong>Use multiple decades.</strong> Averages over 20&ndash;30
-            years are more resistant to transient variability in climate models
-            and to natural variations in regional climate. Compare a future
-            (like 2030&ndash;2069) to a historical reference frame (like
-            1970&ndash;1999), and keep in mind that the later the historical
-            reference frame, the more climate change is already in it!
-          </li>
-          <li>
-            <strong>Use multiple climate models.</strong> Picking one model is
-            not good practice because all the models are at least plausible, if
-            not equally likely. Use several separate models if the full range of
-            possibilities is important to your work, or use the average of
-            multiple models if you are more interested in the most likely
-            outputs. This is especially critical between now and about the 2050s
-            or 2060s.
-          </li>
-          <li>
-            <strong>Use multiple emission scenarios.</strong> Given the
-            uncertainty around future human behavior, you should pick at least
-            two scenarios that bracket the likely range, unless you are only
-            interested in looking at the &ldquo;best case&rdquo; or &ldquo;worst
-            case&rdquo;. RCP 4.5 and RCP 8.5 are good choices.. This is
-            especially critical after about 2050.
-          </li>
-          <li>
-            <strong
-              >Look at medium&ndash;term and longer&ndash;term futures.</strong
-            >
-            A comprehensive assessment would consider a historical, a
-            mid&ndash;21st century future, and a late&ndash;21<sup>st</sup>
-            century future. The two futures should have a high, low and middle
-            range each, possibly with multiple models and multiple emission
-            scenarios in each future window.
-          </li>
-          <li>
-            <strong>Don&rsquo;t make your assessment area too small.</strong>
-            The more local your assessment, the more likely it is that local
-            factors like elevation, vegetation, etc. and the process used to
-            downscale the climate model to local resolution contribute to the
-            uncertainty. Larger areas are probably more resistant to this local
-            variation, so a watershed, planning unit, or responses across
-            several of these are perhaps more useful to consider.
-          </li>
-          <li>
-            <strong
-              >For fire projections and post&ndash;fire vegetation, look at
-              averages across many model runs.</strong
-            >
-            The ALFRESCO fire and vegetation model cannot predict the precise
-            behavior of future fires, but it can simulate the likelihood that
-            fires will start and spread across broad landscapes across long
-            periods of time, causing shifts in the age and type of vegetation.
-            When looking at outputs, consider either a typical model run
-            (&ldquo;best replicate&rdquo;) or an average of many possible
-            burning scenarios. Outputs are helpful for assessing
-            large&ndash;scale long&ndash;term shifts, but are not meaningful at
-            a pixel by pixel level.
-          </li>
-        </ul>
-
-        <h3 id="real-compare-projection" class="subtitle is-4">
-          How will the &ldquo;real&rdquo; climate compare to any projection?
-        </h3>
-
-        <p>
-          The future climate we experience will not look exactly like any of
-          these projections, but it will look like a lot of them. There are a
-          range of future climates we may experience, and best practices are to
-          plan for the likely range of climates, impacts, and associated risks
-          for the time frame and region you&rsquo;re planning for.
-        </p>
-        <p>
-          <strong
-            >Projections are always improving incrementally. Don&rsquo;t wait
-            for a better projection&mdash;you&rsquo;ll always be waiting and the
-            costs of waiting will increase. In general, plan for the range of
-            historical variability plus the range of climates described by a
-            less warm (none show cooling!) climate model under a lower emissions
-            scenario.</strong
-          >
-        </p>
       </div>
     </div>
   </section>
 </template>
 
-<style lang="scss" scoped>
-p:last-of-type {
-  margin-bottom: 2.5rem;
-}
-#main-title {
-  margin-top: 1rem;
-}
-</style>
+<style lang="scss" scoped></style>

@@ -12,7 +12,7 @@
           <strong
             >Models have higher uncertainty with regard to precipitation</strong
           >.
-          <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
+          <nuxt-link :to="{ name: 'data' }"
             >See information about the dataset shown here.</nuxt-link
           >
         </p>

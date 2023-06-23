@@ -84,8 +84,8 @@
         <h5 class="is-title is-5">
           Search these names
           <span
-            ><nuxt-link :to="{ name: 'data', hash: '#places' }"
-              >Learn more about these areas.</nuxt-link
+            ><nuxt-link :to="{ name: 'places' }"
+              >Learn more about these areas</nuxt-link
             ></span
           >
         </h5>
@@ -96,19 +96,20 @@
               <li>Alaska Fire Management Units</li>
               <li>Alaska Game Management Units (GMUs)</li>
               <li>Alaska Native Corporations</li>
+              <li>Boroughs and Census Areas</li>
               <li>Communities in Alaska and Canada</li>
-              <li>Ethnolinguistic Divisions</li>
             </ul>
           </div>
           <div class="column">
             <ul>
+              <li>Ethnolinguistic Divisions</li>
+              <li>
+                <strong>Hydrological units (HUs)</strong> searchable by HU Code
+                (HUC8, HUC10) and name
+              </li>
               <li>
                 <strong>Protected areas</strong>&nbsp;&nbsp;National Parks and
                 more, searchable by name and agency
-              </li>
-              <li>
-                <strong>Hydrological units (HUs)</strong> searchable by HU Code
-                (HUC8, HUC10, HUC12)
               </li>
               <li>Yukon First Nation Traditional Territories</li>
             </ul>
@@ -123,17 +124,23 @@
   h5 span {
     display: inline-block;
     padding-left: 2rem;
-    font-size: 90%;
+    font-size: 85%;
   }
-  .name-types-list.columns {
-    .column {
-      padding-top: 0;
-      margin-top: -0.5rem;
-      ul {
-        list-style-type: none;
-        padding-left: 0;
-        margin-left: 0;
-        li {
+  .name-types-list {
+    position: relative;
+    z-index: -5000; // needed to prevent this div from being on top of autocomplete
+    &.columns {
+      .column {
+        padding-top: 0;
+        margin-top: -0.5rem;
+        ul {
+          list-style-type: none;
+          padding-left: 0;
+          margin-left: 0;
+          li {
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+          }
         }
       }
     }

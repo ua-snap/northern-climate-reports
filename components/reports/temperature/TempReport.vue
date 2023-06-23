@@ -9,7 +9,7 @@
           Results are averaged by season (three month averages) for two specific
           climate models (MRI CGCM3 and NCAR CCSM4) as well as average of five
           models which perform well in Alaska and the Arctic.
-          <nuxt-link :to="{ name: 'data', hash: '#datasets' }"
+          <nuxt-link :to="{ name: 'data' }"
             >See information about the dataset shown here.</nuxt-link
           >
         </p>
