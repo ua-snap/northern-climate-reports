@@ -72,7 +72,9 @@ export const mutations = {
 export const actions = {
   async fetch(context) {
     let queryUrl =
-      process.env.apiUrl + '/taspr/' + context.rootGetters['place/urlFragment']()
+      process.env.apiUrl +
+      '/taspr/' +
+      context.rootGetters['place/urlFragment']()
     let climateData = await this.$axios.$get(queryUrl).catch(err => {
       let httpError = getHttpError(err)
       context.commit('setHttpError', httpError)

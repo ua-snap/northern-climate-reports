@@ -1,7 +1,14 @@
 <template>
   <span
     class="diff"
-    :class="{ weak: isWeak, strong: isStrong, less: isLess, more: isMore, precip: isPrecip, temp: isTemp }"
+    :class="{
+      weak: isWeak,
+      strong: isStrong,
+      less: isLess,
+      more: isMore,
+      precip: isPrecip,
+      temp: isTemp,
+    }"
     v-html="diff"
   ></span>
 </template>
@@ -9,10 +16,11 @@
 .diff {
   display: block;
 
-  &.precip, &.temp.less {
+  &.precip,
+  &.temp.less {
     color: #05335e;
   }
-  
+
   &.temp.more {
     color: #5e3305;
   }
@@ -41,7 +49,7 @@ export default {
     variable: {
       type: String,
       required: true,
-    }
+    },
   },
   computed: {
     pct() {

@@ -18,7 +18,8 @@
         </div>
       </div>
       <p>
-        Enter a specific lat/lon combo above, decimal degrees or DMS format<br> i.e. <code>65.24, -142.22</code> or
+        Enter a specific lat/lon combo above, decimal degrees or DMS format<br />
+        i.e. <code>65.24, -142.22</code> or
         <code>58° 18' 0" N, 134° 24' 57.6" W</code>.
       </p>
     </div>

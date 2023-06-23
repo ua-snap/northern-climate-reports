@@ -25,17 +25,17 @@ export const getters = {
   // been selected.
   reportIsVisible: (state, getters) => {
     // If the path contains `report` then the report should be active.
-    if(state.route.path) {
+    if (state.route.path) {
       return state.route.path.includes('report')
     }
     return false
   },
 
-  mapSearchIsVisible: (state) => {
+  mapSearchIsVisible: state => {
     // If the path contains `search` then the map search pane should be active.
-    if(state.route.path) {
+    if (state.route.path) {
       return state.route.path.includes('search')
     }
     return false
-  }
+  },
 }
