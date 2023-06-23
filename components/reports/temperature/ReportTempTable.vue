@@ -3,7 +3,8 @@
     <table class="table report-table" v-if="reportData">
       <caption>
         Temperature,
-        <span v-html="place"></span>, 1950&ndash;2099
+        <span v-html="place"></span
+        >, 1950&ndash;2099
       </caption>
       <thead>
         <tr>
