@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="reportData">
     <div class="content">
       <h4 class="title is-3">Permafrost</h4>
       <div class="is-size-5">
@@ -45,15 +45,19 @@
     <div v-else-if="!reportData && type != 'community' && type != 'latLng'">
       <div class="content">
         <div class="is-size-5">
-          As permafrost thaws, the ground depth to the top of the permafrost layer increases.  Because the selected place is an area, not a point location, a chart showing ground depth to the top of the permafrost layer cannot be shown because it varies across the extent of the area.
+          As permafrost thaws, the ground depth to the top of the permafrost
+          layer increases. Because the selected place is an area, not a point
+          location, a chart showing ground depth to the top of the permafrost
+          layer cannot be shown because it varies across the extent of the area.
         </div>
       </div>
     </div>
     <div v-else>
       <div class="content">
         <div class="is-size-5">
-          As permafrost thaws, the ground depth to the top of the permafrost layer increases.  This cannot be shown for this place because because permafrost data is not available for this
-          location.
+          As permafrost thaws, the ground depth to the top of the permafrost
+          layer increases. This cannot be shown for this place because because
+          permafrost data is not available for this location.
         </div>
       </div>
     </div>

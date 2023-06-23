@@ -39,12 +39,14 @@
             <span v-if="type == 'latLng'"
               >The <span v-if="climateData">tables and </span>charts below are
               specific to the gridded data extracted at
-              <span v-html="place"></span>, indicated by a marker on the map above. {{ hucPolyExplanation }}</span
+              <span v-html="place"></span>, indicated by a marker on the map
+              above. {{ hucPolyExplanation }}</span
             >
             <span v-else-if="type == 'community'"
               >The <span v-if="climateData">tables and </span>charts below are
               specific to the gridded data extracted from the location of
-              <span v-html="place"></span>, indicated by a marker on the map above. {{ hucPolyExplanation }}</span
+              <span v-html="place"></span>, indicated by a marker on the map
+              above. {{ hucPolyExplanation }}</span
             >
             <span v-else
               >Data for the tables and charts below have been averaged across
@@ -164,7 +166,7 @@
               multiple models and scenarios, grouped decadally and into mid/late
               century
             </li>
-            <li v-if="permafrostData || type != 'latLng'">
+            <li v-if="permafrostData">
               <a href="#permafrost">Permafrost</a> with specific visualizations
               depending on the presence or absence of permafrost
             </li>
@@ -329,7 +331,8 @@ export default {
     return {
       units: 'imperial',
       httpErrors: httpErrors,
-      hucPolyExplanation: 'The shaded region on the map is the nearest watershed (hydrological unit, level 12) and is only used to summarize wildfire data around this place.'
+      hucPolyExplanation:
+        'The shaded region on the map is the nearest watershed (hydrological unit, level 12) and is only used to summarize wildfire data around this place.',
     }
   },
   computed: {
@@ -403,7 +406,7 @@ export default {
     // it should be 'vivid' (more pronounced).  Used in MiniMap.
     // the polygon.
     polystyle() {
-      if(this.type == 'latLng' || this.type == 'community') {
+      if (this.type == 'latLng' || this.type == 'community') {
         return '' // uses default calm MiniMap style
       }
       return 'vivid'
