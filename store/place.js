@@ -1,5 +1,6 @@
 // Shim for dev/testing
 import _ from 'lodash'
+import nuxtStorage from 'nuxt-storage'
 
 // Store, namespaced as `place/`
 export const state = () => ({
@@ -215,14 +216,15 @@ export const actions = {
 
   async fetchPlaces(context) {
     // If we've already fetched this, don't do that again.
-    if (context.state.places) {
-      return
+    if (nuxtStorage.localStorage.getData('places')) {
+      context.commit('setPlaces', nuxtStorage.localStorage.getData('places'))
+    } else {
+      // TODO: add error handling here for 404 (no data) etc.
+      let queryUrl = process.env.apiUrl + '/places/all'
+      let places = await this.$http.$get(queryUrl)
+      nuxtStorage.localStorage.setData('places', places, 4, 'h')
+      context.commit('setPlaces', places)
     }
-
-    // TODO: add error handling here for 404 (no data) etc.
-    let queryUrl = process.env.apiUrl + '/places/all'
-    let places = await this.$http.$get(queryUrl)
-    context.commit('setPlaces', places)
   },
 
   async search(context) {
