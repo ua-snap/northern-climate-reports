@@ -11,7 +11,11 @@
     </div>
     <div id="map-search">
       <div class="is-flex is-flex-direction-row">
-        <div id="map--wrapper" v-bind:class="{ minimized: mapSearchIsVisible }">
+        <div
+          id="map--wrapper"
+          v-bind:class="{ minimized: mapSearchIsVisible }"
+          v-bind:style="mapStyleObject"
+        >
           <Map />
         </div>
         <div
@@ -79,6 +83,15 @@ export default {
   name: 'MapWrapper',
   components: { Map, SearchResults },
   computed: {
+    mapStyleObject() {
+      if (this.mapSearchIsVisible) {
+        return {
+          position: 'sticky',
+          top: 0,
+        }
+      }
+      return {}
+    },
     ...mapGetters({
       searchResults: 'place/searchResults',
       mapSearchIsVisible: 'mapSearchIsVisible',
