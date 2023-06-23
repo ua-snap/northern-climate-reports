@@ -17,22 +17,29 @@
   // styles defined in the `layouts/default` component,
   // which wraps this and the Header component.
   align-self: flex-end;
-  bottom: 0px;
+  position: relative;
+  top: -3rem;
   font-weight: 800;
+  max-height: 12rem;
   h1 {
-    font-size: 3.2vw;
+    font-size: 2.80rem;
     position: relative;
     left: -3px;
 
     span {
       color: #f7ae06;
       display: inline-block;
+
+      img {
+        position: relative;
+        top: 30px;
+      }
     }
   }
 
   h2 {
-    font-size: 1.6vw;
-
+    font-size: 1.4rem;
+    margin-top: -0.7rem;
     span {
       text-transform: lowercase;
     }

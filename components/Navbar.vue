@@ -57,6 +57,7 @@
   padding: 0;
   margin: 0 0 20px 0;
   background: transparent;
+  height: 2rem;
 
   .navbar-burger {
     color: white;
