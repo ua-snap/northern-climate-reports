@@ -178,7 +178,6 @@
                 >Learn more about GMUs</a
               >
             </p>
-            <p class="photo-credit">Photo credit: UAF photo by Todd Paris</p>
           </div>
         </div>
       </div>
@@ -228,6 +227,7 @@
                 >Learn more about hydrological units</a
               >
             </p>
+            <p class="photo-credit">Photo credit: UAF photo by Todd Paris</p>
           </div>
         </div>
       </div>
