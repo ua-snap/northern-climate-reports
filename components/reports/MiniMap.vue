@@ -30,18 +30,19 @@ export default {
   },
   props: ['polystyle'],
   computed: {
-    // The 'vivid' style is the default (blue border/background).
     polygonStyle() {
-      if (this.polystyle == 'vivid') {
-        return {}
+      // The 'vivid' style is the default (blue border/background).
+      let geoJSONOptions = {
+        interactive: false, // outlines of areas should not be interactive
       }
-      return {
-        style: {
+      if (this.polystyle != 'vivid') {
+        geoJSONOptions.style = {
           stroke: false,
           color: '#000000',
           fillOpacity: 0.3,
-        },
+        }
       }
+      return geoJSONOptions
     },
     ...mapGetters({
       latLng: 'place/latLng',
