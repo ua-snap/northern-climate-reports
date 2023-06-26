@@ -1,6 +1,6 @@
 // This store manages ALFRESCO data!
 import _ from 'lodash'
-import { getHttpError } from '../utils/http_errors'
+import { localStorage } from '../utils/localstorage'
 import nuxtStorage from 'nuxt-storage'
 
 export const state = () => ({
@@ -79,55 +79,19 @@ export const mutations = {
 
 export const actions = {
   async fetch(context) {
-    if (
-      nuxtStorage.localStorage.getData(
-        'beetleData-' + context.rootGetters['place/urlFragment']()
-      )
-    ) {
-      context.commit(
-        'setBeetleData',
-        nuxtStorage.localStorage.getData(
-          'beetleData-' + context.rootGetters['place/urlFragment']()
-        )
-      )
+    let queryUrl =
+      process.env.apiUrl +
+      '/beetles/' +
+      context.rootGetters['place/urlFragment']()
+    let localKey = 'beetleData-' + context.rootGetters['place/urlFragment']()
+    let errorKey = 'beetleError-' + context.rootGetters['place/urlFragment']()
+
+    let returnedData = await localStorage(queryUrl, localKey, errorKey)
+
+    if (nuxtStorage.localStorage.getData(errorKey)) {
+      context.commit('setHttpError', nuxtStorage.localStorage.getData(errorKey))
     } else {
-      let beetleData = null
-      if (
-        nuxtStorage.localStorage.getData(
-          'beetleError-' + context.rootGetters['place/urlFragment']()
-        )
-      ) {
-        context.commit(
-          'setHttpError',
-          nuxtStorage.localStorage.getData(
-            'beetleError-' + context.rootGetters['place/urlFragment']()
-          )
-        )
-      } else {
-        let queryUrl =
-          process.env.apiUrl +
-          '/beetles/' +
-          context.rootGetters['place/urlFragment']()
-        beetlesData = await this.$axios.$get(queryUrl).catch(err => {
-          let httpError = getHttpError(err)
-          nuxtStorage.localStorage.setData(
-            'beetleError-' + context.rootGetters['place/urlFragment'](),
-            httpError,
-            4,
-            'h'
-          )
-          context.commit('setHttpError', httpError)
-        })
-      }
-      if (beetleData != null) {
-        nuxtStorage.localStorage.setData(
-          'beetleData-' + context.rootGetters['place/urlFragment'](),
-          beetlesData,
-          4,
-          'h'
-        )
-        context.commit('setBeetleData', beetlesData)
-      }
+      context.commit('setBeetleData', returnedData)
     }
   },
 }

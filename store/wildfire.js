@@ -1,8 +1,7 @@
 // This store manages ALFRESCO data!
 import _ from 'lodash'
-import { getHttpError } from '../utils/http_errors'
 import { convertToPercent } from '../utils/convert'
-import { objectTypeSpreadProperty } from '@babel/types'
+import { localStorage } from '../utils/localstorage'
 import nuxtStorage from 'nuxt-storage'
 
 // Store, namespaced as `climate/`
@@ -187,136 +186,52 @@ export const actions = {
     // to use the special `/local` endpoint & pass
     // a parameter to the `urlFragment` getter to return
     // the correct structure.
-
-    if (
-      nuxtStorage.localStorage.getData(
-        'flammability-' +
-          context.rootGetters['place/urlFragment'](
-            context.rootGetters['place/isPointLocation']
-          )
-      )
-    ) {
-      context.commit(
-        'setFlammability',
-        nuxtStorage.localStorage.getData(
-          'flammability-' +
-            context.rootGetters['place/urlFragment'](
-              context.rootGetters['place/isPointLocation']
-            )
-        )
-      )
-    } else {
-      let flammability = null
-      if (
-        nuxtStorage.localStorage.getData(
-          'flammabilityError-' + context.rootGetters['place/urlFragment']()
-        )
-      ) {
-        context.commit(
-          'setHttpError',
-          nuxtStorage.localStorage.getData(
-            'flammabilityError-' + context.rootGetters['place/urlFragment']()
-          )
-        )
-      } else {
-        let local = ''
-        if (context.rootGetters['place/isPointLocation']) {
-          local = 'local/'
-        }
-
-        let flammabilityQueryUrl =
-          process.env.apiUrl +
-          '/alfresco/flammability/' +
-          local +
-          context.rootGetters['place/urlFragment'](
-            context.rootGetters['place/isPointLocation']
-          )
-        flammability = await this.$axios
-          .$get(flammabilityQueryUrl)
-          .catch(err => {
-            let httpError = getHttpError(err)
-            nuxtStorage.localStorage.setData(
-              'flammabilityError-' + context.rootGetters['place/urlFragment']()
-            )
-            context.commit('setFlammabilityHttpError', httpError)
-          })
-      }
-      if (flammability != null) {
-        let convertedFlammability = convertToPercent(flammability)
-        nuxtStorage.localStorage.setData(
-          'flammability-' +
-            context.rootGetters['place/urlFragment'](
-              context.rootGetters['place/isPointLocation']
-            ),
-          convertedFlammability,
-          4,
-          'h'
-        )
-        context.commit('setFlammability', convertedFlammability)
-      }
+    let local = ''
+    if (context.rootGetters['place/isPointLocation']) {
+      local = 'local/'
     }
 
-    if (
-      nuxtStorage.localStorage.getData(
-        'vegChange-' +
-          context.rootGetters['place/urlFragment'](
-            context.rootGetters['place/isPointLocation']
-          )
+    let queryUrl =
+      process.env.apiUrl +
+      '/alfresco/flammability/' +
+      local +
+      context.rootGetters['place/urlFragment'](
+        context.rootGetters['place/isPointLocation']
       )
-    ) {
+    let localKey = 'flammability-' + context.rootGetters['place/urlFragment']()
+    let errorKey =
+      'flammabilityError-' + context.rootGetters['place/urlFragment']()
+
+    let returnedData = await localStorage(queryUrl, localKey, errorKey)
+
+    if (nuxtStorage.localStorage.getData(errorKey)) {
       context.commit(
-        'setVegChange',
-        nuxtStorage.localStorage.getData(
-          'vegChange-' +
-            context.rootGetters['place/urlFragment'](
-              context.rootGetters['place/isPointLocation']
-            )
-        )
+        'setFlammabilityHttpError',
+        nuxtStorage.localStorage.getData(errorKey)
       )
     } else {
-      let veg_change = null
-      if (
-        nuxtStorage.localStorage.getData(
-          'vegChangeError-' + context.rootGetters['place/urlFragment']()
-        )
-      ) {
-        context.commit(
-          'setHttpError',
-          nuxtStorage.localStorage.getData(
-            'vegChangeError-' + context.rootGetters['place/urlFragment']()
-          )
-        )
-      } else {
-        let vegChangeQueryUrl =
-          process.env.apiUrl +
-          '/alfresco/veg_type/' +
-          local +
-          context.rootGetters['place/urlFragment'](
-            context.rootGetters['place/isPointLocation']
-          )
-        veg_change = await this.$axios.$get(vegChangeQueryUrl).catch(err => {
-          let httpError = getHttpError(err)
-          nuxtStorage.localStorage.setData(
-            'vegChangeError-' + context.rootGetters['place/urlFragment'](),
-            httpError,
-            4,
-            'h'
-          )
-          context.commit('setVegChangeHttpError', httpError)
-        })
-      }
-      if (veg_change != null) {
-        nuxtStorage.localStorage.setData(
-          'vegChange-' +
-            context.rootGetters['place/urlFragment'](
-              context.rootGetters['place/isPointLocation']
-            ),
-          veg_change,
-          4,
-          'h'
-        )
-        context.commit('setVegChange', veg_change)
-      }
+      context.commit('setFlammability', convertToPercent(returnedData))
+    }
+
+    queryUrl =
+      process.env.apiUrl +
+      '/alfresco/veg_type/' +
+      local +
+      context.rootGetters['place/urlFragment'](
+        context.rootGetters['place/isPointLocation']
+      )
+    localKey = 'vegChange-' + context.rootGetters['place/urlFragment']()
+    errorKey = 'vegChangeError-' + context.rootGetters['place/urlFragment']()
+
+    returnedData = await localStorage(queryUrl, localKey, errorKey)
+
+    if (nuxtStorage.localStorage.getData(errorKey)) {
+      context.commit(
+        'setVegChangeHttpError',
+        nuxtStorage.localStorage.getData(errorKey)
+      )
+    } else {
+      context.commit('setVegChange', returnedData)
     }
   },
 }

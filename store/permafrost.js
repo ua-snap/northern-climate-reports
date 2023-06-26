@@ -2,7 +2,7 @@
 
 import _ from 'lodash'
 import { convertToInches, convertToFahrenheit } from '../utils/convert'
-import { getHttpError } from '../utils/http_errors'
+import { localStorage } from '../utils/localstorage'
 import nuxtStorage from 'nuxt-storage'
 
 // Store, namespaced as `permafrost/`
@@ -135,68 +135,21 @@ export const mutations = {
 
 export const actions = {
   async fetch(context) {
-    if (
-      nuxtStorage.localStorage.getData(
-        'permafrostData-' + context.rootGetters['place/urlFragment']()
-      )
-    ) {
-      context.commit(
-        'setPermafrostData',
-        nuxtStorage.localStorage.getData(
-          'permafrostData-' + context.rootGetters['place/urlFragment']()
-        )
-      )
+    let queryUrl =
+      process.env.apiUrl +
+      '/ncr/permafrost/' +
+      context.rootGetters['place/urlFragment']()
+    let localKey =
+      'permafrostData-' + context.rootGetters['place/urlFragment']()
+    let errorKey =
+      'permafrostError-' + context.rootGetters['place/urlFragment']()
+
+    let returnedData = await localStorage(queryUrl, localKey, errorKey)
+
+    if (nuxtStorage.localStorage.getData(errorKey)) {
+      context.commit('setHttpError', nuxtStorage.localStorage.getData(errorKey))
     } else {
-      if (context.rootGetters['place/latLng']) {
-        let permafrostQueryUrl =
-          process.env.apiUrl +
-          '/ncr/permafrost/' +
-          context.rootGetters['place/urlFragment']()
-        try {
-          let permafrostData = null
-          if (
-            nuxtStorage.localStorage.getData(
-              'permafrostError-' + context.rootGetters['place/urlFragment']()
-            )
-          ) {
-            context.commit(
-              'setHttpError',
-              nuxtStorage.localStorage.getData(
-                'permafrostError-' + context.rootGetters['place/urlFragment']()
-              )
-            )
-          } else {
-            permafrostData = await this.$axios
-              .$get(permafrostQueryUrl, { timeout: 60000 })
-              .catch(err => {
-                let httpError = getHttpError(err)
-                nuxtStorage.localStorage.setData(
-                  'permafrostError-' +
-                    context.rootGetters['place/urlFragment'](),
-                  httpError,
-                  4,
-                  'h'
-                )
-                context.commit('setHttpError', httpError)
-              })
-          }
-          if (permafrostData != null) {
-            nuxtStorage.localStorage.setData(
-              'permafrostData-' + context.rootGetters['place/urlFragment'](),
-              permafrostData,
-              4,
-              'h'
-            )
-            context.commit('setPermafrostData', permafrostData)
-          }
-        } catch (error) {
-          throw error
-        }
-      } else {
-        // This case means "won't query",
-        // How to handle this case?
-        return false
-      }
+      context.commit('setPermafrostData', returnedData)
     }
   },
 }

@@ -1,5 +1,5 @@
 import { convertToFeet } from '../utils/convert'
-import { getHttpError } from '../utils/http_errors'
+import { localStorage } from '../utils/localstorage'
 import nuxtStorage from 'nuxt-storage'
 
 export const state = () => ({
@@ -58,55 +58,20 @@ export const mutations = {
 
 export const actions = {
   async fetch(context) {
-    if (
-      nuxtStorage.localStorage.getData(
-        'elevation-' + context.rootGetters['place/urlFragment']()
-      )
-    ) {
-      context.commit(
-        'setElevation',
-        nuxtStorage.localStorage.getData(
-          'elevation-' + context.rootGetters['place/urlFragment']()
-        )
-      )
+    let queryUrl =
+      process.env.apiUrl +
+      '/elevation/' +
+      context.rootGetters['place/urlFragment']()
+    let localKey = 'elevation-' + context.rootGetters['place/urlFragment']()
+    let errorKey =
+      'elevationError-' + context.rootGetters['place/urlFragment']()
+
+    let returnedData = await localStorage(queryUrl, localKey, errorKey)
+
+    if (nuxtStorage.localStorage.getData(errorKey)) {
+      context.commit('setHttpError', nuxtStorage.localStorage.getData(errorKey))
     } else {
-      let elevation = null
-      if (
-        nuxtStorage.localStorage.getData(
-          'elevationError-' + context.rootGetters['place/urlFragment']()
-        )
-      ) {
-        context.commit(
-          'setHttpError',
-          nuxtStorage.localStorage.getData(
-            'elevationError-' + context.rootGetters['place/urlFragment']()
-          )
-        )
-      } else {
-        let queryUrl =
-          process.env.apiUrl +
-          '/elevation/' +
-          context.rootGetters['place/urlFragment']()
-        elevation = await this.$axios.$get(queryUrl).catch(err => {
-          let httpError = getHttpError(err)
-          nuxtStorage.localStorage.setData(
-            'elevationError-' + context.rootGetters['place/urlFragment'](),
-            httpError,
-            4,
-            'h'
-          )
-          context.commit('setHttpError', httpError)
-        })
-      }
-      if (elevation != null) {
-        nuxtStorage.localStorage.setData(
-          'elevation-' + context.rootGetters['place/urlFragment'](),
-          elevation,
-          4,
-          'h'
-        )
-        context.commit('setElevation', elevation)
-      }
+      context.commit('setElevation', returnedData)
     }
   },
 }
