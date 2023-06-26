@@ -105,6 +105,7 @@ export default {
     rasdamanUrl:
       process.env.RASDAMAN_URL || 'https://zeus.snap.uaf.edu/rasdaman/ows',
     apiUrl: process.env.SNAP_API_URL || 'https://earthmaps.io',
+    localStorageExpiration: process.env.LS_EXP || 4,
   },
 
   // Router customizations

@@ -18,11 +18,21 @@ export const localStorage = async function (
       returnedData = await $axios
         .get(queryUrl, { timeout: 60000 })
         .catch(err => {
-          nuxtStorage.localStorage.setData(errorKey, getHttpError(err), 4, 'h')
+          nuxtStorage.localStorage.setData(
+            errorKey,
+            getHttpError(err),
+            process.env.localStorageExpiration,
+            'h'
+          )
         })
     }
     if (returnedData != null) {
-      nuxtStorage.localStorage.setData(localKey, returnedData.data, 4, 'h')
+      nuxtStorage.localStorage.setData(
+        localKey,
+        returnedData.data,
+        process.env.localStorageExpiration,
+        'h'
+      )
     }
     return returnedData.data
   }
