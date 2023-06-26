@@ -231,8 +231,11 @@
           <PrecipReport />
         </div>
       </section>
-      <section class="section is-hidden-touch">
-        <div id="permafrost" v-if="permafrostData || type != 'latLng'">
+      <section
+        class="section is-hidden-touch"
+        v-if="permafrostData || type != 'latLng'"
+      >
+        <div id="permafrost">
           <PermafrostReport />
         </div>
       </section>
@@ -244,11 +247,11 @@
           <WildfireReport />
         </div>
       </section>
-      <section class="section is-hidden-touch">
-        <div id="climate-protection-beetles" v-if="beetleData">
+      <section class="section is-hidden-touch" v-if="beetleData">
+        <div id="climate-protection-beetles">
           <BeetleRiskReport />
+          <BackToTopButton />
         </div>
-        <BackToTopButton />
       </section>
       <section
         class="section is-hidden-fullhd is-hidden-widescreen is-hidden-desktop"
@@ -262,7 +265,6 @@
         </div>
       </section>
       <hr />
-      <BackButton />
     </div>
   </div>
 </template>
