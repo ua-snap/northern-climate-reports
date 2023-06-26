@@ -38,6 +38,7 @@ export const getBaseMapAndLayers = function () {
 export const addGeoJSONtoMap = function (zoomOutDelta = 0) {
   if (this.geoJSON) {
     this.geoJSONLayer = L.geoJSON(this.geoJSON, {
+      interactive: false,
       style: {
         color: '#444444',
         weight: 2,
