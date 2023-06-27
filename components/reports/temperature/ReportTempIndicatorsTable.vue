@@ -1,6 +1,13 @@
 <template>
-  <div class="report--temperature-indicators">
-    <table class="table report-table" v-if="reportData">
+  <div class="report--temperature-indicators" v-if="reportData">
+    <div class="content">
+      <h4 class="title is-4 mt-6">Temperature Indicators</h4>
+      <div class="is-size-5">
+        &ldquo;Indicators&rdquo; are a tool that help us understand data. We can
+        link indicators to specific impacts or risks.
+      </div>
+    </div>
+    <table class="table report-table">
       <caption>
         Temperature Indicators,
         <span v-html="place"></span
@@ -47,7 +54,7 @@
       <tbody>
         <tr>
           <th scope="row">
-            Cold Day Threshold
+            Very Cold Day Threshold
             <span class="description"
               >Only 5 days in a year are colder than this</span
             >
@@ -147,7 +154,7 @@
         </tr>
         <tr>
           <th scope="row">
-            Hot Day Threshold
+            Very Hot Day Threshold
             <span class="description"
               >Only 5 days in a year are warmer than this</span
             >
@@ -459,6 +466,77 @@
                 reportData['dw']['historical']['Daymet']['historical']['mean']
               "
             />
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">Warm Spell Duration Index <span class="description"
+              >how often are there 6 or more hot days in a row?
+            </span></th>
+          <td class="left">🥦🥦 TBD</td>
+          <td>
+            {{ reportData['wsdi']['midcentury']['MRI-CGCM3']['rcp45']['mean'] }}
+          </td>
+          <td>
+            {{
+              reportData['wsdi']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
+            }}
+          </td>
+          <td>
+            {{ reportData['wsdi']['midcentury']['MRI-CGCM3']['rcp85']['mean'] }}
+          </td>
+          <td>
+            {{
+              reportData['wsdi']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
+            }}
+          </td>
+          <td>
+            {{ reportData['wsdi']['longterm']['MRI-CGCM3']['rcp45']['mean'] }}
+          </td>
+          <td>
+            {{ reportData['wsdi']['longterm']['NCAR-CCSM4']['rcp45']['mean'] }}
+          </td>
+          <td>
+            {{ reportData['wsdi']['longterm']['MRI-CGCM3']['rcp85']['mean'] }}
+          </td>
+          <td>
+            {{ reportData['wsdi']['longterm']['NCAR-CCSM4']['rcp85']['mean'] }}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">
+            Cold Spell Duration Index
+            <span class="description"
+              >how often are there 6 or more cold days in a row?
+            </span>
+          </th>
+          <td class="left">🥕🥕 TBD</td>
+          <td>
+            {{ reportData['csdi']['midcentury']['MRI-CGCM3']['rcp45']['mean'] }}
+          </td>
+          <td>
+            {{
+              reportData['csdi']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
+            }}
+          </td>
+          <td>
+            {{ reportData['csdi']['midcentury']['MRI-CGCM3']['rcp85']['mean'] }}
+          </td>
+          <td>
+            {{
+              reportData['csdi']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
+            }}
+          </td>
+          <td>
+            {{ reportData['csdi']['longterm']['MRI-CGCM3']['rcp45']['mean'] }}
+          </td>
+          <td>
+            {{ reportData['csdi']['longterm']['NCAR-CCSM4']['rcp45']['mean'] }}
+          </td>
+          <td>
+            {{ reportData['csdi']['longterm']['MRI-CGCM3']['rcp85']['mean'] }}
+          </td>
+          <td>
+            {{ reportData['csdi']['longterm']['NCAR-CCSM4']['rcp85']['mean'] }}
           </td>
         </tr>
       </tbody>
