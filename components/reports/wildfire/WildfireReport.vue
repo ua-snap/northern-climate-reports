@@ -62,6 +62,7 @@
       endpoint="flammability"
       class="mt-3 mb-5"
     />
+    <BackToTopButton />
     <div class="content">
       <div class="is-size-5 mt-6">
         <p>
@@ -87,6 +88,7 @@
       endpoint="veg_type"
       class="mt-3 mb-5"
     />
+    <BackToTopButton />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -117,6 +119,7 @@ import ReportVegChangeMaps from './ReportVegChangeMaps'
 import ReportVegChangeChart from './ReportVegChangeChart'
 import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import ColorTable from '~/components/reports/ColorTable'
+import BackToTopButton from '~/components/reports/BackToTopButton'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -128,6 +131,7 @@ export default {
     ReportVegChangeChart,
     DownloadCsvButton,
     ColorTable,
+    BackToTopButton,
   },
   computed: {
     ...mapGetters({

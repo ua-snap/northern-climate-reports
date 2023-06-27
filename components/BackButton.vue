@@ -1,10 +1,9 @@
 <template>
   <div class="back">
     <b-button
-      class="default"
       tag="nuxt-link"
       to="/#controls"
-      type="is-info"
+      type="is-info is-light"
       icon-left="arrow-left-circle"
     >
       <strong>Go back</strong>, pick another place</b-button
