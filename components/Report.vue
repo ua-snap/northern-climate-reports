@@ -1,6 +1,5 @@
 <template>
   <div id="results" class="container">
-    <BackButton />
     <hr />
     <section v-if="$fetchState.pending" class="section content">
       <!-- Drama dots -->
@@ -31,6 +30,7 @@
         </h3>
         <MiniMap :polystyle="polystyle" />
         <QualitativeText />
+        <div class="content centered"><BackButton /></div>
       </section>
       <section class="section content pb-0 is-hidden-touch" v-if="dataPresent">
         <h3 class="title is-3">Introduction</h3>
@@ -265,6 +265,7 @@
         </div>
       </section>
       <hr />
+      <div class="content centered"><BackButton /></div>
     </div>
   </div>
 </template>

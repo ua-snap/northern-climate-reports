@@ -1,6 +1,6 @@
 <template>
   <p>
-    <a href="#toc">Back to top</a>
+    <a class="button light" href="#toc">Back to top</a>
   </p>
 </template>
 

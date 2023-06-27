@@ -2,9 +2,8 @@
   <div class="qualitative-text content" v-if="qualitativeText">
     <div class="generated" v-html="qualitativeText"></div>
     <p class="about-blurb">
-      Late&ndash;century, high-emissions (RCP 8.5), MRI CGCM3 or NCAR CCSM4
-      model (whichever shows greater change).<br />See tables and sections below
-      for more detailed information and definitions of fire activity levels.
+      Summary across all models and scenarios.  See tables and sections below
+      for more detailed information and definitions.
     </p>
   </div>
 </template>
