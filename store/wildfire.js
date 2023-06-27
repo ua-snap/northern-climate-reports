@@ -1,8 +1,8 @@
 // This store manages ALFRESCO data!
 import _ from 'lodash'
-import { getHttpError } from '../utils/http_errors'
 import { convertToPercent } from '../utils/convert'
-import { objectTypeSpreadProperty } from '@babel/types'
+import { localStorage, checkForError } from '../utils/localstorage'
+import nuxtStorage from 'nuxt-storage'
 
 // Store, namespaced as `climate/`
 export const state = () => ({
@@ -191,33 +191,47 @@ export const actions = {
       local = 'local/'
     }
 
-    let flammabilityQueryUrl =
+    let queryUrl =
       process.env.apiUrl +
       '/alfresco/flammability/' +
       local +
       context.rootGetters['place/urlFragment'](
         context.rootGetters['place/isPointLocation']
       )
-    let flammability = await this.$axios
-      .$get(flammabilityQueryUrl)
-      .catch(err => {
-        let httpError = getHttpError(err)
-        context.commit('setFlammabilityHttpError', httpError)
-      })
-    let convertedFlammability = convertToPercent(flammability)
-    context.commit('setFlammability', convertedFlammability)
+    let localKey = 'flammability-' + context.rootGetters['place/urlFragment']()
+    let errorKey =
+      'flammabilityError-' + context.rootGetters['place/urlFragment']()
 
-    let vegChangeQueryUrl =
+    let returnedData = await localStorage(queryUrl, localKey, errorKey)
+
+    if (checkForError(errorKey)) {
+      context.commit(
+        'setFlammabilityHttpError',
+        nuxtStorage.localStorage.getData(errorKey)
+      )
+    } else {
+      context.commit('setFlammability', convertToPercent(returnedData))
+    }
+
+    queryUrl =
       process.env.apiUrl +
       '/alfresco/veg_type/' +
       local +
       context.rootGetters['place/urlFragment'](
         context.rootGetters['place/isPointLocation']
       )
-    let veg_change = await this.$axios.$get(vegChangeQueryUrl).catch(err => {
-      let httpError = getHttpError(err)
-      context.commit('setVegChangeHttpError', httpError)
-    })
-    context.commit('setVegChange', veg_change)
+    localKey = 'vegChange-' + context.rootGetters['place/urlFragment']()
+    errorKey = 'vegChangeError-' + context.rootGetters['place/urlFragment']()
+
+    returnedData = await localStorage(queryUrl, localKey, errorKey)
+
+    if (checkForError(errorKey)) {
+      context.commit(
+        'setVegChangeHttpError',
+        nuxtStorage.localStorage.getData(errorKey)
+      )
+    } else {
+      context.commit('setVegChange', returnedData)
+    }
   },
 }

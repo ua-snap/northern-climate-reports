@@ -1,5 +1,6 @@
 // Shim for dev/testing
 import _ from 'lodash'
+import { localStorage } from '../utils/localstorage'
 
 // Store, namespaced as `place/`
 export const state = () => ({
@@ -214,15 +215,13 @@ export const actions = {
   },
 
   async fetchPlaces(context) {
-    // If we've already fetched this, don't do that again.
-    if (context.state.places) {
-      return
-    }
-
-    // TODO: add error handling here for 404 (no data) etc.
     let queryUrl = process.env.apiUrl + '/places/all'
-    let places = await this.$http.$get(queryUrl)
-    context.commit('setPlaces', places)
+
+    let localKey = 'places'
+
+    let returnedData = await localStorage(queryUrl, localKey)
+
+    context.commit('setPlaces', returnedData)
   },
 
   async search(context) {

@@ -1,7 +1,8 @@
 // this store manages NCAR 12km indicator data
 import _ from 'lodash'
 import { convertMmToInches, convertValueToFahrenheit } from '../utils/convert'
-import { getHttpError } from '../utils/http_errors'
+import { localStorage, checkForError } from '../utils/localstorage'
+import nuxtStorage from 'nuxt-storage'
 
 var convertTemperatureData = function (obj) {
   if (typeof obj === 'number') {
@@ -85,10 +86,16 @@ export const actions = {
       process.env.apiUrl +
       '/indicators/base/' +
       context.rootGetters['place/urlFragment']()
-    let indicatorData = await this.$axios.$get(queryUrl).catch(err => {
-      let httpError = getHttpError(err)
-      context.commit('setHttpError', httpError)
-    })
-    context.commit('setIndicatorData', indicatorData)
+    let localKey = 'indicatorData-' + context.rootGetters['place/urlFragment']()
+    let errorKey =
+      'indicatorError-' + context.rootGetters['place/urlFragment']()
+
+    let returnedData = await localStorage(queryUrl, localKey, errorKey)
+
+    if (checkForError(errorKey)) {
+      context.commit('setHttpError', nuxtStorage.localStorage.getData(errorKey))
+    } else {
+      context.commit('setIndicatorData', returnedData)
+    }
   },
 }

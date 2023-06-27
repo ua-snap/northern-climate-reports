@@ -1,5 +1,6 @@
 import { convertToFeet } from '../utils/convert'
-import { getHttpError } from '../utils/http_errors'
+import { localStorage, checkForError } from '../utils/localstorage'
+import nuxtStorage from 'nuxt-storage'
 
 export const state = () => ({
   elevation: undefined,
@@ -61,10 +62,16 @@ export const actions = {
       process.env.apiUrl +
       '/elevation/' +
       context.rootGetters['place/urlFragment']()
-    let elevation = await this.$axios.$get(queryUrl).catch(err => {
-      let httpError = getHttpError(err)
-      context.commit('setHttpError', httpError)
-    })
-    context.commit('setElevation', elevation)
+    let localKey = 'elevation-' + context.rootGetters['place/urlFragment']()
+    let errorKey =
+      'elevationError-' + context.rootGetters['place/urlFragment']()
+
+    let returnedData = await localStorage(queryUrl, localKey, errorKey)
+
+    if (checkForError(errorKey)) {
+      context.commit('setHttpError', nuxtStorage.localStorage.getData(errorKey))
+    } else {
+      context.commit('setElevation', returnedData)
+    }
   },
 }

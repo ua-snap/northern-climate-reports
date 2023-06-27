@@ -2,7 +2,8 @@
 
 import _ from 'lodash'
 import { convertToInches, convertToFahrenheit } from '../utils/convert'
-import { getHttpError } from '../utils/http_errors'
+import { localStorage, checkForError } from '../utils/localstorage'
+import nuxtStorage from 'nuxt-storage'
 
 // Store, namespaced as `permafrost/`
 export const state = () => ({
@@ -134,29 +135,21 @@ export const mutations = {
 
 export const actions = {
   async fetch(context) {
-    if (context.rootGetters['place/latLng']) {
-      let permafrostQueryUrl =
-        process.env.apiUrl +
-        '/ncr/permafrost/' +
-        context.rootGetters['place/urlFragment']()
-      try {
-        let permafrostData = await this.$axios
-          .$get(permafrostQueryUrl, { timeout: 60000 })
-          .catch(err => {
-            let httpError = getHttpError(err)
-            context.commit('setHttpError', httpError)
-          })
+    let queryUrl =
+      process.env.apiUrl +
+      '/ncr/permafrost/' +
+      context.rootGetters['place/urlFragment']()
+    let localKey =
+      'permafrostData-' + context.rootGetters['place/urlFragment']()
+    let errorKey =
+      'permafrostError-' + context.rootGetters['place/urlFragment']()
 
-        if (permafrostData != null) {
-          context.commit('setPermafrostData', permafrostData)
-        }
-      } catch (error) {
-        throw error
-      }
+    let returnedData = await localStorage(queryUrl, localKey, errorKey)
+
+    if (checkForError(errorKey)) {
+      context.commit('setHttpError', nuxtStorage.localStorage.getData(errorKey))
     } else {
-      // This case means "won't query",
-      // How to handle this case?
-      return false
+      context.commit('setPermafrostData', returnedData)
     }
   },
 }
