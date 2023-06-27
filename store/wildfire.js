@@ -1,7 +1,7 @@
 // This store manages ALFRESCO data!
 import _ from 'lodash'
 import { convertToPercent } from '../utils/convert'
-import { localStorage } from '../utils/localstorage'
+import { localStorage, checkForError } from '../utils/localstorage'
 import nuxtStorage from 'nuxt-storage'
 
 // Store, namespaced as `climate/`
@@ -204,7 +204,7 @@ export const actions = {
 
     let returnedData = await localStorage(queryUrl, localKey, errorKey)
 
-    if (nuxtStorage.localStorage.getData(errorKey)) {
+    if (checkForError(errorKey)) {
       context.commit(
         'setFlammabilityHttpError',
         nuxtStorage.localStorage.getData(errorKey)
@@ -225,7 +225,7 @@ export const actions = {
 
     returnedData = await localStorage(queryUrl, localKey, errorKey)
 
-    if (nuxtStorage.localStorage.getData(errorKey)) {
+    if (checkForError(errorKey)) {
       context.commit(
         'setVegChangeHttpError',
         nuxtStorage.localStorage.getData(errorKey)

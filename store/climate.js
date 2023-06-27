@@ -1,7 +1,7 @@
 // This store fetches/manages "climate" variables (taspr = temp + precip)
 import _ from 'lodash'
 import { convertToInches, convertToFahrenheit } from '../utils/convert'
-import { localStorage } from '../utils/localstorage'
+import { localStorage, checkForError } from '../utils/localstorage'
 import nuxtStorage from 'nuxt-storage'
 
 // Helper functions
@@ -81,7 +81,7 @@ export const actions = {
 
     let returnedData = await localStorage(queryUrl, localKey, errorKey)
 
-    if (nuxtStorage.localStorage.getData(errorKey)) {
+    if (checkForError(errorKey)) {
       context.commit('setHttpError', nuxtStorage.localStorage.getData(errorKey))
     } else {
       context.commit('setClimateData', returnedData)

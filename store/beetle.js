@@ -1,6 +1,6 @@
 // This store manages ALFRESCO data!
 import _ from 'lodash'
-import { localStorage } from '../utils/localstorage'
+import { localStorage, checkForError } from '../utils/localstorage'
 import nuxtStorage from 'nuxt-storage'
 
 export const state = () => ({
@@ -88,7 +88,7 @@ export const actions = {
 
     let returnedData = await localStorage(queryUrl, localKey, errorKey)
 
-    if (nuxtStorage.localStorage.getData(errorKey)) {
+    if (checkForError(errorKey)) {
       context.commit('setHttpError', nuxtStorage.localStorage.getData(errorKey))
     } else {
       context.commit('setBeetleData', returnedData)
