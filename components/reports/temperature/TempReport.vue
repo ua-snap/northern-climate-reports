@@ -33,13 +33,6 @@
     </div>
     <ReportTempChart :season="temp_season" />
     <ReportTempTable />
-    <div class="content">
-      <h4 class="title is-4 mt-6">Temperature Indicators</h4>
-      <div class="is-size-5">
-        &ldquo;Indicators&rdquo; are a tool that help us understand data. We can
-        link indicators to specific impacts or risks.
-      </div>
-    </div>
     <ReportTempIndicatorsTable />
     <DownloadCsvButton
       text="Download temperature data as CSV"

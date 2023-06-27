@@ -48,13 +48,6 @@
     </div>
     <ReportPrecipChart :season="precip_season" />
     <ReportPrecipTable />
-    <div class="content">
-      <h4 class="title is-4 mt-6">Precipitation Indicators</h4>
-      <div class="is-size-5">
-        &ldquo;Indicators&rdquo; are a tool that help us understand data. We can
-        link indicators to specific impacts or risks.
-      </div>
-    </div>
     <ReportPrecipIndicatorsTable />
     <DownloadCsvButton
       text="Download precipitation data as CSV"
