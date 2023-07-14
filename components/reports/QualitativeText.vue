@@ -2,8 +2,8 @@
   <div class="qualitative-text content" v-if="qualitativeText">
     <div class="generated" v-html="qualitativeText"></div>
     <p class="about-blurb">
-      Summary across all models and scenarios.  See tables and sections below
-      for more detailed information and definitions.
+      Summary across all models and scenarios. See tables and sections below for
+      more detailed information and definitions.
     </p>
   </div>
 </template>
@@ -77,7 +77,7 @@ export default {
       }
     },
     depthUnitsText() {
-      return this.units == 'metric' ? 'meters' : 'inches'
+      return this.units == 'metric' ? 'centimeters' : 'inches'
     },
     qualitativeText() {
       return this.generateText()
@@ -295,13 +295,19 @@ export default {
 
       let maxDifference = _.max(differences)
 
-      if (maxDifference > 0) {
-        // Inclusively, there are 79 years between 2021 and 2099.
-        let degradationRate = maxDifference / 79
+      // Inclusively, there are 79 years between 2021 and 2099.
+      let degradationRate = maxDifference / 79
 
-        let precision = this.units == 'metric' ? 2 : 1
-        degradationRate = degradationRate.toFixed(precision)
+      // Use centimeters instead of meters for degradation rate since even
+      // small degradation rate values can be meaningful.
+      if (this.units == 'metric') {
+        degradationRate *= 100
+      }
 
+      degradationRate = degradationRate.toFixed(1)
+
+      // Hide permafrost qualitative text if rounded degration rate is zero.
+      if (degradationRate > 0) {
         return (
           '<p>Models indicate that permafrost degradation may occur at a rate of <strong>' +
           degradationRate +
