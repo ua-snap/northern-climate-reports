@@ -48,14 +48,8 @@ export default {
       })
 
       let yAxisLabel = 'Depth (' + units + ')'
-      let orig_layout = getLayout(title, yAxisLabel)
-      let layout = {
-        ...orig_layout,
-        yaxis: {
-          ...orig_layout.yaxis,
-          autorange: 'reversed',
-        },
-      }
+      let layout = getLayout(title, yAxisLabel)
+      layout['yaxis']['autorange'] = 'reversed'
 
       let dataTraces = getProjectedTraces(permafrostTopData, units, precision)
       let footerLines = []
@@ -88,15 +82,11 @@ export default {
 
       layout.annotations.push({
         x: 1,
-        y: 0,
+        y: 1.065,
         xref: 'paper',
-        yref: 'y',
+        yref: 'paper',
         text: 'Ground surface',
-        showarrow: true,
-        arrowcolor: '#aaaaaa',
-        arrowhead: 6,
-        ax: 0,
-        ay: -12,
+        showarrow: false,
         font: {
           color: '#888888',
         },
