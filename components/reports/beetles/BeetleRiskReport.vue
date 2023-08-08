@@ -16,7 +16,7 @@
         </p>
         <p>
           <a
-            href="https://uaf-snap.org/wp-content/uploads/2023/06/20230508_spruce-beetle-climate-model-white-paper.pdf"
+            href="https://uaf-snap.org/wp-content/uploads/2023/06/20230627_spruce-beetle-climate-model-white-paper.pdf"
             >See more details about how the model was developed</a
           >
         </p>
