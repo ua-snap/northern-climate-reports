@@ -129,7 +129,7 @@ export const getters = {
           if (area.id.length == 10) {
             return area.name + ' Watershed HUC10 ' + area.id
           }
-          return area.name + ' Watershed HUC ' + area.id
+          return area.name + ' Watershed HUC8 ' + area.id
         case 'corporation':
           return area.name + ' (Native Corporation)'
         case 'climate_division':

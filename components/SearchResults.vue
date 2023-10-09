@@ -4,18 +4,18 @@
       Locations matching {{ lat }}&deg;N, {{ lng }}&deg;E
     </h3>
 
-    <div v-if="searchResults.areas">
+    <div v-if="searchBlocks.areas.length">
       <p>
-        The map on the left shows hydrological units (HUC-8) and protected areas
-        near the point you selected. Additional areas of interest
-        (ethnolinguistic regions, fire management units, climate divisions and
-        Native corporations) are not shown on the map because they are large,
-        but are included in the list of matching areas below.
+        The map on the left shows hydrological units (HUC-8, HUC-10) and
+        protected areas near the point you selected. Additional areas of
+        interest (ethnolinguistic regions, fire management units, climate
+        divisions and Native corporations) are not shown on the map because they
+        are large, but are included in the list of matching areas below.
       </p>
 
       <ul>
         <li
-          v-for="place in searchResults.areas"
+          v-for="place in searchBlocks.areas"
           :key="place.id"
           class="additional-info"
         >
@@ -33,11 +33,35 @@
         </li>
       </ul>
     </div>
-    <div v-if="searchResults.communities" class="mt-4 mb-4">
+
+    <div v-if="searchBlocks.hucs.length">
+      <h4 class="subtitle is-6 mt-5 mb-1">Hydrological units (HUCs)</h4>
+      <ul>
+        <li
+          v-for="place in searchBlocks.hucs"
+          :key="place.id"
+          class="additional-info"
+        >
+          <nuxt-link
+            :to="{
+              path: formUrl(place),
+              hash: '#results',
+            }"
+            >{{ place.name }}</nuxt-link
+          >
+          <span
+            v-if="formPlaceTypeFragment(place)"
+            v-html="formPlaceTypeFragment(place)"
+          ></span>
+        </li>
+      </ul>
+    </div>
+
+    <div v-if="searchBlocks.communities" class="mt-4 mb-4">
       <p>Nearby places and communities included in this tool:</p>
       <ul>
         <li
-          v-for="community in searchResults.communities"
+          v-for="community in searchBlocks.communities"
           :key="community.id"
           class="community"
         >
@@ -92,6 +116,17 @@ export default {
     lng() {
       return this.latLng[1]
     },
+    searchBlocks() {
+      let blocks = {}
+      blocks.communities = this.searchResults.communities
+      blocks.hucs = _.filter(this.searchResults.areas, area => {
+        return area.type == 'huc'
+      })
+      blocks.areas = _.filter(this.searchResults.areas, area => {
+        return area.type != 'huc'
+      })
+      return blocks
+    },
     ...mapGetters({
       searchResults: 'place/searchResults',
       latLng: 'place/latLng',
@@ -109,7 +144,7 @@ export default {
           break
         case 'huc':
           placeType =
-            'HUC' + (place.id.length == 10 ? '10 ' : ' ') + 'ID' + place.id
+            'HUC' + (place.id.length == 10 ? '10 ' : '8 ') + 'ID' + place.id
           break
         case 'climate_division':
           placeType = 'Climate Division'
