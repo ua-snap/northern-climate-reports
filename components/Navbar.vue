@@ -32,6 +32,11 @@
           >
         </div>
         <div class="navbar-item">
+          <nuxt-link :to="{ name: 'credits' }" exact-active-class="is-active"
+            >Credits</nuxt-link
+          >
+        </div>
+        <div class="navbar-item">
           <nuxt-link :to="{ name: 'data' }" exact-active-class="is-active"
             >Data</nuxt-link
           >
