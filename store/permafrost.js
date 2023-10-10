@@ -149,7 +149,7 @@ export const actions = {
     if (checkForError(errorKey)) {
       context.commit('setHttpError', nuxtStorage.localStorage.getData(errorKey))
     } else {
-      context.commit('setPermafrostData', returnedData)
+      context.commit('setPermafrostData', undefined)
     }
   },
 }
