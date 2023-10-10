@@ -41,7 +41,7 @@ export default {
     },
   },
   methods: {
-    variableTitle: function (varible) {
+    variableTitle: function (variable) {
       let variables = {
         evap: 'Actual Evapotranspiration',
         glacier_melt: 'Glacier Melt',
@@ -56,7 +56,7 @@ export default {
         tmax: 'Maximum Daily 2m Air Temperature',
         tmin: 'Minimum Daily 2m Air Temperature',
       }
-      return variables[varible]
+      return variables[variable]
     },
     renderPlot: function () {
       let reportData = this.reportData

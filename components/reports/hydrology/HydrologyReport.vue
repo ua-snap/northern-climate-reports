@@ -19,48 +19,27 @@
         <b-radio v-model="variable" name="variable" native-value="evap"
           >Evapotranspiration</b-radio
         >
-        <b-radio v-model="variable" name="variable" native-value="glacier_melt"
-          >Glacier Melt</b-radio
-        >
         <b-radio v-model="variable" name="variable" native-value="runoff"
           >Surface Runoff</b-radio
         >
         <b-radio v-model="variable" name="variable" native-value="snow_melt"
           >Snow Melt</b-radio
         >
+        <b-radio v-model="variable" name="variable" native-value="sm1"
+          >Soil Moisture</b-radio
+        >
       </b-field>
     </div>
     <div class="is-size-6 mt-4">
       <b-field label="Model">
-        <b-radio v-model="model" name="model" native-value="ACCESS1-3"
-          >ACCESS1-3</b-radio
-        >
-        <b-radio v-model="model" name="model" native-value="CCSM4"
-          >CCSM4</b-radio
-        >
-        <b-radio v-model="model" name="model" native-value="CSIRO-Mk3-6-0"
-          >CSIRO-Mk3-6-0</b-radio
-        >
         <b-radio v-model="model" name="model" native-value="CanESM2"
           >CanESM2</b-radio
         >
         <b-radio v-model="model" name="model" native-value="GFDL-ESM2M"
           >GFDL-ESM2M</b-radio
         >
-        <b-radio v-model="model" name="model" native-value="HadGEM2-ES"
-          >HadGEM2-ES</b-radio
-        >
-        <b-radio v-model="model" name="model" native-value="MIROC5"
-          >MIROC5</b-radio
-        >
-        <b-radio v-model="model" name="model" native-value="MPI-ESM-MR"
-          >MPI-ESM-MR</b-radio
-        >
-        <b-radio v-model="model" name="model" native-value="MRI-CGCM3"
-          >MRI-CGCM3</b-radio
-        >
-        <b-radio v-model="model" name="model" native-value="inmcm4"
-          >INMCM4</b-radio
+        <b-radio v-model="model" name="model" native-value="CCSM4"
+          >NCAR-CCSM4</b-radio
         >
       </b-field>
     </div>
@@ -103,7 +82,7 @@ export default {
   data() {
     return {
       variable: 'evap',
-      model: 'ACCESS1-3',
+      model: 'CanESM2',
       scenario: 'rcp45',
     }
   },

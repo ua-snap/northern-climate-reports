@@ -101,7 +101,7 @@ const getProjectedTrace = function (
   }
 
   eras.forEach(era => {
-    let value = data[variable][model][scenario][month][era]
+    let value = data[model][scenario][month][era][variable]
 
     projectedTrace['y'].push(value)
   })

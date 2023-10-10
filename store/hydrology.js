@@ -7,45 +7,85 @@ import nuxtStorage from 'nuxt-storage'
 // Helper functions
 var convertReportData = function (hydrologyData) {
   if (hydrologyData) {
-    let variables = Object.keys(hydrologyData)
-    variables.forEach(variable => {
-      let models = Object.keys(hydrologyData[variable])
+    let models = Object.keys(hydrologyData)
+    models.forEach(model => {
+      if (hydrologyData[model] != null) {
+        let scenarios = Object.keys(hydrologyData[model])
 
-      models.forEach(model => {
-        if (hydrologyData[variable][model] != null) {
-          let scenarios = Object.keys(hydrologyData[variable][model])
+        scenarios.forEach(scenario => {
+          let months = Object.keys(hydrologyData[model][scenario])
 
-          scenarios.forEach(scenario => {
-            let months = Object.keys(hydrologyData[variable][model][scenario])
-
-            months.forEach(month => {
-              let eras = Object.keys(
-                hydrologyData[variable][model][scenario][month]
+          months.forEach(month => {
+            let eras = Object.keys(hydrologyData[model][scenario][month])
+            eras.forEach(era => {
+              let variables = Object.keys(
+                hydrologyData[model][scenario][month][era]
               )
-              eras.forEach(era => {
+              variables.forEach(variable => {
                 if (variable == 'tmax' || variable == 'tmin') {
-                  hydrologyData[variable][model][scenario][month][
-                    era
+                  hydrologyData[model][scenario][month][era][
+                    variable
                   ] = convertToFahrenheit(
-                    hydrologyData[variable][model][scenario][month][era]
+                    hydrologyData[model][scenario][month][era][variable]
                   )
                 } else {
-                  hydrologyData[variable][model][scenario][month][
-                    era
+                  hydrologyData[model][scenario][month][era][
+                    variable
                   ] = convertMmToInches(
-                    hydrologyData[variable][model][scenario][month][era]
+                    hydrologyData[model][scenario][month][era][variable]
                   )
                 }
               })
             })
           })
-        }
-      })
+        })
+      }
     })
 
     return hydrologyData
   }
 }
+// var convertReportData = function (hydrologyData) {
+//   if (hydrologyData) {
+//     let variables = Object.keys(hydrologyData)
+//     variables.forEach(variable => {
+//       let models = Object.keys(hydrologyData[variable])
+
+//       models.forEach(model => {
+//         if (hydrologyData[variable][model] != null) {
+//           let scenarios = Object.keys(hydrologyData[variable][model])
+
+//           scenarios.forEach(scenario => {
+//             let months = Object.keys(hydrologyData[variable][model][scenario])
+
+//             months.forEach(month => {
+//               let eras = Object.keys(
+//                 hydrologyData[variable][model][scenario][month]
+//               )
+//               eras.forEach(era => {
+//                 if (variable == 'tmax' || variable == 'tmin') {
+//                   hydrologyData[variable][model][scenario][month][
+//                     era
+//                   ] = convertToFahrenheit(
+//                     hydrologyData[variable][model][scenario][month][era]
+//                   )
+//                 } else {
+//                   hydrologyData[variable][model][scenario][month][
+//                     era
+//                   ] = convertMmToInches(
+//                     hydrologyData[variable][model][scenario][month][era]
+//                   )
+//                 }
+//               })
+//             })
+//           })
+//         }
+//       })
+//     })
+
+//     return hydrologyData
+//   }
+// }
 
 export const state = () => ({
   hydrologyData: undefined,
