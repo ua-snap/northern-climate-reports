@@ -247,7 +247,7 @@
       <p>
         Above, clockwise from left: <strong>Josh Paul</strong>, Geospatial Data
         Analyst; <strong>Carolyn Rosner</strong>, Graphic Designer;
-        <strong>Craig Stephenson</strong>, Software Developer,
+        <strong>Craig Stephenson</strong>, Software Developer;
         <strong>Kyle Redilla</strong>, Geospatial Programmer;
         <strong>Mike DeLue</strong>, Science Communicator;
         <strong>Charlie Parr</strong>, Geospatial Data Analyst;
