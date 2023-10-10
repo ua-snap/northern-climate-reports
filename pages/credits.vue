@@ -1,19 +1,24 @@
 <template>
-  <section class="section">
-    <div class="content-wrapper">
-      <h1 class="title is-2">The people behind Northern Climate Reports</h1>
-
-      <div class="content is-size-4">
-        <p>
-          Northern Climate Reports would not be possible without contributions
-          from a wide variety of climate science professionals. These include
-          ecosystem modelers and boreal ecologists who interpret and look for
-          patterns in massive amounts of data, plus geospatial data analysts and
-          software developers who verify the data and create visualizations that
-          aid understanding. Science communicators and administrative staff
-          round out the team, using graphic design, writing, and organizational
-          skills to help this tool work for a wide variety of users.
-        </p>
+  <div>
+    <HeaderBlock
+      title="Credits"
+      blurb="The people behind Northern Climate Reports"
+    />
+    <div class="columns mt-5">
+      <div class="column is-three-fifths is-offset-one-fifth">
+        <div class="content is-size-5">
+          <p>
+            Northern Climate Reports would not be possible without contributions
+            from a wide variety of climate science professionals. These include
+            ecosystem modelers and boreal ecologists who interpret and look for
+            patterns in massive amounts of data, plus geospatial data analysts
+            and software developers who verify the data and create
+            visualizations that aid understanding. Science communicators and
+            administrative staff round out the team, using graphic design,
+            writing, and organizational skills to help this tool work for a wide
+            variety of users.
+          </p>
+        </div>
       </div>
     </div>
 
@@ -257,10 +262,10 @@
         <a href="https://uaf-snap.org/">https://uaf-snap.org/</a>
       </p>
     </div>
-  </section>
+  </div>
 </template>
 <style lang="scss" scoped>
-  .team {
-    text-align: center;
-  }
+.team {
+  text-align: center;
+}
 </style>
