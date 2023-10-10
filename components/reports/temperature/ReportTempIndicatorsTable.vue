@@ -543,9 +543,7 @@
       <tfoot>
         <tr>
           <td colspan="10" class="about">
-            This table lists some climate indicators derived from a wide range
-            of models.
-            <nuxt-link :to="{ name: 'about' }"
+            <nuxt-link :to="{ name: 'data' }"
               >Read more about the dataset and processing used to generate these
               data.</nuxt-link
             >
