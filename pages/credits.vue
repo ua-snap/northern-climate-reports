@@ -28,7 +28,7 @@
             Dr. Amy Breen is an expert in Arctic vegetation ecology, short- and
             long-term effects of climate change and disturbance on vegetation.
             Her research interests include field studies and modeling to
-            understand and forecast changes in arctic terrestrial ecosystems,
+            understand and forecast changes in Arctic terrestrial ecosystems,
             particularly the response of vegetation to disturbance and climate
             change.
           </p>
