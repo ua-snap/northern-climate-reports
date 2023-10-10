@@ -62,7 +62,7 @@
             western US and the role of climate in Douglas-fir tree growth across
             its climatic range. He also worked as a research scientist at the
             University of Washington Climate Impacts Group, collaborating with
-            resource managers in Federal and state agencies to better understand
+            resource managers in federal and state agencies to better understand
             and use climate information in planning and adaptation.
           </p>
           <p>At the Alaska CASC, his current work addresses two main themes:</p>
