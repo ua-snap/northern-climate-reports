@@ -7,7 +7,7 @@
 
           <p>
             Developed by the
-            <a href="https://www.snap.uaf.edu/" title="👍"
+            <a href="https://www.snap.uaf.edu/" title="🥦🥦🥦"
               >Scenarios Network for Alaska + Arctic Planning</a
             >
             at the
