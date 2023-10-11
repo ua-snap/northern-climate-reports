@@ -246,21 +246,23 @@
         </div>
       </div>
     </div>
-    <div class="team content is-size-5 mt-6">
-      <h3>The Scenarios Network for Alaska + Arctic Planning Team</h3>
-      <img src="~assets/images/people/SNAP-team-bubbles.jpg" />
-      <p>
-        Above, clockwise from left: <strong>Josh Paul</strong>, Geospatial Data
-        Analyst; <strong>Carolyn Rosner</strong>, Graphic Designer;
-        <strong>Craig Stephenson</strong>, Software Developer;
-        <strong>Kyle Redilla</strong>, Geospatial Programmer;
-        <strong>Mike DeLue</strong>, Science Communicator;
-        <strong>Charlie Parr</strong>, Geospatial Data Analyst;
-        <strong>Mimi Lesniak</strong>, Assistant to the Director;
-        <strong>Bob Torgerson</strong>, Software Developer; and
-        <strong>Bruce Crevensten</strong>, Technical Lead.
-        <a href="https://uaf-snap.org/">https://uaf-snap.org/</a>
-      </p>
+    <div class="container">
+      <div class="team content is-size-5 mt-6">
+        <h3>The Scenarios Network for Alaska + Arctic Planning Team</h3>
+        <img src="~assets/images/people/SNAP-team-bubbles.jpg" />
+        <p>
+          Above, clockwise from left: <strong>Josh Paul</strong>, Geospatial
+          Data Analyst; <strong>Carolyn Rosner</strong>, Graphic Designer;
+          <strong>Craig Stephenson</strong>, Software Developer;
+          <strong>Kyle Redilla</strong>, Geospatial Programmer;
+          <strong>Mike DeLue</strong>, Science Communicator;
+          <strong>Charlie Parr</strong>, Geospatial Data Analyst;
+          <strong>Mimi Lesniak</strong>, Assistant to the Director;
+          <strong>Bob Torgerson</strong>, Software Developer; and
+          <strong>Bruce Crevensten</strong>, Technical Lead.
+          <a href="https://uaf-snap.org/">https://uaf-snap.org/</a>
+        </p>
+      </div>
     </div>
   </div>
 </template>
