@@ -1,8 +1,9 @@
 <template>
   <div>
     <HeaderBlock
-      blurb="A changing climate is altering Northern landscapes.<br>Explore these changes with easy-to-understand climate model
-          projections."
+      blurb="A changing climate is altering Northern landscapes.
+      <br class='is-hidden-touch' />
+      Explore these changes with easy-to-understand climate model projections."
     />
 
     <!--

@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div class="px-5-touch">
     <client-only>
       <div v-show="!this.reportIsVisible">
         <div class="container mt-5">
           <div class="columns" id="controls">
             <!-- ID above (#controls) is used as anchor target, don't remove -->
-            <div class="column is-one-half">
+            <div class="column is-half-desktop is-full-mobile is-full-tablet">
               <PlaceSelector></PlaceSelector>
             </div>
-            <div class="column is-one-half">
+            <div class="column is-half-desktop is-hidden-mobile">
               <LatLngSelector></LatLngSelector>
             </div>
           </div>

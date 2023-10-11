@@ -17,3 +17,32 @@ $blue: #03c;
 .content {
 	margin-top: 0.6rem !important;
 }
+
+// Not overrides, but custom Bulma-like classes
+.px-5-mobile {
+	@media (max-width: 768px) {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+}
+
+.px-5-touch {
+	@media (max-width: 1023px) {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+}
+
+.px-5-until-widescreen {
+	@media (max-width: 1215px) {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+}
+
+.px-5-tablet {
+	@media (min-width: 769px) {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+}

@@ -5,7 +5,7 @@
       blurb="We&rsquo;ve made climate model projections for Alaska and western Canada easier to understand"
     />
     <div class="container">
-      <div class="columns mt-5 mb-6">
+      <div class="columns mt-5 mb-6 px-5-touch">
         <div class="column is-three-quarters">
           <h2 class="title is-3">What&rsquo;s in a Northern Climate Report?</h2>
           <div class="content is-size-5">
@@ -164,8 +164,7 @@
               Northern Climate Reports employs these (and more) models, all of
               which perform well in the North, so that data users can think
               broadly about the range of possible futures.
-              <a
-                href="https://www.google.com/url?q=https://doi.org/10.1016/j.envsoft.2018.03.021&sa=D&source=docs&ust=1696990200459455&usg=AOvVaw33Z-IendpJglYsBm_GFGJ5"
+              <a href="https://doi.org/10.1016/j.envsoft.2018.03.021"
                 >See this paper</a
               >, which describes the models, model selection process, and
               downscaling of model output.
@@ -185,15 +184,16 @@
             <ul>
               <li>
                 <strong>RCP 4.5</strong>: the concentration of atmospheric
-                carbon that warms Earth at an average of 4.5 watts/m2. In this
-                scenario, emissions peak around 2040 and then decline.
+                carbon that warms Earth at an average of 4.5
+                watts/m<sup>2</sup>. In this scenario, emissions peak around
+                2040 and then decline.
               </li>
               <li>
                 <strong>RCP 8.5</strong>: the concentration of atmospheric
-                carbon that warms Earth at an average of 8.5 watts/m2. In this
-                scenario, emissions continue to rise throughout the 21st
-                century. Climate change projected under RCP 8.5 will typically
-                be more acute than under RCP 4.5.
+                carbon that warms Earth at an average of 8.5
+                watts/m<sup>2</sup>. In this scenario, emissions continue to
+                rise throughout the 21st century. Climate change projected under
+                RCP 8.5 will typically be more acute than under RCP 4.5.
               </li>
             </ul>
 
@@ -202,7 +202,7 @@
               allowing users to assess emissions-dependent variability and
               evaluate a moderate scenario alongside a more extreme scenario.
               <a
-                href="https://www.google.com/url?q=https://link.springer.com/article/10.1007/s10584-011-0148-z&sa=D&source=docs&ust=1696990200459026&usg=AOvVaw2lVdAC0K81jfho23Mvz08B"
+                href="https://link.springer.com/article/10.1007/s10584-011-0148-z"
                 >Learn more about RCPs</a
               >
             </p>
@@ -216,6 +216,8 @@
 <style lang="scss" scoped>
 .glossary {
   background-color: #fef7e5;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
 }
 </style>
 

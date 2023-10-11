@@ -4,9 +4,8 @@
       title="Places"
       blurb="Places included in Northern Climate Reports"
     />
-    <div class="columns">
+    <div class="columns px-5-mobile">
       <div class="column is-three-fifths is-offset-one-fifth mt-6">
-
         <div class="card is-horizontal">
           <div class="card-image is-small">
             <figure class="image">
