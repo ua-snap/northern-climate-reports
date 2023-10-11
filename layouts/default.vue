@@ -7,9 +7,7 @@
       <Header />
     </div>
 
-    <div class="mb-6">
-      <nuxt />
-    </div>
+    <nuxt />
 
     <Footer />
   </div>

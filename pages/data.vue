@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderBlock title="Data" blurb="Data sources and academic references" />
-    <div class="columns">
+    <div class="columns mb-6">
       <div class="column is-three-fifths is-offset-one-fifth mt-5">
         <table class="table">
           <thead>

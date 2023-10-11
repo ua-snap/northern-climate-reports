@@ -4,7 +4,7 @@
       title="About"
       blurb="We&rsquo;ve made climate model projections for Alaska and western Canada easier to understand"
     />
-    <div class="columns">
+    <div class="columns mb-6">
       <div class="column is-three-fifths is-offset-one-fifth">
         <h2 class="title is-3 mt-5">
           What&rsquo;s in a Northern Climate Report?

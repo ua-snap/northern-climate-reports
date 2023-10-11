@@ -246,7 +246,7 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container mb-6">
       <div class="team content is-size-5 mt-6">
         <h3>The Scenarios Network for Alaska + Arctic Planning Team</h3>
         <img src="~assets/images/people/SNAP-team-bubbles.jpg" />
