@@ -256,8 +256,7 @@
           <th scope="row">
             Summer Days
             <span class="description"
-              >Temperature above {{ suValue
-              }}<UnitWidget variable="temp" type="light"
+              >Temperature above {{ suValue }}<UnitWidget type="light"
             /></span>
           </th>
           <td class="left">
@@ -266,7 +265,6 @@
           <td>
             {{ reportData['su']['midcentury']['MRI-CGCM3']['rcp45']['mean'] }}
             <DayDiffWidget
-              variable="temp"
               :future="
                 reportData['su']['midcentury']['MRI-CGCM3']['rcp45']['mean']
               "
@@ -278,7 +276,6 @@
           <td>
             {{ reportData['su']['midcentury']['NCAR-CCSM4']['rcp45']['mean'] }}
             <DayDiffWidget
-              variable="temp"
               :future="
                 reportData['su']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
               "
@@ -290,7 +287,6 @@
           <td>
             {{ reportData['su']['midcentury']['MRI-CGCM3']['rcp85']['mean'] }}
             <DayDiffWidget
-              variable="temp"
               :future="
                 reportData['su']['midcentury']['MRI-CGCM3']['rcp85']['mean']
               "
@@ -302,7 +298,6 @@
           <td>
             {{ reportData['su']['midcentury']['NCAR-CCSM4']['rcp85']['mean'] }}
             <DayDiffWidget
-              variable="temp"
               :future="
                 reportData['su']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
               "
@@ -314,7 +309,6 @@
           <td>
             {{ reportData['su']['longterm']['MRI-CGCM3']['rcp45']['mean'] }}
             <DayDiffWidget
-              variable="temp"
               :future="
                 reportData['su']['longterm']['MRI-CGCM3']['rcp45']['mean']
               "
@@ -326,7 +320,6 @@
           <td>
             {{ reportData['su']['longterm']['NCAR-CCSM4']['rcp45']['mean'] }}
             <DayDiffWidget
-              variable="temp"
               :future="
                 reportData['su']['longterm']['NCAR-CCSM4']['rcp45']['mean']
               "
@@ -338,7 +331,6 @@
           <td>
             {{ reportData['su']['longterm']['MRI-CGCM3']['rcp85']['mean'] }}
             <DayDiffWidget
-              variable="temp"
               :future="
                 reportData['su']['longterm']['MRI-CGCM3']['rcp85']['mean']
               "
@@ -350,7 +342,6 @@
           <td>
             {{ reportData['su']['longterm']['NCAR-CCSM4']['rcp85']['mean'] }}
             <DayDiffWidget
-              variable="temp"
               :future="
                 reportData['su']['longterm']['NCAR-CCSM4']['rcp85']['mean']
               "
@@ -364,8 +355,7 @@
           <th scope="row">
             Deep Winter Days
             <span class="description"
-              >temperature below {{ dwValue
-              }}<UnitWidget variable="temp" type="light"
+              >temperature below {{ dwValue }}<UnitWidget type="light"
             /></span>
           </th>
           <td class="left">
@@ -374,7 +364,6 @@
           <td>
             {{ reportData['dw']['midcentury']['MRI-CGCM3']['rcp45']['mean'] }}
             <DayDiffWidget
-              variable="temp"
               :future="
                 reportData['dw']['midcentury']['MRI-CGCM3']['rcp45']['mean']
               "
@@ -386,7 +375,6 @@
           <td>
             {{ reportData['dw']['midcentury']['NCAR-CCSM4']['rcp45']['mean'] }}
             <DayDiffWidget
-              variable="temp"
               :future="
                 reportData['dw']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
               "
@@ -398,7 +386,6 @@
           <td>
             {{ reportData['dw']['midcentury']['MRI-CGCM3']['rcp85']['mean'] }}
             <DayDiffWidget
-              variable="temp"
               :future="
                 reportData['dw']['midcentury']['MRI-CGCM3']['rcp85']['mean']
               "
@@ -410,7 +397,6 @@
           <td>
             {{ reportData['dw']['midcentury']['NCAR-CCSM4']['rcp85']['mean'] }}
             <DayDiffWidget
-              variable="temp"
               :future="
                 reportData['dw']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
               "
@@ -422,7 +408,6 @@
           <td>
             {{ reportData['dw']['longterm']['MRI-CGCM3']['rcp45']['mean'] }}
             <DayDiffWidget
-              variable="temp"
               :future="
                 reportData['dw']['longterm']['MRI-CGCM3']['rcp45']['mean']
               "
@@ -434,7 +419,6 @@
           <td>
             {{ reportData['dw']['longterm']['NCAR-CCSM4']['rcp45']['mean'] }}
             <DayDiffWidget
-              variable="temp"
               :future="
                 reportData['dw']['longterm']['NCAR-CCSM4']['rcp45']['mean']
               "
@@ -446,7 +430,6 @@
           <td>
             {{ reportData['dw']['longterm']['MRI-CGCM3']['rcp85']['mean'] }}
             <DayDiffWidget
-              variable="temp"
               :future="
                 reportData['dw']['longterm']['MRI-CGCM3']['rcp85']['mean']
               "
@@ -458,7 +441,6 @@
           <td>
             {{ reportData['dw']['longterm']['NCAR-CCSM4']['rcp85']['mean'] }}
             <DayDiffWidget
-              variable="temp"
               :future="
                 reportData['dw']['longterm']['NCAR-CCSM4']['rcp85']['mean']
               "
@@ -469,74 +451,214 @@
           </td>
         </tr>
         <tr>
-          <th scope="row">Warm Spell Duration Index <span class="description"
-              >how often are there 6 or more hot days in a row?
-            </span></th>
-          <td class="left">🥦🥦 TBD</td>
+          <th scope="row">
+            Warm Spell Duration Index
+            <span class="description"
+              >how many hot days in excess of 6-day periods?
+            </span>
+          </th>
+          <td class="left">
+            {{
+              reportData['wsdi']['historical']['Daymet']['historical']['mean']
+            }}
+          </td>
           <td>
             {{ reportData['wsdi']['midcentury']['MRI-CGCM3']['rcp45']['mean'] }}
+            <DayDiffWidget
+              :future="
+                reportData['wsdi']['midcentury']['MRI-CGCM3']['rcp45']['mean']
+              "
+              :past="
+                reportData['wsdi']['historical']['Daymet']['historical']['mean']
+              "
+            />
           </td>
           <td>
             {{
               reportData['wsdi']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
             }}
+            <DayDiffWidget
+              :future="
+                reportData['wsdi']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
+              "
+              :past="
+                reportData['wsdi']['historical']['Daymet']['historical']['mean']
+              "
+            />
           </td>
           <td>
             {{ reportData['wsdi']['midcentury']['MRI-CGCM3']['rcp85']['mean'] }}
+            <DayDiffWidget
+              :future="
+                reportData['wsdi']['midcentury']['MRI-CGCM3']['rcp85']['mean']
+              "
+              :past="
+                reportData['wsdi']['historical']['Daymet']['historical']['mean']
+              "
+            />
           </td>
+
           <td>
             {{
               reportData['wsdi']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
             }}
+            <DayDiffWidget
+              :future="
+                reportData['wsdi']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
+              "
+              :past="
+                reportData['wsdi']['historical']['Daymet']['historical']['mean']
+              "
+            />
           </td>
           <td>
             {{ reportData['wsdi']['longterm']['MRI-CGCM3']['rcp45']['mean'] }}
+            <DayDiffWidget
+              :future="
+                reportData['wsdi']['longterm']['MRI-CGCM3']['rcp45']['mean']
+              "
+              :past="
+                reportData['wsdi']['historical']['Daymet']['historical']['mean']
+              "
+            />
           </td>
           <td>
             {{ reportData['wsdi']['longterm']['NCAR-CCSM4']['rcp45']['mean'] }}
+            <DayDiffWidget
+              :future="
+                reportData['wsdi']['longterm']['NCAR-CCSM4']['rcp45']['mean']
+              "
+              :past="
+                reportData['wsdi']['historical']['Daymet']['historical']['mean']
+              "
+            />
           </td>
           <td>
             {{ reportData['wsdi']['longterm']['MRI-CGCM3']['rcp85']['mean'] }}
+            <DayDiffWidget
+              :future="
+                reportData['wsdi']['longterm']['MRI-CGCM3']['rcp85']['mean']
+              "
+              :past="
+                reportData['wsdi']['historical']['Daymet']['historical']['mean']
+              "
+            />
           </td>
           <td>
             {{ reportData['wsdi']['longterm']['NCAR-CCSM4']['rcp85']['mean'] }}
+            <DayDiffWidget
+              :future="
+                reportData['wsdi']['longterm']['NCAR-CCSM4']['rcp85']['mean']
+              "
+              :past="
+                reportData['wsdi']['historical']['Daymet']['historical']['mean']
+              "
+            />
           </td>
         </tr>
         <tr>
           <th scope="row">
             Cold Spell Duration Index
             <span class="description"
-              >how often are there 6 or more cold days in a row?
+              >how many cold days in excess of 6-day periods?
             </span>
           </th>
-          <td class="left">🥕🥕 TBD</td>
+          <td class="left">
+            {{
+              reportData['csdi']['historical']['Daymet']['historical']['mean']
+            }}
+          </td>
           <td>
             {{ reportData['csdi']['midcentury']['MRI-CGCM3']['rcp45']['mean'] }}
+            <DayDiffWidget
+              :future="
+                reportData['csdi']['midcentury']['MRI-CGCM3']['rcp45']['mean']
+              "
+              :past="
+                reportData['csdi']['historical']['Daymet']['historical']['mean']
+              "
+            />
           </td>
           <td>
             {{
               reportData['csdi']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
             }}
+            <DayDiffWidget
+              :future="
+                reportData['csdi']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
+              "
+              :past="
+                reportData['csdi']['historical']['Daymet']['historical']['mean']
+              "
+            />
           </td>
           <td>
             {{ reportData['csdi']['midcentury']['MRI-CGCM3']['rcp85']['mean'] }}
+            <DayDiffWidget
+              :future="
+                reportData['csdi']['midcentury']['MRI-CGCM3']['rcp85']['mean']
+              "
+              :past="
+                reportData['csdi']['historical']['Daymet']['historical']['mean']
+              "
+            />
           </td>
           <td>
             {{
               reportData['csdi']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
             }}
+            <DayDiffWidget
+              :future="
+                reportData['csdi']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
+              "
+              :past="
+                reportData['csdi']['historical']['Daymet']['historical']['mean']
+              "
+            />
           </td>
           <td>
             {{ reportData['csdi']['longterm']['MRI-CGCM3']['rcp45']['mean'] }}
+            <DayDiffWidget
+              :future="
+                reportData['csdi']['longterm']['MRI-CGCM3']['rcp45']['mean']
+              "
+              :past="
+                reportData['csdi']['historical']['Daymet']['historical']['mean']
+              "
+            />
           </td>
           <td>
             {{ reportData['csdi']['longterm']['NCAR-CCSM4']['rcp45']['mean'] }}
+            <DayDiffWidget
+              :future="
+                reportData['csdi']['longterm']['NCAR-CCSM4']['rcp45']['mean']
+              "
+              :past="
+                reportData['csdi']['historical']['Daymet']['historical']['mean']
+              "
+            />
           </td>
           <td>
             {{ reportData['csdi']['longterm']['MRI-CGCM3']['rcp85']['mean'] }}
+            <DayDiffWidget
+              :future="
+                reportData['csdi']['longterm']['MRI-CGCM3']['rcp85']['mean']
+              "
+              :past="
+                reportData['csdi']['historical']['Daymet']['historical']['mean']
+              "
+            />
           </td>
           <td>
             {{ reportData['csdi']['longterm']['NCAR-CCSM4']['rcp85']['mean'] }}
+            <DayDiffWidget
+              :future="
+                reportData['csdi']['longterm']['NCAR-CCSM4']['rcp85']['mean']
+              "
+              :past="
+                reportData['csdi']['historical']['Daymet']['historical']['mean']
+              "
+            />
           </td>
         </tr>
       </tbody>
