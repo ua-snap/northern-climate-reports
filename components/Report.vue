@@ -30,7 +30,6 @@
         </h3>
         <MiniMap :polystyle="polystyle" />
         <QualitativeText />
-        <div class="content centered"><BackButton /></div>
       </section>
       <section class="section content pb-0 is-hidden-touch" v-if="dataPresent">
         <h3 class="title is-3">Introduction</h3>
@@ -265,7 +264,6 @@
         </div>
       </section>
       <hr />
-      <div class="content centered"><BackButton /></div>
     </div>
   </div>
 </template>
@@ -309,7 +307,6 @@ import BeetleRiskReport from '~/components/reports/beetles/BeetleRiskReport'
 import MiniMap from '~/components/reports/MiniMap'
 import QualitativeText from '~/components/reports/QualitativeText'
 import BackToTopButton from '~/components/reports/BackToTopButton'
-import BackButton from '~/components/BackButton'
 import { mapGetters } from 'vuex'
 import { httpErrors } from '../utils/http_errors'
 import lodash from 'lodash'
@@ -328,7 +325,6 @@ export default {
     MiniMap,
     QualitativeText,
     BackToTopButton,
-    BackButton,
   },
   data() {
     return {

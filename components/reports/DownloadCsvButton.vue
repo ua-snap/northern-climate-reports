@@ -1,7 +1,12 @@
 <template>
   <a :href="downloadTarget" class="button is-info">{{ text }}</a>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  a.button.is-info {
+    background-color: #f7ae05 !important;
+    color: black;
+  }
+</style>
 <script>
 export default {
   name: 'DownloadCsvButton',
