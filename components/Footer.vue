@@ -73,8 +73,7 @@
           Copyright &copy; {{ year }} University of Alaska Fairbanks. All rights
           reserved.
           <br />
-          UA is an AA/EO employer and educational institution and prohibits
-          illegal discrimination against any individual.
+          UA is an affirmative action / equal opportunity employer, educational institution, and provider and prohibits illegal discrimination against any individual.
           <br />
           <a href="https://www.alaska.edu/nondiscrimination/"
             >Statement of Nondiscrimination</a
