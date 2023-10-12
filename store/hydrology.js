@@ -45,47 +45,6 @@ var convertReportData = function (hydrologyData) {
     return hydrologyData
   }
 }
-// var convertReportData = function (hydrologyData) {
-//   if (hydrologyData) {
-//     let variables = Object.keys(hydrologyData)
-//     variables.forEach(variable => {
-//       let models = Object.keys(hydrologyData[variable])
-
-//       models.forEach(model => {
-//         if (hydrologyData[variable][model] != null) {
-//           let scenarios = Object.keys(hydrologyData[variable][model])
-
-//           scenarios.forEach(scenario => {
-//             let months = Object.keys(hydrologyData[variable][model][scenario])
-
-//             months.forEach(month => {
-//               let eras = Object.keys(
-//                 hydrologyData[variable][model][scenario][month]
-//               )
-//               eras.forEach(era => {
-//                 if (variable == 'tmax' || variable == 'tmin') {
-//                   hydrologyData[variable][model][scenario][month][
-//                     era
-//                   ] = convertToFahrenheit(
-//                     hydrologyData[variable][model][scenario][month][era]
-//                   )
-//                 } else {
-//                   hydrologyData[variable][model][scenario][month][
-//                     era
-//                   ] = convertMmToInches(
-//                     hydrologyData[variable][model][scenario][month][era]
-//                   )
-//                 }
-//               })
-//             })
-//           })
-//         }
-//       })
-//     })
-
-//     return hydrologyData
-//   }
-// }
 
 export const state = () => ({
   hydrologyData: undefined,
@@ -93,6 +52,30 @@ export const state = () => ({
 })
 
 export const getters = {
+  vars() {
+    return {
+      evap: 'Evapotranspiration',
+      runoff: 'Runoff',
+    }
+  },
+  eras() {
+    return {
+      historical: 'Historical',
+      early: 'Early Century',
+      mid: 'Mid Century',
+      late: 'Late Century',
+    }
+  },
+  models() {
+    return {
+      1: 'NCAR CCSM4',
+      3: 'CanESM2',
+      4: 'GFDL ESM2M',
+    }
+  },
+  scenarios() {
+    return { 0: 'RCP 4.5', 1: 'RCP 8.5' }
+  },
   hydrologyData(state, getters, rootState, rootGetters) {
     var convertedData = _.cloneDeep(state.hydrologyData)
 
