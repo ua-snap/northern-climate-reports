@@ -157,7 +157,9 @@ export const getters = {
     }
   },
   huc12Id(state) {
-    return state.flammability.huc_id
+    if(state.flammability) {
+      return state.flammability.huc_id
+    }
   },
 }
 

@@ -25,6 +25,11 @@
     <div v-else>
       <!-- The report! -->
       <section class="section">
+
+        <div v-if="!dataPresent" class="pb-3">
+          <h1 class="title is-1">OH NO THERE IS NO DATA</h1>
+        </div>
+
         <h3 class="title is-3 centered">
           Projected Conditions for <span v-html="place"></span>
         </h3>
@@ -219,7 +224,6 @@
             </ul>
           </div>
         </div>
-        <div v-if="!dataPresent" class="pb-3" />
       </section>
       <section class="section is-hidden-touch" v-if="climateData">
         <div id="temperature">
@@ -472,12 +476,9 @@ export default {
       if (this.climateData) {
         types.push('temperature', 'precipitation')
       }
-
-      // Always show the permafrost section for area reports.
-      if (this.permafrostData || this.type != 'latLng') {
+      if (this.permafrostData) {
         types.push('permafrost')
       }
-
       if (this.flammabilityData) {
         types.push('flammability')
       }

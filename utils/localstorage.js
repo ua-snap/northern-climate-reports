@@ -41,14 +41,15 @@ export const localStorage = async function (
           )
         })
     }
-    if (returnedData != null) {
+    if (returnedData) {
       nuxtStorage.localStorage.setData(
         localKey,
         returnedData.data,
         process.env.localStorageExpiration,
         'h'
       )
+      return returnedData.data
     }
-    return returnedData.data
+    
   }
 }
