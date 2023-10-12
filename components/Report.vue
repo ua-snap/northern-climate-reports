@@ -25,11 +25,6 @@
     <div v-else>
       <!-- The report! -->
       <section class="section">
-
-        <div v-if="!dataPresent" class="pb-3">
-          <h1 class="title is-1">OH NO THERE IS NO DATA</h1>
-        </div>
-
         <h3 class="title is-3 centered">
           Projected Conditions for <span v-html="place"></span>
         </h3>
@@ -191,8 +186,31 @@
       </section>
       <section class="section content py-0 is-hidden-touch" v-if="dataMissing">
         <div class="is-size-5">
-          <p class="no-data mt-6" v-if="uniformHttpError">
+          <div v-if="!dataPresent" class="pb-3">
+            <h3 class="title is-3">
+              We&rsquo;re sorry, but this place is outside of our data.
+            </h3>
+            <div class="content is-size-4">
+              <p>
+                Each data set covers different places, but unfortunately this
+                place has no data.
+              </p>
+              <p>
+                Maybe we can help you find what you&rsquo;re looking for? Email
+                us:
+                <a href="mailto:uaf-snap-data-tools@alaska.edu"
+                  >uaf-snap-data-tools@alaska.edu</a
+                >
+                with what you need!
+              </p>
+            </div>
+          </div>
+          <p
+            class="no-data mt-6"
+            v-if="uniformHttpError && uniformHttpError != 'no_data'"
+          >
             {{ httpErrors[uniformHttpError] }}
+            }
           </p>
           <div v-if="dataMissing && uniformHttpError == null">
             The following data is not available at this location:
