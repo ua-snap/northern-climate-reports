@@ -43,7 +43,6 @@ export default {
       geoJSON: 'place/geoJSON',
       models: 'hydrology/models',
       scenarios: 'hydrology/scenarios',
-      vars: 'hydrology/vars',
       eras: 'hydrology/eras',
     }),
     mapID() {
@@ -66,9 +65,6 @@ export default {
     },
     mapScenario() {
       return this.scenarios[this.scenario]
-    },
-    mapVar() {
-      return this.vars[this.var]
     },
     mapEra() {
       return this.eras[this.era]

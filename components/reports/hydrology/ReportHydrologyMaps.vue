@@ -1,8 +1,7 @@
 <template>
   <section class="section">
     <h5 class="minimaps-section-title has-text-centered">
-      Mean annual ground temperature at {{ depthFragment }} depth,
-      <span v-html="place"></span>, 2021&ndash;2100
+      {{ mapVar('evap') }}, <span v-html="place"></span>, 2021&ndash;2100
     </h5>
     <div class="is-size-6 mb-4">
       <b-field label="Model">
@@ -43,43 +42,21 @@
       </b-field>
     </div>
     <div
-      v-for="era in ['historical', 'early', 'mid', 'late']"
+      v-for="(era, eindex) in ['historical', 'early', 'mid', 'late']"
+      :key="eindex"
       class="columns is-flex-direction-row is-centered"
     >
-      <div class="minimap-container my-4 p-1">
+      <div
+        v-for="(season, sindex) in ['spring', 'summer', 'fall', 'winter']"
+        :key="sindex"
+        class="minimap-container my-4 p-1"
+      >
         <ReportHydrologyMap
           var="evap"
           :model="hydro_model_selection"
           :scenario="hydro_scenario_selection"
           :era="era"
-          season="spring"
-        />
-      </div>
-      <div class="minimap-container my-4 p-1">
-        <ReportHydrologyMap
-          var="evap"
-          :model="hydro_model_selection"
-          :scenario="hydro_scenario_selection"
-          :era="era"
-          season="summer"
-        />
-      </div>
-      <div class="minimap-container my-4 p-1">
-        <ReportHydrologyMap
-          var="evap"
-          :model="hydro_model_selection"
-          :scenario="hydro_scenario_selection"
-          :era="era"
-          season="fall"
-        />
-      </div>
-      <div class="minimap-container my-4 p-1">
-        <ReportHydrologyMap
-          var="evap"
-          :model="hydro_model_selection"
-          :scenario="hydro_scenario_selection"
-          :era="era"
-          season="winter"
+          :season="season"
         />
       </div>
     </div>
@@ -98,7 +75,13 @@ export default {
     ...mapGetters({
       units: 'units',
       place: 'place/name',
+      vars: 'hydrology/vars',
     }),
+  },
+  methods: {
+    mapVar(varName) {
+      return this.vars[varName]
+    },
   },
   data() {
     return {
