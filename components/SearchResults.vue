@@ -89,7 +89,6 @@
         {{ lng }}&deg;E</nuxt-link
       >.
     </p>
-    <BackButton />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -103,12 +102,10 @@ li.additional-info span {
 <script>
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
-import BackButton from '~/components/BackButton'
 import { getAppPathFragment } from '~/utils/path.js'
 
 export default {
   name: 'SearchResults',
-  components: { BackButton },
   computed: {
     lat() {
       return this.latLng[0]

@@ -1,7 +1,7 @@
 <template>
   <div class="map-wrapper--outer is-hidden-touch">
-    <div class="container">
-      <div class="section pullup content fullbleed">
+    <div class="container mb-3">
+      <div class="content fullbleed">
         <h4>Find a place by clicking on the map</h4>
         <p>
           <strong>Click the map</strong> to pick a location. Nearby communities,

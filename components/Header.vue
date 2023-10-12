@@ -1,13 +1,16 @@
 <template>
   <div class="header--text--wrapper">
-    <h1>
-      Northern
-      <span><img src="~/assets/images/lights.svg" />Climate</span>
-      Reports
-    </h1>
-    <h2>
-      Ecological futures <span>in</span> stories, charts, <span>and</span> data
-    </h2>
+    <NuxtLink to="/">
+      <h1>
+        Northern
+        <span><img src="~/assets/images/lights.svg" />Climate</span>
+        Reports
+      </h1>
+      <h2>
+        Ecological futures <span>in</span> stories, charts,
+        <span>and</span> data
+      </h2>
+    </NuxtLink>
   </div>
 </template>
 
@@ -21,6 +24,12 @@
   top: -3rem;
   font-weight: 800;
   max-height: 12rem;
+  a {
+    color: white !important;
+    &:hover {
+      text-decoration: none !important;
+    }
+  }
   h1 {
     font-size: 2.8rem;
     position: relative;

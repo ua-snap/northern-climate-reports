@@ -16,18 +16,12 @@ a:hover {
 
 b,
 strong {
-  font-weight: 600; // Lighten it up a bit.
+  font-weight: 500; // Lighten it up a bit.
 }
 
 // Beufy thing, it's too bold
 label.label {
-  font-weight: 600;
-}
-
-// Narrow the default content blocks, in general.
-.content:not(.fullbleed) {
-  max-width: 50em;
-  margin: 1rem auto;
+  font-weight: 500;
 }
 
 .content-wrapper {

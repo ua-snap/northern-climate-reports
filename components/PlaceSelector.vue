@@ -123,8 +123,13 @@
 .name-types {
   h5 span {
     display: inline-block;
-    padding-left: 2rem;
     font-size: 85%;
+    @media (max-width: 768px) {
+      padding-bottom: 1rem;
+    }
+    @media (min-width: 769px) {
+      padding-left: 2rem;
+    }
   }
   .name-types-list {
     position: relative;

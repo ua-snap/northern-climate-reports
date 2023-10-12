@@ -1,10 +1,48 @@
 @charset "utf-8";
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@350;400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lexend+Peta:wght@800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&display=swap');
 
 // Update Bulma's global variables
-$family-sans-serif: 'Open Sans', sans-serif;
+$family-sans-serif: 'Lexend', sans-serif;
 $family-monospace: 'IBM Plex Mono', monospace;
 $blue: #03c;
+
+.title.is-3 {
+	font-weight: 300 !important;
+	margin-bottom: 0.5rem !important; 
+}
+
+.content {
+	margin-top: 0.6rem !important;
+}
+
+// Not overrides, but custom Bulma-like classes
+.px-5-mobile {
+	@media (max-width: 768px) {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+}
+
+.px-5-touch {
+	@media (max-width: 1023px) {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+}
+
+.px-5-until-widescreen {
+	@media (max-width: 1215px) {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+}
+
+.px-5-tablet {
+	@media (min-width: 769px) {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+}

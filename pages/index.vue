@@ -1,16 +1,11 @@
 <template>
   <div>
-    <div class="container">
-      <section class="section">
-        <p class="leader">
-          Warming temperatures, thawing permafrost, and more wildfires are
-          changing landscapes across the North.
-          <br />
-          Explore these changes with easy-to-understand climate model
-          projections.
-        </p>
-      </section>
-    </div>
+    <HeaderBlock
+      blurb="A changing climate is altering Northern landscapes.
+      <br class='is-hidden-touch' />
+      Explore these changes with easy-to-understand climate model projections."
+    />
+
     <!--
       Place picker / map / report is all wrapped up below in App.
       This needs to be outside of any `container` or `section` wrappers.
