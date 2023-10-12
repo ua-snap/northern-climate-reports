@@ -96,6 +96,12 @@ export default {
       this.map.addLayer(this.baseLayer)
       this.baseLayer.bringToBack()
     },
+    scenario: function () {
+      this.map.removeLayer(this.baseLayer)
+      this.baseLayer = this.getBaseLayer()
+      this.map.addLayer(this.baseLayer)
+      this.baseLayer.bringToBack()
+    },
     // After geoJSON is loaded, display on map.
     geoJSON: function () {
       this.addGeoJSONtoMap()
