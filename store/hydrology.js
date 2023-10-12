@@ -11,28 +11,32 @@ var convertReportData = function (hydrologyData) {
     models.forEach(model => {
       if (hydrologyData[model] != null) {
         let scenarios = Object.keys(hydrologyData[model])
+        console.log(scenarios)
 
         scenarios.forEach(scenario => {
-          let months = Object.keys(hydrologyData[model][scenario])
-
-          months.forEach(month => {
-            let eras = Object.keys(hydrologyData[model][scenario][month])
+          ;['Spring', 'Summer', 'Fall', 'Winter'].forEach(season => {
+            console.log(season)
+            let eras = Object.keys(hydrologyData[model][scenario][season])
             eras.forEach(era => {
               let variables = Object.keys(
-                hydrologyData[model][scenario][month][era]
+                hydrologyData[model][scenario][season][era]
               )
               variables.forEach(variable => {
                 if (variable == 'tmax' || variable == 'tmin') {
-                  hydrologyData[model][scenario][month][era][
-                    variable
+                  hydrologyData[model][scenario][season][era][variable][
+                    'total'
                   ] = convertToFahrenheit(
-                    hydrologyData[model][scenario][month][era][variable]
+                    hydrologyData[model][scenario][season][era][variable][
+                      'total'
+                    ]
                   )
                 } else {
-                  hydrologyData[model][scenario][month][era][
-                    variable
+                  hydrologyData[model][scenario][season][era][variable][
+                    'total'
                   ] = convertMmToInches(
-                    hydrologyData[model][scenario][month][era][variable]
+                    hydrologyData[model][scenario][season][era][variable][
+                      'total'
+                    ]
                   )
                 }
               })
@@ -104,7 +108,7 @@ export const actions = {
   async fetch(context) {
     let queryUrl =
       process.env.apiUrl +
-      '/hydrology/' +
+      '/eds/hydrology/' +
       context.rootGetters['place/urlFragment']()
     let localKey = 'hydrologyData-' + context.rootGetters['place/urlFragment']()
     let errorKey =
@@ -115,7 +119,7 @@ export const actions = {
     if (checkForError(errorKey)) {
       context.commit('setHttpError', nuxtStorage.localStorage.getData(errorKey))
     } else {
-      context.commit('setHydrologyData', returnedData)
+      context.commit('setHydrologyData', returnedData.summary)
     }
   },
 }

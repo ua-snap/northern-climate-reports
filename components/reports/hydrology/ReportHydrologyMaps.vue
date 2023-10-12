@@ -43,7 +43,10 @@
     </div>
     <table>
       <caption>
-        <h1 class="title is-1">Hey bob put the model/scenario here</h1>
+        <h3 class="title is-5">
+          {{ mapModels(hydro_model_selection) }},
+          {{ mapScenarios(hydro_scenario_selection) }}
+        </h3>
       </caption>
       <thead>
         <tr>
@@ -59,7 +62,7 @@
           v-for="(season, sindex) in ['spring', 'summer', 'fall', 'winter']"
           :key="sindex"
         >
-          <th scope="row"  class="left-header">
+          <th scope="row" class="left-header">
             {{ mapSeasons(season) }}
           </th>
           <td
@@ -91,10 +94,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      units: 'units',
       place: 'place/name',
       vars: 'hydrology/vars',
       seasons: 'hydrology/seasons',
+      models: 'hydrology/models',
+      scenarios: 'hydrology/scenarios',
     }),
   },
   methods: {
@@ -103,6 +107,12 @@ export default {
     },
     mapSeasons(season) {
       return _.capitalize(season)
+    },
+    mapModels(model) {
+      return this.models[model]
+    },
+    mapScenarios(scenario) {
+      return this.scenarios[scenario]
     },
   },
   data() {
@@ -128,7 +138,7 @@ table {
   th {
     text-align: center;
   }
-  tbody th[scope="row"] {
+  tbody th[scope='row'] {
     text-align: right;
     padding-right: 1.5rem;
     vertical-align: middle;
