@@ -41,14 +41,42 @@
         >
       </b-field>
     </div>
-    <div
-      v-for="(era, eindex) in ['historical', 'early', 'mid', 'late']"
-      :key="eindex"
+    <table>
+      <tr>
+        <th></th>
+        <th scope="“col”">Historical (1950&ndash;2009)</th>
+        <th scope="“col”">Early-Century (2010&ndash;2039)</th>
+        <th scope="“col”">Mid-Century (2040&ndash;2069)</th>
+        <th scope="“col”">Late-Century (2070&ndash;2099)</th>
+      </tr>
+      <tr
+        v-for="(season, sindex) in ['spring', 'summer', 'fall', 'winter']"
+        :key="sindex"
+      >
+        <th scope="row">{{ mapSeasons(season) }}</th>
+        <td
+          v-for="(era, eindex) in ['historical', 'early', 'mid', 'late']"
+          :key="eindex"
+          class="minimap-container"
+        >
+          <ReportHydrologyMap
+            var="evap"
+            :model="hydro_model_selection"
+            :scenario="hydro_scenario_selection"
+            :era="era"
+            :season="season"
+          />
+        </td>
+      </tr>
+    </table>
+    <!-- <div
+      v-for="(season, sindex) in ['spring', 'summer', 'fall', 'winter']"
+      :key="sindex"
       class="columns is-flex-direction-row is-centered"
     >
       <div
-        v-for="(season, sindex) in ['spring', 'summer', 'fall', 'winter']"
-        :key="sindex"
+        v-for="(era, eindex) in ['historical', 'early', 'mid', 'late']"
+        :key="eindex"
         class="minimap-container my-4 p-1"
       >
         <ReportHydrologyMap
@@ -58,8 +86,8 @@
           :era="era"
           :season="season"
         />
-      </div>
-    </div>
+      </div> -->
+    <!-- </div> -->
   </section>
 </template>
 
@@ -76,11 +104,15 @@ export default {
       units: 'units',
       place: 'place/name',
       vars: 'hydrology/vars',
+      seasons: 'hydrology/seasons',
     }),
   },
   methods: {
     mapVar(varName) {
       return this.vars[varName]
+    },
+    mapSeasons(season) {
+      return _.capitalize(season)
     },
   },
   data() {
@@ -91,3 +123,11 @@ export default {
   },
 }
 </script>
+<style scoped>
+th {
+  text-align: center;
+}
+th[scope='row'] {
+  transform: rotate(-90deg);
+}
+</style>

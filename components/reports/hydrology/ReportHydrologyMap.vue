@@ -1,16 +1,5 @@
 <template>
-  <div>
-    <div class="map-title has-text-centered">
-      <div>
-        <span class="has-text-weight-bold"
-          >{{ mapEra }},<br />{{ mapSeason }}<br
-        /></span>
-        <span v-if="mapModel">{{ mapModel }}<br class="narrow-br" /></span>
-        <span>{{ mapScenario }}</span>
-      </div>
-    </div>
-    <div :id="mapID" class="minimap"></div>
-  </div>
+  <div :id="mapID" class="minimap"></div>
 </template>
 
 <style lang="scss" scoped>
@@ -104,7 +93,7 @@ export default {
     },
     // After geoJSON is loaded, display on map.
     geoJSON: function () {
-      this.addGeoJSONtoMap()
+      this.addGeoJSONtoMap(0.5)
     },
   },
   methods: {
