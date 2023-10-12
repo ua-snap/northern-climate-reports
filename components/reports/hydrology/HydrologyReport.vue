@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="content">
+    <div>
       <h3 class="title is-3">Hydrology</h3>
       <div class="block content is-size-5">
         <p>
