@@ -192,12 +192,12 @@
             </h3>
             <div class="content is-size-4">
               <p>
-                Each data set covers different places, but unfortunately this
+                Each dataset covers different places, but unfortunately this
                 place has no data.
               </p>
               <p>
                 Maybe we can help you find what you&rsquo;re looking for? Email
-                us:
+                us at
                 <a href="mailto:uaf-snap-data-tools@alaska.edu"
                   >uaf-snap-data-tools@alaska.edu</a
                 >
