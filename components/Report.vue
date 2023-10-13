@@ -165,6 +165,10 @@
               multiple models and scenarios, grouped decadally and into mid/late
               century
             </li>
+            <li v-if="hydrologyData">
+              <a href="#hydrology">Hydrology</a> charts with multiple variables,
+              models, and scenarios, grouped decadally and by month of the year.
+            </li>
             <li v-if="permafrostData">
               <a href="#permafrost">Permafrost</a> with specific visualizations
               depending on the presence or absence of permafrost
@@ -252,6 +256,11 @@
           <PrecipReport />
         </div>
       </section>
+      <section class="section is-hidden-touch" v-if="hydrologyData">
+        <div id="hydrology">
+          <HydrologyReport />
+        </div>
+      </section>
       <section
         class="section is-hidden-touch"
         v-if="permafrostData || type != 'latLng'"
@@ -326,6 +335,7 @@ import PrecipReport from '~/components/reports/precipitation/PrecipReport'
 import PermafrostReport from '~/components/reports/permafrost/PermafrostReport'
 import WildfireReport from '~/components/reports/wildfire/WildfireReport'
 import BeetleRiskReport from '~/components/reports/beetles/BeetleRiskReport'
+import HydrologyReport from '~/components/reports/hydrology/HydrologyReport'
 import MiniMap from '~/components/reports/MiniMap'
 import QualitativeText from '~/components/reports/QualitativeText'
 import BackToTopButton from '~/components/reports/BackToTopButton'
@@ -344,6 +354,7 @@ export default {
     PermafrostReport,
     WildfireReport,
     BeetleRiskReport,
+    HydrologyReport,
     MiniMap,
     QualitativeText,
     BackToTopButton,
@@ -388,9 +399,9 @@ export default {
       // (Temperature, Permafrost, Beetle Climate Protection, etc.)
       let types = this.presentDataTypes()
 
-      // If there are less than 6 data types present, the corresponding
+      // If there are less than 7 data types present, the corresponding
       // section(s) of the report page will be hidden.
-      if (types.length < 6) {
+      if (types.length < 7) {
         return true
       }
       return false
@@ -404,6 +415,7 @@ export default {
         this.flammabilityHttpError,
         this.vegChangeHttpError,
         this.beetleHttpError,
+        this.hydrologyHttpError,
       ]
 
       if (this.type == 'latLng') {
@@ -443,12 +455,14 @@ export default {
       flammabilityData: 'wildfire/flammability',
       vegChangeData: 'wildfire/veg_change',
       beetleData: 'beetle/beetleData',
+      hydrologyData: 'hydrology/hydrologyData',
       climateHttpError: 'climate/httpError',
       elevationHttpError: 'elevation/httpError',
       permafrostHttpError: 'permafrost/httpError',
       flammabilityHttpError: 'wildfire/flammabilityHttpError',
       vegChangeHttpError: 'wildfire/vegChangeHttpError',
       beetleHttpError: 'beetle/httpError',
+      hydrologyHttpError: 'hydrology/httpError',
       isPointLocation: 'place/isPointLocation',
     }),
   },
@@ -460,6 +474,9 @@ export default {
       console.error(e)
     })
     await this.$store.dispatch('permafrost/fetch').catch(e => {
+      console.error(e)
+    })
+    await this.$store.dispatch('hydrology/fetch').catch(e => {
       console.error(e)
     })
     await this.$store.dispatch('wildfire/fetch').catch(e => {
@@ -489,6 +506,9 @@ export default {
       let types = []
       if (this.climateData) {
         types.push('temperature', 'precipitation')
+      }
+      if (this.hydrologyData) {
+        types.push('hydrology')
       }
       if (this.permafrostData) {
         types.push('permafrost')

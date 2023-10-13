@@ -24,6 +24,18 @@
         :class="{ light: type == 'light' }"
         >&#x339C;</span
       ></span
+    ><span class="units" v-if="variable == 'hydro'"
+      ><span v-if="units == 'imperial' && type == 'heavy'">(in/season)</span
+      ><span
+        v-if="units == 'imperial' && type == 'light'"
+        :class="{ light: type == 'light' }"
+        >in/season</span
+      ><span v-if="units == 'metric' && type == 'heavy'">(&#x339C;/season)</span
+      ><span
+        v-if="units == 'metric' && type == 'light'"
+        :class="{ light: type == 'light' }"
+        >&#x339C;/season</span
+      ></span
     ></span
   >
 </template>
