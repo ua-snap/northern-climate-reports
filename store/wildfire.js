@@ -157,7 +157,7 @@ export const getters = {
     }
   },
   huc12Id(state) {
-    if(state.flammability) {
+    if (state.flammability) {
       return state.flammability.huc_id
     }
   },
@@ -204,7 +204,20 @@ export const actions = {
     let errorKey =
       'flammabilityError-' + context.rootGetters['place/urlFragment']()
 
-    let returnedData = await localStorage(queryUrl, localKey, errorKey)
+    let expectedFlamKeys = [
+      '1950-1979',
+      '1980-2008',
+      '2010-2039',
+      '2040-2069',
+      '2070-2099',
+    ]
+
+    let returnedData = await localStorage(
+      queryUrl,
+      localKey,
+      errorKey,
+      expectedFlamKeys
+    )
 
     if (checkForError(errorKey)) {
       context.commit(
@@ -225,7 +238,14 @@ export const actions = {
     localKey = 'vegChange-' + context.rootGetters['place/urlFragment']()
     errorKey = 'vegChangeError-' + context.rootGetters['place/urlFragment']()
 
-    returnedData = await localStorage(queryUrl, localKey, errorKey)
+    let expectedVegKeys = ['1950-2008', '2010-2039', '2040-2069', '2070-2099']
+
+    returnedData = await localStorage(
+      queryUrl,
+      localKey,
+      errorKey,
+      expectedVegKeys
+    )
 
     if (checkForError(errorKey)) {
       context.commit(

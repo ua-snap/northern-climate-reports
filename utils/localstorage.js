@@ -21,8 +21,10 @@ export const checkForError = function (errorKey) {
 export const localStorage = async function (
   queryUrl,
   localKey,
-  errorKey = null
+  errorKey = null,
+  expectedDataKeys = null
 ) {
+  let partialData = false
   if (nuxtStorage.localStorage.getData(localKey)) {
     return nuxtStorage.localStorage.getData(localKey)
   } else {
@@ -41,7 +43,32 @@ export const localStorage = async function (
           )
         })
     }
-    if (returnedData) {
+    // If returnedData is not set by this point, treat this the same as an HTTP
+    // 'no_data" error.
+    if (returnedData == undefined) {
+      nuxtStorage.localStorage.setData(
+        errorKey,
+        'no_data',
+        process.env.localStorageExpiration,
+        'h'
+      )
+    } else if (expectedDataKeys != null) {
+      // If the corresponding value of any of our expected data keys is null,
+      // treat this the same as a 'no_data' HTTP response to avoid partial
+      // data from throwing an exception later on.
+      expectedDataKeys.forEach(key => {
+        if (returnedData.data[key] == null) {
+          nuxtStorage.localStorage.setData(
+            errorKey,
+            'no_data',
+            process.env.localStorageExpiration,
+            'h'
+          )
+          partialData = true
+        }
+      })
+    }
+    if (returnedData && !partialData) {
       nuxtStorage.localStorage.setData(
         localKey,
         returnedData.data,
@@ -50,6 +77,5 @@ export const localStorage = async function (
       )
       return returnedData.data
     }
-    
   }
 }
