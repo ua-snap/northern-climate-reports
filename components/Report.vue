@@ -212,7 +212,7 @@
             {{ httpErrors[uniformHttpError] }}
             }
           </p>
-          <div v-if="dataMissing && uniformHttpError == null">
+          <div v-if="dataPresent && dataMissing && uniformHttpError == null">
             The following data is not available at this location:
             <ul class="mb-5">
               <li v-if="climateHttpError">
