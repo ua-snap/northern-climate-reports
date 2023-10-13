@@ -214,7 +214,7 @@
                   <a
                     href="https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/a077b382-c7e5-44a7-8b2a-1cf764c448f6"
                   >
-                    ALFRESCO Model Outputs - Relative Vegetation Change</a
+                    ALFRESCO Model Outputs - Vegetation Type</a
                   >
                 </p>
                 <blockquote>
