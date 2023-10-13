@@ -377,9 +377,9 @@ export default {
       // (Temperature, Permafrost, Beetle Climate Protection, etc.)
       let types = this.presentDataTypes()
 
-      // If there are less than 6 data types present, the corresponding
+      // If there are less than 7 data types present, the corresponding
       // section(s) of the report page will be hidden.
-      if (types.length < 6) {
+      if (types.length < 7) {
         return true
       }
       return false
@@ -484,6 +484,10 @@ export default {
       let types = []
       if (this.climateData) {
         types.push('temperature', 'precipitation')
+      }
+
+      if (this.hydrologyData) {
+        types.push('hydrology')
       }
 
       // Always show the permafrost section for area reports.
