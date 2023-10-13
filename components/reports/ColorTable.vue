@@ -3,13 +3,13 @@
     <table class="table">
       <thead>
         <tr>
-          <th scope="col" style="min-width: 16rem">Category</th>
+          <th scope="col" style="min-width: 16rem">{{ colorHeader }}</th>
           <th scope="col" style="min-width: 10rem">{{ unitLabel }}</th>
           <th scope="col" v-if="showInterpretation()">Interpretation</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(threshold, index) in thresholds">
+        <tr v-for="(threshold, index) in thresholds" :key="index">
           <th scope="row" class="category">
             <div
               class="swatch"
@@ -68,11 +68,16 @@
 
 <script>
 import _ from 'lodash'
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'ColorTable',
-  props: ['thresholds', 'unitLabel', 'unitSymbol', 'borderedColors'],
+  props: [
+    'thresholds',
+    'unitLabel',
+    'unitSymbol',
+    'borderedColors',
+    'colorHeader',
+  ],
   methods: {
     ifBordered(index) {
       // Add border around pale colors to increase visibility

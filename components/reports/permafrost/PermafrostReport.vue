@@ -19,6 +19,7 @@
       <p>This table is a legend for the maps above.</p>
       <ColorTable
         unitLabel="Mean Annual Ground Temperature"
+        colorHeader="Category"
         :unitSymbol="unitSymbol"
         :thresholds="magtThresholds"
         :borderedColors="[3, 4]"

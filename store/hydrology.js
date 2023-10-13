@@ -11,11 +11,8 @@ var convertReportData = function (hydrologyData) {
     models.forEach(model => {
       if (hydrologyData[model] != null) {
         let scenarios = Object.keys(hydrologyData[model])
-        console.log(scenarios)
-
         scenarios.forEach(scenario => {
           ;['Spring', 'Summer', 'Fall', 'Winter'].forEach(season => {
-            console.log(season)
             let eras = Object.keys(hydrologyData[model][scenario][season])
             eras.forEach(era => {
               let variables = Object.keys(
@@ -80,6 +77,107 @@ export const getters = {
   scenarios() {
     return { 0: 'RCP 4.5', 1: 'RCP 8.5' }
   },
+  evapThresholds(state, getters, rootState, rootGetters) {
+    let thresholds = [
+      {
+        label: '',
+        min: -30,
+        max: 0,
+        color: '#c7eae5',
+      },
+      {
+        label: '',
+        min: 0,
+        max: 10,
+        color: '#f5f5f5',
+      },
+      {
+        label: '',
+        min: 10,
+        max: 20,
+        color: '#f6e8c3',
+      },
+      {
+        label: '',
+        min: 20,
+        max: 30,
+        color: '#dfc27d',
+      },
+      {
+        label: '',
+        min: 30,
+        max: 60,
+        color: '#bf812d',
+      },
+      {
+        label: '',
+        min: 60,
+        max: 90,
+        color: '#8c510a',
+      },
+      {
+        label: '',
+        min: 90,
+        max: 180,
+        color: '#543005',
+      },
+    ]
+    let keys = ['min', 'max']
+    thresholds.forEach(threshold => {
+      keys.forEach(key => {
+        threshold[key] =
+          rootGetters.units == 'imperial'
+            ? convertMmToInches(threshold[key])
+            : threshold[key]
+      })
+    })
+    return thresholds
+  },
+  runoffThresholds(state, getters, rootState, rootGetters) {
+    let thresholds = [
+      {
+        label: '',
+        min: 0,
+        max: 15,
+        color: '#f0f9e8',
+      },
+      {
+        label: '',
+        min: 15,
+        max: 30,
+        color: '#bae4bc',
+      },
+      {
+        label: '',
+        min: 30,
+        max: 60,
+        color: '#7bccc4',
+      },
+      {
+        label: '',
+        min: 60,
+        max: 90,
+        color: '#43a2ca',
+      },
+      {
+        label: '',
+        min: 90,
+        max: 180,
+        color: '#0868ac',
+      },
+    ]
+    let keys = ['min', 'max']
+    thresholds.forEach(threshold => {
+      keys.forEach(key => {
+        threshold[key] =
+          rootGetters.units == 'imperial'
+            ? convertMmToInches(threshold[key])
+            : threshold[key]
+      })
+    })
+    return thresholds
+  },
+
   hydrologyData(state, getters, rootState, rootGetters) {
     var convertedData = _.cloneDeep(state.hydrologyData)
 
