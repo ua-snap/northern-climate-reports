@@ -143,7 +143,7 @@
                 <blockquote>
                   Fresco, N., Littell, J., Redilla, K., Moan, J., & Brannoch, S.
                   (in prep). Modeling the loss of climate protection from spruce
-                  beetles (Dendroctonus rufipennis) under changing conditions in
+                  beetles (<i>Dendroctonus rufipennis</i>) under changing conditions in
                   Alaska’s forests. [submission anticipated November 2023]
                 </blockquote>
                 <p>Underlying climataloglical data provided by:</p>
