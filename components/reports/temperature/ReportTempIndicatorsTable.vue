@@ -665,6 +665,7 @@
       <tfoot>
         <tr>
           <td colspan="10" class="about">
+            Red text means warmer, blue means colder. Bold text indicates greater change.
             <nuxt-link :to="{ name: 'data' }"
               >Read more about the dataset and processing used to generate these
               data.</nuxt-link

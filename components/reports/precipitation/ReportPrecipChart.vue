@@ -82,7 +82,7 @@ export default {
       layout.shapes.push(historicalRegion)
 
       let footerLines = [
-        'The boxplot represents the interquartile range (IQR) of historical means for the season, from 1950–2009 (CRU TS 4.0).',
+        'The boxplot on the left represents the interquartile range (IQR) of historical means for the season, from 1950–2009 (CRU TS 4.0).',
         'The shaded gray region shows the extent of common variation for the historical period.',
         'The line inside the boxplot represents the median historical precipitation.',
       ]
