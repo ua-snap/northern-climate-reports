@@ -207,7 +207,7 @@
               </td>
             </tr>
             <tr>
-              <th scope="row">Wildfire (vegetation change)</th>
+              <th scope="row">Wildfire (vegetation type mode and percentage)</th>
               <td>1&#8239;km</td>
               <td>
                 <p>
