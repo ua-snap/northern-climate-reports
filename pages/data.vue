@@ -36,6 +36,53 @@
               </td>
             </tr>
             <tr>
+              <th scope="row">Hydrology</th>
+              <td>12&#8239;km</td>
+              <td>
+                <p>
+                  <a
+                    href="https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/2610188c-aa38-4f47-8987-b36ec72cdd0d"
+                    >Alaska VIC Hydrologic Model Output (1950-2099): Decadal
+                    Averages of Monthly Summaries</a
+                  >
+                </p>
+                <blockquote>
+                  <a href="https://doi.org/10.5065/c3kn-2y77"
+                    >21st Century Hydrologic Projections for Alaska and
+                    Hawai&lsquo;i</a
+                  >, Mizukami, N., Newman, A. J., Wood, A. W., Gutmann, E. D.,
+                  and Hamman, J. J. (2022). Boulder, CO: UCAR/NCAR/RAL.
+                  <a href="https://doi.org/10.5065/c3kn-2y77"
+                    >https://doi.org/10.5065/c3kn-2y77</a
+                  >
+                </blockquote>
+                <blockquote>
+                  Mizukami, N., Newman, A. J., Littell, J. S., Giambelluca, T.
+                  W., Wood, A. W., Gutmann, E. D., Hamman, J. J., Gergel, D. R.,
+                  Nijsenn, B., Clark, M. P., and Arnold, J. R. (2022). New
+                  projections of 21st century climate and hydrology for Alaska
+                  and Hawaiʻi. <i>Climate Services, 27</i>, 100312.
+                  <a href="https://doi.org/10.1016/j.cliser.2022.100312"
+                    >https://doi.org/10.1016/j.cliser.2022.100312</a
+                  >
+                </blockquote>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Indicators (temperature &amp; precipitation)</th>
+              <td>12&#8239;km</td>
+              <td>
+                <p>Indicators were derived from this data product:</p>
+                <blockquote>
+                  Mizukami, N., Newman, A. J., Wood, A. W., Gutmann, E. D., and
+                  Hamman, J. J. (2022). Boulder, CO: UCAR/NCAR/RAL.
+                  <a href="https://doi.org/10.5065/c3kn-2y77"
+                    >https://doi.org/10.5065/c3kn-2y77</a
+                  >
+                </blockquote>
+              </td>
+            </tr>
+            <tr>
               <th scope="row">Precipitation (monthly and derived)</th>
               <td>2&#8239;km</td>
               <td>
@@ -52,8 +99,9 @@
                   Walsh J.E., Bhatt U.S., Littell J. S., Leonawicz M., Lindgren
                   M., Kurkowski T. A., Bieniek P. A., Gray S., & Rupp T. S.
                   (2018). Downscaling of climate model output for Alaskan
-                  stakeholders, <i>Environmental Modelling & Software, 110</i>,
-                  38&ndash;51. DOI
+                  stakeholders,
+                  <i>Environmental Modelling & Software, 110</i>, 38&ndash;51.
+                  DOI
                   <a href="https://doi.org/10.1016/j.envsoft.2018.03.021"
                     >10.1016/j.envsoft.2018.03.021</a
                   >
@@ -88,6 +136,27 @@
               </td>
             </tr>
             <tr>
+              <th scope="row">Spruce Beetle Risk</th>
+              <td>12&#8239;km</td>
+              <td>
+                <p><a href="">Spruce Beetle Risk model output</a></p>
+                <blockquote>
+                  Fresco, N., Littell, J., Redilla, K., Moan, J., & Brannoch, S.
+                  (in prep). Modeling the loss of climate protection from spruce
+                  beetles (Dendroctonus rufipennis) under changing conditions in
+                  Alaska’s forests. [submission anticipated November 2023]
+                </blockquote>
+                <p>Underlying climataloglical data provided by:</p>
+                <blockquote>
+                  Mizukami, N., Newman, A. J., Wood, A. W., Gutmann, E. D., and
+                  Hamman, J. J. (2022). Boulder, CO: UCAR/NCAR/RAL.
+                  <a href="https://doi.org/10.5065/c3kn-2y77"
+                    >https://doi.org/10.5065/c3kn-2y77</a
+                  >
+                </blockquote>
+              </td>
+            </tr>
+            <tr>
               <th scope="row">Temperature (monthly and derived)</th>
               <td>2&#8239;km</td>
               <td>
@@ -105,29 +174,58 @@
                   Walsh J.E., Bhatt U.S., Littell J. S., Leonawicz M., Lindgren
                   M., Kurkowski T. A., Bieniek P. A., Gray S., & Rupp T. S.
                   (2018). Downscaling of climate model output for Alaskan
-                  stakeholders, <i>Environmental Modelling & Software, 110</i>,
-                  38&ndash;51. DOI
+                  stakeholders,
+                  <i>Environmental Modelling & Software, 110</i>, 38&ndash;51.
+                  DOI
                   <a href="https://doi.org/10.1016/j.envsoft.2018.03.021"
                     >10.1016/j.envsoft.2018.03.021</a
                   >
                 </blockquote>
-
               </td>
             </tr>
             <tr>
               <th scope="row">Wildfire (flammability)</th>
               <td>1&#8239;km</td>
               <td>
-                See a summarized data product from the ALFRESCO model
-                that&rsquo;s based on the same data used here.
+                <p>
+                  <a
+                    href="https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/eeaaca2c-0280-4226-b126-fda42a2b6214"
+                  >
+                    ALFRESCO Model Outputs - Relative Flammability</a
+                  >
+                </p>
+
+                <blockquote>
+                  Johnstone, J. F., Rupp, T. S., Olson, M. & Verbyla, D. (2011).
+                  Modeling impacts of fire severity on successional trajectories
+                  and future fire behavior in Alaskan boreal forests.
+                  <i>Landscape Ecology, 26</i>, 487&ndash;500.
+                  <a href="https://doi.org/10.1007/s10980-011-9574-6"
+                    >https://doi.org/10.1007/s10980-011-9574-6</a
+                  >
+                </blockquote>
               </td>
             </tr>
             <tr>
               <th scope="row">Wildfire (vegetation change)</th>
               <td>1&#8239;km</td>
               <td>
-                See a summarized data product from the ALFRESCO model
-                that&rsquo;s based on the same data used here.
+                <p>
+                  <a
+                    href="https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/210f00ff-86e5-47dd-a406-9167af3630af"
+                  >
+                    ALFRESCO Model Outputs - Relative Vegetation Change</a
+                  >
+                </p>
+                <blockquote>
+                  Johnstone, J. F., Rupp, T. S., Olson, M. & Verbyla, D. (2011).
+                  Modeling impacts of fire severity on successional trajectories
+                  and future fire behavior in Alaskan boreal forests.
+                  <i>Landscape Ecology, 26</i>, 487&ndash;500.
+                  <a href="https://doi.org/10.1007/s10980-011-9574-6"
+                    >https://doi.org/10.1007/s10980-011-9574-6</a
+                  >
+                </blockquote>
               </td>
             </tr>
           </thead>
@@ -159,7 +257,7 @@
 blockquote {
   margin: 0.5rem;
   padding-left: 1rem;
-  border-left: 3px solid #ccc;
+  border-left: 1px solid #ccc;
 }
 </style>
 
