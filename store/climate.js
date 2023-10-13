@@ -79,7 +79,27 @@ export const actions = {
     let localKey = 'climateData-' + context.rootGetters['place/urlFragment']()
     let errorKey = 'climateError-' + context.rootGetters['place/urlFragment']()
 
-    let returnedData = await localStorage(queryUrl, localKey, errorKey)
+    let expectedDataKeys = [
+      '1950_2009',
+      '2010_2019',
+      '2020_2029',
+      '2030_2039',
+      '2040_2049',
+      '2040_2069',
+      '2050_2059',
+      '2060_2069',
+      '2070_2079',
+      '2070_2099',
+      '2080_2089',
+      '2090_2099',
+    ]
+
+    let returnedData = await localStorage(
+      queryUrl,
+      localKey,
+      errorKey,
+      expectedDataKeys
+    )
 
     if (checkForError(errorKey)) {
       context.commit('setHttpError', nuxtStorage.localStorage.getData(errorKey))

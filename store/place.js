@@ -206,21 +206,22 @@ export const actions = {
   // or we can pass `huc12Id` if we need to specify a distinct
   // boundary ID to fetch (used for ALFRESCO data).
   async fetch(context, huc12Id) {
-    let boundaryId = huc12Id ? 'area/' + huc12Id : context.getters.urlFragment()
-
-    // TODO: add error handling here for 404 (no data) etc.
-    let queryUrl = process.env.apiUrl + '/boundary/' + boundaryId
-    let geoJSON = await this.$http.$get(queryUrl)
-    context.commit('setGeoJSON', geoJSON)
+    // Only fetch for non-point locations
+    if (!context.getters.isPointLocation) {
+      let boundaryId = huc12Id
+        ? 'area/' + huc12Id
+        : context.getters.urlFragment()
+      // TODO: add error handling here for 404 (no data) etc.
+      let queryUrl = process.env.apiUrl + '/boundary/' + boundaryId
+      let geoJSON = await this.$http.$get(queryUrl)
+      context.commit('setGeoJSON', geoJSON)
+    }
   },
 
   async fetchPlaces(context) {
     let queryUrl = process.env.apiUrl + '/places/all'
-
     let localKey = 'places'
-
     let returnedData = await localStorage(queryUrl, localKey)
-
     context.commit('setPlaces', returnedData)
   },
 

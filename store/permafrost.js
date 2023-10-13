@@ -144,7 +144,14 @@ export const actions = {
     let errorKey =
       'permafrostError-' + context.rootGetters['place/urlFragment']()
 
-    let returnedData = await localStorage(queryUrl, localKey, errorKey)
+    let expectedDataKeys = ['1988-2017', '2010-2039', '2040-2069', '2070-2099']
+
+    let returnedData = await localStorage(
+      queryUrl,
+      localKey,
+      errorKey,
+      expectedDataKeys
+    )
 
     if (checkForError(errorKey)) {
       context.commit('setHttpError', nuxtStorage.localStorage.getData(errorKey))

@@ -189,10 +189,33 @@
       </section>
       <section class="section content py-0 is-hidden-touch" v-if="dataMissing">
         <div class="is-size-5">
-          <p class="no-data mt-6" v-if="uniformHttpError">
+          <div v-if="!dataPresent" class="pb-3">
+            <h3 class="title is-3">
+              We&rsquo;re sorry, but this place is outside of our data.
+            </h3>
+            <div class="content is-size-4">
+              <p>
+                Each dataset covers different places, but unfortunately this
+                place has no data.
+              </p>
+              <p>
+                Maybe we can help you find what you&rsquo;re looking for? Email
+                us at
+                <a href="mailto:uaf-snap-data-tools@alaska.edu"
+                  >uaf-snap-data-tools@alaska.edu</a
+                >
+                with what you need!
+              </p>
+            </div>
+          </div>
+          <p
+            class="no-data mt-6"
+            v-if="uniformHttpError && uniformHttpError != 'no_data'"
+          >
             {{ httpErrors[uniformHttpError] }}
+            }
           </p>
-          <div v-if="dataMissing && uniformHttpError == null">
+          <div v-if="dataPresent && dataMissing && uniformHttpError == null">
             The following data is not available at this location:
             <ul class="mb-5">
               <li v-if="climateHttpError">
@@ -203,7 +226,7 @@
                 <strong>Elevation:</strong>
                 {{ httpErrors[elevationHttpError] }}
               </li>
-              <li v-if="permafrostHttpError && type == 'latLng'">
+              <li v-if="permafrostHttpError">
                 <strong>Permafrost:</strong>
                 {{ httpErrors[permafrostHttpError] }}
               </li>
@@ -222,7 +245,6 @@
             </ul>
           </div>
         </div>
-        <div v-if="!dataPresent" class="pb-3" />
       </section>
       <section class="section is-hidden-touch" v-if="climateData">
         <div id="temperature">
@@ -485,16 +507,12 @@ export default {
       if (this.climateData) {
         types.push('temperature', 'precipitation')
       }
-
       if (this.hydrologyData) {
         types.push('hydrology')
       }
-
-      // Always show the permafrost section for area reports.
-      if (this.permafrostData || this.type != 'latLng') {
+      if (this.permafrostData) {
         types.push('permafrost')
       }
-
       if (this.flammabilityData) {
         types.push('flammability')
       }
