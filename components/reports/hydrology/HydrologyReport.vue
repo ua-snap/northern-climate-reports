@@ -10,19 +10,15 @@
           Capacity (VIC) model to downscaled CMIP5 historical and projected
           climate data, using RCP 4.5 and RCP 8.5 emissions scenarios.
         </p>
-      </div>
 
-      <div class="block">
-        <h4 class="title is-5 mb-1">Data Summary</h4>
-        <div class="content is-size-5">
-          The blocks below show the minimum, mean and maximum values for the
-          annual means across 3 models: CanESM2, GFDL-ESM2M, and NCAR-CCSM4 and
+        <p>
+          The tables below show the minimum, mean and maximum values for the
+          annual means across 3 models: CanESM2, GFDL ESM2M, and NCAR CCSM4 and
           2 scenarios: RCP 4.5 and RCP 8.5 for each of the given eras.
-        </div>
+        </p>
       </div>
 
       <ReportHydrologyTables />
-
       <ReportHydrologyMaps />
 
       <DownloadCsvButton
