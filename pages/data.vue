@@ -139,7 +139,7 @@
               <th scope="row">Spruce Beetle Risk</th>
               <td>12&#8239;km</td>
               <td>
-                <p><a href="">Spruce Beetle Risk model output</a></p>
+                <p>Spruce Beetle Risk model output</p>
                 <blockquote>
                   Fresco, N., Littell, J., Redilla, K., Moan, J., & Brannoch, S.
                   (in prep). Modeling the loss of climate protection from spruce
