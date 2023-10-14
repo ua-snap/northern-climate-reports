@@ -222,6 +222,10 @@
                 <strong>Temperature and precipitation:</strong>
                 {{ httpErrors[climateHttpError] }}
               </li>
+              <li v-if="hydrologyHttpError">
+                <strong>Hydrology:</strong>
+                {{ httpErrors[hydrologyHttpError] }}
+              </li>
               <li v-if="elevationHttpError">
                 <strong>Elevation:</strong>
                 {{ httpErrors[elevationHttpError] }}
