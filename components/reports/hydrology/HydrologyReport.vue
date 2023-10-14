@@ -19,14 +19,15 @@
       </div>
 
       <ReportHydrologyTables />
-      <ReportHydrologyMaps />
-
       <DownloadCsvButton
         text="Download hydrology data as CSV"
         endpoint="hydrology"
         class="mt-3 mb-5"
       />
+
+      <ReportHydrologyMaps />
       <BackToTopButton />
+      
     </div>
   </div>
 </template>
