@@ -121,14 +121,13 @@
           </tr>
         </tbody>
       </table>
-      <div class="content mb-6">
-        <p>This table is a legend for the maps above.</p>
+      <div class="mt-3 mb-6 is-centered legend">
         <ColorTable
           :unitLabel="mapVar(variable)"
-          colorHeader="Color"
           :unitSymbol="unitSymbol"
           :thresholds="variable == 'evap' ? evapThresholds : runoffThresholds"
           :borderedColors="[0, 1, 2]"
+          :ifClampColor="true"
         />
       </div>
     </div>
@@ -157,7 +156,7 @@ export default {
       runoffThresholds: 'hydrology/runoffThresholds',
     }),
     unitSymbol() {
-      return this.units == 'imperial' ? 'in/season' : 'mm/season'
+      return this.units == 'imperial' ? '&#8239;in/season' : '&#8239;mm/season'
     },
   },
   methods: {
@@ -199,6 +198,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.legend {
+  max-width: 23rem;
+  margin-left: auto;
+  margin-right: auto;
+}
 table {
   width: 100%;
   table-layout: fixed;

@@ -1,47 +1,50 @@
 <template>
-  <div class="content">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col" style="min-width: 16rem">{{ colorHeader }}</th>
-          <th scope="col" style="min-width: 10rem">{{ unitLabel }}</th>
-          <th scope="col" v-if="showInterpretation()">Interpretation</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(threshold, index) in thresholds" :key="index">
-          <th scope="row" class="category">
-            <div
-              class="swatch"
-              :class="{ bordered: ifBordered(index) }"
-              :style="{ 'background-color': threshold['color'] }"
-            />
-            {{ threshold['label'] }}
-          </th>
-          <td class="numbers">
-            <span v-if="threshold['min'] == rangeMin()"
-              >&lt;{{ threshold['max'] }}<span v-html="unitSymbol"
-            /></span>
-            <span v-else-if="threshold['max'] == rangeMax()"
-              >&ge;{{ threshold['min'] }}<span v-html="unitSymbol"
-            /></span>
-            <span v-else-if="!threshold['max'] && !threshold['min']">-</span>
-            <span v-else
-              >&ge;{{ threshold['min'] }}<span v-html="unitSymbol" />, &lt;{{
-                threshold['max']
-              }}<span v-html="unitSymbol"
-            /></span>
-          </td>
-          <td v-if="showInterpretation()">
-            {{ threshold['interpretation'] }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col" :class="{ 'color-column-clamp': ifClampColor }">
+          {{ colorHeader }}
+        </th>
+        <th scope="col">{{ unitLabel }}</th>
+        <th scope="col" v-if="showInterpretation()">Interpretation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(threshold, index) in thresholds" :key="index">
+        <th scope="row" class="category">
+          <div
+            class="swatch"
+            :class="{ bordered: ifBordered(index) }"
+            :style="{ 'background-color': threshold['color'] }"
+          />
+          {{ threshold['label'] }}
+        </th>
+        <td class="numbers">
+          <span v-if="threshold['min'] == rangeMin()"
+            >&lt;{{ threshold['max'] }}<span v-html="unitSymbol"
+          /></span>
+          <span v-else-if="threshold['max'] == rangeMax()"
+            >&ge;{{ threshold['min'] }}<span v-html="unitSymbol"
+          /></span>
+          <span v-else-if="!threshold['max'] && !threshold['min']">-</span>
+          <span v-else
+            >&ge;{{ threshold['min'] }}<span v-html="unitSymbol" />, &lt;{{
+              threshold['max']
+            }}<span v-html="unitSymbol"
+          /></span>
+        </td>
+        <td v-if="showInterpretation()">
+          {{ threshold['interpretation'] }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <style lang="scss" scoped>
+.color-column-clamp {
+  width: 3rem;
+}
 .content table th:not([align]) {
   text-align: left;
 }
@@ -77,6 +80,7 @@ export default {
     'unitSymbol',
     'borderedColors',
     'colorHeader',
+    'ifClampColor', // clamp the color column to only contain the swatch
   ],
   methods: {
     ifBordered(index) {
