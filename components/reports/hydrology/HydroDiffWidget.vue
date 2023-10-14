@@ -15,12 +15,6 @@
   &.strong {
     font-weight: 500;
   }
-  &.less {
-    color: #5e3305;
-  }
-  &.more {
-    color: #05335e;
-  }
 }
 </style>
 
@@ -55,7 +49,7 @@ export default {
       return this.pct > 0
     },
     diff() {
-      let diff = parseFloat(this.future - this.past).toFixed(1)
+      let diff = Number(parseFloat(this.future - this.past).toFixed(1))
       if (diff > 0) {
         diff = '&plus;' + diff
       } else if (diff < 0) {
