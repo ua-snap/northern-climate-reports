@@ -139,7 +139,7 @@
               <th scope="row">Spruce Beetle Risk</th>
               <td>12&#8239;km</td>
               <td>
-                <p>Spruce Beetle Risk model output</p>
+                <p><a href="https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/090daa3e-b1f1-4dc5-81f2-b7817bd011ee">Historical and projected climatic protection of spruce beetle infestation in Alaska</a></p>
                 <blockquote>
                   Fresco, N., Littell, J., Redilla, K., Moan, J., & Brannoch, S.
                   (in prep). Modeling the loss of climate protection from spruce
