@@ -144,7 +144,7 @@ export const actions = {
     let errorKey =
       'permafrostError-' + context.rootGetters['place/urlFragment']()
 
-    let expectedDataKeys = ['1988-2017', '2010-2039', '2040-2069', '2070-2099']
+    let expectedDataKeys = ['2021-2039', '2040-2069', '2070-2099']
 
     let returnedData = await localStorage(
       queryUrl,
