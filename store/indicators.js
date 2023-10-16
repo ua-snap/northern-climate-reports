@@ -74,6 +74,7 @@ export const mutations = {
   },
   clear(state) {
     state.indicatorData = undefined
+    state.httpError = null
   },
   setHttpError(state, error) {
     state.httpError = error

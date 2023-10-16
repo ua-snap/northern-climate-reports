@@ -64,6 +64,7 @@ export const mutations = {
   },
   clear(state) {
     state.climateData = undefined
+    state.httpError = null
   },
   setHttpError(state, error) {
     state.httpError = error
