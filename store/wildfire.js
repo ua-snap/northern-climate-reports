@@ -173,6 +173,8 @@ export const mutations = {
   clear(state) {
     state.flammability = undefined
     state.veg_change = undefined
+    state.flammabilityHttpError = null
+    state.vegChangeHttpError = null
   },
   setFlammabilityHttpError(state, error) {
     state.flammabilityHttpError = error

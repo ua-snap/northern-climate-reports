@@ -50,6 +50,7 @@ export const mutations = {
   },
   clear(state) {
     state.elevation = undefined
+    state.httpError = null
   },
   setHttpError(state, error) {
     state.httpError = error

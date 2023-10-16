@@ -71,6 +71,7 @@ export const mutations = {
   },
   clear(state) {
     state.beetleData = undefined
+    state.httpError = null
   },
   setHttpError(state, error) {
     state.httpError = error

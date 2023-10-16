@@ -55,10 +55,13 @@ export default {
 
     // Since this component is invoked whenever the `/` route fires,
     // we need to clear the stores.
-    this.$store.commit('place/clear')
+    this.$store.commit('beetle/clear')
     this.$store.commit('climate/clear')
     this.$store.commit('elevation/clear')
+    this.$store.commit('hydrology/clear')
+    this.$store.commit('indicators/clear')
     this.$store.commit('permafrost/clear')
+    this.$store.commit('place/clear')
     this.$store.commit('wildfire/clear')
 
     // Populate the store with places.
