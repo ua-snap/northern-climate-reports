@@ -54,7 +54,7 @@
       <tbody>
         <tr>
           <th scope="row">
-            Very Cold Day Threshold<br />
+            Very Cold Day Threshold
             <span class="description"
               >Only 5 days in a year are colder than this</span
             >
@@ -154,7 +154,7 @@
         </tr>
         <tr>
           <th scope="row">
-            Very Hot Day Threshold<br />
+            Very Hot Day Threshold
             <span class="description"
               >Only 5 days in a year are warmer than this</span
             >
@@ -254,7 +254,7 @@
         </tr>
         <tr>
           <th scope="row">
-            Summer Days<br />
+            Summer Days
             <span class="description"
               >Temperature above {{ suValue }}<UnitWidget type="light"
             /></span>
@@ -353,7 +353,7 @@
         </tr>
         <tr>
           <th scope="row">
-            Deep Winter Days<br />
+            Deep Winter Days
             <span class="description"
               >Temperature below {{ dwValue }}<UnitWidget type="light"
             /></span>
@@ -452,7 +452,7 @@
         </tr>
         <tr>
           <th scope="row">
-            Warm Spell Duration Index<br />
+            Warm Spell Duration Index
             <span class="description"
               >How many hot days in excess of 6-day periods?
             </span>
@@ -558,7 +558,7 @@
         </tr>
         <tr>
           <th scope="row">
-            Cold Spell Duration Index<br />
+            Cold Spell Duration Index
             <span class="description"
               >How many cold days in excess of 6-day periods?
             </span>

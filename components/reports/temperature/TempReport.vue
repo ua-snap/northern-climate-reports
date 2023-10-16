@@ -33,12 +33,12 @@
     </div>
     <ReportTempChart :season="temp_season" />
     <ReportTempTable />
-    <ReportTempIndicatorsTable />
     <DownloadCsvButton
       text="Download temperature data as CSV"
       endpoint="temperature"
       class="mt-3 mb-5"
     />
+    <ReportTempIndicatorsTable />
     <BackToTopButton />
   </div>
 </template>

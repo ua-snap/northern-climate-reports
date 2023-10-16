@@ -13,9 +13,6 @@
             at the
             <a href="https://uaf-iarc.org"
               >International Arctic Research Center</a
-            >. <strong>Contact us</strong> at
-            <a href="mailto:uaf-snap-data-tools@alaska.edu"
-              >uaf-snap-data-tools@alaska.edu</a
             >.
           </p>
 
@@ -31,17 +28,20 @@
             >.
           </p>
           <p>
-            Data available through this tool are subject to the
-            <a href="https://creativecommons.org/licenses/by/4.0/"
-              >Creative Commons Attribution 4.0</a
+            <strong
+              >Please contact
+              <a href="mailto:uaf-snap-data-tools@alaska.edu"
+                >uaf&ndash;snap&ndash;data&ndash;tools@alaska.edu</a
+              >
+              with questions or comments.</strong
             >
-            license. Please contact
-            <a href="mailto:uaf-snap-data-tools@alaska.edu"
-              >uaf&ndash;snap&ndash;data&ndash;tools@alaska.edu</a
-            >
-            with questions or comments.
             <a href="https://uaf-snap.org">Visit the SNAP website</a>
             to see all of our climate tools.
+          </p>
+          <p>
+            Usage of data provided through this tool is subject to license
+            constraints. See the <nuxt-link to="/data">data page</nuxt-link> for
+            details.
           </p>
           <p>
             UA is committed to providing accessible websites.
