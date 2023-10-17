@@ -626,7 +626,8 @@
       <tfoot>
         <tr>
           <td colspan="10" class="about">
-            Bold text indicates greater change.
+            Values indicate mean values for the time range specified. Bold text
+            indicates greater change.
             <nuxt-link :to="{ name: 'data' }"
               >Read more about the dataset and processing used to generate these
               data.</nuxt-link
