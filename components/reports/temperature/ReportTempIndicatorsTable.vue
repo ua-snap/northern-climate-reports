@@ -60,83 +60,83 @@
             >
           </th>
           <td class="left">
-            {{ reportData['cd']['historical']['Daymet']['historical']['min']
+            {{ reportData['cd']['historical']['Daymet']['historical']['mean']
             }}<UnitWidget />
           </td>
           <td>
-            {{ reportData['cd']['midcentury']['MRI-CGCM3']['rcp45']['min']
+            {{ reportData['cd']['midcentury']['MRI-CGCM3']['rcp45']['mean']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['cd']['midcentury']['MRI-CGCM3']['rcp45']['min']
+                reportData['cd']['midcentury']['MRI-CGCM3']['rcp45']['mean']
               "
               :past="
-                reportData['cd']['historical']['Daymet']['historical']['min']
+                reportData['cd']['historical']['Daymet']['historical']['mean']
               "
             />
           </td>
           <td>
-            {{ reportData['cd']['midcentury']['NCAR-CCSM4']['rcp45']['min']
+            {{ reportData['cd']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['cd']['midcentury']['NCAR-CCSM4']['rcp45']['min']
+                reportData['cd']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
               "
               :past="
-                reportData['cd']['historical']['Daymet']['historical']['min']
+                reportData['cd']['historical']['Daymet']['historical']['mean']
               "
             />
           </td>
           <td>
-            {{ reportData['cd']['midcentury']['MRI-CGCM3']['rcp85']['min']
+            {{ reportData['cd']['midcentury']['MRI-CGCM3']['rcp85']['mean']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['cd']['midcentury']['MRI-CGCM3']['rcp85']['min']
+                reportData['cd']['midcentury']['MRI-CGCM3']['rcp85']['mean']
               "
               :past="
-                reportData['cd']['historical']['Daymet']['historical']['min']
+                reportData['cd']['historical']['Daymet']['historical']['mean']
               "
             />
           </td>
           <td>
-            {{ reportData['cd']['midcentury']['NCAR-CCSM4']['rcp85']['min']
+            {{ reportData['cd']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['cd']['midcentury']['NCAR-CCSM4']['rcp85']['min']
+                reportData['cd']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
               "
               :past="
-                reportData['cd']['historical']['Daymet']['historical']['min']
+                reportData['cd']['historical']['Daymet']['historical']['mean']
               "
             />
           </td>
           <td>
-            {{ reportData['cd']['longterm']['MRI-CGCM3']['rcp45']['min']
+            {{ reportData['cd']['longterm']['MRI-CGCM3']['rcp45']['mean']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['cd']['longterm']['MRI-CGCM3']['rcp45']['min']
+                reportData['cd']['longterm']['MRI-CGCM3']['rcp45']['mean']
               "
               :past="
-                reportData['cd']['historical']['Daymet']['historical']['min']
+                reportData['cd']['historical']['Daymet']['historical']['mean']
               "
             />
           </td>
           <td>
-            {{ reportData['cd']['longterm']['NCAR-CCSM4']['rcp45']['min']
+            {{ reportData['cd']['longterm']['NCAR-CCSM4']['rcp45']['mean']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['cd']['longterm']['NCAR-CCSM4']['rcp45']['min']
+                reportData['cd']['longterm']['NCAR-CCSM4']['rcp45']['mean']
               "
               :past="
-                reportData['cd']['historical']['Daymet']['historical']['min']
+                reportData['cd']['historical']['Daymet']['historical']['mean']
               "
             />
           </td>
           <td>
-            {{ reportData['cd']['longterm']['MRI-CGCM3']['rcp85']['min']
+            {{ reportData['cd']['longterm']['MRI-CGCM3']['rcp85']['mean']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['cd']['longterm']['MRI-CGCM3']['rcp85']['min']
+                reportData['cd']['longterm']['MRI-CGCM3']['rcp85']['mean']
               "
               :past="
-                reportData['cd']['historical']['Daymet']['historical']['min']
+                reportData['cd']['historical']['Daymet']['historical']['mean']
               "
             />
           </td>
@@ -160,94 +160,94 @@
             >
           </th>
           <td class="left">
-            {{ reportData['hd']['historical']['Daymet']['historical']['max']
+            {{ reportData['hd']['historical']['Daymet']['historical']['mean']
             }}<UnitWidget />
           </td>
           <td>
-            {{ reportData['hd']['midcentury']['MRI-CGCM3']['rcp45']['max']
+            {{ reportData['hd']['midcentury']['MRI-CGCM3']['rcp45']['mean']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['hd']['midcentury']['MRI-CGCM3']['rcp45']['max']
+                reportData['hd']['midcentury']['MRI-CGCM3']['rcp45']['mean']
               "
               :past="
-                reportData['hd']['historical']['Daymet']['historical']['max']
+                reportData['hd']['historical']['Daymet']['historical']['mean']
               "
             />
           </td>
           <td>
-            {{ reportData['hd']['midcentury']['NCAR-CCSM4']['rcp45']['max']
+            {{ reportData['hd']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['hd']['midcentury']['NCAR-CCSM4']['rcp45']['max']
+                reportData['hd']['midcentury']['NCAR-CCSM4']['rcp45']['mean']
               "
               :past="
-                reportData['hd']['historical']['Daymet']['historical']['max']
+                reportData['hd']['historical']['Daymet']['historical']['mean']
               "
             />
           </td>
           <td>
-            {{ reportData['hd']['midcentury']['MRI-CGCM3']['rcp85']['max']
+            {{ reportData['hd']['midcentury']['MRI-CGCM3']['rcp85']['mean']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['hd']['midcentury']['MRI-CGCM3']['rcp85']['max']
+                reportData['hd']['midcentury']['MRI-CGCM3']['rcp85']['mean']
               "
               :past="
-                reportData['hd']['historical']['Daymet']['historical']['max']
+                reportData['hd']['historical']['Daymet']['historical']['mean']
               "
             />
           </td>
           <td>
-            {{ reportData['hd']['midcentury']['NCAR-CCSM4']['rcp85']['max']
+            {{ reportData['hd']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['hd']['midcentury']['NCAR-CCSM4']['rcp85']['max']
+                reportData['hd']['midcentury']['NCAR-CCSM4']['rcp85']['mean']
               "
               :past="
-                reportData['hd']['historical']['Daymet']['historical']['max']
+                reportData['hd']['historical']['Daymet']['historical']['mean']
               "
             />
           </td>
           <td>
-            {{ reportData['hd']['longterm']['MRI-CGCM3']['rcp45']['max']
+            {{ reportData['hd']['longterm']['MRI-CGCM3']['rcp45']['mean']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['hd']['longterm']['MRI-CGCM3']['rcp45']['max']
+                reportData['hd']['longterm']['MRI-CGCM3']['rcp45']['mean']
               "
               :past="
-                reportData['hd']['historical']['Daymet']['historical']['max']
+                reportData['hd']['historical']['Daymet']['historical']['mean']
               "
             />
           </td>
           <td>
-            {{ reportData['hd']['longterm']['NCAR-CCSM4']['rcp45']['max']
+            {{ reportData['hd']['longterm']['NCAR-CCSM4']['rcp45']['mean']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['hd']['longterm']['NCAR-CCSM4']['rcp45']['max']
+                reportData['hd']['longterm']['NCAR-CCSM4']['rcp45']['mean']
               "
               :past="
-                reportData['hd']['historical']['Daymet']['historical']['max']
+                reportData['hd']['historical']['Daymet']['historical']['mean']
               "
             />
           </td>
           <td>
-            {{ reportData['hd']['longterm']['MRI-CGCM3']['rcp85']['max']
+            {{ reportData['hd']['longterm']['MRI-CGCM3']['rcp85']['mean']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['hd']['longterm']['MRI-CGCM3']['rcp85']['max']
+                reportData['hd']['longterm']['MRI-CGCM3']['rcp85']['mean']
               "
               :past="
-                reportData['hd']['historical']['Daymet']['historical']['max']
+                reportData['hd']['historical']['Daymet']['historical']['mean']
               "
             />
           </td>
           <td>
-            {{ reportData['hd']['longterm']['NCAR-CCSM4']['rcp85']['max']
+            {{ reportData['hd']['longterm']['NCAR-CCSM4']['rcp85']['mean']
             }}<UnitWidget /><TempDiffWidget
               :future="
-                reportData['hd']['longterm']['NCAR-CCSM4']['rcp85']['max']
+                reportData['hd']['longterm']['NCAR-CCSM4']['rcp85']['mean']
               "
               :past="
-                reportData['hd']['historical']['Daymet']['historical']['max']
+                reportData['hd']['historical']['Daymet']['historical']['mean']
               "
             />
           </td>
@@ -454,7 +454,7 @@
           <th scope="row">
             Warm Spell Duration Index
             <span class="description"
-              >How many hot days in excess of 6-day periods?
+              >Heat wave metric: the number of hot days (&gt;&#8239;90<sup>th</sup> percentile) occurring in a row following an initial warm spell period of six days.
             </span>
           </th>
           <td class="left">
@@ -560,7 +560,7 @@
           <th scope="row">
             Cold Spell Duration Index
             <span class="description"
-              >How many cold days in excess of 6-day periods?
+              >Cold spell metric: the number of cold days (&lt;&#8239;10<sup>th</sup> percentile) occurring in a row following an initial cold spell period of six days.
             </span>
           </th>
           <td class="left">
@@ -665,7 +665,8 @@
       <tfoot>
         <tr>
           <td colspan="10" class="about">
-            Red text means warmer, blue means colder. Bold text indicates greater change.
+            Values indicate mean values for the time range specified. Red text
+            means warmer, blue means colder. Bold text indicates greater change.
             <nuxt-link :to="{ name: 'data' }"
               >Read more about the dataset and processing used to generate these
               data.</nuxt-link
