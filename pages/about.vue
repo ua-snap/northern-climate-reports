@@ -5,7 +5,7 @@
       blurb="We&rsquo;ve made climate model projections for Alaska and western Canada easier to understand"
     />
     <div class="container">
-      <div class="columns mt-5 mb-6 px-5-touch">
+      <div class="columns mt-6 mb-6 px-5-touch">
         <div class="column is-three-quarters">
           <h2 class="title is-3">What&rsquo;s in a Northern Climate Report?</h2>
           <div class="content is-size-5">
@@ -55,10 +55,7 @@
               you&rsquo;re working with.
             </p>
 
-            <article class="message is-info">
-              <div class="message-header">
-                <p>Pro tip!</p>
-              </div>
+            <article class="message">
               <div class="message-body">
                 Projections are always improving, but don&rsquo;t wait for a
                 better one&mdash;you&rsquo;ll always be waiting, and the costs
