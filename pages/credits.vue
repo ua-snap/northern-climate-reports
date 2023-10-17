@@ -273,7 +273,7 @@
 </template>
 <style lang="scss" scoped>
   @media (min-width: 768px) {
-    img {
+    .person img {
       float: right;
       display: inline-block;
       padding-right: 1rem;
