@@ -43,7 +43,6 @@ export const getters = {
       if (place) {
         return [place.latitude, place.longitude]
       }
-      throw 'Could not find the community by ID.'
     }
 
     // It's not a point-based location with a defined lat/lon.
@@ -80,7 +79,6 @@ export const getters = {
         return place.type
       }
     }
-    throw 'Unknown place type!'
   },
 
   // Is this a point-like type?
@@ -148,7 +146,6 @@ export const getters = {
           return area.name
       }
     }
-    throw 'Could not determine name of place from ID.'
   },
 
   // This returns the name of the HUC without any extra stuff.
