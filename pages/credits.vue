@@ -4,8 +4,8 @@
       title="Credits"
       blurb="The people behind Northern Climate Reports"
     />
-    <div class="px-5-mobile">
-      <div class="columns mt-5">
+    <div class="px-5-mobile mt-6">
+      <div class="columns mb-6">
         <div class="column is-three-fifths is-offset-one-fifth">
           <div class="content is-size-5">
             <p>
@@ -272,6 +272,14 @@
   </div>
 </template>
 <style lang="scss" scoped>
+  @media (min-width: 768px) {
+    img {
+      float: right;
+      display: inline-block;
+      padding-right: 1rem;
+    }
+  }
+
 .team {
   text-align: center;
 }

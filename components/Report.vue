@@ -1,13 +1,15 @@
 <template>
   <div id="results" class="container">
-    <hr />
-    <section v-if="$fetchState.pending" class="section content">
+    <div v-if="$fetchState.pending" class="loading">
       <!-- Drama dots -->
-      <h4 class="title is-5">
+      <h3 class="title is-3">
         Loading data for <span v-html="place" />&hellip;
-      </h4>
+      </h3>
+      <div class="content is-size-4">
+        <p>Hang on, this could take a few minutes!</p>
+      </div>
       <b-progress type="is-info"></b-progress>
-    </section>
+    </div>
     <section v-else-if="$fetchState.error" class="section content error">
       <p class="is-size-5">
         Oh no! Something&rsquo;s amiss and the report for this place
@@ -298,11 +300,14 @@
           >
         </div>
       </section>
-      <hr />
     </div>
   </div>
 </template>
 <style lang="scss" scoped>
+.loading {
+  width: 40em;
+  margin: 5rem auto;
+}
 .area-warning {
   border-left: 0.25rem solid #aaa;
   padding-left: 1rem;
