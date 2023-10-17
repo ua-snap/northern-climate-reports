@@ -454,7 +454,7 @@
           <th scope="row">
             Warm Spell Duration Index
             <span class="description"
-              >How many hot days in excess of 6-day periods?
+              >Heat wave metric: the number of hot days (&gt;&#8239;90<sup>th</sup> percentile) occurring in a row following an initial warm spell period of six days.
             </span>
           </th>
           <td class="left">
@@ -560,7 +560,7 @@
           <th scope="row">
             Cold Spell Duration Index
             <span class="description"
-              >How many cold days in excess of 6-day periods?
+              >Cold spell metric: the number of cold days (&lt;&#8239;10<sup>th</sup> percentile) occurring in a row following an initial cold spell period of six days.
             </span>
           </th>
           <td class="left">
