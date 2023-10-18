@@ -273,7 +273,7 @@
       <div class="column is-three-fifths is-offset-one-fifth">
         <h4 class="title is-4">Rasdaman raster database</h4>
         <div class="content is-size-5">
-          <p>This tool is built using the <a href="http://www.rasdaman.org/">rasdaman</a> array database management system.  Rasdaman makes it possible to store, analyze and visualize the 5+TB of climate data that are presented through this interface.  We wish to thank the rasdaman project and core team for their inspiration and support, and for providing this important innovation in data technology.</p>
+          <p>This tool uses the <a href="http://www.rasdaman.org/">rasdaman</a> array database management system.  This technology enables our team to store, analyze and visualize the 5+ TB of climate data that are presented through this interface.  We wish to thank the rasdaman project and team for their inspiration and support, and for providing this important innovation in data technology.</p>
           <blockquote>Peter Baumann, email: p.baumann@jacobs-university.de, & website: rasdaman.org. (2018). rasdaman - raster data manager (9.5.0). Zenodo. <a href="https://doi.org/10.5281/zenodo.1163021">https://doi.org/10.5281/zenodo.1163021</a></blockquote>
         </div>
         </div>
