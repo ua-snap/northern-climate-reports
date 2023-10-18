@@ -4,7 +4,7 @@
       title="Credits"
       blurb="The people behind Northern Climate Reports"
     />
-    <div class="px-5-mobile mt-6">
+    <div class="px-5-mobile mt-6 light">
       <div class="columns mb-6">
         <div class="column is-three-fifths is-offset-one-fifth">
           <div class="content is-size-5">

@@ -2,7 +2,14 @@
   <div>
     <HeaderBlock title="Data" blurb="Data sources and academic references" />
     <div class="columns mb-6 px-5-mobile">
-      <div class="column is-three-fifths is-offset-one-fifth mt-5">
+      <div class="column is-three-fifths is-offset-one-fifth mt-6">
+        <div class="content is-size-5">
+          <p>Use this page to access the datasets that are presented via this tool, including metadata and academic papers about these datasets.</p>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="mt-6">
         <table class="table">
           <thead>
             <tr>
@@ -139,12 +146,19 @@
               <th scope="row">Spruce Beetle Risk</th>
               <td>12&#8239;km</td>
               <td>
-                <p><a href="https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/090daa3e-b1f1-4dc5-81f2-b7817bd011ee">Historical and projected climatic protection of spruce beetle infestation in Alaska</a></p>
+                <p>
+                  <a
+                    href="https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/090daa3e-b1f1-4dc5-81f2-b7817bd011ee"
+                    >Historical and projected climatic protection of spruce
+                    beetle infestation in Alaska</a
+                  >
+                </p>
                 <blockquote>
                   Fresco, N., Littell, J., Redilla, K., Moan, J., & Brannoch, S.
                   (in prep). Modeling the loss of climate protection from spruce
-                  beetles (<i>Dendroctonus rufipennis</i>) under changing conditions in
-                  Alaska’s forests. [submission anticipated November 2023]
+                  beetles (<i>Dendroctonus rufipennis</i>) under changing
+                  conditions in Alaska’s forests. [submission anticipated
+                  November 2023]
                 </blockquote>
                 <p>Underlying climataloglical data provided by:</p>
                 <blockquote>
@@ -207,7 +221,9 @@
               </td>
             </tr>
             <tr>
-              <th scope="row">Wildfire (vegetation type mode and percentage)</th>
+              <th scope="row">
+                Wildfire (vegetation type mode and percentage)
+              </th>
               <td>1&#8239;km</td>
               <td>
                 <p>
@@ -230,24 +246,28 @@
             </tr>
           </thead>
         </table>
-        <h2 class="title is-3 mt-6">License</h2>
-        <div class="content is-size-5">
-          Unless otherwise specified by source providers, all data available
-          through this tool is available through the
-          <a href="https://creativecommons.org/licenses/by/4.0/"
-            >Creative Commons Attribution 4.0 International (CC by 4.0)</a
-          >.
-        </div>
-        <h2 class="title is-3 mt-6">Data API access</h2>
-        <div class="content is-size-5">
-          <p>
-            All the data used in this web tool may be accessed directly via an
-            API. Documentation, examples, and links to source datasets are
-            provided on the API site.
-          </p>
-          <p>
-            <a href="https://earthmaps.io">Visit the Data API</a>
-          </p>
+      </div>
+      <div class="columns mb-6 px-5-mobile">
+        <div class="column is-three-fifths is-offset-one-fifth mt-5">
+          <h2 class="title is-3 mt-6">License</h2>
+          <div class="content is-size-5">
+            Unless otherwise specified by source providers, all data available
+            through this tool is available through the
+            <a href="https://creativecommons.org/licenses/by/4.0/"
+              >Creative Commons Attribution 4.0 International (CC by 4.0)</a
+            >.
+          </div>
+          <h2 class="title is-3 mt-6">Data API access</h2>
+          <div class="content is-size-5">
+            <p>
+              All the data used in this web tool may be accessed directly via an
+              API. Documentation, examples, and links to source datasets are
+              provided on the API site.
+            </p>
+            <p>
+              <a href="https://earthmaps.io">Visit the Data API</a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -256,8 +276,9 @@
 <style lang="scss" scoped>
 blockquote {
   margin: 0.5rem;
-  padding-left: 1rem;
+  padding: 0.6rem 1rem;
   border-left: 1px solid #ccc;
+  background-color: #f8f8f8;
 }
 </style>
 
