@@ -6,7 +6,7 @@
     />
     <div class="container">
       <div class="columns mt-6 mb-6 px-5-touch">
-        <div class="column is-three-quarters">
+        <div class="column is-three-quarters light">
           <h2 class="title is-3">What&rsquo;s in a Northern Climate Report?</h2>
           <div class="content is-size-5">
             <p>
@@ -55,16 +55,14 @@
               you&rsquo;re working with.
             </p>
 
-            <article class="message">
-              <div class="message-body">
-                Projections are always improving, but don&rsquo;t wait for a
-                better one&mdash;you&rsquo;ll always be waiting, and the costs
-                of waiting will increase. Instead, plan for the range of
-                historical variability plus the range of climates described by a
-                less warm (none show cooling!) model under a lower emissions
-                scenario.
-              </div>
-            </article>
+            <p>
+              <strong>Don&rsquo;t wait!</strong>
+              Projections are always improving, but don&rsquo;t wait for a
+              better one&mdash;you&rsquo;ll always be waiting, and the costs of
+              waiting will increase. Instead, plan for the range of historical
+              variability plus the range of climates described by a moderate or
+              higher warming model under a high emissions scenario.
+            </p>
           </div>
 
           <h2 class="title is-3 mt-5">Best practices, illustrated</h2>
@@ -88,13 +86,16 @@
                 reference, the more climate change is already a part of it!
               </li>
               <li>
-                <strong>Choose a large area.</strong> Large areas, such as
-                watersheds or planning units, are less affected by local
-                variations in elevation, vegetation, etc. than small areas. Use
-                multiple emissions scenarios. Humans are unpredictable, so pick
-                at least two scenarios that bracket the likely range, unless you
-                only want the &ldquo;best&rdquo; or &ldquo;worst&rdquo; case.
-                RCP 4.5 and RCP 8.5 are good choices.
+                <strong>Summarize data over a region.</strong> Larger areas,
+                such as watersheds or planning units, are less affected by local
+                variations in elevation, vegetation, etc. than small areas.
+              </li>
+              <li>
+                <strong>Use multiple emissions scenarios.</strong> Humans are
+                unpredictable, so pick at least two scenarios that bracket the
+                likely range, unless you only want the &ldquo;higher risk&rdquo;
+                or &ldquo;lower risk&rdquo; case. RCP 4.5 and RCP 8.5 are good
+                choices.
               </li>
               <li>
                 <strong>Use multiple models and/or an average.</strong> All
