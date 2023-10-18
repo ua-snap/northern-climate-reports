@@ -67,7 +67,7 @@
 
           <h2 class="title is-3 mt-5">Best practices, illustrated</h2>
           <figure class="image">
-            <img src="~/assets/images/best-practices-image.jpg" />
+            <img src="~/assets/images/best-practices-image.png" />
           </figure>
           <div class="content is-size-5">
             <p>
