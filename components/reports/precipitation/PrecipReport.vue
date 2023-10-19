@@ -48,7 +48,7 @@
     </div>
     <ReportPrecipChart :season="precip_season" />
     <ReportPrecipTable />
-    
+
     <DownloadCsvButton
       text="Download precipitation data as CSV"
       endpoint="precipitation"
@@ -56,7 +56,13 @@
     />
 
     <ReportPrecipIndicatorsTable />
-    
+
+    <DownloadCsvButton
+      text="Download precipitation indicators data as CSV"
+      endpoint="indicators"
+      class="mt-3 mb-5"
+    />
+
     <BackToTopButton />
   </div>
 </template>
