@@ -224,14 +224,13 @@
                 <strong>Temperature and precipitation:</strong>
                 {{ httpErrors[climateHttpError] }}
               </li>
-              <li>
+              <li v-if="type != 'community' && type != 'latLng'">
                 <strong>Hydrology:</strong>
-                <span v-if="type != 'latLng'">
-                  Data are not averaged over areas
-                </span>
-                <span v-else-if="hydrologyHttpError">
-                  {{ httpErrors[hydrologyHttpError] }}
-                </span>
+                Data are not averaged over areas
+              </li>
+              <li v-else-if="hydrologyHttpError">
+                <strong>Hydrology:</strong>
+                {{ httpErrors[hydrologyHttpError] }}
               </li>
               <li v-if="elevationHttpError">
                 <strong>Elevation:</strong>
