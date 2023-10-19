@@ -39,11 +39,6 @@
       class="mt-3 mb-5"
     />
     <ReportTempIndicatorsTable />
-    <DownloadCsvButton
-      text="Download temperature indicators data as CSV"
-      endpoint="indicators"
-      class="mt-3 mb-5"
-    />
     <BackToTopButton />
   </div>
 </template>
