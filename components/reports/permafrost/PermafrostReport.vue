@@ -1,5 +1,5 @@
 <template>
-  <div v-if="reportData">
+  <div>
     <div class="content">
       <h4 class="title is-3">Permafrost</h4>
       <div class="is-size-5">
@@ -44,7 +44,7 @@
       />
     </div>
     <div v-else-if="!reportData && type != 'community' && type != 'latLng'">
-      <div class="content">
+      <div class="content mb-5">
         <div class="is-size-5">
           As permafrost thaws, the ground depth to the top of the permafrost
           layer increases. Because the selected place is an area, not a point
@@ -54,7 +54,7 @@
       </div>
     </div>
     <div v-else>
-      <div class="content">
+      <div class="content mb-5">
         <div class="is-size-5">
           As permafrost thaws, the ground depth to the top of the permafrost
           layer increases. This cannot be shown for this place because because

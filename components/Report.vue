@@ -171,7 +171,7 @@
               <a href="#hydrology">Hydrology</a> charts with multiple variables,
               models, and scenarios, grouped decadally and by month of the year.
             </li>
-            <li v-if="permafrostData">
+            <li>
               <a href="#permafrost">Permafrost</a> with specific visualizations
               depending on the presence or absence of permafrost
             </li>
@@ -232,10 +232,6 @@
                 <strong>Elevation:</strong>
                 {{ httpErrors[elevationHttpError] }}
               </li>
-              <li v-if="permafrostHttpError">
-                <strong>Permafrost:</strong>
-                {{ httpErrors[permafrostHttpError] }}
-              </li>
               <li v-if="flammabilityHttpError">
                 <strong>Flammability:</strong>
                 {{ httpErrors[flammabilityHttpError] }}
@@ -267,10 +263,7 @@
           <HydrologyReport />
         </div>
       </section>
-      <section
-        class="section is-hidden-touch"
-        v-if="permafrostData || type != 'latLng'"
-      >
+      <section class="section is-hidden-touch">
         <div id="permafrost">
           <PermafrostReport />
         </div>
@@ -408,9 +401,13 @@ export default {
       // (Temperature, Permafrost, Beetle Climate Protection, etc.)
       let types = this.presentDataTypes()
 
-      // If there are less than 7 data types present, the corresponding
+      // Ignore permafrost when considering if all datasets exist because the
+      // permafrost maps/section will be displayed regardless.
+      types = _.without(types, 'permafrost')
+
+      // If there are less than 6 data types present, the corresponding
       // section(s) of the report page will be hidden.
-      if (types.length < 7) {
+      if (types.length < 6) {
         return true
       }
       return false
