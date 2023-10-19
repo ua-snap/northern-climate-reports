@@ -224,9 +224,14 @@
                 <strong>Temperature and precipitation:</strong>
                 {{ httpErrors[climateHttpError] }}
               </li>
-              <li v-if="hydrologyHttpError">
+              <li>
                 <strong>Hydrology:</strong>
-                {{ httpErrors[hydrologyHttpError] }}
+                <span v-if="type != 'latLng'">
+                  Data are not averaged over areas
+                </span>
+                <span v-else-if="hydrologyHttpError">
+                  {{ httpErrors[hydrologyHttpError] }}
+                </span>
               </li>
               <li v-if="elevationHttpError">
                 <strong>Elevation:</strong>
