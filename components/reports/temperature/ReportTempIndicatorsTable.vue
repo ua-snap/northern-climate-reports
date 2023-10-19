@@ -7,7 +7,7 @@
         link indicators to specific impacts or risks.
       </div>
     </div>
-    <table class="table report-table">
+    <table class="table report-table mb-0">
       <caption>
         Temperature Indicators,
         <span v-html="place"></span
@@ -454,7 +454,11 @@
           <th scope="row">
             Warm Spell Duration Index
             <span class="description"
-              >Heat wave metric: the number of hot days (&gt;&#8239;90<sup>th</sup> percentile) occurring in a row following an initial warm spell period of six days.
+              >Heat wave metric: the number of hot days (&gt;&#8239;90<sup
+                >th</sup
+              >
+              percentile) occurring in a row following an initial warm spell
+              period of six days.
             </span>
           </th>
           <td class="left">
@@ -560,7 +564,11 @@
           <th scope="row">
             Cold Spell Duration Index
             <span class="description"
-              >Cold spell metric: the number of cold days (&lt;&#8239;10<sup>th</sup> percentile) occurring in a row following an initial cold spell period of six days.
+              >Cold spell metric: the number of cold days (&lt;&#8239;10<sup
+                >th</sup
+              >
+              percentile) occurring in a row following an initial cold spell
+              period of six days.
             </span>
           </th>
           <td class="left">
@@ -675,6 +683,11 @@
         </tr>
       </tfoot>
     </table>
+    <DownloadCsvButton
+      text="Download temperature indicators data as CSV"
+      endpoint="indicators"
+      class="mt-3 mb-5"
+    />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -684,12 +697,13 @@
 import UnitWidget from '~/components/UnitWidget'
 import TempDiffWidget from './TempDiffWidget'
 import DayDiffWidget from '../DayDiffWidget'
+import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import { mapGetters } from 'vuex'
 import { convertValueToFahrenheit } from '~/utils/convert'
 
 export default {
   name: 'ReportTempIndicatorsTable',
-  components: { UnitWidget, TempDiffWidget, DayDiffWidget },
+  components: { UnitWidget, TempDiffWidget, DayDiffWidget, DownloadCsvButton },
   computed: {
     // Summer days fixed threshold value 25ºC
     suValue() {

@@ -7,7 +7,7 @@
         link indicators to specific impacts or risks.
       </div>
     </div>
-    <table class="table report-table">
+    <table class="table report-table mb-0">
       <caption>
         Precipitation Indicators,
         <span v-html="place"></span
@@ -636,6 +636,11 @@
         </tr>
       </tfoot>
     </table>
+    <DownloadCsvButton
+      text="Download precipitation indicators data as CSV"
+      endpoint="indicators"
+      class="mt-3 mb-5"
+    />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -645,12 +650,18 @@
 import UnitWidget from '~/components/UnitWidget'
 import PrecipDiffWidget from './PrecipDiffWidget'
 import DayDiffWidget from '../DayDiffWidget'
+import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import { mapGetters } from 'vuex'
 import { convertMmToInches } from '~/utils/convert'
 
 export default {
   name: 'ReportPrecipIndicatorsTable',
-  components: { UnitWidget, PrecipDiffWidget, DayDiffWidget },
+  components: {
+    UnitWidget,
+    PrecipDiffWidget,
+    DayDiffWidget,
+    DownloadCsvButton,
+  },
   computed: {
     // Wet day threshold value (1mm)
     wdValue() {
