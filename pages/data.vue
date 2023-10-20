@@ -4,7 +4,10 @@
     <div class="columns mb-6 px-5-mobile">
       <div class="column is-three-fifths is-offset-one-fifth mt-6">
         <div class="content is-size-5">
-          <p>Use this page to access the datasets that are presented via this tool, including metadata and academic papers about these datasets.</p>
+          <p>
+            Use this page to access the datasets that are presented via this
+            tool, including metadata and academic papers about these datasets.
+          </p>
         </div>
       </div>
     </div>
@@ -79,6 +82,13 @@
               <th scope="row">Indicators (temperature &amp; precipitation)</th>
               <td>12&#8239;km</td>
               <td>
+                <p>
+                  <a
+                    href="https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/1c1de476-cc9d-4c7b-b8ab-25e8f68a317e"
+                    >Historical and projected climate indicators for Alaska at
+                    12km</a
+                  >
+                </p>
                 <p>Indicators were derived from this data product:</p>
                 <blockquote>
                   Mizukami, N., Newman, A. J., Wood, A. W., Gutmann, E. D., and
