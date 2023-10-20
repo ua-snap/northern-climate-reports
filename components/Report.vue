@@ -267,7 +267,7 @@
           <HydrologyReport />
         </div>
       </section>
-      <section class="section is-hidden-touch">
+      <section class="section is-hidden-touch" v-if="dataPresent">
         <div id="permafrost">
           <PermafrostReport />
         </div>
