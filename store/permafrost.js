@@ -125,8 +125,9 @@ export const getters = {
     let areaId = rootGetters['place/areaId']
 
     // We do not have permafrost data for Canada, so don't show permafrost
-    // section for Canadian communities, Canadian protected areas, or lat/lon
-    // points that are approximately Canadian.
+    // section for Canadian communities, Canadian protected areas, First Nation
+    // Traditional Territories, or lat/lon points that are approximately
+    // Canadian.
     if (communityId && !communityId.startsWith('AK')) {
       return false
     } else if (
