@@ -118,6 +118,32 @@ export const getters = {
     })
     return !permafrosttopValues.every(value => value === 0)
   },
+
+  showPermafrost: (state, getters, rootState, rootGetters) => {
+    let communityId = rootGetters['place/communityId']
+    let latLng = rootGetters['place/latLng']
+    let areaId = rootGetters['place/areaId']
+
+    // We do not have permafrost data for Canada, so don't show permafrost
+    // section for Canadian communities, Canadian protected areas, or lat/lon
+    // points that are approximately Canadian.
+    if (communityId && !communityId.startsWith('AK')) {
+      return false
+    } else if (
+      areaId &&
+      (areaId.startsWith('BCPA') ||
+        areaId.startsWith('FNTT') ||
+        areaId.startsWith('YTPA'))
+    ) {
+      return false
+    } else if (latLng && latLng[0] > 60 && latLng[1] > -141.1) {
+      return false
+    } else if (latLng && latLng[0] < 60 && latLng[1] > -129.9) {
+      return false
+    } else {
+      return true
+    }
+  },
 }
 
 export const mutations = {

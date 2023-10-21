@@ -171,7 +171,7 @@
               <a href="#hydrology">Hydrology</a> charts with multiple variables,
               models, and scenarios, grouped decadally and by month of the year.
             </li>
-            <li>
+            <li v-if="permafrostData || showPermafrost">
               <a href="#permafrost">Permafrost</a> with specific visualizations
               depending on the presence or absence of permafrost
             </li>
@@ -236,6 +236,10 @@
                 <strong>Elevation:</strong>
                 {{ httpErrors[elevationHttpError] }}
               </li>
+              <li v-if="permafrostHttpError && !showPermafrost">
+                <strong>Permafrost:</strong>
+                {{ httpErrors[permafrostHttpError] }}
+              </li>
               <li v-if="flammabilityHttpError">
                 <strong>Flammability:</strong>
                 {{ httpErrors[flammabilityHttpError] }}
@@ -267,7 +271,10 @@
           <HydrologyReport />
         </div>
       </section>
-      <section class="section is-hidden-touch" v-if="dataPresent">
+      <section
+        class="section is-hidden-touch"
+        v-if="permafrostData || (dataPresent && showPermafrost)"
+      >
         <div id="permafrost">
           <PermafrostReport />
         </div>
@@ -474,6 +481,7 @@ export default {
       beetleHttpError: 'beetle/httpError',
       hydrologyHttpError: 'hydrology/httpError',
       isPointLocation: 'place/isPointLocation',
+      showPermafrost: 'permafrost/showPermafrost',
     }),
   },
   // This component initiates the data fetching so that
