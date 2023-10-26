@@ -184,13 +184,18 @@ export default {
           _.each(this.searchResults.areas, area => {
             // Skip all but HUCs and Protected Areas, the other polygons
             // get so big they cause the map interface to work poorly.
-            if (area.type != 'huc' && area.type != 'protected_area') {
+            if (
+              area.type != 'huc' &&
+              area.type != 'protected_area' &&
+              area.type != 'yt_watershed' &&
+              area.type != 'yt_game_management_subzone'
+            ) {
               return
             }
 
             let defaultStyle, highlightedStyle
             // Set up the layer styles for HUC/Protected area
-            if (area.type == 'huc') {
+            if (area.type == 'huc' || area.type == 'yt_watershed') {
               defaultStyle = hucDefaultStyle
               highlightedStyle = hucHighlightedStyle
             } else if (area.type == 'protected_area') {

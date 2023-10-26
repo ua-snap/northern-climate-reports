@@ -251,13 +251,22 @@ export const actions = {
         _.each(res.fire_management_units_near, place => {
           ssr.push(place)
         })
+        _.each(res.yt_fire_districts_near, place => {
+          ssr.push(place)
+        })
         _.each(res.hucs_near, place => {
+          ssr.push(place)
+        })
+        _.each(res.yt_watersheds_near, place => {
           ssr.push(place)
         })
         _.each(res.protected_areas_near, place => {
           ssr.push(place)
         })
         _.each(res.game_management_units_near, place => {
+          ssr.push(place)
+        })
+        _.each(res.yt_game_management_subzones_near, place => {
           ssr.push(place)
         })
         _.each(res.ca_first_nations_near, place => {
