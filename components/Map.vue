@@ -198,7 +198,10 @@ export default {
             if (area.type == 'huc' || area.type == 'yt_watershed') {
               defaultStyle = hucDefaultStyle
               highlightedStyle = hucHighlightedStyle
-            } else if (area.type == 'protected_area') {
+            } else if (
+              area.type == 'protected_area' ||
+              area.type == 'yt_game_management_subzone'
+            ) {
               defaultStyle = protectedAreaDefaultStyle
               highlightedStyle = protectedAreaHighlightedStyle
             }
