@@ -142,7 +142,7 @@ export default {
     drawSearchResults() {
       // This can be triggered before the data are ready;
       // guard!
-      if (this.searchResults) {
+      if (this.searchResults && this.searchResults.total_bounds) {
         // Clear prior results, if any.
         if (this.layerGroup || this.communityLayerGroup) {
           this.map.removeLayer(this.layerGroup)
