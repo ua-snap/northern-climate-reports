@@ -128,6 +128,8 @@ export const getters = {
             return area.name + ' Watershed HUC10 ' + area.id
           }
           return area.name + ' Watershed HUC8 ' + area.id
+        case 'yt_watershed':
+          return area.name + ' (Yukon Watershed)'
         case 'corporation':
           return area.name + ' (Native Corporation)'
         case 'climate_division':
@@ -136,10 +138,14 @@ export const getters = {
           return area.name + ' (Ethnolinguistic Region)'
         case 'fire_zone':
           return area.name + ' (Fire Management Unit)'
+        case 'yt_fire_district':
+          return area.name + ' (Yukon Fire District)'
         case 'first_nation':
           return area.name + ' (First Nation Traditional Territory)'
         case 'game_management_unit':
           return area.name + ' (Game Management Unit)'
+        case 'yt_game_management_subzone':
+          return area.name + ' (Yukon Game Management Subzone)'
         case 'borough':
           return area.name + ' (Borough)'
         default:
