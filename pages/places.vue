@@ -239,6 +239,31 @@
           <div class="card-image is-small">
             <figure class="image">
               <img
+                src="~/assets/images/place_thumbnails/yukon-fire-districts_square.jpg"
+                alt="Example map showing Yukon Fire Districts"
+              />
+            </figure>
+          </div>
+          <div class="card-content">
+            <h3 class="title is-4">Yukon Fire Districts</h3>
+            <div class="content">
+              <p>
+                Fire districts are administrative areas where wildland fire
+                resources are allocated and deployed. They fall within one of
+                six larger fire regions.
+                <a
+                  href="https://hub.arcgis.com/datasets/yukon::fire-districts-1/explore?location=64.242510%2C-132.311150%2C6.30"
+                  >Learn more about Yukon Fire Districts</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card is-horizontal">
+          <div class="card-image is-small">
+            <figure class="image">
+              <img
                 src="~/assets/images/place_thumbnails/yukon-territories_square.jpg"
                 alt="Example map showing Yukon First Nation Traditional Territories"
               />
@@ -256,6 +281,57 @@
                 25 percent of Yukon’s population are Indigenous Peoples.
                 <a href="https://yukon.ca/en/find-out-about-yukon-first-nations"
                   >Learn more about Yukon First Nations</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card is-horizontal">
+          <div class="card-image is-small">
+            <figure class="image">
+              <img
+                src="~/assets/images/place_thumbnails/yukon-gms_square.jpg"
+                alt="Example map showing Yukon Game Management Subzones"
+              />
+            </figure>
+          </div>
+          <div class="card-content">
+            <h3 class="title is-4">Yukon Game Management Subzones</h3>
+            <div class="content">
+              <p>
+                The Government of Yukon manages the harvest of wildlife within
+                Game Management Areas, which are legal boundaries within which
+                authorities can make regulations for managing big game. Areas
+                are a combination of Game Management Zones and Subzones.
+                Information is displayed at the subzone level.
+                <a
+                  href="https://yukon.ca/en/outdoor-recreation-and-wildlife/hunting-and-trapping/find-game-management-area-map-data"
+                  >Learn more about Yukon Game Management Subzones</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card is-horizontal">
+          <div class="card-image is-small">
+            <figure class="image">
+              <img
+                src="~/assets/images/place_thumbnails/yukon-watersheds_square.jpg"
+                alt="Example map showing Yukon Watersheds"
+              />
+            </figure>
+          </div>
+          <div class="card-content">
+            <h3 class="title is-4">Yukon Watersheds</h3>
+            <div class="content">
+              <p>
+                Yukon Watersheds are based on the Water Survey of Canada
+                drainage area boundaries at the sub-sub-basin level, roughly
+                equivalent to United States HU-8 level in scale.
+                <a href="https://open.yukon.ca/data/datasets/watersheds-1m"
+                  >Learn more about Yukon Watersheds</a
                 >
               </p>
             </div>
