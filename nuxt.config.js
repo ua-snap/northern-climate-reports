@@ -132,7 +132,7 @@ export default {
   },
 
   umami: {
-    scriptUrl: 'https://umami.snap.uaf.edu/umami.js',
+    scriptUrl: 'https://umami.snap.uaf.edu/script.js',
     websiteId: '2e69a077-ba5f-49c5-b076-09a44ab6fafd',
     ignoreDnt: false,
     domains: 'northernclimatereports.org',
