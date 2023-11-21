@@ -119,30 +119,24 @@ export const getters = {
     return !permafrosttopValues.every(value => value === 0)
   },
 
-  showPermafrost: (state, getters, rootState, rootGetters) => {
-    let communityId = rootGetters['place/communityId']
-    let latLng = rootGetters['place/latLng']
+  forceShowPermafrost: (state, getters, rootState, rootGetters) => {
     let areaId = rootGetters['place/areaId']
 
-    // We do not have permafrost data for Canada, so don't show permafrost
-    // section for Canadian communities, Canadian protected areas, First Nation
-    // Traditional Territories, or lat/lon points that are approximately
-    // Canadian.
-    if (communityId && !communityId.startsWith('AK')) {
-      return false
-    } else if (
-      areaId &&
-      (areaId.startsWith('BCPA') ||
+    // Always show permafrost section for area reports unless the areas are
+    // Canadian. I.e., do not show permafrost for these area code prefixes:
+    // BCPA: British Columbia Protected Areas
+    // FNTT: First Nation Traditional Territories
+    // YTPA: Yukon Protected Areas
+    if (areaId) {
+      if (
+        areaId.startsWith('BCPA') ||
         areaId.startsWith('FNTT') ||
-        areaId.startsWith('YTPA'))
-    ) {
-      return false
-    } else if (latLng && latLng[0] > 60 && latLng[1] > -141.1) {
-      return false
-    } else if (latLng && latLng[0] < 60 && latLng[1] > -129.9) {
-      return false
-    } else {
-      return true
+        areaId.startsWith('YTPA')
+      ) {
+        return false
+      } else {
+        return true
+      }
     }
   },
 }
