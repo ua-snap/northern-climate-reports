@@ -118,6 +118,27 @@ export const getters = {
     })
     return !permafrosttopValues.every(value => value === 0)
   },
+
+  forceShowPermafrost: (state, getters, rootState, rootGetters) => {
+    let areaId = rootGetters['place/areaId']
+
+    // Always show permafrost section for area reports unless the areas are
+    // Canadian. I.e., do not show permafrost for these area code prefixes:
+    // BCPA: British Columbia Protected Areas
+    // FNTT: First Nation Traditional Territories
+    // YTPA: Yukon Protected Areas
+    if (areaId) {
+      if (
+        areaId.startsWith('BCPA') ||
+        areaId.startsWith('FNTT') ||
+        areaId.startsWith('YTPA')
+      ) {
+        return false
+      } else {
+        return true
+      }
+    }
+  },
 }
 
 export const mutations = {

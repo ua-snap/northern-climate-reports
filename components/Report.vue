@@ -171,7 +171,7 @@
               <a href="#hydrology">Hydrology</a> charts with multiple variables,
               models, and scenarios, grouped decadally and by month of the year.
             </li>
-            <li v-if="permafrostData">
+            <li v-if="permafrostData || forceShowPermafrost">
               <a href="#permafrost">Permafrost</a> with specific visualizations
               depending on the presence or absence of permafrost
             </li>
@@ -224,7 +224,11 @@
                 <strong>Temperature and precipitation:</strong>
                 {{ httpErrors[climateHttpError] }}
               </li>
-              <li v-if="hydrologyHttpError">
+              <li v-if="type != 'community' && type != 'latLng'">
+                <strong>Hydrology:</strong>
+                Data are not averaged over areas
+              </li>
+              <li v-else-if="hydrologyHttpError">
                 <strong>Hydrology:</strong>
                 {{ httpErrors[hydrologyHttpError] }}
               </li>
@@ -232,7 +236,7 @@
                 <strong>Elevation:</strong>
                 {{ httpErrors[elevationHttpError] }}
               </li>
-              <li v-if="permafrostHttpError">
+              <li v-if="permafrostHttpError && !forceShowPermafrost">
                 <strong>Permafrost:</strong>
                 {{ httpErrors[permafrostHttpError] }}
               </li>
@@ -269,7 +273,7 @@
       </section>
       <section
         class="section is-hidden-touch"
-        v-if="permafrostData || type != 'latLng'"
+        v-if="permafrostData || (dataPresent && forceShowPermafrost)"
       >
         <div id="permafrost">
           <PermafrostReport />
@@ -408,9 +412,13 @@ export default {
       // (Temperature, Permafrost, Beetle Climate Protection, etc.)
       let types = this.presentDataTypes()
 
-      // If there are less than 7 data types present, the corresponding
+      // Ignore permafrost when considering if all datasets exist because the
+      // permafrost maps/section will be displayed regardless.
+      types = _.without(types, 'permafrost')
+
+      // If there are less than 6 data types present, the corresponding
       // section(s) of the report page will be hidden.
-      if (types.length < 7) {
+      if (types.length < 6) {
         return true
       }
       return false
@@ -473,6 +481,7 @@ export default {
       beetleHttpError: 'beetle/httpError',
       hydrologyHttpError: 'hydrology/httpError',
       isPointLocation: 'place/isPointLocation',
+      forceShowPermafrost: 'permafrost/forceShowPermafrost',
     }),
   },
   // This component initiates the data fetching so that
