@@ -301,6 +301,7 @@
     float: right;
     display: inline-block;
     padding-right: 1rem;
+    width: 100%;
   }
 }
 
