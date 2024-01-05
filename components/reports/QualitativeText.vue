@@ -212,7 +212,7 @@ export default {
       string +=
         '<p><strong>' +
         seasonWithHighestTempChange +
-        '</strong> temperatures are increasing the most (<strong>+' +
+        '</strong> temperatures are projected to increase the most (<strong>+' +
         annualHighestTempChange +
         this.tempUnitsText +
         '</strong>).</p>'
