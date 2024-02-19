@@ -38,9 +38,13 @@
           {{
             mapVariables(variable)
           }},
+
+          <span v-html="place"></span
+          >, 1950&ndash;2099,
           {{
-            place
-          }}, 1950&ndash;2099, {{ radioHydroModel }} model
+            radioHydroModel
+          }}
+          model
         </caption>
         <thead>
           <tr>
