@@ -106,7 +106,7 @@ export default {
       process.env.RASDAMAN_URL || 'https://maps.earthmaps.io/rasdaman/ows',
     apiUrl: process.env.SNAP_API_URL || 'https://earthmaps.io',
     localStorageExpiration: 4,
-    offline: process.env.SITE_OFFLINE == 'true',
+    offline: process.env.SITE_OFFLINE?.toLowerCase() == 'true',
   },
 
   // Router customizations
