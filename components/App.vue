@@ -1,5 +1,27 @@
 <template>
-  <div class="px-5-touch">
+  <div v-if="offline">
+    <div class="container content is-large">
+      <div class="offline mx-6 my-6 px-6 py-6">
+        <h3 class="title is-3">
+          Northern Climate Reports offline for maintenance
+        </h3>
+        <div class="content is-size-4">
+          <p>
+            We&rsquo;re sorry! Northern Climate Reports is currently offline for
+            system maintenance. We&rsquo;re working to complete this maintenance
+            and have Northern Climate Reports back online as soon as possible,
+            but we don&rsquo;t have an estimated time for completion. Please
+            check back soon, or reach out to us at
+            <a href="mailto:uaf-snap-data-tools@alaska.edu"
+              >uaf-snap-data-tools@alaska.edu</a
+            >
+            with questions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div v-else class="px-5-touch">
     <client-only>
       <div v-show="!this.reportIsVisible">
         <div class="container mt-5">
@@ -25,7 +47,12 @@
     </client-only>
   </div>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.offline {
+  border: 0.1px solid #888;
+  background-color: #e7b69a;
+}
+</style>
 <script>
 import MapWrapper from '~/components/MapWrapper'
 import Report from '~/components/Report'
@@ -41,6 +68,11 @@ export default {
     Report,
     LatLngSelector,
     PlaceSelector,
+  },
+  data() {
+    return {
+      offline: process.env.offline,
+    }
   },
   computed: {
     ...mapGetters(['reportIsVisible']),
