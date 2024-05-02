@@ -50,7 +50,12 @@
 <style lang="scss" scoped>
 .offline {
   border: 0.1px solid #888;
+  min-height: 900px;
   background-color: #e7b69a;
+  background-image: url('~/assets/images/vacation.jpg');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
 }
 </style>
 <script>
