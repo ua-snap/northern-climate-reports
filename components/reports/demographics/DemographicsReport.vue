@@ -31,7 +31,7 @@
 <style></style>
 <script>
 import { mapGetters } from 'vuex'
-import { number } from '~/mixins/number.js'
+import { formatting } from '~/mixins/formatting'
 import BackToTopButton from '~/components/reports/BackToTopButton'
 import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import DemographicsAgesChart from '~/components/reports/demographics/DemographicsAgesChart'
@@ -41,10 +41,7 @@ export default {
     DownloadCsvButton,
     DemographicsAgesChart,
   },
-  mixins: [number],
-  mounted() {
-    console.log("In DemographicsReport: ", this.demographics)
-  },
+  mixins: [formatting],
   computed: {
     ...mapGetters({
       demographics: 'demographics/demographicsData',

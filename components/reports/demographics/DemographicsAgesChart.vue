@@ -8,16 +8,17 @@
 import _ from 'lodash'
 import { mapGetters } from 'vuex'
 import { getPlotSettings } from '~/utils/charts'
+import { formatting } from '~/mixins/formatting'
 
 export default {
+  mixins: [formatting],
   mounted() {
     this.renderPlot()
   },
   computed: {
     ...mapGetters({
       demographics: 'demographics/demographicsData',
-      placeName: 'place/rawName',
-      placeAltName: 'place/rawAltName',
+      placeName: 'place/name',
     }),
   },
   watch: {
@@ -31,16 +32,10 @@ export default {
       if (!demographics) {
         return
       }
-      console.log('demos', demographics)
 
-      let place = ''
-      if(this.placeAltName) {
-        place = this.placeName + ' <br>(' + this.placeAltName + ') '
-      } else {
-        place = this.placeName + ' '
-      }
+      let place = this.wordwrap(this.placeName, 20).replace('\n', '  <br>')
 
-      let yaxis = ['U.S. ', 'Alaska ', place]
+      let yaxis = ['U.S.', 'Alaska', place]
 
       var trace1 = {
         x: [
@@ -71,7 +66,6 @@ export default {
       let betweens = {}
       let keys = ['us', 'alaska', 'place']
       keys.forEach(key => {
-        console.log('???', demographics[key]['pct_under_18'])
         betweens[key] = Number(
           (
             100 -
@@ -155,6 +149,7 @@ export default {
           tickfont: {
             size: 16,
           },
+          ticksuffix: '  ', // spacing
         },
         xaxis: { fixedrange: true, zeroline: false },
       }
