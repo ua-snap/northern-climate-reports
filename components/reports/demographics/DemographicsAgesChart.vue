@@ -132,7 +132,7 @@ export default {
           t: 40,
           r: 40,
           b: 0,
-          l: 200,
+          l: 200
         },
         height: 250,
         width: 1000,
