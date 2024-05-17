@@ -86,6 +86,25 @@ export const getters = {
     return getters.type == 'latLng' || getters.type == 'community'
   },
 
+  // Just the raw 'name' field
+  rawName: (state, getters, rootState) => {
+    let place = _.find(state.places, {
+      id: rootState.route.params.communityId,
+    })
+    if (place && place.name) {
+      return place.name
+    }
+  },
+  // Just the raw 'alt_name' field
+  rawAltName: (state, getters, rootState) => {
+    let place = _.find(state.places, {
+      id: rootState.route.params.communityId,
+    })
+    if (place && place.alt_name) {
+      return place.alt_name
+    }
+  },
+
   // Returns a string for the correct current selected place,
   // whether lat/lon, community name, or other regional name.
   // The code here is pretty similar between the different cases,

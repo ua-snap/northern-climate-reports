@@ -37,8 +37,12 @@ export const mutations = {
 export const actions = {
   async fetch(context) {
     let placeId = context.rootGetters['place/communityId']
-    if(demographics[placeId]) {
-      context.commit('setDemographicsData', demographics[placeId])
+    if (demographics[placeId]) {
+      context.commit('setDemographicsData', {
+        place: demographics[placeId],
+        alaska: demographics['AK0'],
+        us: demographics['US0'],
+      })
     }
   },
 }
