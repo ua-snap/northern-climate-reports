@@ -23,6 +23,10 @@
       <h4 class="title is-4">Race &amp; Ethnicity</h4>
       <DemographicsRaceEthnicityChart />
     </div>
+    <div class="block">
+      <h4 class="title is-4">Health</h4>
+      <DemographicsRaceEthnicityChart />
+    </div>
 
     <DownloadCsvButton
       text="Download demographics data as CSV"

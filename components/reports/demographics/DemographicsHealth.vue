@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div id="demographics-race-ethnicity-chart" />
     <div class="block">
       <div id="demographics-race-ethnicity-chart" />
       <table class="table mt-6">
@@ -26,20 +27,13 @@
         </tr>
       </table>
     </div>
-    <hr />
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div id="demographics-race-ethnicity-chart2" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-  table {
-    margin-left: 200px;
-  }
+table {
+  margin-left: 200px;
+}
 </style>
 
 <script>
@@ -85,20 +79,18 @@ export default {
         return
       }
 
-      let yaxis = ['U.S.', 'Alaska', place]
+      let place = this.wordwrap(this.placeName, 20).replace('\n', '  <br>')
 
-
-      /// plot2
-
-      traces = []
+      let traces = []
       let placeMap = {
         place: place,
         alaska: 'Alaska',
         us: 'U.S.',
       }
+
       Object.keys(placeMap).forEach(key => {
         let trace = {
-          y: [
+          x: [
             demographics[key]['pct_hispanic_latino'],
             demographics[key]['pct_white'],
             demographics[key]['pct_african_american'],
@@ -107,27 +99,24 @@ export default {
             demographics[key]['pct_hawaiian_pacislander'],
             demographics[key]['pct_other'],
             demographics[key]['pct_multi'],
-          ],
-          x: Object.values(races),
+          ].reverse(),
+          y: Object.values(this.races)
+            .map(race => {
+              return this.wordwrap(race, 10).replace('\n', ' <br>')
+            })
+            .reverse(),
           name: placeMap[key],
-          // orientation: 'h',
+          orientation: 'h',
           type: 'bar',
-          // text: [
-          //   demographics['us'][race] + '%',
-          //   demographics['alaska'][race] + '%',
-          //   demographics['place'][race] + '%',
-          // ],
-          // textposition: 'auto',
-          // textfont: {
-          //   weight: 'bold',
-          //   size: 14,
-          // },
           hoverinfo: 'none',
         }
-        traces.push(trace)
+        traces.unshift(trace)
       })
+      traces[1].marker = { color: '#a6cee3' }
+      traces[0].marker = { color: '#1f78b4' }
+      traces[2].marker = { color: '#b2df8a' }
 
-      layout = {
+      let layout = {
         title: 'Race & Ethnicity, ' + place,
         barmode: 'group',
         margin: {
@@ -136,7 +125,7 @@ export default {
           b: 0,
           l: 200,
         },
-        height: 350,
+        height: 800,
         width: 1000,
         legend: {
           orientation: 'h',
@@ -156,8 +145,9 @@ export default {
         xaxis: { fixedrange: true, zeroline: false },
       }
 
+      let plotSettings = getPlotSettings()
       this.$Plotly.newPlot(
-        'demographics-race-ethnicity-chart2',
+        'demographics-race-ethnicity-chart',
         traces,
         layout,
         plotSettings
