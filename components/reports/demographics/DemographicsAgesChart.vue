@@ -151,6 +151,7 @@ export default {
           },
           ticksuffix: '  ', // spacing
         },
+        
         xaxis: { fixedrange: true, zeroline: false },
       }
 
