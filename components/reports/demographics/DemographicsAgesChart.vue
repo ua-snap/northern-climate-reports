@@ -1,5 +1,10 @@
 <template>
-  <div id="demographics-ages-chart" />
+  <div class="block">
+    <div class="content is-size-5">
+      Information in this section is computed from the U.S. Census DHC Year 2020.
+    </div>
+    <div id="demographics-ages-chart" />
+  </div>
 </template>
 
 <style lang="scss" scoped></style>
@@ -132,7 +137,7 @@ export default {
           t: 40,
           r: 40,
           b: 0,
-          l: 200
+          l: 200,
         },
         height: 250,
         width: 1000,
@@ -151,7 +156,7 @@ export default {
           },
           ticksuffix: '  ', // spacing
         },
-        
+
         xaxis: { fixedrange: true, zeroline: false },
       }
 

@@ -1,0 +1,50 @@
+<template>
+  <table class="table">
+    <caption>
+      Additional demographics
+    </caption>
+    <thead>
+      <th scope="col">Demographic</th>
+      <th scope="col">{{ placeName }}</th>
+    </thead>
+    <tbody>
+      <tr v-for="(name, key) in otherDemographics">
+        <th scope="row">{{ name }}</th>
+        <td>{{ demographics['place'][key] }}%</td>
+      </tr>
+    </tbody>
+  </table>
+</template>
+
+<style lang="scss" scoped>
+table {
+  margin-left: 200px;
+}
+</style>
+
+<script>
+import _ from 'lodash'
+import { mapGetters } from 'vuex'
+import { getPlotSettings } from '~/utils/charts'
+import { formatting } from '~/mixins/formatting'
+
+export default {
+  mixins: [formatting],
+  computed: {
+    ...mapGetters({
+      demographics: 'demographics/demographicsData',
+      placeName: 'place/name',
+    }),
+  },
+  data() {
+    return {
+      otherDemographics: {
+        pct_minority: "Persons of racial or ethnic minority status",
+        pct_no_hsdiploma: "No high school diploma among adults aged 25 years or older",
+        pct_below_150pov: "Persons living below 150% of the poverty level",
+        pct_no_bband: "No broadband internet subscription among households",
+      },
+    }
+  },
+}
+</script>

@@ -1,6 +1,13 @@
 <template>
   <div>
     <h3 class="title is-3">Demographics</h3>
+    <DemographicsMap/>
+    <div class="content is-size-4">
+      <p>
+        ⚠️ In this section, {{ place }} is used as the name for
+        {{ commentEdited }}, as shown in the map above.
+      </p>
+    </div>
     <h4 class="title is-4 mt-5">
       In {{ place }}, the population is
       {{ commas(demographics.place.total_population) }}.
@@ -10,10 +17,6 @@
       {{ commas(demographics.alaska.total_population) }} and the population of
       the U.S. is {{ commas(demographics.us.total_population) }}.
     </h5>
-    <div class="block content is-size-5">
-      Information in this section is taken from the 2020 U.S. Census.
-      {{ demographics.place.comment }}
-    </div>
 
     <div class="block mb-6">
       <h4 class="title is-4">Age</h4>
@@ -27,14 +30,16 @@
       <h4 class="title is-4">Health</h4>
       <DemographicsHealthChart />
     </div>
+    <div class="block">
+      <h4 class="title is-4">Other demographics</h4>
+      <DemographicsOther />
+    </div>
 
     <DownloadCsvButton
       text="Download demographics data as CSV"
       endpoint="demographics"
       class="mt-3 mb-5"
     />
-
-    <BackToTopButton />
   </div>
 </template>
 <style></style>
@@ -46,6 +51,8 @@ import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import DemographicsAgesChart from '~/components/reports/demographics/DemographicsAgesChart'
 import DemographicsRaceEthnicityChart from '~/components/reports/demographics/DemographicsRaceEthnicityChart'
 import DemographicsHealthChart from '~/components/reports/demographics/DemographicsHealthChart'
+import DemographicsOther from '~/components/reports/demographics/DemographicsOther'
+import DemographicsMap from '~/components/reports/demographics/DemographicsMap'
 
 export default {
   components: {
@@ -54,9 +61,14 @@ export default {
     DemographicsAgesChart,
     DemographicsRaceEthnicityChart,
     DemographicsHealthChart,
+    DemographicsOther,
+    DemographicsMap,
   },
   mixins: [formatting],
   computed: {
+    commentEdited() {
+      return this.demographics.place.comment.replace('Data represent ', '').replace('.', '').replace('county', 'borough')
+    },
     ...mapGetters({
       demographics: 'demographics/demographicsData',
       place: 'place/name',

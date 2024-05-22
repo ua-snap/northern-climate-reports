@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="content is-size-5">
+      <p>Data in this section are computed from the U.S. Census DHC Year 2020.</p>
+    </div>
     <div id="demographics-race-ethnicity-chart" />
     <div class="block">
       <div id="demographics-race-ethnicity-chart" />
@@ -51,14 +54,14 @@ export default {
   data() {
     return {
       races: {
-        pct_hispanic_latino: 'Hispanic / Latino',
+        pct_hispanic_latino: 'Hispanic or Latino',
         pct_white: 'White',
         pct_african_american: 'African American',
-        pct_amer_indian_ak_native: 'American Indian / Alaska Native',
+        pct_amer_indian_ak_native: 'American Indian or Alaska Native',
         pct_asian: 'Asian',
-        pct_hawaiian_pacislander: 'Hawaiian / Pacific Islander',
-        pct_other: 'Other',
-        pct_multi: 'Multiracial',
+        pct_hawaiian_pacislander: 'Native Hawaiian and Pacific Islander',
+        pct_other: 'Other Race',
+        pct_multi: 'Two or More Races',
       },
     }
   },
