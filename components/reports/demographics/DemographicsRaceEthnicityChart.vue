@@ -18,13 +18,14 @@
             <th scope="col">U.S.</th>
           </tr>
         </thead>
-
-        <tr v-for="(race, key) in races">
-          <th scope="row">{{ race }}</th>
-          <td>{{ demographics['place'][key] }}%</td>
-          <td>{{ demographics['alaska'][key] }}%</td>
-          <td>{{ demographics['us'][key] }}%</td>
-        </tr>
+        <tbody>
+          <tr v-for="(race, key) in races">
+            <th scope="row">{{ race }}</th>
+            <td>{{ demographics['place'][key] }}%</td>
+            <td>{{ demographics['alaska'][key] }}%</td>
+            <td>{{ demographics['us'][key] }}%</td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>

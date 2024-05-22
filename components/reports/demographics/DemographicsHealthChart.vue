@@ -2,11 +2,30 @@
   <div>
     <div class="block">
       <h5 class="title is-5">Disability &amp; insurance</h5>
+      <div class="content is-size-5">
+        <p>
+          Downloadable spreadsheet below includes margin of error for these
+          statistics.
+        </p>
+      </div>
       <div id="demographics-di-chart" />
     </div>
     <div class="block">
       <h5 class="title is-5">Health conditions</h5>
-      <div id="demographics-health-chart" />
+      
+      <table class="table">
+        <caption>Health conditions</caption>
+        <thead>
+          <th scope="col">Condition</th>
+          <th scope="col">{{ placeName }}</th>
+        </thead>
+        <tbody>
+          <tr v-for="(conditionName, key) in conditions">
+            <th scope="row">{{ conditionName }}</th>
+            <td>{{ demographics['place'][key] }}%</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -27,6 +46,18 @@ export default {
   mixins: [formatting],
   mounted() {
     this.renderPlot()
+  },
+  data () {
+    return {
+      conditions: {
+        pct_asthma: 'Asthma',
+        pct_copd: 'COPD',
+        pct_hd: 'Heart disease',
+        pct_stroke: 'Stroke',
+        pct_diabetes: 'Diabetes',
+        pct_kd: 'Kidney disease',
+      }
+    }
   },
   computed: {
     ...mapGetters({
@@ -54,24 +85,9 @@ export default {
         alaska: 'Alaska',
         us: 'U.S.',
       }
-
-      //       "pct_w_disability": 11.6,
-      // "moe_pct_w_disability": 1.4,
-      // "pct_insured": 90.6,
-      // "moe_pct_insured": 1.7,
-      // "pct_uninsured": 9.4,
-      // "moe_pct_uninsured": 1.7,
-
       let hi = ['% with disability', '% insured', '% uninsured']
 
-      let conditions = {
-        pct_asthma: 'Asthma',
-        pct_copd: 'COPD',
-        pct_hd: 'Heart disease',
-        pct_stroke: 'Stroke',
-        pct_diabetes: 'Diabetes',
-        pct_kd: 'Kidney disease',
-      }
+      
 
       Object.keys(placeMap).forEach(key => {
         let xaxis = [
@@ -107,7 +123,7 @@ export default {
           b: 0,
           l: 200,
         },
-        height: 500,
+        height: 400,
         width: 1000,
         legend: {
           orientation: 'h',
