@@ -102,7 +102,7 @@ export default {
           ].reverse(),
           y: Object.values(this.races)
             .map(race => {
-              return this.wordwrap(race, 10).replace('\n', ' <br>')
+              return this.wordwrap(race, 20).replace('\n', ' <br>')
             })
             .reverse(),
           name: placeMap[key],
@@ -129,7 +129,7 @@ export default {
         width: 1000,
         legend: {
           orientation: 'h',
-          traceorder: 'normal',
+          traceorder: 'reversed',
           font: {
             size: 16,
           },

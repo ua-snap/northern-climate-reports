@@ -25,7 +25,7 @@
     </div>
     <div class="block">
       <h4 class="title is-4">Health</h4>
-      <DemographicsRaceEthnicityChart />
+      <DemographicsHealthChart />
     </div>
 
     <DownloadCsvButton
@@ -45,12 +45,15 @@ import BackToTopButton from '~/components/reports/BackToTopButton'
 import DownloadCsvButton from '~/components/reports/DownloadCsvButton'
 import DemographicsAgesChart from '~/components/reports/demographics/DemographicsAgesChart'
 import DemographicsRaceEthnicityChart from '~/components/reports/demographics/DemographicsRaceEthnicityChart'
+import DemographicsHealthChart from '~/components/reports/demographics/DemographicsHealthChart'
+
 export default {
   components: {
     BackToTopButton,
     DownloadCsvButton,
     DemographicsAgesChart,
     DemographicsRaceEthnicityChart,
+    DemographicsHealthChart,
   },
   mixins: [formatting],
   computed: {
