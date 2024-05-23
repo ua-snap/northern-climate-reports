@@ -39,10 +39,10 @@ export const actions = {
   async fetch(context) {
     let placeId = context.rootGetters['place/communityId']
     if (demographics[placeId]) {
-      // https://gs.mapventure.org/geoserver/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=demographics:demographics&outputFormat=application/json&cql_filter=id='AK124'
-
       let queryUrl =
-        "https://gs.mapventure.org/geoserver/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=demographics:demographics&outputFormat=application/json&cql_filter=id='AK124'"
+        "https://gs.mapventure.org/geoserver/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=demographics:demographics&outputFormat=application/json&cql_filter=id='" +
+        placeId +
+        "'"
       let returnedData = await $axios
         .get(queryUrl, { timeout: 60000 })
         .catch(err => {
