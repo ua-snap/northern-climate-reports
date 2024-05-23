@@ -67,7 +67,7 @@ export default {
   mixins: [formatting],
   computed: {
     commentEdited() {
-      return this.demographics.place.comment.replace('Data represent ', '').replace('.', '').replace('county', 'borough')
+      return this.demographics.place.comment.replace('Data for this place represent ', '').replace('Data represent ', '').replace('.', '').replace('county', 'borough')
     },
     ...mapGetters({
       demographics: 'demographics/demographicsData',
