@@ -54,6 +54,10 @@ export const actions = {
         us: demographics['US0'],
         geometry: returnedData.data.features[0].geometry,
       })
+    } else {
+      // Simulate an HTTP 404 for now until we actually load this data over
+      // HTTP later down the road.
+      context.commit('setHttpError', 'no_data')
     }
   },
 }

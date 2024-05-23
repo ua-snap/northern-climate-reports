@@ -187,9 +187,7 @@
               beetles in forested areas of Alaska
             </li>
             <li v-if="demographicsData">
-              <a href="#demographics"
-                >Demographic data</a
-              >
+              <a href="#demographics">Demographic data</a>
               from this place, derived from US Census data
             </li>
           </ul>
@@ -256,7 +254,7 @@
               </li>
               <li v-if="demographicsHttpError">
                 <strong>Demographics:</strong>
-                {{ httpErrors[beetleHttpError] }}
+                {{ httpErrors[demographicsHttpError] }}
               </li>
             </ul>
           </div>
@@ -426,9 +424,9 @@ export default {
       // (Temperature, Permafrost, Beetle Climate Protection, etc.)
       let types = this.presentDataTypes()
 
-      // If there are less than 7 data types present, the corresponding
+      // If there are less than 9 data types present, the corresponding
       // section(s) of the report page will be hidden.
-      if (types.length < 8) {
+      if (types.length < 9) {
         return true
       }
       return false
