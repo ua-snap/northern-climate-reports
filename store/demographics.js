@@ -24,7 +24,6 @@ export const getters = {
 
 export const mutations = {
   setDemographicsData(state, demographicsData) {
-    console.log(demographicsData)
     state.demographicsData = demographicsData
   },
   clear(state) {

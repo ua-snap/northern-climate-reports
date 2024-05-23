@@ -21,6 +21,7 @@ export default {
     return {
       marker: undefined,
       geoJSONLayer: undefined,
+      map: undefined,
     }
   },
   computed: {
@@ -31,21 +32,23 @@ export default {
   },
   mounted() {
     this.map = L.map('demographics-map', this.getBaseMapAndLayers())
-
-
   },
   watch: {
+    // Demographics data may or may not be available when the map is mounted,
+    // so call addGeoJSONtoMap() to be safe.
     demographics: function () {
-      alert('really')
+      this.addGeoJSONtoMap()
+    },
+    // Map may or may not be mounted when the demographics data is available,
+    // so call addGeoJSONtoMap() to be safe.
+    map: function () {
       this.addGeoJSONtoMap()
     },
   },
   methods: {
     addGeoJSONtoMap() {
-      alert('trying') 
-      if (this.demographics) {
+      if (this.demographics && this.map) {
         let displayedGeoJSON = _.cloneDeep(this.demographics.geometry)
-        console.log(this.demographics)
         let polygon = L.geoJSON(displayedGeoJSON, { interactive: false })
         this.geoJSONLayer = polygon.addTo(this.map)
         this.map.fitBounds(this.geoJSONLayer.getBounds())
