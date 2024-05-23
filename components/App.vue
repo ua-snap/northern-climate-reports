@@ -100,6 +100,7 @@ export default {
     this.$store.commit('permafrost/clear')
     this.$store.commit('place/clear')
     this.$store.commit('wildfire/clear')
+    this.$store.commit('demographics/clear')
 
     // Populate the store with places.
     this.$fetch()
