@@ -1,7 +1,8 @@
 <template>
   <div class="block">
     <div class="content is-size-5">
-      Information in this section is computed from the U.S. Census DHC Year 2020.
+      Information in this section is computed from the U.S. Census DHC Year
+      2020.
     </div>
     <div id="demographics-ages-chart" />
   </div>
@@ -148,6 +149,10 @@ export default {
             size: 16,
           },
         },
+        xaxis: {
+          fixedrange: true,
+          visible: false,
+        },
         yaxis: {
           fixedrange: true,
           zeroline: false,
@@ -156,8 +161,6 @@ export default {
           },
           ticksuffix: '  ', // spacing
         },
-
-        xaxis: { fixedrange: true, zeroline: false },
       }
 
       let plotSettings = getPlotSettings()
