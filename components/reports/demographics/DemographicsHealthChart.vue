@@ -22,14 +22,27 @@
         <tbody>
           <tr v-for="(name, key) in acs">
             <th scope="row" v-html="name"></th>
-            <td>{{ demographics['place'][key] }}% ({{ demographics['place']['moe_'+key] }}%)</td>
-            <td>{{ demographics['alaska'][key] }}% ({{ demographics['alaska']['moe_'+key] }}%)</td>
-            <td>{{ demographics['us'][key] }}% ({{ demographics['us']['moe_'+key] }}%)</td>
+            <td>
+              {{ demographics['place'][key] }}% ({{
+                demographics['place']['moe_' + key]
+              }}%)
+            </td>
+            <td>
+              {{ demographics['alaska'][key] }}% ({{
+                demographics['alaska']['moe_' + key]
+              }}%)
+            </td>
+            <td>
+              {{ demographics['us'][key] }}% ({{
+                demographics['us']['moe_' + key]
+              }}%)
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="block">
+    <!-- If pct_asthma is missing/blank, the other conditions are as well. -->
+    <div class="block" v-if="demographics['place']['pct_asthma']">
       <h5 class="title is-5">Health conditions</h5>
       <div class="content is-size-5">
         <p>Data in this section taken from CDC PLACES Year 2023.</p>
@@ -56,9 +69,8 @@
 <style lang="scss" scoped>
 table {
   margin-left: 200px;
-  th[scope="row"] {
+  th[scope='row'] {
     max-width: 30rem;
-  
   }
 }
 </style>
