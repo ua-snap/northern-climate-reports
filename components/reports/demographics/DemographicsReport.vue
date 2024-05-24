@@ -1,11 +1,16 @@
 <template>
   <div>
     <h3 class="title is-3">Demographics</h3>
-    <DemographicsMap/>
+    <DemographicsMap />
     <div class="content is-size-4">
       <p>
-        ⚠️ In this section, {{ place }} is used as the name for
-        {{ commentEdited }}, as shown in the map above.
+        ⚠️ Demographic data is presented only regionally, at the level of
+        boroughs or census tracts.
+      </p>
+      <p>
+        In this section,
+        <strong>{{ place }} is used as the name for {{ commentEdited }}</strong
+        >, as shown in the map above.
       </p>
     </div>
     <h4 class="title is-4 mt-5">
@@ -67,7 +72,11 @@ export default {
   mixins: [formatting],
   computed: {
     commentEdited() {
-      return this.demographics.place.comment.replace('Data for this place represent ', '').replace('Data represent ', '').replace('.', '').replace('county', 'borough')
+      return this.demographics.place.comment
+        .replace('Data for this place represent ', '')
+        .replace('Data represent ', '')
+        .replace('.', '')
+        .replace('county', 'borough')
     },
     ...mapGetters({
       demographics: 'demographics/demographicsData',
