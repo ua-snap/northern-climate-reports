@@ -1,6 +1,8 @@
 <template>
   <div>
     <div class="block" v-if="otherPresent">
+      <div class="content is-size-5">
+        <p>Data in this section is from CDC SDOH Years 2017-2021.</p>
       <table class="table">
         <caption>
           Additional demographics
