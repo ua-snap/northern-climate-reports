@@ -2,48 +2,58 @@
   <div>
     <div class="block">
       <h5 class="title is-5">Disability &amp; insurance</h5>
-      <div class="content is-size-5">
-        <p>
-          Data in this section taken from Census ACS 5-year Year 2023.
-          <strong> Values are estimated</strong>; margin of error is shown in
-          parenthesis for each value.
-        </p>
+      <div v-if="disabilityInsurancePresent">
+        <div class="content is-size-5">
+          <p>
+            Data in this section taken from Census ACS 5-year Year 2023.
+            <strong> Values are estimated</strong>; margin of error is shown in
+            parenthesis for each value.
+          </p>
+        </div>
+        <table class="table">
+          <caption>
+            Disability &amp; insurance
+          </caption>
+          <thead>
+            <th scope="col">Condition</th>
+            <th scope="col">{{ placeName }}</th>
+            <th scope="col">Alaska</th>
+            <th scope="col">U.S.</th>
+          </thead>
+          <tbody>
+            <tr v-for="(name, key) in acs">
+              <th scope="row" v-html="name"></th>
+              <td>
+                {{ demographics['place'][key] }}% ({{
+                  demographics['place']['moe_' + key]
+                }}%)
+              </td>
+              <td>
+                {{ demographics['alaska'][key] }}% ({{
+                  demographics['alaska']['moe_' + key]
+                }}%)
+              </td>
+              <td>
+                {{ demographics['us'][key] }}% ({{
+                  demographics['us']['moe_' + key]
+                }}%)
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <table class="table">
-        <caption>
-          Disability &amp; insurance
-        </caption>
-        <thead>
-          <th scope="col">Condition</th>
-          <th scope="col">{{ placeName }}</th>
-          <th scope="col">Alaska</th>
-          <th scope="col">U.S.</th>
-        </thead>
-        <tbody>
-          <tr v-for="(name, key) in acs">
-            <th scope="row" v-html="name"></th>
-            <td>
-              {{ demographics['place'][key] }}% ({{
-                demographics['place']['moe_' + key]
-              }}%)
-            </td>
-            <td>
-              {{ demographics['alaska'][key] }}% ({{
-                demographics['alaska']['moe_' + key]
-              }}%)
-            </td>
-            <td>
-              {{ demographics['us'][key] }}% ({{
-                demographics['us']['moe_' + key]
-              }}%)
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div v-else>
+        <div class="content is-size-5">
+          <p>
+            Demographic information for insurance status and people with a
+            disability are not available for this location.
+          </p>
+        </div>
+      </div>
     </div>
     <!-- If pct_asthma is missing/blank, the other conditions are as well. -->
-    <div class="block" v-if="demographics['place']['pct_asthma']">
-      <h5 class="title is-5">Health conditions</h5>
+    <h5 class="title is-5">Health conditions</h5>
+    <div class="block" v-if="healthConditionsPresent">
       <div class="content is-size-5">
         <p>Data in this section taken from CDC PLACES Year 2023.</p>
       </div>
@@ -62,6 +72,15 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div v-else>
+      <div class="content is-size-5">
+        <p>
+          Demographic information health conditions (asthma, COPD, heart
+          disease, stroke, chronic kidney disease) are not available for this
+          location.
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -105,6 +124,24 @@ export default {
     }
   },
   computed: {
+    healthConditionsPresent() {
+      if (this.demographics) {
+        let sum = 0
+        Object.keys(this.conditions).forEach(k => {
+          sum += this.demographics['place'][k]
+        })
+        return sum > 0
+      }
+    },
+    disabilityInsurancePresent() {
+      if (this.demographics) {
+        let sum = 0
+        Object.keys(this.acs).forEach(k => {
+          sum += this.demographics['place'][k]
+        })
+        return sum > 0
+      }
+    },
     ...mapGetters({
       demographics: 'demographics/demographicsData',
       placeName: 'place/name',
