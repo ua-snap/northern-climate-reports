@@ -3,6 +3,7 @@
     <div class="block" v-if="otherPresent">
       <div class="content is-size-5">
         <p>Data in this section is from CDC SDOH Years 2017-2021.</p>
+      </div>
       <table class="table">
         <caption>
           Additional demographics
@@ -19,6 +20,7 @@
         </tbody>
       </table>
     </div>
+
     <div v-else>
       <div class="content is-size-5">
         <p>
