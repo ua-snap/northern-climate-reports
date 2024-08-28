@@ -188,7 +188,7 @@
             </li>
             <li v-if="demographicsData">
               <a href="#demographics">Demographic data</a>
-              from this place, derived from US Census data
+              for this place, derived from US Census data
             </li>
           </ul>
         </div>
@@ -257,6 +257,13 @@
                 {{ httpErrors[demographicsHttpError] }}
               </li>
             </ul>
+            <p>
+              Please reach out to us via email at
+              <a href="mailto:uaf-snap-data-tools@alaska.edu"
+                >uaf-snap-data-tools@alaska.edu</a
+              >
+              if you have questions.
+            </p>
           </div>
         </div>
       </section>
