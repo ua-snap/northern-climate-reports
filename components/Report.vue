@@ -186,6 +186,10 @@
               visualizes the climate&ndash;related protection from spruce
               beetles in forested areas of Alaska
             </li>
+            <li v-if="demographicsData">
+              <a href="#demographics">Demographic data</a>
+              for this place, derived from US Census and CDC data
+            </li>
           </ul>
         </div>
       </section>
@@ -248,7 +252,18 @@
                 <strong>Beetle climate protection:</strong>
                 {{ httpErrors[beetleHttpError] }}
               </li>
+              <li v-if="demographicsHttpError">
+                <strong>Demographics:</strong>
+                {{ httpErrors[demographicsHttpError] }}
+              </li>
             </ul>
+            <p>
+              Please reach out to us via email at
+              <a href="mailto:uaf-snap-data-tools@alaska.edu"
+                >uaf-snap-data-tools@alaska.edu</a
+              >
+              if you have questions.
+            </p>
           </div>
         </div>
       </section>
@@ -286,6 +301,12 @@
       <section class="section is-hidden-touch" v-if="beetleData">
         <div id="climate-protection-beetles">
           <BeetleRiskReport />
+          <BackToTopButton />
+        </div>
+      </section>
+      <section class="section is-hidden-touch" v-if="demographicsData">
+        <div id="demographics">
+          <DemographicsReport />
           <BackToTopButton />
         </div>
       </section>
@@ -344,6 +365,7 @@ import PrecipReport from '~/components/reports/precipitation/PrecipReport'
 import PermafrostReport from '~/components/reports/permafrost/PermafrostReport'
 import WildfireReport from '~/components/reports/wildfire/WildfireReport'
 import BeetleRiskReport from '~/components/reports/beetles/BeetleRiskReport'
+import DemographicsReport from '~/components/reports/demographics/DemographicsReport'
 import HydrologyReport from '~/components/reports/hydrology/HydrologyReport'
 import MiniMap from '~/components/reports/MiniMap'
 import QualitativeText from '~/components/reports/QualitativeText'
@@ -364,6 +386,7 @@ export default {
     WildfireReport,
     BeetleRiskReport,
     HydrologyReport,
+    DemographicsReport,
     MiniMap,
     QualitativeText,
     BackToTopButton,
@@ -408,9 +431,9 @@ export default {
       // (Temperature, Permafrost, Beetle Climate Protection, etc.)
       let types = this.presentDataTypes()
 
-      // If there are less than 7 data types present, the corresponding
+      // If there are less than 9 data types present, the corresponding
       // section(s) of the report page will be hidden.
-      if (types.length < 7) {
+      if (types.length < 9) {
         return true
       }
       return false
@@ -425,6 +448,7 @@ export default {
         this.vegChangeHttpError,
         this.beetleHttpError,
         this.hydrologyHttpError,
+        this.demographicsHttpError,
       ]
 
       if (this.type == 'latLng') {
@@ -465,6 +489,7 @@ export default {
       vegChangeData: 'wildfire/veg_change',
       beetleData: 'beetle/beetleData',
       hydrologyData: 'hydrology/hydrologyData',
+      demographicsData: 'demographics/demographicsData',
       climateHttpError: 'climate/httpError',
       elevationHttpError: 'elevation/httpError',
       permafrostHttpError: 'permafrost/httpError',
@@ -472,6 +497,7 @@ export default {
       vegChangeHttpError: 'wildfire/vegChangeHttpError',
       beetleHttpError: 'beetle/httpError',
       hydrologyHttpError: 'hydrology/httpError',
+      demographicsHttpError: 'demographics/httpError',
       isPointLocation: 'place/isPointLocation',
     }),
   },
@@ -498,6 +524,9 @@ export default {
       console.error(e)
     })
     await this.$store.dispatch('beetle/fetch').catch(e => {
+      console.error(e)
+    })
+    await this.$store.dispatch('demographics/fetch').catch(e => {
       console.error(e)
     })
   },
@@ -531,7 +560,12 @@ export default {
       if (this.beetleData) {
         types.push('climate protection from spruce beetle outbreaks')
       }
-
+      if (this.vegChangeData) {
+        types.push('vegetation change')
+      }
+      if (this.demographicsData) {
+        types.push('demographics')
+      }
       return types
     },
     formatTypeString(types) {
