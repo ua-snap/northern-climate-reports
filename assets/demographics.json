@@ -31,7 +31,7 @@
     "pct_no_hsdiploma": 5.8,
     "pct_below_150pov": 15.1,
     "pct_no_bband": 7.3,
-    "comment": "Data represent information from nearest county (Anchorage Municipality), which includes Municipality of Anchorage and Anchorage."
+    "comment": "Data represent information from the nearest county (Anchorage Municipality), which includes Anchorage."
   },
   "AK124": {
     "name": "Fairbanks",
