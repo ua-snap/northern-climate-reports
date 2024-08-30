@@ -188,7 +188,7 @@
             </li>
             <li v-if="demographicsData">
               <a href="#demographics">Demographic data</a>
-              for this place, derived from US Census data
+              for this place, derived from US Census and CDC data
             </li>
           </ul>
         </div>
