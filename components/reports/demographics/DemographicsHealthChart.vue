@@ -5,7 +5,7 @@
       <div v-if="disabilityInsurancePresent">
         <div class="content is-size-5">
           <p>
-            Data in this section taken from Census ACS 5-year (2018&ndash;2022).
+            Data in this section were taken from Census ACS 5-year (2018&ndash;2022).
             <strong> Values are estimated</strong>; margin of error is shown in
             parentheses for each value.
           </p>
