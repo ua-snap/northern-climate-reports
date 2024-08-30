@@ -55,7 +55,7 @@
     <h5 class="title is-5">Health conditions</h5>
     <div class="block" v-if="healthConditionsPresent">
       <div class="content is-size-5">
-        <p>Data in this section taken from CDC PLACES Year 2023.</p>
+        <p>Data in this section were taken from CDC PLACES Year 2023.</p>
       </div>
       <table class="table">
         <caption>
