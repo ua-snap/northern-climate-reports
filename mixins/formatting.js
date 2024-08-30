@@ -1,13 +1,25 @@
 export const formatting = {
 	methods: {
 		commas(x) {
-			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+			try {
+				return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+			} catch (e) {
+				throw new Error(
+					'undefined value or unexpected type provided to `mixins/formatting/commas`'
+				)
+			}
 		},
 		wordwrap(s, w) {
-			return s.replace(
-				new RegExp(`(?![^\\n]{1,${w}}$)([^\\n]{1,${w}})\\s`, 'g'),
-				'$1\n'
-			)
+			try {
+				return s.replace(
+					new RegExp(`(?![^\\n]{1,${w}}$)([^\\n]{1,${w}})\\s`, 'g'),
+					'$1\n'
+				)
+			} catch (e) {
+				throw new Error(
+					'undefined value or unexpected type provided to `mixins/formatting/wordwrap`'
+				)
+			}
 		},
 	},
 }
