@@ -7,7 +7,7 @@
           <p>
             Data in this section taken from Census ACS 5-year (2018&ndash;2022).
             <strong> Values are estimated</strong>; margin of error is shown in
-            parenthesis for each value.
+            parentheses for each value.
           </p>
         </div>
         <table class="table">
