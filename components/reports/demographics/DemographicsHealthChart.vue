@@ -76,7 +76,7 @@
     <div v-else>
       <div class="content is-size-5">
         <p>
-          Demographic information health conditions (asthma, COPD, heart
+          Demographic information for health conditions (asthma, COPD, heart
           disease, stroke, chronic kidney disease) are not available for this
           location.
         </p>
