@@ -2,13 +2,43 @@
   <div class="block">
     <div class="content is-size-5">
       Information in this section is computed from the U.S. Census DHC Year
-      2020.
+      2020. Data are shown both as a graphic, and a table, below.
     </div>
     <div id="demographics-ages-chart" />
+    <div class="block">
+      <table class="table mt-6">
+        <caption>
+          Age, by category,
+          {{
+            placeName
+          }}
+        </caption>
+        <thead>
+          <tr>
+            <th></th>
+            <th scope="col">{{ placeName }}</th>
+            <th scope="col">Alaska</th>
+            <th scope="col">U.S.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(age, key) in ages">
+            <th scope="row">{{ age }}</th>
+            <td>{{ ageByCategory[key]['place'] }}%</td>
+            <td>{{ ageByCategory[key]['alaska'] }}%</td>
+            <td>{{ ageByCategory[key]['us'] }}%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+table {
+  margin-left: 200px;
+}
+</style>
 
 <script>
 import _ from 'lodash'
@@ -21,7 +51,56 @@ export default {
   mounted() {
     this.renderPlot()
   },
+  data() {
+    return {
+      ages: {
+        pct_under_5: 'under 5',
+        pct_5_to_17: '5-17',
+        pct_18_to_64: '18-64',
+        pct_65_plus: 'over 65',
+      },
+    }
+  },
   computed: {
+    ageByCategory() {
+      var abc = {}
+      Object.keys(this.ages).forEach(key => {
+        abc[key] = {}
+
+        _.forEach(['place', 'alaska', 'us'], demo => {
+          switch (key) {
+            case 'pct_under_5':
+              abc[key][demo] = this.demographics[demo]['pct_under_5']
+              break
+
+            case 'pct_5_to_17':
+              abc[key][demo] = Number(
+                this.demographics[demo]['pct_under_18'] -
+                  this.demographics[demo]['pct_under_5']
+              ).toPrecision(4)
+              break
+
+            case 'pct_18_to_64':
+              abc[key][demo] = Number(
+                100 -
+                  this.demographics[demo]['pct_65_plus'] -
+                  this.demographics[demo]['pct_under_18']
+              ).toPrecision(4)
+              break
+
+            case 'pct_65_plus':
+              abc[key][demo] = this.demographics[demo]['pct_65_plus']
+              break
+
+            default:
+              console.log(key, 'wat')
+              break
+          }
+        })
+      })
+      console.log(abc)
+      return abc
+    },
     ...mapGetters({
       demographics: 'demographics/demographicsData',
       placeName: 'place/name',
@@ -151,7 +230,7 @@ export default {
         },
         xaxis: {
           fixedrange: true,
-          visible: false,
+          // visible: false,
         },
         yaxis: {
           fixedrange: true,

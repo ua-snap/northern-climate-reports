@@ -70,6 +70,7 @@ export const actions = {
           total_population: returnedData.data.features[0].properties.total_popu,
           pct_65_plus: returnedData.data.features[0].properties.pct_65_plu,
           pct_under_18: returnedData.data.features[0].properties.pct_under_,
+          pct_under_5: returnedData.data.features[0].properties.pct_unde_1,
           pct_hispanic_latino:
             returnedData.data.features[0].properties.pct_hispan,
           pct_white: returnedData.data.features[0].properties.pct_white,
