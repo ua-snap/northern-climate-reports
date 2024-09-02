@@ -122,23 +122,23 @@ export default {
 
       let yaxis = ['U.S.', 'Alaska', place]
 
-      var trace1 = {
+      var trace0 = {
         x: [
-          demographics['us']['pct_under_18'],
-          demographics['alaska']['pct_under_18'],
-          demographics['place']['pct_under_18'],
+          demographics['us']['pct_under_5'],
+          demographics['alaska']['pct_under_5'],
+          demographics['place']['pct_under_5'],
         ],
         y: yaxis,
-        name: 'under 18',
+        name: 'under 5',
         orientation: 'h',
         type: 'bar',
         marker: {
-          color: '#bdd7e7',
+          color: '#f1eef6',
         },
         text: [
-          demographics['us']['pct_under_18'] + '%',
-          demographics['alaska']['pct_under_18'] + '%',
-          demographics['place']['pct_under_18'] + '%',
+          demographics['us']['pct_under_5'] + '%',
+          demographics['alaska']['pct_under_5'] + '%',
+          demographics['place']['pct_under_5'] + '%',
         ],
         textposition: 'auto',
         textfont: {
@@ -148,8 +148,42 @@ export default {
         hoverinfo: 'none',
       }
 
+      // Compute 5-17
       let betweens = {}
       let keys = ['us', 'alaska', 'place']
+      keys.forEach(key => {
+        betweens[key] = Number(
+          (
+            demographics[key]['pct_under_18'] - demographics[key]['pct_under_5']
+          ).toPrecision(4)
+        )
+      })
+
+      var trace1 = {
+        height: 5,
+        x: [betweens['us'], betweens['alaska'], betweens['place']],
+        y: yaxis,
+        name: '5-17',
+        orientation: 'h',
+        type: 'bar',
+        text: [
+          betweens['us'] + '%',
+          betweens['alaska'] + '%',
+          betweens['place'] + '%',
+        ],
+        textposition: 'auto',
+        textfont: {
+          size: 14,
+        },
+        marker: {
+          color: '#bdc9e1',
+        },
+        hoverinfo: 'none',
+      }
+
+      // Compute 18-64
+      betweens = {}
+      // keys defined above
       keys.forEach(key => {
         betweens[key] = Number(
           (
@@ -177,7 +211,7 @@ export default {
           size: 14,
         },
         marker: {
-          color: '#6baed6',
+          color: '#74a9cf',
         },
         hoverinfo: 'none',
       }
@@ -193,7 +227,7 @@ export default {
         orientation: 'h',
         type: 'bar',
         marker: {
-          color: '#045a8d',
+          color: '#0570b0',
         },
         text: [
           demographics['us']['pct_65_plus'] + '%',
@@ -207,7 +241,7 @@ export default {
         hoverinfo: 'none',
       }
 
-      var dataTraces = [trace1, trace2, trace3]
+      var dataTraces = [trace0, trace1, trace2, trace3]
 
       var layout = {
         title: 'Age, by category',
@@ -220,7 +254,7 @@ export default {
           l: 200,
         },
         height: 250,
-        width: 1000,
+        width: 1200,
         legend: {
           orientation: 'h',
           traceorder: 'normal',
@@ -230,7 +264,7 @@ export default {
         },
         xaxis: {
           fixedrange: true,
-          // visible: false,
+          zeroline: false,
         },
         yaxis: {
           fixedrange: true,
