@@ -36,11 +36,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-table {
-  margin-left: 200px;
-}
-</style>
+<style lang="scss" scoped></style>
 
 <script>
 import _ from 'lodash'

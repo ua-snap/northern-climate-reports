@@ -34,11 +34,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-table {
-  margin-left: 200px;
-}
-</style>
+<style lang="scss" scoped></style>
 
 <script>
 import _ from 'lodash'
@@ -98,7 +94,6 @@ export default {
           }
         })
       })
-      console.log(abc)
       return abc
     },
     ...mapGetters({
@@ -265,6 +260,7 @@ export default {
         xaxis: {
           fixedrange: true,
           zeroline: false,
+          visible: false,
         },
         yaxis: {
           fixedrange: true,
