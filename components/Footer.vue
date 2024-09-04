@@ -27,6 +27,22 @@
               >United States Geological Survey</a
             >.
           </p>
+
+          <p>
+            Portions of this tool were developed in collaboration with the
+            University of Alaska Anchorage
+            <a
+              href="https://www.uaa.alaska.edu/academics/college-of-health/departments/population-health-sciences/institute-for-circumpolar-health-studies"
+              >Institute for Circumpolar Health Studies</a
+            >, and the University of Washington
+            <a href="https://cdrc.uw.edu"
+              >Center for Disaster Resilient Communities</a
+            >. Development was partially funded by
+            <a
+              href="https://cfpub.epa.gov/ncer_abstracts/index.cfm/fuseaction/display.abstractDetail/abstract_id/11349"
+              >EPA Grant Number R840479</a
+            >.
+          </p>
           <p>
             <strong
               >Please contact
