@@ -1,11 +1,13 @@
 <template>
   <div>
     <div class="content is-size-5">
-      <p>Data in this section are computed from the U.S. Census DHC Year 2020.</p>
+      <p>
+        Data in this section are computed from the U.S. Census DHC Year 2020.
+        Data are shown both as a chart and as a table, below.
+      </p>
     </div>
     <div id="demographics-race-ethnicity-chart" />
     <div class="block">
-      <div id="demographics-race-ethnicity-chart" />
       <table class="table mt-6">
         <caption>
           Race and ethnicity,
@@ -34,11 +36,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-table {
-  margin-left: 200px;
-}
-</style>
+<style lang="scss" scoped></style>
 
 <script>
 import _ from 'lodash'
