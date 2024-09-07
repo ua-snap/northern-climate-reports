@@ -190,6 +190,10 @@
               <a href="#demographics">Demographic data</a>
               for this place, derived from US Census and CDC data
             </li>
+            <li v-if="speciesData">
+              <a href="#species">Species of greatest conservation concern</a>
+              in this area
+            </li>
           </ul>
         </div>
       </section>
@@ -256,6 +260,10 @@
                 <strong>Demographics:</strong>
                 {{ httpErrors[demographicsHttpError] }}
               </li>
+              <li v-if="speciesHttpError">
+                <strong>Species:</strong>
+                {{ httpErrors[speciesHttpError] }}
+              </li>
             </ul>
             <p>
               Please reach out to us via email at
@@ -307,6 +315,12 @@
       <section class="section is-hidden-touch" v-if="demographicsData">
         <div id="demographics">
           <DemographicsReport />
+          <BackToTopButton />
+        </div>
+      </section>
+      <section class="section is-hidden-touch" v-if="speciesData">
+        <div id="species">
+          <SpeciesReport />
           <BackToTopButton />
         </div>
       </section>
@@ -366,6 +380,7 @@ import PermafrostReport from '~/components/reports/permafrost/PermafrostReport'
 import WildfireReport from '~/components/reports/wildfire/WildfireReport'
 import BeetleRiskReport from '~/components/reports/beetles/BeetleRiskReport'
 import DemographicsReport from '~/components/reports/demographics/DemographicsReport'
+import SpeciesReport from '~/components/reports/species/SpeciesReport'
 import HydrologyReport from '~/components/reports/hydrology/HydrologyReport'
 import MiniMap from '~/components/reports/MiniMap'
 import QualitativeText from '~/components/reports/QualitativeText'
@@ -387,6 +402,7 @@ export default {
     BeetleRiskReport,
     HydrologyReport,
     DemographicsReport,
+    SpeciesReport,
     MiniMap,
     QualitativeText,
     BackToTopButton,
@@ -449,6 +465,7 @@ export default {
         this.beetleHttpError,
         this.hydrologyHttpError,
         this.demographicsHttpError,
+        this.speciesHttpError,
       ]
 
       if (this.type == 'latLng') {
@@ -490,6 +507,7 @@ export default {
       beetleData: 'beetle/beetleData',
       hydrologyData: 'hydrology/hydrologyData',
       demographicsData: 'demographics/demographicsData',
+      speciesData: 'species/speciesData',
       climateHttpError: 'climate/httpError',
       elevationHttpError: 'elevation/httpError',
       permafrostHttpError: 'permafrost/httpError',
@@ -498,6 +516,7 @@ export default {
       beetleHttpError: 'beetle/httpError',
       hydrologyHttpError: 'hydrology/httpError',
       demographicsHttpError: 'demographics/httpError',
+      speciesHttpError: 'species/httpError',
       isPointLocation: 'place/isPointLocation',
     }),
   },
@@ -527,6 +546,9 @@ export default {
       console.error(e)
     })
     await this.$store.dispatch('demographics/fetch').catch(e => {
+      console.error(e)
+    })
+    await this.$store.dispatch('species/fetch').catch(e => {
       console.error(e)
     })
   },
@@ -565,6 +587,9 @@ export default {
       }
       if (this.demographicsData) {
         types.push('demographics')
+      }
+      if (this.speciesData) {
+        types.push('species')
       }
       return types
     },
