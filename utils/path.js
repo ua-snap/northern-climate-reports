@@ -9,10 +9,13 @@ export const getAppPathFragment = function (type, id) {
     type == 'climate_division' ||
     type == 'ethnolinguistic_region' ||
     type == 'fire_zone' ||
+    type == 'yt_fire_district' ||
     type == 'first_nation' ||
     type == 'game_management_unit' ||
+    type == 'yt_game_management_subzone' ||
     type == 'borough' ||
-    type == 'census_area'
+    type == 'census_area' ||
+    type == 'yt_watershed'
   ) {
     path = '/report/area/' + id
   } else {
