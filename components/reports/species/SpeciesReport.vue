@@ -1,11 +1,12 @@
 <template>
   <div>
-    <h3 class="title is-3">Species of Greatest Conservation Concern</h3>
+    <h3 class="title is-3">Species of Greatest Conservation Need</h3>
     <div class="content is-size-5">
       <p>
-        This section shows species of greatest conservation concern in the
-        surrounding area (HUC12) for this place.
+        This dataset represents the results of a project that compiled available range information for three taxonomic groups representing 211 species (159 birds, 45 mammals, and 5 amphibians) identified as Species of Greatest Conservation Need by the <a href="https://www.adfg.alaska.gov/index.cfm?adfg=wildlifediversity.swap">2015 Alaska Wildlife Action Plan (SWAP) Appendix A</a> in addition to 2 amphibian species native to Alaska.
       </p>
+      <h4 class="subtitle is-4">What is this list showing?</h4>
+      <p>The Alaska Wildlife Action Plan identified species which...</p>
       
       <div class="block">
         <div class="tabs is-large">

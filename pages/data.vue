@@ -22,7 +22,7 @@
                 <th scope="col">Source + academic reference</th>
               </tr>
             </thead>
-            <thead>
+            <tbody>
               <tr>
                 <th scope="row">Elevation</th>
                 <td>30&#8239;m</td>
@@ -307,7 +307,15 @@
                   </ul>
                 </td>
               </tr>
-            </thead>
+              <tr>
+                <th scope="row">Species of Greatest Conservation Need</th>
+                <td>HUC12</td>
+                <td>
+                  <p><a href="https://catalog.snap.uaf.edu/geonetwork/srv/eng/catalog.search#/metadata/9fc71df4-8377-45e0-af61-5598a7c1c6e1">Baseline biodiversity heat maps and climate correlates for Alaska&rsquo;s Species of Greatest Conservation Need</a></p>
+                  
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>

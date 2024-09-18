@@ -191,7 +191,7 @@
               for this place, derived from US Census and CDC data
             </li>
             <li v-if="speciesData">
-              <a href="#species">Species of greatest conservation concern</a>
+              <a href="#species">Species of Greatest Conservation Need</a>
               in this area
             </li>
           </ul>
