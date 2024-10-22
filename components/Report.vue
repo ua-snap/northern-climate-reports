@@ -187,8 +187,9 @@
               beetles in forested areas of Alaska
             </li>
             <li v-if="demographicsData">
-              <a href="#demographics">Demographic data</a>
-              for this place, derived from US Census and CDC data
+              <a href="#demographics">Demographic and Health information</a>
+              for this place, derived from data from the U.S. Census and the
+              Centers for Disease Control and Prevention (CDC)
             </li>
           </ul>
         </div>
