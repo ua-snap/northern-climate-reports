@@ -11,11 +11,15 @@
         <thead>
           <th scope="col">Demographic</th>
           <th scope="col">{{ placeName }}</th>
+          <th scope="col">Alaska</th>
+          <th scope="col">U.S.</th>
         </thead>
         <tbody>
           <tr v-for="(name, key) in otherDemographics">
             <th scope="row">{{ name }}</th>
             <td>{{ demographics['place'][key] }}%</td>
+            <td>{{ demographics['alaska'][key] }}%</td>
+            <td>{{ demographics['us'][key] }}%</td>
           </tr>
         </tbody>
       </table>
@@ -33,11 +37,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-table {
-  margin-left: 200px;
-}
-</style>
+<style lang="scss" scoped></style>
 
 <script>
 import _ from 'lodash'
