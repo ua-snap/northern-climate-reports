@@ -5,7 +5,6 @@ export let httpErrors = {
     'Provided coordinates or area are not included in coverage',
   timeout: 'Data request timed out',
   server_error: 'A problem occurred while requesting data',
-  small_population: 'Demographic data is not shown for places with fewer than five people'
 }
 
 export const getHttpError = function (error) {

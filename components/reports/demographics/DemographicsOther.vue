@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h5 class="title is-5">Social Determinants of Health</h5>
+    <h5 class="title is-5 mt-6">Social Determinants of Health</h5>
     <div class="block" v-if="otherPresent">
       <div class="content is-size-5">
         <p>Data in this section were taken from CDC SDOH Years 2017-2021.</p>

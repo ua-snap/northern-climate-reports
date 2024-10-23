@@ -54,6 +54,7 @@
       <h4 class="title is-5">Race &amp; Ethnicity</h4>
       <DemographicsRaceEthnicityChart />
     </div>
+
     <div class="block">
       <h4 class="title is-4">Health</h4>
       <div class="content is-size-4">
@@ -62,8 +63,10 @@
           50 or more, based on the 2020 U.S. Census.
         </p>
       </div>
-      <DemographicsHealthChart />
-      <DemographicsOther />
+      <div v-if="demographics.place.total_population >= 50">
+        <DemographicsHealthChart />
+        <DemographicsOther />
+      </div>
     </div>
 
     <DownloadCsvButton
