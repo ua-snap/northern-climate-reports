@@ -14,6 +14,14 @@ export default {
   computed: {
     downloadTarget() {
       let endpointPath = this.endpoint
+      if (this.endpoint == 'demographics') {
+        url =
+          process.env.apiUrl +
+          '/demographics/' +
+          this.$store.getters['place/communityId'] +
+          '?format=csv'
+        return url
+      }
       if (_.includes(['flammability', 'veg_type'], this.endpoint)) {
         endpointPath = 'alfresco/' + endpointPath
       }
