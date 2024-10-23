@@ -89,7 +89,6 @@ export default {
               break
 
             default:
-              console.log(key, 'wat')
               break
           }
         })
