@@ -58,8 +58,6 @@ export const actions = {
       _.isObject(returnedData.data.features[0].geometry)
     ) {
       // Valid response.
-      // Don't show data for communities with a population <= 5
-      if(returnedData.data.features[0].properties.total_popu > 5) {
       context.commit('setDemographicsData', {
         // Sculpt the incoming field names to match nicer-to-read keys,
         // field names from the shapefile are limited in length
@@ -110,9 +108,7 @@ export const actions = {
         alaska: demographics['AK0'],
         us: demographics['US0'],
         geometry: returnedData.data.features[0].geometry,
-      }) } else {
-        context.commit('setHttpError', 'small_population')
-      }
+      }) 
     } else {
       // No demographics for this place.
       context.commit('setHttpError', 'no_data')

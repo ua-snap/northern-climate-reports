@@ -260,7 +260,7 @@
                 </td>
               </tr>
               <tr>
-                <th scope="row">Demographics</th>
+                <th scope="row">Demographics and Health</th>
                 <td>Borough/census tract(s)</td>
                 <td>
                   <p>

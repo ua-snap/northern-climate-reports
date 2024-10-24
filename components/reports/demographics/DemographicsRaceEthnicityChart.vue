@@ -2,8 +2,9 @@
   <div>
     <div class="content is-size-5">
       <p>
-        Data in this section are computed from the U.S. Census DHC Year 2020.
-        Data are shown both as a chart and as a table, below.
+        Computed from the 2020 US Census Demographics and Housing
+        Characteristics File (DHC). Data are shown both as a chart and as a
+        table, below.
       </p>
     </div>
     <div id="demographics-race-ethnicity-chart" />
