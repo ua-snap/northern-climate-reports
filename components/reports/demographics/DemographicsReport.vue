@@ -20,7 +20,7 @@
     <div class="content is-size-4 mt-6">
       <p>
         Demographic data is presented only regionally, at the level of boroughs,
-        census-sesignated places (CDPs), incorporated places, and census tracts.
+        census-designated places (CDPs), incorporated places, and census tracts.
       </p>
       <p>
         <strong>This section shows information from {{ commentEdited }}</strong
