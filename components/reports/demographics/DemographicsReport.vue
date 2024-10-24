@@ -32,7 +32,7 @@
     </div>
 
     <h4 class="title is-4 mt-5">Demographics</h4>
-    <h5 class="title is-5">Population</h5>
+    <h5 class="title is-5">Total Population</h5>
     <div class="content is-size-5">
       <p class="mb-0 pb-0">
         <strong>
