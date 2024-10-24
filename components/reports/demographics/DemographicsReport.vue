@@ -23,7 +23,7 @@
         census-designated places (CDPs), incorporated places, and census tracts.
       </p>
       <p>
-        <strong>This section shows information from {{ commentEdited }}</strong
+        <strong>This section shows {{ commentEdited }}</strong
         >, as shown in the map above. Census boundaries are designed to produce
         meaningful, relevant, and reliable statistical data, closely
         representing the community’s population, but they do not necessarily
