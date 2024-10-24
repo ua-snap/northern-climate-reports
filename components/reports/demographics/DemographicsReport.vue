@@ -63,7 +63,7 @@
           50 or more, based on the 2020 U.S. Census.
         </p>
       </div>
-      <div v-if="demographics.place.total_population >= 50">
+      <div v-if="adultPopulation >= 50">
         <DemographicsHealthChart />
         <DemographicsOther />
       </div>
@@ -106,6 +106,14 @@ export default {
         .replace('Data represent ', '')
         .replace('.', '')
         .replace('county', 'borough')
+    },
+    adultPopulation() {
+      let totalPopulation = this.demographics.place.total_population
+      let percentUnder18 = this.demographics.place.pct_under_18
+      let populationUnder18 = Math.round(
+        totalPopulation * (percentUnder18 / 100)
+      )
+      return totalPopulation - populationUnder18
     },
     ...mapGetters({
       demographics: 'demographics/demographicsData',
