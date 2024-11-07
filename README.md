@@ -1,4 +1,6 @@
-# iem-webapp
+# Northern Climate Reports
+
+A tool for presenting complex climate data in a format that is useful for rightsholders, stakeholders and land managers.
 
 ## Initial setup
 

@@ -106,6 +106,7 @@ export default {
       process.env.RASDAMAN_URL || 'https://maps.earthmaps.io/rasdaman/ows',
     apiUrl: process.env.SNAP_API_URL || 'https://earthmaps.io',
     localStorageExpiration: 4,
+    offline: process.env.SITE_OFFLINE?.toLowerCase() == 'true',
   },
 
   // Router customizations
@@ -128,11 +129,16 @@ export default {
         path: '/report/:lat/:lng',
         component: resolve(__dirname, 'pages/index'),
       })
+      routes.push({
+        name: 'default',
+        path: '*',
+        redirect: '/',
+      })
     },
   },
 
   umami: {
-    scriptUrl: 'https://umami.snap.uaf.edu/umami.js',
+    scriptUrl: 'https://umami.snap.uaf.edu/script.js',
     websiteId: '2e69a077-ba5f-49c5-b076-09a44ab6fafd',
     ignoreDnt: false,
     domains: 'northernclimatereports.org',
