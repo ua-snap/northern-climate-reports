@@ -7,14 +7,16 @@
         table, below.
       </p>
     </div>
+    
     <div id="demographics-race-ethnicity-chart" />
+  
     <div class="block">
       <table class="table mt-6 block-centered">
         <caption>
           Race and ethnicity,
           {{
             placeName
-          }}
+          }}, compared to Alaska and U.S.
         </caption>
         <thead>
           <tr>
@@ -120,7 +122,7 @@ export default {
       traces[2].marker = { color: '#b2df8a' }
 
       let layout = {
-        title: 'Race & Ethnicity, ' + place,
+        title: 'Race and ethnicity, ' + place + ', compared to Alaska and U.S.',
         barmode: 'group',
         margin: {
           t: 40,
@@ -145,7 +147,9 @@ export default {
           },
           ticksuffix: '  ', // spacing
         },
-        xaxis: { fixedrange: true, zeroline: false },
+        xaxis: { fixedrange: true, zeroline: false, ticksuffix: '%',
+        title: 
+        {text:'Percent of population'} },
       }
 
       let plotSettings = getPlotSettings()

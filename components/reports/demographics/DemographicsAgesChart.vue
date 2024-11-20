@@ -10,10 +10,10 @@
     <div class="block">
       <table class="block-centered table mt-6">
         <caption>
-          Age, by category,
+          Age distribution,
           {{
             placeName
-          }}
+          }}, compared to Alaska and U.S.
         </caption>
         <thead>
           <tr>
@@ -240,7 +240,10 @@ export default {
       var dataTraces = [trace0, trace1, trace2, trace3]
 
       var layout = {
-        title: 'Age, by category',
+        title:
+          'Age distribution, ' +
+          this.placeName +
+          ', compared to Alaska and U.S.',
         barmode: 'stack',
 
         margin: {
