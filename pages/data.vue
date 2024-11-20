@@ -22,7 +22,55 @@
                 <th scope="col">Source + academic reference</th>
               </tr>
             </thead>
-            <thead>
+            <tbody>
+              <tr>
+                <th scope="row">Demographics and Health</th>
+                <td>Borough/census tract(s), census-designated place (CDP), incorporated place</td>
+                <td>
+                  <p>
+                    Derived from the 2020 US Census Demographics and Housing
+                    Characteristics File (DHC), the 2017-2021 US Census American
+                    Community Survey (ACS) 5-year dataset, the 2023 CDC PLACES
+                    dataset, and the 2017-2021 CDC Social Determinants of Health
+                    (SDOH) dataset.
+                  </p>
+                  <p>Citations:</p>
+                  <ul>
+                    <li>
+                      U.S. Census Bureau (2020). Demographics and Housing
+                      Characteristics File. Accessed May 2024, from
+                      <a
+                        href="https://www.census.gov/data/tables/2023/dec/2020-census-dhc.html"
+                        >https://www.census.gov/data/tables/2023/dec/2020-census-dhc.html</a
+                      >
+                    </li>
+                    <li>
+                      U.S. Census Bureau (2021). 2017-2021 American Community
+                      Survey 5-year estimates. Accessed May 2024, from
+                      <a
+                        href="https://www.census.gov/programs-surveys/acs/data.html"
+                        >https://www.census.gov/programs-surveys/acs/data.html</a
+                      >
+                    </li>
+                    <li>
+                      PLACES. Centers for Disease Control and Prevention.
+                      Accessed May 2024, from
+                      <a href="https://www.cdc.gov/places"
+                        >https://www.cdc.gov/places</a
+                      >
+                    </li>
+                    <li>
+                      Healthy People 2030, U.S. Department of Health and Human
+                      Services, Office of Disease Prevention and Health
+                      Promotion. Accessed May 2024, from
+                      <a
+                        href="https://health.gov/healthypeople/objectives-and-data/social-determinants-health"
+                        >https://health.gov/healthypeople/objectives-and-data/social-determinants-health</a
+                      >
+                    </li>
+                  </ul>
+                </td>
+              </tr>
               <tr>
                 <th scope="row">Elevation</th>
                 <td>30&#8239;m</td>
@@ -259,55 +307,7 @@
                   </blockquote>
                 </td>
               </tr>
-              <tr>
-                <th scope="row">Demographics and Health</th>
-                <td>Borough/census tract(s)</td>
-                <td>
-                  <p>
-                    Derived from the 2020 US Census Demographics and Housing
-                    Characteristics File (DHC), the 2017-2021 US Census American
-                    Community Survey (ACS) 5-year dataset, the 2023 CDC PLACES
-                    dataset, and the 2017-2021 CDC Social Determinants of Health
-                    (SDOH) dataset.
-                  </p>
-                  <p>Citations:</p>
-                  <ul>
-                    <li>
-                      U.S. Census Bureau (2020). Demographics and Housing
-                      Characteristics File. Accessed May 2024, from
-                      <a
-                        href="https://www.census.gov/data/tables/2023/dec/2020-census-dhc.html"
-                        >https://www.census.gov/data/tables/2023/dec/2020-census-dhc.html</a
-                      >
-                    </li>
-                    <li>
-                      U.S. Census Bureau (2021). 2017-2021 American Community
-                      Survey 5-year estimates. Accessed May 2024, from
-                      <a
-                        href="https://www.census.gov/programs-surveys/acs/data.html"
-                        >https://www.census.gov/programs-surveys/acs/data.html</a
-                      >
-                    </li>
-                    <li>
-                      PLACES. Centers for Disease Control and Prevention.
-                      Accessed May 2024, from
-                      <a href="https://www.cdc.gov/places"
-                        >https://www.cdc.gov/places</a
-                      >
-                    </li>
-                    <li>
-                      Healthy People 2030, U.S. Department of Health and Human
-                      Services, Office of Disease Prevention and Health
-                      Promotion. Accessed May 2024, from
-                      <a
-                        href="https://health.gov/healthypeople/objectives-and-data/social-determinants-health"
-                        >https://health.gov/healthypeople/objectives-and-data/social-determinants-health</a
-                      >
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-            </thead>
+            </tbody>
           </table>
         </div>
       </div>
@@ -337,7 +337,9 @@
     </div>
   </div>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  
+</style>
 
 <script>
 export default {

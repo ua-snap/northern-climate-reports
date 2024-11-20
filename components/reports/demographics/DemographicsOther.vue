@@ -35,7 +35,7 @@
       <div v-if="disabilityInsurancePresent">
         <div class="content is-size-5">
           <p>
-            Data in this section were taken from the 2017&ndash;2021 US Census American Community Survey (ACS) 5-year dataset. Values are estimated, and the margin of error is shown in parentheses for each value. Based on the total, civilian non-institutionalized population.
+            Data from the 2017&ndash;2021 US Census American Community Survey (ACS) 5-year dataset. Values are estimated, and the margin of error is shown in parentheses for each value. Based on the total, civilian non-institutionalized population.
           </p>
         </div>
         <table class="table block-centered">
