@@ -5,7 +5,7 @@
       <div class="content is-size-5">
         <p>Data from the 2017-2021 CDC Social Determinants of Health (SDOH) dataset.</p>
       </div>
-      <table class="table">
+      <table class="table block-centered">
         <thead>
           <th scope="col"></th>
           <th scope="col">{{ placeName }}</th>
@@ -38,7 +38,7 @@
             Data in this section were taken from the 2017&ndash;2021 US Census American Community Survey (ACS) 5-year dataset. Values are estimated, and the margin of error is shown in parentheses for each value. Based on the total, civilian non-institutionalized population.
           </p>
         </div>
-        <table class="table">
+        <table class="table block-centered">
           <thead>
             <th scope="col"></th>
             <th scope="col">{{ placeName }}</th>

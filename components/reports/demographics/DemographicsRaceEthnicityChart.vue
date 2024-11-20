@@ -9,7 +9,7 @@
     </div>
     <div id="demographics-race-ethnicity-chart" />
     <div class="block">
-      <table class="table mt-6">
+      <table class="table mt-6 block-centered">
         <caption>
           Race and ethnicity,
           {{

@@ -5,7 +5,7 @@
       <div class="content is-size-5">
         <p>Data from the 2023 CDC PLACES dataset.</p>
       </div>
-      <table class="table">
+      <table class="table block-centered">
         <caption>
           Health conditions<br /><span class="clause"
             >crude prevalence, 95% confidence interval</span
