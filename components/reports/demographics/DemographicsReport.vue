@@ -19,8 +19,8 @@
     <DemographicsMap />
     <div class="content is-size-4 mt-6">
       <p>
-        Demographic data is presented only regionally, at the level of boroughs,
-        census-designated places (CDPs), incorporated places, and census tracts.
+        Demographic data is presented regionally, at the level of borough,
+        census-designated place (CDPs), incorporated place, or census tracts.
       </p>
       <p>
         <strong>This section shows {{ commentEdited }}</strong
