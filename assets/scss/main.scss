@@ -35,6 +35,15 @@ label.label {
   margin-right: auto;
 }
 
+// Some lighter formatting for the demographic tables, still more
+// like other tables
+table.table.demographic {
+  td {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+  }
+}
+
 // Formatting common for report tables (temp/precip, indicators)
 table.table.report-table {
   width: 100%;

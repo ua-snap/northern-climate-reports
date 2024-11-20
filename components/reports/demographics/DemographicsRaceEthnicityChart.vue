@@ -7,11 +7,11 @@
         table, below.
       </p>
     </div>
-    
+
     <div id="demographics-race-ethnicity-chart" />
-  
+
     <div class="block">
-      <table class="table mt-6 block-centered">
+      <table class="table mt-6 block-centered demographic">
         <caption>
           Race and ethnicity,
           {{
@@ -39,7 +39,21 @@
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+table {
+  th[scope='row'] {
+    max-width: 30rem;
+  }
+  caption {
+    font-size: 110%;
+    font-weight: 500;
+    .clause {
+      font-size: 100%;
+      font-weight: 400;
+    }
+  }
+}
+</style>
 
 <script>
 import _ from 'lodash'
@@ -147,9 +161,12 @@ export default {
           },
           ticksuffix: '  ', // spacing
         },
-        xaxis: { fixedrange: true, zeroline: false, ticksuffix: '%',
-        title: 
-        {text:'Percent of population'} },
+        xaxis: {
+          fixedrange: true,
+          zeroline: false,
+          ticksuffix: '%',
+          title: { text: 'Percent of population' },
+        },
       }
 
       let plotSettings = getPlotSettings()

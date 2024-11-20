@@ -76,7 +76,6 @@
     />
   </div>
 </template>
-<style></style>
 <script>
 import { mapGetters } from 'vuex'
 import { formatting } from '~/mixins/formatting'

@@ -5,10 +5,14 @@
       <div class="content is-size-5">
         <p>Data from the 2023 CDC PLACES dataset.</p>
       </div>
-      <table class="table block-centered">
+      <table class="table block-centered demographic">
         <caption>
-          Health conditions<br /><span class="clause"
-            >crude prevalence, 95% confidence interval</span
+          Health conditions,
+          {{
+            placeName
+          }}, compared to Alaska and U.S.<br /><span class="clause"
+            >crude prevalence
+            <span class="ci">(95% confidence interval)</span></span
           >
         </caption>
         <thead>
@@ -20,9 +24,30 @@
         <tbody>
           <tr v-for="(conditionName, key) in conditions">
             <th scope="row" v-html="conditionName"></th>
-            <td>{{ demographics['place'][key] }}%</td>
-            <td>{{ demographics['alaska'][key] }}%</td>
-            <td>{{ demographics['us'][key] }}%</td>
+            <td>
+              {{ demographics['place'][key] }}%
+              <span class="ci">
+                ({{ demographics['place'][key + '_low'] }}&ndash;{{
+                  demographics['place'][key + '_high']
+                }})
+              </span>
+            </td>
+            <td>
+              {{ demographics['alaska'][key] }}%
+              <span class="ci">
+                ({{ demographics['alaska'][key + '_low'] }}&ndash;{{
+                  demographics['alaska'][key + '_high']
+                }})
+              </span>
+            </td>
+            <td>
+              {{ demographics['us'][key] }}%
+              <span class="ci">
+                ({{ demographics['us'][key + '_low'] }}&ndash;{{
+                  demographics['us'][key + '_high']
+                }})
+              </span>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -53,6 +78,9 @@ table {
     }
   }
 }
+span.ci {
+  font-weight: 400;
+}
 </style>
 
 <script>
@@ -72,7 +100,7 @@ export default {
         pct_hd: 'Coronary heart disease among adults aged &ge;18 years',
         pct_stroke: 'Stroke among adults aged &ge;18 years',
         pct_diabetes: 'Diagnosed diabetes among adults aged &ge;18 years',
-        pct_kd: 'Chronic kidney disease among adults aged &ge;18 years',
+        pct_mh: 'Frequent mental distress among adults aged &ge;18 years',
       },
     }
   },

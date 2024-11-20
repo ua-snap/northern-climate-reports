@@ -5,7 +5,13 @@
       <div class="content is-size-5">
         <p>Data from the 2017-2021 CDC Social Determinants of Health (SDOH) dataset.</p>
       </div>
-      <table class="table block-centered">
+      <table class="table block-centered demographic">
+        <caption>
+          Social determinants of health,
+          {{
+            placeName
+          }}, compared to Alaska and U.S.
+        </caption>
         <thead>
           <th scope="col"></th>
           <th scope="col">{{ placeName }}</th>
@@ -38,7 +44,13 @@
             Data from the 2017&ndash;2021 US Census American Community Survey (ACS) 5-year dataset. Values are estimated, and the margin of error is shown in parentheses for each value. Based on the total, civilian non-institutionalized population.
           </p>
         </div>
-        <table class="table block-centered">
+        <table class="table block-centered demographic">
+          <caption>
+          Disability and insurance status,
+          {{
+            placeName
+          }}, compared to Alaska and U.S.
+        </caption>
           <thead>
             <th scope="col"></th>
             <th scope="col">{{ placeName }}</th>
@@ -70,8 +82,7 @@
       <div v-else>
         <div class="content is-size-5">
           <p>
-            Demographic information for insurance status and people with a
-            disability are not available for this location.
+            Demographic information for social determinants of health and disability status are not available for this location.
           </p>
         </div>
       </div>
@@ -79,7 +90,21 @@
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+table {
+  th[scope='row'] {
+    max-width: 30rem;
+  }
+  caption {
+    font-size: 110%;
+    font-weight: 500;
+    .clause {
+      font-size: 100%;
+      font-weight: 400;
+    }
+  }
+}
+</style>
 
 <script>
 import _ from 'lodash'
@@ -121,15 +146,21 @@ export default {
         pct_no_hsdiploma:
           'No high school diploma among adults aged 25 years or older',
         pct_below_150pov: 'Persons living below 150% of the poverty level',
+        pct_unemployed: 'Unemployment among people aged 16 years or older',
+        pct_foodstamps: 'Received food stamps in the past 12 months',
+        pct_single_parent: 'Single parent households',
         pct_no_bband: 'No broadband internet subscription among households',
+        pct_crowding: 'Crowding',
+        pct_hcost: 'Housing cost burden',
+        pct_emospt: 'Lack of emotional support',
       },
       acs: {
         pct_w_disability:
-          'Percent with a disability, estimate, total civilian noninstitutionalized population',
+          'Percent with a disability',
         pct_insured:
-          'Percent insured, estimate, civilian noninstitutionalized population',
+          'Percent insured',
         pct_uninsured:
-          'Percent uninsured, estimate, civilian noninstitutionalized population',
+          'Percent uninsured',
       },
     }
   },

@@ -8,7 +8,7 @@
     <div id="demographics-ages-chart" />
 
     <div class="block">
-      <table class="block-centered table mt-6">
+      <table class="block-centered table demographic mt-6">
         <caption>
           Age distribution,
           {{
