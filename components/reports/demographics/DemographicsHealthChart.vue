@@ -7,7 +7,7 @@
       </div>
       <table class="table block-centered demographic">
         <caption>
-          Health conditions,
+          Health conditions among adults aged &ge;18 years,
           {{
             placeName
           }}, compared to Alaska and U.S.<br /><span class="clause"
@@ -94,13 +94,13 @@ export default {
   data() {
     return {
       conditions: {
-        pct_asthma: 'Current asthma among adults aged &ge;18 years',
+        pct_asthma: 'Current asthma',
         pct_copd:
-          'Chronic obstructive pulmonary disease among adults aged &ge;18 years',
-        pct_hd: 'Coronary heart disease among adults aged &ge;18 years',
-        pct_stroke: 'Stroke among adults aged &ge;18 years',
-        pct_diabetes: 'Diagnosed diabetes among adults aged &ge;18 years',
-        pct_mh: 'Frequent mental distress among adults aged &ge;18 years',
+          'Chronic obstructive pulmonary disease',
+        pct_hd: 'Coronary heart disease',
+        pct_stroke: 'Stroke',
+        pct_diabetes: 'Diagnosed diabetes',
+        pct_mh: 'Frequent mental distress',
       },
     }
   },
