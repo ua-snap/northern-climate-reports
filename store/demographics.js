@@ -38,11 +38,11 @@ export const mutations = {
 export const actions = {
   async fetch(context) {
     let placeId
-    
+
     // We want places of type community | borough | census_area
     let placeType = context.rootGetters['place/type']
 
-    if(placeType == 'community') {
+    if (placeType == 'community') {
       placeId = context.rootGetters['place/communityId']
     } else if (placeType == 'borough' || placeType == 'census_area') {
       placeId = context.rootGetters['place/areaId']
@@ -53,14 +53,24 @@ export const actions = {
     if (!placeId) {
       return
     }
-    
+
     let queryUrl = process.env.apiUrl + '/demographics/' + placeId
     let returnedData = await $axios
       .get(queryUrl, { timeout: 60000 })
-      .catch(err => {
-        console.error(err)
-        context.commit('setHttpError', 'no_data')
+      .catch(function (error) {
+        if (error.response.status === 403) {
+          // Forbidden means adult population < 50
+          context.commit('setHttpError', 'low_population')
+        } else {
+          console.error(error)
+          context.commit('setHttpError', 'no_data')
+        }
       })
+
+    // If we have an HTTP error, bail.
+    if (context.getters['httpError']) {
+      return
+    }
 
     // We query for the geometry of the place separately
     let geometryQueryUrl =
