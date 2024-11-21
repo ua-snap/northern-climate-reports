@@ -37,9 +37,19 @@ export const mutations = {
 
 export const actions = {
   async fetch(context) {
-    let placeId = context.rootGetters['place/communityId']
+    let placeId
+    
+    // We want places of type community | borough | census_area
+    let placeType = context.rootGetters['place/type']
 
-    // If this isn't a named community, don't try to fetch data.
+    if(placeType == 'community') {
+      placeId = context.rootGetters['place/communityId']
+    } else if (placeType == 'borough' || placeType == 'census_area') {
+      placeId = context.rootGetters['place/areaId']
+    }
+
+    // If placeId isn't defined, we don't have demographics for
+    // this place.
     if (!placeId) {
       return
     }
