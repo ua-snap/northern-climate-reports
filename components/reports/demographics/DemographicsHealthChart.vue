@@ -109,7 +109,7 @@ export default {
       if (this.demographics) {
         let sum = 0
         Object.keys(this.conditions).forEach(k => {
-          sum += this.demographics['place'][k]
+          sum += Number.parseFloat(this.demographics['place'][k])
         })
         return sum > 0
       }

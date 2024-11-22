@@ -85,10 +85,23 @@ export const actions = {
       })
 
     if (returnedData && returnedGeometry) {
+      // Make the data returns a bit more regular
+      let processed = _.mapValuesDeep(returnedData.data, (value, key) => {
+        if(key == 'total_population') {
+          // Skip this particular value.
+          return value
+        }
+        if(_.isNumber(value)) {
+          return Number.parseFloat(value).toFixed(1)
+        } else {
+          return value
+        }
+      })
+
       context.commit('setDemographicsData', {
-        place: returnedData.data[placeId],
-        alaska: returnedData.data['AK0'],
-        us: returnedData.data['US0'],
+        place: processed[placeId],
+        alaska: processed['AK0'],
+        us: processed['US0'],
         geometry: returnedGeometry.data.features[0].geometry,
       })
     } else {

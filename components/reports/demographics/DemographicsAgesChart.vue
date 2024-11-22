@@ -75,7 +75,7 @@ export default {
               abc[key][demo] = Number(
                 this.demographics[demo]['pct_under_18'] -
                   this.demographics[demo]['pct_under_5']
-              ).toPrecision(4)
+              ).toPrecision(3)
               break
 
             case 'pct_18_to_64':
@@ -83,7 +83,7 @@ export default {
                 100 -
                   this.demographics[demo]['pct_65_plus'] -
                   this.demographics[demo]['pct_under_18']
-              ).toPrecision(4)
+              ).toPrecision(3)
               break
 
             case 'pct_65_plus':
