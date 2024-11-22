@@ -1,8 +1,9 @@
 <template>
   <div class="block">
     <div class="content is-size-5">
-      Computed from the 2020 US Census Demographics and Housing Characteristics
-      File (DHC). Data are shown both as a chart and as a table, below.
+      Computed from the 2020 U.S. Census Demographics and Housing
+      Characteristics File (DHC). Data are shown both as a chart and as a table,
+      below.
     </div>
 
     <div id="demographics-ages-chart" />

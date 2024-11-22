@@ -3,7 +3,9 @@
     <h5 class="title is-5 mt-6">Social Determinants of Health</h5>
     <div class="block" v-if="otherPresent">
       <div class="content is-size-5">
-        <p>Data from the 2017-2021 CDC Social Determinants of Health (SDOH) dataset.</p>
+        <p>
+          Data from the 2017-2021 CDC Social Determinants of Health (SDOH) dataset and from the 2024 CDC PLACES dataset.
+        </p>
       </div>
       <table class="table block-centered demographic">
         <caption>
@@ -32,8 +34,8 @@
       <div class="content is-size-5">
         <p>
           Some social determinants of health (minority status, high school
-          diploma, living below 150% of poverty line, and broadband) are not
-          available for this location.
+          diploma, living below 150% of poverty line, broadband and more) are
+          not available for this location.
         </p>
       </div>
     </div>
@@ -41,16 +43,19 @@
       <div v-if="disabilityInsurancePresent">
         <div class="content is-size-5">
           <p>
-            Data from the 2017&ndash;2021 US Census American Community Survey (ACS) 5-year dataset. Values are estimated, and the margin of error is shown in parentheses for each value. Based on the total, civilian non-institutionalized population.
+            Data from the 2017&ndash;2021 US Census American Community Survey
+            (ACS) 5-year dataset. Values are estimated, and the margin of error
+            is shown in parentheses for each value. Based on the total, civilian
+            non-institutionalized population.
           </p>
         </div>
         <table class="table block-centered demographic">
           <caption>
-          Disability and insurance status,
-          {{
-            placeName
-          }}, compared to Alaska and U.S.
-        </caption>
+            Disability and insurance status,
+            {{
+              placeName
+            }}, compared to Alaska and U.S.
+          </caption>
           <thead>
             <th scope="col"></th>
             <th scope="col">{{ placeName }}</th>
@@ -61,19 +66,25 @@
             <tr v-for="(name, key) in acs">
               <th scope="row" v-html="name"></th>
               <td>
-                {{ demographics['place'][key] }}% ({{
-                  demographics['place']['moe_' + key]
-                }}%)
+                {{ demographics['place'][key] }}% <span class="ci">
+                  ({{
+                    demographics['place']['moe_' + key]
+                  }})
+                </span>
               </td>
               <td>
-                {{ demographics['alaska'][key] }}% ({{
-                  demographics['alaska']['moe_' + key]
-                }}%)
+                {{ demographics['alaska'][key] }}% <span class="ci">
+                  ({{
+                    demographics['alaska']['moe_' + key]
+                  }})
+                </span>
               </td>
               <td>
-                {{ demographics['us'][key] }}% ({{
-                  demographics['us']['moe_' + key]
-                }}%)
+                {{ demographics['us'][key] }}% <span class="ci">
+                  ({{
+                    demographics['us']['moe_' + key]
+                  }})
+                </span>
               </td>
             </tr>
           </tbody>
@@ -82,7 +93,8 @@
       <div v-else>
         <div class="content is-size-5">
           <p>
-            Demographic information for social determinants of health and disability status are not available for this location.
+            Demographic information for social determinants of health and
+            disability status are not available for this location.
           </p>
         </div>
       </div>
@@ -103,6 +115,9 @@ table {
       font-weight: 400;
     }
   }
+}
+span.ci {
+  font-weight: 400;
 }
 </style>
 
@@ -155,12 +170,9 @@ export default {
         pct_emospt: 'Lack of emotional support',
       },
       acs: {
-        pct_w_disability:
-          'Percent with a disability',
-        pct_insured:
-          'Percent insured',
-        pct_uninsured:
-          'Percent uninsured',
+        pct_w_disability: 'Percent with a disability',
+        pct_insured: 'Percent insured',
+        pct_uninsured: 'Percent uninsured',
       },
     }
   },

@@ -30,7 +30,7 @@
                   <p>
                     Derived from the 2020 US Census Demographics and Housing
                     Characteristics File (DHC), the 2017-2021 US Census American
-                    Community Survey (ACS) 5-year dataset, the 2023 CDC PLACES
+                    Community Survey (ACS) 5-year dataset, the 2024 CDC PLACES
                     dataset, and the 2017-2021 CDC Social Determinants of Health
                     (SDOH) dataset.
                   </p>
@@ -38,7 +38,7 @@
                   <ul>
                     <li>
                       U.S. Census Bureau (2020). Demographics and Housing
-                      Characteristics File. Accessed May 2024, from
+                      Characteristics File. Accessed November 2024, from
                       <a
                         href="https://www.census.gov/data/tables/2023/dec/2020-census-dhc.html"
                         >https://www.census.gov/data/tables/2023/dec/2020-census-dhc.html</a
@@ -54,7 +54,7 @@
                     </li>
                     <li>
                       PLACES. Centers for Disease Control and Prevention.
-                      Accessed May 2024, from
+                      Accessed November 2024, from
                       <a href="https://www.cdc.gov/places"
                         >https://www.cdc.gov/places</a
                       >
@@ -62,7 +62,7 @@
                     <li>
                       Healthy People 2030, U.S. Department of Health and Human
                       Services, Office of Disease Prevention and Health
-                      Promotion. Accessed May 2024, from
+                      Promotion. Accessed November 2024, from
                       <a
                         href="https://health.gov/healthypeople/objectives-and-data/social-determinants-health"
                         >https://health.gov/healthypeople/objectives-and-data/social-determinants-health</a
