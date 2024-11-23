@@ -4,7 +4,7 @@
     <div class="block" v-if="healthConditionsPresent">
       <div class="content is-size-5">
         <p>
-          Data from the 2023 CDC PLACES dataset. Values are crude prevalence,
+          Data from the 2024 CDC PLACES dataset. Values are crude prevalence,
           and the 95% confidence interval is shown in parentheses for each
           value.
         </p>
