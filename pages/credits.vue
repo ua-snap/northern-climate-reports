@@ -324,7 +324,7 @@
               <li><a href="https://www.muni.org/Departments/health/Admin/environment/Pages/default.aspx" >Anchorage Health Department Environmental Health Program</a ></li>
               <li><a href="https://www.anthc.org/what-we-do/community-environment-and-health/healthy-homes/" >Alaska Native Tribal Health Consortium Air &amp; Healthy Homes Program</a ></li>
               <li><a href="https://www.anthc.org/what-we-do/climate-initiatives/center-for-climate-and-health/" >Alaska Native Tribal Health Consortium Center for Climate &amp; Health</a ></li>
-              <li><a href="https://crnative.org/">Copper River Native Association</a>,</li>
+              <li><a href="https://crnative.org/">Copper River Native Association</a></li>
               <li><a href="https://www.igiugig.com/tribal-government/8-igiugig-tribal-council" >Igiugig Village Council</a></li>
               
               <li><a href="https://www.loudentribe.org/">Louden Tribe</a></li>
