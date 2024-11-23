@@ -2,7 +2,7 @@
   <div>
     <div class="content is-size-5">
       <p>
-        Computed from the 2020 US Census Demographics and Housing
+        Computed from the 2020 U.S. Census Demographics and Housing
         Characteristics File (DHC). Data are shown both as a chart and as a
         table, below.
       </p>

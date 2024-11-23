@@ -25,14 +25,17 @@
             <tbody>
               <tr>
                 <th scope="row">Demographics and Health</th>
-                <td>Borough/census tract(s), census-designated place (CDP), incorporated place</td>
+                <td>
+                  Borough/census tract(s), census-designated place (CDP),
+                  incorporated place
+                </td>
                 <td>
                   <p>
-                    Derived from the 2020 US Census Demographics and Housing
-                    Characteristics File (DHC), the 2017-2021 US Census American
-                    Community Survey (ACS) 5-year dataset, the 2024 CDC PLACES
-                    dataset, and the 2017-2021 CDC Social Determinants of Health
-                    (SDOH) dataset.
+                    Derived from the 2020 U.S. Census Demographics and Housing
+                    Characteristics File (DHC), the 2017-2021 U.S. Census
+                    American Community Survey (ACS) 5-year dataset, the 2024 CDC
+                    PLACES dataset, and the 2017-2021 CDC Social Determinants of
+                    Health (SDOH) dataset.
                   </p>
                   <p>Citations:</p>
                   <ul>
@@ -337,9 +340,7 @@
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
-  
-</style>
+<style lang="scss" scoped></style>
 
 <script>
 export default {
