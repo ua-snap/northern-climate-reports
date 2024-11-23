@@ -98,8 +98,8 @@ export default {
         pct_asthma: 'Current asthma',
         pct_copd: 'Chronic obstructive pulmonary disease',
         pct_hd: 'Coronary heart disease',
-        pct_stroke: 'Stroke',
         pct_diabetes: 'Diagnosed diabetes',
+        pct_stroke: 'Stroke',
         pct_mh: 'Frequent mental distress',
       },
     }
