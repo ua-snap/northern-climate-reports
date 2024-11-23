@@ -100,11 +100,16 @@ export default {
   mixins: [formatting],
   computed: {
     commentEdited() {
-      return this.demographics.place.comment
-        .replace('Data for this place represent ', '')
-        .replace('Data represent ', '')
-        .replace('.', '')
-        .replace('county', 'borough')
+      if (!this.demographics.place.comment) {
+        // It's a borough or census designated place
+        return 'the ' + this.demographics.place.name
+      } else {
+        return this.demographics.place.comment
+          .replace('Data for this place represent ', '')
+          .replace('Data represent ', '')
+          .replace('.', '')
+          .replace('county', 'borough')
+      }
     },
     adultPopulation() {
       let totalPopulation = this.demographics.place.total_population
