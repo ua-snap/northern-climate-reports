@@ -167,7 +167,7 @@ export default {
         pct_no_bband: 'No broadband internet subscription among households',
         pct_crowding: 'Crowding',
         pct_hcost: 'Housing cost burden',
-        pct_emospt: 'Lack of emotional support',
+        pct_emospt: 'Lack of social and emotional support',
       },
       acs: {
         pct_w_disability: 'Percent with a disability',
