@@ -2,19 +2,21 @@
   <div>
     <div class="content is-size-5">
       <p>
-        Computed from the 2020 US Census Demographics and Housing
+        Computed from the 2020 U.S. Census Demographics and Housing
         Characteristics File (DHC). Data are shown both as a chart and as a
         table, below.
       </p>
     </div>
+
     <div id="demographics-race-ethnicity-chart" />
+
     <div class="block">
-      <table class="table mt-6">
+      <table class="table mt-6 block-centered demographic">
         <caption>
           Race and ethnicity,
           {{
             placeName
-          }}
+          }}, compared to Alaska and U.S.
         </caption>
         <thead>
           <tr>
@@ -37,7 +39,25 @@
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#demographics-race-ethnicity-chart {
+  width: 1000px;
+  margin: 0 auto;
+}
+table {
+  th[scope='row'] {
+    max-width: 30rem;
+  }
+  caption {
+    font-size: 110%;
+    font-weight: 500;
+    .clause {
+      font-size: 100%;
+      font-weight: 400;
+    }
+  }
+}
+</style>
 
 <script>
 import _ from 'lodash'
@@ -120,7 +140,7 @@ export default {
       traces[2].marker = { color: '#b2df8a' }
 
       let layout = {
-        title: 'Race & Ethnicity, ' + place,
+        title: 'Race and ethnicity, ' + place + ', compared to Alaska and U.S.',
         barmode: 'group',
         margin: {
           t: 40,
@@ -129,7 +149,6 @@ export default {
           l: 200,
         },
         height: 800,
-        width: 1000,
         legend: {
           orientation: 'h',
           traceorder: 'reversed',
@@ -145,7 +164,12 @@ export default {
           },
           ticksuffix: '  ', // spacing
         },
-        xaxis: { fixedrange: true, zeroline: false },
+        xaxis: {
+          fixedrange: true,
+          zeroline: false,
+          ticksuffix: '%',
+          title: { text: 'Percent of population' },
+        },
       }
 
       let plotSettings = getPlotSettings()

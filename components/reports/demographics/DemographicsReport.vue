@@ -19,8 +19,8 @@
     <DemographicsMap />
     <div class="content is-size-4 mt-6">
       <p>
-        Demographic data is presented only regionally, at the level of boroughs,
-        census-designated places (CDPs), incorporated places, and census tracts.
+        Demographic data is presented regionally, at the level of borough,
+        census-designated place (CDPs), incorporated place, or census tracts.
       </p>
       <p>
         <strong>This section shows {{ commentEdited }}</strong
@@ -76,7 +76,6 @@
     />
   </div>
 </template>
-<style></style>
 <script>
 import { mapGetters } from 'vuex'
 import { formatting } from '~/mixins/formatting'
@@ -101,11 +100,16 @@ export default {
   mixins: [formatting],
   computed: {
     commentEdited() {
-      return this.demographics.place.comment
-        .replace('Data for this place represent ', '')
-        .replace('Data represent ', '')
-        .replace('.', '')
-        .replace('county', 'borough')
+      if (!this.demographics.place.comment) {
+        // It's a borough or census designated place
+        return 'the ' + this.demographics.place.name
+      } else {
+        return this.demographics.place.comment
+          .replace('Data for this place represent ', '')
+          .replace('Data represent ', '')
+          .replace('.', '')
+          .replace('county', 'borough')
+      }
     },
     adultPopulation() {
       let totalPopulation = this.demographics.place.total_population

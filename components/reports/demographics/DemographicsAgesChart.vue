@@ -1,16 +1,20 @@
 <template>
   <div class="block">
     <div class="content is-size-5">
-      Computed from the 2020 US Census Demographics and Housing Characteristics File (DHC). Data are shown both as a chart and as a table, below.
+      Computed from the 2020 U.S. Census Demographics and Housing
+      Characteristics File (DHC). Data are shown both as a chart and as a table,
+      below.
     </div>
+
     <div id="demographics-ages-chart" />
+
     <div class="block">
-      <table class="table mt-6">
+      <table class="block-centered table demographic mt-6">
         <caption>
-          Age, by category,
+          Age distribution,
           {{
             placeName
-          }}
+          }}, compared to Alaska and U.S.
         </caption>
         <thead>
           <tr>
@@ -33,7 +37,12 @@
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#demographics-ages-chart {
+  width: 1200px;
+  margin: 0 auto;
+}
+</style>
 
 <script>
 import _ from 'lodash'
@@ -72,7 +81,7 @@ export default {
               abc[key][demo] = Number(
                 this.demographics[demo]['pct_under_18'] -
                   this.demographics[demo]['pct_under_5']
-              ).toPrecision(4)
+              ).toPrecision(3)
               break
 
             case 'pct_18_to_64':
@@ -80,7 +89,7 @@ export default {
                 100 -
                   this.demographics[demo]['pct_65_plus'] -
                   this.demographics[demo]['pct_under_18']
-              ).toPrecision(4)
+              ).toPrecision(3)
               break
 
             case 'pct_65_plus':
@@ -237,7 +246,10 @@ export default {
       var dataTraces = [trace0, trace1, trace2, trace3]
 
       var layout = {
-        title: 'Age, by category',
+        title:
+          'Age distribution, ' +
+          this.placeName +
+          ', compared to Alaska and U.S.',
         barmode: 'stack',
 
         margin: {
@@ -247,7 +259,6 @@ export default {
           l: 200,
         },
         height: 250,
-        width: 1200,
         legend: {
           orientation: 'h',
           traceorder: 'normal',
