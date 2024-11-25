@@ -37,7 +37,12 @@
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#demographics-ages-chart {
+  width: 1200px;
+  margin: 0 auto;
+}
+</style>
 
 <script>
 import _ from 'lodash'
@@ -254,7 +259,6 @@ export default {
           l: 200,
         },
         height: 250,
-        width: 1200,
         legend: {
           orientation: 'h',
           traceorder: 'normal',

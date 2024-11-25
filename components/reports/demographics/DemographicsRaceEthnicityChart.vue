@@ -40,6 +40,10 @@
 </template>
 
 <style lang="scss" scoped>
+#demographics-race-ethnicity-chart {
+  width: 1000px;
+  margin: 0 auto;
+}
 table {
   th[scope='row'] {
     max-width: 30rem;
@@ -145,7 +149,6 @@ export default {
           l: 200,
         },
         height: 800,
-        width: 1000,
         legend: {
           orientation: 'h',
           traceorder: 'reversed',
