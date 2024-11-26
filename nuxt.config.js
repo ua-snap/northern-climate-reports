@@ -101,7 +101,7 @@ export default {
   // Env vars
   env: {
     geoserverUrl:
-      process.env.GEOSERVER_URL || 'https://gs.mapventure.org/geoserver/wms',
+      process.env.GEOSERVER_URL || 'https://gs.earthmaps.org/geoserver/wms',
     rasdamanUrl:
       process.env.RASDAMAN_URL || 'https://maps.earthmaps.io/rasdaman/ows',
     apiUrl: process.env.SNAP_API_URL || 'https://earthmaps.io',
