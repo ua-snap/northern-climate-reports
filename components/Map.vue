@@ -102,16 +102,19 @@ export default {
       })
     },
     getBaseMapAndLayers() {
-      var baseLayer = new this.$L.tileLayer.wms(process.env.geoserverUrl, {
-        transparent: true,
-        srs: 'EPSG:3338',
-        format: 'image/png',
-        version: '1.3.0',
-        layers: [
-          'atlas_mapproxy:alaska_osm_retina',
-          'shadow_mask:iem_with_ak_aleutians_symmetric_difference',
-        ],
-      })
+      var baseLayer = new this.$L.tileLayer.wms(
+        process.env.geoserverUrl + '/wms',
+        {
+          transparent: true,
+          srs: 'EPSG:3338',
+          format: 'image/png',
+          version: '1.3.0',
+          layers: [
+            'atlas_mapproxy:alaska_osm_retina',
+            'shadow_mask:iem_with_ak_aleutians_symmetric_difference',
+          ],
+        }
+      )
 
       // Projection definition.
       var proj = new this.$L.Proj.CRS(

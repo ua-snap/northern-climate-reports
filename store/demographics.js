@@ -39,7 +39,8 @@ export const actions = {
   async fetch(context) {
     let placeId = context.rootGetters['place/communityId']
     let queryUrl =
-      "https://gs.mapventure.org/geoserver/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=demographics:demographics&outputFormat=application/json&cql_filter=id='" +
+      process.env.geoserverUrl +
+      "/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=demographics:demographics&outputFormat=application/json&cql_filter=id='" +
       placeId +
       "'"
     let returnedData = await $axios
@@ -108,7 +109,7 @@ export const actions = {
         alaska: demographics['AK0'],
         us: demographics['US0'],
         geometry: returnedData.data.features[0].geometry,
-      }) 
+      })
     } else {
       // No demographics for this place.
       context.commit('setHttpError', 'no_data')

@@ -73,11 +73,11 @@ hydrated report pages.
 The following environment variables can be set to change the API and map service
 endpoints:
 
-| Environment variable | Default                                 |
-| -------------------- | --------------------------------------- |
-| GEOSERVER_URL        | https://gs.mapventure.org/geoserver/wms |
-| RASDAMAN_URL         | https://zeus.snap.uaf.edu/rasdaman/ows  |
-| SNAP_API_URL         | https://earthmaps.io                    |
+| Environment variable | Default                                |
+| -------------------- | -------------------------------------- |
+| GEOSERVER_URL        | https://gs.earthmaps.io/geoserver      |
+| RASDAMAN_URL         | https://zeus.snap.uaf.edu/rasdaman/ows |
+| SNAP_API_URL         | https://earthmaps.io                   |
 
 ### Run locally in development mode
 
