@@ -74,7 +74,8 @@ export const actions = {
 
     // We query for the geometry of the place separately
     let geometryQueryUrl =
-      "https://gs.mapventure.org/geoserver/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=demographics:demographics&outputFormat=application/json&cql_filter=id='" +
+      process.env.geoserverUrl +
+      "/wfs?service=WFS&version=1.0.0&request=GetFeature&typeName=demographics:demographics&outputFormat=application/json&cql_filter=id='" +
       placeId +
       "'"
     let returnedGeometry = await $axios
@@ -87,11 +88,11 @@ export const actions = {
     if (returnedData && returnedGeometry) {
       // Make the data returns a bit more regular
       let processed = _.mapValuesDeep(returnedData.data, (value, key) => {
-        if(key == 'total_population') {
+        if (key == 'total_population') {
           // Skip this particular value.
           return value
         }
-        if(_.isNumber(value)) {
+        if (_.isNumber(value)) {
           return Number.parseFloat(value).toFixed(1)
         } else {
           return value
