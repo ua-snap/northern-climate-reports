@@ -1,15 +1,7 @@
 <template>
   <div>
-    <h5 class="title is-5">Health conditions</h5>
     <div class="block" v-if="healthConditionsPresent">
-      <div class="content is-size-5">
-        <p>
-          Data from the 2024 CDC PLACES dataset. Values are crude prevalence,
-          and the 95% confidence interval is shown in parentheses for each
-          value.
-        </p>
-      </div>
-      <table class="table block-centered demographic">
+      <table class="table block-centered demographic mb-6">
         <caption>
           Health conditions among adults aged &ge;18 years,
           {{
@@ -17,7 +9,7 @@
           }}, compared to Alaska and U.S.
         </caption>
         <thead>
-          <th scope="col">Condition</th>
+          <th scope="col">Condition (Crude prevalence*)</th>
           <th scope="col">{{ placeName }}</th>
           <th scope="col">Alaska</th>
           <th scope="col">U.S.</th>
@@ -51,6 +43,17 @@
             </td>
           </tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4">
+              *For example, if we survey 1,000 people and find that 100 of them
+              have asthma, the crude prevalence of asthma in this group is 10%
+              (100 out of 1,000). This doesn't take into account how things like
+              age or gender might influence the prevalence of asthma&mdash;it's
+              just the raw percentage for the whole group.
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </div>
     <div v-else>

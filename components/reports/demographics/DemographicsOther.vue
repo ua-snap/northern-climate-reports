@@ -1,15 +1,12 @@
 <template>
   <div>
-    <h5 class="title is-5 mt-6">Social Determinants of Health</h5>
     <div class="block" v-if="otherPresent">
-      <div class="content is-size-5">
-        <p>
-          Data from the 2017-2021 CDC Social Determinants of Health (SDOH) dataset and from the 2024 CDC PLACES dataset.
-        </p>
-      </div>
-      <table class="table block-centered demographic">
+      <table class="table block-centered demographic is-fullwidth mb-6">
         <caption>
-          Social determinants of health,
+          <a
+            href="https://odphp.health.gov/healthypeople/priority-areas/social-determinants-health"
+            >Social determinants of health</a
+          >,
           {{
             placeName
           }}, compared to Alaska and U.S.
@@ -23,9 +20,48 @@
         <tbody>
           <tr v-for="(name, key) in otherDemographics">
             <th scope="row">{{ name }}</th>
-            <td>{{ demographics['place'][key] }}%</td>
-            <td>{{ demographics['alaska'][key] }}%</td>
-            <td>{{ demographics['us'][key] }}%</td>
+            <td>
+              {{ demographics['place'][key] }}%
+              <span
+                v-if="
+                  demographics['place'][key + '_low'] &&
+                  demographics['place'][key + '_high']
+                "
+                class="ci"
+              >
+                ({{ demographics['place'][key + '_low'] }}&ndash;{{
+                  demographics['place'][key + '_high']
+                }})
+              </span>
+            </td>
+            <td>
+              {{ demographics['alaska'][key] }}%
+              <span
+                v-if="
+                  demographics['alaska'][key + '_low'] &&
+                  demographics['alaska'][key + '_high']
+                "
+                class="ci"
+              >
+                ({{ demographics['alaska'][key + '_low'] }}&ndash;{{
+                  demographics['alaska'][key + '_high']
+                }})
+              </span>
+            </td>
+            <td>
+              {{ demographics['us'][key] }}%
+              <span
+                v-if="
+                  demographics['us'][key + '_low'] &&
+                  demographics['us'][key + '_high']
+                "
+                class="ci"
+              >
+                ({{ demographics['us'][key + '_low'] }}&ndash;{{
+                  demographics['us'][key + '_high']
+                }})
+              </span>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -41,17 +77,9 @@
     </div>
     <div class="block">
       <div v-if="disabilityInsurancePresent">
-        <div class="content is-size-5">
-          <p>
-            Data from the 2017&ndash;2021 U.S. Census American Community Survey
-            (ACS) 5-year dataset. Values are estimated, and the margin of error
-            is shown in parentheses for each value. Based on the total, civilian
-            non-institutionalized population.
-          </p>
-        </div>
-        <table class="table block-centered demographic">
+        <table class="table block-centered demographic mb-6">
           <caption>
-            Disability and insurance status,
+            Disability and insurance status,*
             {{
               placeName
             }}, compared to Alaska and U.S.
@@ -66,28 +94,52 @@
             <tr v-for="(name, key) in acs">
               <th scope="row" v-html="name"></th>
               <td>
-                {{ demographics['place'][key] }}% <span class="ci">
-                  ({{
-                    demographics['place']['moe_' + key]
-                  }})
-                </span>
+                {{ demographics['place'][key] }}%
+                <span
+                  class="ci"
+                  v-html="
+                    confidenceInverval(
+                      demographics['place'][key],
+                      demographics['place']['moe_' + key]
+                    )
+                  "
+                />
               </td>
               <td>
-                {{ demographics['alaska'][key] }}% <span class="ci">
-                  ({{
-                    demographics['alaska']['moe_' + key]
-                  }})
-                </span>
+                {{ demographics['alaska'][key] }}%
+                <span
+                  class="ci"
+                  v-html="
+                    confidenceInverval(
+                      demographics['alaska'][key],
+                      demographics['alaska']['moe_' + key]
+                    )
+                  "
+                />
               </td>
               <td>
-                {{ demographics['us'][key] }}% <span class="ci">
-                  ({{
-                    demographics['us']['moe_' + key]
-                  }})
-                </span>
+                {{ demographics['us'][key] }}%
+                <span
+                  class="ci"
+                  v-html="
+                    confidenceInverval(
+                      demographics['us'][key],
+                      demographics['us']['moe_' + key]
+                    )
+                  "
+                />
               </td>
             </tr>
           </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4">
+                *These data include the total civilian population, excluding
+                people in the military or living in places like nursing homes or
+                prisons.
+              </td>
+            </tr>
+          </tfoot>
         </table>
       </div>
       <div v-else>
@@ -139,7 +191,6 @@ export default {
         return sum > 0
       }
     },
-
     disabilityInsurancePresent() {
       if (this.demographics) {
         let sum = 0
@@ -153,6 +204,19 @@ export default {
       demographics: 'demographics/demographicsData',
       placeName: 'place/name',
     }),
+  },
+  methods: {
+    confidenceInverval(value, moe) {
+      let valueFloat = parseFloat(value)
+      let moeFloat = parseFloat(moe)
+      return (
+        '(' +
+        _.round(valueFloat - moeFloat, 1).toFixed(1) +
+        '&ndash;' +
+        _.round(valueFloat + moeFloat, 1).toFixed(1) +
+        ')'
+      )
+    },
   },
   data() {
     return {
