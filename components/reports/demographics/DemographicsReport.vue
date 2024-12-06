@@ -11,15 +11,11 @@
         needs. Our goal is to break down barriers to data access, providing key
         information at the community level where decisions are made.
       </p>
-      <p>
-        Health data are only shown for locations with an adult population of 50
-        or more, based on the 2020 U.S. Census.
-      </p>
     </div>
     <DemographicsMap />
     <div class="content is-size-4 mt-6">
       <p>
-        Demographic data is presented regionally, at the level of borough,
+        Demographic data are presented regionally, at the level of borough,
         census-designated place (CDPs), incorporated place, or census tracts.
       </p>
       <p>
@@ -57,10 +53,40 @@
 
     <div class="block">
       <h4 class="title is-4">Health</h4>
-      <div class="content is-size-4">
+      <div class="content is-size-4 mb-6">
         <p>
           Health data are only shown for locations with an adult population of
           50 or more, based on the 2020 U.S. Census.
+          <nuxt-link :to="{ name: 'data' }"
+            >Learn more about the data sources here</nuxt-link
+          >
+          or <a :href="demographicsCsvUrl">download a CSV</a> for definitions
+          and sources for each variable. Confidence intervals (shown in
+          parentheses for each value) show the range where the true value is
+          likely to fall, based on the data collected. For example, if a
+          confidence interval is 45%&ndash;50%, it means we're confident the
+          true value is between 45% and 50%. Wider intervals suggest more
+          uncertainty, while narrower intervals mean more precise estimates.
+        </p>
+        <p>
+          <strong>How do I interpret these data?</strong> The indicators below
+          focus on biomedical aspects of health, offering a snapshot of a
+          community's overall health status compared to Alaska and the U.S. as a
+          whole. These indicators can help highlight areas where public health
+          efforts might be needed or identify populations in the community that
+          may need additional support. They can also highlight community
+          strengths. For example, if only a small percentage of people lack
+          access to broadband internet, it suggests that most residents have
+          internet connectivity&mdash;a valuable tool for communication and
+          staying connected.
+        </p>
+
+        <p>
+          It's important to note that these indicators reflect just one
+          dimension of health. Other aspects, such as intergenerational
+          knowledge transfer, sovereignty, and cultural well-being, are also
+          vital to community health, particularly in Indigenous contexts, and
+          may not be captured here.
         </p>
       </div>
       <div v-if="adultPopulation >= 50">
@@ -70,7 +96,7 @@
     </div>
 
     <DownloadCsvButton
-      text="Download demographics data as CSV"
+      text="Download demographics and health data as CSV"
       endpoint="demographics"
       class="mt-3 mb-5"
     />
@@ -118,6 +144,14 @@ export default {
         totalPopulation * (percentUnder18 / 100)
       )
       return totalPopulation - populationUnder18
+    },
+    demographicsCsvUrl() {
+      return (
+        process.env.apiUrl +
+        '/demographics/' +
+        this.$store.getters['place/communityId'] +
+        '?format=csv'
+      )
     },
     ...mapGetters({
       demographics: 'demographics/demographicsData',

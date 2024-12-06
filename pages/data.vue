@@ -62,15 +62,6 @@
                         >https://www.cdc.gov/places</a
                       >
                     </li>
-                    <li>
-                      Healthy People 2030, U.S. Department of Health and Human
-                      Services, Office of Disease Prevention and Health
-                      Promotion. Accessed November 2024, from
-                      <a
-                        href="https://health.gov/healthypeople/objectives-and-data/social-determinants-health"
-                        >https://health.gov/healthypeople/objectives-and-data/social-determinants-health</a
-                      >
-                    </li>
                   </ul>
                 </td>
               </tr>

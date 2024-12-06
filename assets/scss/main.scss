@@ -38,9 +38,11 @@ label.label {
 // Some lighter formatting for the demographic tables, still more
 // like other tables
 table.table.demographic {
-  td {
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 500;
+  tbody {
+    td {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 500;
+    }
   }
 }
 
