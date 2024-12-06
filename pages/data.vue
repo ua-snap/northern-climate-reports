@@ -32,7 +32,7 @@
                 <td>
                   <p>
                     Derived from the 2020 U.S. Census Demographics and Housing
-                    Characteristics File (DHC), the 2017-2021 U.S. Census
+                    Characteristics File (DHC), the 2018-2022 U.S. Census
                     American Community Survey (ACS) 5-year dataset, the 2024 CDC
                     PLACES dataset, and the 2017-2021 CDC Social Determinants of
                     Health (SDOH) dataset.
@@ -48,7 +48,7 @@
                       >
                     </li>
                     <li>
-                      U.S. Census Bureau (2021). 2017-2021 American Community
+                      U.S. Census Bureau (2021). 2018-2022 American Community
                       Survey 5-year estimates. Accessed May 2024, from
                       <a
                         href="https://www.census.gov/programs-surveys/acs/data.html"
