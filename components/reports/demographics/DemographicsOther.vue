@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="block" v-if="otherPresent">
-      <table class="table block-centered demographic mb-6">
+      <table class="table block-centered demographic is-fullwidth mb-6">
         <caption>
           <a
             href="https://odphp.health.gov/healthypeople/priority-areas/social-determinants-health"
@@ -20,9 +20,48 @@
         <tbody>
           <tr v-for="(name, key) in otherDemographics">
             <th scope="row">{{ name }}</th>
-            <td>{{ demographics['place'][key] }}%</td>
-            <td>{{ demographics['alaska'][key] }}%</td>
-            <td>{{ demographics['us'][key] }}%</td>
+            <td>
+              {{ demographics['place'][key] }}%
+              <span
+                v-if="
+                  demographics['place'][key + '_low'] &&
+                  demographics['place'][key + '_high']
+                "
+                class="ci"
+              >
+                ({{ demographics['place'][key + '_low'] }}&ndash;{{
+                  demographics['place'][key + '_high']
+                }})
+              </span>
+            </td>
+            <td>
+              {{ demographics['alaska'][key] }}%
+              <span
+                v-if="
+                  demographics['alaska'][key + '_low'] &&
+                  demographics['alaska'][key + '_high']
+                "
+                class="ci"
+              >
+                ({{ demographics['alaska'][key + '_low'] }}&ndash;{{
+                  demographics['alaska'][key + '_high']
+                }})
+              </span>
+            </td>
+            <td>
+              {{ demographics['us'][key] }}%
+              <span
+                v-if="
+                  demographics['us'][key + '_low'] &&
+                  demographics['us'][key + '_high']
+                "
+                class="ci"
+              >
+                ({{ demographics['us'][key + '_low'] }}&ndash;{{
+                  demographics['us'][key + '_high']
+                }})
+              </span>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -56,21 +95,39 @@
               <th scope="row" v-html="name"></th>
               <td>
                 {{ demographics['place'][key] }}%
-                <span class="ci">
-                  ({{ demographics['place']['moe_' + key] }})
-                </span>
+                <span
+                  class="ci"
+                  v-html="
+                    confidenceInverval(
+                      demographics['place'][key],
+                      demographics['place']['moe_' + key]
+                    )
+                  "
+                />
               </td>
               <td>
                 {{ demographics['alaska'][key] }}%
-                <span class="ci">
-                  ({{ demographics['alaska']['moe_' + key] }})
-                </span>
+                <span
+                  class="ci"
+                  v-html="
+                    confidenceInverval(
+                      demographics['alaska'][key],
+                      demographics['alaska']['moe_' + key]
+                    )
+                  "
+                />
               </td>
               <td>
                 {{ demographics['us'][key] }}%
-                <span class="ci">
-                  ({{ demographics['us']['moe_' + key] }})
-                </span>
+                <span
+                  class="ci"
+                  v-html="
+                    confidenceInverval(
+                      demographics['us'][key],
+                      demographics['us']['moe_' + key]
+                    )
+                  "
+                />
               </td>
             </tr>
           </tbody>
@@ -134,7 +191,6 @@ export default {
         return sum > 0
       }
     },
-
     disabilityInsurancePresent() {
       if (this.demographics) {
         let sum = 0
@@ -148,6 +204,19 @@ export default {
       demographics: 'demographics/demographicsData',
       placeName: 'place/name',
     }),
+  },
+  methods: {
+    confidenceInverval(value, moe) {
+      let valueFloat = parseFloat(value)
+      let moeFloat = parseFloat(moe)
+      return (
+        '(' +
+        _.round(valueFloat - moeFloat, 1).toFixed(1) +
+        '&ndash;' +
+        _.round(valueFloat + moeFloat, 1).toFixed(1) +
+        ')'
+      )
+    },
   },
   data() {
     return {
