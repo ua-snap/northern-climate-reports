@@ -53,6 +53,13 @@
               >
               if we can help you access this content.
             </p>
+
+            <p>
+              See the <NuxtLink to="/about">About</NuxtLink> and
+              <NuxtLink to="/credits">Credits</NuxtLink> pages for more
+              information.
+            </p>
+
           </div>
         </section>
       </div>
