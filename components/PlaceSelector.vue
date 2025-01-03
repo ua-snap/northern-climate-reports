@@ -75,6 +75,9 @@
                 >
                   Borough
                 </span>
+                <span class="area-additional-info">
+                  {{ props.option.region }}
+                </span>
               </div>
             </template>
           </b-autocomplete>
