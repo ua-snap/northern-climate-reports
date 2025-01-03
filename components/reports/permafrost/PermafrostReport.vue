@@ -57,7 +57,7 @@
       <div class="content">
         <div class="is-size-5">
           As permafrost thaws, the ground depth to the top of the permafrost
-          layer increases. This cannot be shown for this place because because
+          layer increases. This cannot be shown for this place because
           permafrost data is not available for this location.
         </div>
       </div>
