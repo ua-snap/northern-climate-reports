@@ -252,7 +252,7 @@
                 resources are allocated and deployed. They fall within one of
                 six larger fire regions.
                 <a
-                  href="https://hub.arcgis.com/datasets/yukon::fire-districts-1/explore?location=64.242510%2C-132.311150%2C6.30"
+                  href="https://wildfires.service.yukon.ca/"
                   >Learn more about Yukon Fire Districts</a
                 >
               </p>
