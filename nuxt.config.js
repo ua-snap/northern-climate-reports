@@ -53,6 +53,13 @@ export default {
       },
       { rel: 'manifest', href: '/site.webmanifest' },
     ],
+    script: [
+      {
+        type: 'text/javascript',
+        src: '//script.crazyegg.com/pages/scripts/0126/7664.js',
+        async: true,
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
