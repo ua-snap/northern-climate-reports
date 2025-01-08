@@ -8,7 +8,7 @@ export const getBaseMapAndLayers = function () {
     }
   )
   this.baseLayer = this.getBaseLayer()
-  let naturalEarth = new L.tileLayer.wms(process.env.geoserverUrl, {
+  let naturalEarth = new L.tileLayer.wms(process.env.geoserverUrl + '/wms', {
     transparent: true,
     format: 'image/png',
     layers: 'natural_earth:iem-natural-earth',
