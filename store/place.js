@@ -227,7 +227,7 @@ export const actions = {
   },
 
   async fetchPlaces(context) {
-    let queryUrl = process.env.apiUrl + '/places/all'
+    let queryUrl = process.env.apiUrl + '/places/all?tags=ncr'
     let localKey = 'places'
     let returnedData = await localStorage(queryUrl, localKey)
     context.commit('setPlaces', returnedData)
@@ -243,7 +243,8 @@ export const actions = {
         '/places/search/' +
         context.getters.latLng[0] +
         '/' +
-        context.getters.latLng[1]
+        context.getters.latLng[1] +
+        '?tags=ncr'
 
       await this.$http.$get(queryUrl).then(res => {
         // Change the object structure to flatten & sort the areas
