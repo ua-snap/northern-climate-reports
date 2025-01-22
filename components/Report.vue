@@ -432,9 +432,9 @@ export default {
       // (Temperature, Permafrost, Beetle Climate Protection, etc.)
       let types = this.presentDataTypes()
 
-      // If there are less than 9 data types present, the corresponding
+      // If there are less than 8 data types present, the corresponding
       // section(s) of the report page will be hidden.
-      if (types.length < 9) {
+      if (types.length < 8) {
         return true
       }
       return false
@@ -560,9 +560,6 @@ export default {
       }
       if (this.beetleData) {
         types.push('climate protection from spruce beetle outbreaks')
-      }
-      if (this.vegChangeData) {
-        types.push('vegetation change')
       }
       if (this.demographicsData) {
         types.push('demographics')
