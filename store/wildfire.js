@@ -210,7 +210,13 @@ export const actions = {
       '2070-2099',
     ]
 
-    let returnedData = await $axios.get(queryUrl, { timeout: 60000 })
+    let returnedData = await $axios
+      .get(queryUrl, { timeout: 60000 })
+      .catch(err => {
+        console.error(err)
+        context.commit('setFlammabilityHttpError', 'server_error')
+      })
+
     let partialData = false
     expectedFlamKeys.forEach(key => {
       if (returnedData.data[key] == null) {
@@ -234,7 +240,11 @@ export const actions = {
 
     let expectedVegKeys = ['1950-2008', '2010-2039', '2040-2069', '2070-2099']
 
-    returnedData = await $axios.get(queryUrl, { timeout: 60000 })
+    returnedData = await $axios.get(queryUrl, { timeout: 60000 }).catch(err => {
+      console.error(err)
+      context.commit('setHttpError', 'server_error')
+    })
+
     partialData = false
     expectedVegKeys.forEach(key => {
       if (returnedData.data[key] == null) {
