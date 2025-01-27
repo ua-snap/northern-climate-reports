@@ -1,8 +1,7 @@
 // This store fetches/manages "climate" variables (taspr = temp + precip)
 import _ from 'lodash'
 import { convertMmToInches, convertToFahrenheit } from '../utils/convert'
-import { localStorage, checkForError } from '../utils/localstorage'
-import nuxtStorage from 'nuxt-storage'
+import $axios from 'axios'
 
 // Helper functions
 var convertReportData = function (hydrologyData) {
@@ -209,16 +208,12 @@ export const actions = {
       process.env.apiUrl +
       '/eds/hydrology/' +
       context.rootGetters['place/urlFragment']()
-    let localKey = 'hydrologyData-' + context.rootGetters['place/urlFragment']()
-    let errorKey =
-      'hydrologyError-' + context.rootGetters['place/urlFragment']()
+    let returnedData = await $axios.get(queryUrl, { timeout: 60000 })
 
-    let returnedData = await localStorage(queryUrl, localKey, errorKey)
-
-    if (checkForError(errorKey)) {
-      context.commit('setHttpError', nuxtStorage.localStorage.getData(errorKey))
+    if (returnedData) {
+      context.commit('setHydrologyData', returnedData.data.summary)
     } else {
-      context.commit('setHydrologyData', returnedData.summary)
+      context.commit('setHttpError', 'no_data')
     }
   },
 }

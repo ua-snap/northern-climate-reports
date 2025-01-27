@@ -2,8 +2,7 @@
 
 import _ from 'lodash'
 import { convertToInches, convertToFahrenheit } from '../utils/convert'
-import { localStorage, checkForError } from '../utils/localstorage'
-import nuxtStorage from 'nuxt-storage'
+import $axios from 'axios'
 
 // Store, namespaced as `permafrost/`
 export const state = () => ({
@@ -140,24 +139,21 @@ export const actions = {
       process.env.apiUrl +
       '/ncr/permafrost/' +
       context.rootGetters['place/urlFragment']()
-    let localKey =
-      'permafrostData-' + context.rootGetters['place/urlFragment']()
-    let errorKey =
-      'permafrostError-' + context.rootGetters['place/urlFragment']()
 
     let expectedDataKeys = ['2021-2039', '2040-2069', '2070-2099']
 
-    let returnedData = await localStorage(
-      queryUrl,
-      localKey,
-      errorKey,
-      expectedDataKeys
-    )
+    let returnedData = await $axios.get(queryUrl, { timeout: 60000 })
+    let partialData = false
+    expectedDataKeys.forEach(key => {
+      if (returnedData.data[key] == null) {
+        partialData = true
+      }
+    })
 
-    if (checkForError(errorKey)) {
-      context.commit('setHttpError', nuxtStorage.localStorage.getData(errorKey))
-    } else {
-      context.commit('setPermafrostData', returnedData)
+    if (partialData) {
+      context.commit('setHttpError', 'no_data')
+    } else if (returnedData && !partialData) {
+      context.commit('setPermafrostData', returnedData.data)
     }
   },
 }
