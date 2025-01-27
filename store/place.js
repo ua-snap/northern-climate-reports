@@ -1,6 +1,6 @@
 // Shim for dev/testing
 import _ from 'lodash'
-import { localStorage } from '../utils/localstorage'
+import $axios from 'axios'
 
 // Store, namespaced as `place/`
 export const state = () => ({
@@ -227,10 +227,15 @@ export const actions = {
   },
 
   async fetchPlaces(context) {
-    let queryUrl = process.env.apiUrl + '/places/all?tags=ncr'
-    let localKey = 'places'
-    let returnedData = await localStorage(queryUrl, localKey)
-    context.commit('setPlaces', returnedData)
+    const queryUrl = process.env.apiUrl + '/places/all?tags=ncr'
+    try {
+      const returnedData = await $axios.get(queryUrl, { timeout: 60000 })
+      context.commit('setPlaces', returnedData.data)
+    } catch (error) {
+      console.error('Error fetching places:', error)
+      // Optionally handle the error, e.g., show an error message to the user
+      context.commit('setPlaces', null) // Or handle the error case appropriately
+    }
   },
 
   async search(context) {

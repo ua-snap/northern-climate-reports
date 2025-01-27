@@ -1,7 +1,6 @@
 // This store manages ALFRESCO data!
 import _ from 'lodash'
-import { localStorage, checkForError } from '../utils/localstorage'
-import nuxtStorage from 'nuxt-storage'
+import $axios from 'axios'
 
 export const state = () => ({
   beetleData: undefined,
@@ -84,22 +83,20 @@ export const actions = {
       process.env.apiUrl +
       '/beetles/' +
       context.rootGetters['place/urlFragment']()
-    let localKey = 'beetleData-' + context.rootGetters['place/urlFragment']()
-    let errorKey = 'beetleError-' + context.rootGetters['place/urlFragment']()
-
     let expectedDataKeys = ['1988-2017', '2010-2039', '2040-2069', '2070-2099']
 
-    let returnedData = await localStorage(
-      queryUrl,
-      localKey,
-      errorKey,
-      expectedDataKeys
-    )
+    let returnedData = await $axios.get(queryUrl, { timeout: 60000 })
+    let partialData = false
+    expectedDataKeys.forEach(key => {
+      if (returnedData.data[key] == null) {
+        partialData = true
+      }
+    })
 
-    if (checkForError(errorKey)) {
-      context.commit('setHttpError', nuxtStorage.localStorage.getData(errorKey))
-    } else {
-      context.commit('setBeetleData', returnedData)
+    if (partialData) {
+      context.commit('setHttpError', 'no_data')
+    } else if (returnedData && !partialData) {
+      context.commit('setBeetleData', returnedData.data)
     }
   },
 }

@@ -1,8 +1,7 @@
 // This store manages ALFRESCO data!
 import _ from 'lodash'
 import { convertToPercent } from '../utils/convert'
-import { localStorage, checkForError } from '../utils/localstorage'
-import nuxtStorage from 'nuxt-storage'
+import $axios from 'axios'
 
 // Store, namespaced as `climate/`
 export const state = () => ({
@@ -202,9 +201,6 @@ export const actions = {
       context.rootGetters['place/urlFragment'](
         context.rootGetters['place/isPointLocation']
       )
-    let localKey = 'flammability-' + context.rootGetters['place/urlFragment']()
-    let errorKey =
-      'flammabilityError-' + context.rootGetters['place/urlFragment']()
 
     let expectedFlamKeys = [
       '1950-1979',
@@ -214,20 +210,18 @@ export const actions = {
       '2070-2099',
     ]
 
-    let returnedData = await localStorage(
-      queryUrl,
-      localKey,
-      errorKey,
-      expectedFlamKeys
-    )
+    let returnedData = await $axios.get(queryUrl, { timeout: 60000 })
+    let partialData = false
+    expectedFlamKeys.forEach(key => {
+      if (returnedData.data[key] == null) {
+        partialData = true
+      }
+    })
 
-    if (checkForError(errorKey)) {
-      context.commit(
-        'setFlammabilityHttpError',
-        nuxtStorage.localStorage.getData(errorKey)
-      )
-    } else {
-      context.commit('setFlammability', convertToPercent(returnedData))
+    if (partialData) {
+      context.commit('setFlammabilityHttpError', 'no_data')
+    } else if (returnedData && !partialData) {
+      context.commit('setFlammability', convertToPercent(returnedData.data))
     }
 
     queryUrl =
@@ -237,25 +231,21 @@ export const actions = {
       context.rootGetters['place/urlFragment'](
         context.rootGetters['place/isPointLocation']
       )
-    localKey = 'vegChange-' + context.rootGetters['place/urlFragment']()
-    errorKey = 'vegChangeError-' + context.rootGetters['place/urlFragment']()
 
     let expectedVegKeys = ['1950-2008', '2010-2039', '2040-2069', '2070-2099']
 
-    returnedData = await localStorage(
-      queryUrl,
-      localKey,
-      errorKey,
-      expectedVegKeys
-    )
+    returnedData = await $axios.get(queryUrl, { timeout: 60000 })
+    partialData = false
+    expectedVegKeys.forEach(key => {
+      if (returnedData.data[key] == null) {
+        partialData = true
+      }
+    })
 
-    if (checkForError(errorKey)) {
-      context.commit(
-        'setVegChangeHttpError',
-        nuxtStorage.localStorage.getData(errorKey)
-      )
-    } else {
-      context.commit('setVegChange', returnedData)
+    if (partialData) {
+      context.commit('setHttpError', 'no_data')
+    } else if (returnedData && !partialData) {
+      context.commit('setVegChange', returnedData.data)
     }
   },
 }
