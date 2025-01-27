@@ -135,31 +135,36 @@ export const mutations = {
 
 export const actions = {
   async fetch(context) {
-    let queryUrl =
-      process.env.apiUrl +
-      '/ncr/permafrost/' +
-      context.rootGetters['place/urlFragment']()
+    // Only fetches data if the url fragment contains 'point'
+    if (context.rootGetters['place/urlFragment']().includes('point')) {
+      let queryUrl =
+        process.env.apiUrl +
+        '/ncr/permafrost/' +
+        context.rootGetters['place/urlFragment']()
 
-    let expectedDataKeys = ['2021-2039', '2040-2069', '2070-2099']
+      let expectedDataKeys = ['2021-2039', '2040-2069', '2070-2099']
 
-    let returnedData = await $axios
-      .get(queryUrl, { timeout: 60000 })
-      .catch(err => {
-        console.error(err)
-        context.commit('setHttpError', 'server_error')
+      let returnedData = await $axios
+        .get(queryUrl, { timeout: 60000 })
+        .catch(err => {
+          console.error(err)
+          context.commit('setHttpError', 'server_error')
+        })
+
+      let partialData = false
+      expectedDataKeys.forEach(key => {
+        if (returnedData.data[key] == null) {
+          partialData = true
+        }
       })
 
-    let partialData = false
-    expectedDataKeys.forEach(key => {
-      if (returnedData.data[key] == null) {
-        partialData = true
+      if (partialData) {
+        context.commit('setHttpError', 'no_data')
+      } else if (returnedData && !partialData) {
+        context.commit('setPermafrostData', returnedData.data)
       }
-    })
-
-    if (partialData) {
+    } else {
       context.commit('setHttpError', 'no_data')
-    } else if (returnedData && !partialData) {
-      context.commit('setPermafrostData', returnedData.data)
     }
   },
 }
