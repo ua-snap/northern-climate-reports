@@ -23,6 +23,26 @@
   </div>
   <div v-else class="px-5-touch">
     <client-only>
+      <div v-if="slow">
+        <div class="container mt-5">
+          <b-message
+            title="Northern Climate Reports is experiencing slow load times"
+            type="is-warning"
+            aria-close-label="Close message"
+          >
+            <p>
+              We&rsquo;re sorry! Northern Climate Reports is experiencing slower
+              load times than usual. We&rsquo;re working to improve performance
+              as soon as possible, but we don&rsquo;t have an estimated time for
+              completion. Please check back soon, or reach out to us at
+              <a href="mailto:uaf-snap-data-tools@alaska.edu"
+                >uaf-snap-data-tools@alaska.edu</a
+              >
+              with questions.
+            </p>
+          </b-message>
+        </div>
+      </div>
       <div v-show="!this.reportIsVisible">
         <div class="container mt-5">
           <div class="columns" id="controls">
@@ -77,6 +97,7 @@ export default {
   data() {
     return {
       offline: process.env.offline,
+      slow: process.env.slow,
     }
   },
   computed: {
