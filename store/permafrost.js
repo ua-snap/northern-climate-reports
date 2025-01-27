@@ -142,7 +142,13 @@ export const actions = {
 
     let expectedDataKeys = ['2021-2039', '2040-2069', '2070-2099']
 
-    let returnedData = await $axios.get(queryUrl, { timeout: 60000 })
+    let returnedData = await $axios
+      .get(queryUrl, { timeout: 60000 })
+      .catch(err => {
+        console.error(err)
+        context.commit('setHttpError', 'server_error')
+      })
+
     let partialData = false
     expectedDataKeys.forEach(key => {
       if (returnedData.data[key] == null) {

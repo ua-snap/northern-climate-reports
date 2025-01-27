@@ -85,7 +85,13 @@ export const actions = {
       context.rootGetters['place/urlFragment']()
     let expectedDataKeys = ['1988-2017', '2010-2039', '2040-2069', '2070-2099']
 
-    let returnedData = await $axios.get(queryUrl, { timeout: 60000 })
+    let returnedData = await $axios
+      .get(queryUrl, { timeout: 60000 })
+      .catch(err => {
+        console.error(err)
+        context.commit('setHttpError', 'server_error')
+      })
+
     let partialData = false
     expectedDataKeys.forEach(key => {
       if (returnedData.data[key] == null) {

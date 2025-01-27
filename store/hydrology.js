@@ -208,7 +208,13 @@ export const actions = {
       process.env.apiUrl +
       '/eds/hydrology/' +
       context.rootGetters['place/urlFragment']()
-    let returnedData = await $axios.get(queryUrl, { timeout: 60000 })
+
+    let returnedData = await $axios
+      .get(queryUrl, { timeout: 60000 })
+      .catch(err => {
+        console.error(err)
+        context.commit('setHttpError', 'server_error')
+      })
 
     if (returnedData) {
       context.commit('setHydrologyData', returnedData.data.summary)
