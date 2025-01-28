@@ -1,5 +1,6 @@
 import { convertToFeet } from '../utils/convert'
 import $axios from 'axios'
+import { getHttpError } from '../utils/http_errors'
 
 export const state = () => ({
   elevation: undefined,
@@ -65,8 +66,7 @@ export const actions = {
     let returnedData = await $axios
       .get(queryUrl, { timeout: 60000 })
       .catch(err => {
-        console.error(err)
-        context.commit('setHttpError', 'server_error')
+        context.commit('setHttpError', getHttpError(err))
       })
     if (returnedData) {
       context.commit('setElevation', returnedData.data)

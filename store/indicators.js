@@ -2,6 +2,7 @@
 import _ from 'lodash'
 import { convertMmToInches, convertValueToFahrenheit } from '../utils/convert'
 import $axios from 'axios'
+import { getHttpError } from '../utils/http_errors'
 
 var convertTemperatureData = function (obj) {
   if (typeof obj === 'number') {
@@ -90,8 +91,7 @@ export const actions = {
     let returnedData = await $axios
       .get(queryUrl, { timeout: 60000 })
       .catch(err => {
-        console.error(err)
-        context.commit('setHttpError', 'server_error')
+        context.commit('setHttpError', getHttpError(err))
       })
 
     if (returnedData) {

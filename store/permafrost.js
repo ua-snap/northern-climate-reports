@@ -3,6 +3,7 @@
 import _ from 'lodash'
 import { convertToInches, convertToFahrenheit } from '../utils/convert'
 import $axios from 'axios'
+import { getHttpError } from '../utils/http_errors'
 
 // Store, namespaced as `permafrost/`
 export const state = () => ({
@@ -147,24 +148,25 @@ export const actions = {
       let returnedData = await $axios
         .get(queryUrl, { timeout: 60000 })
         .catch(err => {
-          console.error(err)
-          context.commit('setHttpError', 'server_error')
+          context.commit('setHttpError', getHttpError(err))
         })
 
-      let partialData = false
-      expectedDataKeys.forEach(key => {
-        if (returnedData.data[key] == null) {
-          partialData = true
-        }
-      })
+      if (returnedData) {
+        let partialData = false
+        expectedDataKeys.forEach(key => {
+          if (returnedData.data[key] == null) {
+            partialData = true
+          }
+        })
 
-      if (partialData) {
+        if (partialData) {
+          context.commit('setHttpError', 'no_data')
+        } else if (returnedData && !partialData) {
+          context.commit('setPermafrostData', returnedData.data)
+        }
+      } else {
         context.commit('setHttpError', 'no_data')
-      } else if (returnedData && !partialData) {
-        context.commit('setPermafrostData', returnedData.data)
       }
-    } else {
-      context.commit('setHttpError', 'no_data')
     }
   },
 }
