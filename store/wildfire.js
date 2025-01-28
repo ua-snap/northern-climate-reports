@@ -1,5 +1,5 @@
 // This store manages ALFRESCO data!
-import _, { get } from 'lodash'
+import _ from 'lodash'
 import { convertToPercent } from '../utils/convert'
 import $axios from 'axios'
 import { getHttpError } from '../utils/http_errors'

@@ -1,4 +1,3 @@
-import { get } from 'lodash'
 import demographics from '../assets/demographics.json'
 import $axios from 'axios'
 import { getHttpError } from '../utils/http_errors'

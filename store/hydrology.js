@@ -1,5 +1,5 @@
 // This store fetches/manages "climate" variables (taspr = temp + precip)
-import _, { get } from 'lodash'
+import _ from 'lodash'
 import { convertMmToInches, convertToFahrenheit } from '../utils/convert'
 import $axios from 'axios'
 import { getHttpError } from '../utils/http_errors'
