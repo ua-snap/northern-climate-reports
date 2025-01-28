@@ -204,20 +204,25 @@ export const mutations = {
 
 export const actions = {
   async fetch(context) {
-    let queryUrl =
-      process.env.apiUrl +
-      '/eds/hydrology/' +
-      context.rootGetters['place/urlFragment']()
+    // Only fetches data if the url fragment contains 'point'
+    if (context.rootGetters['place/isPointLocation']) {
+      let queryUrl =
+        process.env.apiUrl +
+        '/eds/hydrology/' +
+        context.rootGetters['place/urlFragment']()
 
-    let returnedData = await $axios
-      .get(queryUrl, { timeout: 60000 })
-      .catch(err => {
-        console.error(err)
-        context.commit('setHttpError', 'server_error')
-      })
+      let returnedData = await $axios
+        .get(queryUrl, { timeout: 60000 })
+        .catch(err => {
+          console.error(err)
+          context.commit('setHttpError', 'server_error')
+        })
 
-    if (returnedData) {
-      context.commit('setHydrologyData', returnedData.data.summary)
+      if (returnedData) {
+        context.commit('setHydrologyData', returnedData.data.summary)
+      } else {
+        context.commit('setHttpError', 'no_data')
+      }
     } else {
       context.commit('setHttpError', 'no_data')
     }
