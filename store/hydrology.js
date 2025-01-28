@@ -205,7 +205,7 @@ export const mutations = {
 export const actions = {
   async fetch(context) {
     // Only fetches data if the url fragment contains 'point'
-    if (context.rootGetters['place/urlFragment']().includes('point')) {
+    if (context.rootGetters['place/isPointLocation']) {
       let queryUrl =
         process.env.apiUrl +
         '/eds/hydrology/' +
