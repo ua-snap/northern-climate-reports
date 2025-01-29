@@ -1,5 +1,6 @@
 import demographics from '../assets/demographics.json'
 import $axios from 'axios'
+import { getHttpError } from '../utils/http_errors'
 
 export const state = () => ({
   demographicsData: undefined,
@@ -60,8 +61,7 @@ export const actions = {
           // Forbidden means adult population < 50
           context.commit('setHttpError', 'low_population')
         } else {
-          console.error(error)
-          context.commit('setHttpError', 'no_data')
+          context.commit('setHttpError', getHttpError(error))
         }
       })
 
@@ -79,8 +79,7 @@ export const actions = {
     let returnedGeometry = await $axios
       .get(geometryQueryUrl, { timeout: 60000 })
       .catch(err => {
-        console.error(err)
-        context.commit('setHttpError', 'no_data')
+        context.commit('setHttpError', getHttpError(err))
       })
 
     if (returnedData && returnedGeometry) {

@@ -1,6 +1,7 @@
 // Shim for dev/testing
 import _ from 'lodash'
 import $axios from 'axios'
+import { getHttpError } from '../utils/http_errors'
 
 // Store, namespaced as `place/`
 export const state = () => ({
@@ -229,10 +230,10 @@ export const actions = {
   async fetchPlaces(context) {
     const queryUrl = process.env.apiUrl + '/places/all?tags=ncr'
     try {
-      const returnedData = await $axios.get(queryUrl, { timeout: 60000 })
+      const returnedData = await $axios.get(queryUrl, { timeout: 10000 })
       context.commit('setPlaces', returnedData.data)
     } catch (error) {
-      console.error('Error fetching places:', error)
+      console.error('Error fetching places:', getHttpError(error))
       // Optionally handle the error, e.g., show an error message to the user
       context.commit('setPlaces', null) // Or handle the error case appropriately
     }

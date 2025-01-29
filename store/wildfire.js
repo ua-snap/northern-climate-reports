@@ -2,6 +2,7 @@
 import _ from 'lodash'
 import { convertToPercent } from '../utils/convert'
 import $axios from 'axios'
+import { getHttpError } from '../utils/http_errors'
 
 // Store, namespaced as `climate/`
 export const state = () => ({
@@ -214,20 +215,22 @@ export const actions = {
       .get(queryUrl, { timeout: 60000 })
       .catch(err => {
         console.error(err)
-        context.commit('setFlammabilityHttpError', 'server_error')
+        context.commit('setFlammabilityHttpError', getHttpError(err))
       })
 
-    let partialData = false
-    expectedFlamKeys.forEach(key => {
-      if (returnedData.data[key] == null) {
-        partialData = true
-      }
-    })
+    if (returnedData) {
+      let partialData = false
+      expectedFlamKeys.forEach(key => {
+        if (returnedData.data[key] == null) {
+          partialData = true
+        }
+      })
 
-    if (partialData) {
-      context.commit('setFlammabilityHttpError', 'no_data')
-    } else if (returnedData && !partialData) {
-      context.commit('setFlammability', convertToPercent(returnedData.data))
+      if (partialData) {
+        context.commit('setFlammabilityHttpError', 'no_data')
+      } else if (returnedData && !partialData) {
+        context.commit('setFlammability', convertToPercent(returnedData.data))
+      }
     }
 
     queryUrl =
@@ -241,21 +244,22 @@ export const actions = {
     let expectedVegKeys = ['1950-2008', '2010-2039', '2040-2069', '2070-2099']
 
     returnedData = await $axios.get(queryUrl, { timeout: 60000 }).catch(err => {
-      console.error(err)
-      context.commit('setHttpError', 'server_error')
+      context.commit('setHttpError', getHttpError(err))
     })
 
-    partialData = false
-    expectedVegKeys.forEach(key => {
-      if (returnedData.data[key] == null) {
-        partialData = true
+    if (returnedData) {
+      let partialData = false
+      expectedVegKeys.forEach(key => {
+        if (returnedData.data[key] == null) {
+          partialData = true
+        }
+      })
+
+      if (partialData) {
+        context.commit('setHttpError', 'no_data')
+      } else if (returnedData && !partialData) {
+        context.commit('setVegChange', returnedData.data)
       }
-    })
-
-    if (partialData) {
-      context.commit('setHttpError', 'no_data')
-    } else if (returnedData && !partialData) {
-      context.commit('setVegChange', returnedData.data)
     }
   },
 }
