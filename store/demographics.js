@@ -50,6 +50,7 @@ export const actions = {
     // If placeId isn't defined, we don't have demographics for
     // this place.
     if (!placeId) {
+      context.commit('setHttpError', 'no_data')
       return
     }
 
