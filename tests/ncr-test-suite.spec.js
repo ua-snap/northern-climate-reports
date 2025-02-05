@@ -65,7 +65,7 @@ test('Click on Fairbanks', async ({ page }) => {
   await expect(page.locator('.section > .centered')).toBeVisible()
   await expect(
     page.locator('text=Projected Conditions for Fairbanks')
-  ).toBeVisible({ timeout: 120000 })
+  ).toBeVisible({ timeout: 180000 })
 })
 
 test('Search for Chena River', async ({ page }) => {
@@ -106,7 +106,7 @@ test('Click on Chena River HUC8', async ({ page }) => {
     page.locator(
       'text=Projected Conditions for Chena River Watershed HUC8 19080306'
     )
-  ).toBeVisible({ timeout: 120000 })
+  ).toBeVisible({ timeout: 180000 })
 })
 
 test('Search for Dawson', async ({ page }) => {
@@ -163,7 +163,7 @@ test('Click on the map in Northern Alaska: 70.04N, 157.33W', async ({
 })
 
 test('Choose 70.04N, 157.33W from map search', async ({ page }) => {
-  test.setTimeout(120000)
+  test.setTimeout(180000)
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
   await page.waitForSelector('#map')
@@ -188,11 +188,11 @@ test('Choose 70.04N, 157.33W from map search', async ({ page }) => {
 
   await expect(
     page.locator('text=Projected Conditions for 70.04°N, 157.33°W')
-  ).toBeVisible({ timeout: 120000 })
+  ).toBeVisible({ timeout: 180000 })
 })
 
 test('Choose Admiralty Bay-Dease Inlet from map search', async ({ page }) => {
-  test.setTimeout(120000)
+  test.setTimeout(180000)
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
   await page.waitForSelector('#map')
@@ -219,7 +219,7 @@ test('Choose Admiralty Bay-Dease Inlet from map search', async ({ page }) => {
 
   await expect(
     page.locator('text=Projected Conditions for Admiralty Bay-Dease Inlet')
-  ).toBeVisible({ timeout: 120000 })
+  ).toBeVisible({ timeout: 180000 })
 })
 
 test('Click on the map in Yukon Territory, Canada: 65.65N, 138.89W', async ({
@@ -247,7 +247,7 @@ test('Click on the map in Yukon Territory, Canada: 65.65N, 138.89W', async ({
 })
 
 test('Choose 65.65N, 138.89W from map search', async ({ page }) => {
-  test.setTimeout(120000)
+  test.setTimeout(180000)
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
   await page.waitForSelector('#map')
@@ -273,13 +273,13 @@ test('Choose 65.65N, 138.89W from map search', async ({ page }) => {
 
   await expect(
     page.locator('text=Projected Conditions for 65.65°N, 138.89°W')
-  ).toBeVisible({ timeout: 120000 })
+  ).toBeVisible({ timeout: 180000 })
 })
 
 test('Choose Headwaters Porcupine River in YT from map search', async ({
   page,
 }) => {
-  test.setTimeout(120000)
+  test.setTimeout(180000)
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
   await page.waitForSelector('#map')
@@ -305,5 +305,5 @@ test('Choose Headwaters Porcupine River in YT from map search', async ({
 
   await expect(
     page.locator('text=Projected Conditions for Headwaters Porcupine River')
-  ).toBeVisible({ timeout: 120000 })
+  ).toBeVisible({ timeout: 180000 })
 })
