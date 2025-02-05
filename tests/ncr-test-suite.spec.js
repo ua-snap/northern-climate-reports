@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test'
 
-const url = 'http://localhost:3000'
+const url =
+  process.env.TESTING_URL || 'http://staging.northernclimatereports.org'
 
 test('Click on Header', async ({ page }) => {
   await page.goto(url)
