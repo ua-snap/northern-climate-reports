@@ -329,7 +329,7 @@
               
               <li><a href="https://www.loudentribe.org/">Louden Tribe</a></li>
               <li><a href="https://nvgakona.com/">Native Village of Gakona</a></li>
-              <li>Theresa Vertigan (<a href="https://www.uaa.alaska.edu/academics/college-of-health/departments/population-health-sciences/institute-for-circumpolar-health-studies/index.cshtml" >UAA Institute for Circumpolar Health Studies</a >)</li>
+              <li>Theresa Vertigan & Melissa Bradley (<a href="https://www.uaa.alaska.edu/academics/college-of-health/departments/population-health-sciences/institute-for-circumpolar-health-studies/index.cshtml" >UAA Institute for Circumpolar Health Studies</a >)</li>
             </ul>
           
           <h4 class="title is-4 mt-6">Rasdaman raster database</h4>
