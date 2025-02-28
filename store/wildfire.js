@@ -47,7 +47,7 @@ export const getters = {
     return [
       {
         label: 'Not modeled or no data',
-        color: '#dddddd',
+        color: '#ffffff',
         interpretation:
           'This pixel was not modeled or is not included in the dataset',
       },
