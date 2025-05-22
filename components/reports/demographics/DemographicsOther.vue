@@ -5,7 +5,7 @@
         <caption>
           <a
             href="https://odphp.health.gov/healthypeople/priority-areas/social-determinants-health"
-            >Social determinants of health</a
+            >Non-medical factor measures</a
           >,
           {{
             placeName
@@ -69,7 +69,7 @@
     <div v-else>
       <div class="content is-size-5">
         <p>
-          Some social determinants of health (minority status, high school
+          Some non-medical factor measures (minority status, high school
           diploma, living below 150% of poverty line, broadband and more) are
           not available for this location.
         </p>
@@ -145,7 +145,7 @@
       <div v-else>
         <div class="content is-size-5">
           <p>
-            Demographic information for social determinants of health and
+            Demographic information for non-medical factor measures and
             disability status are not available for this location.
           </p>
         </div>

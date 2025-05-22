@@ -32,10 +32,10 @@
                 <td>
                   <p>
                     Derived from the 2020 U.S. Census Demographics and Housing
-                    Characteristics File (DHC), the 2018-2022 U.S. Census
+                    Characteristics File (DHC), the 2019-2023 U.S. Census
                     American Community Survey (ACS) 5-year dataset, the 2024 CDC
-                    PLACES dataset, and the 2017-2021 CDC Social Determinants of
-                    Health (SDOH) dataset.
+                    PLACES dataset, and the 2017-2021 CDC Non-Medical Factor
+                    Measures dataset.
                   </p>
                   <p>Citations:</p>
                   <ul>
@@ -48,8 +48,8 @@
                       >
                     </li>
                     <li>
-                      U.S. Census Bureau (2021). 2018-2022 American Community
-                      Survey 5-year estimates. Accessed May 2024, from
+                      U.S. Census Bureau (2023). 2019-2023 American Community
+                      Survey 5-year estimates. Accessed March 2025, from
                       <a
                         href="https://www.census.gov/programs-surveys/acs/data.html"
                         >https://www.census.gov/programs-surveys/acs/data.html</a
@@ -60,6 +60,17 @@
                       Accessed November 2024, from
                       <a href="https://www.cdc.gov/places"
                         >https://www.cdc.gov/places</a
+                      >
+                    </li>
+                    <li>
+                      2017-2021 CDC Non-Medical Factor Measures. Healthy People
+                      2030, U.S. Department of Health and Human Services, Office
+                      of Disease Prevention and Health Promotion. Accessed
+                      February 2025, from
+                      <a
+                        href="https://health.gov/healthypeople/objectives-and-data/social-determinants-health"
+                      >
+                        https://health.gov/healthypeople/objectives-and-data/social-determinants-health</a
                       >
                     </li>
                   </ul>
