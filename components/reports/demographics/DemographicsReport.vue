@@ -61,12 +61,15 @@
             >Learn more about the data sources here</nuxt-link
           >
           or <a :href="demographicsCsvUrl">download a CSV</a> for definitions
-          and sources for each variable. Confidence intervals (shown in
-          parentheses for each value) show the range where the true value is
-          likely to fall, based on the data collected. For example, if a
-          confidence interval is 45%&ndash;50%, it means we're confident the
-          true value is between 45% and 50%. Wider intervals suggest more
-          uncertainty, while narrower intervals mean more precise estimates.
+          and sources for each variable.
+        </p>
+        <p>
+          Confidence intervals (shown in parentheses for each value) show the
+          range where the true value is likely to fall, based on the data
+          collected, with a 90% confidence level. For example, if a confidence
+          interval is 45%&ndash;50%, it means we're 90% confident the true value
+          is between 45% and 50%. Wider intervals suggest more uncertainty,
+          while narrower intervals mean more precise estimates.
         </p>
         <p>
           <strong>How do I interpret these data?</strong> The indicators below
