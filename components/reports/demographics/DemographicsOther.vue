@@ -95,39 +95,27 @@
               <th scope="row" v-html="name"></th>
               <td>
                 {{ demographics['place'][key] }}%
-                <span
-                  class="ci"
-                  v-html="
-                    confidenceInverval(
-                      demographics['place'][key],
-                      demographics['place']['moe_' + key]
-                    )
-                  "
-                />
+                <span class="ci">
+                  ({{ demographics['place'][key + '_low'] }}&ndash;{{
+                    demographics['place'][key + '_high']
+                  }})
+                </span>
               </td>
               <td>
                 {{ demographics['alaska'][key] }}%
-                <span
-                  class="ci"
-                  v-html="
-                    confidenceInverval(
-                      demographics['alaska'][key],
-                      demographics['alaska']['moe_' + key]
-                    )
-                  "
-                />
+                <span class="ci">
+                  ({{ demographics['alaska'][key + '_low'] }}&ndash;{{
+                    demographics['alaska'][key + '_high']
+                  }})
+                </span>
               </td>
               <td>
                 {{ demographics['us'][key] }}%
-                <span
-                  class="ci"
-                  v-html="
-                    confidenceInverval(
-                      demographics['us'][key],
-                      demographics['us']['moe_' + key]
-                    )
-                  "
-                />
+                <span class="ci">
+                  ({{ demographics['us'][key + '_low'] }}&ndash;{{
+                    demographics['us'][key + '_high']
+                  }})
+                </span>
               </td>
             </tr>
           </tbody>
@@ -204,19 +192,6 @@ export default {
       demographics: 'demographics/demographicsData',
       placeName: 'place/name',
     }),
-  },
-  methods: {
-    confidenceInverval(value, moe) {
-      let valueFloat = parseFloat(value)
-      let moeFloat = parseFloat(moe)
-      return (
-        '(' +
-        _.round(valueFloat - moeFloat, 1).toFixed(1) +
-        '&ndash;' +
-        _.round(valueFloat + moeFloat, 1).toFixed(1) +
-        ')'
-      )
-    },
   },
   data() {
     return {
