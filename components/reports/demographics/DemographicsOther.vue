@@ -129,16 +129,6 @@ export default {
         return sum > 0
       }
     },
-    disabilityInsurancePresent() {
-      let keys = ['pct_w_disability', 'pct_uninsured']
-      if (this.demographics) {
-        let sum = 0
-        keys.forEach(k => {
-          sum += Number.parseFloat(this.demographics['place'][k])
-        })
-        return sum > 0
-      }
-    },
     ...mapGetters({
       demographics: 'demographics/demographicsData',
       placeName: 'place/name',
