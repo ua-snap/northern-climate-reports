@@ -59,11 +59,10 @@
               at the Institute for Circumpolar Health Studies, University of
               Alaska Anchorage (UAA). Her research explores the health impacts
               of climate change and helps communities develop effective, locally
-              tailored strategies for adaptation and resilience, including
-              public health emergency preparedness and response.
+              tailored strategies for adaptation and resilience.
             </p>
             <p>
-              With a background in environmental epidemiology, Dr. Hahn combines
+              As an environmental epidemiologist, Dr. Hahn combines
               epidemiological techniques, spatio-temporal exposure analysis,
               climate and environmental data, and mixed-methods approaches in
               her research. She collaborates with academic institutions,
@@ -73,13 +72,11 @@
             <p>
               Dr. Hahn earned a joint PhD in Epidemiology and Environment &
               Resources from the University of Wisconsin-Madison, and an MPH in
-              Global Environmental Health from Emory University. She also
-              completed a postdoctoral fellowship with the CDC Climate and
-              Health Program, working alongside the CDC&rsquo;s Division of
-              Vector-borne Diseases and the National Center for Atmospheric
-              Research (NCAR).
+              Global Environmental Health from Emory University. Prior to UAA,
+              she was an epidemiologist with the CDC Climate and Health Program,
+              working alongside the CDC&rsquo;s Division of Vector-borne
+              Diseases and the National Center for Atmospheric Research (NCAR).
             </p>
-
             <p>
               <a href="https://micahbhahn.wordpress.com"
                 >Learn more about Dr. Hahn</a
