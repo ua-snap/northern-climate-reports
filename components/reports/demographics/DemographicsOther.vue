@@ -19,7 +19,12 @@
         </thead>
         <tbody>
           <tr v-for="(name, key) in otherDemographics">
-            <th scope="row">{{ name }}</th>
+            <th scope="row">
+              {{ name
+              }}<span v-if="['pct_w_disability', 'pct_uninsured'].includes(key)"
+                >*</span
+              >
+            </th>
             <td>
               {{ demographics['place'][key] }}%
               <span
@@ -64,6 +69,15 @@
             </td>
           </tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4">
+              *These data include the total civilian population, excluding
+              people in the military or living in places like nursing homes or
+              prisons.
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </div>
     <div v-else>
@@ -73,70 +87,6 @@
           diploma, living below 150% of poverty line, broadband and more) are
           not available for this location.
         </p>
-      </div>
-    </div>
-    <div class="block">
-      <div v-if="disabilityInsurancePresent">
-        <table class="table block-centered demographic mb-6">
-          <caption>
-            Disability and insurance status,*
-            {{
-              placeName
-            }}, compared to Alaska and U.S.
-          </caption>
-          <thead>
-            <th scope="col"></th>
-            <th scope="col">{{ placeName }}</th>
-            <th scope="col">Alaska</th>
-            <th scope="col">U.S.</th>
-          </thead>
-          <tbody>
-            <tr v-for="(name, key) in acs">
-              <th scope="row" v-html="name"></th>
-              <td>
-                {{ demographics['place'][key] }}%
-                <span class="ci">
-                  ({{ demographics['place'][key + '_low'] }}&ndash;{{
-                    demographics['place'][key + '_high']
-                  }})
-                </span>
-              </td>
-              <td>
-                {{ demographics['alaska'][key] }}%
-                <span class="ci">
-                  ({{ demographics['alaska'][key + '_low'] }}&ndash;{{
-                    demographics['alaska'][key + '_high']
-                  }})
-                </span>
-              </td>
-              <td>
-                {{ demographics['us'][key] }}%
-                <span class="ci">
-                  ({{ demographics['us'][key + '_low'] }}&ndash;{{
-                    demographics['us'][key + '_high']
-                  }})
-                </span>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="4">
-                *These data include the total civilian population, excluding
-                people in the military or living in places like nursing homes or
-                prisons.
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-      <div v-else>
-        <div class="content is-size-5">
-          <p>
-            Demographic information for social determinants of health and
-            disability status are not available for this location.
-          </p>
-        </div>
       </div>
     </div>
   </div>
@@ -180,9 +130,10 @@ export default {
       }
     },
     disabilityInsurancePresent() {
+      let keys = ['pct_w_disability', 'pct_uninsured']
       if (this.demographics) {
         let sum = 0
-        Object.keys(this.acs).forEach(k => {
+        keys.forEach(k => {
           sum += Number.parseFloat(this.demographics['place'][k])
         })
         return sum > 0
@@ -207,10 +158,7 @@ export default {
         pct_crowding: 'Crowding',
         pct_hcost: 'Housing cost burden',
         pct_emospt: 'Lack of social and emotional support',
-      },
-      acs: {
         pct_w_disability: 'Percent with a disability',
-        pct_insured: 'Percent insured',
         pct_uninsured: 'Percent uninsured',
       },
     }
