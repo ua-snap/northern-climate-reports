@@ -142,7 +142,12 @@ export default {
         })
       }
 
-      let plotSettings = getPlotSettings()
+      let plotSettings = getPlotSettings({
+        dataLabel: 'Temperature',
+        place: this.place,
+        season: seasons[this.season],
+        dateRange: '1950-2099',
+      })
       this.$Plotly.newPlot('temp-chart', dataTraces, layout, plotSettings)
     },
   },

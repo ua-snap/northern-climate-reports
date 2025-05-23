@@ -105,7 +105,11 @@ export default {
         },
       })
 
-      let plotSettings = getPlotSettings()
+      let plotSettings = getPlotSettings({
+        dataLabel: 'Depth to top of permafrost',
+        place: this.place,
+        dateRange: '2021-2099',
+      })
       this.$Plotly.newPlot(
         'permafrost-top-chart',
         dataTraces,
