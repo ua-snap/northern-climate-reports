@@ -222,7 +222,12 @@ export default {
 
       layout.annotations.push(footer)
 
-      let plotSettings = getPlotSettings()
+      let plotSettings = getPlotSettings({
+        dataLabel: 'Vegetation type',
+        place: this.place,
+        dateRange: '1950-2099',
+        model: this.vegChartModelName,
+      })
       this.$Plotly.newPlot(
         'wildfire-veg-change-chart',
         dataTraces,
