@@ -37,9 +37,10 @@
     <div class="content mb-6">
       <p>
         This table is a legend for the maps above, and explains different
-        categories of modeled fire activity shown on the chart below. These
-        categories are also used in the short blurb in the introduction to this
-        report.
+        categories of modeled fire activity<span v-if="flammabilityData">
+          shown on the chart below. These categories are also used in the short
+          blurb in the introduction to this report</span
+        >.
       </p>
       <ColorTable
         unitLabel="Flammability"
@@ -48,20 +49,22 @@
         :borderedColors="[0]"
       />
     </div>
-    <div class="content mt-6 pt-6">
-      <p class="is-size-5">
-        Hovering over the future eras shown on the chart shows the difference
-        between 1980&ndash;2009 and the future era.
-      </p>
+    <div v-if="flammabilityData">
+      <div class="content mt-6 pt-6">
+        <p class="is-size-5">
+          Hovering over the future eras shown on the chart shows the difference
+          between 1980&ndash;2009 and the future era.
+        </p>
+      </div>
+      <div class="chart-wrapper">
+        <ReportFlammabilityChart />
+      </div>
+      <DownloadCsvButton
+        text="Download flammability data as CSV"
+        endpoint="flammability"
+        class="mt-3 mb-5"
+      />
     </div>
-    <div class="chart-wrapper">
-      <ReportFlammabilityChart />
-    </div>
-    <DownloadCsvButton
-      text="Download flammability data as CSV"
-      endpoint="flammability"
-      class="mt-3 mb-5"
-    />
     <BackToTopButton />
     <div class="content">
       <div class="is-size-5 mt-6">
@@ -80,14 +83,16 @@
       </div>
     </div>
     <ReportVegChangeMaps />
-    <div class="chart-wrapper">
-      <ReportVegChangeChart />
+    <div v-if="vegChangeData">
+      <div class="chart-wrapper">
+        <ReportVegChangeChart />
+      </div>
+      <DownloadCsvButton
+        text="Download vegetation change data as CSV"
+        endpoint="veg_type"
+        class="mt-3 mb-5"
+      />
     </div>
-    <DownloadCsvButton
-      text="Download vegetation change data as CSV"
-      endpoint="veg_type"
-      class="mt-3 mb-5"
-    />
     <BackToTopButton />
   </div>
 </template>
@@ -139,6 +144,8 @@ export default {
       isPointLocation: 'place/isPointLocation',
       huc12Id: 'wildfire/huc12Id',
       place: 'place/name',
+      flammabilityData: 'wildfire/flammability',
+      vegChangeData: 'wildfire/veg_change',
     }),
   },
 }
