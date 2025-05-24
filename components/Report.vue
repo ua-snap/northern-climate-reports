@@ -177,7 +177,7 @@
             </li>
             <li v-if="flammabilityData || vegChangeData">
               <a href="#wildfire">Wildfire</a> charts of
-              {{ wildfireDataSubstring }} with with multiple models and
+              {{ wildfireDataSubstring }} with multiple models and
               scenarios
             </li>
             <li v-if="beetleData">
