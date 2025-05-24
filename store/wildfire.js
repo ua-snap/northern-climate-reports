@@ -144,6 +144,16 @@ export const getters = {
   vegChangeHttpError(state) {
     return state.vegChangeHttpError
   },
+  wildfireDataSubstring(state) {
+    let availableData = []
+    if (state.flammability) {
+      availableData.push('flammability')
+    }
+    if (state.veg_change) {
+      availableData.push('vegetation change')
+    }
+    return availableData.join(' and ')
+  },
   valid(state) {
     if (
       _.isObject(state.flammability) &&
@@ -244,7 +254,7 @@ export const actions = {
     let expectedVegKeys = ['1950-2008', '2010-2039', '2040-2069', '2070-2099']
 
     returnedData = await $axios.get(queryUrl, { timeout: 60000 }).catch(err => {
-      context.commit('setHttpError', getHttpError(err))
+      context.commit('setVegChangeHttpError', getHttpError(err))
     })
 
     if (returnedData) {
@@ -256,7 +266,7 @@ export const actions = {
       })
 
       if (partialData) {
-        context.commit('setHttpError', 'no_data')
+        context.commit('setVegChangeHttpError', 'no_data')
       } else if (returnedData && !partialData) {
         context.commit('setVegChange', returnedData.data)
       }

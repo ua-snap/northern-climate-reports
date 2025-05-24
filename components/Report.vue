@@ -176,8 +176,9 @@
               depending on the presence or absence of permafrost
             </li>
             <li v-if="flammabilityData || vegChangeData">
-              <a href="#wildfire">Wildfire</a> charts of flammability and
-              vegetation change with with multiple models and scenarios
+              <a href="#wildfire">Wildfire</a> charts of
+              {{ wildfireDataSubstring }} with with multiple models and
+              scenarios
             </li>
             <li v-if="beetleData">
               <a href="#climate-protection-beetles"
@@ -496,6 +497,7 @@ export default {
       permafrostHttpError: 'permafrost/httpError',
       flammabilityHttpError: 'wildfire/flammabilityHttpError',
       vegChangeHttpError: 'wildfire/vegChangeHttpError',
+      wildfireDataSubstring: 'wildfire/wildfireDataSubstring',
       beetleHttpError: 'beetle/httpError',
       hydrologyHttpError: 'hydrology/httpError',
       demographicsHttpError: 'demographics/httpError',
