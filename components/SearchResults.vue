@@ -150,13 +150,13 @@ export default {
           placeType = 'Climate Division'
           break
         case 'fire_zone':
-          placeType = 'Fire Management Unit'
+          placeType = 'Alaska Fire Management Unit'
           break
         case 'yt_fire_district':
           placeType = 'Yukon Fire District'
           break
         case 'game_management_unit':
-          placeType = 'Game Management Unit'
+          placeType = 'Alaska Game Management Unit'
           break
         case 'yt_game_management_subzone':
           placeType = 'Yukon Game Management Subzone'
