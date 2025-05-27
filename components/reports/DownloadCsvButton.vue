@@ -17,20 +17,32 @@ export default {
         return this.staticUrl
       }
       let endpointPath = this.endpoint
+
+      // Two kinds of places could have valid demographics:
+      // communities and boroughs.  Grab whichever is defined.
+      // This code will only run if demographics are available,
+      // So we can assume that one or the other is valid.
       if (this.endpoint == 'demographics') {
+        let placeId = this.$store.getters['place/communityId']
+        if(!placeId) {
+          placeId = this.$store.getters['place/areaId']
+        }
         url =
           process.env.apiUrl +
           '/demographics/' +
-          this.$store.getters['place/communityId'] +
+          placeId +
           '?format=csv'
         return url
       }
+      
       if (_.includes(['flammability', 'veg_type'], this.endpoint)) {
         endpointPath = 'alfresco/' + endpointPath
       }
+      
       if (_.includes(['indicators'], this.endpoint)) {
         endpointPath = endpointPath + '/base'
       }
+      
       let url
       if (_.includes(['permafrost'], this.endpoint)) {
         let latLng = this.$store.getters['place/latLng']
