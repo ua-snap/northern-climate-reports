@@ -172,7 +172,10 @@ export default {
         },
       }
 
-      let plotSettings = getPlotSettings()
+      let plotSettings = getPlotSettings({
+        dataLabel: 'Race and ethnicity',
+        place: this.placeName,
+      })
       this.$Plotly.newPlot(
         'demographics-race-ethnicity-chart',
         traces,
