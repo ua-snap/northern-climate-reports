@@ -103,7 +103,7 @@
 
     <div v-if="communityId === 'AK15'">
       <DownloadCsvButton
-        text="Download demographics and health data for individual neighborhoods as CSV"
+        text="Download demographics and health data for Anchorage (Dgheyaytnu) neighborhoods as CSV"
         staticUrl="/Demographic and Health Data for Anchorage (Dgheyaytnu) Neighborhoods.csv"
         class="mb-5"
       />
