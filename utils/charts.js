@@ -26,8 +26,6 @@ export const getPlotSettings = function (params = {}) {
     toImageButtonOptions: {
       filename: plotname,
       format: 'png',
-      height: 800,
-      width: 1200,
       scale: 2,
     },
   }
