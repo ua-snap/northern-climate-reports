@@ -10,9 +10,12 @@ a.button.is-info {
 <script>
 export default {
   name: 'DownloadCsvButton',
-  props: ['text', 'endpoint'],
+  props: ['text', 'endpoint', 'staticUrl'],
   computed: {
     downloadTarget() {
+      if (this.staticUrl) {
+        return this.staticUrl
+      }
       let endpointPath = this.endpoint
       if (this.endpoint == 'demographics') {
         url =

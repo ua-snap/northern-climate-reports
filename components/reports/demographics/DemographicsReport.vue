@@ -103,6 +103,14 @@
       endpoint="demographics"
       class="mt-3 mb-5"
     />
+
+    <div v-if="communityId === 'AK15'">
+      <DownloadCsvButton
+        text="Download demographics and health data for Anchorage (Dgheyaytnu) neighborhoods as CSV"
+        staticUrl="/Demographic and Health Data for Anchorage (Dgheyaytnu) Neighborhoods.csv"
+        class="mb-5"
+      />
+    </div>
   </div>
 </template>
 <script>
@@ -159,6 +167,7 @@ export default {
     ...mapGetters({
       demographics: 'demographics/demographicsData',
       place: 'place/name',
+      communityId: 'place/communityId',
     }),
   },
 }
