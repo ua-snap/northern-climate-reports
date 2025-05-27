@@ -34,11 +34,11 @@
       </ul>
     </div>
 
-    <div v-if="searchBlocks.hucs.length">
-      <h4 class="subtitle is-6 mt-5 mb-1">Hydrological units (HUCs)</h4>
+    <div v-if="searchBlocks.watersheds.length">
+      <h4 class="subtitle is-6 mt-5 mb-1">Watersheds</h4>
       <ul>
         <li
-          v-for="place in searchBlocks.hucs"
+          v-for="place in searchBlocks.watersheds"
           :key="place.id"
           class="additional-info"
         >
@@ -116,11 +116,11 @@ export default {
     searchBlocks() {
       let blocks = {}
       blocks.communities = this.searchResults.communities
-      blocks.hucs = _.filter(this.searchResults.areas, area => {
-        return area.type == 'huc'
+      blocks.watersheds = _.filter(this.searchResults.areas, area => {
+        return area.type == 'huc' || area.type == 'yt_watershed'
       })
       blocks.areas = _.filter(this.searchResults.areas, area => {
-        return area.type != 'huc'
+        return area.type != 'huc' && area.type != 'yt_watershed'
       })
       return blocks
     },
