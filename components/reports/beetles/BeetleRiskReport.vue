@@ -26,7 +26,7 @@
     <ReportBeetleRiskTable snowpack="medium" />
     <ReportBeetleRiskMaps />
     <DownloadCsvButton
-      text="Download beetle risk data as CSV"
+      text="Download climate protection data as CSV"
       endpoint="beetles"
       class="mt-3 mb-5"
     />

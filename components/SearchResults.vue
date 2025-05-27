@@ -6,11 +6,11 @@
 
     <div v-if="searchBlocks.areas.length">
       <p>
-        The map on the left shows hydrological units (HUC-8, HUC-10) and
-        protected areas near the point you selected. Additional areas of
-        interest (ethnolinguistic regions, fire management units, climate
-        divisions and Native corporations) are not shown on the map because they
-        are large, but are included in the list of matching areas below.
+        The map on the left shows watersheds and protected areas near the point
+        you selected. Additional areas of interest (ethnolinguistic regions,
+        fire management units, climate divisions and Native corporations) are
+        not shown on the map because they are large, but are included in the
+        list of matching areas below.
       </p>
 
       <ul>
@@ -143,14 +143,23 @@ export default {
           placeType =
             'HUC' + (place.id.length == 10 ? '10 ' : '8 ') + 'ID' + place.id
           break
+        case 'yt_watershed':
+          placeType = 'Yukon Watershed'
+          break
         case 'climate_division':
           placeType = 'Climate Division'
           break
         case 'fire_zone':
           placeType = 'Fire Management Unit'
           break
+        case 'yt_fire_district':
+          placeType = 'Yukon Fire District'
+          break
         case 'game_management_unit':
           placeType = 'Game Management Unit'
+          break
+        case 'yt_game_management_subzone':
+          placeType = 'Yukon Game Management Subzone'
           break
         case 'first_nation':
           placeType = 'First Nation Traditional Territory'

@@ -53,6 +53,13 @@ export default {
       },
       { rel: 'manifest', href: '/site.webmanifest' },
     ],
+    script: [
+      {
+        type: 'text/javascript',
+        src: '//script.crazyegg.com/pages/scripts/0126/7664.js',
+        async: true,
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -101,11 +108,12 @@ export default {
   // Env vars
   env: {
     geoserverUrl:
-      process.env.GEOSERVER_URL || 'https://gs.mapventure.org/geoserver/wms',
+      process.env.GEOSERVER_URL || 'https://gs.earthmaps.io/geoserver',
     rasdamanUrl:
-      process.env.RASDAMAN_URL || 'https://zeus.snap.uaf.edu/rasdaman/ows',
+      process.env.RASDAMAN_URL || 'https://maps.earthmaps.io/rasdaman/ows',
     apiUrl: process.env.SNAP_API_URL || 'https://earthmaps.io',
-    localStorageExpiration: 4,
+    offline: process.env.SITE_OFFLINE?.toLowerCase() == 'true',
+    slow: process.env.SITE_SLOW?.toLowerCase() == 'true',
   },
 
   // Router customizations
@@ -128,11 +136,16 @@ export default {
         path: '/report/:lat/:lng',
         component: resolve(__dirname, 'pages/index'),
       })
+      routes.push({
+        name: 'default',
+        path: '*',
+        redirect: '/',
+      })
     },
   },
 
   umami: {
-    scriptUrl: 'https://umami.snap.uaf.edu/umami.js',
+    scriptUrl: 'https://umami.snap.uaf.edu/script.js',
     websiteId: '2e69a077-ba5f-49c5-b076-09a44ab6fafd',
     ignoreDnt: false,
     domains: 'northernclimatereports.org',

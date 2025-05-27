@@ -1,8 +1,8 @@
 // This store fetches/manages "climate" variables (taspr = temp + precip)
 import _ from 'lodash'
 import { convertToInches, convertToFahrenheit } from '../utils/convert'
-import { localStorage, checkForError } from '../utils/localstorage'
-import nuxtStorage from 'nuxt-storage'
+import $axios from 'axios'
+import { getHttpError } from '../utils/http_errors'
 
 // Helper functions
 var convertReportData = function (climateData) {
@@ -77,8 +77,6 @@ export const actions = {
       process.env.apiUrl +
       '/taspr/' +
       context.rootGetters['place/urlFragment']()
-    let localKey = 'climateData-' + context.rootGetters['place/urlFragment']()
-    let errorKey = 'climateError-' + context.rootGetters['place/urlFragment']()
 
     let expectedDataKeys = [
       '1950_2009',
@@ -95,17 +93,25 @@ export const actions = {
       '2090_2099',
     ]
 
-    let returnedData = await localStorage(
-      queryUrl,
-      localKey,
-      errorKey,
-      expectedDataKeys
-    )
+    let returnedData = await $axios
+      .get(queryUrl, { timeout: 60000 })
+      .catch(err => {
+        context.commit('setHttpError', getHttpError(err))
+      })
 
-    if (checkForError(errorKey)) {
-      context.commit('setHttpError', nuxtStorage.localStorage.getData(errorKey))
-    } else {
-      context.commit('setClimateData', returnedData)
+    if (returnedData) {
+      let partialData = false
+      expectedDataKeys.forEach(key => {
+        if (returnedData.data[key] == null) {
+          partialData = true
+        }
+      })
+
+      if (partialData) {
+        context.commit('setHttpError', 'no_data')
+      } else if (returnedData && !partialData) {
+        context.commit('setClimateData', returnedData.data)
+      }
     }
   },
 }

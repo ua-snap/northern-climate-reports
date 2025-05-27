@@ -5,6 +5,8 @@ export let httpErrors = {
     'Provided coordinates or area are not included in coverage',
   timeout: 'Data request timed out',
   server_error: 'A problem occurred while requesting data',
+  low_population:
+    'The adult population for the requested community is less than 50 people. To protect privacy of community members, no data is shared for this location.',
 }
 
 export const getHttpError = function (error) {

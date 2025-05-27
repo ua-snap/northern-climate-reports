@@ -27,11 +27,27 @@
               >United States Geological Survey</a
             >.
           </p>
+
+          <p>
+            Portions of this tool were developed in collaboration with the
+            University of Alaska Anchorage
+            <a
+              href="https://www.uaa.alaska.edu/academics/college-of-health/departments/population-health-sciences/institute-for-circumpolar-health-studies"
+              >Institute for Circumpolar Health Studies</a
+            >, and the University of Washington
+            <a href="https://cdrc.uw.edu"
+              >Center for Disaster Resilient Communities</a
+            >. Development was partially funded by
+            <a
+              href="https://cfpub.epa.gov/ncer_abstracts/index.cfm/fuseaction/display.abstractDetail/abstract_id/11349"
+              >EPA Grant Number R840479</a
+            >.
+          </p>
           <p>
             <strong
               >Please contact
               <a href="mailto:uaf-snap-data-tools@alaska.edu"
-                >uaf&ndash;snap&ndash;data&ndash;tools@alaska.edu</a
+                >uaf-snap-data-tools@alaska.edu</a
               >
               with questions or comments.</strong
             >
@@ -57,18 +73,13 @@
             Copyright &copy; {{ year }} University of Alaska Fairbanks. All
             rights reserved.
             <br />
-            UA is an affirmative action / equal opportunity employer,
-            educational institution and provider and prohibits illegal
-            discrimination against any individual.
-            <br />
+            The <a href="https://www.alaska.edu/">University of Alaska</a> is an Equal
+            Opportunity/Equal Access Employer and Educational Institution. The
+            University is committed to a
             <a href="https://www.alaska.edu/nondiscrimination/"
-              >Statement of Nondiscrimination</a
+              >policy of non-discrimination</a
             >
-            and
-            <a
-              href="https://www.alaska.edu/records/records/compliance/gdpr/ua-privacy-statement/"
-              >Privacy Statement</a
-            >
+            against individuals on the basis of any legally protected status.
           </p>
         </div>
       </div>

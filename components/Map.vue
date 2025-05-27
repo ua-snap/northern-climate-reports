@@ -102,16 +102,19 @@ export default {
       })
     },
     getBaseMapAndLayers() {
-      var baseLayer = new this.$L.tileLayer.wms(process.env.geoserverUrl, {
-        transparent: true,
-        srs: 'EPSG:3338',
-        format: 'image/png',
-        version: '1.3.0',
-        layers: [
-          'atlas_mapproxy:alaska_osm_retina',
-          'shadow_mask:iem_with_ak_aleutians_symmetric_difference',
-        ],
-      })
+      var baseLayer = new this.$L.tileLayer.wms(
+        process.env.geoserverUrl + '/wms',
+        {
+          transparent: true,
+          srs: 'EPSG:3338',
+          format: 'image/png',
+          version: '1.3.0',
+          layers: [
+            'atlas_mapproxy:alaska_osm_retina',
+            'shadow_mask:iem_with_ak_aleutians_symmetric_difference',
+          ],
+        }
+      )
 
       // Projection definition.
       var proj = new this.$L.Proj.CRS(
@@ -142,7 +145,7 @@ export default {
     drawSearchResults() {
       // This can be triggered before the data are ready;
       // guard!
-      if (this.searchResults) {
+      if (this.searchResults && this.searchResults.total_bounds) {
         // Clear prior results, if any.
         if (this.layerGroup || this.communityLayerGroup) {
           this.map.removeLayer(this.layerGroup)
@@ -184,16 +187,24 @@ export default {
           _.each(this.searchResults.areas, area => {
             // Skip all but HUCs and Protected Areas, the other polygons
             // get so big they cause the map interface to work poorly.
-            if (area.type != 'huc' && area.type != 'protected_area') {
+            if (
+              area.type != 'huc' &&
+              area.type != 'protected_area' &&
+              area.type != 'yt_watershed' &&
+              area.type != 'yt_game_management_subzone'
+            ) {
               return
             }
 
             let defaultStyle, highlightedStyle
             // Set up the layer styles for HUC/Protected area
-            if (area.type == 'huc') {
+            if (area.type == 'huc' || area.type == 'yt_watershed') {
               defaultStyle = hucDefaultStyle
               highlightedStyle = hucHighlightedStyle
-            } else if (area.type == 'protected_area') {
+            } else if (
+              area.type == 'protected_area' ||
+              area.type == 'yt_game_management_subzone'
+            ) {
               defaultStyle = protectedAreaDefaultStyle
               highlightedStyle = protectedAreaHighlightedStyle
             }

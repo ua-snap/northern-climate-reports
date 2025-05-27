@@ -1,6 +1,7 @@
 // Shim for dev/testing
 import _ from 'lodash'
-import { localStorage } from '../utils/localstorage'
+import $axios from 'axios'
+import { getHttpError } from '../utils/http_errors'
 
 // Store, namespaced as `place/`
 export const state = () => ({
@@ -128,6 +129,8 @@ export const getters = {
             return area.name + ' Watershed HUC10 ' + area.id
           }
           return area.name + ' Watershed HUC8 ' + area.id
+        case 'yt_watershed':
+          return area.name + ' (Yukon Watershed)'
         case 'corporation':
           return area.name + ' (Native Corporation)'
         case 'climate_division':
@@ -136,10 +139,14 @@ export const getters = {
           return area.name + ' (Ethnolinguistic Region)'
         case 'fire_zone':
           return area.name + ' (Fire Management Unit)'
+        case 'yt_fire_district':
+          return area.name + ' (Yukon Fire District)'
         case 'first_nation':
           return area.name + ' (First Nation Traditional Territory)'
         case 'game_management_unit':
           return area.name + ' (Game Management Unit)'
+        case 'yt_game_management_subzone':
+          return area.name + ' (Yukon Game Management Subzone)'
         case 'borough':
           return area.name + ' (Borough)'
         default:
@@ -221,10 +228,15 @@ export const actions = {
   },
 
   async fetchPlaces(context) {
-    let queryUrl = process.env.apiUrl + '/places/all'
-    let localKey = 'places'
-    let returnedData = await localStorage(queryUrl, localKey)
-    context.commit('setPlaces', returnedData)
+    const queryUrl = process.env.apiUrl + '/places/all?tags=ncr'
+    try {
+      const returnedData = await $axios.get(queryUrl, { timeout: 10000 })
+      context.commit('setPlaces', returnedData.data)
+    } catch (error) {
+      console.error('Error fetching places:', getHttpError(error))
+      // Optionally handle the error, e.g., show an error message to the user
+      context.commit('setPlaces', null) // Or handle the error case appropriately
+    }
   },
 
   async search(context) {
@@ -237,7 +249,8 @@ export const actions = {
         '/places/search/' +
         context.getters.latLng[0] +
         '/' +
-        context.getters.latLng[1]
+        context.getters.latLng[1] +
+        '?tags=ncr'
 
       await this.$http.$get(queryUrl).then(res => {
         // Change the object structure to flatten & sort the areas
@@ -251,13 +264,22 @@ export const actions = {
         _.each(res.fire_management_units_near, place => {
           ssr.push(place)
         })
+        _.each(res.yt_fire_districts_near, place => {
+          ssr.push(place)
+        })
         _.each(res.hucs_near, place => {
+          ssr.push(place)
+        })
+        _.each(res.yt_watersheds_near, place => {
           ssr.push(place)
         })
         _.each(res.protected_areas_near, place => {
           ssr.push(place)
         })
         _.each(res.game_management_units_near, place => {
+          ssr.push(place)
+        })
+        _.each(res.yt_game_management_subzones_near, place => {
           ssr.push(place)
         })
         _.each(res.ca_first_nations_near, place => {

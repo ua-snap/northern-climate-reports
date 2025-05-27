@@ -29,6 +29,12 @@
                 >
                 <span
                   class="area-additional-info"
+                  v-if="props.option.type == 'yt_watershed'"
+                >
+                  Yukon Watershed
+                </span>
+                <span
+                  class="area-additional-info"
                   v-if="props.option.type == 'protected_area'"
                 >
                   {{ props.option.area_type }}
@@ -59,6 +65,12 @@
                 </span>
                 <span
                   class="area-additional-info"
+                  v-if="props.option.type == 'yt_fire_district'"
+                >
+                  Yukon Fire District
+                </span>
+                <span
+                  class="area-additional-info"
                   v-if="props.option.type == 'first_nation'"
                 >
                   First Nation Traditional Territory
@@ -71,9 +83,18 @@
                 </span>
                 <span
                   class="area-additional-info"
+                  v-if="props.option.type == 'yt_game_management_subzone'"
+                >
+                  Yukon Game Management Subzone
+                </span>
+                <span
+                  class="area-additional-info"
                   v-if="props.option.type == 'borough'"
                 >
                   Borough
+                </span>
+                <span class="area-additional-info">
+                  {{ props.option.region }}
                 </span>
               </div>
             </template>
@@ -97,12 +118,14 @@
               <li>Alaska Game Management Units (GMUs)</li>
               <li>Alaska Native Corporations</li>
               <li>Boroughs and Census Areas</li>
+              <li>Ethnolinguistic Divisions</li>
+              <li>Yukon First Nation Traditional Territories</li>
+              <li>Yukon Fire Districts</li>
               <li>Communities in Alaska and Canada</li>
             </ul>
           </div>
           <div class="column">
             <ul>
-              <li>Ethnolinguistic Divisions</li>
               <li>
                 <strong>Hydrological units (HUs)</strong> searchable by HU Code
                 (HUC8, HUC10) and name
@@ -111,7 +134,11 @@
                 <strong>Protected areas</strong>&nbsp;&nbsp;National Parks and
                 more, searchable by name and agency
               </li>
-              <li>Yukon First Nation Traditional Territories</li>
+              <li>
+                <strong>Yukon Game Management Subzones</strong> searchable by
+                code
+              </li>
+              <li><strong>Yukon Watersheds</strong> searchable by code</li>
             </ul>
           </div>
         </div>

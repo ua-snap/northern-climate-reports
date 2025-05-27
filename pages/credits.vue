@@ -49,6 +49,45 @@
 
       <div class="person mt-5 columns">
         <div class="column is-3 is-offset-2">
+          <img src="~assets/images/people/Micah-Hahn.jpg" />
+        </div>
+        <div class="column is-5">
+          <h3 class="subtitle is-3">Micah Hahn</h3>
+          <div class="content is-size-5">
+            <p>
+              Dr. Micah Hahn is an Associate Professor of Environmental Health
+              at the Institute for Circumpolar Health Studies, University of
+              Alaska Anchorage (UAA). Her research explores the health impacts
+              of climate change and helps communities develop effective, locally
+              tailored strategies for adaptation and resilience.
+            </p>
+            <p>
+              As an environmental epidemiologist, Dr. Hahn combines
+              epidemiological techniques, spatio-temporal exposure analysis,
+              climate and environmental data, and mixed-methods approaches in
+              her research. She collaborates with academic institutions,
+              government agencies, and communities to tackle real-world health
+              and environmental challenges.
+            </p>
+            <p>
+              Dr. Hahn earned a joint PhD in Epidemiology and Environment &
+              Resources from the University of Wisconsin-Madison, and an MPH in
+              Global Environmental Health from Emory University. Prior to UAA,
+              she was an epidemiologist with the CDC Climate and Health Program,
+              working alongside the CDC&rsquo;s Division of Vector-borne
+              Diseases and the National Center for Atmospheric Research (NCAR).
+            </p>
+            <p>
+              <a href="https://micahbhahn.wordpress.com"
+                >Learn more about Dr. Hahn</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="person mt-5 columns">
+        <div class="column is-3 is-offset-2">
           <img src="~assets/images/people/littell3_bw.jpg" />
         </div>
         <div class="column is-5">
@@ -268,10 +307,31 @@
           </p>
         </div>
       </div>
+    
       <div class="columns mb-6">
         <div class="column is-three-fifths is-offset-one-fifth">
-          <h4 class="title is-4">Rasdaman raster database</h4>
           <div class="content is-size-5">
+          <h3>Additional contributors</h3>
+          <p>
+            Substantial additional contributions were made by the following
+            people and organizations:
+          </p>
+            <ul>
+              <li><a href="https://health.alaska.gov/dph/Epi/eph/Pages/default.aspx" >Alaska Department of Health Environmental Public Health Program</a ></li>
+              <li><a href="https://www.muni.org/Departments/health/Admin/environment/Pages/default.aspx" >Anchorage Health Department Environmental Health Program</a ></li>
+              <li><a href="https://www.anthc.org/what-we-do/community-environment-and-health/healthy-homes/" >Alaska Native Tribal Health Consortium Air &amp; Healthy Homes Program</a ></li>
+              <li><a href="https://www.anthc.org/what-we-do/climate-initiatives/center-for-climate-and-health/" >Alaska Native Tribal Health Consortium Center for Climate &amp; Health</a ></li>
+              <li><a href="https://crnative.org/">Copper River Native Association</a></li>
+              <li><a href="https://www.igiugig.com/tribal-government/8-igiugig-tribal-council" >Igiugig Village Council</a></li>
+              
+              <li><a href="https://www.loudentribe.org/">Louden Tribe</a></li>
+              <li><a href="https://nvgakona.com/">Native Village of Gakona</a></li>
+              <li>Theresa Vertigan & Melissa Bradley (<a href="https://www.uaa.alaska.edu/academics/college-of-health/departments/population-health-sciences/institute-for-circumpolar-health-studies/index.cshtml" >UAA Institute for Circumpolar Health Studies</a >)</li>
+              <li><a href="https://deohs.washington.edu/CEER">University of Washington Collaborative on Extreme Event Resilience</a></li>
+            </ul>
+          
+          <h4 class="title is-4 mt-6">Rasdaman raster database</h4>
+          
             <p>
               This tool uses the
               <a href="http://www.rasdaman.org/">rasdaman</a> array database
@@ -301,6 +361,7 @@
     float: right;
     display: inline-block;
     padding-right: 1rem;
+    width: 100%;
   }
 }
 
