@@ -171,7 +171,7 @@
               <a href="#hydrology">Hydrology</a> charts with multiple variables,
               models, and scenarios, grouped decadally and by month of the year.
             </li>
-            <li v-if="permafrostData || forceShowPermafrost">
+            <li v-if="permafrostData || showPermafrostForArea">
               <a href="#permafrost">Permafrost</a> with specific visualizations
               depending on the presence or absence of permafrost
             </li>
@@ -241,9 +241,13 @@
                 <strong>Elevation:</strong>
                 {{ httpErrors[elevationHttpError] }}
               </li>
-              <li v-if="permafrostHttpError && !forceShowPermafrost">
+              <li v-if="permafrostHttpError && !showPermafrostForArea">
                 <strong>Permafrost:</strong>
                 {{ httpErrors[permafrostHttpError] }}
+              </li>
+              <li v-else-if="!showPermafrostForArea">
+                <strong>Permafrost:</strong>
+                Not supported for this area
               </li>
               <li v-if="flammabilityHttpError">
                 <strong>Flammability:</strong>
@@ -289,7 +293,7 @@
       </section>
       <section
         class="section is-hidden-touch"
-        v-if="permafrostData || (dataPresent && forceShowPermafrost)"
+        v-if="permafrostData || (dataPresent && showPermafrostForArea)"
       >
         <div id="permafrost">
           <PermafrostReport />
@@ -509,7 +513,7 @@ export default {
       hydrologyHttpError: 'hydrology/httpError',
       demographicsHttpError: 'demographics/httpError',
       isPointLocation: 'place/isPointLocation',
-      forceShowPermafrost: 'permafrost/forceShowPermafrost',
+      showPermafrostForArea: 'permafrost/showPermafrostForArea',
     }),
   },
   // This component initiates the data fetching so that

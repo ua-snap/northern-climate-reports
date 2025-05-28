@@ -119,7 +119,7 @@ export const getters = {
     return !permafrosttopValues.every(value => value === 0)
   },
 
-  forceShowPermafrost: (state, getters, rootState, rootGetters) => {
+  showPermafrostForArea: (state, getters, rootState, rootGetters) => {
     let areaId = rootGetters['place/areaId']
     let areaType = rootGetters['place/type']
 
