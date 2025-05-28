@@ -121,18 +121,26 @@ export const getters = {
 
   forceShowPermafrost: (state, getters, rootState, rootGetters) => {
     let areaId = rootGetters['place/areaId']
+    let areaType = rootGetters['place/type']
 
-    // Always show permafrost section for area reports unless the areas are
-    // Canadian. I.e., do not show permafrost for these area code prefixes:
-    // BCPA: British Columbia Protected Areas
-    // FNTT: First Nation Traditional Territories
-    // YTPA: Yukon Protected Areas
+    // The permafrost dataset covers only Alaska, so do not show peramfrost
+    // mini-maps for areas outside of Alaska.
+    const hidePermafrostAreaTypes = [
+      'first_nation',
+      'yt_fire_district',
+      'yt_game_management_subzone',
+      'yt_watershed',
+    ]
+
+    if (areaType && hidePermafrostAreaTypes.includes(areaType)) {
+      return false
+    }
+
+    // Alaska, Yukon, and British Columbia protected areas have the same
+    // areaType, so we need to check the areaId string prefix to determine if
+    // we should show permafrost data.
     if (areaId) {
-      if (
-        areaId.startsWith('BCPA') ||
-        areaId.startsWith('FNTT') ||
-        areaId.startsWith('YTPA')
-      ) {
+      if (areaId.startsWith('BCPA') || areaId.startsWith('YTPA')) {
         return false
       } else {
         return true
