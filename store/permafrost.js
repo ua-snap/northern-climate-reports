@@ -142,10 +142,10 @@ export const getters = {
     if (areaId) {
       if (areaId.startsWith('BCPA') || areaId.startsWith('YTPA')) {
         return false
-      } else {
-        return true
       }
     }
+
+    return true
   },
 }
 
