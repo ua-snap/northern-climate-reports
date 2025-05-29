@@ -53,7 +53,7 @@ export default {
       return this.pct > 0
     },
     diff() {
-      let diff = (this.future - this.past).toFixed(1)
+      let diff = _.round(this.future - this.past, 1)
       if (diff > 0) {
         diff = '&plus;' + diff
       } else if (diff < 0) {
