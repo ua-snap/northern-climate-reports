@@ -118,6 +118,40 @@ export const getters = {
     })
     return !permafrosttopValues.every(value => value === 0)
   },
+
+  showPermafrostForArea: (state, getters, rootState, rootGetters) => {
+    let type = rootGetters['place/type']
+
+    // Return false if this is not an area type.
+    if (type == 'community' || type == 'latLng') {
+      return false
+    }
+
+    // The permafrost dataset covers only Alaska, so do not show peramfrost
+    // mini-maps for areas outside of Alaska.
+    const hidePermafrostAreaTypes = [
+      'first_nation',
+      'yt_fire_district',
+      'yt_game_management_subzone',
+      'yt_watershed',
+    ]
+
+    if (type && hidePermafrostAreaTypes.includes(type)) {
+      return false
+    }
+
+    // Alaska, Yukon, and British Columbia protected areas have the same
+    // type, so we need to check the areaId string prefix to determine if
+    // we should show permafrost data.
+    let areaId = rootGetters['place/areaId']
+    if (areaId) {
+      if (areaId.startsWith('BCPA') || areaId.startsWith('YTPA')) {
+        return false
+      }
+    }
+
+    return true
+  },
 }
 
 export const mutations = {

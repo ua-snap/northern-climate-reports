@@ -171,14 +171,13 @@
               <a href="#hydrology">Hydrology</a> charts with multiple variables,
               models, and scenarios, grouped decadally and by month of the year.
             </li>
-            <li v-if="permafrostData">
+            <li v-if="permafrostData || showPermafrostForArea">
               <a href="#permafrost">Permafrost</a> with specific visualizations
               depending on the presence or absence of permafrost
             </li>
             <li v-if="flammabilityData || vegChangeData">
               <a href="#wildfire">Wildfire</a> charts of
-              {{ wildfireDataSubstring }} with multiple models and
-              scenarios
+              {{ wildfireDataSubstring }} with multiple models and scenarios
             </li>
             <li v-if="beetleData">
               <a href="#climate-protection-beetles"
@@ -230,7 +229,11 @@
                 <strong>Temperature and precipitation:</strong>
                 {{ httpErrors[climateHttpError] }}
               </li>
-              <li v-if="hydrologyHttpError">
+              <li v-if="type != 'community' && type != 'latLng'">
+                <strong>Hydrology:</strong>
+                Data are not averaged over areas
+              </li>
+              <li v-else-if="hydrologyHttpError">
                 <strong>Hydrology:</strong>
                 {{ httpErrors[hydrologyHttpError] }}
               </li>
@@ -238,9 +241,13 @@
                 <strong>Elevation:</strong>
                 {{ httpErrors[elevationHttpError] }}
               </li>
-              <li v-if="permafrostHttpError">
+              <li v-if="permafrostHttpError && !showPermafrostForArea">
                 <strong>Permafrost:</strong>
                 {{ httpErrors[permafrostHttpError] }}
+              </li>
+              <li v-else-if="!showPermafrostForArea">
+                <strong>Permafrost:</strong>
+                Not supported for this area
               </li>
               <li v-if="flammabilityHttpError">
                 <strong>Flammability:</strong>
@@ -286,7 +293,7 @@
       </section>
       <section
         class="section is-hidden-touch"
-        v-if="permafrostData || type != 'latLng'"
+        v-if="permafrostData || (dataPresent && showPermafrostForArea)"
       >
         <div id="permafrost">
           <PermafrostReport />
@@ -433,9 +440,13 @@ export default {
       // (Temperature, Permafrost, Beetle Climate Protection, etc.)
       let types = this.presentDataTypes()
 
+      // Ignore permafrost when considering if all datasets exist because the
+      // permafrost maps/section will be displayed regardless.
+      types = _.without(types, 'permafrost')
+
       // If there are less than 8 data types present, the corresponding
       // section(s) of the report page will be hidden.
-      if (types.length < 8) {
+      if (types.length < 7) {
         return true
       }
       return false
@@ -502,6 +513,7 @@ export default {
       hydrologyHttpError: 'hydrology/httpError',
       demographicsHttpError: 'demographics/httpError',
       isPointLocation: 'place/isPointLocation',
+      showPermafrostForArea: 'permafrost/showPermafrostForArea',
     }),
   },
   // This component initiates the data fetching so that
