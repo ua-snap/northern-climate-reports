@@ -138,13 +138,13 @@ export const getters = {
         case 'ethnolinguistic_region':
           return area.name + ' (Ethnolinguistic Region)'
         case 'fire_zone':
-          return area.name + ' (Fire Management Unit)'
+          return area.name + ' (Alaska Fire Management Unit)'
         case 'yt_fire_district':
           return area.name + ' (Yukon Fire District)'
         case 'first_nation':
           return area.name + ' (First Nation Traditional Territory)'
         case 'game_management_unit':
-          return area.name + ' (Game Management Unit)'
+          return area.name + ' (Alaska Game Management Unit)'
         case 'yt_game_management_subzone':
           return area.name + ' (Yukon Game Management Subzone)'
         case 'borough':

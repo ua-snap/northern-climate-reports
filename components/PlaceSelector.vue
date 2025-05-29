@@ -61,7 +61,7 @@
                   class="area-additional-info"
                   v-if="props.option.type == 'fire_zone'"
                 >
-                  Fire Management Unit
+                  Alaska Fire Management Unit
                 </span>
                 <span
                   class="area-additional-info"
@@ -79,7 +79,7 @@
                   class="area-additional-info"
                   v-if="props.option.type == 'game_management_unit'"
                 >
-                  Game Management Unit
+                  Alaska Game Management Unit
                 </span>
                 <span
                   class="area-additional-info"
