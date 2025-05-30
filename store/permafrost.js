@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { convertToInches, convertToFahrenheit } from '../utils/convert'
 import $axios from 'axios'
 import { getHttpError } from '../utils/http_errors'
-import * as turf from '@turf/turf'
+import { point, booleanPointInPolygon } from '@turf/turf'
 import alaska from '!raw-loader!../assets/alaska.geojson'
 
 // Store, namespaced as `permafrost/`
