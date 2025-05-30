@@ -7,6 +7,8 @@ export let httpErrors = {
   server_error: 'A problem occurred while requesting data',
   low_population:
     'The adult population for the requested community is less than 50 people. To protect privacy of community members, no data is shared for this location.',
+  gipl_outside_data_extent:
+    'Provided coordinates are outside the GIPL 2.0 data extent for Alaska',
 }
 
 export const getHttpError = function (error) {
