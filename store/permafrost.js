@@ -7,6 +7,10 @@ import { getHttpError } from '../utils/http_errors'
 import { point, booleanPointInPolygon } from '@turf/turf'
 import alaska from '!raw-loader!../assets/alaska.geojson'
 
+// Declare here and load alaska.geojson into the variable later if necessary so
+// we avoid loading alaska.geojson repeatedly.
+let alaskaJson = undefined
+
 // Store, namespaced as `permafrost/`
 export const state = () => ({
   permafrostData: undefined,
@@ -137,7 +141,9 @@ export const mutations = {
 }
 
 const withinAlaska = context => {
-  const alaskaJson = JSON.parse(alaska)
+  if (alaskaJson === undefined) {
+    alaskaJson = JSON.parse(alaska)
+  }
   const lngLat = context.rootGetters['place/latLng'].reverse()
   const point = turf.point(lngLat)
 
