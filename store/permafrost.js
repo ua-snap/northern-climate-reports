@@ -4,6 +4,8 @@ import _ from 'lodash'
 import { convertToInches, convertToFahrenheit } from '../utils/convert'
 import $axios from 'axios'
 import { getHttpError } from '../utils/http_errors'
+import * as turf from '@turf/turf'
+import alaska from '!raw-loader!../assets/alaska.geojson'
 
 // Store, namespaced as `permafrost/`
 export const state = () => ({
@@ -134,6 +136,22 @@ export const mutations = {
   },
 }
 
+const withinAlaska = context => {
+  const alaskaJson = JSON.parse(alaska)
+  const lngLat = context.rootGetters['place/latLng'].reverse()
+  const point = turf.point(lngLat)
+
+  // Iterate through each feature (polygon) in the Alaska GeoJSON and perform
+  // a lat/lon check for each polygon. Stop if any polygon contains the point.
+  for (let i = 0; i < alaskaJson.features.length; i++) {
+    const feature = alaskaJson.features[i]
+    const isInAlaska = turf.booleanPointInPolygon(point, feature)
+    if (isInAlaska) {
+      return true
+    }
+  }
+}
+
 export const actions = {
   async fetch(context) {
     // Only fetches data if the url fragment contains 'point'
@@ -160,12 +178,20 @@ export const actions = {
         })
 
         if (partialData) {
-          context.commit('setHttpError', 'no_data')
+          if (withinAlaska(context)) {
+            context.commit('setHttpError', 'gipl_outside_data_extent')
+          } else {
+            context.commit('setHttpError', 'no_data')
+          }
         } else if (returnedData && !partialData) {
           context.commit('setPermafrostData', returnedData.data)
         }
       } else {
-        context.commit('setHttpError', 'no_data')
+        if (withinAlaska(context)) {
+          context.commit('setHttpError', 'gipl_outside_data_extent')
+        } else {
+          context.commit('setHttpError', 'no_data')
+        }
       }
     }
   },
