@@ -150,6 +150,8 @@ const withinAlaska = context => {
       return true
     }
   }
+
+  return false
 }
 
 export const actions = {
