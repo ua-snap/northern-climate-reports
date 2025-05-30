@@ -145,13 +145,13 @@ const withinAlaska = context => {
     alaskaJson = JSON.parse(alaska)
   }
   const lngLat = context.rootGetters['place/latLng'].reverse()
-  const point = turf.point(lngLat)
+  const lngLatPoint = point(lngLat)
 
   // Iterate through each feature (polygon) in the Alaska GeoJSON and perform
   // a lat/lon check for each polygon. Stop if any polygon contains the point.
   for (let i = 0; i < alaskaJson.features.length; i++) {
     const feature = alaskaJson.features[i]
-    const isInAlaska = turf.booleanPointInPolygon(point, feature)
+    const isInAlaska = booleanPointInPolygon(lngLatPoint, feature)
     if (isInAlaska) {
       return true
     }
