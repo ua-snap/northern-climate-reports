@@ -8,7 +8,7 @@
       <p>
         The map on the left shows watersheds and protected areas near the point
         you selected. Additional areas of interest (ethnolinguistic regions,
-        fire management units, climate divisions and Native corporations) are
+        fire management zones, climate divisions and Native corporations) are
         not shown on the map because they are large, but are included in the
         list of matching areas below.
       </p>
@@ -150,7 +150,7 @@ export default {
           placeType = 'Climate Division'
           break
         case 'fire_zone':
-          placeType = 'Alaska Fire Management Unit'
+          placeType = 'Alaska Fire Management Zone'
           break
         case 'yt_fire_district':
           placeType = 'Yukon Fire District'

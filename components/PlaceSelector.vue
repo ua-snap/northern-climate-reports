@@ -61,7 +61,7 @@
                   class="area-additional-info"
                   v-if="props.option.type == 'fire_zone'"
                 >
-                  Alaska Fire Management Unit
+                  Alaska Fire Management Zone
                 </span>
                 <span
                   class="area-additional-info"
@@ -114,7 +114,7 @@
           <div class="column">
             <ul>
               <li>Alaska Climate Divisions</li>
-              <li>Alaska Fire Management Units</li>
+              <li>Alaska Fire Management Zones</li>
               <li>Alaska Game Management Units (GMUs)</li>
               <li>Alaska Native Corporations</li>
               <li>Boroughs and Census Areas</li>
