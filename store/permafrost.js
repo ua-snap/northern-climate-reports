@@ -4,6 +4,12 @@ import _ from 'lodash'
 import { convertToInches, convertToFahrenheit } from '../utils/convert'
 import $axios from 'axios'
 import { getHttpError } from '../utils/http_errors'
+import { point, booleanPointInPolygon } from '@turf/turf'
+import alaska from '!raw-loader!../assets/alaska.geojson'
+
+// Declare here and load alaska.geojson into the variable later if necessary so
+// we avoid loading alaska.geojson repeatedly.
+let alaskaJson = undefined
 
 // Store, namespaced as `permafrost/`
 export const state = () => ({
@@ -168,6 +174,27 @@ export const mutations = {
   },
 }
 
+const withinAlaska = context => {
+  if (alaskaJson === undefined) {
+    alaskaJson = JSON.parse(alaska)
+  }
+  const latLngCopy = [...context.rootGetters['place/latLng']]
+  const lngLat = latLngCopy.reverse()
+  const lngLatPoint = point(lngLat)
+
+  // Iterate through each feature (polygon) in the Alaska GeoJSON and perform
+  // a lat/lon check for each polygon. Stop if any polygon contains the point.
+  for (let i = 0; i < alaskaJson.features.length; i++) {
+    const feature = alaskaJson.features[i]
+    const isInAlaska = booleanPointInPolygon(lngLatPoint, feature)
+    if (isInAlaska) {
+      return true
+    }
+  }
+
+  return false
+}
+
 export const actions = {
   async fetch(context) {
     // Only fetches data if the url fragment contains 'point'
@@ -182,7 +209,15 @@ export const actions = {
       let returnedData = await $axios
         .get(queryUrl, { timeout: 60000 })
         .catch(err => {
-          context.commit('setHttpError', getHttpError(err))
+          if (
+            err.response != undefined &&
+            err.response.status == 404 &&
+            withinAlaska(context)
+          ) {
+            context.commit('setHttpError', 'gipl_outside_data_extent')
+          } else {
+            context.commit('setHttpError', getHttpError(err))
+          }
         })
 
       if (returnedData) {
@@ -198,8 +233,6 @@ export const actions = {
         } else if (returnedData && !partialData) {
           context.commit('setPermafrostData', returnedData.data)
         }
-      } else {
-        context.commit('setHttpError', 'no_data')
       }
     }
   },
