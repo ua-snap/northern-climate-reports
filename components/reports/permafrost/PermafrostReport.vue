@@ -3,7 +3,7 @@
     <div class="content">
       <h4 class="title is-3">Permafrost</h4>
       <div class="is-size-5">
-        <div v-if="reportData">
+        <div v-if="reportData || showPermafrostForArea">
           <span
             >The following maps show the projected mean annual ground
             temperature over time at a depth of {{ depthFragment }}.</span
@@ -107,6 +107,7 @@ export default {
       reportData: 'permafrost/permafrostData',
       magtThresholds: 'permafrost/magtThresholds',
       validTopData: 'permafrost/validTopData',
+      showPermafrostForArea: 'permafrost/showPermafrostForArea',
     }),
   },
 }
