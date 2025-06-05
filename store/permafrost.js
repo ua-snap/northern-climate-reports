@@ -144,7 +144,8 @@ const withinAlaska = context => {
   if (alaskaJson === undefined) {
     alaskaJson = JSON.parse(alaska)
   }
-  const lngLat = context.rootGetters['place/latLng'].reverse()
+  const latLngCopy = [...context.rootGetters['place/latLng']]
+  const lngLat = latLngCopy.reverse()
   const lngLatPoint = point(lngLat)
 
   // Iterate through each feature (polygon) in the Alaska GeoJSON and perform
