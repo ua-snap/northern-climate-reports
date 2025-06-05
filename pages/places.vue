@@ -137,12 +137,12 @@
             <figure class="image">
               <img
                 src="~/assets/images/place_thumbnails/fire-mgmt_square.jpg"
-                alt="Example image of Alaska Fire Management Units"
+                alt="Example image of Alaska Fire Management Zones"
               />
             </figure>
           </div>
           <div class="card-content">
-            <h3 class="title is-4">Alaska Fire Management Units</h3>
+            <h3 class="title is-4">Alaska Fire Management Zones</h3>
             <div class="content">
               <p>
                 The
