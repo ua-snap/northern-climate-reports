@@ -175,7 +175,15 @@ export const actions = {
       let returnedData = await $axios
         .get(queryUrl, { timeout: 60000 })
         .catch(err => {
-          context.commit('setHttpError', getHttpError(err))
+          if (
+            err.response != undefined &&
+            err.response.status == 404 &&
+            withinAlaska(context)
+          ) {
+            context.commit('setHttpError', 'gipl_outside_data_extent')
+          } else {
+            context.commit('setHttpError', getHttpError(err))
+          }
         })
 
       if (returnedData) {
@@ -187,19 +195,9 @@ export const actions = {
         })
 
         if (partialData) {
-          if (withinAlaska(context)) {
-            context.commit('setHttpError', 'gipl_outside_data_extent')
-          } else {
-            context.commit('setHttpError', 'no_data')
-          }
+          context.commit('setHttpError', 'no_data')
         } else if (returnedData && !partialData) {
           context.commit('setPermafrostData', returnedData.data)
-        }
-      } else {
-        if (withinAlaska(context)) {
-          context.commit('setHttpError', 'gipl_outside_data_extent')
-        } else {
-          context.commit('setHttpError', 'no_data')
         }
       }
     }
