@@ -260,7 +260,11 @@ export default {
       let footer = getFooter(footerLines, layout)
       layout.annotations.push(footer)
 
-      let plotSettings = getPlotSettings()
+      let plotSettings = getPlotSettings({
+        dataLabel: 'Flammability',
+        place: this.place,
+        dateRange: '1950-2099',
+      })
       this.$Plotly.newPlot(
         'wildfire-flammability-chart',
         dataTraces,

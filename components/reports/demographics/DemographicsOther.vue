@@ -5,7 +5,7 @@
         <caption>
           <a
             href="https://odphp.health.gov/healthypeople/priority-areas/social-determinants-health"
-            >Social determinants of health</a
+            >Non-medical factor measures</a
           >,
           {{
             placeName
@@ -19,7 +19,12 @@
         </thead>
         <tbody>
           <tr v-for="(name, key) in otherDemographics">
-            <th scope="row">{{ name }}</th>
+            <th scope="row">
+              {{ name
+              }}<span v-if="['pct_w_disability', 'pct_uninsured'].includes(key)"
+                >*</span
+              >
+            </th>
             <td>
               {{ demographics['place'][key] }}%
               <span
@@ -64,91 +69,24 @@
             </td>
           </tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4">
+              *These data include the total civilian population, excluding
+              people in the military or living in places like nursing homes or
+              prisons.
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </div>
     <div v-else>
       <div class="content is-size-5">
         <p>
-          Some social determinants of health (minority status, high school
+          Some non-medical factor measures (minority status, high school
           diploma, living below 150% of poverty line, broadband and more) are
           not available for this location.
         </p>
-      </div>
-    </div>
-    <div class="block">
-      <div v-if="disabilityInsurancePresent">
-        <table class="table block-centered demographic mb-6">
-          <caption>
-            Disability and insurance status,*
-            {{
-              placeName
-            }}, compared to Alaska and U.S.
-          </caption>
-          <thead>
-            <th scope="col"></th>
-            <th scope="col">{{ placeName }}</th>
-            <th scope="col">Alaska</th>
-            <th scope="col">U.S.</th>
-          </thead>
-          <tbody>
-            <tr v-for="(name, key) in acs">
-              <th scope="row" v-html="name"></th>
-              <td>
-                {{ demographics['place'][key] }}%
-                <span
-                  class="ci"
-                  v-html="
-                    confidenceInverval(
-                      demographics['place'][key],
-                      demographics['place']['moe_' + key]
-                    )
-                  "
-                />
-              </td>
-              <td>
-                {{ demographics['alaska'][key] }}%
-                <span
-                  class="ci"
-                  v-html="
-                    confidenceInverval(
-                      demographics['alaska'][key],
-                      demographics['alaska']['moe_' + key]
-                    )
-                  "
-                />
-              </td>
-              <td>
-                {{ demographics['us'][key] }}%
-                <span
-                  class="ci"
-                  v-html="
-                    confidenceInverval(
-                      demographics['us'][key],
-                      demographics['us']['moe_' + key]
-                    )
-                  "
-                />
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="4">
-                *These data include the total civilian population, excluding
-                people in the military or living in places like nursing homes or
-                prisons.
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-      <div v-else>
-        <div class="content is-size-5">
-          <p>
-            Demographic information for social determinants of health and
-            disability status are not available for this location.
-          </p>
-        </div>
       </div>
     </div>
   </div>
@@ -191,32 +129,10 @@ export default {
         return sum > 0
       }
     },
-    disabilityInsurancePresent() {
-      if (this.demographics) {
-        let sum = 0
-        Object.keys(this.acs).forEach(k => {
-          sum += Number.parseFloat(this.demographics['place'][k])
-        })
-        return sum > 0
-      }
-    },
     ...mapGetters({
       demographics: 'demographics/demographicsData',
       placeName: 'place/name',
     }),
-  },
-  methods: {
-    confidenceInverval(value, moe) {
-      let valueFloat = parseFloat(value)
-      let moeFloat = parseFloat(moe)
-      return (
-        '(' +
-        _.round(valueFloat - moeFloat, 1).toFixed(1) +
-        '&ndash;' +
-        _.round(valueFloat + moeFloat, 1).toFixed(1) +
-        ')'
-      )
-    },
   },
   data() {
     return {
@@ -232,10 +148,7 @@ export default {
         pct_crowding: 'Crowding',
         pct_hcost: 'Housing cost burden',
         pct_emospt: 'Lack of social and emotional support',
-      },
-      acs: {
         pct_w_disability: 'Percent with a disability',
-        pct_insured: 'Percent insured',
         pct_uninsured: 'Percent uninsured',
       },
     }

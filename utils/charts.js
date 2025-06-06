@@ -1,4 +1,18 @@
-export const getPlotSettings = function () {
+export const getPlotSettings = function (params = {}) {
+  const { dataLabel, place, dateRange, season, model } = params
+
+  // Dynamically build the plot name
+  let plotname = ''
+  if (dataLabel) plotname = dataLabel
+  if (place) {
+    // Replace &deg; with ° if found in the place
+    const placeLabel = place.replace(/&deg;/g, '°')
+    plotname += ` for ${placeLabel}`
+  }
+  if (season) plotname += `, ${season}`
+  if (dateRange) plotname += `, ${dateRange}`
+  if (model) plotname += `, ${model}`
+
   return {
     responsive: true, // changes the height / width dynamically for charts
     displayModeBar: true, // always show the camera icon
@@ -13,6 +27,11 @@ export const getPlotSettings = function () {
       'autoScale2d',
       'resetScale2d',
     ],
+    toImageButtonOptions: {
+      filename: plotname,
+      format: 'png',
+      scale: 2,
+    },
   }
 }
 

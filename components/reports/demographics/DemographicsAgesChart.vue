@@ -281,7 +281,10 @@ export default {
         },
       }
 
-      let plotSettings = getPlotSettings()
+      let plotSettings = getPlotSettings({
+        dataLabel: 'Age distribution',
+        place: this.placeName,
+      })
       this.$Plotly.newPlot(
         'demographics-ages-chart',
         dataTraces,

@@ -90,7 +90,12 @@ export default {
       let footer = getFooter(footerLines, layout)
       layout.annotations.push(footer)
 
-      let plotSettings = getPlotSettings()
+      let plotSettings = getPlotSettings({
+        dataLabel: 'Precipitation',
+        place: this.place,
+        season: seasons[this.season],
+        dateRange: '1950-2099',
+      })
       this.$Plotly.newPlot('precip-chart', dataTraces, layout, plotSettings)
     },
   },

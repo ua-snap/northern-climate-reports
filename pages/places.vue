@@ -137,12 +137,12 @@
             <figure class="image">
               <img
                 src="~/assets/images/place_thumbnails/fire-mgmt_square.jpg"
-                alt="Example image of Alaska Fire Management Units"
+                alt="Example image of Alaska Fire Management Zones"
               />
             </figure>
           </div>
           <div class="card-content">
-            <h3 class="title is-4">Fire Management Units</h3>
+            <h3 class="title is-4">Alaska Fire Management Zones</h3>
             <div class="content">
               <p>
                 The
@@ -169,7 +169,7 @@
             </figure>
           </div>
           <div class="card-content">
-            <h3 class="title is-4">Game Management Units</h3>
+            <h3 class="title is-4">Alaska Game Management Units</h3>
             <div class="content">
               <p>
                 The Alaska Department of Fish and Game manages hunting by
@@ -251,8 +251,7 @@
                 Fire districts are administrative areas where wildland fire
                 resources are allocated and deployed. They fall within one of
                 six larger fire regions.
-                <a
-                  href="https://wildfires.service.yukon.ca/"
+                <a href="https://wildfires.service.yukon.ca/"
                   >Learn more about Yukon Fire Districts</a
                 >
               </p>
