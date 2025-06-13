@@ -8,6 +8,7 @@ const sectionFunctions = {
   hydrology: 'checkForHydrology',
   permafrost: 'checkForPermafrost',
   wildfire: 'checkForWildfire',
+  beetles: 'checkForBeetles',
   demographics: 'checkForDemographics',
 }
 
@@ -82,6 +83,30 @@ const checkForWildfire = async page => {
   elements = await page.$$('#wildfire-veg-change-chart .legend .traces')
   count = elements.length
   expect(count).toBeGreaterThan(5)
+}
+
+const checkForBeetles = async page => {
+  let elements = await page.$$('#climate-protection-beetles td')
+  let count = elements.length
+  expect(count).toBeGreaterThan(40)
+
+  elements = await page.$$('#permafrost .leaflet-tile-loaded')
+  count = elements.length
+  expect(count).toBeGreaterThan(40)
+}
+
+const checkForDemographics = async page => {
+  let elements = await page.$$('#demographics-ages-chart rect')
+  let count = elements.length
+  expect(count).toBeGreaterThan(10)
+
+  elements = await page.$$('table.demographic td')
+  count = elements.length
+  expect(count).toBeGreaterThan(80)
+
+  elements = await page.$$('#demographics-race-ethnicity-chart rect')
+  count = elements.length
+  expect(count).toBeGreaterThan(10)
 }
 
 test('Click on Header', async ({ page }) => {
@@ -218,6 +243,8 @@ test('Click on Fairbanks', async ({ page }) => {
     'hydrology',
     'permafrost',
     'wildfire',
+    'beetles',
+    'demographics',
   ]
 
   for (const section of sections) {
