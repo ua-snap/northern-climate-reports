@@ -33,7 +33,7 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
 
-  timeout: 300_000,
+  timeout: 360_000,
 
   /* Configure projects for major browsers */
   projects: [

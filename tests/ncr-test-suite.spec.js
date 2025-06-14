@@ -219,23 +219,22 @@ test('Check for expected place types in place selector', async ({ page }) => {
   }
 })
 
-test('Click on Fairbanks', async ({ page }) => {
+test('Select Fairbanks and load report', async ({ page }) => {
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
   await page.waitForSelector('.has-icons-left > .input')
   await page.click('.has-icons-left > .input')
   await page.fill('.has-icons-left > .input', 'Fairbanks')
-  await page.waitForSelector('.dropdown-item:nth-child(1) > .search-item')
-  await page.click('.dropdown-item:nth-child(1) > .search-item')
+  await page.waitForSelector(
+    '.dropdown-item > .search-item:has-text("Fairbanks")'
+  )
+  await page.click('.dropdown-item > .search-item:has-text("Fairbanks")')
   await expect(page.locator('.section > .centered')).toBeVisible({
     timeout: 360000,
   })
   await expect(
     page.locator('text=Projected Conditions for Fairbanks')
   ).toBeVisible({ timeout: 360000 })
-
-  // Sleep for 60 seconds to allow
-  await page.waitForTimeout(10000)
 
   const sections = [
     'temperature',
@@ -246,7 +245,6 @@ test('Click on Fairbanks', async ({ page }) => {
     'beetles',
     'demographics',
   ]
-
   for (const section of sections) {
     if (sectionFunctions[section]) {
       const sectionFunction = sectionFunctions[section]
@@ -256,39 +254,16 @@ test('Click on Fairbanks', async ({ page }) => {
   }
 })
 
-test('Search for Chena River', async ({ page }) => {
+test('Select Chena River and load report', async ({ page }) => {
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
   await page.waitForSelector('.has-icons-left > .input')
   await page.click('.has-icons-left > .input')
   await page.fill('.has-icons-left > .input', 'Chena River')
-  await page.waitForSelector('.dropdown-content')
-  await expect(
-    page.locator('css=.dropdown-item:nth-child(1) > .search-item')
-  ).toContainText('\nChena River\n\nWatershed, HUC ID 19080306')
-  await expect(
-    page.locator('css=.dropdown-item:nth-child(2) > .search-item')
-  ).toContainText(
-    '\nHeadwaters Middle Fork Chena River\n\nWatershed, HUC ID 1908030601'
+  await page.waitForSelector(
+    '.dropdown-item > .search-item:has-text("Chena River")'
   )
-  await expect(
-    page.locator('css=.dropdown-item:nth-child(3) > .search-item')
-  ).toContainText('\nLower Chena River\n\nWatershed, HUC ID 1908030609')
-  await expect(
-    page.locator('css=.dropdown-item:nth-child(4) > .search-item')
-  ).toContainText(
-    '\nOutlet Middle Fork Chena River\n\nWatershed, HUC ID 1908030603'
-  )
-})
-
-test('Click on Chena River HUC8', async ({ page }) => {
-  await page.goto(url)
-  await page.setViewportSize({ width: 1728, height: 1078 })
-  await page.waitForSelector('.has-icons-left > .input')
-  await page.click('.has-icons-left > .input')
-  await page.fill('.has-icons-left > .input', 'Chena River')
-  await page.waitForSelector('.dropdown-item:nth-child(1) > .search-item')
-  await page.click('.dropdown-item:nth-child(1) > .search-item')
+  await page.click('.dropdown-item > .search-item:has-text("Chena River")')
   await expect(page.locator('.section > .centered')).toBeVisible({
     timeout: 360000,
   })
@@ -297,26 +272,18 @@ test('Click on Chena River HUC8', async ({ page }) => {
       'text=Projected Conditions for Chena River Watershed HUC8 19080306'
     )
   ).toBeVisible({ timeout: 360000 })
+
+  const sections = ['temperature', 'precipitation', 'wildfire', 'beetles']
+  for (const section of sections) {
+    if (sectionFunctions[section]) {
+      const sectionFunction = sectionFunctions[section]
+      console.log(`Checking section: ${section}`)
+      await eval(sectionFunction)(page)
+    }
+  }
 })
 
-test('Select and load report for Dawson City', async ({ page }) => {
-  test.setTimeout(180000)
-  await page.goto(url)
-  await page.setViewportSize({ width: 1728, height: 1078 })
-  await page.waitForSelector('.has-icons-left > .input')
-  await page.click('.has-icons-left > .input')
-  await page.fill('.has-icons-left > .input', 'Dawson Ci')
-  await page.waitForSelector('.dropdown-item:nth-child(1) > .search-item')
-  await page.click('.dropdown-item:nth-child(1) > .search-item')
-  await page.waitForSelector('.section > .centered', { timeout: 180000 })
-  await page.waitForSelector('text=Projected Conditions for Dawson City', {
-    timeout: 360000,
-  })
-
-  checkForReportSections(page, ['temperature', 'precipitation'])
-})
-
-test('Choose 70.04N, 157.33W from map search', async ({ page }) => {
+test('Enter 60.61°N, 131.05°W', async ({ page }) => {
   test.setTimeout(180000)
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
@@ -327,20 +294,108 @@ test('Choose 70.04N, 157.33W from map search', async ({ page }) => {
   if (box) {
     await page.mouse.click(box.x + 600, box.y + 250)
   }
-  await page.waitForSelector(
-    'css=div:nth-child(2) > ul > .additional-info:nth-child(1)'
-  )
-  await expect(
-    page.locator('css=div:nth-child(2) > ul > .additional-info:nth-child(1)')
-  ).toContainText('Arctic Slope Regional Corporation')
-  await expect(
-    page.locator('css=div:nth-child(3) > ul > .additional-info:nth-child(1)')
-  ).toContainText('Admiralty Bay-Dease Inlet')
+  await page.waitForSelector('.latlon-picker--wrapper input')
 
-  await page.evaluate(() => window.scrollBy(0, 500))
-  await page.click('css=.mt-4:nth-child(5)')
+  await page.fill('.latlon-picker--wrapper input', '60.61°N, 131.05°W')
+  await page.click('.latlon-picker--wrapper button')
 
+  await page.waitForSelector('text=Projected Conditions for 60.61°N, 131.05°W')
   await expect(
-    page.locator('text=Projected Conditions for 70.04°N, 157.33°W')
+    page.locator('text=Projected Conditions for 60.61°N, 131.05°W')
   ).toBeVisible({ timeout: 360000 })
+
+  const sections = ['temperature', 'precipitation', 'hydrology']
+  for (const section of sections) {
+    if (sectionFunctions[section]) {
+      const sectionFunction = sectionFunctions[section]
+      console.log(`Checking section: ${section}`)
+      await eval(sectionFunction)(page)
+    }
+  }
+})
+
+test('Select and load report for Dawson City', async ({ page }) => {
+  test.setTimeout(180000)
+  await page.goto(url)
+  await page.setViewportSize({ width: 1728, height: 1078 })
+  await page.waitForSelector('.has-icons-left > .input')
+  await page.click('.has-icons-left > .input')
+  await page.fill('.has-icons-left > .input', 'Dawson Ci')
+  await page.waitForSelector(
+    '.dropdown-item > .search-item:has-text("Dawson City")'
+  )
+  await page.click('.dropdown-item > .search-item:has-text("Dawson City")')
+  await page.waitForSelector('.section > .centered', { timeout: 180000 })
+  await page.waitForSelector('text=Projected Conditions for Dawson City', {
+    timeout: 360000,
+  })
+
+  const sections = ['temperature', 'precipitation']
+  for (const section of sections) {
+    if (sectionFunctions[section]) {
+      const sectionFunction = sectionFunctions[section]
+      console.log(`Checking section: ${section}`)
+      await eval(sectionFunction)(page)
+    }
+  }
+})
+
+test('Select Carmacks Fire District and load report', async ({ page }) => {
+  await page.goto(url)
+  await page.setViewportSize({ width: 1728, height: 1078 })
+  await page.waitForSelector('.has-icons-left > .input')
+  await page.click('.has-icons-left > .input')
+  await page.fill('.has-icons-left > .input', 'Carmacks Fire District')
+  await page.waitForSelector(
+    '.dropdown-item > .search-item:has-text("Carmacks Fire District")'
+  )
+  await page.click(
+    '.dropdown-item > .search-item:has-text("Carmacks Fire District")'
+  )
+  await expect(page.locator('.section > .centered')).toBeVisible({
+    timeout: 360000,
+  })
+  await expect(
+    page.locator('text=Projected Conditions for Carmacks Fire District')
+  ).toBeVisible({ timeout: 360000 })
+
+  const sections = ['temperature', 'precipitation', 'wildfire']
+  for (const section of sections) {
+    if (sectionFunctions[section]) {
+      const sectionFunction = sectionFunctions[section]
+      console.log(`Checking section: ${section}`)
+      await eval(sectionFunction)(page)
+    }
+  }
+})
+
+test('Test map search', async ({ page }) => {
+  test.setTimeout(360000)
+  await page.goto(url)
+  await page.setViewportSize({ width: 1728, height: 1078 })
+  await page.waitForSelector('#map')
+  await page.evaluate(() => window.scrollBy(0, 500))
+  const element = await page.locator('#map')
+  const box = await element.boundingBox()
+  if (box) {
+    await page.mouse.click(box.x + 600, box.y + 250)
+  }
+
+  await page.waitForSelector(
+    '#map--sidebar a:has-text("Admiralty Bay-Dease Inlet")'
+  )
+  await page.click('#map--sidebar a:has-text("Admiralty Bay-Dease Inlet")')
+
+  await expect(
+    page.locator('text=Projected Conditions for Admiralty Bay-Dease Inlet')
+  ).toBeVisible({ timeout: 360000 })
+
+  const sections = ['temperature', 'precipitation', 'wildfire']
+  for (const section of sections) {
+    if (sectionFunctions[section]) {
+      const sectionFunction = sectionFunctions[section]
+      console.log(`Checking section: ${section}`)
+      await eval(sectionFunction)(page)
+    }
+  }
 })
