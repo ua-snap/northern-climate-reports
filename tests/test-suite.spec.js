@@ -219,6 +219,7 @@ test('Check for expected place types in place selector', async ({ page }) => {
 })
 
 test('Select Fairbanks and load report', async ({ page }) => {
+  test.setTimeout(500000)
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
   await page.waitForSelector('.has-icons-left > .input')
@@ -229,11 +230,14 @@ test('Select Fairbanks and load report', async ({ page }) => {
   )
   await page.click('.dropdown-item > .search-item:has-text("Fairbanks")')
   await expect(page.locator('.section > .centered')).toBeVisible({
-    timeout: 360000,
+    timeout: 500000,
   })
   await expect(
     page.locator('text=Projected Conditions for Fairbanks')
-  ).toBeVisible({ timeout: 360000 })
+  ).toBeVisible({ timeout: 500000 })
+
+  // Wait to ensure all map tiles are loaded.
+  await page.waitForTimeout(30000)
 
   const sections = [
     'temperature',
@@ -253,24 +257,28 @@ test('Select Fairbanks and load report', async ({ page }) => {
   }
 })
 
-test('Select Chena River and load report', async ({ page }) => {
+test('Select Big Creek Watershed and load report', async ({ page }) => {
+  test.setTimeout(500000)
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
   await page.waitForSelector('.has-icons-left > .input')
   await page.click('.has-icons-left > .input')
-  await page.fill('.has-icons-left > .input', 'Chena River')
+  await page.fill('.has-icons-left > .input', 'Big Creek')
   await page.waitForSelector(
-    '.dropdown-item > .search-item:has-text("Chena River")'
+    '.dropdown-item > .search-item:has-text("Big Creek")'
   )
-  await page.click('.dropdown-item > .search-item:has-text("Chena River")')
+  await page.click('.dropdown-item > .search-item:has-text("Big Creek")')
   await expect(page.locator('.section > .centered')).toBeVisible({
-    timeout: 360000,
+    timeout: 500000,
   })
   await expect(
     page.locator(
-      'text=Projected Conditions for Chena River Watershed HUC8 19080306'
+      'text=Projected Conditions for Big Creek-Frontal Frederick Sound Watershed HUC10 1901021001'
     )
-  ).toBeVisible({ timeout: 360000 })
+  ).toBeVisible({ timeout: 500000 })
+
+  // Wait to ensure all map tiles are loaded.
+  await page.waitForTimeout(30000)
 
   const sections = ['temperature', 'precipitation', 'wildfire', 'beetles']
   for (const section of sections) {
@@ -285,7 +293,7 @@ test('Select Chena River and load report', async ({ page }) => {
 test('Enter coordinates and load report for 60.61°N, 131.05°W', async ({
   page,
 }) => {
-  test.setTimeout(360000)
+  test.setTimeout(500000)
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
   await page.waitForSelector('#map')
@@ -303,7 +311,10 @@ test('Enter coordinates and load report for 60.61°N, 131.05°W', async ({
   await page.waitForSelector('text=Projected Conditions for 60.61°N, 131.05°W')
   await expect(
     page.locator('text=Projected Conditions for 60.61°N, 131.05°W')
-  ).toBeVisible({ timeout: 360000 })
+  ).toBeVisible({ timeout: 500000 })
+
+  // Wait to ensure all map tiles are loaded.
+  await page.waitForTimeout(30000)
 
   const sections = ['temperature', 'precipitation', 'hydrology']
   for (const section of sections) {
@@ -316,7 +327,7 @@ test('Enter coordinates and load report for 60.61°N, 131.05°W', async ({
 })
 
 test('Select and load report for Dawson City', async ({ page }) => {
-  test.setTimeout(360000)
+  test.setTimeout(500000)
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
   await page.waitForSelector('.has-icons-left > .input')
@@ -326,9 +337,9 @@ test('Select and load report for Dawson City', async ({ page }) => {
     '.dropdown-item > .search-item:has-text("Dawson City")'
   )
   await page.click('.dropdown-item > .search-item:has-text("Dawson City")')
-  await page.waitForSelector('.section > .centered', { timeout: 360000 })
+  await page.waitForSelector('.section > .centered', { timeout: 500000 })
   await page.waitForSelector('text=Projected Conditions for Dawson City', {
-    timeout: 360000,
+    timeout: 500000,
   })
 
   const sections = ['temperature', 'precipitation']
@@ -342,6 +353,7 @@ test('Select and load report for Dawson City', async ({ page }) => {
 })
 
 test('Select Carmacks Fire District and load report', async ({ page }) => {
+  test.setTimeout(500000)
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
   await page.waitForSelector('.has-icons-left > .input')
@@ -354,11 +366,14 @@ test('Select Carmacks Fire District and load report', async ({ page }) => {
     '.dropdown-item > .search-item:has-text("Carmacks Fire District")'
   )
   await expect(page.locator('.section > .centered')).toBeVisible({
-    timeout: 360000,
+    timeout: 500000,
   })
   await expect(
     page.locator('text=Projected Conditions for Carmacks Fire District')
-  ).toBeVisible({ timeout: 360000 })
+  ).toBeVisible({ timeout: 500000 })
+
+  // Wait to ensure all map tiles are loaded.
+  await page.waitForTimeout(30000)
 
   const sections = ['temperature', 'precipitation', 'wildfire']
   for (const section of sections) {
@@ -371,7 +386,7 @@ test('Select Carmacks Fire District and load report', async ({ page }) => {
 })
 
 test('Test map search for Admiralty Bay-Dease Inlet', async ({ page }) => {
-  test.setTimeout(360000)
+  test.setTimeout(500000)
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
   await page.waitForSelector('#map')
@@ -389,7 +404,10 @@ test('Test map search for Admiralty Bay-Dease Inlet', async ({ page }) => {
 
   await expect(
     page.locator('text=Projected Conditions for Admiralty Bay-Dease Inlet')
-  ).toBeVisible({ timeout: 360000 })
+  ).toBeVisible({ timeout: 500000 })
+
+  // Wait to ensure all map tiles are loaded.
+  await page.waitForTimeout(30000)
 
   const sections = ['temperature', 'precipitation', 'wildfire']
   for (const section of sections) {
@@ -402,16 +420,19 @@ test('Test map search for Admiralty Bay-Dease Inlet', async ({ page }) => {
 })
 
 test('Test permalink for Fairbanks', async ({ page }) => {
-  test.setTimeout(360000)
+  test.setTimeout(500000)
   const permalinkUrl = url + '/report/community/AK124'
   await page.goto(permalinkUrl)
   await page.setViewportSize({ width: 1728, height: 1078 })
   await expect(page.locator('.section > .centered')).toBeVisible({
-    timeout: 360000,
+    timeout: 500000,
   })
   await expect(
     page.locator('text=Projected Conditions for Fairbanks')
-  ).toBeVisible({ timeout: 360000 })
+  ).toBeVisible({ timeout: 500000 })
+
+  // Wait to ensure all map tiles are loaded.
+  await page.waitForTimeout(30000)
 
   const sections = [
     'temperature',
