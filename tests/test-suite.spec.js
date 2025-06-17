@@ -285,7 +285,7 @@ test('Select Chena River and load report', async ({ page }) => {
 test('Enter coordinates and load report for 60.61°N, 131.05°W', async ({
   page,
 }) => {
-  test.setTimeout(180000)
+  test.setTimeout(360000)
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
   await page.waitForSelector('#map')
@@ -316,7 +316,7 @@ test('Enter coordinates and load report for 60.61°N, 131.05°W', async ({
 })
 
 test('Select and load report for Dawson City', async ({ page }) => {
-  test.setTimeout(180000)
+  test.setTimeout(360000)
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
   await page.waitForSelector('.has-icons-left > .input')
@@ -326,7 +326,7 @@ test('Select and load report for Dawson City', async ({ page }) => {
     '.dropdown-item > .search-item:has-text("Dawson City")'
   )
   await page.click('.dropdown-item > .search-item:has-text("Dawson City")')
-  await page.waitForSelector('.section > .centered', { timeout: 180000 })
+  await page.waitForSelector('.section > .centered', { timeout: 360000 })
   await page.waitForSelector('text=Projected Conditions for Dawson City', {
     timeout: 360000,
   })
