@@ -109,7 +109,7 @@ const checkForDemographics = async page => {
   expect(count).toBeGreaterThan(10)
 }
 
-test('Click on Header', async ({ page }) => {
+test('Check header and header links', async ({ page }) => {
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
   await page.waitForSelector('.place-selector--wrapper .title')
@@ -152,7 +152,6 @@ test('Check for expected place types in place selector', async ({ page }) => {
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
 
-  await page.click('.navbar-item:nth-child(1) > .nuxt-link-active')
   await expect(page.locator('.place-selector--wrapper .title')).toHaveText(
     'Find a place by name'
   )
@@ -283,7 +282,9 @@ test('Select Chena River and load report', async ({ page }) => {
   }
 })
 
-test('Enter 60.61°N, 131.05°W', async ({ page }) => {
+test('Enter coordinates and load report for 60.61°N, 131.05°W', async ({
+  page,
+}) => {
   test.setTimeout(180000)
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
@@ -369,7 +370,7 @@ test('Select Carmacks Fire District and load report', async ({ page }) => {
   }
 })
 
-test('Test map search', async ({ page }) => {
+test('Test map search for Admiralty Bay-Dease Inlet', async ({ page }) => {
   test.setTimeout(360000)
   await page.goto(url)
   await page.setViewportSize({ width: 1728, height: 1078 })
@@ -391,6 +392,36 @@ test('Test map search', async ({ page }) => {
   ).toBeVisible({ timeout: 360000 })
 
   const sections = ['temperature', 'precipitation', 'wildfire']
+  for (const section of sections) {
+    if (sectionFunctions[section]) {
+      const sectionFunction = sectionFunctions[section]
+      console.log(`Checking section: ${section}`)
+      await eval(sectionFunction)(page)
+    }
+  }
+})
+
+test('Test permalink for Fairbanks', async ({ page }) => {
+  test.setTimeout(360000)
+  const permalinkUrl = url + '/report/community/AK124'
+  await page.goto(permalinkUrl)
+  await page.setViewportSize({ width: 1728, height: 1078 })
+  await expect(page.locator('.section > .centered')).toBeVisible({
+    timeout: 360000,
+  })
+  await expect(
+    page.locator('text=Projected Conditions for Fairbanks')
+  ).toBeVisible({ timeout: 360000 })
+
+  const sections = [
+    'temperature',
+    'precipitation',
+    'hydrology',
+    'permafrost',
+    'wildfire',
+    'beetles',
+    'demographics',
+  ]
   for (const section of sections) {
     if (sectionFunctions[section]) {
       const sectionFunction = sectionFunctions[section]
