@@ -89,7 +89,7 @@ $ npm run dev
 
 ### Playwright tests
 
-To run the Playwright tests for this webapp, set any necesary environment variables, then run the webapp:
+To run the Playwright tests for this webapp, set any necessary environment variables, then run the webapp:
 
 ```
 npm run dev
