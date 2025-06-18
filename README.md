@@ -87,6 +87,23 @@ Serve with hot reload at http://localhost:3000:
 $ npm run dev
 ```
 
+### Playwright tests
+
+To run the Playwright tests for this webapp, set any necessary environment variables, then run the webapp:
+
+```
+npm run dev
+```
+
+Make sure the local webapp is running as expected. Then, in another terminal window, run the following
+
+```
+npx playwright install # Install Playwright browsers
+npx playwright test --ui
+```
+
+Note that, due to intermittent timeouts from computationally-expensive Data API requests, especially if you are running this webapp locally against an uncached local Data API, it's very possible that some of the Playwright tests will fail even if there is nothing wrong with the code. This happens maybe ~10% of the time. If a test fails, remember that you can run the test over again individually without re-running the full suite of tests.
+
 ## Deployment
 
 Set environment variables if necessary, then run:
