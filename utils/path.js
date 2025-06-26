@@ -15,7 +15,8 @@ export const getAppPathFragment = function (type, id) {
     type == 'yt_game_management_subzone' ||
     type == 'borough' ||
     type == 'census_area' ||
-    type == 'yt_watershed'
+    type == 'yt_watershed' ||
+    type == 'ecoregion'
   ) {
     path = '/report/area/' + id
   } else {

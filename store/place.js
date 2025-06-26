@@ -149,6 +149,8 @@ export const getters = {
           return area.name + ' (Yukon Game Management Subzone)'
         case 'borough':
           return area.name + ' (Borough)'
+        case 'ecoregion':
+          return area.name + ' (Ecoregion)'
         default:
           return area.name
       }
@@ -292,6 +294,9 @@ export const actions = {
           ssr.push(place)
         })
         _.each(res.ethnolinguistic_regions_near, place => {
+          ssr.push(place)
+        })
+        _.each(res.ecoregions_near, place => {
           ssr.push(place)
         })
 

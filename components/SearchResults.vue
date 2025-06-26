@@ -170,6 +170,9 @@ export default {
         case 'ethnolinguistic_region':
           placeType = 'Ethnolinguistic Region'
           break
+        case 'ecoregion':
+          placeType = 'Ecoregion'
+          break
         default: // Do nothing, don't decorate protected areas
       }
       return placeType
