@@ -171,6 +171,7 @@ test('Check for expected place types in place selector', async ({ page }) => {
     'BC Provincial Park - Protected Area',
     'BC Provincial Park - Recreation Area',
     'Ecological Reserve',
+    'Ecoregion',
     'Habitat Protection Area',
     'National Conservation Area (BLM)',
     'National Forest (USFS)',

@@ -93,6 +93,12 @@
                 >
                   Borough
                 </span>
+                <span
+                  class="area-additional-info"
+                  v-if="props.option.type == 'ecoregion'"
+                >
+                  Ecoregion
+                </span>
                 <span class="area-additional-info">
                   {{ props.option.region }}
                 </span>
