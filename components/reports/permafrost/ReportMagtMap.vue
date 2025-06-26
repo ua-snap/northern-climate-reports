@@ -87,7 +87,7 @@ export default {
         transparent: true,
         format: 'image/png',
         version: '1.3.0',
-        layers: 'crrel_gipl_outputs',
+        layers: 'crrel_gipl_outputs_nc',
         dim_model: this.model,
         dim_scenario: this.scenario,
         dim_variable: 1,
