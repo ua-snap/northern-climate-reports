@@ -85,7 +85,7 @@ export const actions = {
   async fetch(context) {
     let queryUrl =
       process.env.apiUrl +
-      '/indicators/base/' +
+      '/indicators/cmip5/' +
       context.rootGetters['place/urlFragment']()
 
     let returnedData = await $axios
