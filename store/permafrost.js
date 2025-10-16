@@ -133,7 +133,7 @@ export const getters = {
       return true
     }
 
-    // The permafrost dataset covers only Alaska, so do not show peramfrost
+    // The permafrost dataset covers only Alaska, so do not show permafrost
     // mini-maps for areas outside of Alaska.
     const hidePermafrostAreaTypes = [
       'first_nation',
