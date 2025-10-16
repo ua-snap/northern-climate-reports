@@ -125,12 +125,23 @@ export const getters = {
     return !permafrosttopValues.every(value => value === 0)
   },
 
+  isLocation: (state, getters, rootState, rootGetters) => {
+    let type = rootGetters['place/type']
+
+    // Return true if this is a community or lat/lng location.
+    if (type == 'community' || type == 'latLng') {
+      return true
+    }
+
+    return false
+  },
+
   showPermafrostForArea: (state, getters, rootState, rootGetters) => {
     let type = rootGetters['place/type']
 
-    // Return true if this is not an area type.
+    // Required to ensure communities and lat/lngs don't set this to true.
     if (type == 'community' || type == 'latLng') {
-      return true
+      return false
     }
 
     // The permafrost dataset covers only Alaska, so do not show permafrost
