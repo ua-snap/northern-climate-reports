@@ -241,7 +241,7 @@
                 <strong>Elevation:</strong>
                 {{ httpErrors[elevationHttpError] }}
               </li>
-              <li v-if="permafrostHttpError && !showPermafrostForArea">
+              <li v-if="permafrostHttpError && showPermafrostForArea">
                 <strong>Permafrost:</strong>
                 {{ httpErrors[permafrostHttpError] }}
               </li>

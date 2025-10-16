@@ -128,9 +128,9 @@ export const getters = {
   showPermafrostForArea: (state, getters, rootState, rootGetters) => {
     let type = rootGetters['place/type']
 
-    // Return false if this is not an area type.
+    // Return true if this is not an area type.
     if (type == 'community' || type == 'latLng') {
-      return false
+      return true
     }
 
     // The permafrost dataset covers only Alaska, so do not show peramfrost
