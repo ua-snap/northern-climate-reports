@@ -15,6 +15,17 @@
               plan infrastructure, manage natural resources, and communicate
               change. You can also download data.
             </p>
+            <p>
+              To help you use the data outside fo the tool, we have also developed
+               a user guide that shows how to use the health and demographic 
+               information available in the tool alongside the climate projections
+                to help you understand who may be most impacted by these changes. 
+                <a href="https://heyzine.com/flip-book/08230069b0.html"
+                > The step-by-step user guide </a> walks you through two specific scenarios: 
+                program implementation and grant planning. You can read more about 
+                <a href="https://uaf-snap.org/project/epa-star-ncr/">how this user
+               guide was developed here.</a>
+            </p>
           </div>
           <h2 class="title is-3 mt-6">How is this region changing?</h2>
           <div class="content is-size-5">
