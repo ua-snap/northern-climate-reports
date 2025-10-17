@@ -20,7 +20,7 @@
                a user guide that shows how to use the health and demographic 
                information available in the tool alongside the climate projections
                 to help you understand who may be most impacted by these changes. 
-                <a href="https://heyzine.com/flip-book/08230069b0.html"
+                <a href="https://uaf-snap.org/wp-content/uploads/2025/10/ncr-user-guide-full.pdf"
                 > The step-by-step user guide </a> walks you through two specific scenarios: 
                 program implementation and grant planning. You can read more about 
                 <a href="https://uaf-snap.org/project/epa-star-ncr/">how this user
