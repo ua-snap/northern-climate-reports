@@ -127,3 +127,4 @@ aws cloudfront create-invalidation --distribution_id EZEXS6RHS812M --paths "/*"
 
 For detailed explanation on how things work, check out
 [Nuxt.js docs](https://nuxtjs.org).
+
