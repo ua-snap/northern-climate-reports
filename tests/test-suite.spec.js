@@ -395,7 +395,7 @@ test('Test map search for Admiralty Bay-Dease Inlet', async ({ page }) => {
   const element = await page.locator('#map')
   const box = await element.boundingBox()
   if (box) {
-    await page.mouse.click(box.x + 600, box.y + 250)
+    await page.mouse.click(box.x + 875, box.y + 220)
   }
 
   await page.waitForSelector(
