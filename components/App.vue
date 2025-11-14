@@ -45,6 +45,11 @@
       </div>
       <div v-show="!this.reportIsVisible">
         <div class="container mt-5">
+          <a
+            class="has-text-weight-semibold"
+            href="https://uaf-snap.org/wp-content/uploads/2025/10/ncr-user-guide-full.pdf"
+            >Click here to learn how to use this tool</a
+          >
           <div class="columns" id="controls">
             <!-- ID above (#controls) is used as anchor target, don't remove -->
             <div class="column is-half-desktop is-full-mobile is-full-tablet">
