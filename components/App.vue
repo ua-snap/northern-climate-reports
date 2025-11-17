@@ -48,7 +48,7 @@
           <a
             class="has-text-weight-semibold"
             href="https://uaf-snap.org/wp-content/uploads/2025/10/ncr-user-guide-full.pdf"
-            >Click here to learn how to use this tool</a
+            >Click here to read this tool's user guide</a
           >
           <div class="columns" id="controls">
             <!-- ID above (#controls) is used as anchor target, don't remove -->
