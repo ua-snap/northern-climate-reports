@@ -45,11 +45,21 @@
       </div>
       <div v-show="!this.reportIsVisible">
         <div class="container mt-5">
-          <a
-            class="has-text-weight-semibold"
-            href="https://uaf-snap.org/wp-content/uploads/2025/10/ncr-user-guide-full.pdf"
-            >Click here to read this tool's user guide</a
-          >
+          <div class="message is-info">
+            <div class="message-body">
+              <p>Read a
+                <a
+                  class="has-text-weight-semibold"
+                  href="https://uaf-snap.org/wp-content/uploads/2025/10/ncr-user-guide-full.pdf"
+                  >user guide about this tool</a
+                >
+                to learn how to access community-level information to better
+                understand and reduce climate-related risks, plan
+                infrastructure, manage natural resources, and communicate about
+                changes happening in your community.
+              </p>
+            </div>
+          </div>
           <div class="columns" id="controls">
             <!-- ID above (#controls) is used as anchor target, don't remove -->
             <div class="column is-half-desktop is-full-mobile is-full-tablet">
@@ -73,6 +83,9 @@
   </div>
 </template>
 <style lang="scss" scoped>
+.message .message-body {
+  color: #000;
+}
 .offline {
   border: 0.1px solid #888;
   min-height: 1030px;
