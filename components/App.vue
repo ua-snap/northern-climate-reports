@@ -47,16 +47,16 @@
         <div class="container mt-5">
           <div class="message is-info">
             <div class="message-body">
-              <p>Read a
+              <p>
+                Read a
                 <a
                   class="has-text-weight-semibold"
                   href="https://uaf-snap.org/wp-content/uploads/2025/10/ncr-user-guide-full.pdf"
                   >user guide about this tool</a
                 >
-                to learn how to access community-level information to better
-                understand and reduce climate-related risks, plan
-                infrastructure, manage natural resources, and communicate about
-                changes happening in your community.
+                to learn how to access community-level information to assess
+                climate risks, identify who may be most affected, and support
+                decisions about interventions and adaptation strategies.
               </p>
             </div>
           </div>
