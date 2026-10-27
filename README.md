@@ -87,6 +87,19 @@ Serve with hot reload at http://localhost:3000:
 $ npm run dev
 ```
 
+### Printable (PDF) reports
+
+Every report has a print-friendly version at `/print/...` (e.g.
+`/print/community/AK124`), linked from the report page, that lays out all of
+the report's maps, charts and tables as Letter pages. Use the browser's
+"Save as PDF" from there, or render a PDF headlessly while the dev server is
+running:
+
+```
+npm run pdf -- community/AK124 fairbanks.pdf
+npm run pdf -- area/19020501 --units=metric --base=http://localhost:3000
+```
+
 ### Playwright tests
 
 To run the Playwright tests for this webapp, set any necessary environment variables, then run the webapp:

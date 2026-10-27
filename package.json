@@ -7,6 +7,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
+    "pdf": "node scripts/make-pdf.js",
     "test:e2e": "nightwatch"
   },
   "dependencies": {

@@ -129,6 +129,19 @@ export default {
         path: '/report/:lat/:lng',
         component: resolve(__dirname, 'pages/index'),
       })
+      // Print-friendly (PDF) versions of the reports.
+      routes.push({
+        path: '/print/community/:communityId',
+        component: resolve(__dirname, 'pages/print'),
+      })
+      routes.push({
+        path: '/print/area/:areaId',
+        component: resolve(__dirname, 'pages/print'),
+      })
+      routes.push({
+        path: '/print/:lat/:lng',
+        component: resolve(__dirname, 'pages/print'),
+      })
       routes.push({
         name: 'default',
         path: '*',

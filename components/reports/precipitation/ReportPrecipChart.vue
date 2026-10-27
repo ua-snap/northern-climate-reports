@@ -1,5 +1,5 @@
 <template>
-  <div id="precip-chart" />
+  <div :id="chartId" />
 </template>
 <style lang="scss" scoped></style>
 <script>
@@ -20,7 +20,14 @@ import {
 
 export default {
   name: 'ReportPrecipChart',
-  props: ['season'],
+  props: {
+    season: String,
+    // DOM id for the chart, so several can be rendered on one page.
+    chartId: {
+      type: String,
+      default: 'precip-chart',
+    },
+  },
   mounted() {
     this.renderPlot()
   },
@@ -96,7 +103,7 @@ export default {
         season: seasons[this.season],
         dateRange: '1950-2099',
       })
-      this.$Plotly.newPlot('precip-chart', dataTraces, layout, plotSettings)
+      this.$Plotly.newPlot(this.chartId, dataTraces, layout, plotSettings)
     },
   },
 }

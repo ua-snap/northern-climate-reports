@@ -1,6 +1,6 @@
 <template>
   <div class="temp-chart-wrapper">
-    <div id="temp-chart" />
+    <div :id="chartId" />
   </div>
 </template>
 <style lang="scss" scoped>
@@ -26,7 +26,14 @@ import {
 
 export default {
   name: 'ReportTempChart',
-  props: ['season'],
+  props: {
+    season: String,
+    // DOM id for the chart, so several can be rendered on one page.
+    chartId: {
+      type: String,
+      default: 'temp-chart',
+    },
+  },
   mounted() {
     this.renderPlot()
   },
@@ -148,7 +155,7 @@ export default {
         season: seasons[this.season],
         dateRange: '1950-2099',
       })
-      this.$Plotly.newPlot('temp-chart', dataTraces, layout, plotSettings)
+      this.$Plotly.newPlot(this.chartId, dataTraces, layout, plotSettings)
     },
   },
 }

@@ -151,6 +151,13 @@
               Metric
             </b-radio>
           </b-field>
+          <b-button
+            tag="nuxt-link"
+            :to="printPath"
+            type="is-info is-light"
+            icon-left="printer"
+            >Printable report (PDF)</b-button
+          >
         </div>
       </section>
       <section class="section content is-hidden-touch" v-if="dataPresent">
@@ -402,7 +409,7 @@ export default {
   },
   data() {
     return {
-      units: 'imperial',
+      units: this.$store.getters.units,
       httpErrors: httpErrors,
       hucPolyExplanation:
         'The shaded region on the map is the nearest watershed (hydrological unit, level 12) and is only used to summarize wildfire data around this place.',
@@ -427,6 +434,9 @@ export default {
     },
     elevationUnits() {
       return this.units == 'imperial' ? 'ft' : 'm'
+    },
+    printPath() {
+      return this.$route.path.replace(/^\/report\//, '/print/')
     },
     dataPresent() {
       let types = this.presentDataTypes()
@@ -521,30 +531,7 @@ export default {
   // error handling, etc, can all be done in one spot.
   async fetch() {
     // TODO: Error handling.
-    await this.$store.dispatch('climate/fetch').catch(e => {
-      console.error(e)
-    })
-    await this.$store.dispatch('permafrost/fetch').catch(e => {
-      console.error(e)
-    })
-    await this.$store.dispatch('hydrology/fetch').catch(e => {
-      console.error(e)
-    })
-    await this.$store.dispatch('wildfire/fetch').catch(e => {
-      console.error(e)
-    })
-    await this.$store.dispatch('indicators/fetch').catch(e => {
-      console.error(e)
-    })
-    await this.$store.dispatch('elevation/fetch').catch(e => {
-      console.error(e)
-    })
-    await this.$store.dispatch('beetle/fetch').catch(e => {
-      console.error(e)
-    })
-    await this.$store.dispatch('demographics/fetch').catch(e => {
-      console.error(e)
-    })
+    await this.$store.dispatch('fetchReport')
   },
   watch: {
     units: function () {
